@@ -4,8 +4,8 @@
  * Dropbox OAuth
  * 
  * @package Dropbox 
- * @copyright Copyright (C) 2011 Daniel Huesken
- * @author Daniel Huesken (http://www.danielhuesken.de/)
+ * @copyright Copyright (C) 2010 Stefan Motz
+ * @author Stefan Motz (http://www.multimediamotz.de/)
  * @license MIT
  */
 
@@ -14,7 +14,7 @@
  *
  * This specific class uses WordPress WP_Http to authenticate.
  */
-class Dropbox_OAuth_Curl extends Dropbox_OAuth {
+class Dropbox_OAuth_Wordpress extends Dropbox_OAuth {
 
     /**
      *
@@ -26,12 +26,7 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
      * @var string ConsumerSecret
      */
     protected $consumerSecret = null;
-    /**
-     *
-     * @var string ProzessCallBack
-     */
-    public $ProgressFunction = false;
-	
+
     /**
      * Constructor
      * 
@@ -39,8 +34,11 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
      * @param string $consumerSecret 
      */
     public function __construct($consumerKey, $consumerSecret) {
-        if (!function_exists('curl_exec')) 
-            throw new Dropbox_Exception('The PHP curl functions not available!');
+        if (!(defined('ABSPATH') && defined('WPINC')))
+            throw new Dropbox_Exception('The Wordpress OAuth class is available within a wordpress context only!');
+        if (!class_exists('WP_Http')) {
+            include_once( ABSPATH . WPINC . '/class-http.php' );
+        }
 
         $this->consumerKey = $consumerKey;
         $this->consumerSecret = $consumerSecret;
@@ -56,88 +54,31 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
      * @return string 
      */
     public function fetch($uri, $arguments = array(), $method = 'GET', $httpHeaders = array()) {
-		
-		$uri=str_replace('http://', 'https://', $uri); // all https, upload makes problems if not
-		if (is_string($arguments) and strtoupper($method) == 'POST') {
-		    preg_match("/\?file=(.*)$/i", $uri, $matches);
-			if (isset($matches[1])) {
-                $uri = str_replace($matches[0], "", $uri);
-                $filename = $matches[1];
-				$httpHeaders=array_merge($httpHeaders,$this->getOAuthHeader($uri, array("file" => $filename), $method));
+
+        $requestParams = array();
+
+        $requestParams['method'] = $method;
+        $oAuthHeader = $this->getOAuthHeader($uri, $arguments, $method);
+        $requestParams['headers'] = array_merge($httpHeaders, $oAuthHeader);
+
+        // arguments will be passed to uri for GET, to body for POST etc.
+        if ($method == 'GET') {
+            $uri .= '?' . http_build_query($arguments);
+        } else {
+            if (count($arguments)) {
+                $requestParams['body'] = $arguments;
             }
-		} else {
-			$httpHeaders=array_merge($httpHeaders,$this->getOAuthHeader($uri, $arguments, $method));
-		}
-		
-		$ch = curl_init();	
-		if (strtoupper($method) == 'POST') {
-			curl_setopt($ch, CURLOPT_URL, $uri);
-			curl_setopt($ch, CURLOPT_POST, true);
-			if (is_array($arguments))
-				$arguments=http_build_query($arguments);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $arguments);
-			$httpHeaders['Content-Length']=strlen($arguments);
-		} else {
-			curl_setopt($ch, CURLOPT_URL, $uri.'?'.http_build_query($arguments));
-			curl_setopt($ch, CURLOPT_POST, false);
-		}
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_CAINFO, "rootca");
-		curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-		//Build header
-		$headers = array();
-		foreach ($httpHeaders as $name => $value) {
-			$headers[] = "{$name}: $value";
-		}
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		if (!ini_get('safe_mode') && !ini_get('open_basedir'))
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-		if (function_exists($this->ProgressFunction) and defined('CURLOPT_PROGRESSFUNCTION')) {
-			curl_setopt($ch, CURLOPT_NOPROGRESS, false);
-			curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, $this->ProgressFunction);
-			curl_setopt($ch, CURLOPT_BUFFERSIZE, 512);
-		}
-		$response=curl_exec($ch);
-		$errorno=curl_errno($ch);
-		$error=curl_error($ch);
-		$status=curl_getinfo($ch,CURLINFO_HTTP_CODE);
-		curl_close($ch);
-		
-		
-		if (!empty($errorno))
-			throw new Dropbox_Exception_NotFound('Curl error: ('.$errorno.') '.$error."\n");
-						
-		if ($status>=300) {
-			$body = json_decode($response,true);
-			switch ($status) {
-				// Not modified
-				case 304 :
-					return array(
-						'httpStatus' => 304,
-						'body' => null,
-					);
-					break;
-				case 403 :
-					throw new Dropbox_Exception_Forbidden('Forbidden.
-						This could mean a bad OAuth request, or a file or folder already existing at the target location.
-						' . $body["error"] . "\n");
-				case 404 :
-					throw new Dropbox_Exception_NotFound('Resource at uri: ' . $uri . ' could not be found. ' .
-							$body["error"] . "\n");
-				case 507 :
-					throw new Dropbox_Exception_OverQuota('This dropbox is full. ' .
-							$body["error"] . "\n");
-			}
-			if (!empty($body["error"]))
-				throw new Dropbox_Exception_RequestToken('Error: ('.$status.') '.$body["error"]."\n");	
-		}
-		
+        }
+
+        $request = new WP_Http;
+
+        //$uri = str_replace('api.dropbox.com', 'localhost:12346', $uri);
+
+        $result = $request->request($uri, $requestParams);
+
         return array(
-			'body' => $response,
-            'httpStatus' => $status
+            'httpStatus' => $result['response']['code'],
+            'body' => $result['body'],
         );
     }
 
@@ -278,6 +219,5 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
             return $hash;
         }
     }
-	
 
 }
