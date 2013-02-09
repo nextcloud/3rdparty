@@ -10,7 +10,7 @@ use Sabre\VObject;
  *
  * @package Sabre
  * @subpackage CalDAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -37,7 +37,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
      *
      * @var Sabre_DAV_Server
      */
-    private $server;
+    protected $server;
 
     /**
      * The email handler for invites and other scheduling messages.
@@ -334,7 +334,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             if (in_array($calHome,$requestedProperties)) {
                 $principalId = $node->getName();
                 $calendarHomePath = self::CALENDAR_ROOT . '/' . $principalId . '/';
-                unset($requestedProperties[$calHome]);
+                unset($requestedProperties[array_search($calHome, $requestedProperties)]);
                 $returnedProperties[200][$calHome] = new Sabre_DAV_Property_Href($calendarHomePath);
             }
 
@@ -343,7 +343,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             if (in_array($scheduleProp,$requestedProperties)) {
                 $principalId = $node->getName();
                 $outboxPath = self::CALENDAR_ROOT . '/' . $principalId . '/outbox';
-                unset($requestedProperties[$scheduleProp]);
+                unset($requestedProperties[array_search($scheduleProp, $requestedProperties)]);
                 $returnedProperties[200][$scheduleProp] = new Sabre_DAV_Property_Href($outboxPath);
             }
 
@@ -353,7 +353,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
 
                 $addresses = $node->getAlternateUriSet();
                 $addresses[] = $this->server->getBaseUri() . $node->getPrincipalUrl() . '/';
-                unset($requestedProperties[$calProp]);
+                unset($requestedProperties[array_search($calProp, $requestedProperties)]);
                 $returnedProperties[200][$calProp] = new Sabre_DAV_Property_HrefList($addresses, false);
 
             }
@@ -364,7 +364,8 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             $propWrite = '{' . self::NS_CALENDARSERVER . '}calendar-proxy-write-for';
             if (in_array($propRead,$requestedProperties) || in_array($propWrite,$requestedProperties)) {
 
-                $membership = $node->getGroupMembership();
+                $aclPlugin = $this->server->getPlugin('acl');
+                $membership = $aclPlugin->getPrincipalMembership($path);
                 $readList = array();
                 $writeList = array();
 
@@ -451,11 +452,11 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
     public function calendarMultiGetReport($dom) {
 
         $properties = array_keys(Sabre_DAV_XMLUtil::parseProperties($dom->firstChild));
-        $hrefElems = $dom->getElementsByTagNameNS('DAV:','href');
+        $hrefElems = $dom->getElementsByTagNameNS('urn:DAV','href');
 
         $xpath = new DOMXPath($dom);
         $xpath->registerNameSpace('cal',Sabre_CalDAV_Plugin::NS_CALDAV);
-        $xpath->registerNameSpace('dav','DAV:');
+        $xpath->registerNameSpace('dav','urn:DAV');
 
         $expand = $xpath->query('/cal:calendar-multiget/dav:prop/cal:calendar-data/cal:expand');
         if ($expand->length>0) {
@@ -940,11 +941,6 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             throw new Sabre_DAV_Exception_BadRequest('The Recipient: header must be specified when making POST requests');
         }
 
-        if (!preg_match('/^mailto:(.*)@(.*)$/i', $originator)) {
-            throw new Sabre_DAV_Exception_BadRequest('Originator must start with mailto: and must be valid email address');
-        }
-        $originator = substr($originator,7);
-
         $recipients = explode(',',$recipients);
         foreach($recipients as $k=>$recipient) {
 
@@ -968,9 +964,31 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             $addresses = $props['{' . self::NS_CALDAV . '}calendar-user-address-set']->getHrefs();
         }
 
-        if (!in_array('mailto:' . $originator, $addresses)) {
+        $found = false;
+        foreach($addresses as $address) {
+
+            // Trimming the / on both sides, just in case..
+            if (rtrim(strtolower($originator),'/') === rtrim(strtolower($address),'/')) {
+                $found = true;
+                break;
+            }
+
+        }
+
+        if (!$found) {
             throw new Sabre_DAV_Exception_Forbidden('The addresses specified in the Originator header did not match any addresses in the owners calendar-user-address-set header');
         }
+
+        // If the Originator header was a url, and not a mailto: address..
+        // we're going to try to pull the mailto: from the vobject body.
+        if (strtolower(substr($originator,0,7)) !== 'mailto:') {
+            $originator = (string)$vObject->VEVENT->ORGANIZER;
+
+        }
+        if (strtolower(substr($originator,0,7)) !== 'mailto:') {
+            throw new Sabre_DAV_Exception_Forbidden('Could not find mailto: address in both the Orignator header, and the ORGANIZER property in the VEVENT');
+        }
+        $originator = substr($originator,7);
 
         $result = $this->iMIPMessage($originator, $recipients, $vObject, $principal);
         $this->server->httpResponse->sendStatus(200);

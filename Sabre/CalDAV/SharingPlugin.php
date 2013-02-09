@@ -14,7 +14,7 @@
  *
  * @package Sabre
  * @subpackage CalDAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -192,7 +192,7 @@ class Sabre_CalDAV_SharingPlugin extends Sabre_DAV_ServerPlugin {
         }
 
         // Only doing something if shared-owner is indeed not in the list.
-        if($mutations['{DAV:}resourcetype']->is('{' . Sabre_CalDAV_Plugin::NS_CALENDARSERVER . '}shared-owner')) return; 
+        if($mutations['{DAV:}resourcetype']->is('{' . Sabre_CalDAV_Plugin::NS_CALENDARSERVER . '}shared-owner')) return;
 
         $shares = $node->getShares();
         $remove = array();
@@ -237,8 +237,18 @@ class Sabre_CalDAV_SharingPlugin extends Sabre_DAV_ServerPlugin {
             return;
         }
 
+        $requestBody = $this->server->httpRequest->getBody(true);
 
-        $dom = Sabre_DAV_XMLUtil::loadDOMDocument($this->server->httpRequest->getBody(true));
+        // If this request handler could not deal with this POST request, it
+        // will return 'null' and other plugins get a chance to handle the
+        // request.
+        //
+        // However, we already requested the full body. This is a problem,
+        // because a body can only be read once. This is why we preemptively
+        // re-populated the request body with the existing data.
+        $this->server->httpRequest->setBody($requestBody);
+
+        $dom = Sabre_DAV_XMLUtil::loadDOMDocument($requestBody);
 
         $documentType = Sabre_DAV_XMLUtil::toClarkNotation($dom->firstChild);
 
@@ -382,6 +392,7 @@ class Sabre_CalDAV_SharingPlugin extends Sabre_DAV_ServerPlugin {
         }
 
 
+
     }
 
     /**
@@ -406,7 +417,7 @@ class Sabre_CalDAV_SharingPlugin extends Sabre_DAV_ServerPlugin {
 
         $xpath = new \DOMXPath($dom);
         $xpath->registerNamespace('cs', Sabre_CalDAV_Plugin::NS_CALENDARSERVER);
-        $xpath->registerNamespace('d', 'DAV:');
+        $xpath->registerNamespace('d', 'urn:DAV');
 
 
         $set = array();
@@ -455,7 +466,7 @@ class Sabre_CalDAV_SharingPlugin extends Sabre_DAV_ServerPlugin {
 
         $xpath = new \DOMXPath($dom);
         $xpath->registerNamespace('cs', Sabre_CalDAV_Plugin::NS_CALENDARSERVER);
-        $xpath->registerNamespace('d', 'DAV:');
+        $xpath->registerNamespace('d', 'urn:DAV');
 
         $hostHref = $xpath->evaluate('string(cs:hosturl/d:href)');
         if (!$hostHref) {

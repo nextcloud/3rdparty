@@ -12,7 +12,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -23,14 +23,14 @@ class Sabre_DAV_Locks_Plugin extends Sabre_DAV_ServerPlugin {
      *
      * @var Sabre_DAV_Locks_Backend_Abstract
      */
-    private $locksBackend;
+    protected $locksBackend;
 
     /**
      * server
      *
      * @var Sabre_DAV_Server
      */
-    private $server;
+    protected $server;
 
     /**
      * __construct
@@ -619,11 +619,14 @@ class Sabre_DAV_Locks_Plugin extends Sabre_DAV_ServerPlugin {
      */
     protected function parseLockRequest($body) {
 
-        $xml = simplexml_load_string($body,null,LIBXML_NOWARNING);
-        $xml->registerXPathNamespace('d','DAV:');
+        $xml = simplexml_load_string(
+            Sabre_DAV_XMLUtil::convertDAVNamespace($body),
+            null,
+            LIBXML_NOWARNING);
+        $xml->registerXPathNamespace('d','urn:DAV');
         $lockInfo = new Sabre_DAV_Locks_LockInfo();
 
-        $children = $xml->children("DAV:");
+        $children = $xml->children("urn:DAV");
         $lockInfo->owner = (string)$children->owner;
 
         $lockInfo->token = Sabre_DAV_UUIDUtil::getUUID();

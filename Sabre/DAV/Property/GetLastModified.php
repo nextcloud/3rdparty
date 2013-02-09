@@ -11,7 +11,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -54,8 +54,8 @@ class Sabre_DAV_Property_GetLastModified extends Sabre_DAV_Property {
     public function serialize(Sabre_DAV_Server $server, DOMElement $prop) {
 
         $doc = $prop->ownerDocument;
-        $prop->setAttribute('xmlns:b','urn:uuid:c2f41010-65b3-11d1-a29f-00aa00c14882/');
-        $prop->setAttribute('b:dt','dateTime.rfc1123');
+        //$prop->setAttribute('xmlns:b','urn:uuid:c2f41010-65b3-11d1-a29f-00aa00c14882/');
+        //$prop->setAttribute('b:dt','dateTime.rfc1123');
         $prop->nodeValue = Sabre_HTTP_Util::toHTTPDate($this->time);
 
     }
