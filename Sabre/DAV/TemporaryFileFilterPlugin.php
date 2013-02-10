@@ -22,7 +22,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -45,19 +45,19 @@ class Sabre_DAV_TemporaryFileFilterPlugin extends Sabre_DAV_ServerPlugin {
     );
 
     /**
+     * A reference to the main Server class
+     *
+     * @var Sabre_DAV_Server
+     */
+    protected $server;
+
+    /**
      * This is the directory where this plugin
      * will store it's files.
      *
      * @var string
      */
     private $dataDir;
-
-    /**
-     * A reference to the main Server class
-     *
-     * @var Sabre_DAV_Server
-     */
-    private $server;
 
     /**
      * Creates the plugin.

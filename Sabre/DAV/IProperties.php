@@ -7,7 +7,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -57,6 +57,10 @@ interface Sabre_DAV_IProperties extends Sabre_DAV_INode {
      * encoded in clark-notation {xmlnamespace}tagname
      *
      * If the array is empty, it means 'all properties' were requested.
+     *
+     * Note that it's fine to liberally give properties back, instead of
+     * conforming to the list of requested properties.
+     * The Server class will filter out the extra.
      *
      * @param array $properties
      * @return void
