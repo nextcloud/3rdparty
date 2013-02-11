@@ -119,6 +119,7 @@ class smb {
 		$output = popen (SMB4PHP_SMBCLIENT." -N {$auth} {$options} {$port} {$options} {$params} 2>/dev/null", 'r');
 		$info = array ();
 		$info['info']= array ();
+		$mode = '';
 		while ($line = fgets ($output, 4096)) {
 			list ($tag, $regs, $i) = array ('skip', array (), array ());
 			reset ($regexp);
@@ -200,14 +201,16 @@ class smb {
 	# stats
 
 	function url_stat ($url, $flags = STREAM_URL_STAT_LINK) {
-		if ($s = smb::getstatcache($url)) { return $s; }
+		if ($s = smb::getstatcache($url)) {
+			return $s;
+		}
 		list ($stat, $pu) = array (array (), smb::parse_url ($url));
 		switch ($pu['type']) {
 			case 'host':
 				if ($o = smb::look ($pu))
-				$stat = stat ("/tmp");
+					$stat = stat ("/tmp");
 				else
-				trigger_error ("url_stat(): list failed for host '{$host}'", E_USER_WARNING);
+					trigger_error ("url_stat(): list failed for host '{$pu['host']}'", E_USER_WARNING);
 				break;
 			case 'share':
 				if ($o = smb::look ($pu)) {
@@ -219,7 +222,7 @@ class smb {
 					break;
 				}
 				if (! $found)
-					trigger_error ("url_stat(): disk resource '{$share}' not found in '{$host}'", E_USER_WARNING);
+					trigger_error ("url_stat(): disk resource '{$lshare}' not found in '{$pu['host']}'", E_USER_WARNING);
 				}
 				break;
 			case 'path':
