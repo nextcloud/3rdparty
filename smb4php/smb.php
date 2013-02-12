@@ -41,16 +41,26 @@ class smb {
 
 	function parse_url ($url) {
 		$pu = parse_url (trim($url));
-		foreach (array ('domain', 'user', 'pass', 'host', 'port', 'path') as $i)
-			if (! isset($pu[$i])) $pu[$i] = '';
-		if (count ($userdomain = explode (';', urldecode ($pu['user']))) > 1)
+		foreach (array ('domain', 'user', 'pass', 'host', 'port', 'path') as $i) {
+			if (! isset($pu[$i])) {
+				$pu[$i] = '';
+			}
+		}
+		if (count ($userdomain = explode (';', urldecode ($pu['user']))) > 1) {
 			@list ($pu['domain'], $pu['user']) = $userdomain;
+		}
 		$path = preg_replace (array ('/^\//', '/\/$/'), '', urldecode ($pu['path']));
 		list ($pu['share'], $pu['path']) = (preg_match ('/^([^\/]+)\/(.*)/', $path, $regs))
 			? array ($regs[1], preg_replace ('/\//', '\\', $regs[2]))
 			: array ($path, '');
 		$pu['type'] = $pu['path'] ? 'path' : ($pu['share'] ? 'share' : ($pu['host'] ? 'host' : '**error**'));
-		if (! ($pu['port'] = intval(@$pu['port']))) $pu['port'] = 139;
+		if (! ($pu['port'] = intval(@$pu['port']))) {
+			$pu['port'] = 139;
+		}
+
+		// decode user and password
+		$pu['user'] = urldecode($pu['user']);
+		$pu['pass'] = urldecode($pu['pass']);
 		return $pu;
 	}
 
