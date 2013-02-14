@@ -79,8 +79,8 @@ class MDB2_Driver_Reverse_sqlsrv extends MDB2_Driver_Reverse_Common
 
         list($schema, $table) = $this->splitTableSchema($table_name);
 
-        $table = $db->quoteIdentifier($table, true);
-        $fldname = $db->quoteIdentifier($field_name, true);
+//        $table = $db->quoteIdentifier($table, true);
+//        $fldname = $db->quoteIdentifier($field_name, true);
 
         $query = "SELECT t.table_name,
                          c.column_name 'name',
@@ -96,9 +96,10 @@ class MDB2_Driver_Reverse_sqlsrv extends MDB2_Driver_Reverse_Common
                          INFORMATION_SCHEMA.COLUMNS c
                    WHERE t.table_name = c.table_name
                      AND t.table_name = '$table'
-                     AND c.column_name = '$fldname'";
+                     AND c.column_name = '$field_name'";
         if (!empty($schema)) {
-            $query .= " AND t.table_schema = '" .$db->quoteIdentifier($schema, true) ."'";
+//			$query .= " AND t.table_schema = '" .$db->quoteIdentifier($schema, true) ."'";
+			$query .= " AND t.table_schema = '" .$schema."'";
         }
         $query .= ' ORDER BY t.table_name';
         $column = $db->queryRow($query, null, MDB2_FETCHMODE_ASSOC);
@@ -191,7 +192,7 @@ class MDB2_Driver_Reverse_sqlsrv extends MDB2_Driver_Reverse_Common
 
         list($schema, $table) = $this->splitTableSchema($table_name);
 
-        $table = $db->quoteIdentifier($table, true);
+//        $table = $db->quoteIdentifier($table, true);
         //$idxname = $db->quoteIdentifier($index_name, true);
 
         $query = "SELECT OBJECT_NAME(i.id) tablename,
@@ -212,7 +213,8 @@ class MDB2_Driver_Reverse_sqlsrv extends MDB2_Driver_Reverse_Common
                              WHERE k.table_name = OBJECT_NAME(i.id)
                                AND k.constraint_name = i.name";
         if (!empty($schema)) {
-            $query .= " AND k.table_schema = '" .$db->quoteIdentifier($schema, true) ."'";
+//			$query .= " AND k.table_schema = '" .$db->quoteIdentifier($schema, true) ."'";
+			$query .= " AND k.table_schema = '" .$schema."'";
         }
         $query .= ')
                 ORDER BY tablename, indexname, ik.keyno';
@@ -275,7 +277,7 @@ class MDB2_Driver_Reverse_sqlsrv extends MDB2_Driver_Reverse_Common
 
         list($schema, $table) = $this->splitTableSchema($table_name);
 
-        $table = $db->quoteIdentifier($table, true);
+//        $table = $db->quoteIdentifier($table, true);
         $query = "SELECT k.table_name,
                          k.column_name field_name,
                          CASE c.constraint_type WHEN 'PRIMARY KEY' THEN 1 ELSE 0 END 'primary',
@@ -310,7 +312,8 @@ class MDB2_Driver_Reverse_sqlsrv extends MDB2_Driver_Reverse_Common
                      AND k.table_name = '$table'
                      AND k.constraint_name = '%s'";
         if (!empty($schema)) {
-            $query .= " AND k.table_schema = '" .$db->quoteIdentifier($schema, true) ."'";
+//			$query .= " AND k.table_schema = '" .$db->quoteIdentifier($schema, true) ."'";
+			$query .= " AND k.table_schema = '" .$schema."'";
         }
         $query .= ' ORDER BY k.constraint_name,
                              k.ordinal_position';

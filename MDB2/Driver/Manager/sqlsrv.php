@@ -160,7 +160,7 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
         if (PEAR::isError($db)) {
             return $db;
         }
-        $name = $db->quoteIdentifier($name, true);
+//        $name = $db->quoteIdentifier($name, true);
         $result = $db->exec("IF EXISTS (SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME='$name') DROP TABLE $name");
         if (MDB2::isError($result)) {
             return $result;
@@ -519,12 +519,17 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
                 //MSSQL doesn't allow multiple ALTER COLUMNs in one query
                 $query = 'ALTER COLUMN ';
 
-                //MSSQL doesn't allow changing the DEFAULT value of a field in altering mode
-                if (array_key_exists('default', $field['definition'])) {
-                    unset($field['definition']['default']);
-                }
+				//MSSQL doesn't allow changing the DEFAULT value of a field in altering mode
+				if (array_key_exists('default', $field['definition'])) {
+					unset($field['definition']['default']);
+				}
 
-                $query .= $db->getDeclaration($field['definition']['type'], $field_name, $field['definition']);
+				//MSSQL doesn't allow changing the identity - that easy
+				if (array_key_exists('autoincrement', $field['definition'])) {
+					unset($field['definition']['autoincrement']);
+				}
+
+				$query .= $db->getDeclaration($field['definition']['type'], $field_name, $field['definition']);
                 $result = $db->exec("ALTER TABLE $name_quoted $query");
                 if (PEAR::isError($result)) {
                     $db->setOption('idxname_format', $idxname_format);
@@ -700,7 +705,7 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
      * @return mixed array of table names on success, a MDB2 error on failure
      * @access public
      */
-    function listTables()
+    function listTables($database = null)
     {
         $db = $this->getDBInstance();
 
@@ -744,7 +749,7 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
             return $db;
         }
 
-        $table = $db->quoteIdentifier($table, true);
+//        $table = $db->quoteIdentifier($table, true);
         $columns = $db->queryCol("SELECT c.name
                                     FROM syscolumns c
                                LEFT JOIN sysobjects o ON c.id = o.id
@@ -951,7 +956,7 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
      * @return mixed array of view names on success, a MDB2 error on failure
      * @access public
      */
-    function listViews()
+    function listViews($database = null)
     {
         $db = $this->getDBInstance();
         if (PEAR::isError($db)) {
@@ -1181,7 +1186,7 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
      * @return mixed array of sequence names on success, a MDB2 error on failure
      * @access public
      */
-    function listSequences()
+    function listSequences($database = null)
     {
         $db = $this->getDBInstance();
         if (PEAR::isError($db)) {

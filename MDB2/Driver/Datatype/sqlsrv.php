@@ -394,9 +394,9 @@ class MDB2_Driver_Datatype_sqlsrv extends MDB2_Driver_Datatype_Common
             $type[0] = 'float';
             break;
         case 'numeric':
-        case SQLSRV_SQLTYPE_NUMERIC:
+//        case SQLSRV_SQLTYPE_NUMERIC:
         case 'decimal':
-        case SQLSRV_SQLTYPE_DECIMAL:
+//        case SQLSRV_SQLTYPE_DECIMAL:
         case 'money':
         case SQLSRV_SQLTYPE_MONEY:
             $type[0] = 'decimal';
@@ -407,14 +407,14 @@ class MDB2_Driver_Datatype_sqlsrv extends MDB2_Driver_Datatype_Common
         case 'ntext':
         case SQLSRV_SQLTYPE_NTEXT:
         case 'varchar':
-        case SQLSRV_SQLTYPE_VARCHAR:
+//        case SQLSRV_SQLTYPE_VARCHAR:
         case 'nvarchar':
-        case SQLSRV_SQLTYPE_NVARCHAR:
+//        case SQLSRV_SQLTYPE_NVARCHAR:
             $fixed = false;
         case 'char':
-        case SQLSRV_SQLTYPE_CHAR:
+//        case SQLSRV_SQLTYPE_CHAR:
         case 'nchar':
-        case SQLSRV_SQLTYPE_NCHAR:
+//        case SQLSRV_SQLTYPE_NCHAR:
             $type[0] = 'text';
             if ($length == '1') {
                 $type[] = 'boolean';
@@ -432,7 +432,7 @@ class MDB2_Driver_Datatype_sqlsrv extends MDB2_Driver_Datatype_Common
         case 'image':
         case SQLSRV_SQLTYPE_IMAGE:
         case 'varbinary':
-        case SQLSRV_SQLTYPE_VARBINARY:
+//        case SQLSRV_SQLTYPE_VARBINARY:
         case 'timestamp':
         case SQLSRV_SQLTYPE_TIMESTAMP:
             $type[] = 'blob';
