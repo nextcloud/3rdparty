@@ -234,7 +234,8 @@ class MDB2_Driver_sqlsrv extends MDB2_Driver_Common
             $this->destructor_registered = true;
             register_shutdown_function('MDB2_closeOpenTransactions');
         }
-        if (PEAR::isError(sqlsrv_begin_transaction($this->connection))) {
+		$connection = $this->getConnection();
+        if (PEAR::isError(sqlsrv_begin_transaction($connection))) {
             return MDB2_ERROR;
         }
         $this->in_transaction = true;
@@ -853,7 +854,7 @@ class MDB2_Result_sqlsrv extends MDB2_Result_Common
             return $this->db->raiseError(MDB2_ERROR_INVALID, null, null, 'no valid statement given', __FUNCTION__);
         }
         if (($this->limit && $this->rownum >= $this->limit) || ($this->cursor >= $this->rowcnt || $this->rowcnt == 0)) {
-            return null;
+            return false;
         }
         if (null !== $rownum) {
             $seek = $this->seek($rownum);
