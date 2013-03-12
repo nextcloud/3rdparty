@@ -336,7 +336,11 @@ class MDB2_Driver_sqlsrv extends MDB2_Driver_Common
             $host .= ','.$this->dsn['port'];
         }
 
-        $connection = @sqlsrv_connect($host, $params);
+        if (!empty($this->dsn['charset'])) {
+			$params['CharacterSet'] = $this->dsn['charset'];
+        }
+
+		$connection = @sqlsrv_connect($host, $params);
         if (!$connection) {
             return $this->raiseError(MDB2_ERROR_CONNECT_FAILED, null, null,
                 'unable to establish a connection', __FUNCTION__, __FUNCTION__);
@@ -345,12 +349,12 @@ class MDB2_Driver_sqlsrv extends MDB2_Driver_Common
             $this->connected_database_name = $database;
         }
 
-        if (!empty($this->dsn['charset'])) {
-            $result = $this->setCharset($this->dsn['charset'], $connection);
-            if (PEAR::isError($result)) {
-                return $result;
-            }
-        }
+//        if (!empty($this->dsn['charset'])) {
+//            $result = $this->setCharset($this->dsn['charset'], $connection);
+//            if (PEAR::isError($result)) {
+//                return $result;
+//            }
+//        }
 
        if (empty($this->dsn['disable_iso_date'])) {
            @sqlsrv_query($connection,'SET DATEFORMAT ymd');

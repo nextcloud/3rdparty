@@ -713,7 +713,7 @@ class MDB2_Driver_Manager_sqlsrv extends MDB2_Driver_Manager_Common
             return $db;
         }
 
-        $query = 'EXEC sp_tables @table_type = "\'TABLE\'"';
+        $query = 'EXEC sp_tables @table_type = "\'TABLE\'", @table_owner = "dbo"';
         $table_names = $db->queryCol($query, null, 2);
         if (PEAR::isError($table_names)) {
             return $table_names;
