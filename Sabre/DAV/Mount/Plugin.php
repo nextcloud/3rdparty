@@ -7,7 +7,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  */
 class Sabre_DAV_Mount_Plugin extends Sabre_DAV_ServerPlugin {
@@ -17,7 +17,7 @@ class Sabre_DAV_Mount_Plugin extends Sabre_DAV_ServerPlugin {
      *
      * @var Sabre_DAV_Server
      */
-    private $server;
+    protected $server;
 
     /**
      * Initializes the plugin and registers event handles

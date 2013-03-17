@@ -68,15 +68,14 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
 		} else {
 			$httpHeaders=array_merge($httpHeaders,$this->getOAuthHeader($uri, $arguments, $method));
 		}
-		
 		$ch = curl_init();	
 		if (strtoupper($method) == 'POST') {
 			curl_setopt($ch, CURLOPT_URL, $uri);
 			curl_setopt($ch, CURLOPT_POST, true);
-			if (is_array($arguments))
-				$arguments=http_build_query($arguments);
+// 			if (is_array($arguments))
+// 				$arguments=http_build_query($arguments);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $arguments);
-			$httpHeaders['Content-Length']=strlen($arguments);
+// 			$httpHeaders['Content-Length']=strlen($arguments);
 		} else {
 			curl_setopt($ch, CURLOPT_URL, $uri.'?'.http_build_query($arguments));
 			curl_setopt($ch, CURLOPT_POST, false);
@@ -85,7 +84,7 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
 		curl_setopt($ch, CURLOPT_TIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_CAINFO, "rootca");
+//         curl_setopt($ch, CURLOPT_CAINFO, "rootca");
 		curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
 		//Build header
 		$headers = array();
@@ -134,8 +133,8 @@ class Dropbox_OAuth_Curl extends Dropbox_OAuth {
 			if (!empty($body["error"]))
 				throw new Dropbox_Exception_RequestToken('Error: ('.$status.') '.$body["error"]."\n");	
 		}
-		
-        return array(
+
+		return array(
 			'body' => $response,
             'httpStatus' => $status
         );

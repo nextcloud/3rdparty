@@ -5,7 +5,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2012 Rooftop Solutions. All rights reserved.
+ * @copyright Copyright (C) 2007-2013 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -201,6 +201,14 @@ class Sabre_DAV_Server {
     public function exec() {
 
         try {
+
+            // If nginx (pre-1.2) is used as a proxy server, and SabreDAV as an
+            // origin, we must make sure we send back HTTP/1.0 if this was
+            // requested.
+            // This is mainly because nginx doesn't support Chunked Transfer
+            // Encoding, and this forces the webserver SabreDAV is running on,
+            // to buffer entire responses to calculate Content-Length.
+            $this->httpResponse->defaultHttpVersion = $this->httpRequest->getHTTPVersion();
 
             $this->invokeMethod($this->httpRequest->getMethod(), $this->getRequestUri());
 
@@ -610,7 +618,16 @@ class Sabre_DAV_Server {
             // New read/write stream
             $newStream = fopen('php://temp','r+');
 
-            stream_copy_to_stream($body, $newStream, $end-$start+1, $start);
+            // stream_copy_to_stream() has a bug/feature: the `whence` argument
+            // is interpreted as SEEK_SET (count from absolute offset 0), while
+            // for a stream it should be SEEK_CUR (count from current offset).
+            // If a stream is nonseekable, the function fails. So we *emulate*
+            // the correct behaviour with fseek():
+            if ($start > 0) {
+                if (($curOffs = ftell($body)) === false) $curOffs = 0;
+                fseek($body, $start - $curOffs, SEEK_CUR);
+            }
+            stream_copy_to_stream($body, $newStream, $end-$start+1);
             rewind($newStream);
 
             $this->httpResponse->setHeader('Content-Length', $end-$start+1);
@@ -694,7 +711,7 @@ class Sabre_DAV_Server {
     protected function httpPropfind($uri) {
 
         // $xml = new Sabre_DAV_XMLReader(file_get_contents('php://input'));
-        $requestedProperties = $this->parsePropfindRequest($this->httpRequest->getBody(true));
+        $requestedProperties = $this->parsePropFindRequest($this->httpRequest->getBody(true));
 
         $depth = $this->getHTTPDepth(1);
         // The only two options for the depth of a propfind is 0 or 1
@@ -1439,6 +1456,8 @@ class Sabre_DAV_Server {
 
         if ($depth!=0) $depth = 1;
 
+        $path = rtrim($path,'/');
+
         $returnPropertyList = array();
 
         $parentNode = $this->tree->getNodeForPath($path);
@@ -1494,11 +1513,25 @@ class Sabre_DAV_Server {
 
             if (count($currentPropertyNames) > 0) {
 
-                if ($node instanceof Sabre_DAV_IProperties)
-                    $newProperties['200'] = $newProperties[200] + $node->getProperties($currentPropertyNames);
+                if ($node instanceof Sabre_DAV_IProperties) {
+                    $nodeProperties = $node->getProperties($currentPropertyNames);
+
+                    // The getProperties method may give us too much,
+                    // properties, in case the implementor was lazy.
+                    //
+                    // So as we loop through this list, we will only take the
+                    // properties that were actually requested and discard the
+                    // rest.
+                    foreach($currentPropertyNames as $k=>$currentPropertyName) {
+                        if (isset($nodeProperties[$currentPropertyName])) {
+                            unset($currentPropertyNames[$k]);
+                            $newProperties[200][$currentPropertyName] = $nodeProperties[$currentPropertyName];
+                        }
+                    }
+
+                }
 
             }
-
 
             foreach($currentPropertyNames as $prop) {
 
@@ -2124,7 +2157,7 @@ class Sabre_DAV_Server {
         if (!$body) return array();
 
         $dom = Sabre_DAV_XMLUtil::loadDOMDocument($body);
-        $elem = $dom->getElementsByTagNameNS('DAV:','propfind')->item(0);
+        $elem = $dom->getElementsByTagNameNS('urn:DAV','propfind')->item(0);
         return array_keys(Sabre_DAV_XMLUtil::parseProperties($elem));
 
     }
