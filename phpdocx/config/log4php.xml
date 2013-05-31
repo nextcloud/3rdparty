@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use stdout or stderr. WARN level -->
+
+<configuration xmlns="http://logging.apache.org/log4php/">
+    <appender name="default" class="LoggerAppenderConsole">
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date %logger %-5level %msg%n" />
+        </layout>
+    </appender>
+    <root>
+        <level value="warn" />
+        <appender_ref ref="default" />
+    </root>
+</configuration>
+
+<!-- Use a file. TRACE level -->
+<!--
+<configuration xmlns="http://logging.apache.org/log4php/">
+    <appender name="default" class="LoggerAppenderFile">
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date %logger %-5level %msg%n" />
+        </layout>
+        <param name="file" value="phpdocx.log" />
+        <param name="append" value="true" />
+    </appender>
+    <root>
+        <level value="trace" />
+        <appender_ref ref="default" />
+    </root>
+</configuration>
+-->

@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class CreateXlsx</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class CreateXlsx</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-consts">Constants</a>
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create XLSX</p>
+	<ul class="tags">
+				<li><span class="field">version:</span> 1.0</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2009-2013 Narcea Producciones Multimedia S.L.              (http://www.2mdc.com)</li>
+				<li><span class="field">link:</span> <a href="http://www.phpdocx.com">http://www.phpdocx.com</a></li>
+				<li><span class="field">since:</span> Class available since Release 1.0</li>
+				<li><span class="field">license:</span> <a href="http://www.phpdocx.com/wp-content/themes/lightword/pro_license.php">http://www.phpdocx.com/wp-content/themes/lightword/pro_license.php</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_CreateXlsx.inc.html">/CreateXlsx.inc</a> (line <span class="field">28</span>)
+		</p>
+		
+				
+		<pre><a href="../elements/CreateElement.html">CreateElement</a>
+   |
+   --CreateXlsx</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-vars">Vars</a>
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-consts">Constants</a>
+							
+					</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../elements/CreateCompletedXlsx.html">CreateCompletedXlsx</a></td>
+					<td>
+											Create Completed xlsx for bar/cols, line, radar,... charts
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../elements/CreateSimpleXlsx.html">CreateSimpleXlsx</a></td>
+					<td>
+											Create xlsx for pie, ofpie charts
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-consts">Constants</a>
+							
+															<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">CreateXlsx</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__destruct" title="details" class="method-name">__destruct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#cleanTemplateROW" title="details" class="method-name">cleanTemplateROW</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#createXlsx" title="details" class="method-name">createXlsx</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateC" title="details" class="method-name">generateC</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$r</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$s</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$t</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateCOL" title="details" class="method-name">generateCOL</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$min</span> = <span class="var-default">'1'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$max</span> = <span class="var-default">'1'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$width</span> = <span class="var-default">'11.85546875'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$customWidth</span> = <span class="var-default">'1'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateCOLS" title="details" class="method-name">generateCOLS</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateDIMENSION" title="details" class="method-name">generateDIMENSION</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$sizeX</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$sizeY</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generatePAGEMARGINS" title="details" class="method-name">generatePAGEMARGINS</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$left</span> = <span class="var-default">'0.7'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$rigth</span> = <span class="var-default">'0.7'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$bottom</span> = <span class="var-default">'0.75'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$top</span> = <span class="var-default">'0.75'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$header</span> = <span class="var-default">'0.3'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$footer</span> = <span class="var-default">'0.3'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generatePAGESETUP" title="details" class="method-name">generatePAGESETUP</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$paperSize</span> = <span class="var-default">'9'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$orientation</span> = <span class="var-default">'portrait'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">'1'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateROW" title="details" class="method-name">generateROW</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$r</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$spans</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSELECTION" title="details" class="method-name">generateSELECTION</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$num</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSHEETDATA" title="details" class="method-name">generateSHEETDATA</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSHEETFORMATPR" title="details" class="method-name">generateSHEETFORMATPR</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$baseColWidth</span> = <span class="var-default">'10'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$defaultRowHeight</span> = <span class="var-default">'15'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSHEETVIEW" title="details" class="method-name">generateSHEETVIEW</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$tabSelected</span> = <span class="var-default">'1'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$workbookViewId</span> = <span class="var-default">'0'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSHEETVIEWS" title="details" class="method-name">generateSHEETVIEWS</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSI" title="details" class="method-name">generateSI</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateSST" title="details" class="method-name">generateSST</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$num</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateT" title="details" class="method-name">generateT</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$space</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateTABLE" title="details" class="method-name">generateTABLE</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$rows</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$cols</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateTABLECOLUMN" title="details" class="method-name">generateTABLECOLUMN</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">'2'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateTABLECOLUMNS" title="details" class="method-name">generateTABLECOLUMNS</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$count</span> = <span class="var-default">'2'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateTABLEPART" title="details" class="method-name">generateTABLEPART</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">'1'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateTABLEPARTS" title="details" class="method-name">generateTABLEPARTS</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$count</span> = <span class="var-default">'1'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateTABLESTYLEINFO" title="details" class="method-name">generateTABLESTYLEINFO</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$showFirstColumn</span> = <span class="var-default">'0'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$showLastColumn</span> = <span class="var-default">&quot;0&quot;</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$showRowStripes</span> = <span class="var-default">&quot;1&quot;</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$showColumnStripes</span> = <span class="var-default">&quot;0&quot;</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateV" title="details" class="method-name">generateV</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$num</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateWORKSHEET" title="details" class="method-name">generateWORKSHEET</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-consts">Constants</a>
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../elements/CreateElement.html">CreateElement</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../elements/CreateElement.html#var$_xml">CreateElement::$_xml</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-vars">Vars</a>
+																			<a href="#sec-consts">Constants</a>
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">63</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construct</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">CreateXlsx</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../elements/CreateElement.html#method__construct">CreateElement::__construct()</a></dt>
+						<dd>Construct</dd>
+					</dl>
+			
+	</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">73</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Destruct</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__destruct
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../elements/CreateElement.html#method__destruct">CreateElement::__destruct()</a></dt>
+						<dd>Destruct</dd>
+					</dl>
+			
+	</div>
+<a name="methodcleanTemplateROW" id="cleanTemplateROW"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">cleanTemplateROW</span> (line <span class="line-number">471</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clean template row tags</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			cleanTemplateROW
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcreateXlsx" id="createXlsx"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">createXlsx</span> (line <span class="line-number">94</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create XLSX</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			createXlsx
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgenerateC" id="generateC"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateC</span> (line <span class="line-number">222</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate c</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateC
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$r</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$s</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$t</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$r</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$s</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$t</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateCOL" id="generateCOL"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateCOL</span> (line <span class="line-number">244</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate col</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateCOL
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$min</span> = <span class="var-default">'1'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$max</span> = <span class="var-default">'1'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$width</span> = <span class="var-default">'11.85546875'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$customWidth</span> = <span class="var-default">'1'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$min</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$max</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$width</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$customWidth</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateCOLS" id="generateCOLS"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateCOLS</span> (line <span class="line-number">258</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate cols</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateCOLS
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgenerateDIMENSION" id="generateDIMENSION"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateDIMENSION</span> (line <span class="line-number">271</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate dimension</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateDIMENSION
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$sizeX</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$sizeY</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$sizeX</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$sizeY</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgeneratePAGEMARGINS" id="generatePAGEMARGINS"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generatePAGEMARGINS</span> (line <span class="line-number">294</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate pagemargins</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generatePAGEMARGINS
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$left</span> = <span class="var-default">'0.7'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$rigth</span> = <span class="var-default">'0.7'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$bottom</span> = <span class="var-default">'0.75'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$top</span> = <span class="var-default">'0.75'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$header</span> = <span class="var-default">'0.3'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$footer</span> = <span class="var-default">'0.3'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$left</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$rigth</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$bottom</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$top</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$header</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$footer</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgeneratePAGESETUP" id="generatePAGESETUP"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generatePAGESETUP</span> (line <span class="line-number">314</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate pagesetup</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generatePAGESETUP
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$paperSize</span> = <span class="var-default">'9'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$orientation</span> = <span class="var-default">'portrait'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">'1'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$paperSize</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$orientation</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateROW" id="generateROW"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateROW</span> (line <span class="line-number">331</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate row</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateROW
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$r</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$spans</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$r</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$spans</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateSELECTION" id="generateSELECTION"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSELECTION</span> (line <span class="line-number">346</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate selection</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSELECTION
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$num</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$num</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateSHEETDATA" id="generateSHEETDATA"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSHEETDATA</span> (line <span class="line-number">359</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate sheetdata</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSHEETDATA
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgenerateSHEETFORMATPR" id="generateSHEETFORMATPR"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSHEETFORMATPR</span> (line <span class="line-number">373</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate sheetformatpr</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSHEETFORMATPR
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$baseColWidth</span> = <span class="var-default">'10'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$defaultRowHeight</span> = <span class="var-default">'15'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$baseColWidth</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$defaultRowHeight</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateSHEETVIEW" id="generateSHEETVIEW"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSHEETVIEW</span> (line <span class="line-number">390</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate sheetview</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSHEETVIEW
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$tabSelected</span> = <span class="var-default">'1'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$workbookViewId</span> = <span class="var-default">'0'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tabSelected</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workbookViewId</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateSHEETVIEWS" id="generateSHEETVIEWS"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSHEETVIEWS</span> (line <span class="line-number">405</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate sheetviews</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSHEETVIEWS
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgenerateSI" id="generateSI"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSI</span> (line <span class="line-number">193</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate si</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSI
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgenerateSST" id="generateSST"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSST</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate sst</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateSST
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$num</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$num</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateT" id="generateT"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateT</span> (line <span class="line-number">206</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate t</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateT
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$space</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$space</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../elements/CreateElement.html#methodgenerateT">CreateElement::generateT()</a></dt>
+						<dd>Generate w:t</dd>
+					</dl>
+			
+	</div>
+<a name="methodgenerateTABLE" id="generateTABLE"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateTABLE</span> (line <span class="line-number">484</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate table</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateTABLE
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$rows</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$cols</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$rows</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$cols</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateTABLECOLUMN" id="generateTABLECOLUMN"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateTABLECOLUMN</span> (line <span class="line-number">505</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate tablecolumn</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateTABLECOLUMN
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">'2'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateTABLECOLUMNS" id="generateTABLECOLUMNS"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateTABLECOLUMNS</span> (line <span class="line-number">521</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate tablecolumns</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateTABLECOLUMNS
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$count</span> = <span class="var-default">'2'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$count</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateTABLEPART" id="generateTABLEPART"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateTABLEPART</span> (line <span class="line-number">418</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate tablepart</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateTABLEPART
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">'1'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateTABLEPARTS" id="generateTABLEPARTS"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateTABLEPARTS</span> (line <span class="line-number">430</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate tableparts</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateTABLEPARTS
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$count</span> = <span class="var-default">'1'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$count</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateTABLESTYLEINFO" id="generateTABLESTYLEINFO"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateTABLESTYLEINFO</span> (line <span class="line-number">538</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate tablestyleinfo</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateTABLESTYLEINFO
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$showFirstColumn</span> = <span class="var-default">'0'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$showLastColumn</span> = <span class="var-default">&quot;0&quot;</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$showRowStripes</span> = <span class="var-default">&quot;1&quot;</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$showColumnStripes</span> = <span class="var-default">&quot;0&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$showFirstColumn</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$showLastColumn</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$showRowStripes</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$showColumnStripes</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateV" id="generateV"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateV</span> (line <span class="line-number">444</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate v</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateV
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$num</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$num</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateWORKSHEET" id="generateWORKSHEET"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateWORKSHEET</span> (line <span class="line-number">456</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate worksheet</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateWORKSHEET
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">__toString</span> (line <span class="line-number">83</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../elements/CreateElement.html#method__toString">CreateElement::__toString()</a></dt>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../elements/CreateElement.html">CreateElement</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../elements/CreateElement.html#method__construct">CreateElement::__construct()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodcleanTemplate">CreateElement::cleanTemplate()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodcleanTemplateFirstRPR">CreateElement::cleanTemplateFirstRPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateALIGN">CreateElement::generateALIGN()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateANCHOR">CreateElement::generateANCHOR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateAVLST">CreateElement::generateAVLST()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateB">CreateElement::generateB()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateBCS">CreateElement::generateBCS()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateBLIP">CreateElement::generateBLIP()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateBLIPFILL">CreateElement::generateBLIPFILL()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateBR">CreateElement::generateBR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateCNVGRAPHICFRAMEPR">CreateElement::generateCNVGRAPHICFRAMEPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateCNVPICPR">CreateElement::generateCNVPICPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateCNVPR">CreateElement::generateCNVPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateDOCPR">CreateElement::generateDOCPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateDRAWING">CreateElement::generateDRAWING()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateEFFECTEXTENT">CreateElement::generateEFFECTEXTENT()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateEXT">CreateElement::generateEXT()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateEXTENT">CreateElement::generateEXTENT()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateFILLRECT">CreateElement::generateFILLRECT()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateGRAPHIC">CreateElement::generateGRAPHIC()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateGRAPHICDATA">CreateElement::generateGRAPHICDATA()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateGRAPHICPRAMELOCKS">CreateElement::generateGRAPHICPRAMELOCKS()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateINLINE">CreateElement::generateINLINE()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateJC">CreateElement::generateJC()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateLINETO">CreateElement::generateLINETO()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateLN">CreateElement::generateLN()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateNOPROOF">CreateElement::generateNOPROOF()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateNVPICPR">CreateElement::generateNVPICPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateOFF">CreateElement::generateOFF()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateP">CreateElement::generateP()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePIC">CreateElement::generatePIC()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePICT">CreateElement::generatePICT()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePOSITIONH">CreateElement::generatePOSITIONH()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePOSITIONV">CreateElement::generatePOSITIONV()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePOSOFFSET">CreateElement::generatePOSOFFSET()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePPR">CreateElement::generatePPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePRSTDASH">CreateElement::generatePRSTDASH()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePRSTGEOM">CreateElement::generatePRSTGEOM()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgeneratePSTYLE">CreateElement::generatePSTYLE()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateQUITAR">CreateElement::generateQUITAR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateR">CreateElement::generateR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateRFONTS">CreateElement::generateRFONTS()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateRPR">CreateElement::generateRPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateRSTYLE">CreateElement::generateRSTYLE()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateSCHEMECLR">CreateElement::generateSCHEMECLR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateSIMPLEPOS">CreateElement::generateSIMPLEPOS()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateSOLIDFILL">CreateElement::generateSOLIDFILL()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateSPPR">CreateElement::generateSPPR()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateSTART">CreateElement::generateSTART()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateSTRETCH">CreateElement::generateSTRETCH()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateT">CreateElement::generateT()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateWRAPNONE">CreateElement::generateWRAPNONE()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateWRAPPOLYGON">CreateElement::generateWRAPPOLYGON()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateWRAPSQUARE">CreateElement::generateWRAPSQUARE()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateWRAPTHROUGH">CreateElement::generateWRAPTHROUGH()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateWRAPTOPANDBOTTOM">CreateElement::generateWRAPTOPANDBOTTOM()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#methodgenerateXFRM">CreateElement::generateXFRM()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#method__destruct">CreateElement::__destruct()</a></span><br>
+													<span class="method-name"><a href="../elements/CreateElement.html#method__toString">CreateElement::__toString()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-vars">Vars</a>
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Constants</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../elements/CreateElement.html">CreateElement</a></span></p>
+					<blockquote>
+													<span class="const-title">
+								<span class="const-name"><a href="../elements/CreateElement.html#constMATHNAMESPACEWORD">CreateElement::MATHNAMESPACEWORD</a></span><br>
+							</span>
+													<span class="const-title">
+								<span class="const-name"><a href="../elements/CreateElement.html#constNAMESPACEWORD">CreateElement::NAMESPACEWORD</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 21 May 2013 17:19:52 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</div></body>
+</html>
