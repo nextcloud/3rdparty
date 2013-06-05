@@ -28,3 +28,4 @@ class GuidTest extends \Doctrine\Tests\DbalTestCase
         $this->assertNull($this->_type->convertToPHPValue(null, $this->_platform));
     }
 }
+

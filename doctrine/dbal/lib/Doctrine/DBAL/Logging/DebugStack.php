@@ -24,7 +24,7 @@ namespace Doctrine\DBAL\Logging;
 /**
  * Includes executed SQLs in a Debug Stack
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$
@@ -66,3 +66,4 @@ class DebugStack implements SQLLogger
         }
     }
 }
+

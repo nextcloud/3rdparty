@@ -24,7 +24,7 @@ namespace Doctrine\DBAL\Logging;
 /**
  * Interface for SQL loggers.
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$

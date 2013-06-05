@@ -93,3 +93,4 @@ class DrizzleSchemaManager extends AbstractSchemaManager
         return parent::_getPortableTableIndexesList($indexes, $tableName);
     }
 }
+

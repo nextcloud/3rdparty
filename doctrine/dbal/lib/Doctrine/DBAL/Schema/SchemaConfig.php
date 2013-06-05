@@ -22,7 +22,7 @@ namespace Doctrine\DBAL\Schema;
 /**
  * Configuration for a Schema
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @author  Benjamin Eberlei <kontakt@beberlei.de>

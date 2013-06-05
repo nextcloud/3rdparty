@@ -40,3 +40,4 @@ class SQLSrvException extends \Doctrine\DBAL\DBALException
         return new self(rtrim($message));
     }
 }
+

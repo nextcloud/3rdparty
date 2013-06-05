@@ -158,3 +158,4 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
         return sqlsrv_errors(SQLSRV_ERR_ERRORS);
     }
 }
+

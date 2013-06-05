@@ -235,3 +235,4 @@ class SQLAzureShardManager implements ShardManager
         $this->conn->exec($sql);
     }
 }
+

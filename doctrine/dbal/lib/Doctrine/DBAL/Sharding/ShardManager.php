@@ -92,3 +92,4 @@ interface ShardManager
      */
     function queryAll($sql, array $params, array $types);
 }
+

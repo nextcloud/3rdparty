@@ -24,7 +24,7 @@ use Doctrine\DBAL\Schema\Visitor\Visitor;
 /**
  * Sequence Structure
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$

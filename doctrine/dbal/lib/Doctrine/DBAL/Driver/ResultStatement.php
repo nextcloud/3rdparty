@@ -90,3 +90,4 @@ interface ResultStatement extends \Traversable
      */
     function fetchColumn($columnIndex = 0);
 }
+

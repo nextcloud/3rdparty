@@ -303,3 +303,4 @@ abstract class Type
         return false;
     }
 }
+

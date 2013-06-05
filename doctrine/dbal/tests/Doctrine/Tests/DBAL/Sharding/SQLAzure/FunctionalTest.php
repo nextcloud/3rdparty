@@ -41,3 +41,4 @@ class FunctionalTest extends AbstractTestCase
         $this->assertTrue(count($data) > 0);
     }
 }
+

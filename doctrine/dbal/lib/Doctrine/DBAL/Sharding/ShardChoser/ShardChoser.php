@@ -38,3 +38,4 @@ interface ShardChoser
      */
     function pickShard($distributionValue, PoolingShardConnection $conn);
 }
+

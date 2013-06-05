@@ -58,7 +58,6 @@ class Comparator
     public function compare(Schema $fromSchema, Schema $toSchema)
     {
         $diff = new SchemaDiff();
-        $diff->fromSchema = $fromSchema;
 
         $foreignKeysToTable = array();
 
@@ -180,7 +179,6 @@ class Comparator
     {
         $changes = 0;
         $tableDifferences = new TableDiff($table1->getName());
-        $tableDifferences->fromTable = $table1;
 
         $table1Columns = $table1->getColumns();
         $table2Columns = $table2->getColumns();
@@ -205,7 +203,6 @@ class Comparator
                 $changedProperties = $this->diffColumn( $column, $table2->getColumn($columnName) );
                 if (count($changedProperties) ) {
                     $columnDiff = new ColumnDiff($column->getName(), $table2->getColumn($columnName), $changedProperties);
-                    $columnDiff->fromColumn = $column;
                     $tableDifferences->changedColumns[$column->getName()] = $columnDiff;
                     $changes++;
                 }
@@ -298,9 +295,11 @@ class Comparator
                 $removedColumnName = strtolower($removedColumn->getName());
                 $addedColumnName = strtolower($addedColumn->getName());
 
-                $tableDifferences->renamedColumns[$removedColumnName] = $addedColumn;
-                unset($tableDifferences->addedColumns[$addedColumnName]);
-                unset($tableDifferences->removedColumns[$removedColumnName]);
+                if ( ! isset($tableDifferences->renamedColumns[$removedColumnName])) {
+                    $tableDifferences->renamedColumns[$removedColumnName] = $addedColumn;
+                    unset($tableDifferences->addedColumns[$addedColumnName]);
+                    unset($tableDifferences->removedColumns[$removedColumnName]);
+                }
             }
         }
     }
@@ -320,7 +319,7 @@ class Comparator
             return true;
         }
 
-        if (strtolower($key1->getForeignTableName()) != strtolower($key2->getForeignTableName())) {
+        if ($key1->getUnqualifiedForeignTableName() !== $key2->getUnqualifiedForeignTableName()) {
             return true;
         }
 

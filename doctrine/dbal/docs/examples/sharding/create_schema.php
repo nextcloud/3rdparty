@@ -48,3 +48,4 @@ $synchronizer = new SQLAzureSchemaSynchronizer($conn, $shardManager);
 echo implode("\n", $synchronizer->getCreateSchema($schema));
 
 $synchronizer->createSchema($schema);
+

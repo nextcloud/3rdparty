@@ -25,7 +25,7 @@ use Doctrine\DBAL\Schema\Visitor\Visitor;
 /**
  * Object representation of a database column
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$

@@ -51,3 +51,4 @@ class SQLServer2005Platform extends SQLServerPlatform
         return 'VARCHAR(MAX)';
     }
 }
+

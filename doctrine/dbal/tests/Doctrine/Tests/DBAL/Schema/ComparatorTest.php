@@ -210,6 +210,26 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $c->diffColumn($column1, $column1));
     }
 
+    public function testCompareChangeColumns_MultipleNewColumnsRename()
+    {
+        $tableA = new Table("foo");
+        $tableA->addColumn('datefield1', 'datetime');
+
+        $tableB = new Table("foo");
+        $tableB->addColumn('new_datefield1', 'datetime');
+        $tableB->addColumn('new_datefield2', 'datetime');
+
+        $c = new Comparator();
+        $tableDiff = $c->diffTable($tableA, $tableB);
+
+        $this->assertCount(1, $tableDiff->renamedColumns, "we should have one rename datefield1 => new_datefield1.");
+        $this->assertArrayHasKey('datefield1', $tableDiff->renamedColumns, "'datefield1' should be set to be renamed to new_datefield1");
+        $this->assertCount(1, $tableDiff->addedColumns, "'new_datefield2' should be added");
+        $this->assertArrayHasKey('new_datefield2', $tableDiff->addedColumns, "'new_datefield2' should be added, not created through renaming!");
+        $this->assertCount(0, $tableDiff->removedColumns, "Nothing should be removed.");
+        $this->assertCount(0, $tableDiff->changedColumns, "Nothing should be changed as all fields old & new have diff names.");
+    }
+
     public function testCompareRemovedIndex()
     {
         $schema1 = new Schema( array(
@@ -486,6 +506,29 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($tableDiff->changedForeignKeys));
     }
 
+    public function testMovedForeignKeyForeignTable()
+    {
+        $tableForeign = new Table("bar");
+        $tableForeign->addColumn('id', 'integer');
+
+        $tableForeign2 = new Table("bar2");
+        $tableForeign2->addColumn('id', 'integer');
+
+        $table1 = new Table("foo");
+        $table1->addColumn('fk', 'integer');
+        $table1->addForeignKeyConstraint($tableForeign, array('fk'), array('id'));
+
+        $table2 = new Table("foo");
+        $table2->addColumn('fk', 'integer');
+        $table2->addForeignKeyConstraint($tableForeign2, array('fk'), array('id'));
+
+        $c = new Comparator();
+        $tableDiff = $c->diffTable($table1, $table2);
+
+        $this->assertInstanceOf('Doctrine\DBAL\Schema\TableDiff', $tableDiff);
+        $this->assertEquals(1, count($tableDiff->changedForeignKeys));
+    }
+
     public function testTablesCaseInsensitive()
     {
         $schemaA = new Schema();
@@ -576,6 +619,18 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
     {
         $fk1 = new ForeignKeyConstraint(array("foo"), "bar", array("baz"), "fk1", array('onDelete' => 'NO ACTION'));
         $fk2 = new ForeignKeyConstraint(array("foo"), "bar", array("baz"), "fk1", array('onDelete' => 'RESTRICT'));
+
+        $c = new Comparator();
+        $this->assertFalse($c->diffForeignKey($fk1, $fk2));
+    }
+
+    /**
+     * @group DBAL-492
+     */
+    public function testCompareForeignKeyNamesUnqualified_AsNoSchemaInformationIsAvailable()
+    {
+        $fk1 = new ForeignKeyConstraint(array("foo"), "foo.bar", array("baz"), "fk1");
+        $fk2 = new ForeignKeyConstraint(array("foo"), "baz.bar", array("baz"), "fk1");
 
         $c = new Comparator();
         $this->assertFalse($c->diffForeignKey($fk1, $fk2));

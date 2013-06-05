@@ -22,7 +22,7 @@ namespace Doctrine\DBAL\Logging;
 /**
  * Chains multiple SQLLogger
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.2
  * @author  Christophe Coevoet <stof@notk.org>
@@ -61,3 +61,4 @@ class LoggerChain implements SQLLogger
         }
     }
 }
+

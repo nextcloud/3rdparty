@@ -56,3 +56,4 @@ class TableGeneratorTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $this->assertEquals($id1 + 1, $id2, "Second id is one larger than first one.");
     }
 }
+

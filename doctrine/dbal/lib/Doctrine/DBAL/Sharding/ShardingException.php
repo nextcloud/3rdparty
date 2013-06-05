@@ -58,3 +58,4 @@ class ShardingException extends DBALException
         return new self("You have to specify a sharding distribution type such as 'integer', 'string', 'guid'.");
     }
 }
+

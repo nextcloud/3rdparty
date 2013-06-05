@@ -47,3 +47,4 @@ class SQLAzureFederationsSynchronizerTest extends AbstractTestCase
         $this->assertEQuals(5, count($sql));
     }
 }
+

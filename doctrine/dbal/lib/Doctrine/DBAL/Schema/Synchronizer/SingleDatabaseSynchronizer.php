@@ -194,3 +194,4 @@ class SingleDatabaseSynchronizer extends AbstractSchemaSynchronizer
         $this->processSql($this->getDropAllSchema());
     }
 }
+

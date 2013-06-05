@@ -48,3 +48,4 @@ class SQLAzurePlatform extends SQLServer2008Platform
         return $sql;
     }
 }
+

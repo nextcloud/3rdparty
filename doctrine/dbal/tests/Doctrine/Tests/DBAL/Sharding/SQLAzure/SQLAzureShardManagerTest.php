@@ -90,3 +90,4 @@ class SQLAzureShardManagerTest extends \PHPUnit_Framework_TestCase
         return $conn;
     }
 }
+

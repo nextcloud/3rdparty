@@ -85,3 +85,4 @@ class SingleDatabaseSynchronizerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('DROP TABLE test'), $sql);
     }
 }
+

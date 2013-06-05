@@ -23,3 +23,4 @@ if ($config['host'] == "tcp:dbname.windows.net") {
 
 $conn = DriverManager::getConnection($config);
 $shardManager = new SQLAzureShardManager($conn);
+

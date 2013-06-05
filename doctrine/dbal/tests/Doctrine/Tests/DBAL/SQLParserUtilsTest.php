@@ -28,6 +28,13 @@ class SQLParserUtilsTest extends \Doctrine\Tests\DbalTestCase
             array("SELECT '?' FROM foo", true, array()),
             array('SELECT "?" FROM foo WHERE bar = ?', true, array(32)),
             array("SELECT '?' FROM foo WHERE bar = ?", true, array(32)),
+            array(
+<<<'SQLDATA'
+SELECT * FROM foo WHERE bar = 'it\'s a trap? \\' OR bar = ?
+AND baz = "\"quote\" me on it? \\" OR baz = ?
+SQLDATA
+                , true, array(58, 104)
+            ),
 
             // named
             array('SELECT :foo FROM :bar', false, array(7 => 'foo', 17 => 'bar')),
@@ -35,6 +42,10 @@ class SQLParserUtilsTest extends \Doctrine\Tests\DbalTestCase
             array('SELECT ":foo" FROM Foo WHERE bar IN (:name1, :name2)', false, array(37 => 'name1', 45 => 'name2')),
             array("SELECT ':foo' FROM Foo WHERE bar IN (:name1, :name2)", false, array(37 => 'name1', 45 => 'name2')),
             array('SELECT :foo_id', false, array(7 => 'foo_id')), // Ticket DBAL-231
+            array('SELECT @rank := 1', false, array()), // Ticket DBAL-398
+            array('SELECT @rank := 1 AS rank, :foo AS foo FROM :bar', false, array(27 => 'foo', 44 => 'bar')), // Ticket DBAL-398
+            array('SELECT * FROM Foo WHERE bar > :start_date AND baz > :start_date', false, array(30 => 'start_date', 52 =>  'start_date')), // Ticket GH-113
+            array('SELECT foo::date as date FROM Foo WHERE bar > :start_date AND baz > :start_date', false, array(46 => 'start_date', 68 =>  'start_date')) // Ticket GH-259
         );
     }
 
@@ -227,6 +238,55 @@ class SQLParserUtilsTest extends \Doctrine\Tests\DbalTestCase
                 array(),
                 array()
             ),
+            array(
+                "SELECT * FROM Foo WHERE foo IN (:foo) OR bar = :bar OR baz = :baz",
+                array('foo' => array(1, 2), 'bar' => 'bar', 'baz' => 'baz'),
+                array('foo' => Connection::PARAM_INT_ARRAY, 'baz' => 'string'),
+                'SELECT * FROM Foo WHERE foo IN (?, ?) OR bar = ? OR baz = ?',
+                array(1, 2, 'bar', 'baz'),
+                array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_STR, 'string')
+            ),
+            array(
+                "SELECT * FROM Foo WHERE foo IN (:foo) OR bar = :bar",
+                array('foo' => array(1, 2), 'bar' => 'bar'),
+                array('foo' => Connection::PARAM_INT_ARRAY),
+                'SELECT * FROM Foo WHERE foo IN (?, ?) OR bar = ?',
+                array(1, 2, 'bar'),
+                array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_STR)
+            ),
+            // Params/types with colons
+            array(
+                "SELECT * FROM Foo WHERE foo = :foo OR bar = :bar",
+                array(':foo' => 'foo', ':bar' => 'bar'),
+                array(':foo' => \PDO::PARAM_INT),
+                'SELECT * FROM Foo WHERE foo = ? OR bar = ?',
+                array('foo', 'bar'),
+                array(\PDO::PARAM_INT, \PDO::PARAM_STR)
+            ),
+            array(
+                "SELECT * FROM Foo WHERE foo = :foo OR bar = :bar",
+                array(':foo' => 'foo', ':bar' => 'bar'),
+                array(':foo' => \PDO::PARAM_INT, 'bar' => \PDO::PARAM_INT),
+                'SELECT * FROM Foo WHERE foo = ? OR bar = ?',
+                array('foo', 'bar'),
+                array(\PDO::PARAM_INT, \PDO::PARAM_INT)
+            ),
+            array(
+                "SELECT * FROM Foo WHERE foo IN (:foo) OR bar = :bar",
+                array(':foo' => array(1, 2), ':bar' => 'bar'),
+                array('foo' => Connection::PARAM_INT_ARRAY),
+                'SELECT * FROM Foo WHERE foo IN (?, ?) OR bar = ?',
+                array(1, 2, 'bar'),
+                array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_STR)
+            ),
+            array(
+                "SELECT * FROM Foo WHERE foo IN (:foo) OR bar = :bar",
+                array('foo' => array(1, 2), 'bar' => 'bar'),
+                array(':foo' => Connection::PARAM_INT_ARRAY),
+                'SELECT * FROM Foo WHERE foo IN (?, ?) OR bar = ?',
+                array(1, 2, 'bar'),
+                array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_STR)
+            ),
         );
     }
 
@@ -246,5 +306,54 @@ class SQLParserUtilsTest extends \Doctrine\Tests\DbalTestCase
         $this->assertEquals($expectedQuery, $query, "Query was not rewritten correctly.");
         $this->assertEquals($expectedParams, $params, "Params dont match");
         $this->assertEquals($expectedTypes, $types, "Types dont match");
+    }
+
+    public static function dataQueryWithMissingParameters()
+    {
+        return array(
+            array(
+                "SELECT * FROM foo WHERE bar = :param",
+                array('other' => 'val'),
+                array(),
+            ),
+            array(
+                "SELECT * FROM foo WHERE bar = :param",
+                array(),
+                array(),
+            ),
+            array(
+                "SELECT * FROM foo WHERE bar = :param",
+                array(),
+                array('param' => Connection::PARAM_INT_ARRAY),
+            ),
+            array(
+                "SELECT * FROM foo WHERE bar = :param",
+                array(),
+                array(':param' => Connection::PARAM_INT_ARRAY),
+            ),
+            array(
+                "SELECT * FROM foo WHERE bar = :param",
+                array(),
+                array('bar' => Connection::PARAM_INT_ARRAY),
+            ),
+             array(
+                "SELECT * FROM foo WHERE bar = :param",
+                array('bar' => 'value'),
+                array('bar' => Connection::PARAM_INT_ARRAY),
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider dataQueryWithMissingParameters
+     */
+    public function testExceptionIsThrownForMissingParam($query, $params, $types = array())
+    {
+        $this->setExpectedException(
+            'Doctrine\DBAL\SQLParserUtilsException',
+            'Value for :param not found in params array. Params array key should be "param"'
+        );
+
+        SQLParserUtils::expandListParameters($query, $params, $types);
     }
 }

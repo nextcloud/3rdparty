@@ -39,3 +39,4 @@ class GuidType extends StringType
         return Type::GUID;
     }
 }
+

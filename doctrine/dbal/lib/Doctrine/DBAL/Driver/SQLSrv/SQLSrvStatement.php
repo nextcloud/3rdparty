@@ -248,3 +248,4 @@ class SQLSrvStatement implements IteratorAggregate, Statement
         return sqlsrv_rows_affected($this->stmt);
     }
 }
+

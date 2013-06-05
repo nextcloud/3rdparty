@@ -33,7 +33,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform,
 /**
  * Schema Visitor used for Validation or Generation purposes.
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$

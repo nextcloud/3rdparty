@@ -34,7 +34,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform,
 /**
  * Gather SQL statements that allow to completly drop the current schema.
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @author  Benjamin Eberlei <kontakt@beberlei.de>

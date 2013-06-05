@@ -28,7 +28,7 @@ use Doctrine\DBAL\DBALException;
 /**
  * Object Representation of a table
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$

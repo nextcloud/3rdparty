@@ -69,3 +69,4 @@ class Driver implements \Doctrine\DBAL\Driver
         return $params['dbname'];
     }
 }
+

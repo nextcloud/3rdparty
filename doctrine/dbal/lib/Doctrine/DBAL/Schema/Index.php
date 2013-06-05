@@ -239,3 +239,4 @@ class Index extends AbstractAsset implements Constraint
         unset($this->flags[strtolower($flag)]);
     }
 }
+

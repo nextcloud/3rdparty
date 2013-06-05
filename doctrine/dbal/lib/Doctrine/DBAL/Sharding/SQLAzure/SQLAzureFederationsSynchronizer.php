@@ -293,3 +293,4 @@ class SQLAzureFederationsSynchronizer extends AbstractSchemaSynchronizer
                "CREATE FEDERATION " . $this->shardManager->getFederationName() . " (" . $this->shardManager->getDistributionKey() . " " . $federationTypeSql ."  RANGE)";
     }
 }
+

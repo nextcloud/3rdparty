@@ -1,5 +1,7 @@
 <?php
 /*
+ *  $Id: $
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -17,42 +19,25 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\DBAL\Schema\Synchronizer;
-
-use Doctrine\DBAL\Connection;
+namespace Doctrine\DBAL;
 
 /**
- * Abstract schema synchronizer with methods for executing batches of SQL.
+ * Doctrine\DBAL\ConnectionException
+ *
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @link        www.doctrine-project.org
+ * @since       2.4
+ * @author      Lars Strojny <lars@strojny.net>
  */
-abstract class AbstractSchemaSynchronizer implements SchemaSynchronizer
+class SQLParserUtilsException extends DBALException
 {
-    /**
-     * @var Connection
-     */
-    protected $conn;
-
-    public function __construct(Connection $conn)
+    public static function missingParam($paramName)
     {
-        $this->conn = $conn;
+        return new self(sprintf('Value for :%1$s not found in params array. Params array key should be "%1$s"', $paramName));
     }
 
-    protected function processSqlSafely(array $sql)
+    public static function missingType($typeName)
     {
-        foreach ($sql as $s) {
-            try {
-                $this->conn->exec($s);
-            } catch(\Exception $e) {
-
-            }
-        }
+        return new self(sprintf('Value for :%1$s not found in types array. Types array key should be "%1$s"', $typeName));
     }
-
-    protected function processSql(array $sql)
-    {
-        foreach ($sql as $s) {
-            $this->conn->exec($s);
-        }
-    }
-    
 }
-

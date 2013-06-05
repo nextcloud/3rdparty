@@ -95,3 +95,4 @@ class PoolingShardManager implements ShardManager
         return $result;
     }
 }
+

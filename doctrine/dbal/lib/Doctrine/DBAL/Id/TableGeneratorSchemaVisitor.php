@@ -87,3 +87,4 @@ class TableGeneratorSchemaVisitor implements \Doctrine\DBAL\Schema\Visitor\Visit
     {
     }
 }
+

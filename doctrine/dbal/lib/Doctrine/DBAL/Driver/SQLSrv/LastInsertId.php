@@ -39,3 +39,4 @@ class LastInsertId
         return $this->id;
     }
 }
+

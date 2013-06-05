@@ -105,3 +105,4 @@ class PoolingShardManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(array('id' => 1), array('id' => 2)), $result);
     }
 }
+

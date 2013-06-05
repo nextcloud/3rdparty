@@ -19,7 +19,7 @@ if (file_exists($configFile)) {
     }
 
     require $configFile;
-
+    
     foreach ($GLOBALS as $helperSetCandidate) {
         if ($helperSetCandidate instanceof \Symfony\Component\Console\Helper\HelperSet) {
             $helperSet = $helperSetCandidate;
