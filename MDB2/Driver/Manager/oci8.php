@@ -210,7 +210,7 @@ class MDB2_Driver_Manager_oci8 extends MDB2_Driver_Manager_Common
         $db->setOption('idxname_format', $idxname_format);
         if (PEAR::isError($result)) {
             return $db->raiseError($result, null, null,
-                'primary key for autoincrement PK could not be created', __FUNCTION__);
+                'primary key "'.$index_name.'" for autoincrement PK could not be created', __FUNCTION__);
         }
 
         if (null === $start) {
@@ -315,7 +315,7 @@ END;
             $result2 = $this->dropConstraint($table, $index_name);
             if (PEAR::isError($result1) && PEAR::isError($result2)) {
                 return $db->raiseError($result1, null, null,
-                    'primary key for autoincrement PK could not be dropped', __FUNCTION__);
+                    'primary key "'.$index_name.'" for autoincrement PK could not be dropped', __FUNCTION__);
             }
         }
 
