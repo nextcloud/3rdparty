@@ -632,6 +632,15 @@ END;
                 if (!array_key_exists('notnull', $field)) {
                     unset($field['definition']['notnull']);
                 }
+                if (array_key_exists('notnull', $field)
+                    && $field['notnull']
+                    && array_key_exists('notnull', $field['definition'])
+                    && $field['definition']['notnull']
+                ) {
+                    //ignore not null constraint to fix "column to be modified to NOT NULL is already NOT NULL" 
+                    unset($field['definition']['notnull']);
+                    unset($field['notnull']);
+                }
                 $fields[] = $db->getDeclaration($field['definition']['type'], $field_name, $field['definition']);
             }
             $result = $db->exec("ALTER TABLE $name MODIFY (". implode(', ', $fields).')');
