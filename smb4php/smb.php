@@ -98,7 +98,7 @@ class smb {
 			'^(.*): ERRSRV - ERRbadpw' => 'error',
 			'^Error returning browse list: (.*)$' => 'error',
 			'^tree connect failed: (.*)$' => 'error',
-			'^(Connection to .* failed)$' => 'error',
+			'^(Connection to .* failed)(.*)$' => 'error-connect',
 			'^NT_STATUS_(.*) ' => 'error',
 			'^NT_STATUS_(.*)\$' => 'error',
 			'ERRDOS - ERRbadpath \((.*).\)' => 'error',
@@ -185,6 +185,8 @@ class smb {
 						return false;
 					}
 					trigger_error($regs[0].' params('.$params.')', E_USER_ERROR);
+				case 'error-connect':
+					return false;
 			}
 			if ($i) switch ($i[1]) {
 				case 'file':
@@ -214,7 +216,7 @@ class smb {
 		if ($s = smb::getstatcache($url)) {
 			return $s;
 		}
-		list ($stat, $pu) = array (array (), smb::parse_url ($url));
+		list ($stat, $pu) = array (false, smb::parse_url ($url));
 		switch ($pu['type']) {
 			case 'host':
 				if ($o = smb::look ($pu))
