@@ -569,7 +569,11 @@ LEFT JOIN user_cons_columns r_cols
             }
 
             $column = $columnDiff->column;
-            $fields[] = $column->getQuotedName($this). ' ' . $this->getColumnDeclarationSQL('', $column->toArray());
+            $columnInfo = $column->toArray();
+            if (!in_array('notnull', $columnDiff->changedProperties)) {
+                $columnInfo['notnull'] = false;
+            }
+            $fields[] = $column->getQuotedName($this). ' ' . $this->getColumnDeclarationSQL('', $columnInfo);
             if ($columnDiff->hasChanged('comment') && $comment = $this->getColumnComment($column)) {
                 $commentsSQL[] = $this->getCommentOnColumnSQL($diff->name, $column->getName(), $comment);
             }
