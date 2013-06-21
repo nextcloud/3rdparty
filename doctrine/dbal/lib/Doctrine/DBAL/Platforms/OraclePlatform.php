@@ -355,8 +355,6 @@ class OraclePlatform extends AbstractPlatform
      */
     public function getListTableIndexesSQL($table, $currentDatabase = null)
     {
-        $table = strtoupper($table);
-
         return "SELECT uind.index_name AS name, " .
              "       uind.index_type AS type, " .
              "       decode( uind.uniqueness, 'NONUNIQUE', 0, 'UNIQUE', 1 ) AS is_unique, " .
@@ -392,7 +390,7 @@ class OraclePlatform extends AbstractPlatform
 
     public function getCreateAutoincrementSql($name, $table, $start = 1)
     {
-        $table = strtoupper($table);
+        $table = $this->getOracleInternalName($table);
         $sql   = array();
 
         $indexName  = $table . '_AI_PK';
@@ -408,11 +406,14 @@ BEGIN
   END IF;
 END;';
 
-        $sequenceName = $table . '_SEQ';
+        $sequenceNameNotQuoted = $table . '_SEQ';
+        $sequenceName = $this->quoteIdentifier($sequenceNameNotQuoted);
         $sequence = new Sequence($sequenceName, $start);
         $sql[] = $this->getCreateSequenceSQL($sequence);
 
         $triggerName  = $table . '_AI_PK';
+        $triggerName = $this->quoteIdentifier($triggerName);
+        $table = $this->quoteIdentifier($table);
         $sql[] = 'CREATE TRIGGER ' . $triggerName . '
    BEFORE INSERT
    ON ' . $table . '
@@ -427,7 +428,7 @@ BEGIN
    ELSE
       SELECT NVL(Last_Number, 0) INTO last_Sequence
         FROM User_Sequences
-       WHERE Sequence_Name = \'' . $sequenceName . '\';
+       WHERE Sequence_Name = \'' . $sequenceNameNotQuoted . '\';
       SELECT :NEW.' . $name . ' INTO last_InsertID FROM DUAL;
       WHILE (last_InsertID > last_Sequence) LOOP
          SELECT ' . $sequenceName . '.NEXTVAL INTO last_Sequence FROM DUAL;
@@ -440,7 +441,7 @@ END;';
 
     public function getDropAutoincrementSql($table)
     {
-        $table = strtoupper($table);
+        $table = $this->getOracleInternalName($table);
         $trigger = $table . '_AI_PK';
 
         $sql[] = 'DROP TRIGGER ' . $trigger;
@@ -454,7 +455,7 @@ END;';
 
     public function getListTableForeignKeysSQL($table)
     {
-        $table = strtoupper($table);
+        $table = $this->getOracleInternalName($table);
 
         return "SELECT alc.constraint_name,
           alc.DELETE_RULE,
@@ -478,14 +479,12 @@ LEFT JOIN user_cons_columns r_cols
 
     public function getListTableConstraintsSQL($table)
     {
-        $table = strtoupper($table);
+        $table = $this->getOracleInternalName($table);
         return 'SELECT * FROM user_constraints WHERE table_name = \'' . $table . '\'';
     }
 
     public function getListTableColumnsSQL($table, $database = null)
     {
-        $table = strtoupper($table);
-
         $tabColumnsTableName = "user_tab_columns";
         $ownerCondition = '';
 
@@ -822,5 +821,13 @@ LEFT JOIN user_cons_columns r_cols
     public function getBlobTypeDeclarationSQL(array $field)
     {
         return 'BLOB';
+    }
+
+    protected function getOracleInternalName($table)
+    {
+        if ($table[0] == '"') {
+                return str_replace(array('`', '"'), '', $table);
+        }
+        return strtoupper($table);
     }
 }
