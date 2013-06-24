@@ -210,7 +210,7 @@ class MDB2_Driver_Manager_oci8 extends MDB2_Driver_Manager_Common
         $db->setOption('idxname_format', $idxname_format);
         if (PEAR::isError($result)) {
             return $db->raiseError($result, null, null,
-                'primary key for autoincrement PK could not be created', __FUNCTION__);
+                'primary key "'.$index_name.'" for autoincrement PK could not be created', __FUNCTION__);
         }
 
         if (null === $start) {
@@ -315,7 +315,7 @@ END;
             $result2 = $this->dropConstraint($table, $index_name);
             if (PEAR::isError($result1) && PEAR::isError($result2)) {
                 return $db->raiseError($result1, null, null,
-                    'primary key for autoincrement PK could not be dropped', __FUNCTION__);
+                    'primary key "'.$index_name.'" for autoincrement PK could not be dropped', __FUNCTION__);
             }
         }
 
@@ -631,6 +631,15 @@ END;
                 //fix error "column to be modified to NOT NULL is already NOT NULL" 
                 if (!array_key_exists('notnull', $field)) {
                     unset($field['definition']['notnull']);
+                }
+                if (array_key_exists('notnull', $field)
+                    && $field['notnull']
+                    && array_key_exists('notnull', $field['definition'])
+                    && $field['definition']['notnull']
+                ) {
+                    //ignore not null constraint to fix "column to be modified to NOT NULL is already NOT NULL" 
+                    unset($field['definition']['notnull']);
+                    unset($field['notnull']);
                 }
                 $fields[] = $db->getDeclaration($field['definition']['type'], $field_name, $field['definition']);
             }
