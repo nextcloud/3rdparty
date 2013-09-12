@@ -519,6 +519,7 @@ class SqlitePlatform extends AbstractPlatform
             'numeric'          => 'decimal',
             'blob'             => 'blob',
             'integer unsigned' => 'integer',
+            'bigint unsigned'  => 'bigint',
         );
     }
 
