@@ -1,0 +1,12 @@
+====PHPocX 3.0 by 2mdc.com====
+http://www.phpdocx.com/
+
+====Where I can find documentation?====
+If you need more info an docs about PHPDocX we recommend you reading the documentation available here:
+
+FAQS: http://www.phpdocx.com/help/faq
+Documentation & API docs: http://www.phpdocx.com/documentation
+Online DEMO: http://www.phpdocx.com/demo
+Tutorial: http://www.phpdocx.com/documentation/tutorial 
+
+PHPDocX is developed by 2mdc (http://www.2mdc.com).
