@@ -377,7 +377,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
                     // group, we grab the parent principal and add it to the
                     // list.
                     if ($groupNode instanceof Sabre_CalDAV_Principal_ProxyRead) {
-                        list($readList[]) = encodePath(Sabre_DAV_URLUtil::splitPath($group));
+                        list($readList[]) = Sabre_DAV_URLUtil::encodePath(Sabre_DAV_URLUtil::splitPath($group));
                     }
                     if ($groupNode instanceof Sabre_CalDAV_Principal_ProxyWrite) {
                         list($writeList[]) = Sabre_DAV_URLUtil::encodePath(Sabre_DAV_URLUtil::splitPath($group));
