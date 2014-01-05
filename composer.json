@@ -1,0 +1,13 @@
+{
+	"name": "owncloud/3rdparty",
+	"description": "All 3rdparty components",
+	"license": "MIT",
+
+	"config": {
+		"vendor-dir": "."
+	},
+    "require": {
+	    "sabre/dav" : "1.7.9"
+    }
+}
+
