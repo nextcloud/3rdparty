@@ -40,7 +40,7 @@ class AutoLoader
      */
     public static function autoloadDompdf($className)
     {
-        $pathDompdf = dirname(__FILE__) . '/../pdf/dompdf_config.inc.php';
+        $pathDompdf = dirname(__FILE__) . '/../../dompdf/dompdf_config.inc.php';
         if (file_exists($pathDompdf)) {
             require_once $pathDompdf;
         }
