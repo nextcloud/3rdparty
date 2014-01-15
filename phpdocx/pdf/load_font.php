@@ -38,7 +38,7 @@
 
  */
 
-require_once("dompdf_config.inc.php");
+require_once(dirname(__FILE__) . '/../../dompdf_config.inc.php');
 
 /**
  * @access private
