@@ -3,8 +3,19 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "35a030a7ac739f28852b71db491ebdc5",
+    "hash": "539bbaca349fcd46c5f4221ae8732c34",
     "packages": [
+        {
+            "name": "mcnetic/phpzipstreamer",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/McNetic/PHPZipStreamer.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "time": "2014-01-30 14:55:35"
+        },
         {
             "name": "sabre/dav",
             "version": "1.7.9",
@@ -129,9 +140,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "mcnetic/phpzipstreamer": 20
+    },
     "platform": [
 
     ],
