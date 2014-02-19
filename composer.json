@@ -7,7 +7,8 @@
 		"vendor-dir": "."
 	},
     "require": {
-	    "sabre/dav" : "1.7.9"
+	    "sabre/dav" : "1.7.9",
+		"kriswallsmith/assetic": "1.2.*@dev"
     }
 }
 
