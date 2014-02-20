@@ -21,7 +21,8 @@
 	],
 	"require": {
 		"sabre/dav" : "1.7.9",
-		"mcnetic/phpzipstreamer": "dev-master"
+		"mcnetic/phpzipstreamer": "dev-master",
+		"kriswallsmith/assetic": "1.2.*@dev"
 	}
 }
 

@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = $vendorDir;
 
 return array(
+    'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Sabre\\VObject' => array($vendorDir . '/sabre/vobject/lib'),
     'Sabre' => array($vendorDir . '/sabre/dav/lib'),
+    'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
 );
