@@ -526,6 +526,7 @@ class Sabre_DAV_Client {
 
         $body = Sabre_DAV_XMLUtil::convertDAVNamespace($body);
 
+	libxml_disable_entity_loader(true);
         $responseXML = simplexml_load_string($body, null, LIBXML_NOBLANKS | LIBXML_NOCDATA);
         if ($responseXML===false) {
             throw new InvalidArgumentException('The passed data is not valid XML');
