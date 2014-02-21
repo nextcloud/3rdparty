@@ -243,6 +243,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 //		echo htmlentities($gFileData,ENT_QUOTES,'UTF-8');
 //		echo '</pre><hr />';
 //
+		libxml_disable_entity_loader(true);
 		$xml = simplexml_load_string($gFileData);
 		$namespacesMeta = $xml->getNamespaces(true);
 

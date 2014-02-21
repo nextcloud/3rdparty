@@ -314,7 +314,10 @@ class Sabre_DAV_Client {
             CURLOPT_RETURNTRANSFER => true,
             // Return headers as part of the response
             CURLOPT_HEADER => true,
-            CURLOPT_POSTFIELDS => $body,
+            // For security we cast this to a string. If somehow an array could
+            // be passed here, it would be possible for an attacker to use @ to
+            // post local files.
+            CURLOPT_POSTFIELDS => (string)$body,
             // Automatically follow redirects
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_MAXREDIRS => 5,
@@ -526,6 +529,7 @@ class Sabre_DAV_Client {
 
         $body = Sabre_DAV_XMLUtil::convertDAVNamespace($body);
 
+	libxml_disable_entity_loader(true);
         $responseXML = simplexml_load_string($body, null, LIBXML_NOBLANKS | LIBXML_NOCDATA);
         if ($responseXML===false) {
             throw new InvalidArgumentException('The passed data is not valid XML');
