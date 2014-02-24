@@ -618,7 +618,7 @@ class Sabre_DAV_Locks_Plugin extends Sabre_DAV_ServerPlugin {
      * @return Sabre_DAV_Locks_LockInfo
      */
     protected function parseLockRequest($body) {
-
+	libxml_disable_entity_loader(true);
         $xml = simplexml_load_string(
             Sabre_DAV_XMLUtil::convertDAVNamespace($body),
             null,

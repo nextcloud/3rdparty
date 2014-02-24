@@ -1229,6 +1229,7 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $baseDocument = new DOMDocument();
+	libxml_disable_entity_loader(true);
         $baseDocument->loadXML($baseTemplateDocumentT);
         $docXpath = new DOMXPath($baseDocument);
         $docXpath->registerNamespace('w', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main');
@@ -1264,6 +1265,7 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $this->_contentTypeT = new DOMDocument();
+        libxml_disable_entity_loader(true);
         $this->_contentTypeT->loadXML($baseTemplateContentTypeT);
 
         //We are going to include the standard image defaults
@@ -1287,6 +1289,7 @@ class CreateDocx extends CreateDocument
         }
 
         $this->_wordRelsDocumentRelsT = new DOMDocument();
+        libxml_disable_entity_loader(true);
         $this->_wordRelsDocumentRelsT->loadXML($baseTemplateDocumentRelsT);
         $relationships = $this->_wordRelsDocumentRelsT->getElementsByTagName('Relationship');
 
@@ -2304,6 +2307,7 @@ class CreateDocx extends CreateDocument
         if ($this->_debug->getActive() == 1) {
             PhpdocxLogger::logger('Debug is active, add messages to objDebug.', 'debug');
             libxml_use_internal_errors(true);
+            libxml_disable_entity_loader(true);
             simplexml_load_string(
                 $this->_wordDocumentT, 'SimpleXMLElement', LIBXML_NOWARNING
             );
@@ -2448,6 +2452,7 @@ class CreateDocx extends CreateDocument
             }
         //let's parse the different styles via XPath
         $newStylesDoc = new DOMDocument();
+        libxml_disable_entity_loader(true);
         $newStylesDoc->loadXML($newStyles);
         $stylesXpath = new DOMXPath($newStylesDoc);
         $stylesXpath->registerNamespace('w', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main');
@@ -2468,6 +2473,7 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $stylesDocument = new DomDocument();
+        libxml_disable_entity_loader(true);
         $stylesDocument->loadXML($this->_wordStylesT);
         $baseNode = $stylesDocument->documentElement;
         $stylesDocumentXPath = new DOMXPath($stylesDocument);
@@ -2651,6 +2657,7 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $stylesDocument = new DomDocument();
+        libxml_disable_entity_loader(true);
         $stylesDocument->loadXML($this->_wordStylesT);
         $langNode = $stylesDocument->getElementsByTagName('lang');
         $langNode->item(0)->setAttribute('w:val', $lang);
@@ -2704,6 +2711,7 @@ class CreateDocx extends CreateDocument
     {
 
         $templateStylesheet = new DomDocument();
+        libxml_disable_entity_loader(true);
         $templateStylesheet->loadXML($templateStyles);
         //let's parse the different styles via XPath
 
@@ -2714,6 +2722,7 @@ class CreateDocx extends CreateDocument
 
         //Let's get the original styles as a DOMNode
         $stylesDocument = new DomDocument();
+        libxml_disable_entity_loader(true);
         $stylesDocument->loadXML($templateStyles);
         $baseNode = $stylesDocument->documentElement;
 
@@ -3028,6 +3037,7 @@ class CreateDocx extends CreateDocument
         }
 
         $this->_wordSettingsT = new DOMDocument();
+        libxml_disable_entity_loader(true);
         $this->_wordSettingsT->loadXML($baseTemplateSettingsT);
         $selectedElements = $this->_wordSettingsT->documentElement->getElementsByTagName($tag);
         if($selectedElements->length == 0){
@@ -3703,6 +3713,7 @@ class CreateDocx extends CreateDocument
         }
 
         $settingsDoc = new DOMDocument();
+        libxml_disable_entity_loader(true);
         $settingsDoc->loadXML($baseSettings);
         $settings = $settingsDoc->documentElement;
 

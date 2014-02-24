@@ -222,6 +222,7 @@ class Docx2Text
         }
 
         $this->domDocument = new DomDocument();
+        libxml_disable_entity_loader(true);
         $this->domDocument->loadXML($this->_document);
         //get the body node to check the content from all his children
         $bodyNode = $this->domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'body');
@@ -321,6 +322,7 @@ class Docx2Text
             }
             if (!empty($this->_endnote)) {
                 $domDocument = new DomDocument();
+        	libxml_disable_entity_loader(true);
                 $domDocument->loadXML($this->_endnote);
                 $endnotes = $domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'endnote');
                 foreach ($endnotes as $endnote) {
@@ -344,6 +346,7 @@ class Docx2Text
             }
             if (!empty($this->_footnote)) {
                 $domDocument = new DomDocument();
+		libxml_disable_entity_loader(true);
                 $domDocument->loadXML($this->_footnote);
                 $footnotes = $domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'footnote');
                 foreach ($footnotes as $footnote) {
@@ -368,6 +371,7 @@ class Docx2Text
         if(!empty($this->_numbering)){
             //we use the domdocument to iterate the children of the numbering tag 
             $domDocument = new DomDocument();
+            libxml_disable_entity_loader(true);
             $domDocument->loadXML($this->_numbering);
             $numberings = $domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'numbering');
             //there is only one numbering tag in the numbering.xml
@@ -418,6 +422,7 @@ class Docx2Text
                 $this->_relations = $this->docx->getFromName('word/_rels/document.xml.rels');
             }
             $domDocument = new DomDocument();
+            libxml_disable_entity_loader(true);
             $domDocument->loadXML($this->_relations);
             $relations = $domDocument->getElementsByTagName('Relationships');
             $relations = $relations->item(0);
