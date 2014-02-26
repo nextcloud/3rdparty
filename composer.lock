@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8bc48e0bbd8669ab2ef71be24dbac790",
+    "hash": "12f499b51e37a7bdf502bbf2538827e1",
     "packages": [
         {
             "name": "kriswallsmith/assetic",
@@ -77,6 +77,17 @@
                 "minification"
             ],
             "time": "2014-02-04 10:36:39"
+        },
+        {
+            "name": "mcnetic/phpzipstreamer",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/McNetic/PHPZipStreamer.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "time": "2014-02-21 13:13:11"
         },
         {
             "name": "sabre/dav",
@@ -252,6 +263,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "mcnetic/phpzipstreamer": 20,
         "kriswallsmith/assetic": 20
     },
     "platform": [

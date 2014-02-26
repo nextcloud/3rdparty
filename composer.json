@@ -2,13 +2,27 @@
 	"name": "owncloud/3rdparty",
 	"description": "All 3rdparty components",
 	"license": "MIT",
-
 	"config": {
 		"vendor-dir": "."
 	},
-    "require": {
-	    "sabre/dav" : "1.7.9",
+	"repositories": [
+		{
+			"type":"package",
+			"package": {
+				"name": "mcnetic/phpzipstreamer",
+				"version":"master",
+				"source": {
+					"url": "https://github.com/McNetic/PHPZipStreamer.git",
+					"type": "git",
+					"reference":"master"
+				}
+			}
+		}
+	],
+	"require": {
+		"sabre/dav" : "1.7.9",
+		"mcnetic/phpzipstreamer": "dev-master",
 		"kriswallsmith/assetic": "1.2.*@dev"
-    }
+	}
 }
 
