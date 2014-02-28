@@ -5,7 +5,7 @@
  *
  * @package Sabre
  * @subpackage DAV
- * @copyright Copyright (C) 2007-2013 fruux GmbH (https://fruux.com/).
+ * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
@@ -113,7 +113,9 @@ class Sabre_DAV_XMLUtil {
 
         // Retaining old error setting
         $oldErrorSetting =  libxml_use_internal_errors(true);
-	libxml_disable_entity_loader(true);
+        // Fixes an XXE vulnerability on PHP versions older than 5.3.23 or
+        // 5.4.13.
+        $oldEntityLoaderSetting = libxml_disable_entity_loader(true);
 
         // Clearing any previous errors
         libxml_clear_errors();
@@ -122,8 +124,8 @@ class Sabre_DAV_XMLUtil {
 
         // We don't generally care about any whitespace
         $dom->preserveWhiteSpace = false;
-        
-        $dom->loadXML(self::convertDAVNamespace($xml),LIBXML_NOWARNING | LIBXML_NOERROR | LIBXML_DTDLOAD | LIBXML_DTDATTR);
+
+        $dom->loadXML(self::convertDAVNamespace($xml),LIBXML_NOWARNING | LIBXML_NOERROR);
 
         if ($error = libxml_get_last_error()) {
             libxml_clear_errors();
@@ -132,6 +134,7 @@ class Sabre_DAV_XMLUtil {
 
         // Restoring old mechanism for error handling
         if ($oldErrorSetting===false) libxml_use_internal_errors(false);
+        if ($oldEntityLoaderSetting===false) libxml_disable_entity_loader(true);
 
         return $dom;
 
