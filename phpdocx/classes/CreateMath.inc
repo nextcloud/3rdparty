@@ -125,8 +125,9 @@ class CreateMath extends CreateElement
         $mathML = str_replace($arrDeleteStrsMML, $arrDeleteToStrsMML, $mathML);
 
         $rscXML = new DOMDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $rscXML->loadXML($mathML);
+		libxml_disable_entity_loader($loadEntities);
         $objXSLTProc = new XSLTProcessor();
         $objXSL = new DOMDocument();
         $objXSL->load('../xsl/MML2OMML_n.XSL');

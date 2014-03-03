@@ -222,8 +222,9 @@ class Docx2Text
         }
 
         $this->domDocument = new DomDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $this->domDocument->loadXML($this->_document);
+		libxml_disable_entity_loader($loadEntities);
         //get the body node to check the content from all his children
         $bodyNode = $this->domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'body');
         //We get the body node. it is known that there is only one body tag
@@ -322,8 +323,9 @@ class Docx2Text
             }
             if (!empty($this->_endnote)) {
                 $domDocument = new DomDocument();
-        	libxml_disable_entity_loader(true);
+				$loadEntities = libxml_disable_entity_loader(true);
                 $domDocument->loadXML($this->_endnote);
+				libxml_disable_entity_loader($loadEntities);
                 $endnotes = $domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'endnote');
                 foreach ($endnotes as $endnote) {
                     $xml = $endnote->ownerDocument->saveXML($endnote);
@@ -346,8 +348,9 @@ class Docx2Text
             }
             if (!empty($this->_footnote)) {
                 $domDocument = new DomDocument();
-		libxml_disable_entity_loader(true);
+				$loadEntities = libxml_disable_entity_loader(true);
                 $domDocument->loadXML($this->_footnote);
+				libxml_disable_entity_loader($loadEntities);
                 $footnotes = $domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'footnote');
                 foreach ($footnotes as $footnote) {
                     $xml = $footnote->ownerDocument->saveXML( $footnote );
@@ -371,8 +374,9 @@ class Docx2Text
         if(!empty($this->_numbering)){
             //we use the domdocument to iterate the children of the numbering tag 
             $domDocument = new DomDocument();
-            libxml_disable_entity_loader(true);
+			$loadEntities = libxml_disable_entity_loader(true);
             $domDocument->loadXML($this->_numbering);
+			libxml_disable_entity_loader($loadEntities);
             $numberings = $domDocument->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'numbering');
             //there is only one numbering tag in the numbering.xml
             $numberings = $numberings->item(0);
@@ -422,8 +426,9 @@ class Docx2Text
                 $this->_relations = $this->docx->getFromName('word/_rels/document.xml.rels');
             }
             $domDocument = new DomDocument();
-            libxml_disable_entity_loader(true);
+			$loadEntities = libxml_disable_entity_loader(true);
             $domDocument->loadXML($this->_relations);
+			libxml_disable_entity_loader($loadEntities);
             $relations = $domDocument->getElementsByTagName('Relationships');
             $relations = $relations->item(0);
             foreach ($relations->childNodes as $relation) {
