@@ -137,8 +137,9 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 
 		$worksheetNames = array();
 
-		libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
 		$xml = simplexml_load_file($pFilename);
+		libxml_disable_entity_loader($loadEntities);
 		$namespaces = $xml->getNamespaces(true);
 
 		$xml_ss = $xml->children($namespaces['ss']);
@@ -166,8 +167,9 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 
 		$worksheetInfo = array();
 
-		libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
 		$xml = simplexml_load_file($pFilename);
+		libxml_disable_entity_loader($loadEntities);
 		$namespaces = $xml->getNamespaces(true);
 
 		$worksheetID = 1;

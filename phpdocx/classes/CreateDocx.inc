@@ -1229,8 +1229,9 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $baseDocument = new DOMDocument();
-	libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $baseDocument->loadXML($baseTemplateDocumentT);
+		libxml_disable_entity_loader($loadEntities);
         $docXpath = new DOMXPath($baseDocument);
         $docXpath->registerNamespace('w', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main');
         $queryDoc = '//w:body/w:sdt';
@@ -1265,8 +1266,9 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $this->_contentTypeT = new DOMDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $this->_contentTypeT->loadXML($baseTemplateContentTypeT);
+		libxml_disable_entity_loader($loadEntities);
 
         //We are going to include the standard image defaults
 
@@ -1289,8 +1291,9 @@ class CreateDocx extends CreateDocument
         }
 
         $this->_wordRelsDocumentRelsT = new DOMDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $this->_wordRelsDocumentRelsT->loadXML($baseTemplateDocumentRelsT);
+		libxml_disable_entity_loader($loadEntities);
         $relationships = $this->_wordRelsDocumentRelsT->getElementsByTagName('Relationship');
 
         //Now we have to take care of the case that the template used is not one of the default preprocessed templates
@@ -2307,10 +2310,11 @@ class CreateDocx extends CreateDocument
         if ($this->_debug->getActive() == 1) {
             PhpdocxLogger::logger('Debug is active, add messages to objDebug.', 'debug');
             libxml_use_internal_errors(true);
-            libxml_disable_entity_loader(true);
+			$loadEntities = libxml_disable_entity_loader(true);
             simplexml_load_string(
                 $this->_wordDocumentT, 'SimpleXMLElement', LIBXML_NOWARNING
-            );
+			);
+			libxml_disable_entity_loader($loadEntities);
             $xmlErrors = libxml_get_errors();
             if (is_array($xmlErrors)) {
                 $this->_debug->addMessage($xmlErrors);
@@ -2452,8 +2456,9 @@ class CreateDocx extends CreateDocument
             }
         //let's parse the different styles via XPath
         $newStylesDoc = new DOMDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $newStylesDoc->loadXML($newStyles);
+		libxml_disable_entity_loader($loadEntities);
         $stylesXpath = new DOMXPath($newStylesDoc);
         $stylesXpath->registerNamespace('w', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main');
         $queryStyle = '//w:style';
@@ -2473,8 +2478,9 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $stylesDocument = new DomDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $stylesDocument->loadXML($this->_wordStylesT);
+		libxml_disable_entity_loader($loadEntities);
         $baseNode = $stylesDocument->documentElement;
         $stylesDocumentXPath = new DOMXPath($stylesDocument);
         $stylesDocumentXPath->registerNamespace('w', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main');
@@ -2657,8 +2663,9 @@ class CreateDocx extends CreateDocument
             PhpdocxLogger::logger($e->getMessage(), 'fatal');
         }
         $stylesDocument = new DomDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $stylesDocument->loadXML($this->_wordStylesT);
+		libxml_disable_entity_loader($loadEntities);
         $langNode = $stylesDocument->getElementsByTagName('lang');
         $langNode->item(0)->setAttribute('w:val', $lang);
         $langNode->item(0)->setAttribute('w:eastAsia', $lang);
@@ -2711,8 +2718,9 @@ class CreateDocx extends CreateDocument
     {
 
         $templateStylesheet = new DomDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $templateStylesheet->loadXML($templateStyles);
+		libxml_disable_entity_loader($loadEntities);
         //let's parse the different styles via XPath
 
         $stylesXpath = new DOMXPath($importedStylesheet);
@@ -2722,8 +2730,9 @@ class CreateDocx extends CreateDocument
 
         //Let's get the original styles as a DOMNode
         $stylesDocument = new DomDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $stylesDocument->loadXML($templateStyles);
+		libxml_disable_entity_loader($loadEntities);
         $baseNode = $stylesDocument->documentElement;
 
         //Now we start to insert the new styles at the end of the styles.xml
@@ -3037,8 +3046,9 @@ class CreateDocx extends CreateDocument
         }
 
         $this->_wordSettingsT = new DOMDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $this->_wordSettingsT->loadXML($baseTemplateSettingsT);
+		libxml_disable_entity_loader($loadEntities);
         $selectedElements = $this->_wordSettingsT->documentElement->getElementsByTagName($tag);
         if($selectedElements->length == 0){
             $settingsElement = $this->_wordSettingsT->createDocumentFragment();
@@ -3713,8 +3723,9 @@ class CreateDocx extends CreateDocument
         }
 
         $settingsDoc = new DOMDocument();
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $settingsDoc->loadXML($baseSettings);
+		libxml_disable_entity_loader($loadEntities);
         $settings = $settingsDoc->documentElement;
 
         foreach($data as $key => $value){

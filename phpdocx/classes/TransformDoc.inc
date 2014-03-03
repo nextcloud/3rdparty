@@ -241,10 +241,11 @@ class TransformDoc
             echo 'Unable to find the DOCX file';
             exit();
         }
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $relations = simplexml_load_string(
             $package->getFromName('_rels/.rels')
         );
+		libxml_disable_entity_loader($loadEntities);
 
         foreach ($relations->Relationship as $rel) {
             if ($rel["Type"] == TransformDoc::SCHEMA_OFFICEDOCUMENT) {
@@ -260,8 +261,9 @@ class TransformDoc
                 $xml = preg_replace(
                     '/(<w:wordDocument)+(.)*(><w:body>)/', '<w:body>', $xml
                 );
-        	libxml_disable_entity_loader(true);
+				$loadEntities = libxml_disable_entity_loader(true);
                 @$xmlDOM->loadXML($xml);
+				libxml_disable_entity_loader($loadEntities);
                 $xsl = new DOMDocument();
                 $xsl->load(dirname(__FILE__) . '/../xsl/docx2html.xsl');
 
@@ -283,10 +285,11 @@ class TransformDoc
                 $idImgs[] = substr($datFiltered[1], 0, -1);
             }
         }
-        libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $relationsImgs = simplexml_load_string(
             $package->getFromName('word/_rels/document.xml.rels')
         );
+		libxml_disable_entity_loader($loadEntities);
         $pathImgs = array();
         foreach ($relationsImgs->Relationship as $relImg) {
             if ($relImg["Type"] == TransformDoc::SCHEMA_IMAGEDOCUMENT) {
@@ -370,8 +373,9 @@ class TransformDoc
     private function _extractProps()
     {
         $xmlDOM = new DOMDocument();
-	libxml_disable_entity_loader(true);
+		$loadEntities = libxml_disable_entity_loader(true);
         $xmlDOM->loadXML($this->getDocument());
+		libxml_disable_entity_loader($loadEntities);
         //Get the page size and orientation
         $node = $xmlDOM->getElementsByTagName('pgSz');
         $docProps = array();
