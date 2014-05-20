@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0d116b672c4d2fa4cd0e8bce9cd6e417",
+    "hash": "f98ec4b3c8b4e10eeb08ac3402b3fe20",
     "packages": [
         {
             "name": "guzzle/common",
@@ -205,6 +204,40 @@
             "time": "2014-01-28 22:14:17"
         },
         {
+            "name": "isoft/mssql-bundle",
+            "version": "dev-master",
+            "target-dir": "Realestate/MssqlBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/intellectsoft-uk/MssqlBundle.git",
+                "reference": "98a020cd39f8bfc1282e734c7c5038e129411981"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/intellectsoft-uk/MssqlBundle/zipball/98a020cd39f8bfc1282e734c7c5038e129411981",
+                "reference": "98a020cd39f8bfc1282e734c7c5038e129411981",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Realestate\\MssqlBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Realestate"
+                },
+                {
+                    "name": "Vitaly Zhloba",
+                    "email": "vitaly.zhloba@gmail.com"
+                }
+            ],
+            "description": "Driver for work with MsSQL server",
+            "time": "2014-02-12 08:38:02"
+        },
+        {
             "name": "kriswallsmith/assetic",
             "version": "dev-master",
             "source": {
@@ -286,7 +319,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-06-04 12:11:53"
+            "time": "2014-06-23 10:03:21"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -734,7 +767,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mcnetic/phpzipstreamer": 20,
-        "kriswallsmith/assetic": 20
+        "kriswallsmith/assetic": 20,
+        "isoft/mssql-bundle": 20
     },
     "platform": [
 

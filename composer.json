@@ -25,7 +25,8 @@
 		"kriswallsmith/assetic": "1.2.*@dev",
 		"phpmailer/phpmailer": "v5.2.8",
 		"phpseclib/phpseclib": "*",
-		"rackspace/php-opencloud": "v1.9.2"
+		"rackspace/php-opencloud": "v1.9.2",
+		"isoft/mssql-bundle": "master-dev"
 	}
 }
 
