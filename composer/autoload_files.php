@@ -7,4 +7,5 @@ $baseDir = $vendorDir;
 
 return array(
     $vendorDir . '/kriswallsmith/assetic/src/functions.php',
+    $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Random.php',
 );
