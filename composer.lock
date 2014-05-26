@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "7b77a322e1575c9b2d36f72c5af70ef4",
+    "hash": "b73413e14bb322d2f87d32a119280872",
     "packages": [
         {
             "name": "kriswallsmith/assetic",
@@ -87,7 +88,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-05-28 13:13:33"
+            "time": "2014-06-03 10:17:22"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -239,16 +240,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "1.7.11",
+            "version": "1.8.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "e3f46e0ecf83cf1d2ebf54908cde7b5ec170aa2c"
+                "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/e3f46e0ecf83cf1d2ebf54908cde7b5ec170aa2c",
-                "reference": "e3f46e0ecf83cf1d2ebf54908cde7b5ec170aa2c",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
+                "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
                 "shasum": ""
             },
             "require": {
@@ -268,18 +269,25 @@
                 "evert/sabredav": "1.7.*"
             },
             "require-dev": {
-                "phing/phing": "2.4.14",
-                "phpunit/phpunit": "3.7.*"
+                "evert/phpdoc-md": "~0.0.7",
+                "phpunit/phpunit": "~4.0.0"
             },
             "suggest": {
                 "ext-apc": "*",
                 "ext-curl": "*",
                 "ext-pdo": "*"
             },
+            "bin": [
+                "bin/sabredav"
+            ],
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "Sabre": "lib/"
+                    "Sabre\\DAV": "lib/",
+                    "Sabre\\HTTP": "lib/",
+                    "Sabre\\DAVACL": "lib/",
+                    "Sabre\\CalDAV": "lib/",
+                    "Sabre\\CardDAV": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -289,7 +297,7 @@
             "authors": [
                 {
                     "name": "Evert Pot",
-                    "email": "evert@rooftopsolutions.nl",
+                    "email": "me@evertpot.com",
                     "homepage": "http://evertpot.com/",
                     "role": "Developer"
                 }
@@ -303,7 +311,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2014-02-26 22:13:46"
+            "time": "2014-05-16 00:14:02"
         },
         {
             "name": "sabre/vobject",

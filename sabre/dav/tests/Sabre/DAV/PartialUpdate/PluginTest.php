@@ -1,20 +1,25 @@
 <?php
 
+namespace Sabre\DAV\PartialUpdate;
+
+use Sabre\DAV;
+use Sabre\HTTP;
+
 require_once 'Sabre/DAV/PartialUpdate/FileMock.php';
 
-class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
+class PluginTest extends \Sabre\DAVServerTest {
 
     protected $node;
     protected $plugin;
 
     public function setUp() {
 
-        $this->node = new Sabre_DAV_PartialUpdate_FileMock();
+        $this->node = new FileMock();
         $this->tree[] = $this->node;
 
         parent::setUp();
 
-        $this->plugin = new Sabre_DAV_PartialUpdate_Plugin();
+        $this->plugin = new Plugin();
         $this->server->addPlugin($this->plugin);
 
 
@@ -38,7 +43,7 @@ class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
     public function testPatchNoRange() {
 
         $this->node->put('00000000');
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD' => 'PATCH',
             'REQUEST_URI'    => '/partial',
         ));
@@ -51,7 +56,7 @@ class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
     public function testPatchNotSupported() {
 
         $this->node->put('00000000');
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD' => 'PATCH',
             'REQUEST_URI'    => '/',
             'X_UPDATE_RANGE' => '3-4',
@@ -69,7 +74,7 @@ class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
     public function testPatchNoContentType() {
 
         $this->node->put('00000000');
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD'      => 'PATCH',
             'REQUEST_URI'         => '/partial',
             'HTTP_X_UPDATE_RANGE' => 'bytes=3-4',
@@ -87,7 +92,7 @@ class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
     public function testPatchBadRange() {
 
         $this->node->put('00000000');
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD'      => 'PATCH',
             'REQUEST_URI'         => '/partial',
             'HTTP_X_UPDATE_RANGE' => 'bytes=3-4',
@@ -98,14 +103,14 @@ class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
         );
         $response = $this->request($request);
 
-        $this->assertEquals('HTTP/1.1 416 Requested Range Not Satisfiable', $response->status, 'Full response body:' . $response->body);
+        $this->assertEquals('HTTP/1.1 411 Length Required', $response->status, 'Full response body:' . $response->body);
 
     }
 
     public function testPatchSuccess() {
 
         $this->node->put('00000000');
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD'      => 'PATCH',
             'REQUEST_URI'         => '/partial',
             'HTTP_X_UPDATE_RANGE' => 'bytes=3-5',
@@ -118,7 +123,27 @@ class Sabre_DAV_PartialUpdate_PluginTest extends Sabre_DAVServerTest {
         $response = $this->request($request);
 
         $this->assertEquals('HTTP/1.1 204 No Content', $response->status, 'Full response body:' . $response->body);
-        $this->assertEquals('00111000', $this->node->get());
+        $this->assertEquals('00011100', $this->node->get());
+
+    }
+
+    public function testPatchNoEndRange() {
+
+        $this->node->put('00000');
+        $request = new HTTP\Request(array(
+            'REQUEST_METHOD'      => 'PATCH',
+            'REQUEST_URI'         => '/partial',
+            'HTTP_X_UPDATE_RANGE' => 'bytes=3-',
+            'HTTP_CONTENT_TYPE'   => 'application/x-sabredav-partialupdate',
+            'HTTP_CONTENT_LENGTH' => 3,
+        ));
+        $request->setBody(
+            '111'
+        );
+        $response = $this->request($request);
+
+        $this->assertEquals('HTTP/1.1 204 No Content', $response->status, 'Full response body:' . $response->body);
+        $this->assertEquals('00111', $this->node->get());
 
     }
 

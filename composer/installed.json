@@ -176,76 +176,6 @@
 		]
 	},
 	{
-		"name": "sabre/dav",
-		"version": "1.7.11",
-		"version_normalized": "1.7.11.0",
-		"source": {
-			"type": "git",
-			"url": "https://github.com/fruux/sabre-dav.git",
-			"reference": "e3f46e0ecf83cf1d2ebf54908cde7b5ec170aa2c"
-		},
-		"dist": {
-			"type": "zip",
-			"url": "https://api.github.com/repos/fruux/sabre-dav/zipball/e3f46e0ecf83cf1d2ebf54908cde7b5ec170aa2c",
-			"reference": "e3f46e0ecf83cf1d2ebf54908cde7b5ec170aa2c",
-			"shasum": ""
-		},
-		"require": {
-			"ext-ctype": "*",
-			"ext-date": "*",
-			"ext-dom": "*",
-			"ext-iconv": "*",
-			"ext-libxml": "*",
-			"ext-mbstring": "*",
-			"ext-pcre": "*",
-			"ext-simplexml": "*",
-			"ext-spl": "*",
-			"php": ">=5.3.1",
-			"sabre/vobject": "~2.1.0"
-		},
-		"provide": {
-			"evert/sabredav": "1.7.*"
-		},
-		"require-dev": {
-			"phing/phing": "2.4.14",
-			"phpunit/phpunit": "3.7.*"
-		},
-		"suggest": {
-			"ext-apc": "*",
-			"ext-curl": "*",
-			"ext-pdo": "*"
-		},
-		"time": "2014-02-26 22:13:46",
-		"type": "library",
-		"installation-source": "dist",
-		"autoload": {
-			"psr-0": {
-				"Sabre": "lib/"
-			}
-		},
-		"notification-url": "https://packagist.org/downloads/",
-		"license": [
-			"BSD-3-Clause"
-		],
-		"authors": [
-			{
-				"name": "Evert Pot",
-				"email": "evert@rooftopsolutions.nl",
-				"homepage": "http://evertpot.com/",
-				"role": "Developer"
-			}
-		],
-		"description": "WebDAV Framework for PHP",
-		"homepage": "http://code.google.com/p/sabredav/",
-		"keywords": [
-			"CalDAV",
-			"CardDAV",
-			"WebDAV",
-			"framework",
-			"iCalendar"
-		]
-	},
-	{
 		"name": "mcnetic/phpzipstreamer",
 		"version": "master",
 		"version_normalized": "9999999-dev",
@@ -408,5 +338,82 @@
 			"x.509",
 			"x509"
 		]
-	}
+	},
+    {
+        "name": "sabre/dav",
+        "version": "1.8.10",
+        "version_normalized": "1.8.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fruux/sabre-dav.git",
+            "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
+            "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-date": "*",
+            "ext-dom": "*",
+            "ext-iconv": "*",
+            "ext-libxml": "*",
+            "ext-mbstring": "*",
+            "ext-pcre": "*",
+            "ext-simplexml": "*",
+            "ext-spl": "*",
+            "php": ">=5.3.1",
+            "sabre/vobject": "~2.1.0"
+        },
+        "provide": {
+            "evert/sabredav": "1.7.*"
+        },
+        "require-dev": {
+            "evert/phpdoc-md": "~0.0.7",
+            "phpunit/phpunit": "~4.0.0"
+        },
+        "suggest": {
+            "ext-apc": "*",
+            "ext-curl": "*",
+            "ext-pdo": "*"
+        },
+        "time": "2014-05-16 00:14:02",
+        "bin": [
+            "bin/sabredav"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Sabre\\DAV": "lib/",
+                "Sabre\\HTTP": "lib/",
+                "Sabre\\DAVACL": "lib/",
+                "Sabre\\CalDAV": "lib/",
+                "Sabre\\CardDAV": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "WebDAV Framework for PHP",
+        "homepage": "http://code.google.com/p/sabredav/",
+        "keywords": [
+            "CalDAV",
+            "CardDAV",
+            "WebDAV",
+            "framework",
+            "iCalendar"
+        ]
+    }
 ]

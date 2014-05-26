@@ -1,15 +1,15 @@
 <?php
 
+namespace Sabre\CalDAV\Backend;
+
 /**
  * Every CalDAV backend must at least implement this interface.
  *
- * @package Sabre
- * @subpackage CalDAV
  * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-interface Sabre_CalDAV_Backend_BackendInterface {
+interface BackendInterface {
 
     /**
      * Returns a list of calendars for a principal.
@@ -126,9 +126,11 @@ interface Sabre_CalDAV_Backend_BackendInterface {
      * 'calendardata' object is required here though, while it's not required
      * for getCalendarObjects.
      *
+     * This method must return null if the object did not exist.
+     *
      * @param mixed $calendarId
      * @param string $objectUri
-     * @return array
+     * @return array|null
      */
     public function getCalendarObject($calendarId,$objectUri);
 
@@ -189,7 +191,7 @@ interface Sabre_CalDAV_Backend_BackendInterface {
      * query.
      *
      * The list of filters are specified as an array. The exact array is
-     * documented by Sabre_CalDAV_CalendarQueryParser.
+     * documented by Sabre\CalDAV\CalendarQueryParser.
      *
      * Note that it is extremely likely that getCalendarObject for every path
      * returned from this method will be called almost immediately after. You
@@ -218,7 +220,7 @@ interface Sabre_CalDAV_Backend_BackendInterface {
      * time-range filter specified on a VEVENT must for instance also handle
      * recurrence rules correctly.
      * A good example of how to interprete all these filters can also simply
-     * be found in Sabre_CalDAV_CalendarQueryFilter. This class is as correct
+     * be found in Sabre\CalDAV\CalendarQueryFilter. This class is as correct
      * as possible, so it gives you a good idea on what type of stuff you need
      * to think of.
      *

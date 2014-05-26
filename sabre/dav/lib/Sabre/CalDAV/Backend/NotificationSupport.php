@@ -1,5 +1,7 @@
 <?php
 
+namespace Sabre\CalDAV\Backend;
+
 /**
  * Adds caldav notification support to a backend.
  *
@@ -14,19 +16,17 @@
  *
  * The primary usecase is to allow for calendar-sharing.
  *
- * @package Sabre
- * @subpackage CalDAV
  * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-interface Sabre_CalDAV_Backend_NotificationSupport extends Sabre_CalDAV_Backend_BackendInterface {
+interface NotificationSupport extends BackendInterface {
 
     /**
      * Returns a list of notifications for a given principal url.
      *
      * The returned array should only consist of implementations of
-     * Sabre_CalDAV_Notifications_INotificationType.
+     * \Sabre\CalDAV\Notifications\INotificationType.
      *
      * @param string $principalUri
      * @return array
@@ -39,9 +39,9 @@ interface Sabre_CalDAV_Backend_NotificationSupport extends Sabre_CalDAV_Backend_
      * This may be called by a client once it deems a notification handled.
      *
      * @param string $principalUri
-     * @param Sabre_CalDAV_Notifications_INotificationType $notification
+     * @param \Sabre\CalDAV\Notifications\INotificationType $notification
      * @return void
      */
-    public function deleteNotification($principalUri, Sabre_CalDAV_Notifications_INotificationType $notification);
+    public function deleteNotification($principalUri, \Sabre\CalDAV\Notifications\INotificationType $notification);
 
 }

@@ -18,3 +18,5 @@ vendor
 bin/phing
 bin/phpunit
 bin/vobjectvalidate.php
+bin/phpdocmd
+bin/phpunit

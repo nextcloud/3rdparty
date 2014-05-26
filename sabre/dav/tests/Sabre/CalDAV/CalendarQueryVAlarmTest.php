@@ -1,8 +1,10 @@
 <?php
 
+namespace Sabre\CalDAV;
+
 use Sabre\VObject;
 
-class Sabre_CalDAV_CalendarQueryVAlarmTest extends PHPUnit_Framework_TestCase {
+class CalendarQueryVAlarmTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * This test is specifically for a time-range query on a VALARM, contained
@@ -42,8 +44,8 @@ class Sabre_CalDAV_CalendarQueryVAlarmTest extends PHPUnit_Framework_TestCase {
                             'prop-filters' => array(),
                             'comp-filters' => array(),
                             'time-range' => array(
-                                'start' => new DateTime('2012-05-10'),
-                                'end' => new DateTime('2012-05-20'),
+                                'start' => new \DateTime('2012-05-10'),
+                                'end' => new \DateTime('2012-05-20'),
                             ),
                         ),
                     ),
@@ -51,7 +53,7 @@ class Sabre_CalDAV_CalendarQueryVAlarmTest extends PHPUnit_Framework_TestCase {
             ),
         );
 
-        $validator = new Sabre_CalDAV_CalendarQueryValidator();
+        $validator = new CalendarQueryValidator();
         $this->assertTrue($validator->validate($vcalendar, $filter));
 
         $vcalendar = new VObject\Component\VCalendar();
@@ -103,8 +105,8 @@ class Sabre_CalDAV_CalendarQueryVAlarmTest extends PHPUnit_Framework_TestCase {
                             'prop-filters' => array(),
                             'comp-filters' => array(),
                             'time-range' => array(
-                                'start' => new DateTime('2011-12-10'),
-                                'end' => new DateTime('2011-12-20'),
+                                'start' => new \DateTime('2011-12-10'),
+                                'end' => new \DateTime('2011-12-20'),
                             ),
                         ),
                     ),
@@ -112,7 +114,7 @@ class Sabre_CalDAV_CalendarQueryVAlarmTest extends PHPUnit_Framework_TestCase {
             ),
         );
 
-        $validator = new Sabre_CalDAV_CalendarQueryValidator();
+        $validator = new CalendarQueryValidator();
         $this->assertTrue($validator->validate($vcalendar, $filter));
 
     }
