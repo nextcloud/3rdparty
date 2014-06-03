@@ -6,8 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = $vendorDir;
 
 return array(
+    'System' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Sabre\\VObject' => array($vendorDir . '/sabre/vobject/lib'),
     'Sabre' => array($vendorDir . '/sabre/dav/lib'),
+    'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'Math' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
 );
