@@ -1,5 +1,7 @@
 <?php
 
+namespace Sabre\DAV;
+
 /**
  * SabreDAV DAV client
  *
@@ -8,13 +10,11 @@
  *
  * NOTE: This class is experimental, it's api will likely change in the future.
  *
- * @package Sabre
- * @subpackage DAVClient
  * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-class Sabre_DAV_Client {
+class Client {
 
     /**
      * The propertyMap is a key-value array.
@@ -24,7 +24,7 @@ class Sabre_DAV_Client {
      * respective class.
      *
      * The {DAV:}resourcetype property is automatically added. This maps to
-     * Sabre_DAV_Property_ResourceType
+     * Sabre\DAV\Property\ResourceType
      *
      * @var array
      */
@@ -81,7 +81,7 @@ class Sabre_DAV_Client {
     public function __construct(array $settings) {
 
         if (!isset($settings['baseUri'])) {
-            throw new InvalidArgumentException('A baseUri must be provided');
+            throw new \InvalidArgumentException('A baseUri must be provided');
         }
 
         $validSettings = array(
@@ -103,7 +103,7 @@ class Sabre_DAV_Client {
             $this->authType = self::AUTH_BASIC | self::AUTH_DIGEST;
         }
 
-        $this->propertyMap['{DAV:}resourcetype'] = 'Sabre_DAV_Property_ResourceType';
+        $this->propertyMap['{DAV:}resourcetype'] = 'Sabre\\DAV\\Property\\ResourceType';
 
     }
 
@@ -160,7 +160,7 @@ class Sabre_DAV_Client {
             list(
                 $namespace,
                 $elementName
-            ) = Sabre_DAV_XMLUtil::parseClarkNotation($property);
+            ) = XMLUtil::parseClarkNotation($property);
 
             if ($namespace === 'DAV:') {
                 $body.='    <d:' . $elementName . ' />' . "\n";
@@ -221,7 +221,7 @@ class Sabre_DAV_Client {
             list(
                 $namespace,
                 $elementName
-            ) = Sabre_DAV_XMLUtil::parseClarkNotation($propName);
+            ) = XMLUtil::parseClarkNotation($propName);
 
             if ($propValue === null) {
 
@@ -411,37 +411,37 @@ class Sabre_DAV_Client {
         );
 
         if ($curlErrNo) {
-            throw new Sabre_DAV_Exception('[CURL] Error while making request: ' . $curlError . ' (error code: ' . $curlErrNo . ')');
+            throw new Exception('[CURL] Error while making request: ' . $curlError . ' (error code: ' . $curlErrNo . ')');
         }
 
         if ($response['statusCode']>=400) {
             switch ($response['statusCode']) {
                 case 400 :
-                    throw new Sabre_DAV_Exception_BadRequest('Bad request');
+                    throw new Exception\BadRequest('Bad request');
                 case 401 :
-                    throw new Sabre_DAV_Exception_NotAuthenticated('Not authenticated');
+                    throw new Exception\NotAuthenticated('Not authenticated');
                 case 402 :
-                    throw new Sabre_DAV_Exception_PaymentRequired('Payment required');
+                    throw new Exception\PaymentRequired('Payment required');
                 case 403 :
-                    throw new Sabre_DAV_Exception_Forbidden('Forbidden');
+                    throw new Exception\Forbidden('Forbidden');
                 case 404:
-                    throw new Sabre_DAV_Exception_NotFound('Resource not found.');
+                    throw new Exception\NotFound('Resource not found.');
                 case 405 :
-                    throw new Sabre_DAV_Exception_MethodNotAllowed('Method not allowed');
+                    throw new Exception\MethodNotAllowed('Method not allowed');
                 case 409 :
-                    throw new Sabre_DAV_Exception_Conflict('Conflict');
+                    throw new Exception\Conflict('Conflict');
                 case 412 :
-                    throw new Sabre_DAV_Exception_PreconditionFailed('Precondition failed');
+                    throw new Exception\PreconditionFailed('Precondition failed');
                 case 416 :
-                    throw new Sabre_DAV_Exception_RequestedRangeNotSatisfiable('Requested Range Not Satisfiable');
+                    throw new Exception\RequestedRangeNotSatisfiable('Requested Range Not Satisfiable');
                 case 500 :
-                    throw new Sabre_DAV_Exception('Internal server error');
+                    throw new Exception('Internal server error');
                 case 501 :
-                    throw new Sabre_DAV_Exception_NotImplemented('Not Implemented');
+                    throw new Exception\NotImplemented('Not Implemented');
                 case 507 :
-                    throw new Sabre_DAV_Exception_InsufficientStorage('Insufficient storage');
+                    throw new Exception\InsufficientStorage('Insufficient storage');
                 default:
-                    throw new Sabre_DAV_Exception('HTTP error response. (errorcode ' . $response['statusCode'] . ')');
+                    throw new Exception('HTTP error response. (errorcode ' . $response['statusCode'] . ')');
             }
         }
 
@@ -528,7 +528,7 @@ class Sabre_DAV_Client {
      */
     public function parseMultiStatus($body) {
 
-        $body = Sabre_DAV_XMLUtil::convertDAVNamespace($body);
+        $body = XMLUtil::convertDAVNamespace($body);
 
         // Fixes an XXE vulnerability on PHP versions older than 5.3.23 or
         // 5.4.13.
@@ -537,7 +537,7 @@ class Sabre_DAV_Client {
         libxml_disable_entity_loader($previous);
 
         if ($responseXML===false) {
-            throw new InvalidArgumentException('The passed data is not valid XML');
+            throw new \InvalidArgumentException('The passed data is not valid XML');
         }
 
         $responseXML->registerXPathNamespace('d', 'urn:DAV');
@@ -560,7 +560,7 @@ class Sabre_DAV_Client {
                 // Only using the propertymap for results with status 200.
                 $propertyMap = $statusCode==='200' ? $this->propertyMap : array();
 
-                $properties[$statusCode] = Sabre_DAV_XMLUtil::parseProperties(dom_import_simplexml($propStat), $propertyMap);
+                $properties[$statusCode] = XMLUtil::parseProperties(dom_import_simplexml($propStat), $propertyMap);
 
             }
 

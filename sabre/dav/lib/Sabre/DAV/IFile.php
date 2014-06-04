@@ -1,5 +1,7 @@
 <?php
 
+namespace Sabre\DAV;
+
 /**
  * This interface represents a file in the directory tree
  *
@@ -7,13 +9,11 @@
  * this specific node a PUT or GET method may be performed, to either update,
  * or retrieve the contents of the file.
  *
- * @package Sabre
- * @subpackage DAV
  * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-interface Sabre_DAV_IFile extends Sabre_DAV_INode {
+interface IFile extends INode {
 
     /**
      * Updates the data

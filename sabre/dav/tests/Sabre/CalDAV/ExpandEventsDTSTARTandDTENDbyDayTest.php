@@ -1,16 +1,17 @@
 <?php
 
+namespace Sabre\CalDAV;
+use Sabre\HTTP;
 use Sabre\VObject;
 
 /**
  * This unittests is created to find out why recurring events have wrong DTSTART value
  *
- *
  * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-class Sabre_CalDAV_ExpandEventsDTSTARTandDTENDbyDayTest extends Sabre_DAVServerTest {
+class ExpandEventsDTSTARTandDTENDbyDayTest extends \Sabre\DAVServerTest {
 
     protected $setupCalDAV = true;
 
@@ -43,7 +44,7 @@ END:VCALENDAR
 
     function testExpandRecurringByDayEvent() {
 
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD' => 'REPORT',
             'HTTP_CONTENT_TYPE' => 'application/xml',
             'REQUEST_URI' => '/calendars/user1/calendar1',

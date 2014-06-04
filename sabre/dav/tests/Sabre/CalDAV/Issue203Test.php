@@ -1,16 +1,18 @@
 <?php
 
+namespace Sabre\CalDAV;
+use Sabre\HTTP;
 use Sabre\VObject;
 
 /**
  * This unittest is created to find out why an overwritten DAILY event has wrong DTSTART, DTEND, SUMMARY and RECURRENCEID
  *
  *
- * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
+ * @copyright Copyright (C) 2007-2014 Rooftop Solutions. All rights reserved.
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-class Sabre_CalDAV_Issue203Test extends Sabre_DAVServerTest {
+class Issue203Test extends \Sabre\DAVServerTest {
 
     protected $setupCalDAV = true;
 
@@ -56,7 +58,7 @@ END:VCALENDAR
 
     function testIssue203() {
 
-        $request = new Sabre_HTTP_Request(array(
+        $request = new HTTP\Request(array(
             'REQUEST_METHOD' => 'REPORT',
             'HTTP_CONTENT_TYPE' => 'application/xml',
             'REQUEST_URI' => '/calendars/user1/calendar1',

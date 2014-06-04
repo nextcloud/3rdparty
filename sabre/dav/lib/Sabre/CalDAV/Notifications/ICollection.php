@@ -1,5 +1,9 @@
 <?php
 
+namespace Sabre\CalDAV\Notifications;
+
+use Sabre\DAV;
+
 /**
  * This node represents a list of notifications.
  *
@@ -7,16 +11,14 @@
  * interface to allow the Notifications plugin to mark the collection
  * as a notifications collection.
  *
- * This collection should only return Sabre_CalDAV_Notifications_INode nodes as
+ * This collection should only return Sabre\CalDAV\Notifications\INode nodes as
  * its children.
  *
- * @package Sabre
- * @subpackage CalDAV
  * @copyright Copyright (C) 2007-2014 fruux GmbH (https://fruux.com/).
  * @author Evert Pot (http://evertpot.com/)
- * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
+ * @license http://sabre.io/license/ Modified BSD License
  */
-interface Sabre_CalDAV_Notifications_ICollection extends Sabre_DAV_ICollection {
+interface ICollection extends DAV\ICollection {
 
 
 }
