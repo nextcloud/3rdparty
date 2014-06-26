@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "f98ec4b3c8b4e10eeb08ac3402b3fe20",
+    "hash": "6a5a32286b2594a8eeda466dadea2e4e",
     "packages": [
         {
             "name": "guzzle/common",
@@ -238,6 +239,42 @@
             "time": "2014-02-12 08:38:02"
         },
         {
+            "name": "james-heinrich/getid3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JamesHeinrich/getID3.git",
+                "reference": "a99b19fdceb5c5d92648334757020445fb139b13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/a99b19fdceb5c5d92648334757020445fb139b13",
+                "reference": "a99b19fdceb5c5d92648334757020445fb139b13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "getid3/getid3.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "description": "PHP script that extracts useful information from popular multimedia file formats",
+            "homepage": "http://www.getid3.org/",
+            "keywords": [
+                "codecs",
+                "php",
+                "tags"
+            ],
+            "time": "2014-07-18 12:21:31"
+        },
+        {
             "name": "kriswallsmith/assetic",
             "version": "dev-master",
             "source": {
@@ -319,7 +356,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-06-23 10:03:21"
+            "time": "2014-07-11 09:09:02"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -758,22 +795,16 @@
             "time": "2014-02-11 13:52:09"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "mcnetic/phpzipstreamer": 20,
         "kriswallsmith/assetic": 20,
+        "james-heinrich/getid3": 20,
         "isoft/mssql-bundle": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "platform": [],
+    "platform-dev": []
 }

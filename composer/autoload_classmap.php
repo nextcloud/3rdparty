@@ -9,5 +9,8 @@ return array(
     'PHPMailer' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
     'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
     'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
+    'getID3' => $vendorDir . '/james-heinrich/getid3/getid3/getid3.php',
+    'getid3_exception' => $vendorDir . '/james-heinrich/getid3/getid3/getid3.php',
+    'getid3_handler' => $vendorDir . '/james-heinrich/getid3/getid3/getid3.php',
     'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
 );
