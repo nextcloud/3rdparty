@@ -741,5 +741,41 @@
             "rackspace",
             "swift"
         ]
+    },
+    {
+        "name": "isoft/mssql-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Realestate/MssqlBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/intellectsoft-uk/MssqlBundle.git",
+            "reference": "98a020cd39f8bfc1282e734c7c5038e129411981"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/intellectsoft-uk/MssqlBundle/zipball/98a020cd39f8bfc1282e734c7c5038e129411981",
+            "reference": "98a020cd39f8bfc1282e734c7c5038e129411981",
+            "shasum": ""
+        },
+        "time": "2014-02-12 08:38:02",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Realestate\\MssqlBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Realestate"
+            },
+            {
+                "name": "Vitaly Zhloba",
+                "email": "vitaly.zhloba@gmail.com"
+            }
+        ],
+        "description": "Driver for work with MsSQL server"
     }
 ]
