@@ -15,7 +15,6 @@ return array(
     'Sabre\\DAV' => array($vendorDir . '/sabre/dav/lib'),
     'Sabre\\CardDAV' => array($vendorDir . '/sabre/dav/lib'),
     'Sabre\\CalDAV' => array($vendorDir . '/sabre/dav/lib'),
-    'Realestate\\MssqlBundle' => array($vendorDir . '/isoft/mssql-bundle'),
     'OpenCloud' => array($vendorDir . '/rackspace/php-opencloud/lib', $vendorDir . '/rackspace/php-opencloud/tests'),
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Math' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
