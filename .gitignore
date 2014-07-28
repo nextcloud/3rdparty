@@ -1,3 +1,6 @@
 .DS_Store
 bin
+# ignore demo files
+james-heinrich/getid3/demos
+james-heinrich/getid3/helperapps
 
