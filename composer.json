@@ -26,7 +26,7 @@
 		"phpmailer/phpmailer": "v5.2.8",
 		"phpseclib/phpseclib": "*",
 		"rackspace/php-opencloud": "v1.9.2",
-		"james-heinrich/getid3": "dev-master"
+		"james-heinrich/getid3": "dev-master",
+		"ircmaxell/random-lib": "v1.0.0"
 	}
 }
-
