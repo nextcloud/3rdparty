@@ -3,8 +3,38 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f2e791e7924c554e35a53bb9aee156c5",
+    "hash": "4e466ba02a23af88f97c10ff11a89c2d",
     "packages": [
+        {
+            "name": "bantu/ini-get-wrapper",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bantu/php-ini-get-wrapper.git",
+                "reference": "4770c7feab370c62e23db4f31c112b7c6d90aee2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bantu/php-ini-get-wrapper/zipball/4770c7feab370c62e23db4f31c112b7c6d90aee2",
+                "reference": "4770c7feab370c62e23db4f31c112b7c6d90aee2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "bantu\\IniGetWrapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Convenience wrapper around ini_get()",
+            "time": "2014-09-15 13:12:35"
+        },
         {
             "name": "guzzle/common",
             "version": "v3.8.1",
@@ -415,7 +445,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-08-11 13:15:55"
+            "time": "2014-08-31 13:25:06"
         },
         {
             "name": "phpmailer/phpmailer",
