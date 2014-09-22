@@ -1,7 +1,8 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
     "hash": "4e466ba02a23af88f97c10ff11a89c2d",
     "packages": [
@@ -333,12 +334,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JamesHeinrich/getID3.git",
-                "reference": "a99b19fdceb5c5d92648334757020445fb139b13"
+                "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/a99b19fdceb5c5d92648334757020445fb139b13",
-                "reference": "a99b19fdceb5c5d92648334757020445fb139b13",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
+                "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +362,7 @@
                 "php",
                 "tags"
             ],
-            "time": "2014-07-18 12:21:31"
+            "time": "2014-09-14 18:13:30"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -445,7 +446,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-08-31 13:25:06"
+            "time": "2014-09-17 13:32:18"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -892,6 +893,7 @@
         "kriswallsmith/assetic": 20,
         "james-heinrich/getid3": 20
     },
+    "prefer-stable": false,
     "platform": [],
     "platform-dev": []
 }

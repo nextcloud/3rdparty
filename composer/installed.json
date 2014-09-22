@@ -743,44 +743,6 @@
         ]
     },
     {
-        "name": "james-heinrich/getid3",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/JamesHeinrich/getID3.git",
-            "reference": "a99b19fdceb5c5d92648334757020445fb139b13"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/a99b19fdceb5c5d92648334757020445fb139b13",
-            "reference": "a99b19fdceb5c5d92648334757020445fb139b13",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2014-07-18 12:21:31",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "getid3/getid3.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL"
-        ],
-        "description": "PHP script that extracts useful information from popular multimedia file formats",
-        "homepage": "http://www.getid3.org/",
-        "keywords": [
-            "codecs",
-            "php",
-            "tags"
-        ]
-    },
-    {
         "name": "ircmaxell/security-lib",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -909,5 +871,43 @@
             "MIT"
         ],
         "description": "Convenience wrapper around ini_get()"
+    },
+    {
+        "name": "james-heinrich/getid3",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/JamesHeinrich/getID3.git",
+            "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
+            "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2014-09-14 18:13:30",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "getid3/getid3.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL"
+        ],
+        "description": "PHP script that extracts useful information from popular multimedia file formats",
+        "homepage": "http://www.getid3.org/",
+        "keywords": [
+            "codecs",
+            "php",
+            "tags"
+        ]
     }
 ]
