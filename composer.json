@@ -28,6 +28,8 @@
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",
 		"ircmaxell/random-lib": "v1.0.0",
-		"bantu/ini-get-wrapper": "v1.0.1"
+		"bantu/ini-get-wrapper": "v1.0.1",
+		"natxet/CssMin": "dev-master",
+		"mrclay/minify": "dev-master"
 	}
 }
