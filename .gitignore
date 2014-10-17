@@ -3,4 +3,6 @@ bin
 # ignore demo files
 james-heinrich/getid3/demos
 james-heinrich/getid3/helperapps
-
+mrclay/minify/min_unit_tests
+mrclay/minify/min_extras
+mrclay/minify/min/builder
