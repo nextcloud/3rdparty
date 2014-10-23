@@ -7,4 +7,5 @@ $baseDir = $vendorDir;
 
 return array(
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
+    'Punic\\' => array($vendorDir . '/punic/punic/code'),
 );

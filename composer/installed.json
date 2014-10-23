@@ -954,51 +954,119 @@
             "minify"
         ]
     },
-    {
-        "name": "mrclay/minify",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+	{
+		"name": "mrclay/minify",
+		"version": "dev-master",
+		"version_normalized": "9999999-dev",
+		"source": {
+			"type": "git",
+			"url": "https://github.com/mrclay/minify.git",
+			"reference": "bd9a450694cda1b54c43a1784adabe36ad522d89"
+		},
+		"dist": {
+			"type": "zip",
+			"url": "https://api.github.com/repos/mrclay/minify/zipball/bd9a450694cda1b54c43a1784adabe36ad522d89",
+			"reference": "bd9a450694cda1b54c43a1784adabe36ad522d89",
+			"shasum": ""
+		},
+		"require": {
+			"ext-pcre": "*",
+			"php": ">=5.2.1"
+		},
+		"require-dev": {
+			"tubalmartin/cssmin": "~2.4.8"
+		},
+		"suggest": {
+			"tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
+		},
+		"time": "2014-09-25 11:40:53",
+		"type": "library",
+		"installation-source": "source",
+		"autoload": {
+			"classmap": [
+				"min/lib/"
+			]
+		},
+		"notification-url": "https://packagist.org/downloads/",
+		"license": [
+			"BSD-3-Clause"
+		],
+		"authors": [
+			{
+				"name": "Stephen Clay",
+				"email": "steve@mrclay.org",
+				"role": "Developer"
+			}
+		],
+		"description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
+		"homepage": "http://code.google.com/p/minify/"
+	},
+	{
+        "name": "punic/punic",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/mrclay/minify.git",
-            "reference": "bd9a450694cda1b54c43a1784adabe36ad522d89"
+            "url": "https://github.com/punic/punic.git",
+            "reference": "b4a06d4ad15040b18ec5db4491fc8ed8aa42874c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mrclay/minify/zipball/bd9a450694cda1b54c43a1784adabe36ad522d89",
-            "reference": "bd9a450694cda1b54c43a1784adabe36ad522d89",
+            "url": "https://api.github.com/repos/punic/punic/zipball/b4a06d4ad15040b18ec5db4491fc8ed8aa42874c",
+            "reference": "b4a06d4ad15040b18ec5db4491fc8ed8aa42874c",
             "shasum": ""
         },
         "require": {
-            "ext-pcre": "*",
-            "php": ">=5.2.1"
+            "php": ">=5.3"
+        },
+        "replace": {
+            "punic/calendar": "*",
+            "punic/common": "*"
         },
         "require-dev": {
-            "tubalmartin/cssmin": "~2.4.8"
+            "apigen/apigen": "~2.8.2",
+            "satooshi/php-coveralls": "dev-master"
         },
-        "suggest": {
-            "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
-        },
-        "time": "2014-09-25 11:40:53",
+        "time": "2014-09-25 08:53:54",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
-            "classmap": [
-                "min/lib/"
-            ]
+            "psr-4": {
+                "Punic\\": "code/"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause"
+            "MIT"
         ],
         "authors": [
             {
-                "name": "Stephen Clay",
-                "email": "steve@mrclay.org",
+                "name": "Michele Locati",
+                "email": "mlocati@gmail.com",
                 "role": "Developer"
+            },
+            {
+                "name": "Remo Laubacher",
+                "email": "remo.laubacher@gmail.com",
+                "role": "Collaborator, motivator and perfectionist supporter"
             }
         ],
-        "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
-        "homepage": "http://code.google.com/p/minify/"
+        "description": "PHP-Unicode CLDR",
+        "homepage": "https://github.com/punic/punic",
+        "keywords": [
+            "calendar",
+            "cldr",
+            "date",
+            "date-time",
+            "i18n",
+            "internationalization",
+            "l10n",
+            "localization",
+            "php",
+            "time",
+            "translate",
+            "translations",
+            "unicode"
+        ]
     }
 ]
