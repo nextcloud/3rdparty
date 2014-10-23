@@ -31,6 +31,7 @@
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"natxet/CssMin": "dev-master",
 		"mrclay/minify": "dev-master",
-		"punic/punic": "1.1.0"
+		"punic/punic": "1.1.0",
+		"patchwork/utf8": "~1.1"
 	}
 }

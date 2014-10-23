@@ -38,11 +38,13 @@ class Iconv
     ERROR_WRONG_CHARSET     = 'iconv(): Wrong charset, conversion from `%s\' to `%s\' is not allowed';
 
 
-    protected static
+    public static
 
     $input_encoding = 'utf-8',
     $output_encoding = 'utf-8',
-    $internal_encoding = 'utf-8',
+    $internal_encoding = 'utf-8';
+
+    protected static
 
     $alias = array(
         'utf8' => 'utf-8',
@@ -130,8 +132,7 @@ class Iconv
 
     static function iconv($in_charset, $out_charset, $str)
     {
-        if ('' === (string) $str) return '';
-
+        if ('' === $str .= '') return '';
 
         // Prepare for //IGNORE and //TRANSLIT
 
@@ -164,8 +165,8 @@ class Iconv
 
         // Load charset maps
 
-        if ( ('utf-8' !==  $in_charset && !self::loadMap('from.',  $in_charset,  $in_map))
-          || ('utf-8' !== $out_charset && !self::loadMap(  'to.', $out_charset, $out_map)) )
+        if ( ('utf-8' !==  $in_charset && !static::loadMap('from.',  $in_charset,  $in_map))
+          || ('utf-8' !== $out_charset && !static::loadMap(  'to.', $out_charset, $out_map)) )
         {
             user_error(sprintf(self::ERROR_WRONG_CHARSET, $in_charset, $out_charset));
             return false;
@@ -220,6 +221,7 @@ class Iconv
         foreach ($str as $str)
         {
             $str = self::iconv_mime_decode($str, $mode, $charset);
+            if (false === $str) return false;
             $str = explode(':', $str, 2);
 
             if (2 === count($str))
@@ -244,22 +246,39 @@ class Iconv
         false !== strpos($str, "\r") && $str = strtr(str_replace("\r\n", "\n", $str), "\r", "\n");
         $str = preg_split('/\n(?![ \t])/', rtrim($str), 2);
         $str = preg_replace('/[ \t]*\n[ \t]+/', ' ', rtrim($str[0]));
-        $str = preg_split('/=\?([^?]+)\?([bqBQ])\?(.*)\?=/', $str, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $str = preg_split('/=\?([^?]+)\?([bqBQ])\?(.*?)\?=/', $str, -1, PREG_SPLIT_DELIM_CAPTURE);
 
         $result = self::iconv('utf-8', $charset, $str[0]);
+        if (false === $result) return false;
 
         $i = 1;
         $len = count($str);
 
         while ($i < $len)
         {
-            if ('Q' !== strtoupper($str[$i+1])) $str[$i+2] = base64_decode($str[$i+2]);
-            else $str[$i+2] = rawurldecode(strtr(str_replace('%', '%25', $str[$i+2]), '=_', '% '));
+            $c = strtolower($str[$i]);
+            if ( (ICONV_MIME_DECODE_CONTINUE_ON_ERROR & $mode)
+              && 'utf-8' !== $c
+              && !isset(self::$alias[$c])
+              && !static::loadMap('from.', $c,  $d) ) $d = false;
+            else if ('B' === strtoupper($str[$i+1])) $d = base64_decode($str[$i+2]);
+            else $d = rawurldecode(strtr(str_replace('%', '%25', $str[$i+2]), '=_', '% '));
 
-            $str[$i+2] = self::iconv($str[$i], $charset, $str[$i+2]);
-            $str[$i+3] = self::iconv('utf-8' , $charset, $str[$i+3]);
-
-            $result .= $str[$i+2] . ('' === trim($str[$i+3]) ? '' : $str[$i+3]);
+            if (false !== $d)
+            {
+                $result .= self::iconv($c, $charset, $d);
+                $d = self::iconv('utf-8' , $charset, $str[$i+3]);
+                if ('' !== trim($d)) $result .= $d;
+            }
+            else if (ICONV_MIME_DECODE_CONTINUE_ON_ERROR & $mode)
+            {
+                $result .= "=?{$str[$i]}?{$str[$i+1]}?{$str[$i+2]}?={$str[$i+3]}";
+            }
+            else
+            {
+                $result = false;
+                break;
+            }
 
             $i += 4;
         }
@@ -408,21 +427,30 @@ class Iconv
     static function iconv_strpos($haystack, $needle, $offset = 0, $encoding = INF)
     {
         INF === $encoding && $encoding = self::$internal_encoding;
-        if (0 !== strncasecmp($encoding, 'utf-8', 5) && false === $s = self::iconv($encoding, 'utf-8', $s)) return false;
+
+        if (0 !== strncasecmp($encoding, 'utf-8', 5))
+        {
+            if (false === $haystack = self::iconv($encoding, 'utf-8', $haystack)) return false;
+            if (false === $needle = self::iconv($encoding, 'utf-8', $needle)) return false;
+        }
 
         if ($offset = (int) $offset) $haystack = self::iconv_substr($haystack, $offset, 2147483647, 'utf-8');
         $pos = strpos($haystack, $needle);
-        return false === $pos ? false : ($offset + ($pos ? iconv_strlen(substr($haystack, 0, $pos), 'utf-8') : 0));
+        return false === $pos ? false : ($offset + ($pos ? self::iconv_strlen(substr($haystack, 0, $pos), 'utf-8') : 0));
     }
 
     static function iconv_strrpos($haystack, $needle, $encoding = INF)
     {
         INF === $encoding && $encoding = self::$internal_encoding;
-        if (0 !== strncasecmp($encoding, 'utf-8', 5) && false === $s = self::iconv($encoding, 'utf-8', $s)) return false;
 
-        $needle = self::iconv_substr($needle, 0, 1, 'utf-8');
-        $pos = strpos(strrev($haystack), strrev($needle));
-        return false === $pos ? false : iconv_strlen($pos ? substr($haystack, 0, -$pos) : $haystack, 'utf-8');
+        if (0 !== strncasecmp($encoding, 'utf-8', 5))
+        {
+            if (false === $haystack = self::iconv($encoding, 'utf-8', $haystack)) return false;
+            if (false === $needle = self::iconv($encoding, 'utf-8', $needle)) return false;
+        }
+
+        $pos = isset($needle[0]) ? strrpos($haystack, $needle) : false;
+        return false === $pos ? false : self::iconv_strlen($pos ? substr($haystack, 0, $pos) : $haystack, 'utf-8');
     }
 
     static function iconv_substr($s, $start, $length = 2147483647, $encoding = INF)
@@ -431,7 +459,8 @@ class Iconv
         if (0 === strncasecmp($encoding, 'utf-8', 5)) $encoding = INF;
         else if (false === $s = self::iconv($encoding, 'utf-8', $s)) return false;
 
-        $slen = iconv_strlen($s, 'utf-8');
+        $s .= '';
+        $slen = self::iconv_strlen($s, 'utf-8');
         $start = (int) $start;
 
         if (0 > $start) $start += $slen;
@@ -454,42 +483,13 @@ class Iconv
         else return self::iconv('utf-8', $encoding, $s);
     }
 
-    static function iconv_workaround52211($in_charset, $out_charset, $str)
-    {
-        self::$last_error = false;
-        self::$error_handler = set_error_handler(array(__CLASS__, 'iconv_workaround52211_error_handler'));
-        $str = iconv($in_charset, $out_charset, $str);
-        restore_error_handler();
-        self::$error_handler = null;
-
-        if (true === self::$last_error && is_string($str))
-        {
-            self::$error_handler = null;
-            return false;
-        }
-
-        return $str;
-    }
-
-    protected static function iconv_workaround52211_error_handler($no, $msg, $file, $line, &$context)
-    {
-        if ($h = self::$error_handler)
-        {
-            $no = call_user_func_array($h, array($no, $msg, $file, $line, &$context));
-            self::$error_handler = $h;
-        }
-        else $no = false;
-        self::$last_error = true;
-        return $no;
-    }
-
     protected static function loadMap($type, $charset, &$map)
     {
         if (!isset(self::$convert_map[$type . $charset]))
         {
-            if (false === $map = self::getData($type . $charset))
+            if (false === $map = static::getData($type . $charset))
             {
-                if ('to.' === $type && self::loadMap('from.', $charset, $map)) $map = array_reverse($map);
+                if ('to.' === $type && static::loadMap('from.', $charset, $map)) $map = array_flip($map);
                 else return false;
             }
 
@@ -564,9 +564,7 @@ class Iconv
         $ulen_mask = self::$ulen_mask;
         $valid     = self::$is_valid_utf8;
 
-        $TRANSLIT
-            && self::$translit_map
-            || self::$translit_map = self::getData('translit');
+        if ($TRANSLIT) self::$translit_map or self::$translit_map = static::getData('translit');
 
         $i = 0;
         $len = strlen($str);
@@ -592,22 +590,27 @@ class Iconv
             {
                 $result .= $map[$uchr];
             }
-            else if ($TRANSLIT && isset($translit_map[$uchr]))
+            else if ($TRANSLIT)
             {
-                $uchr = $translit_map[$uchr];
+                if (isset(self::$translit_map[$uchr]))
+                {
+                    $uchr = self::$translit_map[$uchr];
+                }
+                else if ($uchr >= "\xC3\x80")
+                {
+                    $uchr = \Normalizer::normalize($uchr, \Normalizer::NFD);
 
-                if (isset($map[$uchr]))
-                {
-                    $result .= $map[$uchr];
+                    if ($uchr[0] < "\x80") $uchr = $uchr[0];
+                    else if ($IGNORE) continue;
+                    else return false;
                 }
-                else if (!self::map_from_utf8($result, $map, $uchr, $IGNORE, true))
-                {
-                    return false;
-                }
+
+                $str = $uchr . substr($str, $i);
+                $len = strlen($str);
+                $i = 0;
             }
-            else
+            else if (!$IGNORE)
             {
-                user_error(self::ERROR_ILLEGAL_CHARACTER);
                 return false;
             }
         }
