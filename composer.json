@@ -21,6 +21,7 @@
 	],
 	"require": {
 		"sabre/dav" : "1.8.10",
+		"doctrine/dbal": "2.5.*@dev",
 		"mcnetic/phpzipstreamer": "dev-master",
 		"kriswallsmith/assetic": "1.2.*@dev",
 		"phpmailer/phpmailer": "v5.2.8",
