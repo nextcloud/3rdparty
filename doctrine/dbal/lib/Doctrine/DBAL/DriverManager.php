@@ -38,21 +38,25 @@ final class DriverManager
      * @var array
      */
      private static $_driverMap = array(
-            'pdo_mysql'  => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-            'pdo_sqlite' => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
-            'pdo_pgsql'  => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
-            'pdo_oci' => 'Doctrine\DBAL\Driver\PDOOracle\Driver',
-            'oci8' => 'Doctrine\DBAL\Driver\OCI8\Driver',
-            'ibm_db2' => 'Doctrine\DBAL\Driver\IBMDB2\DB2Driver',
-            'pdo_ibm' => 'Doctrine\DBAL\Driver\PDOIbm\Driver',
-            'pdo_sqlsrv' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',
-            'mysqli' => 'Doctrine\DBAL\Driver\Mysqli\Driver',
-            'drizzle_pdo_mysql'  => 'Doctrine\DBAL\Driver\DrizzlePDOMySql\Driver',
-            'sqlsrv' => 'Doctrine\DBAL\Driver\SQLSrv\Driver',
-            );
+         'pdo_mysql'          => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+         'pdo_sqlite'         => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
+         'pdo_pgsql'          => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+         'pdo_oci'            => 'Doctrine\DBAL\Driver\PDOOracle\Driver',
+         'oci8'               => 'Doctrine\DBAL\Driver\OCI8\Driver',
+         'ibm_db2'            => 'Doctrine\DBAL\Driver\IBMDB2\DB2Driver',
+         'pdo_sqlsrv'         => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',
+         'mysqli'             => 'Doctrine\DBAL\Driver\Mysqli\Driver',
+         'drizzle_pdo_mysql'  => 'Doctrine\DBAL\Driver\DrizzlePDOMySql\Driver',
+         'sqlanywhere'        => 'Doctrine\DBAL\Driver\SQLAnywhere\Driver',
+         'sqlsrv'             => 'Doctrine\DBAL\Driver\SQLSrv\Driver',
+    );
 
-    /** Private constructor. This class cannot be instantiated. */
-    private function __construct() { }
+    /**
+     * Private constructor. This class cannot be instantiated.
+     */
+    private function __construct()
+    {
+    }
 
     /**
      * Creates a connection object based on the specified parameters.
@@ -68,9 +72,9 @@ final class DriverManager
      *     pdo_pgsql
      *     pdo_oci (unstable)
      *     pdo_sqlsrv
-     *     pdo_ibm (unstable)
      *     pdo_sqlsrv
      *     mysqli
+     *     sqlanywhere
      *     sqlsrv
      *     ibm_db2 (unstable)
      *     drizzle_pdo_mysql
@@ -101,10 +105,13 @@ final class DriverManager
      * <b>driverClass</b>:
      * The driver class to use.
      *
-     * @param array $params The parameters.
-     * @param \Doctrine\DBAL\Configuration The configuration to use.
-     * @param \Doctrine\Common\EventManager The event manager to use.
+     * @param array                              $params       The parameters.
+     * @param \Doctrine\DBAL\Configuration|null  $config       The configuration to use.
+     * @param \Doctrine\Common\EventManager|null $eventManager The event manager to use.
+     *
      * @return \Doctrine\DBAL\Connection
+     *
+     * @throws \Doctrine\DBAL\DBALException
      */
     public static function getConnection(
             array $params,
@@ -122,7 +129,7 @@ final class DriverManager
         // check for existing pdo object
         if (isset($params['pdo']) && ! $params['pdo'] instanceof \PDO) {
             throw DBALException::invalidPdoInstance();
-        } else if (isset($params['pdo'])) {
+        } elseif (isset($params['pdo'])) {
             $params['pdo']->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $params['driver'] = 'pdo_' . $params['pdo']->getAttribute(\PDO::ATTR_DRIVER_NAME);
         } else {
@@ -149,13 +156,27 @@ final class DriverManager
     }
 
     /**
+     * Returns the list of supported drivers.
+     *
+     * @return array
+     */
+    public static function getAvailableDrivers()
+    {
+        return array_keys(self::$_driverMap);
+    }
+
+    /**
      * Checks the list of parameters.
      *
-     * @param array $params
+     * @param array $params The list of parameters.
+     *
+     * @return void
+     *
+     * @throws \Doctrine\DBAL\DBALException
      */
     private static function _checkParams(array $params)
     {
-        // check existance of mandatory parameters
+        // check existence of mandatory parameters
 
         // driver
         if ( ! isset($params['driver']) && ! isset($params['driverClass'])) {
@@ -165,7 +186,7 @@ final class DriverManager
         // check validity of parameters
 
         // driver
-        if ( isset($params['driver']) && ! isset(self::$_driverMap[$params['driver']])) {
+        if (isset($params['driver']) && ! isset(self::$_driverMap[$params['driver']])) {
             throw DBALException::unknownDriver($params['driver'], array_keys(self::$_driverMap));
         }
 
