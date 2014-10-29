@@ -22,25 +22,22 @@ namespace Doctrine\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 /**
- * Type that maps an SQL BLOB to a PHP resource stream
+ * Type that maps an SQL BLOB to a PHP resource stream.
  *
  * @since 2.2
  */
 class BlobType extends Type
 {
-    /** @override */
+    /**
+     * {@inheritdoc}
+     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         return $platform->getBlobTypeDeclarationSQL($fieldDeclaration);
     }
 
     /**
-     * Converts a value from its database representation to its PHP representation
-     * of this type.
-     *
-     * @param mixed $value The value to convert.
-     * @param AbstractPlatform $platform The currently used database platform.
-     * @return mixed The PHP representation of the value.
+     * {@inheritdoc}
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
@@ -49,9 +46,12 @@ class BlobType extends Type
         }
 
         if (is_string($value)) {
-            $value = fopen('data://text/plain;base64,' . base64_encode($value), 'r');
-        } 
-        
+            $fp = fopen('php://temp', 'rb+');
+            fwrite($fp, $value);
+            fseek($fp, 0);
+            $value = $fp;
+        }
+
         if ( ! is_resource($value)) {
             throw ConversionException::conversionFailed($value, self::BLOB);
         }
@@ -59,11 +59,17 @@ class BlobType extends Type
         return $value;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return Type::BLOB;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBindingType()
     {
         return \PDO::PARAM_LOB;

@@ -20,24 +20,22 @@
 namespace Doctrine\DBAL\Schema;
 
 use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Types\StringType;
+use Doctrine\DBAL\Types\TextType;
 
 /**
- * SqliteSchemaManager
+ * Sqlite SchemaManager.
  *
- * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @author      Jonathan H. Wage <jonwage@gmail.com>
- * @author      Martin Hasoň <martin.hason@gmail.com>
- * @version     $Revision$
- * @since       2.0
+ * @author Konsta Vesterinen <kvesteri@cc.hut.fi>
+ * @author Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @author Jonathan H. Wage <jonwage@gmail.com>
+ * @author Martin Hasoň <martin.hason@gmail.com>
+ * @since  2.0
  */
 class SqliteSchemaManager extends AbstractSchemaManager
 {
     /**
      * {@inheritdoc}
-     *
-     * @override
      */
     public function dropDatabase($database)
     {
@@ -48,8 +46,6 @@ class SqliteSchemaManager extends AbstractSchemaManager
 
     /**
      * {@inheritdoc}
-     *
-     * @override
      */
     public function createDatabase($database)
     {
@@ -151,27 +147,35 @@ class SqliteSchemaManager extends AbstractSchemaManager
         return $this->_getPortableTableForeignKeysList($tableForeignKeys);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function _getPortableTableDefinition($table)
     {
         return $table['name'];
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @license New BSD License
      * @link http://ezcomponents.org/docs/api/trunk/DatabaseSchema/ezcDbSchemaPgsqlReader.html
-     * @param  array $tableIndexes
-     * @param  string $tableName
-     * @return array
      */
     protected function _getPortableTableIndexesList($tableIndexes, $tableName=null)
     {
         $indexBuffer = array();
 
         // fetch primary
-        $stmt = $this->_conn->executeQuery( "PRAGMA TABLE_INFO ('$tableName')" );
+        $stmt = $this->_conn->executeQuery("PRAGMA TABLE_INFO ('$tableName')");
         $indexArray = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        foreach($indexArray as $indexColumnRow) {
-            if($indexColumnRow['pk'] == "1") {
+        usort($indexArray, function($a, $b) {
+            if ($a['pk'] == $b['pk']) {
+                return $a['cid'] - $b['cid'];
+            }
+            return $a['pk'] - $b['pk'];
+        });
+        foreach ($indexArray as $indexColumnRow) {
+            if ($indexColumnRow['pk'] != "0") {
                 $indexBuffer[] = array(
                     'key_name' => 'primary',
                     'primary' => true,
@@ -182,7 +186,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
         }
 
         // fetch regular indexes
-        foreach($tableIndexes as $tableIndex) {
+        foreach ($tableIndexes as $tableIndex) {
             // Ignore indexes with reserved names, e.g. autoindexes
             if (strpos($tableIndex['name'], 'sqlite_') !== 0) {
                 $keyName = $tableIndex['name'];
@@ -191,10 +195,10 @@ class SqliteSchemaManager extends AbstractSchemaManager
                 $idx['primary'] = false;
                 $idx['non_unique'] = $tableIndex['unique']?false:true;
 
-                $stmt = $this->_conn->executeQuery( "PRAGMA INDEX_INFO ( '{$keyName}' )" );
+                $stmt = $this->_conn->executeQuery("PRAGMA INDEX_INFO ('{$keyName}')");
                 $indexArray = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-                foreach ( $indexArray as $indexColumnRow ) {
+                foreach ($indexArray as $indexColumnRow) {
                     $idx['column_name'] = $indexColumnRow['name'];
                     $indexBuffer[] = $idx;
                 }
@@ -204,6 +208,9 @@ class SqliteSchemaManager extends AbstractSchemaManager
         return parent::_getPortableTableIndexesList($indexBuffer, $tableName);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function _getPortableTableIndexDefinition($tableIndex)
     {
         return array(
@@ -212,13 +219,19 @@ class SqliteSchemaManager extends AbstractSchemaManager
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function _getPortableTableColumnList($table, $database, $tableColumns)
     {
         $list = parent::_getPortableTableColumnList($table, $database, $tableColumns);
+
+        // find column with autoincrement
         $autoincrementColumn = null;
         $autoincrementCount = 0;
+
         foreach ($tableColumns as $tableColumn) {
-            if ('1' == $tableColumn['pk']) {
+            if ('0' != $tableColumn['pk']) {
                 $autoincrementCount++;
                 if (null === $autoincrementColumn && 'integer' == strtolower($tableColumn['type'])) {
                     $autoincrementColumn = $tableColumn['name'];
@@ -234,21 +247,42 @@ class SqliteSchemaManager extends AbstractSchemaManager
             }
         }
 
+        // inspect column collation
+        $createSql = $this->_conn->fetchAll("SELECT sql FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type = 'table' AND name = '$table'");
+        $createSql = isset($createSql[0]['sql']) ? $createSql[0]['sql'] : '';
+
+        foreach ($list as $columnName => $column) {
+            $type = $column->getType();
+
+            if ($type instanceof StringType || $type instanceof TextType) {
+                $column->setPlatformOption('collation', $this->parseColumnCollationFromSQL($columnName, $createSql) ?: 'BINARY');
+            }
+        }
+
         return $list;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function _getPortableTableColumnDefinition($tableColumn)
     {
-        $e = explode('(', $tableColumn['type']);
-        $tableColumn['type'] = $e[0];
-        if (isset($e[1])) {
-            $length = trim($e[1], ')');
+        $parts = explode('(', $tableColumn['type']);
+        $tableColumn['type'] = $parts[0];
+        if (isset($parts[1])) {
+            $length = trim($parts[1], ')');
             $tableColumn['length'] = $length;
         }
 
         $dbType = strtolower($tableColumn['type']);
         $length = isset($tableColumn['length']) ? $tableColumn['length'] : null;
-        $unsigned = (boolean) isset($tableColumn['unsigned']) ? $tableColumn['unsigned'] : false;
+        $unsigned = false;
+
+        if (strpos($dbType, ' unsigned') !== false) {
+            $dbType = str_replace(' unsigned', '', $dbType);
+            $unsigned = true;
+        }
+
         $fixed = false;
         $type = $this->_platform->getDoctrineTypeMapping($dbType);
         $default = $tableColumn['dflt_value'];
@@ -280,7 +314,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
                 if (isset($tableColumn['length'])) {
                     if (strpos($tableColumn['length'], ',') === false) {
                         $tableColumn['length'] .= ",0";
-                    }                    
+                    }
                     list($precision, $scale) = array_map('trim', explode(',', $tableColumn['length']));
                 }
                 $length = null;
@@ -301,15 +335,21 @@ class SqliteSchemaManager extends AbstractSchemaManager
         return new Column($tableColumn['name'], \Doctrine\DBAL\Types\Type::getType($type), $options);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function _getPortableViewDefinition($view)
     {
         return new View($view['name'], $view['sql']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function _getPortableTableForeignKeysList($tableForeignKeys)
     {
         $list = array();
-        foreach ($tableForeignKeys as $key => $value) {
+        foreach ($tableForeignKeys as $value) {
             $value = array_change_key_case($value, CASE_LOWER);
             $name = $value['constraint_name'];
             if ( ! isset($list[$name])) {
@@ -336,7 +376,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
         }
 
         $result = array();
-        foreach($list as $constraint) {
+        foreach ($list as $constraint) {
             $result[] = new ForeignKeyConstraint(
                 array_values($constraint['local']), $constraint['foreignTable'],
                 array_values($constraint['foreign']), $constraint['name'],
@@ -352,12 +392,20 @@ class SqliteSchemaManager extends AbstractSchemaManager
         return $result;
     }
 
+    /**
+     * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint $foreignKey
+     * @param \Doctrine\DBAL\Schema\Table|string         $table
+     *
+     * @return \Doctrine\DBAL\Schema\TableDiff
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
     private function getTableDiffForAlterForeignKey(ForeignKeyConstraint $foreignKey, $table)
     {
         if ( ! $table instanceof Table) {
             $tableDetails = $this->tryMethod('listTableDetails', $table);
             if (false === $table) {
-                throw new \DBALException(sprintf('Sqlite schema manager requires to modify foreign keys table definition "%s".', $table));
+                throw new DBALException(sprintf('Sqlite schema manager requires to modify foreign keys table definition "%s".', $table));
             }
 
             $table = $tableDetails;
@@ -367,5 +415,18 @@ class SqliteSchemaManager extends AbstractSchemaManager
         $tableDiff->fromTable = $table;
 
         return $tableDiff;
+    }
+
+    private function parseColumnCollationFromSQL($column, $sql)
+    {
+        if (preg_match(
+            '{(?:'.preg_quote($column).'|'.preg_quote($this->_platform->quoteSingleIdentifier($column)).')
+                [^,(]+(?:\([^()]+\)[^,]*)?
+                (?:(?:DEFAULT|CHECK)\s*(?:\(.*?\))?[^,]*)*
+                COLLATE\s+["\']?([^\s,"\')]+)}isx', $sql, $match)) {
+            return $match[1];
+        }
+
+        return false;
     }
 }
