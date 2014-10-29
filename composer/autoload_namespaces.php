@@ -18,6 +18,7 @@ return array(
     'Sabre\\CalDAV' => array($vendorDir . '/sabre/dav/lib'),
     'RandomLib' => array($vendorDir . '/ircmaxell/random-lib/lib'),
     'Patchwork' => array($vendorDir . '/patchwork/utf8/class'),
+    'PEAR' => array($vendorDir . '/pear/pear_exception'),
     'OpenCloud' => array($vendorDir . '/rackspace/php-opencloud/lib', $vendorDir . '/rackspace/php-opencloud/tests'),
     'Normalizer' => array($vendorDir . '/patchwork/utf8/class'),
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
@@ -36,4 +37,5 @@ return array(
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
+    'Archive_Tar' => array($vendorDir . '/pear/archive_tar'),
 );

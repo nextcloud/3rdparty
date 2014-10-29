@@ -7,4 +7,6 @@ $baseDir = $vendorDir;
 
 return array(
     $vendorDir . '/phpseclib/phpseclib/phpseclib',
+    $vendorDir . '/pear/pear_exception',
+    $vendorDir . '/pear/archive_tar',
 );
