@@ -20,3 +20,10 @@ doctrine/dbal/docs
 doctrine/dbal/run-all.sh
 doctrine/dbal/.travis.yml
 doctrine/inflector/tests
+
+pear/archive_tar/.travis.sh
+pear/archive_tar/.travis.yml
+pear/archive_tar/tests/
+pear/archive_tar/docs/
+pear/archive_tar/scripts/
+pear/archive_tar/sync-php4

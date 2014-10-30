@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6d11535acc9f818c2b9b28498fd5e6c3",
+    "hash": "85a7ca1bf470718cbbb25804291000f5",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -916,7 +916,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-10-28 13:40:24"
+            "time": "2014-10-29 10:34:14"
         },
         {
             "name": "mrclay/minify",
@@ -1060,6 +1060,124 @@
                 "utf8"
             ],
             "time": "2014-08-05 08:00:32"
+        },
+        {
+            "name": "pear/archive_tar",
+            "version": "1.3.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pear/Archive_Tar.git",
+                "reference": "b433342172d4eae3957cba13cd3a51e8323b8dcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/b433342172d4eae3957cba13cd3a51e8323b8dcd",
+                "reference": "b433342172d4eae3957cba13cd3a51e8323b8dcd",
+                "shasum": ""
+            },
+            "require": {
+                "pear/pear_exception": "1.0-beta1",
+                "php": ">=4.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "ext-bz2": "bz2 compression support.",
+                "ext-xz": "lzma2 compression support.",
+                "ext-zlib": "Gzip compression support."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Archive_Tar": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "./"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Blavet",
+                    "email": "vincent@phpconcept.net"
+                },
+                {
+                    "name": "Greg Beaver",
+                    "email": "greg@chiaraquartet.net"
+                },
+                {
+                    "name": "Michiel Rook",
+                    "email": "mrook@php.net"
+                }
+            ],
+            "description": "Tar file management class",
+            "homepage": "https://github.com/pear/Archive_Tar",
+            "keywords": [
+                "archive",
+                "tar"
+            ],
+            "time": "2014-09-02 07:32:58"
+        },
+        {
+            "name": "pear/pear_exception",
+            "version": "1.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pear/PEAR_Exception.git",
+                "reference": "f053615c7cbdfaba5a3b7021ee58a48523b8576c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/f053615c7cbdfaba5a3b7021ee58a48523b8576c",
+                "reference": "f053615c7cbdfaba5a3b7021ee58a48523b8576c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=4.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "class",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PEAR": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "."
+            ],
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Helgi Thormar",
+                    "email": "dufuz@php.net",
+                    "role": "Lead"
+                },
+                {
+                    "name": "Greg Beaver",
+                    "email": "cellog@php.net",
+                    "role": "Helper"
+                }
+            ],
+            "description": "The PEAR Exception base class.",
+            "homepage": "https://github.com/pear/PEAR_Exception",
+            "keywords": [
+                "exception"
+            ],
+            "time": "2014-02-21 17:29:07"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1573,7 +1691,8 @@
         "kriswallsmith/assetic": 20,
         "james-heinrich/getid3": 20,
         "natxet/cssmin": 20,
-        "mrclay/minify": 20
+        "mrclay/minify": 20,
+        "pear/pear_exception": 20
     },
     "prefer-stable": false,
     "platform": [],
