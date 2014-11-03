@@ -19,6 +19,7 @@ return array(
     'Sabre\\CardDAV' => array($vendorDir . '/sabre/dav/lib'),
     'Sabre\\CalDAV' => array($vendorDir . '/sabre/dav/lib'),
     'RandomLib' => array($vendorDir . '/ircmaxell/random-lib/lib'),
+    'Pimple' => array($vendorDir . '/pimple/pimple/src'),
     'Patchwork' => array($vendorDir . '/patchwork/utf8/class'),
     'PEAR' => array($vendorDir . '/pear/pear_exception'),
     'OpenCloud' => array($vendorDir . '/rackspace/php-opencloud/lib', $vendorDir . '/rackspace/php-opencloud/tests'),
