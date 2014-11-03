@@ -7,6 +7,7 @@ $baseDir = $vendorDir;
 
 return array(
     'System' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'Symfony\\Component\\Routing\\' => array($vendorDir . '/symfony/routing'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),

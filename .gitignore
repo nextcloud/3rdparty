@@ -32,3 +32,8 @@ symfony/console/Symfony/Component/Console/Tests
 symfony/console/Symfony/Component/Console/.gitignore
 symfony/console/Symfony/Component/Console/composer.json
 
+symfony/routing/Symfony/Component/Routing/Tests/
+symfony/routing/Symfony/Component/Routing/phpunit.xml.dist
+symfony/routing/Symfony/Component/Routing/.gitignore
+
+
