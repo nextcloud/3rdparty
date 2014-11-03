@@ -12,7 +12,6 @@
 namespace Symfony\Component\Console\Output;
 
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
 
 /**
  * ConsoleOutput is the default class for all CLI output. It uses STDOUT.
@@ -36,8 +35,8 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
     /**
      * Constructor.
      *
-     * @param integer                       $verbosity The verbosity level (one of the VERBOSITY constants in OutputInterface)
-     * @param Boolean|null                  $decorated Whether to decorate messages (null for auto-guessing)
+     * @param int                           $verbosity The verbosity level (one of the VERBOSITY constants in OutputInterface)
+     * @param bool|null                     $decorated Whether to decorate messages (null for auto-guessing)
      * @param OutputFormatterInterface|null $formatter Output formatter instance (null to use default OutputFormatter)
      *
      * @api
@@ -51,7 +50,7 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
 
         parent::__construct(fopen($outputStream, 'w'), $verbosity, $decorated, $formatter);
 
-        $this->stderr = new StreamOutput(fopen('php://stderr', 'w'), $verbosity, $decorated, $formatter);
+        $this->stderr = new StreamOutput(fopen('php://stderr', 'w'), $verbosity, $decorated, $this->getFormatter());
     }
 
     /**
@@ -105,7 +104,7 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
      * STDOUT and doesn't properly convert ASCII to EBCDIC, resulting in garbage
      * output.
      *
-     * @return boolean
+     * @return bool
      */
     protected function hasStdoutSupport()
     {
