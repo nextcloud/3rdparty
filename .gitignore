@@ -27,3 +27,8 @@ pear/archive_tar/tests/
 pear/archive_tar/docs/
 pear/archive_tar/scripts/
 pear/archive_tar/sync-php4
+
+symfony/console/Symfony/Component/Console/Tests
+symfony/console/Symfony/Component/Console/.gitignore
+symfony/console/Symfony/Component/Console/composer.json
+

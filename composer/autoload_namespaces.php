@@ -9,6 +9,7 @@ return array(
     'System' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
+    'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SecurityLib' => array($vendorDir . '/ircmaxell/security-lib/lib'),
     'Sabre\\VObject' => array($vendorDir . '/sabre/vobject/lib'),
     'Sabre\\HTTP' => array($vendorDir . '/sabre/dav/lib'),

@@ -58,7 +58,7 @@ To display the list of available commands, please use the <info>list</info> comm
 * Is value required: yes
 * Is multiple: no
 * Description: To output help in other formats
-* Default: `NULL`
+* Default: `'txt'`
 
 **raw:**
 
@@ -97,7 +97,7 @@ To display the list of available commands, please use the <info>list</info> comm
 * Accept value: no
 * Is value required: no
 * Is multiple: no
-* Description: Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+* Description: Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 * Default: `false`
 
 **version:**
@@ -203,7 +203,7 @@ It's also possible to get raw list of commands (useful for embedding command run
 * Is value required: yes
 * Is multiple: no
 * Description: To output list in other formats
-* Default: `NULL`
+* Default: `'txt'`
 
 descriptor:command1
 -------------------
@@ -243,7 +243,7 @@ command 1 help
 * Accept value: no
 * Is value required: no
 * Is multiple: no
-* Description: Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+* Description: Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 * Default: `false`
 
 **version:**
@@ -344,7 +344,7 @@ command 2 help
 * Accept value: no
 * Is value required: no
 * Is multiple: no
-* Description: Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+* Description: Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 * Default: `false`
 
 **version:**

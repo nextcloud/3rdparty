@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\Console\Tests\Helper;
 
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\FormatterHelper;
@@ -94,6 +95,9 @@ class DialogHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('FooBundle', $dialog->ask($this->getOutputStream(), 'Please select a bundle', 'FrameworkBundle', $bundles));
     }
 
+    /**
+     * @group tty
+     */
     public function testAskHiddenResponse()
     {
         if (defined('PHP_WINDOWS_VERSION_BUILD')) {
@@ -130,7 +134,7 @@ class DialogHelperTest extends \PHPUnit_Framework_TestCase
         $helperSet = new HelperSet(array(new FormatterHelper()));
         $dialog->setHelperSet($helperSet);
 
-        $question ='What color was the white horse of Henry IV?';
+        $question = 'What color was the white horse of Henry IV?';
         $error = 'This is not a color!';
         $validator = function ($color) use ($error) {
             if (!in_array($color, array('white', 'black'))) {
@@ -151,6 +155,18 @@ class DialogHelperTest extends \PHPUnit_Framework_TestCase
         } catch (\InvalidArgumentException $e) {
             $this->assertEquals($error, $e->getMessage());
         }
+    }
+
+    public function testNoInteraction()
+    {
+        $dialog = new DialogHelper();
+
+        $input = new ArrayInput(array());
+        $input->setInteractive(false);
+
+        $dialog->setInput($input);
+
+        $this->assertEquals('not yet', $dialog->ask($this->getOutputStream(), 'Do you have a job?', 'not yet'));
     }
 
     protected function getInputStream($input)
