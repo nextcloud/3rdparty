@@ -36,4 +36,14 @@ symfony/routing/Symfony/Component/Routing/Tests/
 symfony/routing/Symfony/Component/Routing/phpunit.xml.dist
 symfony/routing/Symfony/Component/Routing/.gitignore
 
+pimple/pimple/ext
+pimple/pimple/.gitignore
+pimple/pimple/.travis.yml
+pimple/pimple/CHANGELOG
+pimple/pimple/composer.json
+pimple/pimple/LICENSE
+pimple/pimple/phpunit.xml.dist
+pimple/pimple/README.rst
+pimple/pimple/src/Pimple/Tests
+
 
