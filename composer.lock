@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0f85fb7506450c428b9df1fd7e012242",
+    "hash": "06cebccf328a6e3c70d3656647fc7f26",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -705,6 +704,45 @@
             "time": "2014-01-28 22:14:17"
         },
         {
+            "name": "ircmaxell/password-compat",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ircmaxell/password_compat.git",
+                "reference": "1fc1521b5e9794ea77e4eca30717be9635f1d4f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/1fc1521b5e9794ea77e4eca30717be9635f1d4f4",
+                "reference": "1fc1521b5e9794ea77e4eca30717be9635f1d4f4",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/password.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Ferrara",
+                    "email": "ircmaxell@ircmaxell.com",
+                    "homepage": "http://blog.ircmaxell.com"
+                }
+            ],
+            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+            "homepage": "https://github.com/ircmaxell/password_compat",
+            "keywords": [
+                "hashing",
+                "password"
+            ],
+            "time": "2013-04-30 19:58:08"
+        },
+        {
             "name": "ircmaxell/random-lib",
             "version": "v1.0.0",
             "source": {
@@ -916,7 +954,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-11-03 15:42:46"
+            "time": "2014-11-03 19:31:34"
         },
         {
             "name": "mrclay/minify",
@@ -1862,7 +1900,6 @@
         "mrclay/minify": 20,
         "pear/pear_exception": 20
     },
-    "prefer-stable": false,
     "platform": [],
     "platform-dev": []
 }

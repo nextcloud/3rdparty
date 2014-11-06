@@ -47,3 +47,8 @@ pimple/pimple/README.rst
 pimple/pimple/src/Pimple/Tests
 
 
+ircmaxell/password-compat/.travis.yml
+ircmaxell/password-compat/README.md
+ircmaxell/password-compat/phpunit.xml.dist
+ircmaxell/password-compat/test/
+ircmaxell/password-compat/version-test.php
