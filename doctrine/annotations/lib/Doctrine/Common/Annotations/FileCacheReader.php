@@ -24,6 +24,10 @@ namespace Doctrine\Common\Annotations;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ *
+ * @deprecated the FileCacheReader is deprecated and will be removed
+ *             in version 2.0.0 of doctrine/annotations. Please use the
+ *             {@see \Doctrine\Common\Annotations\CachedReader} instead.
  */
 class FileCacheReader implements Reader
 {
@@ -189,7 +193,25 @@ class FileCacheReader implements Reader
         if (!is_writable($this->dir)) {
             throw new \InvalidArgumentException(sprintf('The directory "%s" is not writable. Both, the webserver and the console user need access. You can manage access rights for multiple users with "chmod +a". If your system does not support this, check out the acl package.', $this->dir));
         }
-        file_put_contents($path, '<?php return unserialize('.var_export(serialize($data), true).');');
+
+        $tempfile = tempnam($this->dir, uniqid('', true));
+
+        if (false === $tempfile) {
+            throw new \RuntimeException(sprintf('Unable to create tempfile in directory: %s', $this->dir));
+        }
+
+        $written = file_put_contents($tempfile, '<?php return unserialize('.var_export(serialize($data), true).');');
+
+        if (false === $written) {
+            throw new \RuntimeException(sprintf('Unable to write cached file to: %s', $tempfile));
+        }
+
+        if (false === rename($tempfile, $path)) {
+            throw new \RuntimeException(sprintf('Unable to rename %s to %s', $tempfile, $path));
+        }
+
+        @chmod($path, 0666 & ~umask());
+        @unlink($tempfile);
     }
 
     /**
