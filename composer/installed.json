@@ -340,83 +340,6 @@
         ]
     },
     {
-        "name": "sabre/dav",
-        "version": "1.8.10",
-        "version_normalized": "1.8.10.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fruux/sabre-dav.git",
-            "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
-            "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
-            "shasum": ""
-        },
-        "require": {
-            "ext-ctype": "*",
-            "ext-date": "*",
-            "ext-dom": "*",
-            "ext-iconv": "*",
-            "ext-libxml": "*",
-            "ext-mbstring": "*",
-            "ext-pcre": "*",
-            "ext-simplexml": "*",
-            "ext-spl": "*",
-            "php": ">=5.3.1",
-            "sabre/vobject": "~2.1.0"
-        },
-        "provide": {
-            "evert/sabredav": "1.7.*"
-        },
-        "require-dev": {
-            "evert/phpdoc-md": "~0.0.7",
-            "phpunit/phpunit": "~4.0.0"
-        },
-        "suggest": {
-            "ext-apc": "*",
-            "ext-curl": "*",
-            "ext-pdo": "*"
-        },
-        "time": "2014-05-16 00:14:02",
-        "bin": [
-            "bin/sabredav"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Sabre\\DAV": "lib/",
-                "Sabre\\HTTP": "lib/",
-                "Sabre\\DAVACL": "lib/",
-                "Sabre\\CalDAV": "lib/",
-                "Sabre\\CardDAV": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "WebDAV Framework for PHP",
-        "homepage": "http://code.google.com/p/sabredav/",
-        "keywords": [
-            "CalDAV",
-            "CardDAV",
-            "WebDAV",
-            "framework",
-            "iCalendar"
-        ]
-    },
-    {
         "name": "symfony/event-dispatcher",
         "version": "v2.5.0",
         "version_normalized": "2.5.0.0",
@@ -1949,6 +1872,83 @@
             "dbal",
             "persistence",
             "queryobject"
+        ]
+    },
+    {
+        "name": "sabre/dav",
+        "version": "1.8.12",
+        "version_normalized": "1.8.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fruux/sabre-dav.git",
+            "reference": "78b0a55ae126666b49ec9ac88582d453b971967d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/78b0a55ae126666b49ec9ac88582d453b971967d",
+            "reference": "78b0a55ae126666b49ec9ac88582d453b971967d",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-date": "*",
+            "ext-dom": "*",
+            "ext-iconv": "*",
+            "ext-libxml": "*",
+            "ext-mbstring": "*",
+            "ext-pcre": "*",
+            "ext-simplexml": "*",
+            "ext-spl": "*",
+            "php": ">=5.3.1",
+            "sabre/vobject": "~2.1.0"
+        },
+        "provide": {
+            "evert/sabredav": "1.7.*"
+        },
+        "require-dev": {
+            "evert/phpdoc-md": "~0.0.7",
+            "phpunit/phpunit": "~4.0.0"
+        },
+        "suggest": {
+            "ext-apc": "*",
+            "ext-curl": "*",
+            "ext-pdo": "*"
+        },
+        "time": "2015-01-21 21:01:09",
+        "bin": [
+            "bin/sabredav"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Sabre\\DAV": "lib/",
+                "Sabre\\HTTP": "lib/",
+                "Sabre\\DAVACL": "lib/",
+                "Sabre\\CalDAV": "lib/",
+                "Sabre\\CardDAV": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "WebDAV Framework for PHP",
+        "homepage": "http://code.google.com/p/sabredav/",
+        "keywords": [
+            "CalDAV",
+            "CardDAV",
+            "WebDAV",
+            "framework",
+            "iCalendar"
         ]
     }
 ]

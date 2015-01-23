@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc4a7bb25e438a7a6f20b0e4af7c938d",
+    "hash": "f081d428c1941871a57782c92d01287d",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -958,7 +958,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-04-04 10:55:12"
+            "time": "2015-01-01 13:17:44"
         },
         {
             "name": "mrclay/minify",
@@ -1540,16 +1540,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "1.8.10",
+            "version": "1.8.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18"
+                "reference": "78b0a55ae126666b49ec9ac88582d453b971967d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
-                "reference": "0d064536ed3c7974e486b6ebb5b17ad7a974fe18",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/78b0a55ae126666b49ec9ac88582d453b971967d",
+                "reference": "78b0a55ae126666b49ec9ac88582d453b971967d",
                 "shasum": ""
             },
             "require": {
@@ -1611,7 +1611,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2014-05-16 00:14:02"
+            "time": "2015-01-21 21:01:09"
         },
         {
             "name": "sabre/vobject",
@@ -1904,7 +1904,6 @@
         "pear/pear_exception": 20
     },
     "prefer-stable": false,
-    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }
