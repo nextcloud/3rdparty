@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = $vendorDir;
 
 return array(
-    $vendorDir . '/phpseclib/phpseclib/phpseclib',
     $vendorDir . '/pear/pear_exception',
     $vendorDir . '/pear/archive_tar',
+    $vendorDir . '/phpseclib/phpseclib/phpseclib',
 );
