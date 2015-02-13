@@ -28,6 +28,13 @@ pear/archive_tar/docs/
 pear/archive_tar/scripts/
 pear/archive_tar/sync-php4
 
+phpseclib/phpseclib/.git*
+phpseclib/phpseclib/*.yml
+phpseclib/phpseclib/phpunit.xml.dist
+phpseclib/phpseclib/build/
+phpseclib/phpseclib/tests/
+phpseclib/phpseclib/travis/
+
 symfony/console/Symfony/Component/Console/Tests
 symfony/console/Symfony/Component/Console/.gitignore
 symfony/console/Symfony/Component/Console/composer.json
