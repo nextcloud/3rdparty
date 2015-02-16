@@ -39,6 +39,7 @@
 		"symfony/console": "~2.5",
 		"symfony/routing": "~2.5",
 		"pimple/pimple": "~3.0",
-		"ircmaxell/password-compat": "1.0.*"
+		"ircmaxell/password-compat": "1.0.*",
+		"nikic/php-parser": "~1.1"
 	}
 }
