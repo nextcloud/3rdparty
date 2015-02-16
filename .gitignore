@@ -59,3 +59,12 @@ ircmaxell/password-compat/README.md
 ircmaxell/password-compat/phpunit.xml.dist
 ircmaxell/password-compat/test/
 ircmaxell/password-compat/version-test.php
+
+ircmaxell/random-lib/test/
+ircmaxell/random-lib/.gitignore
+ircmaxell/random-lib/.travis.yml
+ircmaxell/random-lib/LICENSE
+ircmaxell/random-lib/README.md
+ircmaxell/random-lib/composer.json
+ircmaxell/random-lib/composer.lock
+ircmaxell/random-lib/phpunit.xml.dist
