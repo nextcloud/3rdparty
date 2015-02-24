@@ -16,4 +16,6 @@ return array(
     'Sabre\\CardDAV\\' => array($vendorDir . '/sabre/dav/lib/CardDAV'),
     'Sabre\\CalDAV\\' => array($vendorDir . '/sabre/dav/lib/CalDAV'),
     'Punic\\' => array($vendorDir . '/punic/punic/code'),
+    'Icewind\\Streams\\Tests\\' => array($vendorDir . '/icewind/streams/tests'),
+    'Icewind\\Streams\\' => array($vendorDir . '/icewind/streams/src'),
 );
