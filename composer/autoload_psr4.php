@@ -7,6 +7,7 @@ $baseDir = $vendorDir;
 
 return array(
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
+    'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
     'Sabre\\VObject\\' => array($vendorDir . '/sabre/vobject/lib'),
     'Sabre\\HTTP\\' => array($vendorDir . '/sabre/http/lib'),
     'Sabre\\Event\\' => array($vendorDir . '/sabre/event/lib'),
