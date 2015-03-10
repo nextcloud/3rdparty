@@ -38,6 +38,7 @@
 		"pear/pear_exception": "1.0.*@dev",
 		"patchwork/utf8": "~1.1",
 		"symfony/console": "2.6.4",
+		"symfony/event-dispatcher": "2.6.4",
 		"symfony/routing": "2.6.4",
 		"pimple/pimple": "~3.0",
 		"ircmaxell/password-compat": "1.0.*",

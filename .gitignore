@@ -42,6 +42,11 @@ symfony/console/Symfony/Component/Console/composer.json
 symfony/routing/Symfony/Component/Routing/Tests/
 symfony/routing/Symfony/Component/Routing/phpunit.xml.dist
 symfony/routing/Symfony/Component/Routing/.gitignore
+symfony/event-dispatcher/Symfony/Component/EventDispatcher/Tests/
+
+symfony/event-dispatcher/Symfony/EventDispatcher/Debug/Routing/Tests/
+symfony/event-dispatcher/Symfony/EventDispatcher/Debug/phpunit.xml.dist
+symfony/event-dispatcher/Symfony/EventDispatcher/Debug/.gitignore
 
 pimple/pimple/ext
 pimple/pimple/.gitignore
