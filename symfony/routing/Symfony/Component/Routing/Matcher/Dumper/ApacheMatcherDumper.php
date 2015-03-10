@@ -43,7 +43,7 @@ class ApacheMatcherDumper extends MatcherDumper
     {
         $options = array_merge(array(
             'script_name' => 'app.php',
-            'base_uri'    => '',
+            'base_uri' => '',
         ), $options);
 
         $options['script_name'] = self::escape($options['script_name'], ' ', '\\');
@@ -111,12 +111,12 @@ class ApacheMatcherDumper extends MatcherDumper
     }
 
     /**
-     * Dumps a single route
+     * Dumps a single route.
      *
-     * @param  string $name Route name
-     * @param  Route  $route The route
-     * @param  array  $options Options
-     * @param  bool   $hostRegexUnique Unique identifier for the host regex
+     * @param string $name            Route name
+     * @param Route  $route           The route
+     * @param array  $options         Options
+     * @param bool   $hostRegexUnique Unique identifier for the host regex
      *
      * @return string The compiled route
      */
@@ -141,10 +141,10 @@ class ApacheMatcherDumper extends MatcherDumper
         }
         foreach ($this->normalizeValues($route->getDefaults()) as $key => $value) {
             $variables[] = 'E=_ROUTING_default_'.$key.':'.strtr($value, array(
-                ':'  => '\\:',
-                '='  => '\\=',
+                ':' => '\\:',
+                '=' => '\\=',
                 '\\' => '\\\\',
-                ' '  => '\\ ',
+                ' ' => '\\ ',
             ));
         }
         $variables = implode(',', $variables);
@@ -190,9 +190,9 @@ class ApacheMatcherDumper extends MatcherDumper
     }
 
     /**
-     * Returns methods allowed for a route
+     * Returns methods allowed for a route.
      *
-     * @param Route  $route The route
+     * @param Route $route The route
      *
      * @return array The methods
      */
@@ -211,9 +211,9 @@ class ApacheMatcherDumper extends MatcherDumper
     }
 
     /**
-     * Converts a regex to make it suitable for mod_rewrite
+     * Converts a regex to make it suitable for mod_rewrite.
      *
-     * @param string  $regex The regex
+     * @param string $regex The regex
      *
      * @return string The converted regex
      */

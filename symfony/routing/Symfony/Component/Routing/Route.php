@@ -61,7 +61,10 @@ class Route implements \Serializable
      */
     private $compiled;
 
-    private $condition;
+    /**
+     * @var string
+     */
+    private $condition = '';
 
     /**
      * Constructor.
@@ -81,7 +84,7 @@ class Route implements \Serializable
      *
      * @api
      */
-    public function __construct($path, array $defaults = array(), array $requirements = array(), array $options = array(), $host = '', $schemes = array(), $methods = array(), $condition = null)
+    public function __construct($path, array $defaults = array(), array $requirements = array(), array $options = array(), $host = '', $schemes = array(), $methods = array(), $condition = '')
     {
         $this->setPath($path);
         $this->setDefaults($defaults);
@@ -99,23 +102,30 @@ class Route implements \Serializable
         $this->setCondition($condition);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function serialize()
     {
         return serialize(array(
-            'path'         => $this->path,
-            'host'         => $this->host,
-            'defaults'     => $this->defaults,
+            'path' => $this->path,
+            'host' => $this->host,
+            'defaults' => $this->defaults,
             'requirements' => $this->requirements,
-            'options'      => $this->options,
-            'schemes'      => $this->schemes,
-            'methods'      => $this->methods,
-            'condition'    => $this->condition,
+            'options' => $this->options,
+            'schemes' => $this->schemes,
+            'methods' => $this->methods,
+            'condition' => $this->condition,
+            'compiled' => $this->compiled,
         ));
     }
 
-    public function unserialize($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
     {
-        $data = unserialize($data);
+        $data = unserialize($serialized);
         $this->path = $data['path'];
         $this->host = $data['host'];
         $this->defaults = $data['defaults'];
@@ -123,7 +133,13 @@ class Route implements \Serializable
         $this->options = $data['options'];
         $this->schemes = $data['schemes'];
         $this->methods = $data['methods'];
-        $this->condition = $data['condition'];
+
+        if (isset($data['condition'])) {
+            $this->condition = $data['condition'];
+        }
+        if (isset($data['compiled'])) {
+            $this->compiled = $data['compiled'];
+        }
     }
 
     /**
@@ -252,25 +268,18 @@ class Route implements \Serializable
      *
      * @param string $scheme
      *
-     * @return bool    true if the scheme requirement exists, otherwise false
+     * @return bool true if the scheme requirement exists, otherwise false
      */
     public function hasScheme($scheme)
     {
-        $scheme = strtolower($scheme);
-        foreach ($this->schemes as $requiredScheme) {
-            if ($scheme === $requiredScheme) {
-                return true;
-            }
-        }
-
-        return false;
+        return in_array(strtolower($scheme), $this->schemes, true);
     }
 
     /**
      * Returns the uppercased HTTP methods this route is restricted to.
      * So an empty array means that any method is allowed.
      *
-     * @return array The schemes
+     * @return array The methods
      */
     public function getMethods()
     {
@@ -383,11 +392,11 @@ class Route implements \Serializable
     }
 
     /**
-     * Checks if an option has been set
+     * Checks if an option has been set.
      *
      * @param string $name An option name
      *
-     * @return bool    true if the option is set, false otherwise
+     * @return bool true if the option is set, false otherwise
      */
     public function hasOption($name)
     {
@@ -456,7 +465,7 @@ class Route implements \Serializable
      *
      * @param string $name A variable name
      *
-     * @return bool    true if the default value is set, false otherwise
+     * @return bool true if the default value is set, false otherwise
      */
     public function hasDefault($name)
     {
@@ -543,7 +552,7 @@ class Route implements \Serializable
      *
      * @param string $key A variable name
      *
-     * @return bool    true if a requirement is specified, false otherwise
+     * @return bool true if a requirement is specified, false otherwise
      */
     public function hasRequirement($key)
     {
