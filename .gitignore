@@ -68,3 +68,5 @@ ircmaxell/random-lib/README.md
 ircmaxell/random-lib/composer.json
 ircmaxell/random-lib/composer.lock
 ircmaxell/random-lib/phpunit.xml.dist
+
+icewind/streams/tests
