@@ -20,7 +20,7 @@
 		}
 	],
 	"require": {
-		"sabre/dav" : "2.1.2",
+		"sabre/dav" : "2.1.3",
 		"doctrine/dbal": "2.5.1",
 		"mcnetic/phpzipstreamer": "dev-master",
 		"kriswallsmith/assetic": "1.2.*@dev",
