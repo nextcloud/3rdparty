@@ -10,4 +10,5 @@ return array(
     $vendorDir . '/kriswallsmith/assetic/src/functions.php',
     $vendorDir . '/ircmaxell/password-compat/lib/password.php',
     $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Random.php',
+    $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
 );

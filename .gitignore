@@ -80,3 +80,16 @@ ircmaxell/random-lib/composer.lock
 ircmaxell/random-lib/phpunit.xml.dist
 
 icewind/streams/tests
+
+swiftmailer/swiftmailer/.travis.yml
+swiftmailer/swiftmailer/phpunit.xml.dist
+swiftmailer/swiftmailer/doc/
+swiftmailer/swiftmailer/notes/
+swiftmailer/swiftmailer/tests/
+swiftmailer/swiftmailer/.gitattributes
+swiftmailer/swiftmailer/.gitignore
+swiftmailer/swiftmailer/CHANGES
+swiftmailer/swiftmailer/README
+swiftmailer/swiftmailer/VERSION
+swiftmailer/swiftmailer/LICENSE
+swiftmailer/swiftmailer/composer.json
