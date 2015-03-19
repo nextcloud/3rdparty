@@ -1,6 +1,37 @@
 ChangeLog
 =========
 
+3.4.2 (2015-02-25)
+------------------
+
+* #210: iTip: Replying to an event without a master event was broken.
+
+
+3.4.1 (2015-02-24)
+------------------
+
+* A minor change to ensure that unittests work correctly in the sabre/dav
+  test-suite.
+
+
+3.4.0 (2015-02-23)
+------------------
+
+* #196: Made parsing recurrence rules a lot faster on big calendars.
+* Updated windows timezone mappings to latest unicode version.
+* #202: Support for parsing and validating `VAVAILABILITY` components. (@Hywan)
+* #195: PHP 5.3 compatibility in 'generatevcards' script. (@rickdenhaan)
+* #205: Improving handling of multiple `EXDATE` when processing iTip changes.
+  (@armin-hackmann)
+* #187: Fixed validator rules for `LAST-MODIFIED` properties.
+* #188: Retain floating times when generating instances using
+  `Recur\EventIterator`.
+* #203: Skip tests for timezones that are not supported on older PHP versions,
+  instead of a hard fail.
+* #204: Dealing a bit better with vCard date-time values that contained
+  milliseconds. (which is normally invalid). (@armin-hackmann)
+
+
 3.3.5 (2015-01-09)
 ------------------
 
@@ -13,6 +44,10 @@ ChangeLog
 * #179: Fixed jCal serialization of floating `DATE-TIME` properties.
 * #173: vCard converter failed for `X-ABDATE` properties that had no
   `X-ABLABEL`.
+* #180: Added `PROFILE_CALDAV` and `PROFILE_CARDDAV` to enable validation rules
+  specific for CalDAV/CardDAV servers.
+* #176: A missing `UID` is no longer an error, but a warning for the vCard
+  validator, unless `PROFILE_CARDDAV` is specified.
 
 
 3.3.4 (2014-11-19)
@@ -352,6 +387,14 @@ ChangeLog
   VERSION and CALSCALE.
 * Added: You can add new sub-components much quicker with the magic setters, and
   add() method.
+
+
+2.1.7 (2015-01-21)
+------------------
+
+* Fixed: Issue #94, a workaround for bad escaping of ; and , in compound
+  properties. It's not a full solution, but it's an improvement for those
+  stuck in the 2.1 versions.
 
 
 2.1.6 (2014-12-10)

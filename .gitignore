@@ -93,3 +93,5 @@ swiftmailer/swiftmailer/README
 swiftmailer/swiftmailer/VERSION
 swiftmailer/swiftmailer/LICENSE
 swiftmailer/swiftmailer/composer.json
+
+**/.travis.yml
