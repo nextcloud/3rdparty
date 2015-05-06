@@ -115,9 +115,6 @@ return array(
     'Minify_YUI_CssCompressor' => $vendorDir . '/mrclay/minify/min/lib/Minify/YUI/CssCompressor.php',
     'MrClay\\Cli' => $vendorDir . '/mrclay/minify/min/lib/MrClay/Cli.php',
     'MrClay\\Cli\\Arg' => $vendorDir . '/mrclay/minify/min/lib/MrClay/Cli/Arg.php',
-    'PHPMailer' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
-    'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
-    'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
     'aCssAtBlockEndToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssAtBlockStartToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssDeclarationToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
@@ -131,5 +128,4 @@ return array(
     'getID3' => $vendorDir . '/james-heinrich/getid3/getid3/getid3.php',
     'getid3_exception' => $vendorDir . '/james-heinrich/getid3/getid3/getid3.php',
     'getid3_handler' => $vendorDir . '/james-heinrich/getid3/getid3/getid3.php',
-    'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
 );

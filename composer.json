@@ -24,7 +24,6 @@
 		"doctrine/dbal": "2.5.1",
 		"mcnetic/phpzipstreamer": "dev-master",
 		"kriswallsmith/assetic": "1.2.*@dev",
-		"phpmailer/phpmailer": "v5.2.8",
 		"phpseclib/phpseclib": "~0.3",
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",
