@@ -45,6 +45,7 @@
 		"nikic/php-parser": "~1.1",
 		"icewind/Streams": "0.2.0",
 		"swiftmailer/swiftmailer": "@stable",
-		"guzzlehttp/guzzle": "~5.0"
+		"guzzlehttp/guzzle": "~5.0",
+		"league/flysystem": "1.0.4"
 	}
 }
