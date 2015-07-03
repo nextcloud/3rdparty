@@ -7,14 +7,25 @@ namespace PhpParser;
  */
 class Autoloader
 {
+    /** @var bool Whether the autoloader has been registered. */
+    private static $registered = false;
+
+    /** @var bool Whether we're running on PHP 7. */
+    private static $runningOnPhp7;
+
     /**
      * Registers PhpParser\Autoloader as an SPL autoloader.
      *
      * @param bool $prepend Whether to prepend the autoloader instead of appending
      */
     static public function register($prepend = false) {
-        ini_set('unserialize_callback_func', 'spl_autoload_call');
+        if (self::$registered === true) {
+            return;
+        }
+
         spl_autoload_register(array(__CLASS__, 'autoload'), true, $prepend);
+        self::$registered = true;
+        self::$runningOnPhp7 = version_compare(PHP_VERSION, '7.0-dev', '>=');
     }
 
     /**
@@ -24,24 +35,58 @@ class Autoloader
      */
     static public function autoload($class) {
         if (0 === strpos($class, 'PhpParser\\')) {
+            if (isset(self::$php7AliasesOldToNew[$class])) {
+                if (self::$runningOnPhp7) {
+                    return;
+                }
+
+                // Load the new class, alias will be registered afterwards
+                $class = self::$php7AliasesOldToNew[$class];
+            }
+
             $fileName = dirname(__DIR__) . '/' . strtr($class, '\\', '/') . '.php';
             if (file_exists($fileName)) {
                 require $fileName;
             }
+
+            if (isset(self::$php7AliasesNewToOld[$class])) {
+                // New class name was used, register alias for old one, otherwise
+                // it won't be usable in "instanceof" and other non-autoloading places.
+                if (!self::$runningOnPhp7) {
+                    class_alias($class, self::$php7AliasesNewToOld[$class]);
+                }
+            }
         } else if (0 === strpos($class, 'PHPParser_')) {
-            if (isset(self::$oldToNewMap[$class])) {
-                self::registerLegacyAliases();
+            if (isset(self::$nonNamespacedAliases[$class])) {
+                // Register all aliases at once to avoid dependency issues
+                self::registerNonNamespacedAliases();
             }
         }
     }
 
-    private static function registerLegacyAliases() {
-        foreach (self::$oldToNewMap as $old => $new) {
+    private static function registerNonNamespacedAliases() {
+        foreach (self::$nonNamespacedAliases as $old => $new) {
             class_alias($new, $old);
         }
     }
 
-    private static $oldToNewMap = array(
+    private static $php7AliasesOldToNew = array(
+        'PhpParser\Node\Expr\Cast\Bool' => 'PhpParser\Node\Expr\Cast\Bool_',
+        'PhpParser\Node\Expr\Cast\Int' => 'PhpParser\Node\Expr\Cast\Int_',
+        'PhpParser\Node\Expr\Cast\Object' => 'PhpParser\Node\Expr\Cast\Object_',
+        'PhpParser\Node\Expr\Cast\String' => 'PhpParser\Node\Expr\Cast\String_',
+        'PhpParser\Node\Scalar\String' => 'PhpParser\Node\Scalar\String_',
+    );
+
+    private static $php7AliasesNewToOld = array(
+        'PhpParser\Node\Expr\Cast\Bool_' => 'PhpParser\Node\Expr\Cast\Bool',
+        'PhpParser\Node\Expr\Cast\Int_' => 'PhpParser\Node\Expr\Cast\Int',
+        'PhpParser\Node\Expr\Cast\Object_' => 'PhpParser\Node\Expr\Cast\Object',
+        'PhpParser\Node\Expr\Cast\String_' => 'PhpParser\Node\Expr\Cast\String',
+        'PhpParser\Node\Scalar\String_' => 'PhpParser\Node\Scalar\String',
+    );
+
+    private static $nonNamespacedAliases = array(
         'PHPParser_Builder' => 'PhpParser\Builder',
         'PHPParser_BuilderAbstract' => 'PhpParser\BuilderAbstract',
         'PHPParser_BuilderFactory' => 'PhpParser\BuilderFactory',
@@ -141,11 +186,11 @@ class Autoloader
 
         'PHPParser_Node_Expr_Cast' => 'PhpParser\Node\Expr\Cast',
         'PHPParser_Node_Expr_Cast_Array' => 'PhpParser\Node\Expr\Cast\Array_',
-        'PHPParser_Node_Expr_Cast_Bool' => 'PhpParser\Node\Expr\Cast\Bool',
+        'PHPParser_Node_Expr_Cast_Bool' => 'PhpParser\Node\Expr\Cast\Bool_',
         'PHPParser_Node_Expr_Cast_Double' => 'PhpParser\Node\Expr\Cast\Double',
-        'PHPParser_Node_Expr_Cast_Int' => 'PhpParser\Node\Expr\Cast\Int',
-        'PHPParser_Node_Expr_Cast_Object' => 'PhpParser\Node\Expr\Cast\Object',
-        'PHPParser_Node_Expr_Cast_String' => 'PhpParser\Node\Expr\Cast\String',
+        'PHPParser_Node_Expr_Cast_Int' => 'PhpParser\Node\Expr\Cast\Int_',
+        'PHPParser_Node_Expr_Cast_Object' => 'PhpParser\Node\Expr\Cast\Object_',
+        'PHPParser_Node_Expr_Cast_String' => 'PhpParser\Node\Expr\Cast\String_',
         'PHPParser_Node_Expr_Cast_Unset' => 'PhpParser\Node\Expr\Cast\Unset_',
 
         'PHPParser_Node_Expr_BitwiseAnd' => 'PhpParser\Node\Expr\BinaryOp\BitwiseAnd',
@@ -223,7 +268,7 @@ class Autoloader
         'PHPParser_Node_Scalar_DNumber' => 'PhpParser\Node\Scalar\DNumber',
         'PHPParser_Node_Scalar_Encapsed' => 'PhpParser\Node\Scalar\Encapsed',
         'PHPParser_Node_Scalar_LNumber' => 'PhpParser\Node\Scalar\LNumber',
-        'PHPParser_Node_Scalar_String' => 'PhpParser\Node\Scalar\String',
+        'PHPParser_Node_Scalar_String' => 'PhpParser\Node\Scalar\String_',
     );
 }
 
