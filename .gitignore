@@ -129,3 +129,8 @@ react/CHANGELOG.md
 react/composer.json
 react/phpunit.xml.dist
 react/README.md
+
+nikic/php-parser/bin/
+nikic/php-parser/doc/
+nikic/php-parser/test/
+nikic/php-parser/test_old/
