@@ -4,6 +4,6 @@ namespace PhpParser\Node\Expr\Cast;
 
 use PhpParser\Node\Expr\Cast;
 
-class Int extends Cast
+class Object_ extends Cast
 {
 }
