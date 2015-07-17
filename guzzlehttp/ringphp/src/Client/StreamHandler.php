@@ -16,6 +16,7 @@ use GuzzleHttp\Stream\Utils;
 class StreamHandler
 {
     private $options;
+    private $lastHeaders;
 
     public function __construct(array $options = [])
     {
@@ -30,17 +31,20 @@ class StreamHandler
         try {
             // Does not support the expect header.
             $request = Core::removeHeader($request, 'Expect');
-            $stream = $this->createStream($url, $request, $headers);
-            return $this->createResponse($request, $url, $headers, $stream);
+            $stream = $this->createStream($url, $request);
+            return $this->createResponse($request, $url, $stream);
         } catch (RingException $e) {
             return $this->createErrorResponse($url, $e);
         }
     }
 
-    private function createResponse(array $request, $url, array $hdrs, $stream)
+    private function createResponse(array $request, $url, $stream)
     {
+        $hdrs = $this->lastHeaders;
+        $this->lastHeaders = null;
         $parts = explode(' ', array_shift($hdrs), 3);
         $response = [
+            'version'        => substr($parts[0], 5),
             'status'         => $parts[1],
             'reason'         => isset($parts[2]) ? $parts[2] : null,
             'headers'        => Core::headersFromLines($hdrs),
@@ -176,11 +180,8 @@ class StreamHandler
         return $resource;
     }
 
-    private function createStream(
-        $url,
-        array $request,
-        &$http_response_header
-    ) {
+    private function createStream($url, array $request)
+    {
         static $methods;
         if (!$methods) {
             $methods = array_flip(get_class_methods(__CLASS__));
@@ -215,8 +216,7 @@ class StreamHandler
             $url,
             $request,
             $options,
-            $this->createContext($request, $options, $params),
-            $http_response_header
+            $this->createContext($request, $options, $params)
         );
     }
 
@@ -285,13 +285,14 @@ class StreamHandler
             }
         } elseif ($value === false) {
             $options['ssl']['verify_peer'] = false;
+            $options['ssl']['allow_self_signed'] = true;
             return;
         } else {
             throw new RingException('Invalid verify request option');
         }
 
         $options['ssl']['verify_peer'] = true;
-        $options['ssl']['allow_self_signed'] = true;
+        $options['ssl']['allow_self_signed'] = false;
     }
 
     private function add_cert(array $request, &$options, $value, &$params)
@@ -310,7 +311,7 @@ class StreamHandler
 
     private function add_progress(array $request, &$options, $value, &$params)
     {
-        $fn = function ($code, $_, $_, $_, $transferred, $total) use ($value) {
+        $fn = function ($code, $_1, $_2, $_3, $transferred, $total) use ($value) {
             if ($code == STREAM_NOTIFY_PROGRESS) {
                 $value($total, $transferred, null, null);
             }
@@ -394,16 +395,17 @@ class StreamHandler
         $url,
         array $request,
         array $options,
-        $context,
-        &$http_response_header
+        $context
     ) {
         return $this->createResource(
-            function () use ($url, &$http_response_header, $context) {
+            function () use ($url, $context) {
                 if (false === strpos($url, 'http')) {
                     trigger_error("URL is invalid: {$url}", E_USER_WARNING);
                     return null;
                 }
-                return fopen($url, 'r', null, $context);
+                $resource = fopen($url, 'r', null, $context);
+                $this->lastHeaders = $http_response_header;
+                return $resource;
             },
             $request,
             $options
