@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3d2ad62f3f26dd7cdb28c72d350ec76e",
+    "hash": "b7f103a1e1e509a0875d4b74020eb28f",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1050,7 +1050,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/178e55bc05bc78c764ae0a096c4caacf118ab12a",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/730e81152e827118a5e5b875d169a89785aa7596",
                 "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
                 "shasum": ""
             },
@@ -1300,7 +1300,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2015-07-03 10:20:56"
+            "time": "2015-07-17 20:55:32"
         },
         {
             "name": "mrclay/minify",
@@ -1357,7 +1357,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natxet/CssMin/zipball/f076e41392b0008efb47074a133ec1d90dc8c99f",
+                "url": "https://api.github.com/repos/natxet/CssMin/zipball/4026975145f645a77e087a26e7b0a1c9209b0191",
                 "reference": "003920e783c568c2d8fdf03999eebefb8479092a",
                 "shasum": ""
             },
@@ -1921,16 +1921,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "2.1.3",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "6a8aec204688d36681e0185fbaf1974b97e4a070"
+                "reference": "393dc0e3cb7dbc82ba0bb597e8c3c0d596d55b71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/6a8aec204688d36681e0185fbaf1974b97e4a070",
-                "reference": "6a8aec204688d36681e0185fbaf1974b97e4a070",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/393dc0e3cb7dbc82ba0bb597e8c3c0d596d55b71",
+                "reference": "393dc0e3cb7dbc82ba0bb597e8c3c0d596d55b71",
                 "shasum": ""
             },
             "require": {
@@ -1946,7 +1946,7 @@
                 "php": ">=5.4.1",
                 "sabre/event": "~2.0.0",
                 "sabre/http": "~3.0.0",
-                "sabre/vobject": "~3.3"
+                "sabre/vobject": ">=3.3.4 <4"
             },
             "require-dev": {
                 "evert/phpdoc-md": "~0.1.0",
@@ -1991,7 +1991,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2015-02-25 18:13:20"
+            "time": "2015-07-21 20:13:05"
         },
         {
             "name": "sabre/event",
