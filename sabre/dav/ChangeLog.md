@@ -1,12 +1,44 @@
 ChangeLog
 =========
 
+2.1.6 (2015-07-21)
+------------------
+
+* #657: Migration script would break when coming a cross an iCalendar object
+  with no UID.
+* #691: Workaround for broken Windows Phone client.
+* The zip release ships with [sabre/vobject 3.4.5][vobj],
+  [sabre/http 3.0.5][http], and [sabre/event 2.0.2][evnt].
+
+
+2.1.5 (2015-07-11)
+------------------
+
+* #677: Resources with the name '0' would not get retrieved when using
+  `Depth: infinity` in a `PROPFIND` request.
+* The zip release ships with [sabre/vobject 3.4.5][vobj],
+  [sabre/http 3.0.5][http], and [sabre/event 2.0.2][evnt].
+
+
+2.1.4 (2015-05-25)
+------------------
+
+* #651: Double-encoded path in the browser plugin. Should fix a few broken
+  links in some setups.
+* #650: Correctly cleaning up change info after deleting calendars (@ErrOrnAmE).
+* #658: Updating `schedule-calendar-default-URL` does not work well, so we're
+  disabling it until there's a better fix.
+* The zip release ships with [sabre/vobject 3.4.3][vobj],
+  [sabre/http 3.0.5][http], and [sabre/event 2.0.2][evnt].
+
+
 2.1.3 (2015-02-25)
 ------------------
 
 * #586: `SCHEDULE-STATUS` should not contain a reason-phrase.
 * #539: Fixed a bug related to scheduling in shared calendars.
 * #595: Support for calendar-timezone in iCalendar exports.
+* #581: findByUri would send empty prefixes to the principal backend (@soydeedo)
 * #611: Escaping a bit more HTML output in the browser plugin. (@LukasReschke)
 * #610: Don't allow discovery of arbitrary files using `..` in the browser
   plugin (@LukasReschke).
@@ -149,6 +181,23 @@ ChangeLog
 * Added: #523 Custom CalDAV backends can now mark any calendar as read-only.
 * The zip release ships with [sabre/vobject 3.3.3][vobj],
   [sabre/http 3.0.0][http], and [sabre/event 2.0.0][evnt].
+
+
+2.0.8 (2015-07-11)
+------------------
+
+* #677: Resources with the name '0' would not get retrieved when using
+  `Depth: infinity` in a `PROPFIND` request.
+* The zip release ships with [sabre/vobject 3.3.5][vobj],
+  [sabre/http 2.0.4][http], and [sabre/event 1.0.1][evnt].
+
+
+2.0.7 (2015-05-25)
+------------------
+
+* #650: Correctly cleaning up change info after deleting calendars (@ErrOrnAmE).
+* The zip release ships with [sabre/vobject 3.3.4][vobj],
+  [sabre/http 2.0.4][http], and [sabre/event 1.0.1][evnt].
 
 
 2.0.6 (2014-12-10)
