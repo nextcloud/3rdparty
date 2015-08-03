@@ -24,7 +24,7 @@
 		"doctrine/dbal": "2.5.1",
 		"mcnetic/phpzipstreamer": "dev-master",
 		"kriswallsmith/assetic": "1.2.*@dev",
-		"phpseclib/phpseclib": "~0.3",
+		"phpseclib/phpseclib": "~2.0@dev",
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",
 		"jeremeamia/superclosure": "2.0.0",
