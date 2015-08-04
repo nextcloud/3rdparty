@@ -28,6 +28,8 @@ pear/archive_tar/docs/
 pear/archive_tar/scripts/
 pear/archive_tar/sync-php4
 
+pear/console_getopt/tests/
+
 phpseclib/phpseclib/.git*
 phpseclib/phpseclib/*.yml
 phpseclib/phpseclib/phpunit.xml.dist
