@@ -34,7 +34,6 @@
 		"mrclay/minify": "dev-master",
 		"punic/punic": "1.1.0",
 		"pear/archive_tar": "~1.4",
-		"pear/pear_exception": "1.0.*@dev",
 		"patchwork/utf8": "~1.1",
 		"symfony/console": "2.6.4",
 		"symfony/event-dispatcher": "2.6.4",
@@ -46,6 +45,7 @@
 		"icewind/Streams": "0.2.0",
 		"swiftmailer/swiftmailer": "@stable",
 		"guzzlehttp/guzzle": "~5.0",
-		"league/flysystem": "1.0.4"
+		"league/flysystem": "1.0.4",
+		"pear/pear-core-minimal": "v1.10.0alpha2"
 	}
 }

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ade70d01cf1d47366503d0e21660c048",
+    "hash": "164c985d2bf1446cca0d65660213ec9f",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1300,7 +1300,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2015-08-03 07:32:27"
+            "time": "2015-08-04 10:31:08"
         },
         {
             "name": "mrclay/minify",
@@ -1605,16 +1605,16 @@
         },
         {
             "name": "pear/pear-core-minimal",
-            "version": "v1.9.5",
+            "version": "v1.10.0alpha2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/pear-core-minimal.git",
-                "reference": "bdfefcacb3b388a1050a58eff9ba5a8f43de2411"
+                "reference": "0457483add2e037a5e00eb186b9dce7ea3b49da2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/bdfefcacb3b388a1050a58eff9ba5a8f43de2411",
-                "reference": "bdfefcacb3b388a1050a58eff9ba5a8f43de2411",
+                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/0457483add2e037a5e00eb186b9dce7ea3b49da2",
+                "reference": "0457483add2e037a5e00eb186b9dce7ea3b49da2",
                 "shasum": ""
             },
             "require": {
@@ -1645,20 +1645,20 @@
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
-            "time": "2015-02-10 20:55:39"
+            "time": "2015-08-05 08:44:58"
         },
         {
             "name": "pear/pear_exception",
-            "version": "1.0-beta1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/PEAR_Exception.git",
-                "reference": "f053615c7cbdfaba5a3b7021ee58a48523b8576c"
+                "reference": "8c18719fdae000b690e3912be401c76e406dd13b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/b065fb1396e87c4a60acfaf93226470f14e8a0e1",
-                "reference": "f053615c7cbdfaba5a3b7021ee58a48523b8576c",
+                "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/8c18719fdae000b690e3912be401c76e406dd13b",
+                "reference": "8c18719fdae000b690e3912be401c76e406dd13b",
                 "shasum": ""
             },
             "require": {
@@ -1688,13 +1688,11 @@
             "authors": [
                 {
                     "name": "Helgi Thormar",
-                    "email": "dufuz@php.net",
-                    "role": "Lead"
+                    "email": "dufuz@php.net"
                 },
                 {
                     "name": "Greg Beaver",
-                    "email": "cellog@php.net",
-                    "role": "Helper"
+                    "email": "cellog@php.net"
                 }
             ],
             "description": "The PEAR Exception base class.",
@@ -1702,7 +1700,7 @@
             "keywords": [
                 "exception"
             ],
-            "time": "2014-02-21 17:29:07"
+            "time": "2015-02-10 20:07:52"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -1714,7 +1712,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/772d4df5975a721d9c2cc79ca4da1339798c2c86",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/761173bb7f26efef05b523835594f55214f46ce6",
                 "reference": "772d4df5975a721d9c2cc79ca4da1339798c2c86",
                 "shasum": ""
             },
@@ -2534,8 +2532,8 @@
         "james-heinrich/getid3": 20,
         "natxet/cssmin": 20,
         "mrclay/minify": 20,
-        "pear/pear_exception": 20,
-        "swiftmailer/swiftmailer": 0
+        "swiftmailer/swiftmailer": 0,
+        "pear/pear-core-minimal": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

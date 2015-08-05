@@ -30,6 +30,8 @@ pear/archive_tar/sync-php4
 
 pear/console_getopt/tests/
 
+pear/pear_exception/tests/
+
 phpseclib/phpseclib/.git*
 phpseclib/phpseclib/*.yml
 phpseclib/phpseclib/phpunit.xml.dist
