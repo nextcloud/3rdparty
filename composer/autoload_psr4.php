@@ -8,6 +8,7 @@ $baseDir = $vendorDir;
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
+    'ZipStreamer\\' => array($vendorDir . '/mcnetic/zipstreamer/src'),
     'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
     'Sabre\\VObject\\' => array($vendorDir . '/sabre/vobject/lib'),
     'Sabre\\HTTP\\' => array($vendorDir . '/sabre/http/lib'),

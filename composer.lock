@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "164c985d2bf1446cca0d65660213ec9f",
+    "hash": "8d206323a108d57a155342ee104152fa",
+    "content-hash": "90b1161fa03df40eb049d2f518a576c6",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1050,7 +1051,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/730e81152e827118a5e5b875d169a89785aa7596",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/835a0db62993cb1d85925f9a8aefe13e4ebe2b67",
                 "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
                 "shasum": ""
             },
@@ -1292,15 +1293,51 @@
             "time": "2015-06-07 21:27:37"
         },
         {
-            "name": "mcnetic/phpzipstreamer",
-            "version": "master",
+            "name": "mcnetic/zipstreamer",
+            "version": "v0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/McNetic/PHPZipStreamer.git",
-                "reference": "master"
+                "reference": "44c99c659abf4dac92882437c1da68de824ca9d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/McNetic/PHPZipStreamer/zipball/44c99c659abf4dac92882437c1da68de824ca9d0",
+                "reference": "44c99c659abf4dac92882437c1da68de824ca9d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
             },
             "type": "library",
-            "time": "2015-08-04 10:31:08"
+            "autoload": {
+                "psr-4": {
+                    "ZipStreamer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolai Ehemann",
+                    "email": "en@enlightened.de",
+                    "role": "Author/Maintainer"
+                },
+                {
+                    "name": "André Rothe",
+                    "email": "arothe@zks.uni-leipzig.de",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Stream zip files without i/o overhead",
+            "homepage": "https://github.com/McNetic/PHPZipStreamer",
+            "keywords": [
+                "stream",
+                "zip"
+            ],
+            "time": "2015-08-26 13:48:01"
         },
         {
             "name": "mrclay/minify",
@@ -1312,7 +1349,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/minify/zipball/cabd595a5aebf87e5d229814564aa3b466908be1",
+                "url": "https://api.github.com/repos/mrclay/minify/zipball/d233b65d3dc183933c5be8a16b5b7eaf313ef66c",
                 "reference": "bd9a450694cda1b54c43a1784adabe36ad522d89",
                 "shasum": ""
             },
@@ -1712,7 +1749,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/761173bb7f26efef05b523835594f55214f46ce6",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/6f6ec7f13a0ca95e504b408d7f176c5572130de2",
                 "reference": "772d4df5975a721d9c2cc79ca4da1339798c2c86",
                 "shasum": ""
             },
@@ -2526,7 +2563,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "mcnetic/phpzipstreamer": 20,
         "kriswallsmith/assetic": 20,
         "phpseclib/phpseclib": 20,
         "james-heinrich/getid3": 20,

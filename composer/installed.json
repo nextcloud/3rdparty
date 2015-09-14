@@ -75,18 +75,6 @@
         ]
     },
     {
-        "name": "mcnetic/phpzipstreamer",
-        "version": "master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/McNetic/PHPZipStreamer.git",
-            "reference": "master"
-        },
-        "type": "library",
-        "installation-source": "source"
-    },
-    {
         "name": "guzzle/common",
         "version": "v3.8.1",
         "version_normalized": "3.8.1.0",
@@ -437,7 +425,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/730e81152e827118a5e5b875d169a89785aa7596",
+            "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/835a0db62993cb1d85925f9a8aefe13e4ebe2b67",
             "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
             "shasum": ""
         },
@@ -519,7 +507,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mrclay/minify/zipball/cabd595a5aebf87e5d229814564aa3b466908be1",
+            "url": "https://api.github.com/repos/mrclay/minify/zipball/d233b65d3dc183933c5be8a16b5b7eaf313ef66c",
             "reference": "bd9a450694cda1b54c43a1784adabe36ad522d89",
             "shasum": ""
         },
@@ -2308,7 +2296,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/761173bb7f26efef05b523835594f55214f46ce6",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/6f6ec7f13a0ca95e504b408d7f176c5572130de2",
             "reference": "772d4df5975a721d9c2cc79ca4da1339798c2c86",
             "shasum": ""
         },
@@ -2604,5 +2592,54 @@
             }
         ],
         "description": "Minimal set of PEAR core files to be used as composer dependency"
+    },
+    {
+        "name": "mcnetic/zipstreamer",
+        "version": "v0.7",
+        "version_normalized": "0.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/McNetic/PHPZipStreamer.git",
+            "reference": "44c99c659abf4dac92882437c1da68de824ca9d0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/McNetic/PHPZipStreamer/zipball/44c99c659abf4dac92882437c1da68de824ca9d0",
+            "reference": "44c99c659abf4dac92882437c1da68de824ca9d0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2015-08-26 13:48:01",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ZipStreamer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "Nicolai Ehemann",
+                "email": "en@enlightened.de",
+                "role": "Author/Maintainer"
+            },
+            {
+                "name": "André Rothe",
+                "email": "arothe@zks.uni-leipzig.de",
+                "role": "Contributor"
+            }
+        ],
+        "description": "Stream zip files without i/o overhead",
+        "homepage": "https://github.com/McNetic/PHPZipStreamer",
+        "keywords": [
+            "stream",
+            "zip"
+        ]
     }
 ]
