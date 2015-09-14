@@ -20,6 +20,7 @@ return array(
     'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'Punic\\' => array($vendorDir . '/punic/punic/code'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
+    'InterfaSys\\LogNormalizer\\' => array($vendorDir . '/interfasys/lognormalizer/src'),
     'Icewind\\Streams\\Tests\\' => array($vendorDir . '/icewind/streams/tests'),
     'Icewind\\Streams\\' => array($vendorDir . '/icewind/streams/src'),
     'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),

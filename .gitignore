@@ -138,3 +138,12 @@ nikic/php-parser/bin/
 nikic/php-parser/doc/
 nikic/php-parser/test/
 nikic/php-parser/test_old/
+
+interfasys/lognormalizer/.gitignore
+interfasys/lognormalizer/.travis.yml
+interfasys/lognormalizer/.scrutinizer.yml
+interfasys/lognormalizer/CHANGELOG.md
+interfasys/lognormalizer/README.md
+interfasys/lognormalizer/composer.json
+interfasys/lognormalizer/phpunit.xml
+interfasys/lognormalizer/tests

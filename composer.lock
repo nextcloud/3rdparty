@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d206323a108d57a155342ee104152fa",
+    "hash": "3a775d82f8b719241522c893157b7fed",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -903,6 +903,59 @@
             "time": "2014-07-30 23:46:15"
         },
         {
+            "name": "interfasys/lognormalizer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/interfasys/lognormalizer.git",
+                "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/interfasys/lognormalizer/zipball/d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
+                "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "InterfaSys\\LogNormalizer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Paroz",
+                    "email": "dev-lognormalizer@interfasys.ch",
+                    "homepage": "http://www.interfasys.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Parses variables and converts them to string so that they can be logged",
+            "homepage": "https://github.com/interfasys/lognormalizer",
+            "keywords": [
+                "log",
+                "normalizer"
+            ],
+            "time": "2015-08-01 16:27:37"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "1.0.3",
             "source": {
@@ -1344,7 +1397,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/minify/zipball/d233b65d3dc183933c5be8a16b5b7eaf313ef66c",
+                "url": "https://api.github.com/repos/mrclay/minify/zipball/d71b11ec98cf8c67cfce636d393189105f3f353d",
                 "reference": "bd9a450694cda1b54c43a1784adabe36ad522d89",
                 "shasum": ""
             },
@@ -1744,7 +1797,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/6f6ec7f13a0ca95e504b408d7f176c5572130de2",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/bff8e3093f126ea8219b4eecbe00b7636e76efe3",
                 "reference": "772d4df5975a721d9c2cc79ca4da1339798c2c86",
                 "shasum": ""
             },
@@ -2564,7 +2617,8 @@
         "natxet/cssmin": 20,
         "mrclay/minify": 20,
         "swiftmailer/swiftmailer": 0,
-        "pear/pear-core-minimal": 15
+        "pear/pear-core-minimal": 15,
+        "interfasys/lognormalizer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
