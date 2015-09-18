@@ -5,24 +5,10 @@
 	"config": {
 		"vendor-dir": "."
 	},
-	"repositories": [
-		{
-			"type":"package",
-			"package": {
-				"name": "mcnetic/phpzipstreamer",
-				"version":"master",
-				"source": {
-					"url": "https://github.com/McNetic/PHPZipStreamer.git",
-					"type": "git",
-					"reference":"master"
-				}
-			}
-		}
-	],
 	"require": {
 		"sabre/dav" : "2.1.6",
 		"doctrine/dbal": "2.5.1",
-		"mcnetic/phpzipstreamer": "dev-master",
+		"mcnetic/zipstreamer": "v0.7",
 		"kriswallsmith/assetic": "1.2.*@dev",
 		"phpseclib/phpseclib": "~2.0@dev",
 		"rackspace/php-opencloud": "v1.9.2",
