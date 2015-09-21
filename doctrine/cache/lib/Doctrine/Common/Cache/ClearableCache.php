@@ -17,26 +17,24 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\Common\Proxy\Exception;
-
-use OutOfBoundsException as BaseOutOfBoundsException;
+namespace Doctrine\Common\Cache;
 
 /**
- * Proxy Invalid Argument Exception.
+ * Interface for cache that can be flushed.
+ *
+ * Intended to be used for partial clearing of a cache namespace. For a more
+ * global "flushing", see {@see FlushableCache}.
  *
  * @link   www.doctrine-project.org
- * @author Fredrik Wendel <fredrik_w@users.sourceforge.net>
+ * @since  1.4
+ * @author Adirelle <adirelle@gmail.com>
  */
-class OutOfBoundsException extends BaseOutOfBoundsException implements ProxyException
+interface ClearableCache
 {
     /**
-     * @param string $className
-     * @param string $idField
+     * Deletes all cache entries in the current cache namespace.
      *
-     * @return self
+     * @return boolean TRUE if the cache entries were successfully deleted, FALSE otherwise.
      */
-    public static function missingPrimaryKeyValue($className, $idField)
-    {
-        return new self(sprintf("Missing value for primary key %s on %s", $idField, $className));
-    }
+    public function deleteAll();
 }

@@ -20,75 +20,59 @@
 namespace Doctrine\Common\Cache;
 
 /**
- * Array cache driver.
+ * Void cache driver. The cache could be of use in tests where you don`t need to cache anything.
  *
  * @link   www.doctrine-project.org
- * @since  2.0
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author Jonathan Wage <jonwage@gmail.com>
- * @author Roman Borschel <roman@code-factory.org>
- * @author David Abdemoulaie <dave@hobodave.com>
+ * @since  1.5
+ * @author Kotlyar Maksim <kotlyar.maksim@gmail.com>
  */
-class ArrayCache extends CacheProvider
+class VoidCache extends CacheProvider
 {
     /**
-     * @var array $data
-     */
-    private $data = array();
-
-    /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doFetch($id)
     {
-        return $this->doContains($id) ? $this->data[$id] : false;
+        return false;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doContains($id)
     {
-        // isset() is required for performance optimizations, to avoid unnecessary function calls to array_key_exists.
-        return isset($this->data[$id]) || array_key_exists($id, $this->data);
+        return false;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
-        $this->data[$id] = $data;
-
         return true;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doDelete($id)
     {
-        unset($this->data[$id]);
-
         return true;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doFlush()
     {
-        $this->data = array();
-
         return true;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doGetStats()
     {
-        return null;
+        return;
     }
 }

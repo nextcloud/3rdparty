@@ -17,26 +17,23 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\Common\Proxy\Exception;
-
-use OutOfBoundsException as BaseOutOfBoundsException;
+namespace Doctrine\Common\Cache;
 
 /**
- * Proxy Invalid Argument Exception.
+ * Interface for cache drivers that allows to get many items at once.
  *
  * @link   www.doctrine-project.org
- * @author Fredrik Wendel <fredrik_w@users.sourceforge.net>
+ * @since  1.4
+ * @author Asmir Mustafic <goetas@gmail.com>
  */
-class OutOfBoundsException extends BaseOutOfBoundsException implements ProxyException
+interface MultiGetCache
 {
     /**
-     * @param string $className
-     * @param string $idField
+     * Returns an associative array of values for keys is found in cache.
      *
-     * @return self
+     * @param string[] $keys Array of keys to retrieve from cache
+     * @return mixed[] Array of retrieved values, indexed by the specified keys.
+     *                 Values that couldn't be retrieved are not contained in this array.
      */
-    public static function missingPrimaryKeyValue($className, $idField)
-    {
-        return new self(sprintf("Missing value for primary key %s on %s", $idField, $className));
-    }
+    function fetchMultiple(array $keys);
 }
