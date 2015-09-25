@@ -7,6 +7,7 @@ $baseDir = $vendorDir;
 
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
     'ZipStreamer\\' => array($vendorDir . '/mcnetic/zipstreamer/src'),
     'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),

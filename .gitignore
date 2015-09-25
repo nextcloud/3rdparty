@@ -147,3 +147,9 @@ interfasys/lognormalizer/README.md
 interfasys/lognormalizer/composer.json
 interfasys/lognormalizer/phpunit.xml
 interfasys/lognormalizer/tests
+
+deepdiver1975/tarstreamer/.gitignore
+deepdiver1975/tarstreamer/.travis.yml
+deepdiver1975/tarstreamer/.scrutinizer.yml
+deepdiver1975/tarstreamer/composer.json
+deepdiver1975/tarstreamer/tests
