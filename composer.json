@@ -34,6 +34,6 @@
 		"league/flysystem": "1.0.4",
 		"pear/pear-core-minimal": "v1.10.0alpha2",
 		"interfasys/lognormalizer": "dev-master@dev",
-		"deepdiver1975/TarStreamer": "v0.1-beta2"
+		"deepdiver1975/TarStreamer": "v0.1-beta3"
 	}
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "64377791b0d3db34cc6baa91038e4206",
+    "hash": "3b200676b37a9dfeaee6b303ef01b251",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -38,16 +38,16 @@
         },
         {
             "name": "deepdiver1975/tarstreamer",
-            "version": "v0.1-beta2",
+            "version": "v0.1-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owncloud/TarStreamer.git",
-                "reference": "0b9e800bfac662e64033e617f5db3ef66f77b1cb"
+                "reference": "07b940c68382cbfbf3a42e1de307ef6b53d5d515"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/0b9e800bfac662e64033e617f5db3ef66f77b1cb",
-                "reference": "0b9e800bfac662e64033e617f5db3ef66f77b1cb",
+                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/07b940c68382cbfbf3a42e1de307ef6b53d5d515",
+                "reference": "07b940c68382cbfbf3a42e1de307ef6b53d5d515",
                 "shasum": ""
             },
             "require": {
@@ -76,7 +76,7 @@
                 "stream",
                 "tar"
             ],
-            "time": "2015-09-25 21:16:54"
+            "time": "2015-09-28 09:43:53"
         },
         {
             "name": "doctrine/annotations",
@@ -1141,7 +1141,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/835a0db62993cb1d85925f9a8aefe13e4ebe2b67",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/df7f782133e36da9345fd4d6ee639753831021fd",
                 "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
                 "shasum": ""
             },
@@ -1439,7 +1439,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/minify/zipball/d71b11ec98cf8c67cfce636d393189105f3f353d",
+                "url": "https://api.github.com/repos/mrclay/minify/zipball/2720239c8c724d921f1a720deb8d4d323bb5ca28",
                 "reference": "bd9a450694cda1b54c43a1784adabe36ad522d89",
                 "shasum": ""
             },

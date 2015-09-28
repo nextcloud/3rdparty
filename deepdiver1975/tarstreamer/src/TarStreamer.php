@@ -38,24 +38,16 @@ class TarStreamer {
 	 *
 	 * @param string $archiveName Filename of archive to be created (optional, default 'archive.tar')
 	 * @param string $contentType Content mime type to be set (optional, default 'application/x-tar')
+	 * @throws \Exception
 	 */
 	public function sendHeaders($archiveName = 'archive.tar', $contentType = 'application/x-tar'){
 		$encodedArchiveName = rawurlencode($archiveName);
 		if (headers_sent($headerFile, $headerLine)){
-			die(
-					"<p><strong>Error:</strong> Unable to send file " .
-					"$encodedArchiveName. HTML Headers have already been sent from " .
-					"<strong>$headerFile</strong> in line <strong>$headerLine" .
-					"</strong></p>"
-			);
+			throw new \Exception("Unable to send file $encodedArchiveName. HTML Headers have already been sent from $headerFile in line $headerLine");
 		}
 		$buffer = ob_get_contents();
 		if (!empty($buffer)){
-			die(
-					"\n<p><strong>Error:</strong> Unable to send file " .
-					"<strong>$encodedArchiveName</strong>. Output buffer " .
-					"already contains text (typically warnings or errors).</p>"
-			);
+			throw new \Exception("Unable to send file $encodedArchiveName. Output buffer already contains text (typically warnings or errors).");
 		}
 
 		$headers = [
