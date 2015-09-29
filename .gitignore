@@ -153,3 +153,7 @@ deepdiver1975/tarstreamer/tests
 
 patchwork/jsqueeze/tests
 patchwork/jsqueeze/phpunit.xml.dist
+
+sabre/dav/examples
+sabre/dav/tests
+
