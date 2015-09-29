@@ -20,6 +20,7 @@ return array(
     'Sabre\\CalDAV\\' => array($vendorDir . '/sabre/dav/lib/CalDAV'),
     'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'Punic\\' => array($vendorDir . '/punic/punic/code'),
+    'Patchwork\\' => array($vendorDir . '/patchwork/jsqueeze/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'InterfaSys\\LogNormalizer\\' => array($vendorDir . '/interfasys/lognormalizer/src'),
     'Icewind\\Streams\\Tests\\' => array($vendorDir . '/icewind/streams/tests'),

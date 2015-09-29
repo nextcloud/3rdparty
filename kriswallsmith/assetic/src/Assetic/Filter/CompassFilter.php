@@ -13,7 +13,8 @@ namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
-use Assetic\Factory\AssetFactory;
+use Assetic\Filter\Sass\BaseSassFilter;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * Loads Compass files.
@@ -21,7 +22,7 @@ use Assetic\Factory\AssetFactory;
  * @link http://compass-style.org/
  * @author Maxime Thirouin <maxime.thirouin@gmail.com>
  */
-class CompassFilter extends BaseProcessFilter implements DependencyExtractorInterface
+class CompassFilter extends BaseSassFilter
 {
     private $compassPath;
     private $rubyPath;
@@ -42,10 +43,10 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
     private $imagesDir;
     private $javascriptsDir;
     private $fontsDir;
+    private $relativeAssets;
 
     // compass configuration file options
     private $plugins = array();
-    private $loadPaths = array();
     private $httpPath;
     private $httpImagesPath;
     private $httpFontsPath;
@@ -58,7 +59,7 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
     {
         $this->compassPath = $compassPath;
         $this->rubyPath = $rubyPath;
-        $this->cacheLocation = sys_get_temp_dir();
+        $this->cacheLocation = FilesystemUtils::getTemporaryDirectory();
 
         if ('cli' !== php_sapi_name()) {
             $this->boring = true;
@@ -143,16 +144,6 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
         $this->plugins[] = $plugin;
     }
 
-    public function setLoadPaths(array $loadPaths)
-    {
-        $this->loadPaths = $loadPaths;
-    }
-
-    public function addLoadPath($loadPath)
-    {
-        $this->loadPaths[] = $loadPath;
-    }
-
     public function setHttpPath($httpPath)
     {
         $this->httpPath = $httpPath;
@@ -188,6 +179,11 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
         $this->homeEnv = $homeEnv;
     }
 
+    public function setRelativeAssets($relativeAssets)
+    {
+        $this->relativeAssets = $relativeAssets;
+    }
+
     public function filterLoad(AssetInterface $asset)
     {
         $loadPaths = $this->loadPaths;
@@ -195,8 +191,7 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
             $loadPaths[] = $dir;
         }
 
-        // compass does not seems to handle symlink, so we use realpath()
-        $tempDir = realpath(sys_get_temp_dir());
+        $tempDir = $this->cacheLocation ? $this->cacheLocation : FilesystemUtils::getTemporaryDirectory();
 
         $compassProcessArgs = array(
             $this->compassPath,
@@ -229,15 +224,23 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
             $pb->add('--no-line-comments');
         }
 
-        // these two options are not passed into the config file
+        // these three options are not passed into the config file
         // because like this, compass adapts this to be xxx_dir or xxx_path
         // whether it's an absolute path or not
         if ($this->imagesDir) {
             $pb->add('--images-dir')->add($this->imagesDir);
         }
 
+        if ($this->relativeAssets) {
+            $pb->add('--relative-assets');
+        }
+
         if ($this->javascriptsDir) {
             $pb->add('--javascripts-dir')->add($this->javascriptsDir);
+        }
+
+        if ($this->fontsDir) {
+            $pb->add('--fonts-dir')->add($this->fontsDir);
         }
 
         // options in config file
@@ -285,10 +288,6 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
 
         if ($this->httpJavascriptsPath) {
             $optionsConfig['http_javascripts_path'] = $this->httpJavascriptsPath;
-        }
-
-        if ($this->fontsDir) {
-            $optionsConfig['fonts_dir'] = $this->fontsDir;
         }
 
         // options in configuration file
@@ -341,7 +340,7 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
 
         if ($this->homeEnv) {
             // it's not really usefull but... https://github.com/chriseppstein/compass/issues/376
-            $pb->setEnv('HOME', sys_get_temp_dir());
+            $pb->setEnv('HOME', FilesystemUtils::getTemporaryDirectory());
             $this->mergeEnv($pb);
         }
 
@@ -368,12 +367,6 @@ class CompassFilter extends BaseProcessFilter implements DependencyExtractorInte
 
     public function filterDump(AssetInterface $asset)
     {
-    }
-
-    public function getChildren(AssetFactory $factory, $content, $loadPath = null)
-    {
-        // todo
-        return array();
     }
 
     private function formatArrayToRuby($array)

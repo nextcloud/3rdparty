@@ -9,7 +9,6 @@
 		"sabre/dav" : "2.1.6",
 		"doctrine/dbal": "2.5.1",
 		"mcnetic/zipstreamer": "v0.7",
-		"kriswallsmith/assetic": "1.2.*@dev",
 		"phpseclib/phpseclib": "~2.0@dev",
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",
@@ -17,7 +16,6 @@
 		"ircmaxell/random-lib": "~1.1",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"natxet/CssMin": "dev-master",
-		"mrclay/minify": "dev-master",
 		"punic/punic": "1.1.0",
 		"pear/archive_tar": "~1.4",
 		"patchwork/utf8": "~1.1",
@@ -34,6 +32,8 @@
 		"league/flysystem": "1.0.4",
 		"pear/pear-core-minimal": "v1.10.0alpha2",
 		"interfasys/lognormalizer": "dev-master@dev",
-		"deepdiver1975/TarStreamer": "v0.1-beta3"
+		"deepdiver1975/TarStreamer": "v0.1-beta3",
+		"patchwork/jsqueeze": "^2.0",
+		"kriswallsmith/assetic": "^1.3"
 	}
 }

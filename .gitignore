@@ -3,9 +3,6 @@ bin
 # ignore demo files
 james-heinrich/getid3/demos
 james-heinrich/getid3/helperapps
-mrclay/minify/min_unit_tests
-mrclay/minify/min_extras
-mrclay/minify/min/builder
 
 doctrine/annotations/tests
 doctrine/annotations/.travis.yml
@@ -153,3 +150,6 @@ deepdiver1975/tarstreamer/.travis.yml
 deepdiver1975/tarstreamer/.scrutinizer.yml
 deepdiver1975/tarstreamer/composer.json
 deepdiver1975/tarstreamer/tests
+
+patchwork/jsqueeze/tests
+patchwork/jsqueeze/phpunit.xml.dist

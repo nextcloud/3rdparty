@@ -8,7 +8,7 @@ $baseDir = $vendorDir;
 return array(
     $vendorDir . '/react/promise/src/functions_include.php',
     $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
-    $vendorDir . '/kriswallsmith/assetic/src/functions.php',
     $vendorDir . '/ircmaxell/password-compat/lib/password.php',
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    $vendorDir . '/kriswallsmith/assetic/src/functions.php',
 );
