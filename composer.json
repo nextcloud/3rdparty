@@ -6,7 +6,7 @@
 		"vendor-dir": "."
 	},
 	"require": {
-		"sabre/dav" : "2.1.6",
+		"sabre/dav" : "2.1.7",
 		"doctrine/dbal": "2.5.1",
 		"mcnetic/zipstreamer": "v0.7",
 		"phpseclib/phpseclib": "~2.0@dev",
