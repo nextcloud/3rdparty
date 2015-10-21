@@ -23,7 +23,7 @@
 		"symfony/event-dispatcher": "2.6.4",
 		"symfony/routing": "2.6.4",
 		"symfony/process": "2.6.4",
-		"pimple/pimple": "~3.0",
+		"pimple/pimple": "3.0.2",
 		"ircmaxell/password-compat": "1.0.*",
 		"nikic/php-parser": "~1.1",
 		"icewind/Streams": "0.2.0",
