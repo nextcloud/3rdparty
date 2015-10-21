@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c3d60611f678598869784c3418297b3e",
-    "content-hash": "3c27112b9b1fa9a1863b9981aa415747",
+    "hash": "c8ab57014a79ba8939555265b16d2e4b",
+    "content-hash": "5207bfeb5681ab21bf557b4d1c8388ae",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1743,24 +1743,24 @@
         },
         {
             "name": "pear/pear-core-minimal",
-            "version": "v1.10.0alpha2",
+            "version": "v1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/pear-core-minimal.git",
-                "reference": "0457483add2e037a5e00eb186b9dce7ea3b49da2"
+                "reference": "cae0f1ce0cb5bddb611b0a652d322905a65a5896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/0457483add2e037a5e00eb186b9dce7ea3b49da2",
-                "reference": "0457483add2e037a5e00eb186b9dce7ea3b49da2",
+                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/cae0f1ce0cb5bddb611b0a652d322905a65a5896",
+                "reference": "cae0f1ce0cb5bddb611b0a652d322905a65a5896",
                 "shasum": ""
             },
             "require": {
                 "pear/console_getopt": "~1.3",
                 "pear/pear_exception": "~1.0"
             },
-            "provide": {
-                "rsky/pear-core-min": "*"
+            "replace": {
+                "rsky/pear-core-min": "self.version"
             },
             "type": "library",
             "autoload": {
@@ -1773,7 +1773,7 @@
                 "src/"
             ],
             "license": [
-                "New BSD"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -1783,7 +1783,7 @@
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
-            "time": "2015-08-05 08:44:58"
+            "time": "2015-10-17 11:41:19"
         },
         {
             "name": "pear/pear_exception",
@@ -2668,7 +2668,6 @@
         "james-heinrich/getid3": 20,
         "natxet/cssmin": 20,
         "swiftmailer/swiftmailer": 0,
-        "pear/pear-core-minimal": 15,
         "interfasys/lognormalizer": 20,
         "deepdiver1975/tarstreamer": 10
     },
