@@ -124,12 +124,12 @@ guzzlehttp/streams/README.rst
 guzzlehttp/streams/composer.json
 guzzlehttp/streams/phpunit.xml.dist
 
-react/tests/
-react/.gitignore
-react/CHANGELOG.md
-react/composer.json
-react/phpunit.xml.dist
-react/README.md
+react/promise/tests/
+react/promise/.gitignore
+react/promise/CHANGELOG.md
+react/promise/composer.json
+react/promise/phpunit.xml.dist
+react/promise/README.md
 
 nikic/php-parser/bin/
 nikic/php-parser/doc/
