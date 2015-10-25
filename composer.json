@@ -3,7 +3,9 @@
 	"description": "All 3rdparty components",
 	"license": "MIT",
 	"config": {
-		"vendor-dir": "."
+		"vendor-dir": ".",
+		"optimize-autoloader": true,
+		"classmap-authoritative": true
 	},
 	"require": {
 		"sabre/dav" : "2.1.7",
