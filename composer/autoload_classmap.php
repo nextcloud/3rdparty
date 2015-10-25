@@ -64,6 +64,7 @@ return array(
     'CssVariablesMinifierFilter' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'CssVariablesMinifierPlugin' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'CssWhitesmithsFormatter' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
+    'Normalizer' => $vendorDir . '/patchwork/utf8/src/Normalizer.php',
     'aCssAtBlockEndToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssAtBlockStartToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssDeclarationToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
