@@ -11,7 +11,7 @@
 		"sabre/dav" : "2.1.7",
 		"doctrine/dbal": "2.5.1",
 		"mcnetic/zipstreamer": "v0.7",
-		"phpseclib/phpseclib": "~2.0@dev",
+		"phpseclib/phpseclib": "2.0.0",
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",
 		"jeremeamia/superclosure": "2.0.0",
