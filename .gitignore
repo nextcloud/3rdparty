@@ -35,6 +35,11 @@ phpseclib/phpseclib/phpunit.xml.dist
 phpseclib/phpseclib/build/
 phpseclib/phpseclib/tests/
 phpseclib/phpseclib/travis/
+phpseclib/phpseclib/CHANGELOG.md
+phpseclib/phpseclib/README.md
+phpseclib/phpseclib/composer.json
+phpseclib/phpseclib/composer.lock
+phpseclib/phpseclib/phpunit.xml.dist
 
 symfony/console/Symfony/Component/Console/Tests
 symfony/console/Symfony/Component/Console/.gitignore
