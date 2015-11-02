@@ -10,6 +10,8 @@ doctrine/cache/tests
 doctrine/cache/.travis.yml
 doctrine/collections/tests
 doctrine/collections/.travis.yml
+doctrine/collections/README.md
+doctrine/collections/composer.json
 doctrine/common/tests
 doctrine/common/.travis.yml
 doctrine/dbal/tests
@@ -17,6 +19,8 @@ doctrine/dbal/docs
 doctrine/dbal/run-all.sh
 doctrine/dbal/.travis.yml
 doctrine/inflector/tests
+doctrine/lexer/composer.json
+doctrine/lexer/LICENSE
 
 pear/archive_tar/.travis.sh
 pear/archive_tar/.travis.yml

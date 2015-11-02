@@ -9,7 +9,7 @@
 	},
 	"require": {
 		"sabre/dav" : "2.1.7",
-		"doctrine/dbal": "2.5.1",
+		"doctrine/dbal": "2.5.2",
 		"mcnetic/zipstreamer": "v0.7",
 		"phpseclib/phpseclib": "2.0.0",
 		"rackspace/php-opencloud": "v1.9.2",
