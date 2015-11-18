@@ -90,6 +90,9 @@ ircmaxell/random-lib/composer.lock
 ircmaxell/random-lib/phpunit.xml.dist
 
 icewind/streams/tests
+icewind/streams/README.md
+icewind/streams/LICENCE
+icewind/streams/composer.json
 
 swiftmailer/swiftmailer/.travis.yml
 swiftmailer/swiftmailer/phpunit.xml.dist
