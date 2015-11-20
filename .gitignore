@@ -169,3 +169,10 @@ patchwork/jsqueeze/phpunit.xml.dist
 sabre/dav/examples
 sabre/dav/tests
 
+mcnetic/zipstreamer/tests
+
+ircmaxell/security-lib/tests
+
+bantu/ini-get-wrapper/tests
+
+rackspace/php-opencloud/tests
