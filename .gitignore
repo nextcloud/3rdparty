@@ -168,6 +168,12 @@ patchwork/jsqueeze/phpunit.xml.dist
 
 sabre/dav/examples
 sabre/dav/tests
+sabre/event/tests
+sabre/http/examples
+sabre/http/tests
+sabre/uri/tests
+sabre/vobject/tests
+sabre/xml/tests
 
 mcnetic/zipstreamer/tests
 
