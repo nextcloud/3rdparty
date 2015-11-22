@@ -21,7 +21,7 @@
 		"punic/punic": "1.1.0",
 		"pear/archive_tar": "1.4.1",
 		"patchwork/utf8": "1.2.5",
-		"symfony/console": "2.6.4",
+		"symfony/console": "2.7.6",
 		"symfony/event-dispatcher": "2.6.4",
 		"symfony/routing": "2.6.4",
 		"symfony/process": "2.6.4",
