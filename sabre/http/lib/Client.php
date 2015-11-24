@@ -2,8 +2,8 @@
 
 namespace Sabre\HTTP;
 
-use
-    Sabre\Event\EventEmitter;
+use Sabre\Event\EventEmitter;
+use Sabre\Uri;
 
 /**
  * A rudimentary HTTP client.
@@ -72,8 +72,8 @@ class Client extends EventEmitter {
 
         $this->curlSettings = [
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => true,
-            CURLOPT_NOBODY => false,
+            CURLOPT_HEADER         => true,
+            CURLOPT_NOBODY         => false,
         ];
 
     }
@@ -115,7 +115,7 @@ class Client extends EventEmitter {
                     $request = clone $request;
 
                     // Setting the new location
-                    $request->setUrl(URLUtil::resolve(
+                    $request->setUrl(Uri\resolve(
                         $oldLocation,
                         $response->getHeader('Location')
                     ));
@@ -134,6 +134,7 @@ class Client extends EventEmitter {
                 }
 
             } catch (ClientException $e) {
+
                 $this->emit('exception', [$request, $e, &$retry, $retryCount]);
 
                 // If retry was still set to false, it means no event handler
@@ -142,7 +143,9 @@ class Client extends EventEmitter {
                 if (!$retry) {
                     throw $e;
                 }
+
             }
+
             if ($retry) {
                 $retryCount++;
             }
@@ -194,7 +197,7 @@ class Client extends EventEmitter {
     function poll() {
 
         // nothing to do?
-        if(!$this->curlMultiMap) {
+        if (!$this->curlMultiMap) {
             return false;
         }
 
@@ -213,6 +216,7 @@ class Client extends EventEmitter {
                 $this->curlMultiHandle,
                 $messagesInQueue
             );
+
             if ($status && $status['msg'] === CURLMSG_DONE) {
 
                 $resourceId = intval($status['handle']);
@@ -222,23 +226,23 @@ class Client extends EventEmitter {
                     $errorCallback,
                     $retryCount,
                 ) = $this->curlMultiMap[$resourceId];
-
                 unset($this->curlMultiMap[$resourceId]);
-
                 $curlResult = $this->parseCurlResult(curl_multi_getcontent($status['handle']), $status['handle']);
-
                 $retry = false;
 
                 if ($curlResult['status'] === self::STATUS_CURLERROR) {
 
                     $e = new ClientException($curlResult['curl_errmsg'], $curlResult['curl_errno']);
                     $this->emit('exception', [$request, $e, &$retry, $retryCount]);
+
                     if ($retry) {
                         $retryCount++;
                         $this->sendASyncInternal($request, $successCallback, $errorCallback, $retryCount);
                         goto messageQueue;
                     }
+
                     $curlResult['request'] = $request;
+
                     if ($errorCallback) {
                         $errorCallback($curlResult);
                     }
@@ -249,24 +253,33 @@ class Client extends EventEmitter {
                     $this->emit('error:' . $curlResult['http_code'], [$request, $curlResult['response'], &$retry, $retryCount]);
 
                     if ($retry) {
+
                         $retryCount++;
                         $this->sendASyncInternal($request, $successCallback, $errorCallback, $retryCount);
                         goto messageQueue;
+
                     }
+
                     $curlResult['request'] = $request;
+
                     if ($errorCallback) {
                         $errorCallback($curlResult);
                     }
+
                 } else {
+
                     $this->emit('afterRequest', [$request, $curlResult['response']]);
+
                     if ($successCallback) {
                         $successCallback($curlResult['response']);
                     }
+
                 }
             }
+
         } while ($messagesInQueue > 0);
 
-        return $stillRunning;
+        return count($this->curlMultiMap) > 0;
 
     }
 
@@ -335,7 +348,6 @@ class Client extends EventEmitter {
 
         curl_setopt_array($this->curlHandle, $settings);
         $response = $this->curlExec($this->curlHandle);
-
         $response = $this->parseCurlResult($response, $this->curlHandle);
 
         if ($response['status'] === self::STATUS_CURLERROR) {
@@ -384,7 +396,7 @@ class Client extends EventEmitter {
 
         $settings = $this->curlSettings;
 
-        switch($request->getMethod()) {
+        switch ($request->getMethod()) {
             case 'HEAD' :
                 $settings[CURLOPT_NOBODY] = true;
                 $settings[CURLOPT_CUSTOMREQUEST] = 'HEAD';
@@ -416,9 +428,9 @@ class Client extends EventEmitter {
         }
 
         $nHeaders = [];
-        foreach($request->getHeaders() as $key=>$values) {
+        foreach ($request->getHeaders() as $key => $values) {
 
-            foreach($values as $value) {
+            foreach ($values as $value) {
                 $nHeaders[] = $key . ': ' . $value;
             }
 
@@ -426,11 +438,11 @@ class Client extends EventEmitter {
         $settings[CURLOPT_HTTPHEADER] = $nHeaders;
         $settings[CURLOPT_URL] = $request->getUrl();
         // FIXME: CURLOPT_PROTOCOLS is currently unsupported by HHVM
-        if(defined('CURLOPT_PROTOCOLS')) {
+        if (defined('CURLOPT_PROTOCOLS')) {
             $settings[CURLOPT_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
         }
         // FIXME: CURLOPT_REDIR_PROTOCOLS is currently unsupported by HHVM
-        if(defined('CURLOPT_REDIR_PROTOCOLS')) {
+        if (defined('CURLOPT_REDIR_PROTOCOLS')) {
             $settings[CURLOPT_REDIR_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
         }
 
@@ -471,8 +483,8 @@ class Client extends EventEmitter {
 
         if ($curlErrNo) {
             return [
-                'status' => self::STATUS_CURLERROR,
-                'curl_errno' => $curlErrNo,
+                'status'      => self::STATUS_CURLERROR,
+                'curl_errno'  => $curlErrNo,
                 'curl_errmsg' => $curlErrMsg,
             ];
         }
@@ -486,13 +498,12 @@ class Client extends EventEmitter {
         unset($response);
 
         // In the case of 100 Continue, or redirects we'll have multiple lists
-        //
         // of headers for each separate HTTP response. We can easily split this
         // because they are separated by \r\n\r\n
         $headerBlob = explode("\r\n\r\n", trim($headerBlob, "\r\n"));
 
         // We only care about the last set of headers
-        $headerBlob = $headerBlob[count($headerBlob)-1];
+        $headerBlob = $headerBlob[count($headerBlob) - 1];
 
         // Splitting headers
         $headerBlob = explode("\r\n", $headerBlob);
@@ -500,9 +511,9 @@ class Client extends EventEmitter {
         $response = new Response();
         $response->setStatus($curlInfo['http_code']);
 
-        foreach($headerBlob as $header) {
+        foreach ($headerBlob as $header) {
             $parts = explode(':', $header, 2);
-            if (count($parts)==2) {
+            if (count($parts) == 2) {
                 $response->addHeader(trim($parts[0]), trim($parts[1]));
             }
         }
@@ -520,7 +531,7 @@ class Client extends EventEmitter {
     }
 
     /**
-     * Sends a asynchrous http request.
+     * Sends an asynchronous HTTP request.
      *
      * We keep this in a separate method, so we can call it without triggering
      * the beforeRequest event and don't do the poll().
@@ -559,7 +570,6 @@ class Client extends EventEmitter {
      *
      * @param resource $curlHandle
      * @return string
-
      */
     protected function curlExec($curlHandle) {
 
