@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "87ae32540d27cdecc5bd3deabb5a7835",
-    "content-hash": "f323c32b0f4e26c2dd057fd0d2b094ac",
+    "hash": "f9aa318b3aaeb3853837646e9312d22d",
+    "content-hash": "16b81f28b9754152b44db66f25cd6d87",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -2146,16 +2146,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "3.0.5",
+            "version": "3.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "69c1b5c9c19e52e2da15dc8920fce9ea9df9abcc"
+                "reference": "4d83ffbdb31f399aa023edd91cb008c06512990c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/69c1b5c9c19e52e2da15dc8920fce9ea9df9abcc",
-                "reference": "69c1b5c9c19e52e2da15dc8920fce9ea9df9abcc",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/4d83ffbdb31f399aa023edd91cb008c06512990c",
+                "reference": "4d83ffbdb31f399aa023edd91cb008c06512990c",
                 "shasum": ""
             },
             "require": {
@@ -2223,7 +2223,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2015-09-15 19:24:48"
+            "time": "2015-11-25 17:51:25"
         },
         {
             "name": "sabre/event",
@@ -2798,7 +2798,8 @@
         "natxet/cssmin": 20,
         "swiftmailer/swiftmailer": 0,
         "interfasys/lognormalizer": 20,
-        "deepdiver1975/tarstreamer": 10
+        "deepdiver1975/tarstreamer": 10,
+        "sabre/dav": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
