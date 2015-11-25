@@ -26,8 +26,6 @@ use Symfony\Component\Process\Pipes\WindowsPipes;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Romain Neutron <imprec@gmail.com>
- *
- * @api
  */
 class Process
 {
@@ -133,14 +131,12 @@ class Process
      *
      * @param string         $commandline The command line to run
      * @param string|null    $cwd         The working directory or null to use the working dir of the current PHP process
-     * @param array|null     $env         The environment variables or null to inherit
+     * @param array|null     $env         The environment variables or null to use the same environment as the current PHP process
      * @param string|null    $input       The input
      * @param int|float|null $timeout     The timeout in seconds or null to disable
      * @param array          $options     An array of options for proc_open
      *
      * @throws RuntimeException When proc_open is not installed
-     *
-     * @api
      */
     public function __construct($commandline, $cwd = null, array $env = null, $input = null, $timeout = 60, array $options = array())
     {
@@ -200,8 +196,6 @@ class Process
      * @throws RuntimeException When process can't be launched
      * @throws RuntimeException When process stopped after receiving signal
      * @throws LogicException   In case a callback is provided and output has been disabled
-     *
-     * @api
      */
     public function run($callback = null)
     {
@@ -254,8 +248,6 @@ class Process
      * @param callable|null $callback A PHP callback to run whenever there is some
      *                                output available on STDOUT or STDERR
      *
-     * @return Process The process itself
-     *
      * @throws RuntimeException When process can't be launched
      * @throws RuntimeException When process is already running
      * @throws LogicException   In case a callback is provided and output has been disabled
@@ -277,7 +269,7 @@ class Process
         $commandline = $this->commandline;
 
         if ('\\' === DIRECTORY_SEPARATOR && $this->enhanceWindowsCompatibility) {
-            $commandline = 'cmd /V:ON /E:ON /C "('.$commandline.')';
+            $commandline = 'cmd /V:ON /E:ON /D /C "('.$commandline.')';
             foreach ($this->processPipes->getFiles() as $offset => $filename) {
                 $commandline .= ' '.$offset.'>'.ProcessUtils::escapeArgument($filename);
             }
@@ -288,7 +280,19 @@ class Process
             }
         }
 
+        $ptsWorkaround = null;
+
+        if (!$this->useFileHandles && $this->enhanceSigchildCompatibility && $this->isSigchildEnabled()) {
+            // Workaround for the bug, when PTS functionality is enabled.
+            // @see : https://bugs.php.net/69442
+            $ptsWorkaround = fopen(__FILE__, 'r');
+        }
+
         $this->process = proc_open($commandline, $descriptors, $this->processPipes->pipes, $this->cwd, $this->env, $this->options);
+
+        if ($ptsWorkaround) {
+            fclose($ptsWorkaround);
+        }
 
         if (!is_resource($this->process)) {
             throw new RuntimeException('Unable to launch a new process.');
@@ -465,8 +469,6 @@ class Process
      *
      * @throws LogicException in case the output has been disabled
      * @throws LogicException In case the process is not started
-     *
-     * @api
      */
     public function getOutput()
     {
@@ -529,8 +531,6 @@ class Process
      *
      * @throws LogicException in case the output has been disabled
      * @throws LogicException In case the process is not started
-     *
-     * @api
      */
     public function getErrorOutput()
     {
@@ -593,8 +593,6 @@ class Process
      * @return null|int The exit status code, null if the Process is not terminated
      *
      * @throws RuntimeException In case --enable-sigchild is activated and the sigchild compatibility mode is disabled
-     *
-     * @api
      */
     public function getExitCode()
     {
@@ -633,8 +631,6 @@ class Process
      * Checks if the process ended successfully.
      *
      * @return bool true if the process ended successfully, false otherwise
-     *
-     * @api
      */
     public function isSuccessful()
     {
@@ -650,8 +646,6 @@ class Process
      *
      * @throws RuntimeException In case --enable-sigchild is activated
      * @throws LogicException   In case the process is not terminated
-     *
-     * @api
      */
     public function hasBeenSignaled()
     {
@@ -675,8 +669,6 @@ class Process
      *
      * @throws RuntimeException In case --enable-sigchild is activated
      * @throws LogicException   In case the process is not terminated
-     *
-     * @api
      */
     public function getTermSignal()
     {
@@ -699,8 +691,6 @@ class Process
      * @return bool
      *
      * @throws LogicException In case the process is not terminated
-     *
-     * @api
      */
     public function hasBeenStopped()
     {
@@ -719,8 +709,6 @@ class Process
      * @return int
      *
      * @throws LogicException In case the process is not terminated
-     *
-     * @api
      */
     public function getStopSignal()
     {
@@ -798,7 +786,7 @@ class Process
         $timeoutMicro = microtime(true) + $timeout;
         if ($this->isRunning()) {
             if ('\\' === DIRECTORY_SEPARATOR && !$this->isSigchildEnabled()) {
-                exec(sprintf("taskkill /F /T /PID %d 2>&1", $this->getPid()), $output, $exitCode);
+                exec(sprintf('taskkill /F /T /PID %d 2>&1', $this->getPid()), $output, $exitCode);
                 if ($exitCode > 0) {
                     throw new RuntimeException('Unable to kill the process');
                 }
@@ -949,6 +937,9 @@ class Process
         if ('\\' === DIRECTORY_SEPARATOR && $tty) {
             throw new RuntimeException('TTY mode is not supported on Windows platform.');
         }
+        if ($tty && (!file_exists('/dev/tty') || !is_readable('/dev/tty'))) {
+            throw new RuntimeException('TTY mode requires /dev/tty to be readable.');
+        }
 
         $this->tty = (bool) $tty;
 
@@ -1051,7 +1042,7 @@ class Process
 
         $this->env = array();
         foreach ($env as $key => $value) {
-            $this->env[(binary) $key] = (binary) $value;
+            $this->env[$key] = (string) $value;
         }
 
         return $this;
@@ -1062,11 +1053,14 @@ class Process
      *
      * @return string|null The current contents
      *
-     * @deprecated Deprecated since version 2.5, to be removed in 3.0.
+     * @deprecated since version 2.5, to be removed in 3.0.
+     *             Use setInput() instead.
      *             This method is deprecated in favor of getInput.
      */
     public function getStdin()
     {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.5 and will be removed in 3.0. Use the getInput() method instead.', E_USER_DEPRECATED);
+
         return $this->getInput();
     }
 
@@ -1087,14 +1081,16 @@ class Process
      *
      * @return self The current Process instance
      *
-     * @deprecated Deprecated since version 2.5, to be removed in 3.0.
-     *             This method is deprecated in favor of setInput.
+     * @deprecated since version 2.5, to be removed in 3.0.
+     *             Use setInput() instead.
      *
      * @throws LogicException           In case the process is running
      * @throws InvalidArgumentException In case the argument is invalid
      */
     public function setStdin($stdin)
     {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.5 and will be removed in 3.0. Use the setInput() method instead.', E_USER_DEPRECATED);
+
         return $this->setInput($stdin);
     }
 
@@ -1103,11 +1099,13 @@ class Process
      *
      * This content will be passed to the underlying process standard input.
      *
-     * @param string|null $input The content
+     * @param mixed $input The content
      *
      * @return self The current Process instance
      *
      * @throws LogicException In case the process is running
+     *
+     * Passing an object as an input is deprecated since version 2.5 and will be removed in 3.0.
      */
     public function setInput($input)
     {
@@ -1284,7 +1282,7 @@ class Process
      *
      * @param callable|null $callback The user defined PHP callback
      *
-     * @return callable A PHP callable
+     * @return \Closure A PHP closure
      */
     protected function buildCallback($callback)
     {
