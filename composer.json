@@ -22,7 +22,7 @@
 		"patchwork/utf8": "1.2.5",
 		"symfony/console": "2.7.6",
 		"symfony/event-dispatcher": "2.6.4",
-		"symfony/routing": "2.6.4",
+		"symfony/routing": "2.7.6",
 		"symfony/process": "2.6.4",
 		"pimple/pimple": "3.0.2",
 		"ircmaxell/password-compat": "1.0.*",
