@@ -12,6 +12,7 @@ return array(
     'ZipStreamer\\' => array($vendorDir . '/mcnetic/zipstreamer/src'),
     'Symfony\\Component\\Routing\\' => array($vendorDir . '/symfony/routing'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
+    'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
     'Sabre\\Xml\\' => array($vendorDir . '/sabre/xml/lib'),
