@@ -49,9 +49,10 @@ symfony/console/Symfony/Component/Console/Tests
 symfony/console/Symfony/Component/Console/.gitignore
 symfony/console/Symfony/Component/Console/composer.json
 
-symfony/routing/Symfony/Component/Routing/Tests/
-symfony/routing/Symfony/Component/Routing/phpunit.xml.dist
-symfony/routing/Symfony/Component/Routing/.gitignore
+symfony/routing/Tests/
+symfony/routing/phpunit.xml.dist
+symfony/routing/.gitignore
+
 symfony/event-dispatcher/Symfony/Component/EventDispatcher/Tests/
 
 symfony/event-dispatcher/Symfony/EventDispatcher/Debug/Routing/Tests/
