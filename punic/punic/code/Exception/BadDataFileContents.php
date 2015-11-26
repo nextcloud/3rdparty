@@ -1,8 +1,9 @@
 <?php
+
 namespace Punic\Exception;
 
 /**
- * An exception raised when an data file contains malformed data
+ * An exception raised when an data file contains malformed data.
  */
 class BadDataFileContents extends \Punic\Exception
 {
@@ -11,10 +12,11 @@ class BadDataFileContents extends \Punic\Exception
     protected $dataFileContents;
 
     /**
-     * Initializes the instance
+     * Initializes the instance.
+     *
      * @param string $dataFilePath The path to the file with bad contents
      * @param string $dataFileContents The malformed of the file
-     * @param \Exception $previous = null The previous exception used for the exception chaining
+     * @param \Exception $previous The previous exception used for the exception chaining
      */
     public function __construct($dataFilePath, $dataFileContents, $previous = null)
     {
@@ -25,7 +27,8 @@ class BadDataFileContents extends \Punic\Exception
     }
 
     /**
-     * Retrieves the path to the data file
+     * Retrieves the path to the data file.
+     *
      * @return string
      */
     public function getDataFilePath()
@@ -34,7 +37,8 @@ class BadDataFileContents extends \Punic\Exception
     }
 
     /**
-     * Retrieves the malformed contents of the file
+     * Retrieves the malformed contents of the file.
+     *
      * @return string
      */
     public function getDataFileContents()

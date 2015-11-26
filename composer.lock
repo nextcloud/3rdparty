@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c02540a0569475a6788ceacbeadf090c",
-    "content-hash": "a13430615371c26a407048b179c98bbb",
+    "hash": "6ad1600ce12f01676d72bcfb6f806e77",
+    "content-hash": "d1ae364a433d9e84d541c0461a21fceb",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1978,16 +1978,16 @@
         },
         {
             "name": "punic/punic",
-            "version": "1.1.0",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/punic/punic.git",
-                "reference": "b4a06d4ad15040b18ec5db4491fc8ed8aa42874c"
+                "reference": "5805b35d6a574f754b49be1f539aaf3ae6484808"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/punic/punic/zipball/b4a06d4ad15040b18ec5db4491fc8ed8aa42874c",
-                "reference": "b4a06d4ad15040b18ec5db4491fc8ed8aa42874c",
+                "url": "https://api.github.com/repos/punic/punic/zipball/5805b35d6a574f754b49be1f539aaf3ae6484808",
+                "reference": "5805b35d6a574f754b49be1f539aaf3ae6484808",
                 "shasum": ""
             },
             "require": {
@@ -1998,8 +1998,7 @@
                 "punic/common": "*"
             },
             "require-dev": {
-                "apigen/apigen": "~2.8.2",
-                "satooshi/php-coveralls": "dev-master"
+                "apigen/apigen": "4.0.*"
             },
             "type": "library",
             "autoload": {
@@ -2040,7 +2039,7 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2014-09-25 08:53:54"
+            "time": "2015-06-16 13:04:27"
         },
         {
             "name": "rackspace/php-opencloud",
