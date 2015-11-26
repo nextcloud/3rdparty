@@ -422,74 +422,6 @@
         ]
     },
     {
-        "name": "punic/punic",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/punic/punic.git",
-            "reference": "b4a06d4ad15040b18ec5db4491fc8ed8aa42874c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/punic/punic/zipball/b4a06d4ad15040b18ec5db4491fc8ed8aa42874c",
-            "reference": "b4a06d4ad15040b18ec5db4491fc8ed8aa42874c",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3"
-        },
-        "replace": {
-            "punic/calendar": "*",
-            "punic/common": "*"
-        },
-        "require-dev": {
-            "apigen/apigen": "~2.8.2",
-            "satooshi/php-coveralls": "dev-master"
-        },
-        "time": "2014-09-25 08:53:54",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Punic\\": "code/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Michele Locati",
-                "email": "mlocati@gmail.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Remo Laubacher",
-                "email": "remo.laubacher@gmail.com",
-                "role": "Collaborator, motivator and perfectionist supporter"
-            }
-        ],
-        "description": "PHP-Unicode CLDR",
-        "homepage": "https://github.com/punic/punic",
-        "keywords": [
-            "calendar",
-            "cldr",
-            "date",
-            "date-time",
-            "i18n",
-            "internationalization",
-            "l10n",
-            "localization",
-            "php",
-            "time",
-            "translate",
-            "translations",
-            "unicode"
-        ]
-    },
-    {
         "name": "doctrine/inflector",
         "version": "v1.0.1",
         "version_normalized": "1.0.1.0",
@@ -2881,6 +2813,73 @@
             "assets",
             "compression",
             "minification"
+        ]
+    },
+    {
+        "name": "punic/punic",
+        "version": "1.6.3",
+        "version_normalized": "1.6.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/punic/punic.git",
+            "reference": "5805b35d6a574f754b49be1f539aaf3ae6484808"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/punic/punic/zipball/5805b35d6a574f754b49be1f539aaf3ae6484808",
+            "reference": "5805b35d6a574f754b49be1f539aaf3ae6484808",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "replace": {
+            "punic/calendar": "*",
+            "punic/common": "*"
+        },
+        "require-dev": {
+            "apigen/apigen": "4.0.*"
+        },
+        "time": "2015-06-16 13:04:27",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Punic\\": "code/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michele Locati",
+                "email": "mlocati@gmail.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Remo Laubacher",
+                "email": "remo.laubacher@gmail.com",
+                "role": "Collaborator, motivator and perfectionist supporter"
+            }
+        ],
+        "description": "PHP-Unicode CLDR",
+        "homepage": "https://github.com/punic/punic",
+        "keywords": [
+            "calendar",
+            "cldr",
+            "date",
+            "date-time",
+            "i18n",
+            "internationalization",
+            "l10n",
+            "localization",
+            "php",
+            "time",
+            "translate",
+            "translations",
+            "unicode"
         ]
     }
 ]

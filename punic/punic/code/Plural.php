@@ -1,20 +1,22 @@
 <?php
+
 namespace Punic;
 
 /**
- * Plural helper stuff
+ * Plural helper stuff.
  */
 class Plural
 {
-
     /**
-     * Return the list of applicable plural rule for a locale
-     * @param string $locale = '' The locale to use. If empty we'll use the default locale set in \Punic\Data
-     * @return array[string] Returns a list containing some the following values: 'zero', 'one', 'two', 'few', 'many', 'other' ('other' will be always there)
+     * Return the list of applicable plural rule for a locale.
+     *
+     * @param string $locale The locale to use. If empty we'll use the default locale set in \Punic\Data
+     *
+     * @return array<string> Returns a list containing some the following values: 'zero', 'one', 'two', 'few', 'many', 'other' ('other' will be always there)
      */
     public static function getRules($locale = '')
     {
-        $node = \Punic\Data::getLanguageNode(\Punic\Data::getGeneric('plurals'), $locale);
+        $node = Data::getLanguageNode(Data::getGeneric('plurals'), $locale);
 
         return array_merge(
             array_keys($node),
@@ -23,10 +25,13 @@ class Plural
     }
 
     /**
-     * Return the plural rule ('zero', 'one', 'two', 'few', 'many' or 'other') for a number and a locale
+     * Return the plural rule ('zero', 'one', 'two', 'few', 'many' or 'other') for a number and a locale.
+     *
      * @param string|int|float $number The number to check the plural rule for for
-     * @param string $locale = '' The locale to use. If empty we'll use the default locale set in \Punic\Data
+     * @param string $locale The locale to use. If empty we'll use the default locale set in \Punic\Data
+     *
      * @return string Returns one of the following values: 'zero', 'one', 'two', 'few', 'many', 'other'
+     *
      * @throws \Punic\Exception\BadArgumentType Throws a \Punic\Exception\BadArgumentType if $number is not a valid number
      * @throws \Exception Throws a \Exception if there were problems calculating the plural rule
      */
@@ -44,7 +49,7 @@ class Plural
                 list($intPart, $floatPart) = explode('.', $s);
             }
             $intPartAbs = strval(abs(intval($intPart)));
-        } elseif (is_string($number) && strlen($number)) {
+        } elseif (is_string($number) && isset($number[0])) {
             if (preg_match('/^[+|\\-]?\\d+\\.?$/', $number)) {
                 $v = intval($number);
                 $intPartAbs = strval(abs($v));
@@ -60,7 +65,7 @@ class Plural
             throw new Exception\BadArgumentType($number, 'number');
         }
         // 'n' => '%1$s', // absolute value of the source number (integer and decimals).
-        $v1 = $intPartAbs . (strlen($floatPart) ? ".$floatPart" : '');
+        $v1 = $intPartAbs.(strlen($floatPart) ? ".$floatPart" : '');
         // 'i' => '%2$s', // integer digits of n
         $v2 = $intPartAbs;
         // 'v' => '%3$s', // number of visible fraction digits in n, with trailing zeros.
@@ -71,11 +76,11 @@ class Plural
         $v5 = strlen($floatPart) ? strval(intval($floatPart)) : '0';
         // 't' => '%6$s', // visible fractional digits in n, without trailing zeros.
         $v6 = trim($floatPart, '0');
-        if (!strlen($v6)) {
+        if (!isset($v6[0])) {
             $v6 = '0';
         }
         $result = 'other';
-        $node = \Punic\Data::getLanguageNode(\Punic\Data::getGeneric('plurals'), $locale);
+        $node = Data::getLanguageNode(Data::getGeneric('plurals'), $locale);
         foreach ($node as $rule => $formulaPattern) {
             $formula = sprintf($formulaPattern, $v1, $v2, $v3, $v4, $v5, $v6);
             $check = str_replace(array('static::inRange(', ' and ', ' or ', ', false, ', ', true, ', ', array('), ' , ', $formula);
@@ -88,9 +93,9 @@ class Plural
                 $decimals = strlen(rtrim($decimalPart, '0'));
                 if ($decimals > 0) {
                     $pow = intval(pow(10, $decimals));
-                    $repl = '(' . strval(intval(floatval($m[1]) * $pow)) . ' % ' . strval(intval(floatval($m[2] * $pow))) . ') / ' . $pow;
+                    $repl = '('.strval(intval(floatval($m[1]) * $pow)).' % '.strval(intval(floatval($m[2] * $pow))).') / '.$pow;
                 } else {
-                    $repl = strval(intval($m[1])) . ' % ' . $m[2];
+                    $repl = strval(intval($m[1])).' % '.$m[2];
                 }
                 $formula = str_replace($m[0], $repl, $formula);
             }
@@ -99,7 +104,7 @@ class Plural
                 $result = $rule;
                 break;
             } elseif ($formulaResult !== 'no') {
-                throw new \Exception('There was a problem in the formula ' . $formulaPattern);
+                throw new \Exception('There was a problem in the formula '.$formulaPattern);
             }
         }
 
@@ -120,7 +125,6 @@ class Plural
         foreach ($rangeValues as $rangeValue) {
             if (is_array($rangeValue)) {
                 if ($isInt && ($value >= $rangeValue[0]) && ($value <= $rangeValue[1])) {
-
                     $included = true;
                     break;
                 }
