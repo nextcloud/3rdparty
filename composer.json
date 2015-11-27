@@ -13,7 +13,7 @@
 		"phpseclib/phpseclib": "2.0.0",
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",
-		"jeremeamia/superclosure": "2.0.0",
+		"jeremeamia/superclosure": "2.1.0",
 		"ircmaxell/random-lib": "~1.1",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"natxet/CssMin": "dev-master",
