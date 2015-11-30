@@ -148,6 +148,8 @@ nikic/php-parser/bin/
 nikic/php-parser/doc/
 nikic/php-parser/test/
 nikic/php-parser/test_old/
+nikic/php-parser/grammar/analyze.php
+nikic/php-parser/grammar/rebuildParser.php
 
 interfasys/lognormalizer/.gitignore
 interfasys/lognormalizer/.travis.yml
