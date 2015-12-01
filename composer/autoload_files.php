@@ -8,8 +8,8 @@ $baseDir = $vendorDir;
 return array(
     $vendorDir . '/sabre/uri/lib/functions.php',
     $vendorDir . '/react/promise/src/functions_include.php',
-    $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
     $vendorDir . '/sabre/http/lib/functions.php',
+    $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
     $vendorDir . '/ircmaxell/password-compat/lib/password.php',
     $vendorDir . '/kriswallsmith/assetic/src/functions.php',
