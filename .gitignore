@@ -185,3 +185,10 @@ ircmaxell/security-lib/tests
 bantu/ini-get-wrapper/tests
 
 rackspace/php-opencloud/tests
+
+paragonie/random_compat/tests
+paragonie/random_compat/phpunit.sh
+paragonie/random_compat/.scrutinizer.yml
+paragonie/random_compat/ERRATA.md
+paragonie/random_compat/README.md
+paragonie/random_compat/SECURITY.md
