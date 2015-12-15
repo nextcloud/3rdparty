@@ -8,12 +8,14 @@ doctrine/annotations/tests
 doctrine/annotations/.travis.yml
 doctrine/cache/tests
 doctrine/cache/.travis.yml
+doctrine/cache/composer.json
 doctrine/collections/tests
 doctrine/collections/.travis.yml
 doctrine/collections/README.md
 doctrine/collections/composer.json
 doctrine/common/tests
 doctrine/common/.travis.yml
+doctrine/common/composer.json
 doctrine/dbal/tests
 doctrine/dbal/docs
 doctrine/dbal/run-all.sh
