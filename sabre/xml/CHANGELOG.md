@@ -1,6 +1,28 @@
 ChangeLog
 =========
 
+1.3.0 (2015-12-29)
+------------------
+
+* The `Service` class adds a new `mapValueObject` method which provides basic
+  capabilities to map between ValueObjects and XML.
+* #61: You can now specify serializers for specific classes, allowing you
+  separate the object you want to serialize from the serializer. This uses the
+  `$classMap` property which is defined on both the `Service` and `Writer`.
+* It's now possible to pass an array of possible root elements to
+  `Sabre\Xml\Service::expect()`.
+* Moved some parsing logic to `Reader::getDeserializerForElementName()`,
+  so people with more advanced use-cases can implement their own logic there.
+* #63: When serializing elements using arrays, the `value` key in the array is
+  now optional.
+* #62: Added a `keyValue` deserializer function. This can be used instead of
+  the `Element\KeyValue` class and is a lot more flexible. (@staabm)
+* Also added an `enum` deserializer function to replace
+  `Element\Elements`.
+* Using an empty string for a namespace prefix now has the same effect as
+  `null`.
+
+
 1.2.0 (2015-08-30)
 ------------------
 

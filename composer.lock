@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "440878857b49179d40f77ef9d0f3bb06",
-    "content-hash": "7a44e303fca8deec9923de7cc830d3e7",
+    "hash": "436425e1558a43d3fb52e749edd2fd72",
+    "content-hash": "0626d1a8971aa6174a6d29841c831cfe",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -2192,16 +2192,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "3.0.x-dev",
+            "version": "3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "4d83ffbdb31f399aa023edd91cb008c06512990c"
+                "reference": "280d326338255f4ab7e06f73e4de070c4f9d85f0"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/280d326338255f4ab7e06f73e4de070c4f9d85f0",
-                "reference": "4d83ffbdb31f399aa023edd91cb008c06512990c",
+                "reference": "280d326338255f4ab7e06f73e4de070c4f9d85f0",
                 "shasum": ""
             },
             "require": {
@@ -2269,7 +2269,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2015-11-25 17:51:25"
+            "time": "2016-01-04 20:24:48"
         },
         {
             "name": "sabre/event",
@@ -2324,22 +2324,22 @@
         },
         {
             "name": "sabre/http",
-            "version": "4.1.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-http.git",
-                "reference": "5874c9c449e690242cf32884da9d32a3369a2c78"
+                "reference": "2e93bc8321524c67be4ca5b8415daebd4c8bf85e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-http/zipball/5874c9c449e690242cf32884da9d32a3369a2c78",
-                "reference": "5874c9c449e690242cf32884da9d32a3369a2c78",
+                "url": "https://api.github.com/repos/fruux/sabre-http/zipball/2e93bc8321524c67be4ca5b8415daebd4c8bf85e",
+                "reference": "2e93bc8321524c67be4ca5b8415daebd4c8bf85e",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=5.4",
-                "sabre/event": ">=1.0.0,<3.0.0",
+                "sabre/event": ">=1.0.0,<4.0.0",
                 "sabre/uri": "~1.0"
             },
             "require-dev": {
@@ -2375,7 +2375,7 @@
             "keywords": [
                 "http"
             ],
-            "time": "2015-09-04 21:56:22"
+            "time": "2016-01-06 23:00:08"
         },
         {
             "name": "sabre/uri",
@@ -2430,16 +2430,16 @@
         },
         {
             "name": "sabre/vobject",
-            "version": "3.4.7",
+            "version": "3.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-vobject.git",
-                "reference": "7b3690545451159fc608dfac6696110f6770ff5d"
+                "reference": "0d4f1b634cd483320f0e4530a3335fc19501e663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/7b3690545451159fc608dfac6696110f6770ff5d",
-                "reference": "7b3690545451159fc608dfac6696110f6770ff5d",
+                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/0d4f1b634cd483320f0e4530a3335fc19501e663",
+                "reference": "0d4f1b634cd483320f0e4530a3335fc19501e663",
                 "shasum": ""
             },
             "require": {
@@ -2492,20 +2492,20 @@
                 "jCard",
                 "vCard"
             ],
-            "time": "2015-09-04 15:17:58"
+            "time": "2016-01-04 19:42:01"
         },
         {
             "name": "sabre/xml",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-xml.git",
-                "reference": "a3eeef9f3f13ee42503a1e06e5df3a6fc95b479b"
+                "reference": "420400f36655d79894fae8ce970516a71ea8f5f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-xml/zipball/a3eeef9f3f13ee42503a1e06e5df3a6fc95b479b",
-                "reference": "a3eeef9f3f13ee42503a1e06e5df3a6fc95b479b",
+                "url": "https://api.github.com/repos/fruux/sabre-xml/zipball/420400f36655d79894fae8ce970516a71ea8f5f5",
+                "reference": "420400f36655d79894fae8ce970516a71ea8f5f5",
                 "shasum": ""
             },
             "require": {
@@ -2524,7 +2524,11 @@
             "autoload": {
                 "psr-4": {
                     "Sabre\\Xml\\": "lib/"
-                }
+                },
+                "files": [
+                    "lib/Deserializer/functions.php",
+                    "lib/Serializer/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2536,9 +2540,14 @@
                     "email": "me@evertpot.com",
                     "homepage": "http://evertpot.com/",
                     "role": "Developer"
+                },
+                {
+                    "name": "Markus Staab",
+                    "email": "markus.staab@redaxo.de",
+                    "role": "Developer"
                 }
             ],
-            "description": "The Sabre XML parser is the only XML library that you may not hate.",
+            "description": "sabre/xml is an XML library that you may not hate.",
             "homepage": "https://sabre.io/xml/",
             "keywords": [
                 "XMLReader",
@@ -2546,7 +2555,7 @@
                 "dom",
                 "xml"
             ],
-            "time": "2015-08-30 07:57:48"
+            "time": "2015-12-29 20:51:22"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3134,8 +3143,7 @@
         "natxet/cssmin": 20,
         "swiftmailer/swiftmailer": 0,
         "interfasys/lognormalizer": 20,
-        "deepdiver1975/tarstreamer": 10,
-        "sabre/dav": 20
+        "deepdiver1975/tarstreamer": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,

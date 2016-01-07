@@ -3,7 +3,6 @@
 namespace Sabre\Xml;
 
 use XMLWriter;
-use InvalidArgumentException;
 
 /**
  * The XML Writer class.
@@ -98,58 +97,23 @@ class Writer extends XMLWriter {
      */
     function write($value) {
 
-        if (is_scalar($value)) {
-            $this->text($value);
-        } elseif ($value instanceof XmlSerializable) {
-            $value->xmlSerialize($this);
-        } elseif (is_null($value)) {
-            // noop
-        } elseif (is_array($value)) {
-
-            reset($value);
-            foreach ($value as $name => $item) {
-
-                if (is_int($name)) {
-
-                    // This item has a numeric index. We expect to be an array with a name and a value.
-                    if (!is_array($item) || !array_key_exists('name', $item) || !array_key_exists('value', $item)) {
-                        throw new InvalidArgumentException('When passing an array to ->write with numeric indices, every item must be an array containing the "name" and "value" key');
-                    }
-
-                    $attributes = isset($item['attributes']) ? $item['attributes'] : [];
-                    $name = $item['name'];
-                    $item = $item['value'];
-
-                } elseif (is_array($item) && array_key_exists('value', $item)) {
-
-                    // This item has a text index. We expect to be an array with a value and optional attributes.
-                    $attributes = isset($item['attributes']) ? $item['attributes'] : [];
-                    $item = $item['value'];
-
-                } else {
-                    // If it's an array with text-indices, we expect every item's
-                    // key to be an xml element name in clark notation.
-                    // No attributes can be passed.
-                    $attributes = [];
-                }
-
-                $this->startElement($name);
-                $this->writeAttributes($attributes);
-                $this->write($item);
-                $this->endElement();
-
-            }
-
-        } elseif (is_object($value)) {
-
-            throw new InvalidArgumentException('The writer cannot serialize objects of type: ' . get_class($value));
-
-        }
+        Serializer\standardSerializer($this, $value);
 
     }
 
     /**
-     * Starts an element.
+     * Opens a new element.
+     *
+     * You can either just use a local elementname, or you can use clark-
+     * notation to start a new element.
+     *
+     * Example:
+     *
+     *     $writer->startElement('{http://www.w3.org/2005/Atom}entry');
+     *
+     * Would result in something like:
+     *
+     *     <entry xmlns="http://w3.org/2005/Atom">
      *
      * @param string $name
      * @return bool
@@ -162,12 +126,16 @@ class Writer extends XMLWriter {
                 Service::parseClarkNotation($name);
 
             if (array_key_exists($namespace, $this->namespaceMap)) {
-                $result = $this->startElementNS($this->namespaceMap[$namespace], $localName, null);
+                $result = $this->startElementNS(
+                    $this->namespaceMap[$namespace] === '' ?  null : $this->namespaceMap[$namespace],
+                    $localName,
+                    null
+                );
             } else {
 
                 // An empty namespace means it's the global namespace. This is
                 // allowed, but it mustn't get a prefix.
-                if ($namespace === "") {
+                if ($namespace === "" || $namespace === null) {
                     $result = $this->startElement($localName);
                     $this->writeAttribute('xmlns', '');
                 } else {
@@ -196,9 +164,23 @@ class Writer extends XMLWriter {
     }
 
     /**
-     * Write a full element tag.
+     * Write a full element tag and it's contents.
      *
      * This method automatically closes the element as well.
+     *
+     * The element name may be specified in clark-notation.
+     *
+     * Examples:
+     *
+     *    $writer->writeElement('{http://www.w3.org/2005/Atom}author',null);
+     *    becomes:
+     *    <author xmlns="http://www.w3.org/2005" />
+     *
+     *    $writer->writeElement('{http://www.w3.org/2005/Atom}author', [
+     *       '{http://www.w3.org/2005/Atom}name' => 'Evert Pot',
+     *    ]);
+     *    becomes:
+     *    <author xmlns="http://www.w3.org/2005" /><name>Evert Pot</name></author>
      *
      * @param string $name
      * @param string $content

@@ -7,7 +7,7 @@ namespace Sabre\HTTP;
  *
  * This object contains a few simple methods that are shared by both.
  *
- * @copyright Copyright (C) 2009-2015 fruux GmbH (https://fruux.com/).
+ * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
@@ -74,7 +74,12 @@ abstract class Message implements MessageInterface {
         if (is_null($body)) {
             return '';
         }
-        return stream_get_contents($body);
+        $contentLength = $this->getHeader('Content-Length');
+        if (null === $contentLength) {
+            return stream_get_contents($body);
+        } else {
+            return stream_get_contents($body, $contentLength);
+        }
 
     }
 

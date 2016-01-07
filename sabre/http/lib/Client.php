@@ -18,6 +18,7 @@ use Sabre\Uri;
  *   beforeRequest(RequestInterface $request)
  *   afterRequest(RequestInterface $request, ResponseInterface $response)
  *   error(RequestInterface $request, ResponseInterface $response, bool &$retry, int $retryCount)
+ *   exception(RequestInterface $request, ClientException $e, bool &$retry, int $retryCount)
  *
  * The beforeRequest event allows you to do some last minute changes to the
  * request before it's done, such as adding authentication headers.
@@ -36,7 +37,7 @@ use Sabre\Uri;
  * It's also possible to intercept specific http errors, by subscribing to for
  * example 'error:401'.
  *
- * @copyright Copyright (C) 2009-2015 fruux GmbH (https://fruux.com/).
+ * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
@@ -74,6 +75,7 @@ class Client extends EventEmitter {
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => true,
             CURLOPT_NOBODY         => false,
+            CURLOPT_USERAGENT      => 'sabre-http/' . Version::VERSION . ' (http://sabre.io/)',
         ];
 
     }
@@ -237,7 +239,7 @@ class Client extends EventEmitter {
 
                     if ($retry) {
                         $retryCount++;
-                        $this->sendASyncInternal($request, $successCallback, $errorCallback, $retryCount);
+                        $this->sendAsyncInternal($request, $successCallback, $errorCallback, $retryCount);
                         goto messageQueue;
                     }
 
@@ -255,7 +257,7 @@ class Client extends EventEmitter {
                     if ($retry) {
 
                         $retryCount++;
-                        $this->sendASyncInternal($request, $successCallback, $errorCallback, $retryCount);
+                        $this->sendAsyncInternal($request, $successCallback, $errorCallback, $retryCount);
                         goto messageQueue;
 
                     }
