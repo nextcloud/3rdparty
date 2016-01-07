@@ -2200,7 +2200,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/4d83ffbdb31f399aa023edd91cb008c06512990c",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/280d326338255f4ab7e06f73e4de070c4f9d85f0",
                 "reference": "4d83ffbdb31f399aa023edd91cb008c06512990c",
                 "shasum": ""
             },
@@ -2781,7 +2781,7 @@
         },
         {
             "name": "symfony/polyfill-php55",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php55.git",
