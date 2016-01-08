@@ -39,6 +39,26 @@ class Service {
     public $namespaceMap = [];
 
     /**
+     * This is a list of custom serializers for specific classes.
+     *
+     * The writer may use this if you attempt to serialize an object with a
+     * class that does not implement XmlSerializable.
+     *
+     * Instead it will look at this classmap to see if there is a custom
+     * serializer here. This is useful if you don't want your value objects
+     * to be responsible for serializing themselves.
+     *
+     * The keys in this classmap need to be fully qualified PHP class names,
+     * the values must be callbacks. The callbacks take two arguments. The
+     * writer class, and the value that must be written.
+     *
+     * function (Writer $writer, object $value)
+     *
+     * @var array
+     */
+    public $classMap = [];
+
+    /**
      * Returns a fresh XML Reader
      *
      * @return Reader
@@ -60,6 +80,7 @@ class Service {
 
         $w = new Writer();
         $w->namespaceMap = $this->namespaceMap;
+        $w->classMap = $this->classMap;
         return $w;
 
     }
@@ -111,7 +132,10 @@ class Service {
      * This is useful in cases where you expected a specific document to be
      * passed, and reduces the amount of if statements.
      *
-     * @param string $rootElementName
+     * It's also possible to pass an array of expected rootElements if your
+     * code may expect more than one document type.
+     *
+     * @param string|string[] $rootElementName
      * @param string|resource $input
      * @param string|null $contextUri
      * @return void
@@ -128,8 +152,8 @@ class Service {
         $r->xml($input);
 
         $result = $r->parse();
-        if ($rootElementName !== $result['name']) {
-            throw new ParseException('Expected ' . $rootElementName . ' but received ' . $result['name'] . ' as the root element');
+        if (!in_array($result['name'], (array)$rootElementName, true)) {
+            throw new ParseException('Expected ' . implode(' or ', (array)$rootElementName) . ' but received ' . $result['name'] . ' as the root element');
         }
         return $result['value'];
 
@@ -165,6 +189,71 @@ class Service {
 
     }
 
+    /**
+     * Map an xml element to a PHP class.
+     *
+     * Calling this function will automatically setup the Reader and Writer
+     * classes to turn a specific XML element to a PHP class.
+     *
+     * For example, given a class such as :
+     *
+     * class Author {
+     *   public $firstName;
+     *   public $lastName;
+     * }
+     *
+     * and an XML element such as:
+     *
+     * <author xmlns="http://example.org/ns">
+     *   <firstName>...</firstName>
+     *   <lastName>...</lastName>
+     * </author>
+     *
+     * These can easily be mapped by calling:
+     *
+     * $service->mapValueObject('{http://example.org}author', 'Author');
+     *
+     * @param string $elementName
+     * @param object $className
+     * @return void
+     */
+    function mapValueObject($elementName, $className) {
+        list($namespace) = self::parseClarkNotation($elementName);
+
+        $this->elementMap[$elementName] = function(Reader $reader) use ($className, $namespace) {
+            return \Sabre\Xml\Deserializer\valueObject($reader, $className, $namespace);
+        };
+        $this->classMap[$className] = function(Writer $writer, $valueObject) use ($namespace) {
+            return \Sabre\Xml\Serializer\valueObject($writer, $valueObject, $namespace);
+        };
+        $this->valueObjectMap[$className] = $elementName;
+    }
+
+    /**
+     * Writes a value object.
+     *
+     * This function largely behaves similar to write(), except that it's
+     * intended specifically to serialize a Value Object into an XML document.
+     *
+     * The ValueObject must have been previously registered using
+     * mapValueObject().
+     *
+     * @param object $object
+     * @param string $contextUri
+     * @return void
+     */
+    function writeValueObject($object, $contextUri = null) {
+
+        if (!isset($this->valueObjectMap[get_class($object)])) {
+            throw new \InvalidArgumentException('"' . get_class($object) . '" is not a registered value object class. Register your class with mapValueObject.');
+        }
+        return $this->write(
+            $this->valueObjectMap[get_class($object)],
+            $object,
+            $contextUri
+        );
+
+    }
 
     /**
      * Parses a clark-notation string, and returns the namespace and element
@@ -189,5 +278,9 @@ class Service {
 
     }
 
+    /**
+     * A list of classes and which XML elements they map to.
+     */
+    protected $valueObjectMap = [];
 
 }

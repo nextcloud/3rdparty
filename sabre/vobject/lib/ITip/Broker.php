@@ -31,7 +31,7 @@ use Sabre\VObject\Recur\EventIterator;
  * 6. It can process a reply from an invite and update an events attendee
  *     status based on a reply.
  *
- * @copyright Copyright (C) 2011-2015 fruux GmbH (https://fruux.com/).
+ * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
@@ -525,6 +525,11 @@ class Broker {
                     $event->add('SUMMARY', $calendar->VEVENT->SUMMARY->getValue());
                 }
                 $event->add(clone $calendar->VEVENT->DTSTART);
+                if (isset($calendar->VEVENT->DTEND)) {
+                    $event->add(clone $calendar->VEVENT->DTEND);
+                } elseif (isset($calendar->VEVENT->DURATION)) {
+                    $event->add(clone $calendar->VEVENT->DURATION);
+                }
                 $org = $event->add('ORGANIZER', $eventInfo['organizer']);
                 if ($eventInfo['organizerName']) $org['CN'] = $eventInfo['organizerName'];
                 $event->add('ATTENDEE', $attendee['href'], array(
@@ -735,6 +740,11 @@ class Broker {
             if (isset($eventInfo['instances'][$instance['id']])) {
                 $instanceObj = $eventInfo['instances'][$instance['id']];
                 $event->add(clone $instanceObj->DTSTART);
+                if (isset($instanceObj->DTEND)) {
+                    $event->add(clone $instanceObj->DTEND);
+                } elseif (isset($instanceObj->DURATION)) {
+                    $event->add(clone $instanceObj->DURATION);
+                }
                 if (isset($instanceObj->SUMMARY)) {
                     $event->add('SUMMARY', $instanceObj->SUMMARY->getValue());
                 } elseif ($summary) {

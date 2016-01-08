@@ -9,7 +9,7 @@ use Sabre\HTTP\Util;
  *
  * Use this class to leverage amazon's AWS authentication header
  *
- * @copyright Copyright (C) 2009-2015 fruux GmbH (https://fruux.com/).
+ * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
@@ -90,8 +90,8 @@ class AWS extends AbstractAuth {
 
         if ($contentMD5) {
             // We need to validate the integrity of the request
-            $body = $this->request->getBody(true);
-            $this->request->setBody($body, true);
+            $body = $this->request->getBody();
+            $this->request->setBody($body);
 
             if ($contentMD5 != base64_encode(md5($body, true))) {
                 // content-md5 header did not match md5 signature of body
