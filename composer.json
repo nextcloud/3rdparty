@@ -21,7 +21,7 @@
 		"pear/archive_tar": "1.4.1",
 		"patchwork/utf8": "1.2.5",
 		"symfony/console": "2.8.0",
-		"symfony/event-dispatcher": "2.7.7",
+		"symfony/event-dispatcher": "2.8.1",
 		"symfony/routing": "2.8.0",
 		"symfony/process": "2.8.0",
 		"pimple/pimple": "3.0.2",
