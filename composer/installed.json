@@ -2904,89 +2904,6 @@
         ]
     },
     {
-        "name": "sabre/dav",
-        "version": "3.0.6",
-        "version_normalized": "3.0.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fruux/sabre-dav.git",
-            "reference": "280d326338255f4ab7e06f73e4de070c4f9d85f0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/280d326338255f4ab7e06f73e4de070c4f9d85f0",
-            "reference": "280d326338255f4ab7e06f73e4de070c4f9d85f0",
-            "shasum": ""
-        },
-        "require": {
-            "ext-ctype": "*",
-            "ext-date": "*",
-            "ext-dom": "*",
-            "ext-iconv": "*",
-            "ext-libxml": "*",
-            "ext-mbstring": "*",
-            "ext-pcre": "*",
-            "ext-simplexml": "*",
-            "ext-spl": "*",
-            "php": ">=5.4.1",
-            "sabre/event": "~2.0",
-            "sabre/http": "~4.0",
-            "sabre/uri": "~1.0",
-            "sabre/vobject": ">=3.3.4,<4",
-            "sabre/xml": "~1.0"
-        },
-        "require-dev": {
-            "evert/phpdoc-md": "~0.1.0",
-            "phpunit/phpunit": "~4.2",
-            "sabre/cs": "~0.0.2"
-        },
-        "suggest": {
-            "ext-curl": "*",
-            "ext-pdo": "*"
-        },
-        "time": "2016-01-04 20:24:48",
-        "bin": [
-            "bin/sabredav",
-            "bin/naturalselection"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sabre\\DAV\\": "lib/DAV/",
-                "Sabre\\DAVACL\\": "lib/DAVACL/",
-                "Sabre\\CalDAV\\": "lib/CalDAV/",
-                "Sabre\\CardDAV\\": "lib/CardDAV/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "WebDAV Framework for PHP",
-        "homepage": "http://sabre.io/",
-        "keywords": [
-            "CalDAV",
-            "CardDAV",
-            "WebDAV",
-            "framework",
-            "iCalendar"
-        ]
-    },
-    {
         "name": "sabre/http",
         "version": "4.2.1",
         "version_normalized": "4.2.1.0",
@@ -3041,74 +2958,6 @@
         "homepage": "https://github.com/fruux/sabre-http",
         "keywords": [
             "http"
-        ]
-    },
-    {
-        "name": "sabre/vobject",
-        "version": "3.4.8",
-        "version_normalized": "3.4.8.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fruux/sabre-vobject.git",
-            "reference": "0d4f1b634cd483320f0e4530a3335fc19501e663"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/0d4f1b634cd483320f0e4530a3335fc19501e663",
-            "reference": "0d4f1b634cd483320f0e4530a3335fc19501e663",
-            "shasum": ""
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.3.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "*",
-            "squizlabs/php_codesniffer": "*"
-        },
-        "time": "2016-01-04 19:42:01",
-        "bin": [
-            "bin/vobject",
-            "bin/generate_vcards"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.2.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sabre\\VObject\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            },
-            {
-                "name": "Dominik Tobschall",
-                "email": "dominik@fruux.com",
-                "homepage": "http://tobschall.de/",
-                "role": "Developer"
-            }
-        ],
-        "description": "The VObject library for PHP allows you to easily parse and manipulate iCalendar and vCard objects",
-        "homepage": "http://sabre.io/vobject/",
-        "keywords": [
-            "VObject",
-            "iCalendar",
-            "jCal",
-            "jCard",
-            "vCard"
         ]
     },
     {
@@ -3237,5 +3086,156 @@
         ],
         "description": "Symfony EventDispatcher Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "sabre/vobject",
+        "version": "3.5.0",
+        "version_normalized": "3.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fruux/sabre-vobject.git",
+            "reference": "061dd47ce40074bf63da8e3d6dbe7f18b5a4f3a4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/061dd47ce40074bf63da8e3d6dbe7f18b5a4f3a4",
+            "reference": "061dd47ce40074bf63da8e3d6dbe7f18b5a4f3a4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*",
+            "squizlabs/php_codesniffer": "*"
+        },
+        "time": "2016-01-11 18:13:23",
+        "bin": [
+            "bin/vobject",
+            "bin/generate_vcards"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\VObject\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            },
+            {
+                "name": "Dominik Tobschall",
+                "email": "dominik@fruux.com",
+                "homepage": "http://tobschall.de/",
+                "role": "Developer"
+            }
+        ],
+        "description": "The VObject library for PHP allows you to easily parse and manipulate iCalendar and vCard objects",
+        "homepage": "http://sabre.io/vobject/",
+        "keywords": [
+            "VObject",
+            "iCalendar",
+            "jCal",
+            "jCard",
+            "vCard"
+        ]
+    },
+    {
+        "name": "sabre/dav",
+        "version": "3.0.7",
+        "version_normalized": "3.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fruux/sabre-dav.git",
+            "reference": "294b6e133f3b4cf644b9637a734b53f82d46d7f7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/294b6e133f3b4cf644b9637a734b53f82d46d7f7",
+            "reference": "294b6e133f3b4cf644b9637a734b53f82d46d7f7",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-date": "*",
+            "ext-dom": "*",
+            "ext-iconv": "*",
+            "ext-libxml": "*",
+            "ext-mbstring": "*",
+            "ext-pcre": "*",
+            "ext-simplexml": "*",
+            "ext-spl": "*",
+            "php": ">=5.4.1",
+            "sabre/event": "~2.0",
+            "sabre/http": "~4.0",
+            "sabre/uri": "~1.0",
+            "sabre/vobject": "^3.3.4",
+            "sabre/xml": "~1.0"
+        },
+        "require-dev": {
+            "evert/phpdoc-md": "~0.1.0",
+            "phpunit/phpunit": "~4.2",
+            "sabre/cs": "~0.0.2"
+        },
+        "suggest": {
+            "ext-curl": "*",
+            "ext-pdo": "*"
+        },
+        "time": "2016-01-12 22:41:05",
+        "bin": [
+            "bin/sabredav",
+            "bin/naturalselection"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\DAV\\": "lib/DAV/",
+                "Sabre\\DAVACL\\": "lib/DAVACL/",
+                "Sabre\\CalDAV\\": "lib/CalDAV/",
+                "Sabre\\CardDAV\\": "lib/CardDAV/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "WebDAV Framework for PHP",
+        "homepage": "http://sabre.io/",
+        "keywords": [
+            "CalDAV",
+            "CardDAV",
+            "WebDAV",
+            "framework",
+            "iCalendar"
+        ]
     }
 ]

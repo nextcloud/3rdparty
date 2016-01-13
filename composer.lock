@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e417c111b86067806b1f47be03e0b583",
-    "content-hash": "eaba40db159682cd7190887c9bf563a2",
+    "hash": "2035afbf9dd5436fd7648eb910d78bea",
+    "content-hash": "424678d7e3e63027d4cef362361a434b",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -2192,16 +2192,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "3.0.6",
+            "version": "3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "280d326338255f4ab7e06f73e4de070c4f9d85f0"
+                "reference": "294b6e133f3b4cf644b9637a734b53f82d46d7f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/280d326338255f4ab7e06f73e4de070c4f9d85f0",
-                "reference": "280d326338255f4ab7e06f73e4de070c4f9d85f0",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/294b6e133f3b4cf644b9637a734b53f82d46d7f7",
+                "reference": "294b6e133f3b4cf644b9637a734b53f82d46d7f7",
                 "shasum": ""
             },
             "require": {
@@ -2218,7 +2218,7 @@
                 "sabre/event": "~2.0",
                 "sabre/http": "~4.0",
                 "sabre/uri": "~1.0",
-                "sabre/vobject": ">=3.3.4,<4",
+                "sabre/vobject": "^3.3.4",
                 "sabre/xml": "~1.0"
             },
             "require-dev": {
@@ -2269,7 +2269,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2016-01-04 20:24:48"
+            "time": "2016-01-12 22:41:05"
         },
         {
             "name": "sabre/event",
@@ -2430,16 +2430,16 @@
         },
         {
             "name": "sabre/vobject",
-            "version": "3.4.8",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-vobject.git",
-                "reference": "0d4f1b634cd483320f0e4530a3335fc19501e663"
+                "reference": "061dd47ce40074bf63da8e3d6dbe7f18b5a4f3a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/0d4f1b634cd483320f0e4530a3335fc19501e663",
-                "reference": "0d4f1b634cd483320f0e4530a3335fc19501e663",
+                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/061dd47ce40074bf63da8e3d6dbe7f18b5a4f3a4",
+                "reference": "061dd47ce40074bf63da8e3d6dbe7f18b5a4f3a4",
                 "shasum": ""
             },
             "require": {
@@ -2492,7 +2492,7 @@
                 "jCard",
                 "vCard"
             ],
-            "time": "2016-01-04 19:42:01"
+            "time": "2016-01-11 18:13:23"
         },
         {
             "name": "sabre/xml",
