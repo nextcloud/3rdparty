@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9be5f2a6b55f90ece129220243025f4d",
-    "content-hash": "f9afa8f8a9d8a5b4993cadb8cfcbb99d",
+    "hash": "defe407b94981d3dd00f3c7af580ad1a",
+    "content-hash": "6279df5d520b1e6fdf046777f3cad773",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -3062,16 +3062,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "f76830dc0f8068df36226dc822e7fc1f5f73be46"
+                "reference": "b3261d88bad77de60e01f05706810413cc11367d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/f76830dc0f8068df36226dc822e7fc1f5f73be46",
-                "reference": "f76830dc0f8068df36226dc822e7fc1f5f73be46",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/b3261d88bad77de60e01f05706810413cc11367d",
+                "reference": "b3261d88bad77de60e01f05706810413cc11367d",
                 "shasum": ""
             },
             "require": {
@@ -3132,7 +3132,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2015-11-26 07:00:59"
+            "time": "2015-12-23 07:56:26"
         }
     ],
     "packages-dev": [],
