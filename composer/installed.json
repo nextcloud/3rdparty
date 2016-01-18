@@ -948,61 +948,6 @@
         ]
     },
     {
-        "name": "interfasys/lognormalizer",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/interfasys/lognormalizer.git",
-            "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/interfasys/lognormalizer/zipball/d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
-            "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "codacy/coverage": "dev-master",
-            "codeclimate/php-test-reporter": "dev-master",
-            "phpunit/phpunit": "4.*"
-        },
-        "time": "2015-08-01 16:27:37",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "InterfaSys\\LogNormalizer\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "AGPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "Olivier Paroz",
-                "email": "dev-lognormalizer@interfasys.ch",
-                "homepage": "http://www.interfasys.ch",
-                "role": "Developer"
-            },
-            {
-                "name": "Jordi Boggiano",
-                "email": "j.boggiano@seld.be",
-                "role": "Developer"
-            }
-        ],
-        "description": "Parses variables and converts them to string so that they can be logged",
-        "homepage": "https://github.com/interfasys/lognormalizer",
-        "keywords": [
-            "log",
-            "normalizer"
-        ]
-    },
-    {
         "name": "deepdiver1975/tarstreamer",
         "version": "v0.1-beta3",
         "version_normalized": "0.1.0.0-beta3",
@@ -3237,5 +3182,60 @@
         ],
         "description": "Symfony Console Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "interfasys/lognormalizer",
+        "version": "v1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/interfasys/lognormalizer.git",
+            "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/interfasys/lognormalizer/zipball/d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
+            "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "codacy/coverage": "dev-master",
+            "codeclimate/php-test-reporter": "dev-master",
+            "phpunit/phpunit": "4.*"
+        },
+        "time": "2015-08-01 16:27:37",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "InterfaSys\\LogNormalizer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "AGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Olivier Paroz",
+                "email": "dev-lognormalizer@interfasys.ch",
+                "homepage": "http://www.interfasys.ch",
+                "role": "Developer"
+            },
+            {
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Parses variables and converts them to string so that they can be logged",
+        "homepage": "https://github.com/interfasys/lognormalizer",
+        "keywords": [
+            "log",
+            "normalizer"
+        ]
     }
 ]
