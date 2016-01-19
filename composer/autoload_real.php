@@ -27,16 +27,6 @@ class ComposerAutoloaderInit2f23f73bc0cc116b4b1eee1521aa8652
         array_push($includePaths, get_include_path());
         set_include_path(join(PATH_SEPARATOR, $includePaths));
 
-        $map = require __DIR__ . '/autoload_namespaces.php';
-        foreach ($map as $namespace => $path) {
-            $loader->set($namespace, $path);
-        }
-
-        $map = require __DIR__ . '/autoload_psr4.php';
-        foreach ($map as $namespace => $path) {
-            $loader->setPsr4($namespace, $path);
-        }
-
         $classMap = require __DIR__ . '/autoload_classmap.php';
         if ($classMap) {
             $loader->addClassMap($classMap);
