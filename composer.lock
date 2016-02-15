@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "24fe16c237181b4f16314fe2d7f96e42",
-    "content-hash": "3ac35fa2d361138de18245f8e7536e32",
+    "hash": "535817718a4310cc78be6e0ba74eef38",
+    "content-hash": "4bfd282c4d64796696f153ce27f1b62b",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -39,16 +39,16 @@
         },
         {
             "name": "deepdiver1975/tarstreamer",
-            "version": "v0.1-beta3",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owncloud/TarStreamer.git",
-                "reference": "07b940c68382cbfbf3a42e1de307ef6b53d5d515"
+                "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/07b940c68382cbfbf3a42e1de307ef6b53d5d515",
-                "reference": "07b940c68382cbfbf3a42e1de307ef6b53d5d515",
+                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/859a0170de120c66b042e6c0dbc1a9979c74669b",
+                "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b",
                 "shasum": ""
             },
             "require": {
@@ -77,7 +77,7 @@
                 "stream",
                 "tar"
             ],
-            "time": "2015-09-28 09:43:53"
+            "time": "2016-02-15 10:52:44"
         },
         {
             "name": "doctrine/annotations",
@@ -3141,8 +3141,7 @@
     "stability-flags": {
         "james-heinrich/getid3": 20,
         "natxet/cssmin": 20,
-        "swiftmailer/swiftmailer": 0,
-        "deepdiver1975/tarstreamer": 10
+        "swiftmailer/swiftmailer": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,

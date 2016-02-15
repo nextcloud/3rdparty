@@ -862,50 +862,6 @@
         ]
     },
     {
-        "name": "deepdiver1975/tarstreamer",
-        "version": "v0.1-beta3",
-        "version_normalized": "0.1.0.0-beta3",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/owncloud/TarStreamer.git",
-            "reference": "07b940c68382cbfbf3a42e1de307ef6b53d5d515"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/07b940c68382cbfbf3a42e1de307ef6b53d5d515",
-            "reference": "07b940c68382cbfbf3a42e1de307ef6b53d5d515",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.8"
-        },
-        "require-dev": {
-            "pear/archive_tar": "~1.4",
-            "pear/pear-core-minimal": "v1.10.0alpha2",
-            "phpunit/phpunit": "^4.8"
-        },
-        "time": "2015-09-28 09:43:53",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "ownCloud\\TarStreamer\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "A library for dynamically streaming dynamic tar files without the need to have the complete file stored on the server.",
-        "homepage": "https://github.com/owncloud/TarStreamer",
-        "keywords": [
-            "archive",
-            "php",
-            "stream",
-            "tar"
-        ]
-    },
-    {
         "name": "patchwork/jsqueeze",
         "version": "v2.0.3",
         "version_normalized": "2.0.3.0",
@@ -3236,6 +3192,50 @@
             "s3",
             "sftp",
             "storage"
+        ]
+    },
+    {
+        "name": "deepdiver1975/tarstreamer",
+        "version": "v0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/owncloud/TarStreamer.git",
+            "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/859a0170de120c66b042e6c0dbc1a9979c74669b",
+            "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.8"
+        },
+        "require-dev": {
+            "pear/archive_tar": "~1.4",
+            "pear/pear-core-minimal": "v1.10.0alpha2",
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2016-02-15 10:52:44",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ownCloud\\TarStreamer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "A library for dynamically streaming dynamic tar files without the need to have the complete file stored on the server.",
+        "homepage": "https://github.com/owncloud/TarStreamer",
+        "keywords": [
+            "archive",
+            "php",
+            "stream",
+            "tar"
         ]
     }
 ]
