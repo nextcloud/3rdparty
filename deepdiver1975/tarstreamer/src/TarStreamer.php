@@ -57,10 +57,17 @@ class TarStreamer {
 			'Accept-Ranges' => 'bytes',
 			'Connection' => 'Keep-Alive',
 			'Content-Type' => $contentType,
-			'Content-Disposition' => 'attachment; filename="' . $encodedArchiveName . '";',
 			'Cache-Control' => 'public, must-revalidate',
 			'Content-Transfer-Encoding' => 'binary',
 		];
+
+		// Use UTF-8 filenames when not using Internet Explorer
+		if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
+			header('Content-Disposition: attachment; filename="' . rawurlencode($archiveName) . '"');
+		}  else  {
+			header('Content-Disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($archiveName)
+					. '; filename="' . rawurlencode($archiveName) . '"');
+		}
 
 		foreach ($headers as $key => $value){
 			header("$key: $value");
