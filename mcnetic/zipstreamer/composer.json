@@ -12,8 +12,12 @@
     },{
       "name": "André Rothe",
       "email": "arothe@zks.uni-leipzig.de",
-     "role": "Contributor"
-   }
+      "role": "Contributor"
+    },{
+      "name": "Lukas Reschke",
+      "email": "lukas@owncloud.com",
+      "role": "Contributor"
+    }
   ],
   "repositories": [ {
       "type": "vcs",

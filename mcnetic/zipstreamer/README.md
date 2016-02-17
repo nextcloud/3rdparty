@@ -4,10 +4,12 @@ PHPZipStreamer
 Simple Class to create zip files on the fly and stream directly to the HTTP
 client as the content is added (without using temporary files).
 
-Copyright (C) 2013-2015 Nicolai Ehemann (en@enlightened.de) and contributors
+Copyright (C) 2013-2016 Nicolai Ehemann (en@enlightened.de) and contributors
 
-Contributors:
+Contributors (in order of first contribution):
 * André Rothe (arothe@zks.uni-leipzig.de)
+* Lukas Reschke (lukas@owncloud.com)
+* Others (who do not want to be mentioned)
 
 See MANUAL.md for a short intro to using ZipStreamer.
 

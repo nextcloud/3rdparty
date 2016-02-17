@@ -9,7 +9,7 @@
 	},
 	"require": {
 		"doctrine/dbal": "2.5.2",
-		"mcnetic/zipstreamer": "v0.7",
+		"mcnetic/zipstreamer": "^1.0",
 		"phpseclib/phpseclib": "2.0.0",
 		"rackspace/php-opencloud": "v1.9.2",
 		"james-heinrich/getid3": "dev-master",

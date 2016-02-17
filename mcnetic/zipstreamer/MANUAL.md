@@ -46,7 +46,9 @@ Characteristics
 streams, if they are created from disk), has low cpu usage (especially when
 not compressing) and a low memory footprint, as the streams are read in small
 chunks
-* **Compatibility issues:** ZipStreamer by default uses the Zip64 extension. Some
+* **Compatibility issues:** ZipStreamer produces 'streamed' zip files (part of
+the zip standard since 1993). Some (mostly older) zip tools and Mac OS X finder
+can not handle that. ZipStreamer by default uses the Zip64 extension. Some
 (mostly older) zip tools and Mac OS X can not handle that, therefore it can be
 disabled (see below)
 * **Large output files:** With the Zip64 extension, ZipStreamer can handle
