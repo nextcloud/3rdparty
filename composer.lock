@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "535817718a4310cc78be6e0ba74eef38",
-    "content-hash": "4bfd282c4d64796696f153ce27f1b62b",
+    "hash": "38f085368014c38a315ea4c53ce531de",
+    "content-hash": "bd2122818a7f85e08f1b7362eeb91b6e",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1621,16 +1621,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.2.5",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tchwork/utf8.git",
-                "reference": "25a55c6c668de61cc3b97aab4237ebf6dadabe17"
+                "reference": "f986d18f4e37ab70b792e977c7d85970cf84f164"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/utf8/zipball/25a55c6c668de61cc3b97aab4237ebf6dadabe17",
-                "reference": "25a55c6c668de61cc3b97aab4237ebf6dadabe17",
+                "url": "https://api.github.com/repos/tchwork/utf8/zipball/f986d18f4e37ab70b792e977c7d85970cf84f164",
+                "reference": "f986d18f4e37ab70b792e977c7d85970cf84f164",
                 "shasum": ""
             },
             "require": {
@@ -1676,7 +1676,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-10-14 08:58:12"
+            "time": "2015-12-15 15:33:41"
         },
         {
             "name": "pear/archive_tar",
