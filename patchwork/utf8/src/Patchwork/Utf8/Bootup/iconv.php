@@ -16,8 +16,6 @@ const ICONV_VERSION = '1.0';
 const ICONV_MIME_DECODE_STRICT = 1;
 const ICONV_MIME_DECODE_CONTINUE_ON_ERROR = 2;
 
-@trigger_error('You are using a fallback implementation of the iconv extension. Installing the native one is highly recommended instead.', E_USER_DEPRECATED);
-
 function iconv($from, $to, $s) {return s\Iconv::iconv($from, $to, $s);};
 function iconv_get_encoding($type = 'all') {return s\Iconv::iconv_get_encoding($type);};
 function iconv_set_encoding($type, $charset) {return s\Iconv::iconv_set_encoding($type, $charset);};

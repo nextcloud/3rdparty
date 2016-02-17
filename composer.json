@@ -19,7 +19,7 @@
 		"natxet/CssMin": "dev-master",
 		"punic/punic": "1.6.3",
 		"pear/archive_tar": "1.4.1",
-		"patchwork/utf8": "1.2.5",
+		"patchwork/utf8": "1.2.6",
 		"symfony/console": "2.8.1",
 		"symfony/event-dispatcher": "2.8.1",
 		"symfony/routing": "2.8.1",
