@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38f085368014c38a315ea4c53ce531de",
-    "content-hash": "bd2122818a7f85e08f1b7362eeb91b6e",
+    "hash": "01a2beb82c7d1d41a162c7a0d4f92d67",
+    "content-hash": "513a3dea6f9343315cafeff57cd53ad6",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1392,16 +1392,16 @@
         },
         {
             "name": "mcnetic/zipstreamer",
-            "version": "v0.7",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/McNetic/PHPZipStreamer.git",
-                "reference": "44c99c659abf4dac92882437c1da68de824ca9d0"
+                "reference": "e57c198486242476587d04844084adbe8330581d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/McNetic/PHPZipStreamer/zipball/44c99c659abf4dac92882437c1da68de824ca9d0",
-                "reference": "44c99c659abf4dac92882437c1da68de824ca9d0",
+                "url": "https://api.github.com/repos/McNetic/PHPZipStreamer/zipball/e57c198486242476587d04844084adbe8330581d",
+                "reference": "e57c198486242476587d04844084adbe8330581d",
                 "shasum": ""
             },
             "require": {
@@ -1427,6 +1427,11 @@
                     "name": "André Rothe",
                     "email": "arothe@zks.uni-leipzig.de",
                     "role": "Contributor"
+                },
+                {
+                    "name": "Lukas Reschke",
+                    "email": "lukas@owncloud.com",
+                    "role": "Contributor"
                 }
             ],
             "description": "Stream zip files without i/o overhead",
@@ -1435,7 +1440,7 @@
                 "stream",
                 "zip"
             ],
-            "time": "2015-08-26 13:48:01"
+            "time": "2016-02-17 22:47:09"
         },
         {
             "name": "natxet/CssMin",

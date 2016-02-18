@@ -27,7 +27,7 @@
  * @author André Rothe <arothe@zks.uni-leipzig.de>
  * @copyright Copyright (C) 2013-2015 Nicolai Ehemann and contributors
  * @license GNU GPL
- * @version 0.7
+ * @version 1.0
  */
 namespace ZipStreamer;
 
@@ -46,7 +46,7 @@ class COMPR {
 }
 
 class ZipStreamer {
-  const VERSION = "0.7";
+  const VERSION = "1.0";
 
   const ZIP_LOCAL_FILE_HEADER = 0x04034b50; // local file header signature
   const ZIP_CENTRAL_FILE_HEADER = 0x02014b50; // central file header signature
@@ -166,7 +166,13 @@ class ZipStreamer {
         header('Accept-Ranges: bytes');
         header('Connection: Keep-Alive');
         header('Content-Type: ' . $contentType);
-        header('Content-Disposition: attachment; filename="' . $archiveName . '";');
+        // Use UTF-8 filenames when not using Internet Explorer
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
+          header('Content-Disposition: attachment; filename="' . rawurlencode($archiveName) . '"' );
+        }  else  {
+          header( 'Content-Disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($archiveName)
+              . '; filename="' . rawurlencode($archiveName) . '"' );
+        }
         header('Content-Transfer-Encoding: binary');
       }
     }
@@ -359,8 +365,7 @@ class ZipStreamer {
       $compStream = DeflateStream::create($level);
     }
 
-    while (!feof($stream)) {
-      $data = fread($stream, self::STREAM_CHUNK_SIZE);
+    while (!feof($stream) && $data = fread($stream, self::STREAM_CHUNK_SIZE)) {
       $dataLength->add(strlen($data));
       hash_update($hashCtx, $data);
       if (COMPR::DEFLATE === $compress) {
