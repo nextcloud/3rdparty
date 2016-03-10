@@ -312,8 +312,12 @@ class Application
      */
     public function getLongVersion()
     {
-        if ('UNKNOWN' !== $this->getName() && 'UNKNOWN' !== $this->getVersion()) {
-            return sprintf('<info>%s</info> version <comment>%s</comment>', $this->getName(), $this->getVersion());
+        if ('UNKNOWN' !== $this->getName()) {
+            if ('UNKNOWN' !== $this->getVersion()) {
+                return sprintf('<info>%s</info> version <comment>%s</comment>', $this->getName(), $this->getVersion());
+            }
+
+            return sprintf('<info>%s</info>', $this->getName());
         }
 
         return '<info>Console Tool</info>';
@@ -426,7 +430,7 @@ class Application
     public function getNamespaces()
     {
         $namespaces = array();
-        foreach ($this->commands as $command) {
+        foreach ($this->all() as $command) {
             $namespaces = array_merge($namespaces, $this->extractAllNamespaces($command->getName()));
 
             foreach ($command->getAliases() as $alias) {
