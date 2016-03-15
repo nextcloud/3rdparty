@@ -51,13 +51,25 @@ function enum(Writer $writer, array $values) {
  * Every public property will be encoded as an xml element with the same
  * name, in the XML namespace as specified.
  *
+ * Values that are set to null or an empty array are not serialized. To
+ * serialize empty properties, you must specify them as an empty string.
+ *
  * @param Writer $writer
  * @param object $valueObject
  * @param string $namespace
  */
 function valueObject(Writer $writer, $valueObject, $namespace) {
     foreach (get_object_vars($valueObject) as $key => $val) {
-        $writer->writeElement('{' . $namespace . '}' . $key, $val);
+        if (is_array($val)) {
+            // If $val is an array, it has a special meaning. We need to
+            // generate one child element for each item in $val
+            foreach ($val as $child) {
+                $writer->writeElement('{' . $namespace . '}' . $key, $child);
+            }
+
+        } elseif ($val !== null) {
+            $writer->writeElement('{' . $namespace . '}' . $key, $val);
+        }
     }
 }
 
@@ -80,7 +92,7 @@ function valueObject(Writer $writer, $valueObject, $namespace) {
  * @param Writer $writer
  * @param array $items A list of items sabre/xml can serialize.
  * @param string $childElementName Element name in clark-notation
- * @return array
+ * @return void
  */
 function repeatingElements(Writer $writer, array $items, $childElementName) {
 
@@ -175,39 +187,53 @@ function standardSerializer(Writer $writer, $value) {
 
         // nothing!
 
+    } elseif (is_array($value) && array_key_exists('name', $value)) {
+
+        // if the array had a 'name' element, we assume that this array
+        // describes a 'name' and optionally 'attributes' and 'value'.
+
+        $name = $value['name'];
+        $attributes = isset($value['attributes']) ? $value['attributes'] : [];
+        $value = isset($value['value']) ? $value['value'] : null;
+
+        $writer->startElement($name);
+        $writer->writeAttributes($attributes);
+        $writer->write($value);
+        $writer->endElement();
+
     } elseif (is_array($value)) {
 
         foreach ($value as $name => $item) {
 
             if (is_int($name)) {
 
-                // This item has a numeric index. We expect to be an array with a name and a value.
-                if (!is_array($item) || !array_key_exists('name', $item)) {
-                    throw new InvalidArgumentException('When passing an array to ->write with numeric indices, every item must be an array containing at least the "name" key');
+                // This item has a numeric index. We just loop through the
+                // array and throw it back in the writer.
+                standardSerializer($writer, $item);
+
+            } elseif (is_string($name) && is_array($item) && isset($item['attributes'])) {
+
+                // The key is used for a name, but $item has 'attributes' and
+                // possibly 'value'
+                $writer->startElement($name);
+                $writer->writeAttributes($item['attributes']);
+                if (isset($item['value'])) {
+                    $writer->write($item['value']);
                 }
+                $writer->endElement();
 
-                $attributes = isset($item['attributes']) ? $item['attributes'] : [];
-                $name = $item['name'];
-                $item = isset($item['value']) ? $item['value'] : [];
+            } elseif (is_string($name)) {
 
-            } elseif (is_array($item) && array_key_exists('value', $item)) {
-
-                // This item has a text index. We expect to be an array with a value and optional attributes.
-                $attributes = isset($item['attributes']) ? $item['attributes'] : [];
-                $item = $item['value'];
+                // This was a plain key-value array.
+                $writer->startElement($name);
+                $writer->write($item);
+                $writer->endElement();
 
             } else {
-                // If it's an array with text-indices, we expect every item's
-                // key to be an xml element name in clark notation.
-                // No attributes can be passed.
-                $attributes = [];
+
+                throw new InvalidArgumentException('The writer does not know how to serialize arrays with keys of type: ' . gettype($name));
+
             }
-
-            $writer->startElement($name);
-            $writer->writeAttributes($attributes);
-            $writer->write($item);
-            $writer->endElement();
-
         }
 
     } elseif (is_object($value)) {

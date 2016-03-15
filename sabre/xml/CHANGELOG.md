@@ -1,6 +1,25 @@
 ChangeLog
 =========
 
+1.4.1 (2016-03-12)
+-----------------
+
+* Parsing clark-notation is now cached. This can speed up parsing large
+  documents with lots of repeating elements a fair bit. (@icewind1991).
+
+
+1.4.0 (2016-02-14)
+------------------
+
+* Any array thrown into the serializer with numeric keys is now simply
+  traversed and each individual item is serialized. This fixes an issue
+  related to serializing value objects with array children.
+* When serializing value objects, properties that have a null value or an
+  empty array are now skipped. We believe this to be the saner default, but
+  does constitute a BC break for those depending on this.
+* Serializing array properties in value objects was broken.
+
+
 1.3.0 (2015-12-29)
 ------------------
 

@@ -2384,16 +2384,16 @@
         },
         {
             "name": "sabre/uri",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-uri.git",
-                "reference": "6bae7efdd9dfcfdb3edfc4362741e59ce4b64f42"
+                "reference": "9012116434d84ef6e5e37a89dfdbfbe2204a8704"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-uri/zipball/6bae7efdd9dfcfdb3edfc4362741e59ce4b64f42",
-                "reference": "6bae7efdd9dfcfdb3edfc4362741e59ce4b64f42",
+                "url": "https://api.github.com/repos/fruux/sabre-uri/zipball/9012116434d84ef6e5e37a89dfdbfbe2204a8704",
+                "reference": "9012116434d84ef6e5e37a89dfdbfbe2204a8704",
                 "shasum": ""
             },
             "require": {
@@ -2431,7 +2431,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2015-04-29 03:47:26"
+            "time": "2016-03-08 02:29:27"
         },
         {
             "name": "sabre/vobject",
@@ -2501,16 +2501,16 @@
         },
         {
             "name": "sabre/xml",
-            "version": "1.3.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-xml.git",
-                "reference": "420400f36655d79894fae8ce970516a71ea8f5f5"
+                "reference": "59998046db252634259a878baf1af18159f508f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-xml/zipball/420400f36655d79894fae8ce970516a71ea8f5f5",
-                "reference": "420400f36655d79894fae8ce970516a71ea8f5f5",
+                "url": "https://api.github.com/repos/fruux/sabre-xml/zipball/59998046db252634259a878baf1af18159f508f3",
+                "reference": "59998046db252634259a878baf1af18159f508f3",
                 "shasum": ""
             },
             "require": {
@@ -2560,7 +2560,7 @@
                 "dom",
                 "xml"
             ],
-            "time": "2015-12-29 20:51:22"
+            "time": "2016-03-12 22:23:16"
         },
         {
             "name": "swiftmailer/swiftmailer",
