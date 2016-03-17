@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e358b5279a99469a58e2e2137cde62a7",
-    "content-hash": "d71eb9e02d8b6aab2f6f4bf1d9dfc1da",
+    "hash": "79c901497ff79204f52de955d695345f",
+    "content-hash": "7afc67bc105e10f3a1ead14fb04a75c8",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -907,23 +907,24 @@
         },
         {
             "name": "icewind/streams",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "1cca87c499b0a50056468b94479effd5b4b390cb"
+                "reference": "9ca40274645a967ecc3408b0ca2e6255ead1d1d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/1cca87c499b0a50056468b94479effd5b4b390cb",
-                "reference": "1cca87c499b0a50056468b94479effd5b4b390cb",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/9ca40274645a967ecc3408b0ca2e6255ead1d1d3",
+                "reference": "9ca40274645a967ecc3408b0ca2e6255ead1d1d3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
             "require-dev": {
-                "satooshi/php-coveralls": "dev-master"
+                "phpunit/phpunit": "^4.8",
+                "satooshi/php-coveralls": "v1.0.0"
             },
             "type": "library",
             "autoload": {
@@ -943,7 +944,7 @@
                 }
             ],
             "description": "A set of generic stream wrappers",
-            "time": "2015-09-01 14:56:35"
+            "time": "2016-03-17 12:32:25"
         },
         {
             "name": "interfasys/lognormalizer",
