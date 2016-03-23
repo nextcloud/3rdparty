@@ -758,6 +758,7 @@ return array(
     'League\\Flysystem\\Util' => $vendorDir . '/league/flysystem/src/Util.php',
     'League\\Flysystem\\Util\\ContentListingFormatter' => $vendorDir . '/league/flysystem/src/Util/ContentListingFormatter.php',
     'League\\Flysystem\\Util\\MimeType' => $vendorDir . '/league/flysystem/src/Util/MimeType.php',
+    'League\\Flysystem\\Util\\StreamHasher' => $vendorDir . '/league/flysystem/src/Util/StreamHasher.php',
     'Normalizer' => $vendorDir . '/patchwork/utf8/src/Normalizer.php',
     'OS_Guess' => $vendorDir . '/pear/pear-core-minimal/src/OS/Guess.php',
     'OpenCloud\\Autoscale\\Resource\\AbstractResource' => $vendorDir . '/rackspace/php-opencloud/lib/OpenCloud/Autoscale/Resource/AbstractResource.php',
