@@ -12,7 +12,6 @@
 		"mcnetic/zipstreamer": "^1.0",
 		"phpseclib/phpseclib": "2.0.0",
 		"rackspace/php-opencloud": "v1.9.2",
-		"james-heinrich/getid3": "dev-master",
 		"jeremeamia/superclosure": "2.1.0",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"natxet/CssMin": "dev-master",
@@ -38,6 +37,7 @@
 		"sabre/dav": "3.0.8",
 		"symfony/polyfill-php70": "^1.0",
 		"symfony/polyfill-php55": "^1.0",
-		"symfony/polyfill-php56": "^1.0"
+		"symfony/polyfill-php56": "^1.0",
+		"lukasreschke/id3parser": "^0.0.1"
 	}
 }
