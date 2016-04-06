@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0b855067bb60438c994ea114d0208e38",
-    "content-hash": "ba5f3798248d16fb6e24f72e57a49097",
+    "hash": "b904a64f4284c645ddbf8652f0d1518b",
+    "content-hash": "a00d063a183dcc8185e42e9cf0c88ab1",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1042,42 +1042,6 @@
             "time": "2014-11-20 16:49:30"
         },
         {
-            "name": "james-heinrich/getid3",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JamesHeinrich/getID3.git",
-                "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/995da7d5e8a7ac2b5ef076c64e9be66d380ede4f",
-                "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "getid3/getid3.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL"
-            ],
-            "description": "PHP script that extracts useful information from popular multimedia file formats",
-            "homepage": "http://www.getid3.org/",
-            "keywords": [
-                "codecs",
-                "php",
-                "tags"
-            ],
-            "time": "2014-09-14 18:13:30"
-        },
-        {
             "name": "jeremeamia/SuperClosure",
             "version": "2.1.0",
             "source": {
@@ -1294,6 +1258,41 @@
                 "storage"
             ],
             "time": "2016-03-14 21:54:11"
+        },
+        {
+            "name": "lukasreschke/id3parser",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LukasReschke/ID3Parser.git",
+                "reference": "cd3ba6e8918cc30883f01a3c24281cfe23b8877a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LukasReschke/ID3Parser/zipball/cd3ba6e8918cc30883f01a3c24281cfe23b8877a",
+                "reference": "cd3ba6e8918cc30883f01a3c24281cfe23b8877a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ID3Parser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "homepage": "https://github.com/LukasReschke/ID3Parser/",
+            "keywords": [
+                "codecs",
+                "php",
+                "tags"
+            ],
+            "time": "2016-04-04 09:34:50"
         },
         {
             "name": "mcnetic/zipstreamer",
@@ -3049,7 +3048,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "james-heinrich/getid3": 20,
         "natxet/cssmin": 20,
         "swiftmailer/swiftmailer": 0
     },
