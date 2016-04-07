@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b904a64f4284c645ddbf8652f0d1518b",
-    "content-hash": "a00d063a183dcc8185e42e9cf0c88ab1",
+    "hash": "16431eb4f0d1fab791d7c4650f6f31bd",
+    "content-hash": "507c15d06b78cef2836f432a00ba8280",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -2101,16 +2101,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "3.0.8",
+            "version": "3.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "69c5080ae689247d06a3c30fba05aba22bb81cf5"
+                "reference": "b42593965211de1ce99f73bd3aede99c41258e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/69c5080ae689247d06a3c30fba05aba22bb81cf5",
-                "reference": "69c5080ae689247d06a3c30fba05aba22bb81cf5",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/b42593965211de1ce99f73bd3aede99c41258e08",
+                "reference": "b42593965211de1ce99f73bd3aede99c41258e08",
                 "shasum": ""
             },
             "require": {
@@ -2118,11 +2118,11 @@
                 "ext-date": "*",
                 "ext-dom": "*",
                 "ext-iconv": "*",
-                "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
                 "ext-spl": "*",
+                "lib-libxml": ">=2.7.0",
                 "php": ">=5.4.1",
                 "sabre/event": "~2.0",
                 "sabre/http": "~4.0",
@@ -2178,7 +2178,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2016-03-12 22:36:59"
+            "time": "2016-04-07 00:32:57"
         },
         {
             "name": "sabre/event",
