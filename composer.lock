@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "747aa1bf8588aa51e9f8d6bc6ebee284",
-    "content-hash": "2e338b6fe65de0e3135657efcf586920",
+    "hash": "e45bd9ffd35e8aa646134870a48bc4c0",
+    "content-hash": "c8078550a50c307c7e598d03fb0fe60b",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1146,7 +1146,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/5c85d440b6c7d5ffdc4b8d8d6fdd37c6e244b3af",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/995da7d5e8a7ac2b5ef076c64e9be66d380ede4f",
                 "reference": "afbdaa044a9a0a9dff2f800bd670e231b3ec99b2",
                 "shasum": ""
             },
@@ -2198,16 +2198,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "3.0.8",
+            "version": "3.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-dav.git",
-                "reference": "69c5080ae689247d06a3c30fba05aba22bb81cf5"
+                "reference": "b42593965211de1ce99f73bd3aede99c41258e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/69c5080ae689247d06a3c30fba05aba22bb81cf5",
-                "reference": "69c5080ae689247d06a3c30fba05aba22bb81cf5",
+                "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/b42593965211de1ce99f73bd3aede99c41258e08",
+                "reference": "b42593965211de1ce99f73bd3aede99c41258e08",
                 "shasum": ""
             },
             "require": {
@@ -2215,11 +2215,11 @@
                 "ext-date": "*",
                 "ext-dom": "*",
                 "ext-iconv": "*",
-                "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
                 "ext-spl": "*",
+                "lib-libxml": ">=2.7.0",
                 "php": ">=5.4.1",
                 "sabre/event": "~2.0",
                 "sabre/http": "~4.0",
@@ -2275,7 +2275,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2016-03-12 22:36:59"
+            "time": "2016-04-07 00:32:57"
         },
         {
             "name": "sabre/event",
