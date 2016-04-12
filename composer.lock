@@ -1483,16 +1483,16 @@
         },
         {
             "name": "patchwork/jsqueeze",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tchwork/jsqueeze.git",
-                "reference": "074a7ac403d1fae262fd662c43c04b62d71c3e50"
+                "reference": "74203bf6f4f891f5741cf286c2e47ece120f8b3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/jsqueeze/zipball/074a7ac403d1fae262fd662c43c04b62d71c3e50",
-                "reference": "074a7ac403d1fae262fd662c43c04b62d71c3e50",
+                "url": "https://api.github.com/repos/tchwork/jsqueeze/zipball/74203bf6f4f891f5741cf286c2e47ece120f8b3e",
+                "reference": "74203bf6f4f891f5741cf286c2e47ece120f8b3e",
                 "shasum": ""
             },
             "require": {
@@ -1526,7 +1526,7 @@
                 "javascript",
                 "minification"
             ],
-            "time": "2015-08-20 11:07:02"
+            "time": "2016-03-27 16:56:41"
         },
         {
             "name": "patchwork/utf8",
