@@ -3096,23 +3096,23 @@
     },
     {
         "name": "patchwork/jsqueeze",
-        "version": "v2.0.4",
-        "version_normalized": "2.0.4.0",
+        "version": "v2.0.5",
+        "version_normalized": "2.0.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tchwork/jsqueeze.git",
-            "reference": "74203bf6f4f891f5741cf286c2e47ece120f8b3e"
+            "reference": "693d64850eab2ce6a7c8f7cf547e1ab46e69d542"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tchwork/jsqueeze/zipball/74203bf6f4f891f5741cf286c2e47ece120f8b3e",
-            "reference": "74203bf6f4f891f5741cf286c2e47ece120f8b3e",
+            "url": "https://api.github.com/repos/tchwork/jsqueeze/zipball/693d64850eab2ce6a7c8f7cf547e1ab46e69d542",
+            "reference": "693d64850eab2ce6a7c8f7cf547e1ab46e69d542",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-03-27 16:56:41",
+        "time": "2016-04-19 09:28:22",
         "type": "library",
         "extra": {
             "branch-alias": {
