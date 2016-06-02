@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "16431eb4f0d1fab791d7c4650f6f31bd",
-    "content-hash": "507c15d06b78cef2836f432a00ba8280",
+    "hash": "cd6381c98bfdef8fc8782e3ba2101dde",
+    "content-hash": "40a1c2115611f850a7227831db855f4f",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -590,6 +590,7 @@
                 "event",
                 "exception"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2014-01-28 22:29:15"
         },
         {
@@ -647,6 +648,7 @@
                 "http",
                 "http client"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2014-01-23 18:23:29"
         },
         {
@@ -691,6 +693,7 @@
                 "message",
                 "url"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2013-10-24 00:04:09"
         },
         {
@@ -744,6 +747,7 @@
                 "component",
                 "stream"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2014-01-28 22:14:17"
         },
         {
@@ -907,16 +911,16 @@
         },
         {
             "name": "icewind/streams",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "9ca40274645a967ecc3408b0ca2e6255ead1d1d3"
+                "reference": "d3620e8dc410c86c2ba55579803679c4e0b289ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/9ca40274645a967ecc3408b0ca2e6255ead1d1d3",
-                "reference": "9ca40274645a967ecc3408b0ca2e6255ead1d1d3",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/d3620e8dc410c86c2ba55579803679c4e0b289ac",
+                "reference": "d3620e8dc410c86c2ba55579803679c4e0b289ac",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +948,7 @@
                 }
             ],
             "description": "A set of generic stream wrappers",
-            "time": "2016-03-17 12:32:25"
+            "time": "2016-06-02 14:37:52"
         },
         {
             "name": "interfasys/lognormalizer",
@@ -1356,7 +1360,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natxet/CssMin/zipball/0b2170454eed9024c7e26b036fbccf2d7f6f2c53",
+                "url": "https://api.github.com/repos/natxet/CssMin/zipball/003920e783c568c2d8fdf03999eebefb8479092a",
                 "reference": "003920e783c568c2d8fdf03999eebefb8479092a",
                 "shasum": ""
             },
