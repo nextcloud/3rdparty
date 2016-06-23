@@ -1,6 +1,6 @@
 3rdparty
 ========
 
-Some 3rd party libraries that are necessary to run ownCloud
+Some 3rd party libraries that are necessary to run Nextcloud.
 
-[![Dependency Status](https://www.versioneye.com/user/projects/54d1f76f3ca0840b190000c0/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54d1f76f3ca0840b190000c0#tab-settings)
+[![Dependency Status](https://www.versioneye.com/user/projects/576c043fcd6d510048bab256/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/576c043fcd6d510048bab256)
