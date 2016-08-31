@@ -35,7 +35,6 @@
 		"patchwork/jsqueeze": "^2.0",
 		"sabre/dav": "3.0.9",
 		"symfony/polyfill-php70": "^1.0",
-		"symfony/polyfill-php55": "^1.0",
 		"symfony/polyfill-php56": "^1.0",
 		"lukasreschke/id3parser": "^0.0.1"
 	}
