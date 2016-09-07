@@ -23,7 +23,6 @@
 		"symfony/routing": "^3.0.0",
 		"symfony/process": "2.8.1",
 		"pimple/pimple": "3.0.2",
-		"ircmaxell/password-compat": "1.0.*",
 		"nikic/php-parser": "1.4.1",
 		"icewind/Streams": "0.4.1",
 		"swiftmailer/swiftmailer": "@stable",
