@@ -1729,8 +1729,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
-        'Symfony\\Component\\Routing\\Matcher\\ApacheUrlMatcher' => __DIR__ . '/..' . '/symfony/routing/Matcher/ApacheUrlMatcher.php',
-        'Symfony\\Component\\Routing\\Matcher\\Dumper\\ApacheMatcherDumper' => __DIR__ . '/..' . '/symfony/routing/Matcher/Dumper/ApacheMatcherDumper.php',
         'Symfony\\Component\\Routing\\Matcher\\Dumper\\DumperCollection' => __DIR__ . '/..' . '/symfony/routing/Matcher/Dumper/DumperCollection.php',
         'Symfony\\Component\\Routing\\Matcher\\Dumper\\DumperPrefixCollection' => __DIR__ . '/..' . '/symfony/routing/Matcher/Dumper/DumperPrefixCollection.php',
         'Symfony\\Component\\Routing\\Matcher\\Dumper\\DumperRoute' => __DIR__ . '/..' . '/symfony/routing/Matcher/Dumper/DumperRoute.php',
