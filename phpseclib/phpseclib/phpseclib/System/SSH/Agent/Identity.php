@@ -23,9 +23,8 @@ use phpseclib\System\SSH\Agent;
  * Instantiation should only be performed by \phpseclib\System\SSH\Agent class.
  * This could be thought of as implementing an interface that phpseclib\Crypt\RSA
  * implements. ie. maybe a Net_SSH_Auth_PublicKey interface or something.
- * The methods in this interface would be getPublicKey, setSignatureMode
- * and sign since those are the methods phpseclib looks for to perform
- * public key authentication.
+ * The methods in this interface would be getPublicKey and sign since those are the
+ * methods phpseclib looks for to perform public key authentication.
  *
  * @package SSH\Agent
  * @author  Jim Wigginton <terrafrost@php.net>
@@ -38,32 +37,32 @@ class Identity
      *
      * @var \phpseclib\Crypt\RSA
      * @access private
-     * @see \phpseclib\System\SSH\Agent\Identity::getPublicKey()
+     * @see self::getPublicKey()
      */
     var $key;
 
     /**
      * Key Blob
      *
-     * @var String
+     * @var string
      * @access private
-     * @see \phpseclib\System\SSH\Agent\Identity::sign()
+     * @see self::sign()
      */
     var $key_blob;
 
     /**
      * Socket Resource
      *
-     * @var Resource
+     * @var resource
      * @access private
-     * @see \phpseclib\System\SSH\Agent\Identity::sign()
+     * @see self::sign()
      */
     var $fsock;
 
     /**
      * Default Constructor.
      *
-     * @param Resource $fsock
+     * @param resource $fsock
      * @return \phpseclib\System\SSH\Agent\Identity
      * @access private
      */
@@ -92,7 +91,7 @@ class Identity
      * Called by \phpseclib\System\SSH\Agent::requestIdentities(). The key blob could be extracted from $this->key
      * but this saves a small amount of computation.
      *
-     * @param String $key_blob
+     * @param string $key_blob
      * @access private
      */
     function setPublicKeyBlob($key_blob)
@@ -105,8 +104,8 @@ class Identity
      *
      * Wrapper for $this->key->getPublicKey()
      *
-     * @param Integer $format optional
-     * @return Mixed
+     * @param int $format optional
+     * @return mixed
      * @access public
      */
     function getPublicKey($format = null)
@@ -120,7 +119,7 @@ class Identity
      * Doesn't do anything as ssh-agent doesn't let you pick and choose the signature mode. ie.
      * ssh-agent's only supported mode is \phpseclib\Crypt\RSA::SIGNATURE_PKCS1
      *
-     * @param Integer $mode
+     * @param int $mode
      * @access public
      */
     function setSignatureMode($mode)
@@ -132,8 +131,8 @@ class Identity
      *
      * See "2.6.2 Protocol 2 private key signature request"
      *
-     * @param String $message
-     * @return String
+     * @param string $message
+     * @return string
      * @access public
      */
     function sign($message)
@@ -148,7 +147,7 @@ class Identity
         $length = current(unpack('N', fread($this->fsock, 4)));
         $type = ord(fread($this->fsock, 1));
         if ($type != Agent::SSH_AGENT_SIGN_RESPONSE) {
-            user_error('Unable to retreive signature');
+            user_error('Unable to retrieve signature');
         }
 
         $signature_blob = fread($this->fsock, $length - 1);
