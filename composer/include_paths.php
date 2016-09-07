@@ -10,5 +10,4 @@ return array(
     $vendorDir . '/pear/pear_exception',
     $vendorDir . '/pear/pear-core-minimal/src',
     $vendorDir . '/pear/archive_tar',
-    $vendorDir . '/phpseclib/phpseclib/phpseclib',
 );
