@@ -8,8 +8,8 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
 {
     public static $files = array (
         '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
-        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         'fe1bcd0336136e435eaf197895daf81a' => __DIR__ . '/..' . '/nikic/php-parser/lib/bootstrap.php',
         'ebdb698ed4152ae445614b69b5e4bb6a' => __DIR__ . '/..' . '/sabre/http/lib/functions.php',
         '3569eecfeed3bcf0bad3c998a494ecb8' => __DIR__ . '/..' . '/sabre/xml/lib/Deserializer/functions.php',
@@ -46,6 +46,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
             'SuperClosure\\' => 13,
+            'Stecman\\Component\\Symfony\\Console\\BashCompletion\\' => 49,
             'Sabre\\Xml\\' => 10,
             'Sabre\\VObject\\' => 14,
             'Sabre\\Uri\\' => 10,
@@ -132,6 +133,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'SuperClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src',
+        ),
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stecman/symfony-console-completion/src',
         ),
         'Sabre\\Xml\\' => 
         array (
@@ -1597,6 +1602,15 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Sabre\\Xml\\Writer' => __DIR__ . '/..' . '/sabre/xml/lib/Writer.php',
         'Sabre\\Xml\\XmlDeserializable' => __DIR__ . '/..' . '/sabre/xml/lib/XmlDeserializable.php',
         'Sabre\\Xml\\XmlSerializable' => __DIR__ . '/..' . '/sabre/xml/lib/XmlSerializable.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\Completion' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/Completion.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\CompletionCommand' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/CompletionCommand.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\CompletionContext' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/CompletionContext.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\CompletionHandler' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/CompletionHandler.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\Completion\\CompletionAwareInterface' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/Completion/CompletionAwareInterface.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\Completion\\CompletionInterface' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/Completion/CompletionInterface.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\Completion\\ShellPathCompletion' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/Completion/ShellPathCompletion.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\EnvironmentCompletionContext' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/EnvironmentCompletionContext.php',
+        'Stecman\\Component\\Symfony\\Console\\BashCompletion\\HookFactory' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/HookFactory.php',
         'SuperClosure\\Analyzer\\AstAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/AstAnalyzer.php',
         'SuperClosure\\Analyzer\\ClosureAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/ClosureAnalyzer.php',
         'SuperClosure\\Analyzer\\Token' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Token.php',

@@ -180,6 +180,13 @@ sabre/uri/tests
 sabre/vobject/tests
 sabre/xml/tests
 
+stecman/symfony-console-completion/tests
+stecman/symfony-console-completion/.gitignore
+stecman/symfony-console-completion/.travis.yml
+stecman/symfony-console-completion/composer.json
+stecman/symfony-console-completion/phpunit.xml.dist
+stecman/symfony-console-completion/README.md
+
 mcnetic/zipstreamer/tests
 
 ircmaxell/security-lib/tests
