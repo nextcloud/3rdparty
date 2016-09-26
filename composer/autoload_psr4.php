@@ -17,6 +17,7 @@ return array(
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
+    'Stecman\\Component\\Symfony\\Console\\BashCompletion\\' => array($vendorDir . '/stecman/symfony-console-completion/src'),
     'Sabre\\Xml\\' => array($vendorDir . '/sabre/xml/lib'),
     'Sabre\\VObject\\' => array($vendorDir . '/sabre/vobject/lib'),
     'Sabre\\Uri\\' => array($vendorDir . '/sabre/uri/lib'),
