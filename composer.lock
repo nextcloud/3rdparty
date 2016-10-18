@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41a7cb3cbc77445056509eacd88175bc",
-    "content-hash": "9269dbe6f0b5171867d083022b51c380",
+    "hash": "659652a24accab928c0d819a95dd0148",
+    "content-hash": "2486fa1b7aaa7365d979b98836b45359",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -2686,25 +2686,25 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.1",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "62c254438b5040bc2217156e1570cf2206e8540c"
+                "reference": "66de154ae86b1a07001da9fbffd620206e4faf94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/62c254438b5040bc2217156e1570cf2206e8540c",
-                "reference": "62c254438b5040bc2217156e1570cf2206e8540c",
+                "url": "https://api.github.com/repos/symfony/process/zipball/66de154ae86b1a07001da9fbffd620206e4faf94",
+                "reference": "66de154ae86b1a07001da9fbffd620206e4faf94",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.5.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2731,7 +2731,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-23 11:03:46"
+            "time": "2016-09-29 14:13:09"
         },
         {
             "name": "symfony/routing",
