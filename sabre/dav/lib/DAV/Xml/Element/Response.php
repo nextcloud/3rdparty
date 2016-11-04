@@ -142,7 +142,7 @@ class Response implements Element {
         if ($empty) {
             /*
              * The WebDAV spec _requires_ at least one DAV:propstat to appear for
-             * every DAV:response. There are circumstances however, there are no
+             * every DAV:response. In some circumstances however, there are no
              * properties to encode.
              *
              * In those cases we MUST specify at least one DAV:propstat anyway, with
@@ -189,7 +189,7 @@ class Response implements Element {
         //
         // The difference is that if there are any child-elements inside of
         // {DAV:}prop, that have no value, normally any deserializers are
-        // called. But we don't want this, because a singlular element without
+        // called. But we don't want this, because a singular element without
         // child-elements implies 'no value' in {DAV:}prop, so we want to skip
         // deserializers and just set null for those.
         $reader->elementMap['{DAV:}prop'] = function(Reader $reader) {

@@ -70,14 +70,34 @@ class VCFExportPlugin extends DAV\ServerPlugin {
             $aclPlugin->checkPrivileges($path, '{DAV:}read');
         }
 
-        $response->setHeader('Content-Type', 'text/directory');
-        $response->setStatus(200);
-
         $nodes = $this->server->getPropertiesForPath($path, [
             '{' . Plugin::NS_CARDDAV . '}address-data',
         ], 1);
 
-        $response->setBody($this->generateVCF($nodes));
+        $format = 'text/directory';
+
+        $output = null;
+        $filenameExtension = null;
+
+        switch ($format) {
+            case 'text/directory':
+                $output = $this->generateVCF($nodes);
+                $filenameExtension = '.vcf';
+                break;
+        }
+
+        $filename = preg_replace(
+            '/[^a-zA-Z0-9-_ ]/um',
+            '',
+            $node->getName()
+        );
+        $filename .= '-' . date('Y-m-d') . $filenameExtension;
+
+        $response->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
+        $response->setHeader('Content-Type', $format);
+
+        $response->setStatus(200);
+        $response->setBody($output);
 
         // Returning false to break the event chain
         return false;
@@ -102,8 +122,11 @@ class VCFExportPlugin extends DAV\ServerPlugin {
             $nodeData = $node[200]['{' . Plugin::NS_CARDDAV . '}address-data'];
 
             // Parsing this node so VObject can clean up the output.
-            $output .=
-               VObject\Reader::read($nodeData)->serialize();
+            $vcard = VObject\Reader::read($nodeData);
+            $output .= $vcard->serialize();
+
+            // Destroy circular references to PHP will GC the object.
+            $vcard->destroy();
 
         }
 

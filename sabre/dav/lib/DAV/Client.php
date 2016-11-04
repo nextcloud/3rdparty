@@ -3,6 +3,7 @@
 namespace Sabre\DAV;
 
 use Sabre\HTTP;
+use Sabre\Uri;
 
 /**
  * SabreDAV DAV client
@@ -165,6 +166,8 @@ class Client extends HTTP\Client {
             $this->addCurlSetting(CURLOPT_ENCODING, implode(',', $encodings));
         }
 
+        $this->addCurlSetting(CURLOPT_USERAGENT, 'sabre-dav/' . Version::VERSION . ' (http://sabre.io/)');
+
         $this->xml = new Xml\Service();
         // BC
         $this->propertyMap = & $this->xml->elementMap;
@@ -228,7 +231,7 @@ class Client extends HTTP\Client {
         $response = $this->send($request);
 
         if ((int)$response->getStatus() >= 400) {
-            throw new Exception('HTTP error: ' . $response->getStatus());
+            throw new \Sabre\HTTP\ClientHttpException($response);
         }
 
         $result = $this->parseMultiStatus($response->getBodyAsString());
@@ -260,7 +263,7 @@ class Client extends HTTP\Client {
      *
      * @param string $url
      * @param array $properties
-     * @return void
+     * @return bool
      */
     function propPatch($url, array $properties) {
 
@@ -275,7 +278,36 @@ class Client extends HTTP\Client {
         $request = new HTTP\Request('PROPPATCH', $url, [
             'Content-Type' => 'application/xml',
         ], $xml);
-        $this->send($request);
+        $response = $this->send($request);
+
+        if ($response->getStatus() >= 400) {
+            throw new \Sabre\HTTP\ClientHttpException($response);
+        }
+
+        if ($response->getStatus() === 207) {
+            // If it's a 207, the request could still have failed, but the
+            // information is hidden in the response body.
+            $result = $this->parseMultiStatus($response->getBodyAsString());
+
+            $errorProperties = [];
+            foreach ($result as $href => $statusList) {
+                foreach ($statusList as $status => $properties) {
+
+                    if ($status >= 400) {
+                        foreach ($properties as $propName => $propValue) {
+                            $errorProperties[] = $propName . ' (' . $status . ')';
+                        }
+                    }
+
+                }
+            }
+            if ($errorProperties) {
+
+                throw new \Sabre\HTTP\ClientException('PROPPATCH failed. The following properties errored: ' . implode(', ', $errorProperties));
+            }
+        }
+        return true;
+
     }
 
     /**
@@ -356,20 +388,10 @@ class Client extends HTTP\Client {
      */
     function getAbsoluteUrl($url) {
 
-        // If the url starts with http:// or https://, the url is already absolute.
-        if (preg_match('/^http(s?):\/\//', $url)) {
-            return $url;
-        }
-
-        // If the url starts with a slash, we must calculate the url based off
-        // the root of the base url.
-        if (strpos($url, '/') === 0) {
-            $parts = parse_url($this->baseUri);
-            return $parts['scheme'] . '://' . $parts['host'] . (isset($parts['port']) ? ':' . $parts['port'] : '') . $url;
-        }
-
-        // Otherwise...
-        return $this->baseUri . $url;
+        return Uri\resolve(
+            $this->baseUri,
+            $url
+        );
 
     }
 

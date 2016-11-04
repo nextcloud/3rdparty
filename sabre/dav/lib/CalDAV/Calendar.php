@@ -18,6 +18,8 @@ use Sabre\DAV\PropPatch;
  */
 class Calendar implements ICalendar, DAV\IProperties, DAV\Sync\ISyncCollection, DAV\IMultiGet {
 
+    use DAVACL\ACLTrait;
+
     /**
      * This is an array with calendar information
      *
@@ -86,7 +88,7 @@ class Calendar implements ICalendar, DAV\IProperties, DAV\Sync\ISyncCollection, 
 
         foreach ($this->calendarInfo as $propName => $propValue) {
 
-            if ($propName[0] === '{')
+            if (!is_null($propValue) && $propName[0] === '{')
                 $response[$propName] = $this->calendarInfo[$propName];
 
         }
@@ -227,7 +229,7 @@ class Calendar implements ICalendar, DAV\IProperties, DAV\Sync\ISyncCollection, 
     /**
      * Returns the last modification date as a unix timestamp.
      *
-     * @return void
+     * @return null
      */
     function getLastModified() {
 
@@ -245,19 +247,6 @@ class Calendar implements ICalendar, DAV\IProperties, DAV\Sync\ISyncCollection, 
     function getOwner() {
 
         return $this->calendarInfo['principaluri'];
-
-    }
-
-    /**
-     * Returns a group principal
-     *
-     * This must be a url to a principal, or null if there's no owner
-     *
-     * @return string|null
-     */
-    function getGroup() {
-
-        return null;
 
     }
 
@@ -360,50 +349,6 @@ class Calendar implements ICalendar, DAV\IProperties, DAV\Sync\ISyncCollection, 
 
     }
 
-    /**
-     * Updates the ACL
-     *
-     * This method will receive a list of new ACE's.
-     *
-     * @param array $acl
-     * @return void
-     */
-    function setACL(array $acl) {
-
-        throw new DAV\Exception\MethodNotAllowed('Changing ACL is not yet supported');
-
-    }
-
-    /**
-     * Returns the list of supported privileges for this node.
-     *
-     * The returned data structure is a list of nested privileges.
-     * See \Sabre\DAVACL\Plugin::getDefaultSupportedPrivilegeSet for a simple
-     * standard structure.
-     *
-     * If null is returned from this method, the default privilege set is used,
-     * which is fine for most common usecases.
-     *
-     * @return array|null
-     */
-    function getSupportedPrivilegeSet() {
-
-        $default = DAVACL\Plugin::getDefaultSupportedPrivilegeSet();
-
-        // We need to inject 'read-free-busy' in the tree, aggregated under
-        // {DAV:}read.
-        foreach ($default['aggregates'] as &$agg) {
-
-            if ($agg['privilege'] !== '{DAV:}read') continue;
-
-            $agg['aggregates'][] = [
-                'privilege' => '{' . Plugin::NS_CALDAV . '}read-free-busy',
-            ];
-
-        }
-        return $default;
-
-    }
 
     /**
      * Performs a calendar-query on the contents of this calendar.

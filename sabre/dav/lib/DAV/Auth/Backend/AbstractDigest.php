@@ -105,7 +105,7 @@ abstract class AbstractDigest implements BackendInterface {
 
         // No username was given
         if (!$username) {
-            return [false, "No 'Authorization: Digest' header found. Either the client didn't send one, or the server is mis-configured"];
+            return [false, "No 'Authorization: Digest' header found. Either the client didn't send one, or the server is misconfigured"];
         }
 
         $hash = $this->getDigestHash($this->realm, $username);
@@ -155,7 +155,13 @@ abstract class AbstractDigest implements BackendInterface {
             $response
         );
         $auth->init();
+
+        $oldStatus = $response->getStatus() ?: 200;
         $auth->requireLogin();
+
+        // Preventing the digest utility from modifying the http status code,
+        // this should be handled by the main plugin.
+        $response->setStatus($oldStatus);
 
     }
 

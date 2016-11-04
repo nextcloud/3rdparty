@@ -50,6 +50,8 @@ class CorePlugin extends ServerPlugin {
         $server->on('propFind',         [$this, 'propFindNode'], 120);
         $server->on('propFind',         [$this, 'propFindLate'], 200);
 
+        $server->on('exception',        [$this, 'exception']);
+
     }
 
     /**
@@ -76,7 +78,7 @@ class CorePlugin extends ServerPlugin {
     function httpGet(RequestInterface $request, ResponseInterface $response) {
 
         $path = $request->getPath();
-        $node = $this->server->tree->getNodeForPath($path, 0);
+        $node = $this->server->tree->getNodeForPath($path);
 
         if (!$node instanceof IFile) return;
 
@@ -673,12 +675,12 @@ class CorePlugin extends ServerPlugin {
 
         $copyInfo = $this->server->getCopyAndMoveInfo($request);
 
+        if (!$this->server->emit('beforeBind', [$copyInfo['destination']])) return false;
         if ($copyInfo['destinationExists']) {
             if (!$this->server->emit('beforeUnbind', [$copyInfo['destination']])) return false;
             $this->server->tree->delete($copyInfo['destination']);
-
         }
-        if (!$this->server->emit('beforeBind', [$copyInfo['destination']])) return false;
+
         $this->server->tree->copy($path, $copyInfo['destination']);
         $this->server->emit('afterBind', [$copyInfo['destination']]);
 
@@ -844,10 +846,8 @@ class CorePlugin extends ServerPlugin {
         if ($node instanceof IProperties && $propertyNames = $propFind->get404Properties()) {
 
             $nodeProperties = $node->getProperties($propertyNames);
-            foreach ($propertyNames as $propertyName) {
-                if (array_key_exists($propertyName, $nodeProperties)) {
-                    $propFind->set($propertyName, $nodeProperties[$propertyName], 200);
-                }
+            foreach ($nodeProperties as $propertyName => $propertyValue) {
+                $propFind->set($propertyName, $propertyValue, 200);
             }
 
         }
@@ -902,6 +902,38 @@ class CorePlugin extends ServerPlugin {
 
         });
 
+    }
+
+    /**
+     * Listens for exception events, and automatically logs them.
+     *
+     * @param Exception $e
+     */
+    function exception($e) {
+
+        $logLevel = \Psr\Log\LogLevel::CRITICAL;
+        if ($e instanceof \Sabre\DAV\Exception) {
+            // If it's a standard sabre/dav exception, it means we have a http
+            // status code available.
+            $code = $e->getHTTPCode();
+
+            if ($code >= 400 && $code < 500) {
+                // user error
+                $logLevel = \Psr\Log\LogLevel::INFO;
+            } else {
+                // Server-side error. We mark it's as an error, but it's not
+                // critical.
+                $logLevel = \Psr\Log\LogLevel::ERROR;
+            }
+        }
+
+        $this->server->getLogger()->log(
+            $logLevel,
+            'Uncaught exception',
+            [
+                'exception' => $e,
+            ]
+        );
     }
 
     /**

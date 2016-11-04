@@ -2,12 +2,13 @@
 
 namespace Sabre\VObject\Component;
 
+use DateTimeInterface;
 use Sabre\VObject;
 use Sabre\VObject\Recur\EventIterator;
 use Sabre\VObject\Recur\NoInstancesException;
 
 /**
- * VEvent component
+ * VEvent component.
  *
  * This component contains some additional functionality specific for VEVENT's.
  *
@@ -24,11 +25,12 @@ class VEvent extends VObject\Component {
      * The rules used to determine if an event falls within the specified
      * time-range is based on the CalDAV specification.
      *
-     * @param \DateTime $start
-     * @param \DateTime $end
+     * @param DateTimeInterface $start
+     * @param DateTimeInterface $end
+     *
      * @return bool
      */
-    public function isInTimeRange(\DateTime $start, \DateTime $end) {
+    function isInTimeRange(DateTimeInterface $start, DateTimeInterface $end) {
 
         if ($this->RRULE) {
 
@@ -68,13 +70,11 @@ class VEvent extends VObject\Component {
             $effectiveEnd = $this->DTEND->getDateTime($end->getTimezone());
 
         } elseif (isset($this->DURATION)) {
-            $effectiveEnd = clone $effectiveStart;
-            $effectiveEnd->add(VObject\DateTimeParser::parseDuration($this->DURATION));
+            $effectiveEnd = $effectiveStart->add(VObject\DateTimeParser::parseDuration($this->DURATION));
         } elseif (!$this->DTSTART->hasTime()) {
-            $effectiveEnd = clone $effectiveStart;
-            $effectiveEnd->modify('+1 day');
+            $effectiveEnd = $effectiveStart->modify('+1 day');
         } else {
-            $effectiveEnd = clone $effectiveStart;
+            $effectiveEnd = $effectiveStart;
         }
         return (
             ($start < $effectiveEnd) && ($end > $effectiveStart)
@@ -89,10 +89,10 @@ class VEvent extends VObject\Component {
      */
     protected function getDefaults() {
 
-        return array(
+        return [
             'UID'     => 'sabre-vobject-' . VObject\UUIDUtil::getUUID(),
             'DTSTAMP' => date('Ymd\\THis\\Z'),
-        );
+        ];
 
     }
 
@@ -111,42 +111,42 @@ class VEvent extends VObject\Component {
      *
      * @var array
      */
-    public function getValidationRules() {
+    function getValidationRules() {
 
         $hasMethod = isset($this->parent->METHOD);
-        return array(
-            'UID' => 1,
-            'DTSTAMP' => 1,
-            'DTSTART' => $hasMethod?'?':'1',
-            'CLASS' => '?',
-            'CREATED' => '?',
-            'DESCRIPTION' => '?',
-            'GEO' => '?',
+        return [
+            'UID'           => 1,
+            'DTSTAMP'       => 1,
+            'DTSTART'       => $hasMethod ? '?' : '1',
+            'CLASS'         => '?',
+            'CREATED'       => '?',
+            'DESCRIPTION'   => '?',
+            'GEO'           => '?',
             'LAST-MODIFIED' => '?',
-            'LOCATION' => '?',
-            'ORGANIZER' => '?',
-            'PRIORITY' => '?',
-            'SEQUENCE' => '?',
-            'STATUS' => '?',
-            'SUMMARY' => '?',
-            'TRANSP' => '?',
-            'URL' => '?',
+            'LOCATION'      => '?',
+            'ORGANIZER'     => '?',
+            'PRIORITY'      => '?',
+            'SEQUENCE'      => '?',
+            'STATUS'        => '?',
+            'SUMMARY'       => '?',
+            'TRANSP'        => '?',
+            'URL'           => '?',
             'RECURRENCE-ID' => '?',
-            'RRULE' => '?',
-            'DTEND' => '?',
-            'DURATION' => '?',
+            'RRULE'         => '?',
+            'DTEND'         => '?',
+            'DURATION'      => '?',
 
-            'ATTACH' => '*',
-            'ATTENDEE' => '*',
-            'CATEGORIES' => '*',
-            'COMMENT' => '*',
-            'CONTACT' => '*',
-            'EXDATE' => '*',
+            'ATTACH'         => '*',
+            'ATTENDEE'       => '*',
+            'CATEGORIES'     => '*',
+            'COMMENT'        => '*',
+            'CONTACT'        => '*',
+            'EXDATE'         => '*',
             'REQUEST-STATUS' => '*',
-            'RELATED-TO' => '*',
-            'RESOURCES' => '*',
-            'RDATE' => '*',
-        );
+            'RELATED-TO'     => '*',
+            'RESOURCES'      => '*',
+            'RDATE'          => '*',
+        ];
 
     }
 
