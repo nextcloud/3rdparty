@@ -8,6 +8,10 @@ use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
 use Sabre\HTTP\URLUtil;
 use Sabre\Uri;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Main DAV server class
@@ -16,7 +20,9 @@ use Sabre\Uri;
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
-class Server extends EventEmitter {
+class Server extends EventEmitter implements LoggerAwareInterface {
+
+    use LoggerAwareTrait;
 
     /**
      * Infinity is used for some request supporting the HTTP Depth header and indicates that the operation should traverse the entire tree
@@ -431,6 +437,20 @@ class Server extends EventEmitter {
     }
 
     /**
+     * Returns the PSR-3 logger objcet.
+     *
+     * @return LoggerInterface
+     */
+    function getLogger() {
+
+        if (!$this->logger) {
+            $this->logger = new NullLogger();
+        }
+        return $this->logger;
+
+    }
+
+    /**
      * Handles a http request, and execute a method based on its name
      *
      * @param RequestInterface $request
@@ -458,14 +478,22 @@ class Server extends EventEmitter {
 
         if ($this->emit('method:' . $method, [$request, $response])) {
             if ($this->emit('method', [$request, $response])) {
+                $exMessage = "There was no plugin in the system that was willing to handle this " . $method . " method.";
+                if ($method === "GET") {
+                    $exMessage .= " Enable the Browser plugin to get a better result here.";
+                }
+
                 // Unsupported method
-                throw new Exception\NotImplemented('There was no handler found for this "' . $method . '" method');
+                throw new Exception\NotImplemented($exMessage);
             }
         }
 
         if (!$this->emit('afterMethod:' . $method, [$request, $response])) return;
         if (!$this->emit('afterMethod', [$request, $response])) return;
 
+        if ($response->getStatus() === null) {
+            throw new Exception('No subsystem set a valid HTTP status code. Something must have interrupted the request without providing further detail.');
+        }
         if ($sendResponse) {
             $this->sapi->sendResponse($response);
             $this->emit('afterResponse', [$request, $response]);
@@ -756,9 +784,13 @@ class Server extends EventEmitter {
     /**
      * Returns a list of properties for a path
      *
-     * This is a simplified version getPropertiesForPath.
-     * if you aren't interested in status codes, but you just
-     * want to have a flat list of properties. Use this method.
+     * This is a simplified version getPropertiesForPath. If you aren't
+     * interested in status codes, but you just want to have a flat list of
+     * properties, use this method.
+     *
+     * Please note though that any problems related to retrieving properties,
+     * such as permission issues will just result in an empty array being
+     * returned.
      *
      * @param string $path
      * @param array $propertyNames
@@ -766,7 +798,11 @@ class Server extends EventEmitter {
     function getProperties($path, $propertyNames) {
 
         $result = $this->getPropertiesForPath($path, $propertyNames, 0);
-        return $result[0][200];
+        if (isset($result[0][200])) {
+            return $result[0][200];
+        } else {
+            return [];
+        }
 
     }
 
@@ -1161,9 +1197,20 @@ class Server extends EventEmitter {
 
         if (!$success) {
             $result = $mkCol->getResult();
-            // generateMkCol needs the href key to exist.
-            $result['href'] = $uri;
-            return $result;
+
+            $formattedResult = [
+                'href' => $uri,
+            ];
+
+            foreach ($result as $propertyName => $status) {
+
+                if (!isset($formattedResult[$status])) {
+                    $formattedResult[$status] = [];
+                }
+                $formattedResult[$status][$propertyName] = null;
+
+            }
+            return $formattedResult;
         }
 
         $this->tree->markDirty($parentUri);

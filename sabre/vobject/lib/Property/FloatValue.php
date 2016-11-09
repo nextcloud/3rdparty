@@ -2,11 +2,11 @@
 
 namespace Sabre\VObject\Property;
 
-use
-    Sabre\VObject\Property;
+use Sabre\VObject\Property;
+use Sabre\Xml;
 
 /**
- * Float property
+ * Float property.
  *
  * This object represents FLOAT values. These can be 1 or more floating-point
  * numbers.
@@ -32,12 +32,13 @@ class FloatValue extends Property {
      * not yet done, but parameters are not included.
      *
      * @param string $val
+     *
      * @return void
      */
-    public function setRawMimeDirValue($val) {
+    function setRawMimeDirValue($val) {
 
         $val = explode($this->delimiter, $val);
-        foreach($val as &$item) {
+        foreach ($val as &$item) {
             $item = (float)$item;
         }
         $this->setParts($val);
@@ -49,7 +50,7 @@ class FloatValue extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    function getRawMimeDirValue() {
 
         return implode(
             $this->delimiter,
@@ -66,39 +67,76 @@ class FloatValue extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    function getValueType() {
 
-        return "FLOAT";
+        return 'FLOAT';
 
     }
 
     /**
-     * Returns the value, in the format it should be encoded for json.
+     * Returns the value, in the format it should be encoded for JSON.
      *
      * This method must always return an array.
      *
      * @return array
      */
-    public function getJsonValue() {
+    function getJsonValue() {
 
-        $val = array_map(
-            function($item) {
-
-                return (float)$item;
-
-            },
-            $this->getParts()
-        );
+        $val = array_map('floatval', $this->getParts());
 
         // Special-casing the GEO property.
         //
         // See:
         // http://tools.ietf.org/html/draft-ietf-jcardcal-jcal-04#section-3.4.1.2
-        if ($this->name==='GEO') {
-            return array($val);
-        } else {
-            return $val;
+        if ($this->name === 'GEO') {
+            return [$val];
+        }
+
+        return $val;
+
+    }
+
+    /**
+     * Hydrate data from a XML subtree, as it would appear in a xCard or xCal
+     * object.
+     *
+     * @param array $value
+     *
+     * @return void
+     */
+    function setXmlValue(array $value) {
+
+        $value = array_map('floatval', $value);
+        parent::setXmlValue($value);
+
+    }
+
+    /**
+     * This method serializes only the value of a property. This is used to
+     * create xCard or xCal documents.
+     *
+     * @param Xml\Writer $writer  XML writer.
+     *
+     * @return void
+     */
+    protected function xmlSerializeValue(Xml\Writer $writer) {
+
+        // Special-casing the GEO property.
+        //
+        // See:
+        // http://tools.ietf.org/html/rfc6321#section-3.4.1.2
+        if ($this->name === 'GEO') {
+
+            $value = array_map('floatval', $this->getParts());
+
+            $writer->writeElement('latitude', $value[0]);
+            $writer->writeElement('longitude', $value[1]);
+
+        }
+        else {
+            parent::xmlSerializeValue($writer);
         }
 
     }
+
 }

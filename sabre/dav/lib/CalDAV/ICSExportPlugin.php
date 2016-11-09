@@ -170,13 +170,13 @@ class ICSExportPlugin extends DAV\ServerPlugin {
     protected function generateResponse($path, $start, $end, $expand, $componentType, $format, $properties, ResponseInterface $response) {
 
         $calDataProp = '{' . Plugin::NS_CALDAV . '}calendar-data';
+        $calendarNode = $this->server->tree->getNodeForPath($path);
 
         $blobs = [];
         if ($start || $end || $componentType) {
 
             // If there was a start or end filter, we need to enlist
             // calendarQuery for speed.
-            $calendarNode = $this->server->tree->getNodeForPath($path);
             $queryResult = $calendarNode->calendarQuery([
                 'name'         => 'VCALENDAR',
                 'comp-filters' => [
@@ -235,25 +235,39 @@ class ICSExportPlugin extends DAV\ServerPlugin {
                 // VTIMEZONE.
                 $vtimezoneObj = VObject\Reader::read($tzResult[$tzProp]);
                 $calendarTimeZone = $vtimezoneObj->VTIMEZONE->getTimeZone();
+                // Destroy circular references to PHP will GC the object.
+                $vtimezoneObj->destroy();
                 unset($vtimezoneObj);
             } else {
                 // Defaulting to UTC.
                 $calendarTimeZone = new DateTimeZone('UTC');
             }
 
-            $mergedCalendar->expand($start, $end, $calendarTimeZone);
+            $mergedCalendar = $mergedCalendar->expand($start, $end, $calendarTimeZone);
         }
 
-        $response->setHeader('Content-Type', $format);
+        $filenameExtension = '.ics';
 
         switch ($format) {
             case 'text/calendar' :
                 $mergedCalendar = $mergedCalendar->serialize();
+                $filenameExtension = '.ics';
                 break;
             case 'application/calendar+json' :
                 $mergedCalendar = json_encode($mergedCalendar->jsonSerialize());
+                $filenameExtension = '.json';
                 break;
         }
+
+        $filename = preg_replace(
+            '/[^a-zA-Z0-9-_ ]/um',
+            '',
+            $calendarNode->getName()
+        );
+        $filename .= '-' . date('Y-m-d') . $filenameExtension;
+
+        $response->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
+        $response->setHeader('Content-Type', $format);
 
         $response->setStatus(200);
         $response->setBody($mergedCalendar);
@@ -270,11 +284,11 @@ class ICSExportPlugin extends DAV\ServerPlugin {
     function mergeObjects(array $properties, array $inputObjects) {
 
         $calendar = new VObject\Component\VCalendar();
-        $calendar->version = '2.0';
+        $calendar->VERSION = '2.0';
         if (DAV\Server::$exposeVersion) {
-            $calendar->prodid = '-//SabreDAV//SabreDAV ' . DAV\Version::VERSION . '//EN';
+            $calendar->PRODID = '-//SabreDAV//SabreDAV ' . DAV\Version::VERSION . '//EN';
         } else {
-            $calendar->prodid = '-//SabreDAV//SabreDAV//EN';
+            $calendar->PRODID = '-//SabreDAV//SabreDAV//EN';
         }
         if (isset($properties['{DAV:}displayname'])) {
             $calendar->{'X-WR-CALNAME'} = $properties['{DAV:}displayname'];
@@ -298,7 +312,7 @@ class ICSExportPlugin extends DAV\ServerPlugin {
                     case 'VEVENT' :
                     case 'VTODO' :
                     case 'VJOURNAL' :
-                        $objects[] = $child;
+                        $objects[] = clone $child;
                         break;
 
                     // VTIMEZONE is special, because we need to filter out the duplicates
@@ -306,13 +320,16 @@ class ICSExportPlugin extends DAV\ServerPlugin {
                         // Naively just checking tzid.
                         if (in_array((string)$child->TZID, $collectedTimezones)) continue;
 
-                        $timezones[] = $child;
+                        $timezones[] = clone $child;
                         $collectedTimezones[] = $child->TZID;
                         break;
 
                 }
 
             }
+            // Destroy circular references to PHP will GC the object.
+            $nodeComp->destroy();
+            unset($nodeComp);
 
         }
 

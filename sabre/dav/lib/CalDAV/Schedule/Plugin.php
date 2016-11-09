@@ -5,9 +5,12 @@ namespace Sabre\CalDAV\Schedule;
 use DateTimeZone;
 use Sabre\DAV\Server;
 use Sabre\DAV\ServerPlugin;
+use Sabre\DAV\Sharing;
 use Sabre\DAV\PropFind;
+use Sabre\DAV\PropPatch;
 use Sabre\DAV\INode;
 use Sabre\DAV\Xml\Property\Href;
+use Sabre\DAV\Xml\Property\LocalHref;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
 use Sabre\VObject;
@@ -72,7 +75,7 @@ class Plugin extends ServerPlugin {
      */
     function getFeatures() {
 
-        return ['calendar-auto-schedule'];
+        return ['calendar-auto-schedule', 'calendar-availability'];
 
     }
 
@@ -99,11 +102,13 @@ class Plugin extends ServerPlugin {
     function initialize(Server $server) {
 
         $this->server = $server;
-        $server->on('method:POST',          [$this, 'httpPost']);
-        $server->on('propFind',             [$this, 'propFind']);
-        $server->on('calendarObjectChange', [$this, 'calendarObjectChange']);
-        $server->on('beforeUnbind',         [$this, 'beforeUnbind']);
-        $server->on('schedule',             [$this, 'scheduleLocalDelivery']);
+        $server->on('method:POST',              [$this, 'httpPost']);
+        $server->on('propFind',                 [$this, 'propFind']);
+        $server->on('propPatch',                [$this, 'propPatch']);
+        $server->on('calendarObjectChange',     [$this, 'calendarObjectChange']);
+        $server->on('beforeUnbind',             [$this, 'beforeUnbind']);
+        $server->on('schedule',                 [$this, 'scheduleLocalDelivery']);
+        $server->on('getSupportedPrivilegeSet', [$this, 'getSupportedPrivilegeSet']);
 
         $ns = '{' . self::NS_CALDAV . '}';
 
@@ -199,62 +204,131 @@ class Plugin extends ServerPlugin {
      */
     function propFind(PropFind $propFind, INode $node) {
 
-        if (!$node instanceof DAVACL\IPrincipal) return;
+        if ($node instanceof DAVACL\IPrincipal) {
 
-        $caldavPlugin = $this->server->getPlugin('caldav');
-        $principalUrl = $node->getPrincipalUrl();
+            $caldavPlugin = $this->server->getPlugin('caldav');
+            $principalUrl = $node->getPrincipalUrl();
 
-        // schedule-outbox-URL property
-        $propFind->handle('{' . self::NS_CALDAV . '}schedule-outbox-URL', function() use ($principalUrl, $caldavPlugin) {
+            // schedule-outbox-URL property
+            $propFind->handle('{' . self::NS_CALDAV . '}schedule-outbox-URL', function() use ($principalUrl, $caldavPlugin) {
 
-            $calendarHomePath = $caldavPlugin->getCalendarHomeForPrincipal($principalUrl);
-            $outboxPath = $calendarHomePath . '/outbox/';
-
-            return new Href($outboxPath);
-
-        });
-        // schedule-inbox-URL property
-        $propFind->handle('{' . self::NS_CALDAV . '}schedule-inbox-URL', function() use ($principalUrl, $caldavPlugin) {
-
-            $calendarHomePath = $caldavPlugin->getCalendarHomeForPrincipal($principalUrl);
-            $inboxPath = $calendarHomePath . '/inbox/';
-
-            return new Href($inboxPath);
-
-        });
-
-        $propFind->handle('{' . self::NS_CALDAV . '}schedule-default-calendar-URL', function() use ($principalUrl, $caldavPlugin) {
-
-            // We don't support customizing this property yet, so in the
-            // meantime we just grab the first calendar in the home-set.
-            $calendarHomePath = $caldavPlugin->getCalendarHomeForPrincipal($principalUrl);
-
-            $sccs = '{' . self::NS_CALDAV . '}supported-calendar-component-set';
-
-            $result = $this->server->getPropertiesForPath($calendarHomePath, [
-                '{DAV:}resourcetype',
-                $sccs,
-            ], 1);
-
-            foreach ($result as $child) {
-                if (!isset($child[200]['{DAV:}resourcetype']) || !$child[200]['{DAV:}resourcetype']->is('{' . self::NS_CALDAV . '}calendar') || $child[200]['{DAV:}resourcetype']->is('{http://calendarserver.org/ns/}shared')) {
-                    // Node is either not a calendar or a shared instance.
-                    continue;
+                $calendarHomePath = $caldavPlugin->getCalendarHomeForPrincipal($principalUrl);
+                if (!$calendarHomePath) {
+                    return null;
                 }
-                if (!isset($child[200][$sccs]) || in_array('VEVENT', $child[200][$sccs]->getValue())) {
-                    // Either there is no supported-calendar-component-set
-                    // (which is fine) or we found one that supports VEVENT.
-                    return new Href($child['href']);
+                $outboxPath = $calendarHomePath . '/outbox/';
+
+                return new LocalHref($outboxPath);
+
+            });
+            // schedule-inbox-URL property
+            $propFind->handle('{' . self::NS_CALDAV . '}schedule-inbox-URL', function() use ($principalUrl, $caldavPlugin) {
+
+                $calendarHomePath = $caldavPlugin->getCalendarHomeForPrincipal($principalUrl);
+                if (!$calendarHomePath) {
+                    return null;
                 }
-            }
+                $inboxPath = $calendarHomePath . '/inbox/';
+
+                return new LocalHref($inboxPath);
+
+            });
+
+            $propFind->handle('{' . self::NS_CALDAV . '}schedule-default-calendar-URL', function() use ($principalUrl, $caldavPlugin) {
+
+                // We don't support customizing this property yet, so in the
+                // meantime we just grab the first calendar in the home-set.
+                $calendarHomePath = $caldavPlugin->getCalendarHomeForPrincipal($principalUrl);
+
+                if (!$calendarHomePath) {
+                    return null;
+                }
+
+                $sccs = '{' . self::NS_CALDAV . '}supported-calendar-component-set';
+
+                $result = $this->server->getPropertiesForPath($calendarHomePath, [
+                    '{DAV:}resourcetype',
+                    '{DAV:}share-access',
+                    $sccs,
+                ], 1);
+
+                foreach ($result as $child) {
+                    if (!isset($child[200]['{DAV:}resourcetype']) || !$child[200]['{DAV:}resourcetype']->is('{' . self::NS_CALDAV . '}calendar')) {
+                        // Node is either not a calendar
+                        continue;
+                    }
+                    if (isset($child[200]['{DAV:}share-access'])) {
+                        $shareAccess = $child[200]['{DAV:}share-access']->getValue();
+                        if ($shareAccess !== Sharing\Plugin::ACCESS_NOTSHARED && $shareAccess !== Sharing\Plugin::ACCESS_SHAREDOWNER) {
+                            // Node is a shared node, not owned by the relevant
+                            // user.
+                            continue;
+                        }
+
+                    }
+                    if (!isset($child[200][$sccs]) || in_array('VEVENT', $child[200][$sccs]->getValue())) {
+                        // Either there is no supported-calendar-component-set
+                        // (which is fine) or we found one that supports VEVENT.
+                        return new LocalHref($child['href']);
+                    }
+                }
+
+            });
+
+            // The server currently reports every principal to be of type
+            // 'INDIVIDUAL'
+            $propFind->handle('{' . self::NS_CALDAV . '}calendar-user-type', function() {
+
+                return 'INDIVIDUAL';
+
+            });
+
+        }
+
+        // Mapping the old property to the new property.
+        $propFind->handle('{http://calendarserver.org/ns/}calendar-availability', function() use ($propFind, $node) {
+
+             // In case it wasn't clear, the only difference is that we map the
+            // old property to a different namespace.
+             $availProp = '{' . self::NS_CALDAV . '}calendar-availability';
+             $subPropFind = new PropFind(
+                 $propFind->getPath(),
+                 [$availProp]
+             );
+
+             $this->server->getPropertiesByNode(
+                 $subPropFind,
+                 $node
+             );
+
+             $propFind->set(
+                 '{http://calendarserver.org/ns/}calendar-availability',
+                 $subPropFind->get($availProp),
+                 $subPropFind->getStatus($availProp)
+             );
 
         });
 
-        // The server currently reports every principal to be of type
-        // 'INDIVIDUAL'
-        $propFind->handle('{' . self::NS_CALDAV . '}calendar-user-type', function() {
+    }
 
-            return 'INDIVIDUAL';
+    /**
+     * This method is called during property updates.
+     *
+     * @param string $path
+     * @param PropPatch $propPatch
+     * @return void
+     */
+    function propPatch($path, PropPatch $propPatch) {
+
+        // Mapping the old property to the new property.
+        $propPatch->handle('{http://calendarserver.org/ns/}calendar-availability', function($value) use ($path) {
+
+            $availProp = '{' . self::NS_CALDAV . '}calendar-availability';
+            $subPropPatch = new PropPatch([$availProp => $value]);
+            $this->server->emit('propPatch', [$path, $subPropPatch]);
+            $subPropPatch->commit();
+
+            return $subPropPatch->getResult()[$availProp];
 
         });
 
@@ -292,6 +366,11 @@ class Plugin extends ServerPlugin {
         }
 
         $this->processICalendarChange($oldObj, $vCal, $addresses, [], $modified);
+
+        if ($oldObj) {
+            // Destroy circular references so PHP will GC the object.
+            $oldObj->destroy();
+        }
 
     }
 
@@ -426,7 +505,7 @@ class Plugin extends ServerPlugin {
         }
 
         if (!$aclPlugin->checkPrivileges($inboxPath, $caldavNS . $privilege, DAVACL\Plugin::R_PARENT, false)) {
-            $iTipMessage->scheduleStatus = '3.8;organizer did not have the ' . $privilege . ' privilege on the attendees inbox';
+            $iTipMessage->scheduleStatus = '3.8;insufficient privileges: ' . $privilege . ' is required on the recipient schedule inbox.';
             return;
         }
 
@@ -491,6 +570,65 @@ class Plugin extends ServerPlugin {
             $objectNode->put($newObject->serialize());
         }
         $iTipMessage->scheduleStatus = '1.2;Message delivered locally';
+
+    }
+
+    /**
+     * This method is triggered whenever a subsystem requests the privileges
+     * that are supported on a particular node.
+     *
+     * We need to add a number of privileges for scheduling purposes.
+     *
+     * @param INode $node
+     * @param array $supportedPrivilegeSet
+     */
+    function getSupportedPrivilegeSet(INode $node, array &$supportedPrivilegeSet) {
+
+        $ns = '{' . self::NS_CALDAV . '}';
+        if ($node instanceof IOutbox) {
+            $supportedPrivilegeSet[$ns . 'schedule-send'] = [
+                'abstract'   => false,
+                'aggregates' => [
+                    $ns . 'schedule-send-invite' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                    $ns . 'schedule-send-reply' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                    $ns . 'schedule-send-freebusy' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                    // Privilege from an earlier scheduling draft, but still
+                    // used by some clients.
+                    $ns . 'schedule-post-vevent' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                ]
+            ];
+        }
+        if ($node instanceof IInbox) {
+            $supportedPrivilegeSet[$ns . 'schedule-deliver'] = [
+                'abstract'   => false,
+                'aggregates' => [
+                    $ns . 'schedule-deliver-invite' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                    $ns . 'schedule-deliver-reply' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                    $ns . 'schedule-query-freebusy' => [
+                        'abstract'   => false,
+                        'aggregates' => [],
+                    ],
+                ]
+            ];
+        }
 
     }
 
@@ -581,7 +719,7 @@ class Plugin extends ServerPlugin {
     /**
      * This method handles POST requests to the schedule-outbox.
      *
-     * Currently, two types of requests are support:
+     * Currently, two types of requests are supported:
      *   * FREEBUSY requests from RFC 6638
      *   * Simple iTIP messages from draft-desruisseaux-caldav-sched-04
      *
@@ -633,8 +771,12 @@ class Plugin extends ServerPlugin {
 
         if ($componentType === 'VFREEBUSY' && $method === 'REQUEST') {
 
-            $acl && $acl->checkPrivileges($outboxPath, '{' . self::NS_CALDAV . '}schedule-query-freebusy');
+            $acl && $acl->checkPrivileges($outboxPath, '{' . self::NS_CALDAV . '}schedule-send-freebusy');
             $this->handleFreeBusyRequest($outboxNode, $vObject, $request, $response);
+
+            // Destroy circular references so PHP can GC the object.
+            $vObject->destroy();
+            unset($vObject);
 
         } else {
 
@@ -657,7 +799,7 @@ class Plugin extends ServerPlugin {
     protected function handleFreeBusyRequest(IOutbox $outbox, VObject\Component $vObject, RequestInterface $request, ResponseInterface $response) {
 
         $vFreeBusy = $vObject->VFREEBUSY;
-        $organizer = $vFreeBusy->organizer;
+        $organizer = $vFreeBusy->ORGANIZER;
 
         $organizer = (string)$organizer;
 
@@ -748,12 +890,12 @@ class Plugin extends ServerPlugin {
      *   * 3.7;description
      *
      * @param string $email address
-     * @param \DateTime $start
-     * @param \DateTime $end
+     * @param DateTimeInterface $start
+     * @param DateTimeInterface $end
      * @param VObject\Component $request
      * @return array
      */
-    protected function getFreeBusyForEmail($email, \DateTime $start, \DateTime $end, VObject\Component $request) {
+    protected function getFreeBusyForEmail($email, \DateTimeInterface $start, \DateTimeInterface $end, VObject\Component $request) {
 
         $caldavNS = '{' . self::NS_CALDAV . '}';
 
@@ -763,8 +905,11 @@ class Plugin extends ServerPlugin {
         $result = $aclPlugin->principalSearch(
             ['{http://sabredav.org/ns}email-address' => $email],
             [
-                '{DAV:}principal-URL', $caldavNS . 'calendar-home-set',
+                '{DAV:}principal-URL',
+                $caldavNS . 'calendar-home-set',
+                $caldavNS . 'schedule-inbox-URL',
                 '{http://sabredav.org/ns}email-address',
+
             ]
         );
 
@@ -781,7 +926,17 @@ class Plugin extends ServerPlugin {
                 'href'           => 'mailto:' . $email,
             ];
         }
+        if (!isset($result[0][200][$caldavNS . 'schedule-inbox-URL'])) {
+            return [
+                'request-status' => '3.7;No schedule-inbox-URL property found',
+                'href'           => 'mailto:' . $email,
+            ];
+        }
         $homeSet = $result[0][200][$caldavNS . 'calendar-home-set']->getHref();
+        $inboxUrl = $result[0][200][$caldavNS . 'schedule-inbox-URL']->getHref();
+
+        // Do we have permission?
+        $aclPlugin->checkPrivileges($inboxUrl, $caldavNS . 'schedule-query-freebusy');
 
         // Grabbing the calendar list
         $objects = [];
@@ -802,11 +957,13 @@ class Plugin extends ServerPlugin {
                 continue;
             }
 
-            $aclPlugin->checkPrivileges($homeSet . $node->getName(), $caldavNS . 'read-free-busy');
-
             if (isset($props[$ctz])) {
                 $vtimezoneObj = VObject\Reader::read($props[$ctz]);
                 $calendarTimeZone = $vtimezoneObj->VTIMEZONE->getTimeZone();
+
+                // Destroy circular references so PHP can garbage collect the object.
+                $vtimezoneObj->destroy();
+
             }
 
             // Getting the list of object uris within the time-range
@@ -838,6 +995,11 @@ class Plugin extends ServerPlugin {
 
         }
 
+        $inboxProps = $this->server->getProperties(
+            $inboxUrl,
+            $caldavNS . 'calendar-availability'
+        );
+
         $vcalendar = new VObject\Component\VCalendar();
         $vcalendar->METHOD = 'REPLY';
 
@@ -846,6 +1008,14 @@ class Plugin extends ServerPlugin {
         $generator->setTimeRange($start, $end);
         $generator->setBaseObject($vcalendar);
         $generator->setTimeZone($calendarTimeZone);
+
+        if ($inboxProps) {
+            $generator->setVAvailability(
+                VObject\Reader::read(
+                    $inboxProps[$caldavNS . 'calendar-availability']
+                )
+            );
+        }
 
         $result = $generator->getResult();
 

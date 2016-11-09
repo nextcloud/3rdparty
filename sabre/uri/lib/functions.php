@@ -45,8 +45,8 @@ function resolve($basePath, $newPath) {
     $newParts = [];
 
     $newParts['scheme'] = $pick('scheme');
-    $newParts['host']   = $pick('host');
-    $newParts['port']   = $pick('port');
+    $newParts['host'] = $pick('host');
+    $newParts['port'] = $pick('port');
 
     $path = '';
     if ($delta['path']) {
@@ -233,7 +233,7 @@ function build(array $parts) {
         $uri = $parts['scheme'] . ':';
 
     }
-    if ($authority) {
+    if ($authority || (!empty($parts['scheme']) && $parts['scheme'] === 'file')) {
         // No scheme, but there is a host.
         $uri .= '//' . $authority;
 
