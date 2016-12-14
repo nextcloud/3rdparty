@@ -1,5 +1,5 @@
 {
-	"name": "owncloud/3rdparty",
+	"name": "nextcloud/3rdparty",
 	"description": "All 3rdparty components",
 	"license": "MIT",
 	"config": {
