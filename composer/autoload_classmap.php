@@ -1237,6 +1237,7 @@ return array(
     'Sabre\\HTTP\\URLUtil' => $vendorDir . '/sabre/http/lib/URLUtil.php',
     'Sabre\\HTTP\\Util' => $vendorDir . '/sabre/http/lib/Util.php',
     'Sabre\\HTTP\\Version' => $vendorDir . '/sabre/http/lib/Version.php',
+    'Sabre\\Uri\\InvalidUriException' => $vendorDir . '/sabre/uri/lib/InvalidUriException.php',
     'Sabre\\Uri\\Version' => $vendorDir . '/sabre/uri/lib/Version.php',
     'Sabre\\VObject\\BirthdayCalendarGenerator' => $vendorDir . '/sabre/vobject/lib/BirthdayCalendarGenerator.php',
     'Sabre\\VObject\\Cli' => $vendorDir . '/sabre/vobject/lib/Cli.php',

@@ -1552,6 +1552,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Sabre\\HTTP\\URLUtil' => __DIR__ . '/..' . '/sabre/http/lib/URLUtil.php',
         'Sabre\\HTTP\\Util' => __DIR__ . '/..' . '/sabre/http/lib/Util.php',
         'Sabre\\HTTP\\Version' => __DIR__ . '/..' . '/sabre/http/lib/Version.php',
+        'Sabre\\Uri\\InvalidUriException' => __DIR__ . '/..' . '/sabre/uri/lib/InvalidUriException.php',
         'Sabre\\Uri\\Version' => __DIR__ . '/..' . '/sabre/uri/lib/Version.php',
         'Sabre\\VObject\\BirthdayCalendarGenerator' => __DIR__ . '/..' . '/sabre/vobject/lib/BirthdayCalendarGenerator.php',
         'Sabre\\VObject\\Cli' => __DIR__ . '/..' . '/sabre/vobject/lib/Cli.php',
