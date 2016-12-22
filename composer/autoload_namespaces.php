@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = $vendorDir;
 
 return array(
+    'ProxyManager\\' => array($vendorDir . '/ocramius/proxy-manager/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
     'PEAR' => array($vendorDir . '/pear/pear_exception'),
     'OpenCloud' => array($vendorDir . '/rackspace/php-opencloud/lib', $vendorDir . '/rackspace/php-opencloud/tests'),
