@@ -11,7 +11,7 @@
 /**
  * Sends Messages over SMTP with ESMTP support.
  *
- * @author     Chris Corbyn
+ * @author Chris Corbyn
  */
 class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTransport implements Swift_Transport_SmtpAgent
 {
@@ -42,6 +42,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
         'blocking' => 1,
         'tls' => false,
         'type' => Swift_Transport_IoBuffer::TYPE_SOCKET,
+        'stream_context_options' => array(),
         );
 
     /**
@@ -84,7 +85,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
     /**
      * Set the port to connect to.
      *
-     * @param int     $port
+     * @param int $port
      *
      * @return Swift_Transport_EsmtpTransport
      */
@@ -108,7 +109,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
     /**
      * Set the connection timeout.
      *
-     * @param int     $timeout seconds
+     * @param int $timeout seconds
      *
      * @return Swift_Transport_EsmtpTransport
      */
@@ -131,7 +132,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
     }
 
     /**
-     * Set the encryption type (tls or ssl)
+     * Set the encryption type (tls or ssl).
      *
      * @param string $encryption
      *
@@ -139,6 +140,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
      */
     public function setEncryption($encryption)
     {
+        $encryption = strtolower($encryption);
         if ('tls' == $encryption) {
             $this->_params['protocol'] = 'tcp';
             $this->_params['tls'] = true;
@@ -158,6 +160,30 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
     public function getEncryption()
     {
         return $this->_params['tls'] ? 'tls' : $this->_params['protocol'];
+    }
+
+    /**
+     * Sets the stream context options.
+     *
+     * @param array $options
+     *
+     * @return Swift_Transport_EsmtpTransport
+     */
+    public function setStreamOptions($options)
+    {
+        $this->_params['stream_context_options'] = $options;
+
+        return $this;
+    }
+
+    /**
+     * Returns the stream context options.
+     *
+     * @return array
+     */
+    public function getStreamOptions()
+    {
+        return $this->_params['stream_context_options'];
     }
 
     /**
@@ -181,7 +207,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
      */
     public function getSourceIp()
     {
-        return $this->_params['sourceIp'];
+        return isset($this->_params['sourceIp']) ? $this->_params['sourceIp'] : null;
     }
 
     /**
@@ -197,7 +223,8 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
         foreach ($handlers as $handler) {
             $assoc[$handler->getHandledKeyword()] = $handler;
         }
-        uasort($assoc, array($this, '_sortHandlers'));
+
+        @uasort($assoc, array($this, '_sortHandlers'));
         $this->_handlers = $assoc;
         $this->_setHandlerParams();
 
@@ -318,7 +345,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
         }
         $paramStr = !empty($params) ? ' '.implode(' ', $params) : '';
         $this->executeCommand(
-            sprintf("MAIL FROM: <%s>%s\r\n", $address, $paramStr), array(250)
+            sprintf("MAIL FROM:<%s>%s\r\n", $address, $paramStr), array(250)
             );
     }
 
@@ -332,7 +359,7 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
         }
         $paramStr = !empty($params) ? ' '.implode(' ', $params) : '';
         $this->executeCommand(
-            sprintf("RCPT TO: <%s>%s\r\n", $address, $paramStr), array(250, 251, 252)
+            sprintf("RCPT TO:<%s>%s\r\n", $address, $paramStr), array(250, 251, 252)
             );
     }
 
