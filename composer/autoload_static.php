@@ -73,6 +73,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'Leafo\\ScssPhp\\' => 14,
         ),
         'I' => 
         array (
@@ -199,6 +200,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
+        'Leafo\\ScssPhp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/leafo/scssphp/src',
         ),
         'InterfaSys\\LogNormalizer\\' => 
         array (
@@ -933,6 +938,29 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Icewind\\Streams\\UrlCallback' => __DIR__ . '/..' . '/icewind/streams/src/UrlCallBack.php',
         'Icewind\\Streams\\Wrapper' => __DIR__ . '/..' . '/icewind/streams/src/Wrapper.php',
         'InterfaSys\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/interfasys/lognormalizer/src/Normalizer.php',
+        'Leafo\\ScssPhp\\Base\\Range' => __DIR__ . '/..' . '/leafo/scssphp/src/Base/Range.php',
+        'Leafo\\ScssPhp\\Block' => __DIR__ . '/..' . '/leafo/scssphp/src/Block.php',
+        'Leafo\\ScssPhp\\Colors' => __DIR__ . '/..' . '/leafo/scssphp/src/Colors.php',
+        'Leafo\\ScssPhp\\Compiler' => __DIR__ . '/..' . '/leafo/scssphp/src/Compiler.php',
+        'Leafo\\ScssPhp\\Compiler\\Environment' => __DIR__ . '/..' . '/leafo/scssphp/src/Compiler/Environment.php',
+        'Leafo\\ScssPhp\\Exception\\CompilerException' => __DIR__ . '/..' . '/leafo/scssphp/src/Exception/CompilerException.php',
+        'Leafo\\ScssPhp\\Exception\\ParserException' => __DIR__ . '/..' . '/leafo/scssphp/src/Exception/ParserException.php',
+        'Leafo\\ScssPhp\\Exception\\ServerException' => __DIR__ . '/..' . '/leafo/scssphp/src/Exception/ServerException.php',
+        'Leafo\\ScssPhp\\Formatter' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter.php',
+        'Leafo\\ScssPhp\\Formatter\\Compact' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/Compact.php',
+        'Leafo\\ScssPhp\\Formatter\\Compressed' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/Compressed.php',
+        'Leafo\\ScssPhp\\Formatter\\Crunched' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/Crunched.php',
+        'Leafo\\ScssPhp\\Formatter\\Debug' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/Debug.php',
+        'Leafo\\ScssPhp\\Formatter\\Expanded' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/Expanded.php',
+        'Leafo\\ScssPhp\\Formatter\\Nested' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/Nested.php',
+        'Leafo\\ScssPhp\\Formatter\\OutputBlock' => __DIR__ . '/..' . '/leafo/scssphp/src/Formatter/OutputBlock.php',
+        'Leafo\\ScssPhp\\Node' => __DIR__ . '/..' . '/leafo/scssphp/src/Node.php',
+        'Leafo\\ScssPhp\\Node\\Number' => __DIR__ . '/..' . '/leafo/scssphp/src/Node/Number.php',
+        'Leafo\\ScssPhp\\Parser' => __DIR__ . '/..' . '/leafo/scssphp/src/Parser.php',
+        'Leafo\\ScssPhp\\Server' => __DIR__ . '/..' . '/leafo/scssphp/src/Server.php',
+        'Leafo\\ScssPhp\\Type' => __DIR__ . '/..' . '/leafo/scssphp/src/Type.php',
+        'Leafo\\ScssPhp\\Util' => __DIR__ . '/..' . '/leafo/scssphp/src/Util.php',
+        'Leafo\\ScssPhp\\Version' => __DIR__ . '/..' . '/leafo/scssphp/src/Version.php',
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',

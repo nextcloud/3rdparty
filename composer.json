@@ -35,6 +35,7 @@
 		"sabre/dav": "^3.2.0",
 		"symfony/polyfill-php70": "^1.0",
 		"lukasreschke/id3parser": "^0.0.1",
-		"stecman/symfony-console-completion": "^0.7.0"
+		"stecman/symfony-console-completion": "^0.7.0",
+		"leafo/scssphp": "^0.6.6"
 	}
 }
