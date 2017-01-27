@@ -8,7 +8,7 @@
 		"classmap-authoritative": true
 	},
 	"require": {
-		"doctrine/dbal": "2.5.5",
+		"doctrine/dbal": "2.5.9",
 		"mcnetic/zipstreamer": "^1.0",
 		"phpseclib/phpseclib": "2.0.3",
 		"rackspace/php-opencloud": "v1.9.2",
