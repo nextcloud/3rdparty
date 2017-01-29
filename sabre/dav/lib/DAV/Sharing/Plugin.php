@@ -8,8 +8,8 @@ use Sabre\DAV\INode;
 use Sabre\DAV\PropFind;
 use Sabre\DAV\Server;
 use Sabre\DAV\ServerPlugin;
-use Sabre\DAV\Xml\Property;
 use Sabre\DAV\Xml\Element\Sharee;
+use Sabre\DAV\Xml\Property;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
 
@@ -40,7 +40,7 @@ class Plugin extends ServerPlugin {
     /**
      * Reference to SabreDAV server object.
      *
-     * @var Sabre\DAV\Server
+     * @var Server
      */
     protected $server;
 

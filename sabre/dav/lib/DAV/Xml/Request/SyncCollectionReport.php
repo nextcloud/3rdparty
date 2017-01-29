@@ -2,10 +2,10 @@
 
 namespace Sabre\DAV\Xml\Request;
 
+use Sabre\DAV\Exception\BadRequest;
+use Sabre\Xml\Element\KeyValue;
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
-use Sabre\Xml\Element\KeyValue;
-use Sabre\DAV\Exception\BadRequest;
 
 /**
  * SyncCollection request parser.
@@ -51,7 +51,7 @@ class SyncCollectionReport implements XmlDeserializable {
     /**
      * The deserialize method is called during xml parsing.
      *
-     * This method is called statictly, this is because in theory this method
+     * This method is called statically, this is because in theory this method
      * may be used as a type of constructor, or factory method.
      *
      * Often you want to return an instance of the current class, but you are
@@ -75,7 +75,7 @@ class SyncCollectionReport implements XmlDeserializable {
 
         $reader->pushContext();
 
-        $reader->elementMap['{DAV:}prop']   = 'Sabre\Xml\Element\Elements';
+        $reader->elementMap['{DAV:}prop'] = 'Sabre\Xml\Element\Elements';
         $elems = KeyValue::xmlDeserialize($reader);
 
         $reader->popContext();

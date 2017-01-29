@@ -9,11 +9,11 @@ use Sabre\DAV\INode;
 use Sabre\DAV\MkCol;
 use Sabre\DAV\Xml\Property\LocalHref;
 use Sabre\DAVACL;
-use Sabre\VObject;
 use Sabre\HTTP;
-use Sabre\Uri;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
+use Sabre\Uri;
+use Sabre\VObject;
 
 /**
  * CalDAV plugin
@@ -302,8 +302,8 @@ class Plugin extends DAV\ServerPlugin {
 
         $this->server->createCollection($path, new MkCol($resourceType, $properties));
 
-        $this->server->httpResponse->setStatus(201);
-        $this->server->httpResponse->setHeader('Content-Length', 0);
+        $response->setStatus(201);
+        $response->setHeader('Content-Length', 0);
 
         // This breaks the method chain.
         return false;
@@ -926,7 +926,7 @@ class Plugin extends DAV\ServerPlugin {
             );
         }
 
-        // We use an extra variable to allow event handles to tell us wether
+        // We use an extra variable to allow event handles to tell us whether
         // the object was modified or not.
         //
         // This helps us determine if we need to re-serialize the object.

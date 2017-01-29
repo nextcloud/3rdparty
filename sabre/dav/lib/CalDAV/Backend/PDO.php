@@ -5,8 +5,8 @@ namespace Sabre\CalDAV\Backend;
 use Sabre\CalDAV;
 use Sabre\DAV;
 use Sabre\DAV\Exception\Forbidden;
-use Sabre\VObject;
 use Sabre\DAV\Xml\Element\Sharee;
+use Sabre\VObject;
 
 /**
  * PDO CalDAV backend
@@ -296,7 +296,7 @@ SQL
      * Calling the handle method is like telling the PropPatch object "I
      * promise I can handle updating this property".
      *
-     * Read the PropPatch documenation for more info and examples.
+     * Read the PropPatch documentation for more info and examples.
      *
      * @param mixed $calendarId
      * @param \Sabre\DAV\PropPatch $propPatch
@@ -481,13 +481,13 @@ SQL
         if (!$row) return null;
 
         return [
-            'id'            => $row['id'],
-            'uri'           => $row['uri'],
-            'lastmodified'  => (int)$row['lastmodified'],
-            'etag'          => '"' . $row['etag'] . '"',
-            'size'          => (int)$row['size'],
-            'calendardata'  => $row['calendardata'],
-            'component'     => strtolower($row['componenttype']),
+            'id'           => $row['id'],
+            'uri'          => $row['uri'],
+            'lastmodified' => (int)$row['lastmodified'],
+            'etag'         => '"' . $row['etag'] . '"',
+            'size'         => (int)$row['size'],
+            'calendardata' => $row['calendardata'],
+            'component'    => strtolower($row['componenttype']),
          ];
 
     }
@@ -511,27 +511,29 @@ SQL
         }
         list($calendarId, $instanceId) = $calendarId;
 
-        $query = 'SELECT id, uri, lastmodified, etag, calendarid, size, calendardata, componenttype FROM ' . $this->calendarObjectTableName . ' WHERE calendarid = ? AND uri IN (';
-        // Inserting a whole bunch of question marks
-        $query .= implode(',', array_fill(0, count($uris), '?'));
-        $query .= ')';
-
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute(array_merge([$calendarId], $uris));
-
         $result = [];
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        foreach (array_chunk($uris, 900) as $chunk) {
+            $query = 'SELECT id, uri, lastmodified, etag, calendarid, size, calendardata, componenttype FROM ' . $this->calendarObjectTableName . ' WHERE calendarid = ? AND uri IN (';
+            // Inserting a whole bunch of question marks
+            $query .= implode(',', array_fill(0, count($chunk), '?'));
+            $query .= ')';
 
-            $result[] = [
-                'id'           => $row['id'],
-                'uri'          => $row['uri'],
-                'lastmodified' => (int)$row['lastmodified'],
-                'etag'         => '"' . $row['etag'] . '"',
-                'size'         => (int)$row['size'],
-                'calendardata' => $row['calendardata'],
-                'component'    => strtolower($row['componenttype']),
-            ];
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array_merge([$calendarId], $chunk));
 
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+
+                $result[] = [
+                    'id'           => $row['id'],
+                    'uri'          => $row['uri'],
+                    'lastmodified' => (int)$row['lastmodified'],
+                    'etag'         => '"' . $row['etag'] . '"',
+                    'size'         => (int)$row['size'],
+                    'calendardata' => $row['calendardata'],
+                    'component'    => strtolower($row['componenttype']),
+                ];
+
+            }
         }
         return $result;
 
@@ -686,7 +688,7 @@ SQL
                 }
 
             }
-            
+
             // Ensure Occurence values are positive
             if ($firstOccurence < 0) $firstOccurence = 0;
             if ($lastOccurence < 0) $lastOccurence = 0;
@@ -769,7 +771,7 @@ SQL
      * Note that especially time-range-filters may be difficult to parse. A
      * time-range filter specified on a VEVENT must for instance also handle
      * recurrence rules correctly.
-     * A good example of how to interprete all these filters can also simply
+     * A good example of how to interpret all these filters can also simply
      * be found in \Sabre\CalDAV\CalendarQueryFilter. This class is as correct
      * as possible, so it gives you a good idea on what type of stuff you need
      * to think of.
@@ -969,7 +971,7 @@ SQL;
 
         // Current synctoken
         $stmt = $this->pdo->prepare('SELECT synctoken FROM ' . $this->calendarTableName . ' WHERE id = ?');
-        $stmt->execute([ $calendarId ]);
+        $stmt->execute([$calendarId]);
         $currentToken = $stmt->fetchColumn(0);
 
         if (is_null($currentToken)) return null;
@@ -1181,7 +1183,7 @@ SQL;
      * Calling the handle method is like telling the PropPatch object "I
      * promise I can handle updating this property".
      *
-     * Read the PropPatch documenation for more info and examples.
+     * Read the PropPatch documentation for more info and examples.
      *
      * @param mixed $subscriptionId
      * @param \Sabre\DAV\PropPatch $propPatch
@@ -1327,7 +1329,7 @@ SQL;
     function createSchedulingObject($principalUri, $objectUri, $objectData) {
 
         $stmt = $this->pdo->prepare('INSERT INTO ' . $this->schedulingObjectTableName . ' (principaluri, calendardata, uri, lastmodified, etag, size) VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$principalUri, $objectData, $objectUri, time(), md5($objectData), strlen($objectData) ]);
+        $stmt->execute([$principalUri, $objectData, $objectUri, time(), md5($objectData), strlen($objectData)]);
 
     }
 
@@ -1483,7 +1485,7 @@ SQL;
                 'inviteStatus' => (int)$row['share_invitestatus'],
                 'properties'   =>
                     !empty($row['share_displayname'])
-                    ?  [ '{DAV:}displayname' => $row['share_displayname'] ]
+                    ? ['{DAV:}displayname' => $row['share_displayname']]
                     : [],
                 'principal' => $row['principaluri'],
             ]);
@@ -1502,7 +1504,7 @@ SQL;
      */
     function setPublishStatus($calendarId, $value) {
 
-        throw new \Sabre\DAV\Exception\NotImplemented('Not implemented');
+        throw new DAV\Exception\NotImplemented('Not implemented');
 
     }
 

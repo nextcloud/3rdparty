@@ -2,10 +2,10 @@
 
 namespace Sabre\CalDAV\Xml\Request;
 
-use Sabre\Xml\XmlDeserializable;
-use Sabre\Xml\Reader;
 use Sabre\CalDAV\Plugin;
 use Sabre\Uri;
+use Sabre\Xml\Reader;
+use Sabre\Xml\XmlDeserializable;
 
 /**
  * CalendarMultiGetReport request parser.
@@ -64,7 +64,7 @@ class CalendarMultiGetReport implements XmlDeserializable {
     /**
      * The deserialize method is called during xml parsing.
      *
-     * This method is called statictly, this is because in theory this method
+     * This method is called statically, this is because in theory this method
      * may be used as a type of constructor, or factory method.
      *
      * Often you want to return an instance of the current class, but you are
