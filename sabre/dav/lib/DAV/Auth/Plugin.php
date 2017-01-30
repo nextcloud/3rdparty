@@ -2,11 +2,11 @@
 
 namespace Sabre\DAV\Auth;
 
-use Sabre\HTTP\RequestInterface;
-use Sabre\HTTP\ResponseInterface;
 use Sabre\DAV\Exception\NotAuthenticated;
 use Sabre\DAV\Server;
 use Sabre\DAV\ServerPlugin;
+use Sabre\HTTP\RequestInterface;
+use Sabre\HTTP\ResponseInterface;
 
 /**
  * This plugin provides Authentication for a WebDAV server.
@@ -181,7 +181,7 @@ class Plugin extends ServerPlugin {
      *
      * If login was not successful, the second item in the array will contain a
      * an array with strings. The strings are a list of reasons why login was
-     * unsuccesful. For every auth backend there will be one reason, so usually
+     * unsuccessful. For every auth backend there will be one reason, so usually
      * there's just one.
      *
      * @param RequestInterface $request

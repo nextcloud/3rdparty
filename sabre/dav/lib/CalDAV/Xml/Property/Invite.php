@@ -2,10 +2,11 @@
 
 namespace Sabre\CalDAV\Xml\Property;
 
-use Sabre\Xml\XmlSerializable;
-use Sabre\Xml\Writer;
 use Sabre\CalDAV\Plugin;
 use Sabre\DAV;
+use Sabre\DAV\Xml\Element\Sharee;
+use Sabre\Xml\Writer;
+use Sabre\Xml\XmlSerializable;
 
 /**
  * Invite property
@@ -51,12 +52,12 @@ class Invite implements XmlSerializable {
     }
 
     /**
-     * The xmlSerialize metod is called during xml writing.
+     * The xmlSerialize method is called during xml writing.
      *
      * Use the $writer argument to write its own xml serialization.
      *
      * An important note: do _not_ create a parent element. Any element
-     * implementing XmlSerializble should only ever write what's considered
+     * implementing XmlSerializable should only ever write what's considered
      * its 'inner xml'.
      *
      * The parent of the current element is responsible for writing a
@@ -75,7 +76,7 @@ class Invite implements XmlSerializable {
 
         foreach ($this->sharees as $sharee) {
 
-            if ($sharee->access === \Sabre\DAV\Sharing\Plugin::ACCESS_SHAREDOWNER) {
+            if ($sharee->access === DAV\Sharing\Plugin::ACCESS_SHAREDOWNER) {
                 $writer->startElement($cs . 'organizer');
             } else {
                 $writer->startElement($cs . 'user');
@@ -109,7 +110,7 @@ class Invite implements XmlSerializable {
 
             }
 
-            $href = new \Sabre\DAV\Xml\Property\Href($sharee->href);
+            $href = new DAV\Xml\Property\Href($sharee->href);
             $href->xmlSerialize($writer);
 
             if (isset($sharee->properties['{DAV:}displayname'])) {

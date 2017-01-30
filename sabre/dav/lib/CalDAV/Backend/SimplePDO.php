@@ -8,7 +8,7 @@ use Sabre\DAV;
 /**
  * Simple PDO CalDAV backend.
  *
- * This class is basically the most minmum example to get a caldav backend up
+ * This class is basically the most minimum example to get a caldav backend up
  * and running. This class uses the following schema (MySQL example):
  *
  * CREATE TABLE simple_calendars (
@@ -209,12 +209,12 @@ class SimplePDO extends AbstractBackend {
         if (!$row) return null;
 
         return [
-            'id'            => $row['id'],
-            'uri'           => $row['uri'],
-            'etag'          => '"' . md5($row['calendardata']) . '"',
-            'calendarid'    => $calendarId,
-            'size'          => strlen($row['calendardata']),
-            'calendardata'  => $row['calendardata'],
+            'id'           => $row['id'],
+            'uri'          => $row['uri'],
+            'etag'         => '"' . md5($row['calendardata']) . '"',
+            'calendarid'   => $calendarId,
+            'size'         => strlen($row['calendardata']),
+            'calendardata' => $row['calendardata'],
          ];
 
     }
