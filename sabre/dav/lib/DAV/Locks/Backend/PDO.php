@@ -33,7 +33,7 @@ class PDO extends AbstractBackend {
     /**
      * Constructor
      *
-     * @param PDO $pdo
+     * @param \PDO $pdo
      */
     function __construct(\PDO $pdo) {
 
@@ -102,7 +102,7 @@ class PDO extends AbstractBackend {
             $lockInfo->created = $row['created'];
             $lockInfo->scope = $row['scope'];
             $lockInfo->depth = $row['depth'];
-            $lockInfo->uri   = $row['uri'];
+            $lockInfo->uri = $row['uri'];
             $lockList[] = $lockInfo;
 
         }

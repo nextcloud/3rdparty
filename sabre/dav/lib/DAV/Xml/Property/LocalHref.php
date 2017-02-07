@@ -8,7 +8,7 @@ use Sabre\HTTP;
  * LocalHref property
  *
  * Like the Href property, this element represents {DAV:}href. The difference
- * is that this is used stricly for paths on the server. The LocalHref property
+ * is that this is used strictly for paths on the server. The LocalHref property
  * will prepare the path so it's a valid URI.
  *
  * These two objects behave identically:
@@ -32,7 +32,7 @@ class LocalHref extends Href {
      * If auto-prefix is set to false, the hrefs will be treated as absolute
      * and not relative to the servers base uri.
      *
-     * @param string|string[] $href
+     * @param string|string[] $hrefs
      */
     function __construct($hrefs) {
 
