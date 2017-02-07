@@ -14,7 +14,7 @@ use Sabre\HTTP\URLUtil;
  * a WebDAV share as a disk.
  *
  * It will intercept these files and place them in a separate directory.
- * these files are not deleted automatically, so it is adviceable to
+ * these files are not deleted automatically, so it is advisable to
  * delete these after they are not accessed for 24 hours.
  *
  * Currently it supports:
@@ -51,7 +51,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
     /**
      * A reference to the main Server class
      *
-     * @var Sabre\DAV\Server
+     * @var \Sabre\DAV\Server
      */
     protected $server;
 
@@ -134,12 +134,12 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      *
      * @param string $uri
      * @param resource $data
-     * @param DAV\ICollection $parentNode
+     * @param ICollection $parent
      * @param bool $modified Should be set to true, if this event handler
      *                       changed &$data.
      * @return bool
      */
-    function beforeCreateFile($uri, $data, $parent, $modified) {
+    function beforeCreateFile($uri, $data, ICollection $parent, $modified) {
 
         if ($tempPath = $this->isTempFile($uri)) {
 

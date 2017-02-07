@@ -4,8 +4,8 @@ namespace Sabre\DAVACL\Xml\Property;
 
 use Sabre\DAV\Browser\HtmlOutput;
 use Sabre\DAV\Browser\HtmlOutputHelper;
-use Sabre\Xml\XmlSerializable;
 use Sabre\Xml\Writer;
+use Sabre\Xml\XmlSerializable;
 
 /**
  * SupportedPrivilegeSet property
@@ -53,12 +53,12 @@ class SupportedPrivilegeSet implements XmlSerializable, HtmlOutput {
     }
 
     /**
-     * The xmlSerialize metod is called during xml writing.
+     * The xmlSerialize method is called during xml writing.
      *
      * Use the $writer argument to write its own xml serialization.
      *
      * An important note: do _not_ create a parent element. Any element
-     * implementing XmlSerializble should only ever write what's considered
+     * implementing XmlSerializable should only ever write what's considered
      * its 'inner xml'.
      *
      * The parent of the current element is responsible for writing a
@@ -73,7 +73,7 @@ class SupportedPrivilegeSet implements XmlSerializable, HtmlOutput {
      */
     function xmlSerialize(Writer $writer) {
 
-        $this->serializePriv($writer, '{DAV:}all', [ 'aggregates' => $this->privileges]);
+        $this->serializePriv($writer, '{DAV:}all', ['aggregates' => $this->privileges]);
 
     }
 
@@ -114,7 +114,7 @@ class SupportedPrivilegeSet implements XmlSerializable, HtmlOutput {
 
         ob_start();
         echo "<ul class=\"tree\">";
-        $traverse('{DAV:}all', [ 'aggregates' => $this->getValue() ]);
+        $traverse('{DAV:}all', ['aggregates' => $this->getValue()]);
         echo "</ul>\n";
 
         return ob_get_clean();
@@ -129,6 +129,7 @@ class SupportedPrivilegeSet implements XmlSerializable, HtmlOutput {
      * This is a recursive function.
      *
      * @param Writer $writer
+     * @param string $privName
      * @param array $privilege
      * @return void
      */

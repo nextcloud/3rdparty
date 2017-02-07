@@ -2,12 +2,12 @@
 
 namespace Sabre\DAV\Xml\Property;
 
+use DateTime;
+use DateTimeZone;
+use Sabre\HTTP;
 use Sabre\Xml\Element;
 use Sabre\Xml\Reader;
 use Sabre\Xml\Writer;
-use Sabre\HTTP;
-use DateTime;
-use DateTimeZone;
 
 /**
  * This property represents the {DAV:}getlastmodified property.
@@ -83,7 +83,7 @@ class GetLastModified implements Element {
     /**
      * The deserialize method is called during xml parsing.
      *
-     * This method is called statictly, this is because in theory this method
+     * This method is called statically, this is because in theory this method
      * may be used as a type of constructor, or factory method.
      *
      * Often you want to return an instance of the current class, but you are
