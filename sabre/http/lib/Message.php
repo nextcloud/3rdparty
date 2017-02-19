@@ -73,7 +73,8 @@ abstract class Message implements MessageInterface {
         }
         if (is_null($body)) {
             return '';
-        }
+	}
+
         $contentLength = $this->getHeader('Content-Length');
         if (!is_int($contentLength)) {
             return stream_get_contents($body);
