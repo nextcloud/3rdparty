@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "641586bfbbc76b68f47359d62e729d22",
-    "content-hash": "2408eab0e3c7aa1a1412f3dc86500329",
+    "content-hash": "7b6c2725b3b843ec779a761085bc6be9",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -35,7 +34,7 @@
                 "MIT"
             ],
             "description": "Convenience wrapper around ini_get()",
-            "time": "2014-09-15 13:12:35"
+            "time": "2014-09-15T13:12:35+00:00"
         },
         {
             "name": "deepdiver1975/tarstreamer",
@@ -77,7 +76,7 @@
                 "stream",
                 "tar"
             ],
-            "time": "2016-02-15 10:52:44"
+            "time": "2016-02-15T10:52:44+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -145,7 +144,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2015-08-31 12:32:49"
+            "time": "2015-08-31T12:32:49+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -215,7 +214,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-12-31 16:37:02"
+            "time": "2015-12-31T16:37:02+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -281,7 +280,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14 22:21:58"
+            "time": "2015-04-14T22:21:58+00:00"
         },
         {
             "name": "doctrine/common",
@@ -354,7 +353,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-12-25 13:18:31"
+            "time": "2015-12-25T13:18:31+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -425,7 +424,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-09-09 19:13:33"
+            "time": "2016-09-09T19:13:33+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -492,7 +491,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2015-11-06T14:35:42+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -546,7 +545,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "guzzle/common",
@@ -591,7 +590,7 @@
                 "exception"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-01-28 22:29:15"
+            "time": "2014-01-28T22:29:15+00:00"
         },
         {
             "name": "guzzle/http",
@@ -649,7 +648,7 @@
                 "http client"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-01-23 18:23:29"
+            "time": "2014-01-23T18:23:29+00:00"
         },
         {
             "name": "guzzle/parser",
@@ -694,7 +693,7 @@
                 "url"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2013-10-24 00:04:09"
+            "time": "2013-10-24T00:04:09+00:00"
         },
         {
             "name": "guzzle/stream",
@@ -748,7 +747,7 @@
                 "stream"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-01-28 22:14:17"
+            "time": "2014-01-28T22:14:17+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -800,7 +799,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-07-15 19:28:39"
+            "time": "2016-07-15T19:28:39+00:00"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -851,7 +850,7 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "time": "2015-05-20 03:37:09"
+            "time": "2015-05-20T03:37:09+00:00"
         },
         {
             "name": "guzzlehttp/streams",
@@ -901,20 +900,20 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-10-12 19:18:40"
+            "time": "2014-10-12T19:18:40+00:00"
         },
         {
             "name": "icewind/streams",
-            "version": "0.4.1",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "d3620e8dc410c86c2ba55579803679c4e0b289ac"
+                "reference": "6bfd2fdbd99319f5e010d0a684409189a562cb1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/d3620e8dc410c86c2ba55579803679c4e0b289ac",
-                "reference": "d3620e8dc410c86c2ba55579803679c4e0b289ac",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/6bfd2fdbd99319f5e010d0a684409189a562cb1e",
+                "reference": "6bfd2fdbd99319f5e010d0a684409189a562cb1e",
                 "shasum": ""
             },
             "require": {
@@ -942,7 +941,7 @@
                 }
             ],
             "description": "A set of generic stream wrappers",
-            "time": "2016-06-02 14:37:52"
+            "time": "2016-12-02T14:21:23+00:00"
         },
         {
             "name": "interfasys/lognormalizer",
@@ -995,7 +994,7 @@
                 "log",
                 "normalizer"
             ],
-            "time": "2015-08-01 16:27:37"
+            "time": "2015-08-01T16:27:37+00:00"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -1053,7 +1052,7 @@
                 "serialize",
                 "tokenizer"
             ],
-            "time": "2015-03-11 20:06:43"
+            "time": "2015-03-11T20:06:43+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1136,7 +1135,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-03-14 21:54:11"
+            "time": "2016-03-14T21:54:11+00:00"
         },
         {
             "name": "lukasreschke/id3parser",
@@ -1171,7 +1170,7 @@
                 "php",
                 "tags"
             ],
-            "time": "2016-04-04 09:34:50"
+            "time": "2016-04-04T09:34:50+00:00"
         },
         {
             "name": "mcnetic/zipstreamer",
@@ -1223,7 +1222,7 @@
                 "stream",
                 "zip"
             ],
-            "time": "2016-02-17 22:47:09"
+            "time": "2016-02-17T22:47:09+00:00"
         },
         {
             "name": "natxet/CssMin",
@@ -1265,7 +1264,7 @@
                 "css",
                 "minify"
             ],
-            "time": "2014-09-10 14:34:00"
+            "time": "2014-09-10T14:34:00+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1310,7 +1309,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-09-19 14:15:08"
+            "time": "2015-09-19T14:15:08+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1358,7 +1357,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-03-18 20:34:03"
+            "time": "2016-03-18T20:34:03+00:00"
         },
         {
             "name": "patchwork/jsqueeze",
@@ -1405,7 +1404,7 @@
                 "javascript",
                 "minification"
             ],
-            "time": "2016-04-19 09:28:22"
+            "time": "2016-04-19T09:28:22+00:00"
         },
         {
             "name": "patchwork/utf8",
@@ -1464,7 +1463,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-12-15 15:33:41"
+            "time": "2015-12-15T15:33:41+00:00"
         },
         {
             "name": "pear/archive_tar",
@@ -1530,7 +1529,7 @@
                 "archive",
                 "tar"
             ],
-            "time": "2015-08-05 12:31:03"
+            "time": "2015-08-05T12:31:03+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -1577,7 +1576,7 @@
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Console_Getopt",
-            "time": "2015-07-20 20:28:12"
+            "time": "2015-07-20T20:28:12+00:00"
         },
         {
             "name": "pear/pear-core-minimal",
@@ -1621,7 +1620,7 @@
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
-            "time": "2015-10-17 11:41:19"
+            "time": "2015-10-17T11:41:19+00:00"
         },
         {
             "name": "pear/pear_exception",
@@ -1676,7 +1675,7 @@
             "keywords": [
                 "exception"
             ],
-            "time": "2015-02-10 20:07:52"
+            "time": "2015-02-10T20:07:52+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -1768,7 +1767,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2016-08-18 18:49:14"
+            "time": "2016-08-18T18:49:14+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -1814,7 +1813,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2015-09-11 15:10:35"
+            "time": "2015-09-11T15:10:35+00:00"
         },
         {
             "name": "psr/log",
@@ -1861,7 +1860,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "punic/punic",
@@ -1926,7 +1925,7 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2015-06-16 13:04:27"
+            "time": "2015-06-16T13:04:27+00:00"
         },
         {
             "name": "rackspace/php-opencloud",
@@ -1983,7 +1982,7 @@
                 "rackspace",
                 "swift"
             ],
-            "time": "2014-02-06 20:53:21"
+            "time": "2014-02-06T20:53:21+00:00"
         },
         {
             "name": "react/promise",
@@ -2027,7 +2026,7 @@
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2015-07-03 13:48:55"
+            "time": "2015-07-03T13:48:55+00:00"
         },
         {
             "name": "sabre/dav",
@@ -2110,7 +2109,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2016-06-28 02:44:05"
+            "time": "2016-06-28T02:44:05+00:00"
         },
         {
             "name": "sabre/event",
@@ -2167,7 +2166,7 @@
                 "promise",
                 "signal"
             ],
-            "time": "2015-11-05 20:14:39"
+            "time": "2015-11-05T20:14:39+00:00"
         },
         {
             "name": "sabre/http",
@@ -2222,7 +2221,7 @@
             "keywords": [
                 "http"
             ],
-            "time": "2016-01-06 23:00:08"
+            "time": "2016-01-06T23:00:08+00:00"
         },
         {
             "name": "sabre/uri",
@@ -2273,7 +2272,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-10-27 04:56:33"
+            "time": "2016-10-27T04:56:33+00:00"
         },
         {
             "name": "sabre/vobject",
@@ -2370,7 +2369,7 @@
                 "xCal",
                 "xCard"
             ],
-            "time": "2016-07-15 19:52:17"
+            "time": "2016-07-15T19:52:17+00:00"
         },
         {
             "name": "sabre/xml",
@@ -2433,7 +2432,7 @@
                 "dom",
                 "xml"
             ],
-            "time": "2016-10-09 22:57:52"
+            "time": "2016-10-09T22:57:52+00:00"
         },
         {
             "name": "stecman/symfony-console-completion",
@@ -2478,7 +2477,7 @@
                 }
             ],
             "description": "Automatic BASH completion for Symfony Console Component based applications.",
-            "time": "2016-02-24 05:08:54"
+            "time": "2016-02-24T05:08:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2530,7 +2529,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-12-05 14:17:14"
+            "time": "2014-12-05T14:17:14+00:00"
         },
         {
             "name": "symfony/console",
@@ -2590,7 +2589,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-26 08:04:17"
+            "time": "2016-07-26T08:04:17+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2650,7 +2649,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-19 10:45:57"
+            "time": "2016-07-19T10:45:57+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2709,7 +2708,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-05-18T14:26:46+00:00"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -2768,7 +2767,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-01-28 22:42:02"
+            "time": "2016-01-28T22:42:02+00:00"
         },
         {
             "name": "symfony/process",
@@ -2817,7 +2816,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-29 14:13:09"
+            "time": "2016-09-29T14:13:09+00:00"
         },
         {
             "name": "symfony/routing",
@@ -2892,7 +2891,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-08-16 14:58:24"
+            "time": "2016-08-16T14:58:24+00:00"
         }
     ],
     "packages-dev": [],
