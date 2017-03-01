@@ -3044,5 +3044,48 @@
             "persistence",
             "queryobject"
         ]
+    },
+    {
+        "name": "icewind/searchdav",
+        "version": "v0.2.0",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/icewind1991/SearchDAV.git",
+            "reference": "5c2a3f1b021ccd18a12f8aa6b196c07fefac67ee"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/5c2a3f1b021ccd18a12f8aa6b196c07fefac67ee",
+            "reference": "5c2a3f1b021ccd18a12f8aa6b196c07fefac67ee",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6",
+            "sabre/dav": "^3.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2017-02-22T17:14:08+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "SearchDAV\\": "src/",
+                "SearchDAV\\Test\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "AGPL"
+        ],
+        "authors": [
+            {
+                "name": "Robin Appelman",
+                "email": "robin@icewind.nl"
+            }
+        ],
+        "description": "sabre/dav plugin to implement rfc5323 SEARCH"
     }
 ]
