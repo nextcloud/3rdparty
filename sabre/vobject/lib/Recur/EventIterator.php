@@ -2,9 +2,9 @@
 
 namespace Sabre\VObject\Recur;
 
-use DateTimeZone;
 use DateTimeImmutable;
 use DateTimeInterface;
+use DateTimeZone;
 use InvalidArgumentException;
 use Sabre\VObject\Component;
 use Sabre\VObject\Component\VEvent;
@@ -43,6 +43,8 @@ use Sabre\VObject\Settings;
  *     * BYSETPOS
  *   * FREQ=YEARLY
  *     * BYMONTH
+ *     * BYYEARDAY
+ *     * BYWEEKNO
  *     * BYMONTHDAY (only if BYMONTH is also set)
  *     * BYDAY (only if BYMONTH is also set)
  *
@@ -407,7 +409,7 @@ class EventIterator implements \Iterator {
      */
     function fastForward(DateTimeInterface $dateTime) {
 
-        while ($this->valid() && $this->getDtEnd() < $dateTime) {
+        while ($this->valid() && $this->getDtEnd() <= $dateTime) {
             $this->next();
         }
 

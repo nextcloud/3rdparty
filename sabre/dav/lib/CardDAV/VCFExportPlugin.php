@@ -3,9 +3,9 @@
 namespace Sabre\CardDAV;
 
 use Sabre\DAV;
-use Sabre\VObject;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
+use Sabre\VObject;
 
 /**
  * VCF Exporter
@@ -24,7 +24,7 @@ class VCFExportPlugin extends DAV\ServerPlugin {
     /**
      * Reference to Server class
      *
-     * @var Sabre\DAV\Server
+     * @var DAV\Server
      */
     protected $server;
 

@@ -20,7 +20,7 @@ interface IFile extends INode {
      *
      * The data argument is a readable stream resource.
      *
-     * After a succesful put operation, you may choose to return an ETag. The
+     * After a successful put operation, you may choose to return an ETag. The
      * etag must always be surrounded by double-quotes. These quotes must
      * appear in the actual string you're returning.
      *
@@ -32,7 +32,7 @@ interface IFile extends INode {
      * different object on a subsequent GET you are strongly recommended to not
      * return an ETag, and just return null.
      *
-     * @param resource|data $data
+     * @param resource|string $data
      * @return string|null
      */
     function put($data);

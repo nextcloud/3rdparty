@@ -2,9 +2,9 @@
 
 namespace Sabre\CalDAV\Notifications;
 
-use Sabre\DAV;
 use Sabre\CalDAV;
 use Sabre\CalDAV\Xml\Notification\NotificationInterface;
+use Sabre\DAV;
 use Sabre\DAVACL;
 
 /**
@@ -25,14 +25,14 @@ class Node extends DAV\File implements INode, DAVACL\IACL {
     /**
      * The notification backend
      *
-     * @var Sabre\CalDAV\Backend\NotificationSupport
+     * @var CalDAV\Backend\NotificationSupport
      */
     protected $caldavBackend;
 
     /**
      * The actual notification
      *
-     * @var Sabre\CalDAV\Notifications\INotificationType
+     * @var NotificationInterface
      */
     protected $notification;
 
@@ -61,7 +61,7 @@ class Node extends DAV\File implements INode, DAVACL\IACL {
     /**
      * Returns the path name for this notification
      *
-     * @return id
+     * @return string
      */
     function getName() {
 
@@ -84,9 +84,9 @@ class Node extends DAV\File implements INode, DAVACL\IACL {
 
     /**
      * This method must return an xml element, using the
-     * Sabre\CalDAV\Notifications\INotificationType classes.
+     * Sabre\CalDAV\Xml\Notification\NotificationInterface classes.
      *
-     * @return INotificationType
+     * @return NotificationInterface
      */
     function getNotificationType() {
 

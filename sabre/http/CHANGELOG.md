@@ -1,19 +1,25 @@
 ChangeLog
 =========
 
+4.2.2 (2017-01-02)
+------------------
+
+* #72: Handling clients that send invalid `Content-Length` headers.
+
+
 4.2.1 (2016-01-06)
 ------------------
 
 * #56: `getBodyAsString` now returns at most as many bytes as the contents of
   the `Content-Length` header. This allows users to pass much larger strings
   without having to copy and truncate them.
+* The client now sets a default `User-Agent` header identifying this library.
 
 
 4.2.0 (2016-01-04)
 ------------------
 
 * This package now supports sabre/event 3.0.
-* The client now sets a default `User-Agent` header identifying this library.
 
 
 4.1.0 (2015-09-04)
