@@ -2,10 +2,10 @@
 
 namespace Sabre\CalDAV\Schedule;
 
-use Sabre\DAV;
 use Sabre\CalDAV;
-use Sabre\DAVACL;
 use Sabre\CalDAV\Backend;
+use Sabre\DAV;
+use Sabre\DAVACL;
 use Sabre\VObject;
 
 /**
@@ -83,7 +83,7 @@ class Inbox extends DAV\Collection implements IInbox {
      * Data will either be supplied as a stream resource, or in certain cases
      * as a string. Keep in mind that you may have to support either.
      *
-     * After succesful creation of the file, you may choose to return the ETag
+     * After successful creation of the file, you may choose to return the ETag
      * of the new file here.
      *
      * The returned ETag must be surrounded by double-quotes (The quotes should

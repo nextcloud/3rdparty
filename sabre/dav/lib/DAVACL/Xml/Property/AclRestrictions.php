@@ -2,8 +2,8 @@
 
 namespace Sabre\DAVACL\Xml\Property;
 
-use Sabre\Xml\XmlSerializable;
 use Sabre\Xml\Writer;
+use Sabre\Xml\XmlSerializable;
 
 /**
  * AclRestrictions property
@@ -17,12 +17,12 @@ use Sabre\Xml\Writer;
 class AclRestrictions implements XmlSerializable {
 
     /**
-     * The xmlSerialize metod is called during xml writing.
+     * The xmlSerialize method is called during xml writing.
      *
      * Use the $writer argument to write its own xml serialization.
      *
      * An important note: do _not_ create a parent element. Any element
-     * implementing XmlSerializble should only ever write what's considered
+     * implementing XmlSerializable should only ever write what's considered
      * its 'inner xml'.
      *
      * The parent of the current element is responsible for writing a

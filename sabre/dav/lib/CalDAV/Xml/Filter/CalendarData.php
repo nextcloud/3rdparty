@@ -2,11 +2,11 @@
 
 namespace Sabre\CalDAV\Xml\Filter;
 
+use Sabre\CalDAV\Plugin;
+use Sabre\DAV\Exception\BadRequest;
+use Sabre\VObject\DateTimeParser;
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
-use Sabre\DAV\Exception\BadRequest;
-use Sabre\CalDAV\Plugin;
-use Sabre\VObject\DateTimeParser;
 
 /**
  * CalendarData parser.
@@ -30,7 +30,7 @@ class CalendarData implements XmlDeserializable {
     /**
      * The deserialize method is called during xml parsing.
      *
-     * This method is called statictly, this is because in theory this method
+     * This method is called statically, this is because in theory this method
      * may be used as a type of constructor, or factory method.
      *
      * Often you want to return an instance of the current class, but you are
