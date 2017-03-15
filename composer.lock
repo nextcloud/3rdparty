@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "20290e8ec883e5cbfcbe14dc9bc3cfe8",
+    "content-hash": "99369e16e1234563cbf384489b030da0",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -904,16 +904,16 @@
         },
         {
             "name": "icewind/searchdav",
-            "version": "v0.2.0",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/SearchDAV.git",
-                "reference": "5c2a3f1b021ccd18a12f8aa6b196c07fefac67ee"
+                "reference": "3071937c64a5e45d23c2600e5524538694e03042"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/5c2a3f1b021ccd18a12f8aa6b196c07fefac67ee",
-                "reference": "5c2a3f1b021ccd18a12f8aa6b196c07fefac67ee",
+                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/3071937c64a5e45d23c2600e5524538694e03042",
+                "reference": "3071937c64a5e45d23c2600e5524538694e03042",
                 "shasum": ""
             },
             "require": {
@@ -941,7 +941,7 @@
                 }
             ],
             "description": "sabre/dav plugin to implement rfc5323 SEARCH",
-            "time": "2017-02-22T17:14:08+00:00"
+            "time": "2017-03-15T13:21:40+00:00"
         },
         {
             "name": "icewind/streams",
@@ -1358,7 +1358,7 @@
                 "css",
                 "minify"
             ],
-            "time": "2014-09-10T14:34:00+00:00"
+            "time": "2014-09-10 14:34:00"
         },
         {
             "name": "nikic/php-parser",
