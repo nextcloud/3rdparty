@@ -13,14 +13,18 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         '2b9d0f43f9552984cfa82fee95491826' => __DIR__ . '/..' . '/sabre/event/lib/coroutine.php',
         'd81bab31d3feb45bfe2f283ea3c8fdf7' => __DIR__ . '/..' . '/sabre/event/lib/Loop/functions.php',
         'a1cce3d26cc15c00fcd0b3354bd72c88' => __DIR__ . '/..' . '/sabre/event/lib/Promise/functions.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'ebdb698ed4152ae445614b69b5e4bb6a' => __DIR__ . '/..' . '/sabre/http/lib/functions.php',
         'fe1bcd0336136e435eaf197895daf81a' => __DIR__ . '/..' . '/nikic/php-parser/lib/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        'cab01a477104179f77303ac3e0aabb0e' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Handler/GuzzleV5/GuzzleHandler.php',
+        '7c2b47ca18c73719428cbad34d80d8b2' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Handler/GuzzleV6/GuzzleHandler.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -66,16 +70,26 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'React\\Promise\\' => 14,
         ),
+        'Q' => 
+        array (
+            'QingStor\\SDK\\Service\\' => 21,
+            'QingStor\\SDK\\' => 13,
+        ),
         'P' => 
         array (
             'Punic\\' => 6,
             'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'Patchwork\\' => 10,
         ),
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
             'Leafo\\ScssPhp\\' => 14,
+        ),
+        'K' => 
+        array (
+            'Katzgrau\\KLogger\\' => 17,
         ),
         'I' => 
         array (
@@ -88,6 +102,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'GuzzleHttp\\Stream\\' => 18,
             'GuzzleHttp\\Ring\\' => 16,
+            'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\' => 11,
         ),
         'D' => 
@@ -194,6 +209,14 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
         ),
+        'QingStor\\SDK\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/QingStor',
+        ),
+        'QingStor\\SDK\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yunify/qingstor-sdk/src',
+        ),
         'Punic\\' => 
         array (
             0 => __DIR__ . '/..' . '/punic/punic/code',
@@ -201,6 +224,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Patchwork\\' => 
         array (
@@ -214,6 +241,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Leafo\\ScssPhp\\' => 
         array (
             0 => __DIR__ . '/..' . '/leafo/scssphp/src',
+        ),
+        'Katzgrau\\KLogger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/katzgrau/klogger/src',
         ),
         'InterfaSys\\LogNormalizer\\' => 
         array (
@@ -238,6 +269,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'GuzzleHttp\\Ring\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
         'GuzzleHttp\\' => 
         array (
@@ -793,6 +828,28 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'GuzzleHttp\\Post\\PostBodyInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Post/PostBodyInterface.php',
         'GuzzleHttp\\Post\\PostFile' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Post/PostFile.php',
         'GuzzleHttp\\Post\\PostFileInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Post/PostFileInterface.php',
+        'GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/AppendStream.php',
+        'GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/BufferStream.php',
+        'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',
+        'GuzzleHttp\\Psr7\\DroppingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/DroppingStream.php',
+        'GuzzleHttp\\Psr7\\FnStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/FnStream.php',
+        'GuzzleHttp\\Psr7\\InflateStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/InflateStream.php',
+        'GuzzleHttp\\Psr7\\LazyOpenStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LazyOpenStream.php',
+        'GuzzleHttp\\Psr7\\LimitStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LimitStream.php',
+        'GuzzleHttp\\Psr7\\MessageTrait' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MessageTrait.php',
+        'GuzzleHttp\\Psr7\\MultipartStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MultipartStream.php',
+        'GuzzleHttp\\Psr7\\NoSeekStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/NoSeekStream.php',
+        'GuzzleHttp\\Psr7\\PumpStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/PumpStream.php',
+        'GuzzleHttp\\Psr7\\Request' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Request.php',
+        'GuzzleHttp\\Psr7\\Response' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Response.php',
+        'GuzzleHttp\\Psr7\\ServerRequest' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/ServerRequest.php',
+        'GuzzleHttp\\Psr7\\Stream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Stream.php',
+        'GuzzleHttp\\Psr7\\StreamDecoratorTrait' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/StreamDecoratorTrait.php',
+        'GuzzleHttp\\Psr7\\StreamWrapper' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/StreamWrapper.php',
+        'GuzzleHttp\\Psr7\\UploadedFile' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UploadedFile.php',
+        'GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Uri.php',
+        'GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriNormalizer.php',
+        'GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriResolver.php',
         'GuzzleHttp\\Query' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Query.php',
         'GuzzleHttp\\QueryParser' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/QueryParser.php',
         'GuzzleHttp\\RequestFsm' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RequestFsm.php',
@@ -949,6 +1006,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Icewind\\Streams\\UrlCallback' => __DIR__ . '/..' . '/icewind/streams/src/UrlCallBack.php',
         'Icewind\\Streams\\Wrapper' => __DIR__ . '/..' . '/icewind/streams/src/Wrapper.php',
         'InterfaSys\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/interfasys/lognormalizer/src/Normalizer.php',
+        'Katzgrau\\KLogger\\Logger' => __DIR__ . '/..' . '/katzgrau/klogger/src/Logger.php',
         'Leafo\\ScssPhp\\Base\\Range' => __DIR__ . '/..' . '/leafo/scssphp/src/Base/Range.php',
         'Leafo\\ScssPhp\\Block' => __DIR__ . '/..' . '/leafo/scssphp/src/Block.php',
         'Leafo\\ScssPhp\\Colors' => __DIR__ . '/..' . '/leafo/scssphp/src/Colors.php',
@@ -1300,6 +1358,13 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Patchwork\\Utf8\\WindowsStreamWrapper' => __DIR__ . '/..' . '/patchwork/utf8/src/Patchwork/Utf8/WindowsStreamWrapper.php',
         'Pimple\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Container.php',
         'Pimple\\ServiceProviderInterface' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/ServiceProviderInterface.php',
+        'Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
+        'Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
+        'Psr\\Http\\Message\\ResponseInterface' => __DIR__ . '/..' . '/psr/http-message/src/ResponseInterface.php',
+        'Psr\\Http\\Message\\ServerRequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/ServerRequestInterface.php',
+        'Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
+        'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
+        'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
@@ -1331,6 +1396,17 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Punic\\Plural' => __DIR__ . '/..' . '/punic/punic/code/Plural.php',
         'Punic\\Territory' => __DIR__ . '/..' . '/punic/punic/code/Territory.php',
         'Punic\\Unit' => __DIR__ . '/..' . '/punic/punic/code/Unit.php',
+        'QingStor\\SDK\\Builder' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Builder.php',
+        'QingStor\\SDK\\Config' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Config.php',
+        'QingStor\\SDK\\Exception\\ParameterRequiredException' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Exception/ParameterRequiredException.php',
+        'QingStor\\SDK\\Exception\\ParameterValueNotAllowedException' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Exception/ParameterValueNotAllowedException.php',
+        'QingStor\\SDK\\Handler\\GuzzleV5\\GuzzleStream' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Handler/GuzzleV5/GuzzleStream.php',
+        'QingStor\\SDK\\Handler\\GuzzleV5\\PsrStream' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Handler/GuzzleV5/PsrStream.php',
+        'QingStor\\SDK\\Logger' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Logger.php',
+        'QingStor\\SDK\\Request' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Request.php',
+        'QingStor\\SDK\\Service\\Bucket' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/QingStor/Bucket.php',
+        'QingStor\\SDK\\Service\\QingStor' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/QingStor/QingStor.php',
+        'QingStor\\SDK\\Unpacker' => __DIR__ . '/..' . '/yunify/qingstor-sdk/src/Unpacker.php',
         'React\\Promise\\CancellablePromiseInterface' => __DIR__ . '/..' . '/react/promise/src/CancellablePromiseInterface.php',
         'React\\Promise\\Deferred' => __DIR__ . '/..' . '/react/promise/src/Deferred.php',
         'React\\Promise\\ExtendedPromiseInterface' => __DIR__ . '/..' . '/react/promise/src/ExtendedPromiseInterface.php',

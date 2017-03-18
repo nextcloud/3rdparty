@@ -19,7 +19,7 @@
             "php": ">=5.3.2",
             "symfony/event-dispatcher": ">=2.1"
         },
-        "time": "2014-01-28T22:29:15+00:00",
+        "time": "2014-01-28 22:29:15",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -69,7 +69,7 @@
         "suggest": {
             "guzzle/http": "To convert Guzzle request objects to PHP streams"
         },
-        "time": "2014-01-28T22:14:17+00:00",
+        "time": "2014-01-28 22:14:17",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -121,7 +121,7 @@
         "require": {
             "php": ">=5.3.2"
         },
-        "time": "2013-10-24T00:04:09+00:00",
+        "time": "2013-10-24 00:04:09",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -174,7 +174,7 @@
         "suggest": {
             "ext-curl": "*"
         },
-        "time": "2014-01-23T18:23:29+00:00",
+        "time": "2014-01-23 18:23:29",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -233,7 +233,7 @@
             "psr/log": "1.0.*",
             "satooshi/php-coveralls": "0.6.*@dev"
         },
-        "time": "2014-02-06T20:53:21+00:00",
+        "time": "2014-02-06 20:53:21",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -286,7 +286,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2014-09-15T13:12:35+00:00",
+        "time": "2014-09-15 13:12:35",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -318,7 +318,7 @@
         "require": {
             "php": ">=5.0"
         },
-        "time": "2014-09-10T14:34:00+00:00",
+        "time": "2014-09-10 14:34:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -365,7 +365,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2014-10-12T19:18:40+00:00",
+        "time": "2014-10-12 19:18:40",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -423,7 +423,7 @@
         "suggest": {
             "ext-curl": "Guzzle will use specific adapters if cURL is present"
         },
-        "time": "2015-05-20T03:37:09+00:00",
+        "time": "2015-05-20 03:37:09",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -464,7 +464,7 @@
             "reference": "82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f",
             "shasum": ""
         },
-        "time": "2015-07-20T20:28:12+00:00",
+        "time": "2015-07-20 20:28:12",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -519,7 +519,7 @@
         "require-dev": {
             "phpunit/phpunit": "*"
         },
-        "time": "2015-02-10T20:07:52+00:00",
+        "time": "2015-02-10 20:07:52",
         "type": "class",
         "extra": {
             "branch-alias": {
@@ -578,7 +578,7 @@
             "doctrine/cache": "1.*",
             "phpunit/phpunit": "4.*"
         },
-        "time": "2015-08-31T12:32:49+00:00",
+        "time": "2015-08-31 12:32:49",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -647,7 +647,7 @@
         "replace": {
             "rsky/pear-core-min": "self.version"
         },
-        "time": "2015-10-17T11:41:19+00:00",
+        "time": "2015-10-17 11:41:19",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -689,7 +689,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2015-09-11T15:10:35+00:00",
+        "time": "2015-09-11 15:10:35",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -746,7 +746,7 @@
             "ext-xz": "lzma2 compression support.",
             "ext-zlib": "Gzip compression support."
         },
-        "time": "2015-08-05T12:31:03+00:00",
+        "time": "2015-08-05 12:31:03",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -805,7 +805,7 @@
         "require": {
             "php": ">=5.4.0"
         },
-        "time": "2015-07-03T13:48:55+00:00",
+        "time": "2015-07-03 13:48:55",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -851,7 +851,7 @@
         "require": {
             "php": ">=5.3.2"
         },
-        "time": "2014-09-09T13:34:57+00:00",
+        "time": "2014-09-09 13:34:57",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -910,7 +910,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2015-04-14T22:21:58+00:00",
+        "time": "2015-04-14 22:21:58",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -982,7 +982,7 @@
         "require-dev": {
             "apigen/apigen": "4.0.*"
         },
-        "time": "2015-06-16T13:04:27+00:00",
+        "time": "2015-06-16 13:04:27",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1047,7 +1047,7 @@
             "codeclimate/php-test-reporter": "~0.1.2",
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2015-03-11T20:06:43+00:00",
+        "time": "2015-03-11 20:06:43",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1103,7 +1103,7 @@
             "ext-tokenizer": "*",
             "php": ">=5.3"
         },
-        "time": "2015-09-19T14:15:08+00:00",
+        "time": "2015-09-19 14:15:08",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1152,7 +1152,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.*"
         },
-        "time": "2015-11-06T14:35:42+00:00",
+        "time": "2015-11-06 14:35:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1223,7 +1223,7 @@
             "codeclimate/php-test-reporter": "dev-master",
             "phpunit/phpunit": "4.*"
         },
-        "time": "2015-08-01T16:27:37+00:00",
+        "time": "2015-08-01 16:27:37",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1278,7 +1278,7 @@
             "pear/pear-core-minimal": "v1.10.0alpha2",
             "phpunit/phpunit": "^4.8"
         },
-        "time": "2016-02-15T10:52:44+00:00",
+        "time": "2016-02-15 10:52:44",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1324,7 +1324,7 @@
             "ext-mbstring": "Use Mbstring for best performance",
             "ext-wfio": "Use WFIO for UTF-8 filesystem access on Windows"
         },
-        "time": "2015-12-15T15:33:41+00:00",
+        "time": "2015-12-15 15:33:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1378,7 +1378,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-02-17T22:47:09+00:00",
+        "time": "2016-02-17 22:47:09",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1438,7 +1438,7 @@
         "suggest": {
             "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
         },
-        "time": "2016-03-18T20:34:03+00:00",
+        "time": "2016-03-18 20:34:03",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1483,7 +1483,7 @@
             "paragonie/random_compat": "~1.0",
             "php": ">=5.3.3"
         },
-        "time": "2016-01-28T22:42:02+00:00",
+        "time": "2016-01-28 22:42:02",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1566,7 +1566,7 @@
             "league/flysystem-webdav": "Allows you to use WebDAV storage",
             "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
         },
-        "time": "2016-03-14T21:54:11+00:00",
+        "time": "2016-03-14 21:54:11",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1628,7 +1628,7 @@
         "require": {
             "php": ">=5.4.0"
         },
-        "time": "2016-04-04T09:34:50+00:00",
+        "time": "2016-04-04 09:34:50",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1665,7 +1665,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-04-19T09:28:22+00:00",
+        "time": "2016-04-19 09:28:22",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1719,7 +1719,7 @@
             "ext-curl": "*",
             "phpunit/phpunit": "^4.0"
         },
-        "time": "2016-07-15T19:28:39+00:00",
+        "time": "2016-07-15 19:28:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1771,7 +1771,7 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2016-05-18T14:26:46+00:00",
+        "time": "2016-05-18 14:26:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1840,7 +1840,7 @@
             "symfony/event-dispatcher": "",
             "symfony/process": ""
         },
-        "time": "2016-07-26T08:04:17+00:00",
+        "time": "2016-07-26 08:04:17",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1911,7 +1911,7 @@
             "symfony/http-foundation": "For using a Symfony Request object",
             "symfony/yaml": "For using the YAML loader"
         },
-        "time": "2016-08-16T14:58:24+00:00",
+        "time": "2016-08-16 14:58:24",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1980,7 +1980,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2016-08-18T18:49:14+00:00",
+        "time": "2016-08-18 18:49:14",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2073,7 +2073,7 @@
             "symfony/dependency-injection": "",
             "symfony/http-kernel": ""
         },
-        "time": "2016-07-19T10:45:57+00:00",
+        "time": "2016-07-19 10:45:57",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2128,7 +2128,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.4"
         },
-        "time": "2016-02-24T05:08:54+00:00",
+        "time": "2016-02-24 05:08:54",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2179,7 +2179,7 @@
             "predis/predis": "~1.0",
             "satooshi/php-coveralls": "~0.6"
         },
-        "time": "2015-12-31T16:37:02+00:00",
+        "time": "2015-12-31 16:37:02",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2251,7 +2251,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.8|~5.0"
         },
-        "time": "2015-12-25T13:18:31+00:00",
+        "time": "2015-12-25 13:18:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2318,7 +2318,7 @@
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2016-09-29T14:13:09+00:00",
+        "time": "2016-09-29 14:13:09",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2378,7 +2378,7 @@
             "phpunit/phpunit": "*",
             "sabre/cs": "~1.0.0"
         },
-        "time": "2016-10-09T22:57:52+00:00",
+        "time": "2016-10-09 22:57:52",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2438,7 +2438,7 @@
             "phpunit/phpunit": "*",
             "sabre/cs": "~0.0.4"
         },
-        "time": "2015-11-05T20:14:39+00:00",
+        "time": "2015-11-05 20:14:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2493,7 +2493,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
+        "time": "2016-10-10 12:19:37",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2546,7 +2546,7 @@
             "mockery/mockery": "~0.9.1",
             "symfony/phpunit-bridge": "~3.2"
         },
-        "time": "2016-12-29T10:02:40+00:00",
+        "time": "2016-12-29 10:02:40",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2603,7 +2603,7 @@
             "phpunit/phpunit": "~3.7",
             "squizlabs/php_codesniffer": "~2.5"
         },
-        "time": "2016-09-11T01:34:11+00:00",
+        "time": "2016-09-11 01:34:11",
         "bin": [
             "bin/pscss"
         ],
@@ -2657,7 +2657,7 @@
             "phpunit/phpunit": "^4.8",
             "satooshi/php-coveralls": "v1.0.0"
         },
-        "time": "2016-12-02T14:21:23+00:00",
+        "time": "2016-12-02 14:21:23",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2704,7 +2704,7 @@
         "suggest": {
             "symfony/console": "For helpful console commands such as SQL execution and import of files."
         },
-        "time": "2017-01-19T13:27:33+00:00",
+        "time": "2017-01-19 13:27:33",
         "bin": [
             "bin/doctrine-dbal"
         ],
@@ -2773,7 +2773,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8"
         },
-        "time": "2017-02-22T17:14:08+00:00",
+        "time": "2017-02-22 17:14:08",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2816,7 +2816,7 @@
             "phpunit/phpunit": ">=4.0,<6.0",
             "sabre/cs": "~1.0.0"
         },
-        "time": "2017-02-20T19:59:28+00:00",
+        "time": "2017-02-20 19:59:28",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2874,7 +2874,7 @@
         "suggest": {
             "hoa/bench": "If you would like to run the benchmark scripts"
         },
-        "time": "2016-12-06T04:14:09+00:00",
+        "time": "2016-12-06 04:14:09",
         "bin": [
             "bin/vobject",
             "bin/generate_vcards"
@@ -2975,7 +2975,7 @@
         "suggest": {
             "ext-curl": " to make http requests with the Client class"
         },
-        "time": "2017-01-02T19:38:42+00:00",
+        "time": "2017-01-02 19:38:42",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3047,7 +3047,7 @@
             "ext-curl": "*",
             "ext-pdo": "*"
         },
-        "time": "2017-02-15T03:06:08+00:00",
+        "time": "2017-02-15 03:06:08",
         "bin": [
             "bin/sabredav",
             "bin/naturalselection"
@@ -3087,6 +3087,288 @@
             "WebDAV",
             "framework",
             "iCalendar"
+        ]
+    },
+    {
+        "name": "mustangostang/spyc",
+        "version": "0.6.2",
+        "version_normalized": "0.6.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mustangostang/spyc.git",
+            "reference": "23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mustangostang/spyc/zipball/23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d",
+            "reference": "23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.3.*@dev"
+        },
+        "time": "2017-02-24 16:06:33",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "Spyc.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "mustangostang",
+                "email": "vlad.andersen@gmail.com"
+            }
+        ],
+        "description": "A simple YAML loader/dumper class for PHP",
+        "homepage": "https://github.com/mustangostang/spyc/",
+        "keywords": [
+            "spyc",
+            "yaml",
+            "yml"
+        ]
+    },
+    {
+        "name": "katzgrau/klogger",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/katzgrau/KLogger.git",
+            "reference": "a4ed373fa8a214aa4ae7aa4f221fe2c6ce862ef1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/katzgrau/KLogger/zipball/a4ed373fa8a214aa4ae7aa4f221fe2c6ce862ef1",
+            "reference": "a4ed373fa8a214aa4ae7aa4f221fe2c6ce862ef1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3",
+            "psr/log": "^1.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.0.*"
+        },
+        "time": "2016-11-07 19:29:14",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Katzgrau\\KLogger\\": "src/"
+            },
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kenny Katzgrau",
+                "email": "katzgrau@gmail.com"
+            },
+            {
+                "name": "Dan Horrigan",
+                "email": "dan@dhorrigan.com"
+            }
+        ],
+        "description": "A Simple Logging Class",
+        "keywords": [
+            "logging"
+        ]
+    },
+    {
+        "name": "psr/http-message",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-message.git",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-08-06 14:39:51",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Message\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for HTTP messages",
+        "homepage": "https://github.com/php-fig/http-message",
+        "keywords": [
+            "http",
+            "http-message",
+            "psr",
+            "psr-7",
+            "request",
+            "response"
+        ]
+    },
+    {
+        "name": "guzzlehttp/psr7",
+        "version": "1.4.1",
+        "version_normalized": "1.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/psr7.git",
+            "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/0d6c7ca039329247e4f0f8f8f6506810e8248855",
+            "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2017-02-27 10:51:17",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Psr7\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            },
+            {
+                "name": "Tobias Schultze",
+                "homepage": "https://github.com/Tobion"
+            }
+        ],
+        "description": "PSR-7 message implementation that also provides common utility methods",
+        "keywords": [
+            "http",
+            "message",
+            "request",
+            "response",
+            "stream",
+            "uri",
+            "url"
+        ]
+    },
+    {
+        "name": "yunify/qingstor-sdk",
+        "version": "2.2.1",
+        "version_normalized": "2.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yunify/qingstor-sdk-php.git",
+            "reference": "46b02d33e7e35a1a8589eec51a685cfefb3437f8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yunify/qingstor-sdk-php/zipball/46b02d33e7e35a1a8589eec51a685cfefb3437f8",
+            "reference": "46b02d33e7e35a1a8589eec51a685cfefb3437f8",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "~5|~6",
+            "guzzlehttp/psr7": "~1.3",
+            "katzgrau/klogger": "^1.2.1",
+            "mustangostang/spyc": "~0.6"
+        },
+        "require-dev": {
+            "behat/behat": "^3.2",
+            "phpunit/phpunit": "~4.0|~5.0"
+        },
+        "time": "2017-03-14 04:55:56",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "QingStor\\SDK\\": "src/",
+                "QingStor\\SDK\\Service\\": "src/QingStor/"
+            },
+            "files": [
+                "src/Handler/GuzzleV5/GuzzleHandler.php",
+                "src/Handler/GuzzleV6/GuzzleHandler.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Yunify SDK Group",
+                "email": "sdk_group@yunify.com",
+                "homepage": "https://www.qingstor.com"
+            }
+        ],
+        "description": "The official QingStor SDK for the PHP programming language.",
+        "homepage": "https://www.qingstor.com",
+        "keywords": [
+            "object storage",
+            "qingcloud",
+            "qingstor",
+            "sdk",
+            "yunify"
         ]
     }
 ]
