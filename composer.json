@@ -37,6 +37,7 @@
 		"lukasreschke/id3parser": "^0.0.1",
 		"stecman/symfony-console-completion": "^0.7.0",
 		"leafo/scssphp": "^0.6.6",
-		"icewind/searchdav": "0.2.0"
+		"icewind/searchdav": "0.2.0",
+		"yunify/qingstor-sdk": "^2.2"
 	}
 }
