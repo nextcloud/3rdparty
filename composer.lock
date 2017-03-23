@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "99369e16e1234563cbf384489b030da0",
+    "content-hash": "dcb1337e082e0807a32ad1ec0539782c",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1958,16 +1958,16 @@
         },
         {
             "name": "punic/punic",
-            "version": "1.6.3",
+            "version": "1.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/punic/punic.git",
-                "reference": "5805b35d6a574f754b49be1f539aaf3ae6484808"
+                "reference": "7bc85ce1137cf52db4d2a6298256a4c4a24da99a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/punic/punic/zipball/5805b35d6a574f754b49be1f539aaf3ae6484808",
-                "reference": "5805b35d6a574f754b49be1f539aaf3ae6484808",
+                "url": "https://api.github.com/repos/punic/punic/zipball/7bc85ce1137cf52db4d2a6298256a4c4a24da99a",
+                "reference": "7bc85ce1137cf52db4d2a6298256a4c4a24da99a",
                 "shasum": ""
             },
             "require": {
@@ -2019,7 +2019,7 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2015-06-16T13:04:27+00:00"
+            "time": "2017-02-03T16:13:09+00:00"
         },
         {
             "name": "rackspace/php-opencloud",
