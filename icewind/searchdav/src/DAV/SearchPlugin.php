@@ -21,30 +21,19 @@
 
 namespace SearchDAV\DAV;
 
-use Sabre\DAV\Exception\BadRequest;
-use Sabre\DAV\Exception\Forbidden;
 use Sabre\DAV\INode;
-use Sabre\DAV\Node;
 use Sabre\DAV\PropFind;
 use Sabre\DAV\Server;
 use Sabre\DAV\ServerPlugin;
-use Sabre\DAV\Xml\Element\Response;
-use Sabre\DAV\Xml\Response\MultiStatus;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
 use Sabre\Xml\ParseException;
-use Sabre\Xml\Writer;
 use SearchDAV\Backend\ISearchBackend;
-use SearchDAV\Backend\SearchPropertyDefinition;
-use SearchDAV\Backend\SearchResult;
-use SearchDAV\XML\BasicSearch;
-use SearchDAV\XML\BasicSearchSchema;
-use SearchDAV\XML\PropDesc;
-use SearchDAV\XML\QueryDiscoverResponse;
-use SearchDAV\XML\Scope;
 use SearchDAV\XML\SupportedQueryGrammar;
 
 class SearchPlugin extends ServerPlugin {
+	const SEARCHDAV_NS = 'https://github.com/icewind1991/SearchDAV/ns';
+
 	/** @var Server */
 	private $server;
 

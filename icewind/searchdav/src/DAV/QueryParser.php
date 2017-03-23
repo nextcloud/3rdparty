@@ -25,6 +25,7 @@ use Sabre\Xml\Element;
 use Sabre\Xml\Reader;
 use Sabre\Xml\Service;
 use SearchDAV\XML\BasicSearch;
+use SearchDAV\XML\Limit;
 use SearchDAV\XML\Literal;
 use SearchDAV\XML\Operator;
 use SearchDAV\XML\Order;
@@ -34,7 +35,8 @@ class QueryParser extends Service {
 	public $namespaceMap = [
 		'DAV:' => 'd',
 		'http://sabredav.org/ns' => 's',
-		'http://www.w3.org/2001/XMLSchema' => 'xs'
+		'http://www.w3.org/2001/XMLSchema' => 'xs',
+		SearchPlugin::SEARCHDAV_NS => 'sd'
 	];
 
 	public function __construct() {
@@ -72,6 +74,7 @@ class QueryParser extends Service {
 			'{DAV:}contains' => Operator::class,
 			'{DAV:}not' => Operator::class,
 			'{DAV:}is-collection' => Operator::class,
+			'{DAV:}limit' => Limit::class,
 		];
 	}
 }

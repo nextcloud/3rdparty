@@ -1690,6 +1690,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'SearchDAV\\DAV\\SearchPlugin' => __DIR__ . '/..' . '/icewind/searchdav/src/DAV/SearchPlugin.php',
         'SearchDAV\\XML\\BasicSearch' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/BasicSearch.php',
         'SearchDAV\\XML\\BasicSearchSchema' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/BasicSearchSchema.php',
+        'SearchDAV\\XML\\Limit' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/Limit.php',
         'SearchDAV\\XML\\Literal' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/Literal.php',
         'SearchDAV\\XML\\Operator' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/Operator.php',
         'SearchDAV\\XML\\Order' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/Order.php',

@@ -21,46 +21,39 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
+use SearchDAV\DAV\SearchPlugin;
 
-class Order implements XmlDeserializable {
-	const ASC = 'ascending';
-	const DESC = 'descending';
-
+/**
+ * The limit and offset of a search query
+ */
+class Limit implements XmlDeserializable {
 	/**
-	 * @var string
+	 * @var integer
 	 *
-	 * The property that should be sorted on.
+	 * The maximum number of results to be returned
+	 *
+	 * If set to 0 then no limit should be imposed
 	 */
-	public $property;
+	public $maxResults = 0;
 	/**
-	 * @var string 'ascending' or 'descending'
+	 * @var integer
 	 *
-	 * The sort direction
+	 * The index of the first result to be returned (offset)
 	 */
-	public $order;
-
-	/**
-	 * Order constructor.
-	 *
-	 * @param string $property
-	 * @param string $order
-	 */
-	public function __construct($property = '', $order = self::ASC) {
-		$this->property = $property;
-		$this->order = $order;
-	}
+	public $firstResult = 0;
 
 	static function xmlDeserialize(Reader $reader) {
-		$order = new self();
+		$limit = new self();
 
-		$childs = \Sabre\Xml\Deserializer\keyValue($reader);
+		$elements = \Sabre\Xml\Deserializer\keyValue($reader);
+		$namespace = SearchPlugin::SEARCHDAV_NS;
 
-		$order->order = array_key_exists('{DAV:}descending', $childs) ? self::DESC : self::ASC;
-		$order->property = $childs['{DAV:}prop'][0];
+		$limit->maxResults = isset($elements['{DAV:}nresults']) ? $elements['{DAV:}nresults'] : 0;
+		$firstResult = '{' . $namespace . '}firstresult';
+		$limit->firstResult = isset($elements[$firstResult]) ? $elements[$firstResult] : 0;
 
-		return $order;
+		return $limit;
 	}
 }

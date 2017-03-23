@@ -21,7 +21,6 @@
 
 namespace SearchDAV\DAV;
 
-use Sabre\DAV\Exception\BadRequest;
 use Sabre\DAV\PropFind;
 use Sabre\DAV\Server;
 use Sabre\HTTP\ResponseInterface;

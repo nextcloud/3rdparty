@@ -1360,6 +1360,7 @@ return array(
     'SearchDAV\\DAV\\SearchPlugin' => $vendorDir . '/icewind/searchdav/src/DAV/SearchPlugin.php',
     'SearchDAV\\XML\\BasicSearch' => $vendorDir . '/icewind/searchdav/src/XML/BasicSearch.php',
     'SearchDAV\\XML\\BasicSearchSchema' => $vendorDir . '/icewind/searchdav/src/XML/BasicSearchSchema.php',
+    'SearchDAV\\XML\\Limit' => $vendorDir . '/icewind/searchdav/src/XML/Limit.php',
     'SearchDAV\\XML\\Literal' => $vendorDir . '/icewind/searchdav/src/XML/Literal.php',
     'SearchDAV\\XML\\Operator' => $vendorDir . '/icewind/searchdav/src/XML/Operator.php',
     'SearchDAV\\XML\\Order' => $vendorDir . '/icewind/searchdav/src/XML/Order.php',

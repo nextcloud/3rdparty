@@ -58,6 +58,12 @@ class BasicSearch implements XmlDeserializable {
 	 * more significant.
 	 */
 	public $orderBy;
+	/**
+	 * @var Limit
+	 *
+	 * The limit and offset for the search query
+	 */
+	public $limit;
 
 	static function xmlDeserialize(Reader $reader) {
 		$search = new self();
@@ -72,6 +78,7 @@ class BasicSearch implements XmlDeserializable {
 		$search->from = $elements['{DAV:}from'];
 		$search->where = isset($elements['{DAV:}where']) ? $elements['{DAV:}where'] : null;
 		$search->orderBy = isset($elements['{DAV:}orderby']) ? $elements['{DAV:}orderby'] : [];
+		$search->limit = isset($elements['{DAV:}limit']) ? $elements['{DAV:}limit'] : new Limit();
 
 		return $search;
 	}
