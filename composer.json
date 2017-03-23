@@ -28,7 +28,7 @@
 		"swiftmailer/swiftmailer": "@stable",
 		"guzzlehttp/guzzle": "~5.3",
 		"league/flysystem": "^1.0",
-		"pear/pear-core-minimal": "v1.10.1",
+		"pear/pear-core-minimal": "^v1.10",
 		"interfasys/lognormalizer": "^v1.0",
 		"deepdiver1975/TarStreamer": "v0.1.0",
 		"patchwork/jsqueeze": "^2.0",
