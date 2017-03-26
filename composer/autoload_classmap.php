@@ -626,6 +626,7 @@ return array(
     'Leafo\\ScssPhp\\Compiler\\Environment' => $vendorDir . '/leafo/scssphp/src/Compiler/Environment.php',
     'Leafo\\ScssPhp\\Exception\\CompilerException' => $vendorDir . '/leafo/scssphp/src/Exception/CompilerException.php',
     'Leafo\\ScssPhp\\Exception\\ParserException' => $vendorDir . '/leafo/scssphp/src/Exception/ParserException.php',
+    'Leafo\\ScssPhp\\Exception\\RangeException' => $vendorDir . '/leafo/scssphp/src/Exception/RangeException.php',
     'Leafo\\ScssPhp\\Exception\\ServerException' => $vendorDir . '/leafo/scssphp/src/Exception/ServerException.php',
     'Leafo\\ScssPhp\\Formatter' => $vendorDir . '/leafo/scssphp/src/Formatter.php',
     'Leafo\\ScssPhp\\Formatter\\Compact' => $vendorDir . '/leafo/scssphp/src/Formatter/Compact.php',
