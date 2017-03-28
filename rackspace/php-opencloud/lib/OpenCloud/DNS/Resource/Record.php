@@ -1,25 +1,29 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\DNS\Resource;
-
-use OpenCloud\DNS\Service;
 
 /**
  * The Record class represents a single domain record
  *
  * This is also used for PTR records.
  */
-class Record extends Object 
+class Record extends AbstractResource
 {
-
     public $ttl;
     public $updated;
     public $created;
@@ -35,7 +39,7 @@ class Record extends Object
     protected static $url_resource = 'records';
 
     protected $parent;
-    
+
     protected $updateKeys = array(
         'name',
         'ttl',
@@ -43,7 +47,7 @@ class Record extends Object
         'priority',
         'comment'
     );
-    
+
     protected $createKeys = array(
         'type',
         'name',
@@ -52,5 +56,4 @@ class Record extends Object
         'priority',
         'comment'
     );
-
 }

@@ -1,20 +1,31 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Database;
 
+use Guzzle\Http\ClientInterface;
 use OpenCloud\Common\Service\NovaService;
-use OpenCloud\OpenStack;
+use OpenCloud\Database\Resource\Instance;
+use OpenCloud\Database\Resource\Configuration;
+use OpenCloud\Database\Resource\Datastore;
+use OpenCloud\Database\Resource\Backup;
 
 /**
- * The Rackspace Database As A Service (aka "Red Dwarf")
+ * The Rackspace Database service
  */
 class Service extends NovaService
 {
@@ -22,41 +33,102 @@ class Service extends NovaService
     const DEFAULT_NAME = 'cloudDatabases';
 
     /**
-     * Returns a list of flavors
+     * Returns an Instance
      *
-     * just call the parent FlavorList() method, but pass FALSE
-     * because the /flavors/detail resource is not supported
-     *
-     * @api
-     * @return \OpenCloud\Compute\FlavorList
-     */
-    public function flavorList($details = false, array $filter = array())
-    {
-        return parent::flavorList(false);
-    }
-
-    /**
-     * Creates a Instance object
-     *
-     * @api
      * @param string $id the ID of the instance to retrieve
-     * @return DbService\Instance
+     * @return \OpenCloud\Database\Resource\Instance
      */
     public function instance($id = null)
     {
-        return new Resource\Instance($this, $id);
+        return $this->resource('Instance', $id);
     }
 
     /**
-     * Creates a Collection of Instance objects
+     * Returns a Collection of Instance objects
      *
-     * @api
-     * @param array $params array of parameters to pass to the request as
-     *      query strings
-     * @return Collection
+     * @param array $params
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
     public function instanceList($params = array())
     {
-        return $this->collection('OpenCloud\Database\Resource\Instance', null, null, $params);
+        $url = clone $this->getUrl();
+        $url->addPath(Instance::resourceName())->setQuery($params);
+
+        return $this->resourceList('Instance', $url);
+    }
+
+    /**
+     * Returns a Configuration
+     *
+     * @param string $id the ID of the configuration to retrieve
+     * @return \OpenCloud\Database\Resource\Configuration
+     */
+    public function configuration($id = null)
+    {
+        return $this->resource('Configuration', $id);
+    }
+
+    /**
+     * Returns a Collection of Configuration objects
+     *
+     * @param array $params
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
+     */
+    public function configurationList($params = array())
+    {
+        $url = clone $this->getUrl();
+        $url->addPath(Configuration::resourceName())->setQuery($params);
+
+        return $this->resourceList('Configuration', $url);
+    }
+
+    /**
+     * Returns a Datastore
+     *
+     * @param string $id the ID of the datastore to retrieve
+     * @return \OpenCloud\Database\Resource\Datastore
+     */
+    public function datastore($id = null)
+    {
+        return $this->resource('Datastore', $id);
+    }
+
+    /**
+     * Returns a Collection of Datastore objects
+     *
+     * @param array $params
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
+     */
+    public function datastoreList($params = array())
+    {
+        $url = clone $this->getUrl();
+        $url->addPath(Datastore::resourceName())->setQuery($params);
+
+        return $this->resourceList('Datastore', $url);
+    }
+
+    /**
+     * Returns a Backup
+     *
+     * @param string $id the ID of the backup to retrieve
+     * @return \OpenCloud\Database\Resource\Backup
+     */
+    public function backup($id = null)
+    {
+        return $this->resource('Backup', $id);
+    }
+
+    /**
+     * Returns a Collection of Backup objects
+     *
+     * @param array $params
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
+     */
+    public function backupList($params = array())
+    {
+        $url = clone $this->getUrl();
+        $url->addPath(Backup::resourceName())->setQuery($params);
+
+        return $this->resourceList('Backup', $url);
     }
 }

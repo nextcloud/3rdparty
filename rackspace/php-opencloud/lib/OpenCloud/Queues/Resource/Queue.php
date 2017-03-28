@@ -1,61 +1,69 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Queues\Resource;
 
 use Guzzle\Http\Url;
-use OpenCloud\Common\PersistentObject;
-use OpenCloud\Common\Exceptions\InvalidArgumentError;
-use OpenCloud\Queues\Exception;
-use OpenCloud\Common\Metadata;
 use OpenCloud\Common\Collection\PaginatedIterator;
 use OpenCloud\Common\Http\Message\Formatter;
+use OpenCloud\Common\Resource\PersistentResource;
+use OpenCloud\Queues\Exception;
+use OpenCloud\Queues\Collection\MessageIterator;
+use OpenCloud\Common\Metadata;
 
 /**
- * A queue holds messages. Ideally, a queue is created per work type. For example, 
- * if you want to compress files, you would create a queue dedicated to this job. 
+ * A queue holds messages. Ideally, a queue is created per work type. For example,
+ * if you want to compress files, you would create a queue dedicated to this job.
  * Any application that reads from this queue would only compress files.
  */
-class Queue extends PersistentObject
+class Queue extends PersistentResource
 {
     /**
      * Maximum number of messages that can be posted at once.
      */
     const MAX_POST_MESSAGES = 10;
-    
+
     /**
-     * The name given to the queue. The name MUST NOT exceed 64 bytes in length, 
+     * The name given to the queue. The name MUST NOT exceed 64 bytes in length,
      * and is limited to US-ASCII letters, digits, underscores, and hyphens.
-     * 
+     *
      * @var string
      */
     private $name;
-    
+
     /**
      * Miscellaneous, user-defined information about the queue.
-     * 
-     * @var array|Metadata 
+     *
+     * @var array|Metadata
      */
     protected $metadata;
-    
+
     /**
-     * Populated when the service's listQueues() method is called. Provides a 
+     * Populated when the service's listQueues() method is called. Provides a
      * convenient link for a particular Queue.md.
-     * 
-     * @var string 
+     *
+     * @var string
      */
     private $href;
-    
+
     protected static $url_resource = 'queues';
     protected static $json_collection_name = 'queues';
     protected static $json_name = false;
-    
+
     public $createKeys = array('name');
 
     /**
@@ -76,6 +84,7 @@ class Queue extends PersistentObject
         }
 
         $this->name = $name;
+
         return $this;
     }
 
@@ -85,33 +94,6 @@ class Queue extends PersistentObject
     public function getName()
     {
         return $this->name;
-    }
-    
-    /**
-     * Sets the metadata for this Queue.
-     *
-     * @param $data
-     * @return $this
-     * @throws \OpenCloud\Common\Exceptions\InvalidArgumentError
-     */
-    public function setMetadata($data)
-    {
-        // Check for either objects, arrays or Metadata objects
-        if ($data instanceof Metadata) {
-            $metadata = $data;
-        } elseif (is_array($data) || is_object($data)) {
-            $metadata = new Metadata();
-            $metadata->setArray($data);
-        } else {
-            throw new InvalidArgumentError(sprintf(
-                'You must specify either an array/object of parameters, or an '
-                . 'instance of Metadata. You provided: %s',
-                print_r($data, true)
-            ));
-        }
-
-        $this->metadata = $metadata;
-        return $this;
     }
 
     /**
@@ -129,16 +111,6 @@ class Queue extends PersistentObject
         $json = json_encode((object) $this->getMetadata()->toArray());
 
         return $this->getClient()->put($this->getUrl('metadata'), self::getJsonHeader(), $json)->send();
-    }
-    
-    /**
-     * Returns the metadata associated with a Queue.md.
-     *
-     * @return Metadata|null
-     */
-    public function getMetadata()
-    {
-        return $this->metadata;
     }
 
     /**
@@ -175,11 +147,11 @@ class Queue extends PersistentObject
     {
         return $this->noUpdate();
     }
-    
+
     /**
-     * This operation returns queue statistics including how many messages are 
+     * This operation returns queue statistics including how many messages are
      * in the queue, broken out by status.
-     * 
+     *
      * @return object
      */
     public function getStats()
@@ -189,17 +161,17 @@ class Queue extends PersistentObject
             ->send();
 
         $body = Formatter::decode($response);
-        
+
         return (!isset($body->messages)) ? false : $body->messages;
     }
 
     /**
-     * Gets a message either by a specific ID, or, if no ID is specified, just 
+     * Gets a message either by a specific ID, or, if no ID is specified, just
      * an empty Message object.
-     * 
-     * @param string|null $id If a string, then the service will retrieve an 
-     *      individual message based on its specific ID. If NULL, then an empty
-     *      object is returned for further use.
+     *
+     * @param string|null $id If a string, then the service will retrieve an
+     *                        individual message based on its specific ID. If NULL, then an empty
+     *                        object is returned for further use.
      * @return Message
      */
     public function getMessage($id = null)
@@ -227,60 +199,59 @@ class Queue extends PersistentObject
     public function createMessages(array $messages)
     {
         $objects = array();
-        
+
         foreach ($messages as $dataArray) {
             $objects[] = $this->getMessage($dataArray)->createJson();
         }
-        
+
         $json = json_encode(array_slice($objects, 0, self::MAX_POST_MESSAGES));
         $this->checkJsonError();
-        
+
         $response = $this->getClient()
             ->post($this->getUrl('messages'), self::getJsonHeader(), $json)
             ->send();
 
         if (null !== ($location = $response->getHeader('Location'))) {
-            
             $parts = array_merge($this->getUrl()->getParts(), parse_url($location));
             $url = Url::factory(Url::buildUrl($parts));
 
             $options = $this->makeResourceIteratorOptions(__NAMESPACE__ . '\\Message') + array(
-                'baseUrl'    => $url,
-                'limit.page' => 10
-            );
+                    'baseUrl'    => $url,
+                    'limit.page' => 10
+                );
 
             return PaginatedIterator::factory($this, $options);
         }
-        
+
         return true;
     }
-    
+
     /**
-     * Lists messages according to certain filter options. Results are ordered 
+     * Lists messages according to certain filter options. Results are ordered
      * by age, oldest message first. All of the parameters are optional.
-     * 
+     *
      * @param array $options An associative array of filtering parameters:
-     * 
+     *
      * - ids (array) A two-dimensional array of IDs to retrieve.
-     * 
+     *
      * - claim_id (string) The claim ID to which the message is associated.
-     * 
-     * - marker (string) An opaque string that the client can use to request the 
-     *      next batch of messages. If not specified, the API will return all 
+     *
+     * - marker (string) An opaque string that the client can use to request the
+     *      next batch of messages. If not specified, the API will return all
      *      messages at the head of the queue (up to limit).
-     * 
-     * - limit (integer) A number up to 20 (the default, but is configurable) 
+     *
+     * - limit (integer) A number up to 20 (the default, but is configurable)
      *      queues to return. If not specified, it defaults to 10.
-     * 
-     * - echo (bool) Determines whether the API returns a client's own messages, 
-     *      as determined by the uuid portion of the User-Agent header. If not 
+     *
+     * - echo (bool) Determines whether the API returns a client's own messages,
+     *      as determined by the uuid portion of the User-Agent header. If not
      *      specified, echo defaults to FALSE.
-     * 
-     * - include_claimed (bool) Determines whether the API returns claimed 
-     *      messages as well as unclaimed messages. If not specified, defaults 
+     *
+     * - include_claimed (bool) Determines whether the API returns claimed
+     *      messages as well as unclaimed messages. If not specified, defaults
      *      to FALSE (i.e. only unclaimed messages are returned).
-     * 
-     * @return Collection
+     *
+     * @return \OpenCloud\Queues\Collection\MessageIterator
      */
     public function listMessages(array $options = array())
     {
@@ -288,7 +259,17 @@ class Queue extends PersistentObject
         if (isset($options['ids']) && is_array($options['ids'])) {
             $options['ids'] = implode(',', $options['ids']);
         }
-        
+
+        // PHP will cast boolean values to integers (true => 1, false => 0) but
+        // the Queues REST API expects strings as query parameters ("true" and "false").
+        foreach ($options as $optionKey => $optionValue) {
+            if (true === $optionValue) {
+                $options[$optionKey] = "true";
+            } elseif (false === $optionValue) {
+                $options[$optionKey] = "false";
+            }
+        }
+
         $url = $this->getUrl('messages', $options);
 
         $options = $this->makeResourceIteratorOptions(__NAMESPACE__ . '\\Message') + array(
@@ -296,13 +277,13 @@ class Queue extends PersistentObject
                 'limit.page' => 10
             );
 
-        return PaginatedIterator::factory($this, $options);
+        return MessageIterator::factory($this, $options);
     }
-    
+
     /**
-     * This operation immediately deletes the specified messages, providing a 
+     * This operation immediately deletes the specified messages, providing a
      * means for bulk deletes.
-     * 
+     *
      * @param array $ids Two-dimensional array of IDs to be deleted
      * @return boolean
      */
@@ -310,30 +291,31 @@ class Queue extends PersistentObject
     {
         $url = $this->url('messages', array('ids' => implode(',', $ids)));
         $this->getClient()->delete($url)->send();
+
         return true;
     }
 
     /**
-     * This operation claims a set of messages, up to limit, from oldest to 
-     * newest, skipping any that are already claimed. If no unclaimed messages 
+     * This operation claims a set of messages, up to limit, from oldest to
+     * newest, skipping any that are already claimed. If no unclaimed messages
      * are available, FALSE is returned.
-     * 
-     * You should delete the message when you have finished processing it, 
-     * before the claim expires, to ensure the message is processed only once. 
+     *
+     * You should delete the message when you have finished processing it,
+     * before the claim expires, to ensure the message is processed only once.
      * Be aware that you must call the delete() method on the Message object and
-     * pass in the Claim ID, rather than relying on the service's bulk delete 
-     * deleteMessages() method. This is so that the server can return an error 
-     * if the claim just expired, giving you a chance to roll back your processing 
-     * of the given message, since another worker will likely claim the message 
+     * pass in the Claim ID, rather than relying on the service's bulk delete
+     * deleteMessages() method. This is so that the server can return an error
+     * if the claim just expired, giving you a chance to roll back your processing
+     * of the given message, since another worker will likely claim the message
      * and process it.
-     * 
-     * Just as with a message's age, the age given for the claim is relative to 
-     * the server's clock, and is useful for determining how quickly messages are 
+     *
+     * Just as with a message's age, the age given for the claim is relative to
+     * the server's clock, and is useful for determining how quickly messages are
      * getting processed, and whether a given message's claim is about to expire.
-     * 
-     * When a claim expires, it is removed, allowing another client worker to 
+     *
+     * When a claim expires, it is removed, allowing another client worker to
      * claim the message in the case that the original worker fails to process it.
-     * 
+     *
      * @param int $limit
      */
     public function claimMessages(array $options = array())
@@ -346,7 +328,7 @@ class Queue extends PersistentObject
             'grace' => $grace,
             'ttl'   => $ttl
         ));
-        
+
         $url = $this->getUrl('claims', array('limit' => $limit));
 
         $response = $this->getClient()->post($url, self::getJsonHeader(), $json)->send();
@@ -359,11 +341,11 @@ class Queue extends PersistentObject
 
         return PaginatedIterator::factory($this, $options, Formatter::decode($response));
     }
-    
+
     /**
      * If an ID is supplied, the API is queried for a persistent object; otherwise
      * an empty object is returned.
-     * 
+     *
      * @param  int $id
      * @return Claim
      */
@@ -371,5 +353,4 @@ class Queue extends PersistentObject
     {
         return $this->getService()->resource('Claim', $id, $this);
     }
-    
 }

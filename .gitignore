@@ -197,6 +197,9 @@ ircmaxell/security-lib/tests
 bantu/ini-get-wrapper/tests
 
 rackspace/php-opencloud/tests
+rackspace/php-opencloud/doc
+rackspace/php-opencloud/docs
+rackspace/php-opencloud/samples
 
 paragonie/random_compat/tests
 paragonie/random_compat/phpunit.sh

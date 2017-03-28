@@ -1,19 +1,25 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Compute;
 
-use OpenCloud\Common\Http\Client;
-use OpenCloud\Common\Lang;
-use OpenCloud\Common\Service\NovaService;
 use OpenCloud\Common\Exceptions;
+use OpenCloud\Common\Http\Client;
+use OpenCloud\Common\Service\NovaService;
 
 /**
  * The Compute class represents the OpenStack Nova service.
@@ -55,9 +61,10 @@ class Service extends NovaService
     {
         parent::__construct($client, $type, $name, $region, $urlType);
 
-        if (strpos($this->getUrl()->getPath(), '/v1') !== false) {
+        // @see https://github.com/rackspace/php-opencloud/issues/353
+        if (strpos($this->getUrl()->getPath(), '/v1.0/') !== false) {
             throw new Exceptions\UnsupportedVersionError(sprintf(
-                Lang::translate('Sorry; API version /v1 is not supported [%s]'), 
+                'Sorry; API version /v1.0 is not supported [%s]',
                 $this->getUrl()
             ));
         }
@@ -74,9 +81,9 @@ class Service extends NovaService
      *
      * @api
      * @param string $id - if specified, the server with the ID is retrieved
-     * @returns Compute\Server object
+     * @return Resource\Server object
      */
-    public function server($id = null) 
+    public function server($id = null)
     {
         return new Resource\Server($this, $id);
     }
@@ -90,16 +97,17 @@ class Service extends NovaService
      *
      * @api
      * @param boolean $details - if TRUE, full server details are returned; if
-     *      FALSE, just the minimal set of info is listed. Defaults to TRUE;
-     *      you might set this to FALSE to improve performance at the risk of
-     *      not having all the information you need.
-     * @param array $filter - a set of key/value pairs that is passed to the
-     *    servers list for filtering
-     * @returns \OpenCloud\Common\Collection
+     *                         FALSE, just the minimal set of info is listed. Defaults to TRUE;
+     *                         you might set this to FALSE to improve performance at the risk of
+     *                         not having all the information you need.
+     * @param array   $filter  - a set of key/value pairs that is passed to the
+     *                         servers list for filtering
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function serverList($details = true, array $filter = array()) 
+    public function serverList($details = true, array $filter = array())
     {
         $url = $this->getUrl(Resource\Server::resourceName() . (($details) ? '/detail' : ''), $filter);
+
         return $this->collection('OpenCloud\Compute\Resource\Server', $url);
     }
 
@@ -110,7 +118,7 @@ class Service extends NovaService
      * @param string $id the network ID
      * @return Resource\Network
      */
-    public function network($id = null) 
+    public function network($id = null)
     {
         return new Resource\Network($this, $id);
     }
@@ -120,9 +128,9 @@ class Service extends NovaService
      *
      * @api
      * @param array $filter array of filter key/value pairs
-     * @return \OpenCloud\Common\Collection
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function networkList($filter = array()) 
+    public function networkList($filter = array())
     {
         return $this->collection('OpenCloud\Compute\Resource\Network');
     }
@@ -137,7 +145,7 @@ class Service extends NovaService
      * @param string $id - if supplied, returns the image with the specified ID.
      * @return Resource\Image object
      */
-    public function image($id = null) 
+    public function image($id = null)
     {
         return new Resource\Image($this, $id);
     }
@@ -150,16 +158,16 @@ class Service extends NovaService
      *
      * @api
      * @param boolean $details - if TRUE (the default), returns complete image
-     *      details. Set to FALSE to improve performance, but only return a
-     *      minimal set of data
-     * @param array $filter - key/value pairs to pass to the images resource.
-     *      The actual values available here are determined by the OpenStack
-     *      code and any extensions installed by your cloud provider;
-     *      see http://docs.rackspace.com/servers/api/v2/cs-devguide/content/List_Images-d1e4435.html
-     *      for current filters available.
+     *                         details. Set to FALSE to improve performance, but only return a
+     *                         minimal set of data
+     * @param array   $filter  - key/value pairs to pass to the images resource.
+     *                         The actual values available here are determined by the OpenStack
+     *                         code and any extensions installed by your cloud provider;
+     *                         see http://docs.rackspace.com/servers/api/v2/cs-devguide/content/List_Images-d1e4435.html
+     *                         for current filters available.
      * @return \OpenCloud\Common\Collection
      */
-    public function imageList($details = true, array $filter = array()) 
+    public function imageList($details = true, array $filter = array())
     {
         $url = clone $this->getUrl();
         $url->addPath('images');
@@ -175,15 +183,13 @@ class Service extends NovaService
         return $this->resourceList('Image', $url);
     }
 
-    
     public function keypair($data = null)
     {
         return $this->resource('KeyPair', $data);
     }
-    
+
     public function listKeypairs()
     {
         return $this->resourceList('KeyPair', null, $this);
     }
-    
 }

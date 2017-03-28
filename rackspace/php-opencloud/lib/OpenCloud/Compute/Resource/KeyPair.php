@@ -1,18 +1,25 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Compute\Resource;
 
+use OpenCloud\Common\Exceptions\InvalidArgumentError;
 use OpenCloud\Common\PersistentObject;
 use OpenCloud\Compute\Exception\KeyPairException;
-use OpenCloud\Common\Exceptions\InvalidArgumentError;
 
 class KeyPair extends PersistentObject
 {
@@ -21,17 +28,17 @@ class KeyPair extends PersistentObject
     private $privateKey;
     private $publicKey;
     private $userId;
-    
+
     public $aliases = array(
         'private_key' => 'privateKey',
         'public_key'  => 'publicKey',
         'user_id'     => 'userId'
     );
-    
+
     protected static $url_resource = 'os-keypairs';
-    protected static $json_name    = 'keypair';
+    protected static $json_name = 'keypair';
     protected static $json_collection_element = 'keypair';
-    
+
     public function setName($name)
     {
         if (preg_match('#[^\w\d\s-_]#', $name) || strlen($name) > 255) {
@@ -43,14 +50,15 @@ class KeyPair extends PersistentObject
             ));
         }
         $this->name = $name;
+
         return $this;
     }
-    
+
     public function getName()
     {
         return $this->name;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -60,20 +68,22 @@ class KeyPair extends PersistentObject
             'name' => $this->getName()
         );
         if (null !== ($key = $this->getPublicKey())) {
-            $object->public_key = $key; 
+            $object->public_key = $key;
         }
+
         return (object) array('keypair' => $object);
     }
 
     public function create($params = array())
     {
         $this->setPublicKey(null);
+
         return parent::create($params);
     }
-    
+
     /**
      * Upload an existing public key to a new keypair.
-     * 
+     *
      * @param  array $options
      * @return type
      * @throws KeyPairException
@@ -93,6 +103,7 @@ class KeyPair extends PersistentObject
                 'In order to upload a keypair, the public key must be set.'
             );
         }
+
         return parent::create();
     }
 
@@ -105,5 +116,4 @@ class KeyPair extends PersistentObject
     {
         return 'name';
     }
-    
 }

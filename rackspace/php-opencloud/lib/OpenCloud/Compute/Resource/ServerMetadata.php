@@ -1,23 +1,30 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Compute\Resource;
 
+use Guzzle\Http\Url;
+use OpenCloud\Common\Exceptions;
+use OpenCloud\Common\Http\Message\Formatter;
 use OpenCloud\Common\Lang;
 use OpenCloud\Common\Metadata;
-use OpenCloud\Common\Exceptions;
-use Guzzle\Http\Url;
-use OpenCloud\Common\Http\Message\Formatter;
 
 /**
- * This class handles specialized metadata for OpenStack Server objects (metadata 
+ * This class handles specialized metadata for OpenStack Server objects (metadata
  * items can be managed individually or in aggregate).
  *
  * Server metadata is a weird beast in that it has resource representations
@@ -27,14 +34,14 @@ use OpenCloud\Common\Http\Message\Formatter;
 class ServerMetadata extends Metadata
 {
     private $parent;
-    protected $key;    // the metadata item (if supplied)
-    private $url;      // the URL of this particular metadata item or block
+    protected $key; // the metadata item (if supplied)
+    private $url; // the URL of this particular metadata item or block
 
     /**
-     * Contructs a Metadata object associated with a Server or Image object
+     * Constructs a Metadata object associated with a Server or Image object
      *
      * @param object $parent either a Server or an Image object
-     * @param string $key the (optional) key for the metadata item
+     * @param string $key    the (optional) key for the metadata item
      * @throws MetadataError
      */
     public function __construct(Server $parent, $key = null)
@@ -44,7 +51,6 @@ class ServerMetadata extends Metadata
 
         // set the URL according to whether or not we have a key
         if ($this->getParent()->getId()) {
-            
             $this->url = $this->getParent()->url('metadata');
             $this->key = $key;
 
@@ -73,6 +79,7 @@ class ServerMetadata extends Metadata
     public function setParent($parent)
     {
         $this->parent = $parent;
+
         return $this;
     }
 
@@ -153,7 +160,7 @@ class ServerMetadata extends Metadata
         // otherwise, just set it;
         parent::__set($key, $value);
     }
-    
+
     /**
      * Builds a metadata JSON string
      *
@@ -172,16 +179,12 @@ class ServerMetadata extends Metadata
         if ($name = $this->key) {
             $object->meta->$name = $this->$name;
         } else {
-            $object->metadata = new \stdClass();
-            foreach ($this->keylist() as $key) {
-                $object->metadata->$key = (string) $this->$key;
-            }
+            $object->metadata = $this->keylist();
         }
 
         $json = json_encode($object);
         $this->checkJsonError();
-        
+
         return $json;
     }
-
 }

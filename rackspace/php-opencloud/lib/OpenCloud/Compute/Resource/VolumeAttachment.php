@@ -1,25 +1,31 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Compute\Resource;
 
-use OpenCloud\Common\Lang;
 use OpenCloud\Common\Exceptions;
+use OpenCloud\Common\Lang;
 use OpenCloud\Common\PersistentObject;
 
 /**
  * The VolumeAttachment class represents a volume that is attached to a server.
  */
-class VolumeAttachment extends PersistentObject 
+class VolumeAttachment extends PersistentObject
 {
-
     public $id;
     public $device;
     public $serverId;
@@ -35,7 +41,7 @@ class VolumeAttachment extends PersistentObject
      *
      * @throws OpenCloud\UpdateError always
      */
-    public function update($params = array()) 
+    public function update($params = array())
     {
         throw new Exceptions\UpdateError(Lang::translate('Updates are not permitted'));
     }
@@ -48,9 +54,9 @@ class VolumeAttachment extends PersistentObject
      * @api
      * @return string
      */
-    public function name() 
+    public function name()
     {
-        return sprintf('Attachment [%s]', $this->volumeId ?: 'N/A');
+        return sprintf('Attachment [%s]', $this->volumeId ? : 'N/A');
     }
 
     /**
@@ -58,11 +64,11 @@ class VolumeAttachment extends PersistentObject
      *
      * @return stdClass
      */
-    protected function createJson() 
+    protected function createJson()
     {
         $object = new \stdClass;
-        
-        foreach($this->createKeys as $key) {
+
+        foreach ($this->createKeys as $key) {
             if (isset($this->$key)) {
                 $object->$key = $this->$key;
             }
@@ -72,5 +78,4 @@ class VolumeAttachment extends PersistentObject
             $this->jsonName() => $object
         );
     }
-
 }
