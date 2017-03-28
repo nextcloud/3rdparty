@@ -1,21 +1,30 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright Copyright 2014 Rackspace US, Inc. See COPYING for licensing information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache 2.0
- * @version   1.6.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\LoadBalancer;
 
+use OpenCloud\Common\Log\Logger;
 use OpenCloud\Common\Service\NovaService;
-use OpenCloud\OpenStack;
+use OpenCloud\LoadBalancer\Collection\LoadBalancerIterator;
 
 /**
- * The Rackspace Cloud Load Balancers
+ * Class that encapsulates the Rackspace Cloud Load Balancers service
+ *
+ * @package OpenCloud\LoadBalancer
  */
 class Service extends NovaService
 {
@@ -23,82 +32,89 @@ class Service extends NovaService
     const DEFAULT_TYPE = 'rax:load-balancer';
 
     /**
-     * creates a new LoadBalancer object
+     * Return a Load Balancer
      *
-     * @api
-     * @param string $id the identifier of the load balancer
-     * @return Resource\LoadBalancer
+     * @param string $id
+     * @return \OpenCloud\LoadBalancer\Resource\LoadBalancer
      */
-    public function loadBalancer($id = null) 
+    public function loadBalancer($id = null)
     {
-        return new Resource\LoadBalancer($this, $id);
+        return $this->resource('LoadBalancer', $id);
     }
 
     /**
-     * returns a Collection of LoadBalancer objects
+     * Return a paginated collection of load balancers
      *
-     * @api
-     * @param boolean $detail if TRUE (the default), then all details are
-     *      returned; otherwise, the minimal set (ID, name) are retrieved
-     * @param array $filter if provided, a set of key/value pairs that are
-     *      set as query string parameters to the query
-     * @return \OpenCloud\Common\Collection
+     * @param bool $detail If TRUE, all details are returned; otherwise, a
+     *                     minimal set (ID, name) is retrieved [DEPRECATED]
+     * @param array $filter Optional query params used for search
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function loadBalancerList($detail = true, $filter = array()) 
+    public function loadBalancerList($detail = true, array $filter = array())
     {
-        return $this->collection('OpenCloud\LoadBalancer\Resource\LoadBalancer');
+        $options = $this->makeResourceIteratorOptions($this->resolveResourceClass('LoadBalancer'));
+
+        if (isset($filter['limit'])) {
+            $options['limit.page'] = $filter['limit'];
+            unset($filter['limit']);
+        }
+
+        $url = $this->getUrl();
+        $url->addPath(Resource\LoadBalancer::resourceName());
+        $url->setQuery($filter);
+
+        $options = array_merge($options, array('baseUrl' => $url, 'key.marker' => 'id'));
+
+        return LoadBalancerIterator::factory($this, $options);
     }
 
     /**
-     * creates a new BillableLoadBalancer object (read-only)
-     *
-     * @api
-     * @param string $id the identifier of the load balancer
-     * @return Resource\LoadBalancer
+     * @deprecated
      */
-    public function billableLoadBalancer($id = null) 
+    public function billableLoadBalancer($id = null)
     {
-        return new Resource\BillableLoadBalancer($this, $id);
+        $this->getLogger()->warning(Logger::deprecated(__METHOD__, 'loadBalancer'));
+
+        return $this->resource('LoadBalancer', $id);
     }
 
     /**
-     * returns a Collection of BillableLoadBalancer objects
+     * Returns a paginated collection of load balancers that have been billed
+     * between a certain period.
      *
-     * @api
-     * @param boolean $detail if TRUE (the default), then all details are
-     *      returned; otherwise, the minimal set (ID, name) are retrieved
-     * @param array $filter if provided, a set of key/value pairs that are
-     *      set as query string parameters to the query
-     * @return \OpenCloud\Common\Collection
+     * @link http://docs.rackspace.com/loadbalancers/api/v1.0/clb-devguide/content/List_Usage-d1e3014.html
+     * @param array $filter
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function billableLoadBalancerList($detail = true, $filter = array()) 
+    public function billableLoadBalancerList(array $filter = array())
     {
-        $class = 'OpenCloud\LoadBalancer\Resource\BillableLoadBalancer';
-        $url = $this->url($class::ResourceName(), $filter);
-        return $this->collection($class, $url);
+        $url = $this->getUrl();
+        $url->addPath(Resource\LoadBalancer::resourceName());
+        $url->addPath('billable');
+        $url->setQuery($filter);
+
+        return $this->resourceList('LoadBalancer', $url);
     }
 
     /**
-     * returns allowed domain
+     * Returns an allowed domain
      *
-     * @api
      * @param mixed $data either an array of values or null
-     * @return Resource\AllowedDomain
+     * @return \OpenCloud\LoadBalancer\Resource\AllowedDomain
      */
-    public function allowedDomain($data = null) 
+    public function allowedDomain($data = null)
     {
-        return new Resource\AllowedDomain($this, $data);
+        return $this->resource('AllowedDomain', $data);
     }
 
     /**
-     * returns Collection of AllowedDomain object
+     * Returns Collection of AllowedDomain object
      *
-     * @api
-     * @return Collection
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function allowedDomainList() 
+    public function allowedDomainList()
     {
-        return $this->collection('OpenCloud\LoadBalancer\Resource\AllowedDomain', null, $this);
+        return $this->resourceList('AllowedDomain');
     }
 
     /**
@@ -106,22 +122,21 @@ class Service extends NovaService
      *
      * Convenience method to be used by the ProtocolList Collection.
      *
-     * @return Resource\Protocol
+     * @return \OpenCloud\LoadBalancer\Resource\Protocol
      */
-    public function protocol($data = null) 
+    public function protocol($data = null)
     {
-        return new Resource\Protocol($this, $data);
+        return $this->resource('Protocol', $data);
     }
 
     /**
-     * a list of Protocol objects
+     * Returns a list of Protocol objects
      *
-     * @api
-     * @return \OpenCloud\Common\Collection
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function protocolList() 
+    public function protocolList()
     {
-        return $this->collection('OpenCloud\LoadBalancer\Resource\Protocol', null, $this);
+        return $this->resourceList('Protocol');
     }
 
     /**
@@ -129,22 +144,20 @@ class Service extends NovaService
      *
      * convenience method used by the Collection factory
      *
-     * @return Resource\Algorithm
+     * @return \OpenCloud\LoadBalancer\Resource\Algorithm
      */
-    public function algorithm($data = null) 
+    public function algorithm($data = null)
     {
-        return new Resource\Algorithm($this, $data);
+        return $this->resource('Algorithm', $data);
     }
 
     /**
-     * a list of Algorithm objects
+     * Return a list of Algorithm objects
      *
-     * @api
-     * @return \OpenCloud\Common\Collection
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function algorithmList() 
+    public function algorithmList()
     {
-        return $this->collection('OpenCloud\LoadBalancer\Resource\Algorithm', null, $this);
+        return $this->resourceList('Algorithm');
     }
-
 }

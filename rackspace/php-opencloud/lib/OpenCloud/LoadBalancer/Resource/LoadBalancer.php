@@ -1,38 +1,44 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright Copyright 2014 Rackspace US, Inc. See COPYING for licensing information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache 2.0
- * @version   1.6.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\LoadBalancer\Resource;
 
-use OpenCloud\Common\PersistentObject;
-use OpenCloud\Common\Lang;
 use OpenCloud\Common\Exceptions;
-use OpenCloud\Common\Http\Message\Formatter;
+use OpenCloud\Common\Log\Logger;
+use OpenCloud\Common\Resource\PersistentResource;
+use OpenCloud\DNS\Resource\HasPtrRecordsInterface;
+use OpenCloud\LoadBalancer\Enum\NodeCondition;
+use OpenCloud\LoadBalancer\Enum\IpType;
+use OpenCloud\LoadBalancer\Enum\NodeType;
 
 /**
- * A load balancer is a logical device which belongs to a cloud account. It is 
- * used to distribute workloads between multiple back-end systems or services, 
+ * A load balancer is a logical device which belongs to a cloud account. It is
+ * used to distribute workloads between multiple back-end systems or services,
  * based on the criteria defined as part of its configuration.
- * 
- * 
  */
-class LoadBalancer extends PersistentObject 
+class LoadBalancer extends PersistentResource implements HasPtrRecordsInterface
 {
-
     public $id;
-    
+
     /**
-     * Name of the load balancer to create. The name must be 128 characters or 
+     * Name of the load balancer to create. The name must be 128 characters or
      * less in length, and all UTF-8 characters are valid.
-     * 
-     * @var string 
+     *
+     * @var string
      */
     public $name;
 
@@ -42,62 +48,70 @@ class LoadBalancer extends PersistentObject
      * @var string
      */
     public $port;
-    
+
     /**
      * Protocol of the service which is being load balanced.
-     * 
-     * @var string 
+     *
+     * @var string
      */
     public $protocol;
-    
+
     /**
      * Type of virtual IP to add along with the creation of a load balancer.
-     * 
+     *
      * @var array|Collection
      */
     public $virtualIps = array();
-    
+
     /**
      * Nodes to be added to the load balancer.
-     * 
+     *
      * @var array|Collection
      */
     public $nodes = array();
-    
+
     /**
-     * The access list management feature allows fine-grained network access 
+     * The access list management feature allows fine-grained network access
      * controls to be applied to the load balancer's virtual IP address.
-     * 
-     * @var Collection 
+     *
+     * @var Collection
      */
     public $accessList;
-    
+
     /**
      * Algorithm that defines how traffic should be directed between back-end nodes.
      *
      * @var Algorithm
      */
     public $algorithm;
-    
+
+
+    /**
+     * Enables or disables HTTP to HTTPS redirection for the load balancer.
+     *
+     * @var bool
+     */
+    public $httpsRedirect;
+
     /**
      * Current connection logging configuration.
-     * 
+     *
      * @var ConnectionLogging
      */
     public $connectionLogging;
-    
+
     /**
-     * Specifies limits on the number of connections per IP address to help 
+     * Specifies limits on the number of connections per IP address to help
      * mitigate malicious or abusive traffic to your applications.
-     * 
+     *
      * @var ConnectionThrottle
      */
     public $connectionThrottle;
-    
+
     /**
-     * The type of health monitor check to perform to ensure that the service is 
+     * The type of health monitor check to perform to ensure that the service is
      * performing properly.
-     * 
+     *
      * @var HealthMonitor
      */
     public $healthMonitor;
@@ -109,23 +123,23 @@ class LoadBalancer extends PersistentObject
      * @var SessionPersistance
      */
     public $sessionPersistence;
-    
+
     /**
-     * Information (metadata) that can be associated with each load balancer for 
+     * Information (metadata) that can be associated with each load balancer for
      * the client's personal use.
-     * 
-     * @var array|Metadata 
+     *
+     * @var array|Metadata
      */
     public $metadata = array();
-    
+
     /**
-     * The timeout value for the load balancer and communications with its nodes. 
+     * The timeout value for the load balancer and communications with its nodes.
      * Defaults to 30 seconds with a maximum of 120 seconds.
-     * 
-     * @var int 
+     *
+     * @var int
      */
     public $timeout;
-    
+
     public $created;
     public $updated;
     public $status;
@@ -137,6 +151,7 @@ class LoadBalancer extends PersistentObject
     protected static $url_resource = 'loadbalancers';
 
     protected $associatedResources = array(
+        'certificateMapping' => 'CertificateMapping',
         'node'               => 'Node',
         'virtualIp'          => 'VirtualIp',
         'connectionLogging'  => 'ConnectionLogging',
@@ -145,12 +160,13 @@ class LoadBalancer extends PersistentObject
     );
 
     protected $associatedCollections = array(
-        //'nodes'      => 'Node',
-        'virtualIps' => 'VirtualIp',
-        'accessList' => 'Access'
+        'certificateMappings' => 'CertificateMapping',
+        'nodes'               => 'Node',
+        'virtualIps'          => 'VirtualIp',
+        'accessList'          => 'Access'
     );
 
-    private $createKeys = array(
+    protected $createKeys = array(
         'name',
         'port',
         'protocol',
@@ -161,106 +177,105 @@ class LoadBalancer extends PersistentObject
         'connectionLogging',
         'connectionThrottle',
         'healthMonitor',
-        'sessionPersistence'
+        'sessionPersistence',
+        'httpsRedirect'
     );
 
     /**
-     * adds a node to the load balancer
-     *
      * This method creates a Node object and adds it to a list of Nodes
-     * to be added to the LoadBalancer. *Very important:* this method *NEVER*
-     * adds the nodes directly to the load balancer itself; it stores them
-     * on the object, and the nodes are added later, in one of two ways:
+     * to be added to the LoadBalancer. This method will not add the nodes
+     * directly to the load balancer itself; it stores them in an array and
+     * the nodes are added later, in one of two ways:
      *
-     * * for a new LoadBalancer, the Nodes are added as part of the Create()
-     *   method call.
-     * * for an existing LoadBalancer, you must call the AddNodes() method
+     * * for a new load balancer, the nodes are added as part of the create() method call
+     * * for an existing load balancer, you must call the addNodes() method
      *
-     * @api
-     * @param string $address the IP address of the node
-     * @param integer $port the port # of the node
+     * @param string  $address   the IP address of the node
+     * @param integer $port      the port # of the node
      * @param boolean $condition the initial condition of the node
-     * @param string $type either PRIMARY or SECONDARY
-     * @param integer $weight the node weight (for round-robin)
-     * @throws \OpenCloud\DomainError if value is not valid
+     * @param string  $type      either PRIMARY or SECONDARY
+     * @param integer $weight    the node weight (for round-robin)
+     *
+     * @throws \InvalidArgumentException
      * @return void
      */
     public function addNode(
-        $address, 
-        $port, 
-        $condition = 'ENABLED',
-        $type = null, 
+        $address,
+        $port,
+        $condition = NodeCondition::ENABLED,
+        $type = null,
         $weight = null
     ) {
-        $node = $this->Node();
-        $node->address = $address;
-        $node->port = $port;
-        $cond = strtoupper($condition);
+        $allowedConditions = array(
+            NodeCondition::ENABLED,
+            NodeCondition::DISABLED,
+            NodeCondition::DRAINING
+        );
 
-        switch($cond) {
-            case 'ENABLED':
-            case 'DISABLED':
-            case 'DRAINING':
-                $node->condition = $cond;
-                break;
-            default:
-                throw new Exceptions\DomainError(sprintf(
-                    Lang::translate('Value [%s] for Node::condition is not valid'), 
-                    $condition
-                ));
+        if (!in_array($condition, $allowedConditions)) {
+            throw new \InvalidArgumentException(sprintf(
+                "Invalid condition. It must one of the following: %s",
+                implode(', ', $allowedConditions)
+            ));
         }
 
-        if ($type !== null) {
-            switch(strtoupper($type)) {
-                case 'PRIMARY':
-                case 'SECONDARY':
-                    $node->type = $type;
-                    break;
-                default:
-                    throw new Exceptions\DomainError(sprintf(
-                        Lang::translate('Value [%s] for Node::type is not valid'), 
-                        $type
-                    ));
-            }
+        $allowedTypes = array(NodeType::PRIMARY, NodeType::SECONDARY);
+        if ($type && !in_array($type, $allowedTypes)) {
+            throw new \InvalidArgumentException(sprintf(
+                "Invalid type. It must one of the following: %s",
+                implode(', ', $allowedTypes)
+            ));
         }
 
-        if ($weight !== null) {
-            if (is_integer($weight)) {
-                $node->weight = $weight;
-            } else {
-                throw new Exceptions\DomainError(sprintf(
-                    Lang::translate('Value [%s] for Node::weight must be integer'), 
-                    $weight
-                ));
-            }
+        if ($weight && !is_numeric($weight)) {
+            throw new \InvalidArgumentException('Invalid weight. You must supply a numeric type');
         }
 
         // queue it
-        $this->nodes[] = $node;
+        $this->nodes[] = $this->node(array(
+            'address'   => $address,
+            'port'      => $port,
+            'condition' => $condition,
+            'type'      => $type,
+            'weight'    => $weight
+        ));
     }
-    
-    public function addNodes() 
+
+    /**
+     * Creates currently added nodes by sending them to the API
+     *
+     * @return array of {@see \Guzzle\Http\Message\Response} objects
+     * @throws \OpenCloud\Common\Exceptions\MissingValueError
+     */
+    public function addNodes()
     {
-        if (count($this->nodes) < 1) {
+        if (empty($this->nodes)) {
             throw new Exceptions\MissingValueError(
-                Lang::translate('Cannot add nodes; no nodes are defined')
+                'Cannot add nodes; no nodes are defined'
             );
         }
 
-        // iterate through all the nodes
-        foreach($this->nodes as $node) {
-            $resp = $node->Create();
+        $requestData = array('nodes' => array());
+
+        /** @var Node $node */
+        foreach ($this->nodes as $node) {
+            // Only add the node if it is new
+            if (null === $node->getId()) {
+                $nodeJson = $node->createJson();
+                $requestData['nodes'][] = $nodeJson['nodes'][0];
+            }
         }
 
-        return $resp;
+        $request = $this->getClient()->post($node->getUrl(), self::getJsonHeader(), json_encode($requestData));
+
+        return $this->getClient()->send($request);
     }
-    
+
     /**
      * Remove a node from this load-balancer
      *
-     * @api
      * @param int $id id of the node
-     * @return mixed
+     * @return \Guzzle\Http\Message\Response
      */
     public function removeNode($nodeId)
     {
@@ -268,28 +283,22 @@ class LoadBalancer extends PersistentObject
     }
 
     /**
-     * adds a virtual IP to the load balancer
+     * Adds a virtual IP to the load balancer. You can use the strings 'PUBLIC'
+     * or 'SERVICENET' to indicate the public or internal networks, or you can
+     * pass the `Id` of an existing IP address.
      *
-     * You can use the strings `'PUBLIC'` or `'SERVICENET`' to indicate the
-     * public or internal networks, or you can pass the `Id` of an existing
-     * IP address.
-     *
-     * @api
-     * @param string $id either 'public' or 'servicenet' or an ID of an
-     *      existing IP address
+     * @param string  $id        either 'public' or 'servicenet' or an ID of an
+     *                           existing IP address
      * @param integer $ipVersion either null, 4, or 6 (both, IPv4, or IPv6)
      * @return void
      */
-    public function addVirtualIp($type = 'PUBLIC', $ipVersion = NULL) 
+    public function addVirtualIp($type = IpType::PUBLIC_TYPE, $ipVersion = null)
     {
         $object = new \stdClass();
 
-        /**
-         * check for PUBLIC or SERVICENET
-         */
-        switch(strtoupper($type)) {
-            case 'PUBLIC':
-            case 'SERVICENET':
+        switch (strtoupper($type)) {
+            case IpType::PUBLIC_TYPE:
+            case IpType::SERVICENET_TYPE:
                 $object->type = strtoupper($type);
                 break;
             default:
@@ -298,16 +307,16 @@ class LoadBalancer extends PersistentObject
         }
 
         if ($ipVersion) {
-            switch($ipVersion) {
+            switch ($ipVersion) {
                 case 4:
-                    $object->version = 'IPV4';
+                    $object->ipVersion = IpType::IPv4;
                     break;
                 case 6:
-                    $object->version = 'IPV6';
+                    $object->ipVersion = IpType::IPv6;
                     break;
                 default:
                     throw new Exceptions\DomainError(sprintf(
-                        Lang::translate('Value [%s] for ipVersion is not valid'), 
+                        'Value [%s] for ipVersion is not valid',
                         $ipVersion
                     ));
             }
@@ -321,7 +330,7 @@ class LoadBalancer extends PersistentObject
         if ($this->Id()) {
             $virtualIp = $this->virtualIp();
             $virtualIp->type = $type;
-            $virtualIp->ipVersion = $object->version;
+            $virtualIp->ipVersion = $object->ipVersion;
             return $virtualIp->create();
         } else {
             // queue it
@@ -332,193 +341,367 @@ class LoadBalancer extends PersistentObject
     }
 
     /**
-     * returns a Node object
+     * Returns a Node
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\Node
      */
-    public function node($id = null) 
+    public function node($id = null)
     {
-        $resource = new Node($this->getService());
-        $resource->setParent($this)->populate($id);
-        return $resource;
+        return $this->getService()->resource('Node', $id, $this);
     }
 
     /**
      * returns a Collection of Nodes
+     *
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function nodeList() 
+    public function nodeList()
     {
         return $this->getService()->resourceList('Node', null, $this);
     }
 
     /**
-     * returns a NodeEvent object
+     * Returns a NodeEvent object
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\NodeEvent
      */
-    public function nodeEvent() 
+    public function nodeEvent()
     {
-        $resource = new NodeEvent($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        return $this->getService()->resource('NodeEvent', null, $this);
     }
 
     /**
-     * returns a Collection of NodeEvents
+     * Returns a Collection of NodeEvents
+     *
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function nodeEventList() 
+    public function nodeEventList()
     {
-        return $this->getParent()->resourceList('NodeEvent', null, $this);
+        return $this->getService()->resourceList('NodeEvent', null, $this);
     }
 
     /**
-     * returns a single Virtual IP (not called publicly)
+     * Returns a single Virtual IP (not called publicly)
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\VirtualIp
      */
-    public function virtualIp($data = null) 
+    public function virtualIp($data = null)
     {
-        $resource = new VirtualIp($this->getService(), $data);
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
-        
+        return $this->getService()->resource('VirtualIp', $data, $this);
     }
 
     /**
-     * returns  a Collection of Virtual Ips
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function virtualIpList() 
+    public function virtualIpList()
     {
         return $this->getService()->resourceList('VirtualIp', null, $this);
     }
 
     /**
-     */
-    public function sessionPersistence() 
-    {
-        $resource = new SessionPersistence($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
-    }
-
-    /**
-     * returns the load balancer's error page object
+     * Returns a Certificate Mapping.
      *
-     * @api
-     * @return ErrorPage
+     * @param int|array $id (Optional) Either a particular Certificate mapping ID, or an array of data about the
+     *                      mapping. An array can include these keys: hostName, privateKey, certificate,
+     *                      intermediateCertificate.
+     * @return \OpenCloud\LoadBalancer\Resource\CertificateMapping
      */
-    public function errorPage() 
+    public function certificateMapping($id = null)
     {
-        $resource = new ErrorPage($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        return $this->getService()->resource('CertificateMapping', $id, $this);
     }
 
     /**
-     * returns the load balancer's health monitor object
+     * Returns a Collection of Certificate Mappings.
      *
-     * @api
-     * @return HealthMonitor
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
      */
-    public function healthMonitor() 
+    public function certificateMappingList()
     {
-        $resource = new HealthMonitor($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        return $this->getService()->resourceList('CertificateMapping', null, $this);
     }
 
     /**
-     * returns statistics on the load balancer operation
+     * Creates a certificate mapping.
      *
-     * cannot be created, updated, or deleted
+     * @throws \OpenCloud\Common\Exceptions\MissingValueError
      *
-     * @api
-     * @return Stats
+     * @param string $hostName                The domain name for the certificate.
+     * @param string $privateKey              The private key for the certificate
+     * @param string $certificate             The certificate itself.
+     * @param string $intermediateCertificate The intermediate certificate chain.
+     * @return array An array of \Guzzle\Http\Message\Response objects.
      */
-    public function stats() 
-    {
-        $resource = new Stats($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+    public function addCertificateMapping(
+        $hostName,
+        $privateKey,
+        $certificate,
+        $intermediateCertificate = null
+    ) {
+        $certificateMapping = $this->certificateMapping(
+            array(
+                'hostName'                => $hostName,
+                'privateKey'              => $privateKey,
+                'certificate'             => $certificate,
+                'intermediateCertificate' => $intermediateCertificate
+            )
+        );
+        $json = json_encode($certificateMapping->createJson());
+        $request = $this->getClient()->post($certificateMapping->getUrl(), self::getJsonHeader(), $json);
+
+        return $this->getClient()->send($request);
     }
 
     /**
+     * Updates a certificate mapping.
+     *
+     * @param int    $id                      ID of the certificate mapping.
+     * @param string $hostName                (Optional) The domain name of the certificate.
+     * @param string $privateKey              (Optional) The private key for the certificate.
+     * @param string $certificate             The certificate itself.
+     * @param string $intermediateCertificate The intermediate certificate chain.
+     * @return array An array of \Guzzle\Http\Message\Response objects.
      */
-    public function usage() 
-    {
-        $resource = new Usage($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+    public function updateCertificateMapping(
+        $id,
+        $hostName = null,
+        $privateKey = null,
+        $certificate = null,
+        $intermediateCertificate = null
+    ) {
+        $certificateMapping = $this->certificateMapping($id);
+        return $certificateMapping->update(
+            array(
+                'hostName'                => $hostName,
+                'privateKey'              => $privateKey,
+                'certificate'             => $certificate,
+                'intermediateCertificate' => $intermediateCertificate
+            )
+        );
     }
 
     /**
+     * Remove a certificate mapping.
+     *
+     * @param int $id ID of the certificate mapping.
+     * @return \Guzzle\Http\Message\Response
      */
-    public function access($data = null) 
+    public function removeCertificateMapping($id)
     {
-        $resource = new Access($this->getService(), $data);
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        return $this->certificateMapping($id)->delete();
     }
 
     /**
+     * Return the session persistence resource
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\SessionPersistence
      */
-    public function accessList() 
+    public function sessionPersistence()
+    {
+        return $this->getService()->resource('SessionPersistence', null, $this);
+    }
+
+    /**
+     * Returns the load balancer's error page object
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\ErrorPage
+     */
+    public function errorPage()
+    {
+        return $this->getService()->resource('ErrorPage', null, $this);
+    }
+
+    /**
+     * Returns the load balancer's health monitor object
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\HealthMonitor
+     */
+    public function healthMonitor()
+    {
+        return $this->getService()->resource('HealthMonitor', null, $this);
+    }
+
+    /**
+     * Returns statistics on the load balancer operation
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\Stats
+     */
+    public function stats()
+    {
+        return $this->getService()->resource('Stats', null, $this);
+    }
+
+    /**
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
+     */
+    public function usage()
+    {
+        return $this->getService()->resourceList('UsageRecord', null, $this);
+    }
+
+    /**
+     * Return an access resource
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\Access
+     */
+    public function access($data = null)
+    {
+        return $this->getService()->resource('Access', $data, $this);
+    }
+
+    /**
+     * Creates an access list. You must provide an array of \stdClass objects,
+     * each of which contains `type' and `address' properties. Valid types for
+     * the former are: "DENY" or "ALLOW". The address must be a valid IP
+     * address, either v4 or v6.
+     *
+     * @param stdClass[] $list
+     *
+     * @return \Guzzle\Http\Message\Response
+     */
+    public function createAccessList(array $list)
+    {
+        $url = $this->getUrl();
+        $url->addPath('accesslist');
+
+        $json = json_encode($list);
+        $this->checkJsonError();
+
+        return $this->getClient()->post($url, self::getJsonHeader(), $json)->send();
+    }
+
+    /**
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
+     */
+    public function accessList()
     {
         return $this->getService()->resourceList('Access', null, $this);
     }
 
     /**
+     * Return a connection throttle resource
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\ConnectionThrottle
      */
-    public function connectionThrottle() 
+    public function connectionThrottle()
     {
-        $resource = new ConnectionThrottle($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        return $this->getService()->resource('ConnectionThrottle', null, $this);
     }
 
     /**
+     * Find out whether connection logging is enabled for this load balancer
+     *
+     * @return bool Returns TRUE if enabled, FALSE if not
      */
-    public function connectionLogging() 
+    public function hasConnectionLogging()
     {
-        $resource = new ConnectionLogging($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        $url = clone $this->getUrl();
+        $url->addPath('connectionlogging');
+
+        $response = $this->getClient()->get($url)->send()->json();
+
+        return isset($response['connectionLogging']['enabled'])
+            && $response['connectionLogging']['enabled'] === true;
     }
 
     /**
+     * Set the connection logging setting for this load balancer
+     *
+     * @param $bool  Set to TRUE to enable, FALSE to disable
+     * @return \Guzzle\Http\Message\Response
      */
-    public function contentCaching() 
+    public function enableConnectionLogging($bool)
     {
-        $resource = new ContentCaching($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        $url = clone $this->getUrl();
+        $url->addPath('connectionlogging');
+
+        $body = array('connectionLogging' => (bool) $bool);
+
+        return $this->getClient()->put($url, self::getJsonHeader(), $body)->send();
     }
 
     /**
+     * @deprecated
      */
-    public function SSLTermination() 
+    public function connectionLogging()
     {
-        $resource = new SSLTermination($this->getService());
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        $this->getLogger()->warning(Logger::deprecated(__METHOD__, 'hasConnectionLogging or enableConnectionLogging'));
     }
 
     /**
+     * Find out whether content caching is enabled for this load balancer
+     *
+     * @return bool Returns TRUE if enabled, FALSE if not
      */
-    public function metadata($data = null) 
+    public function hasContentCaching()
     {
-        $resource = new Metadata($this->getService(), $data);
-        $resource->setParent($this)->initialRefresh();
-        return $resource;
+        $url = clone $this->getUrl();
+        $url->addPath('contentcaching');
+
+        $response = $this->getClient()->get($url)->send()->json();
+
+        return isset($response['contentCaching']['enabled'])
+            && $response['contentCaching']['enabled'] === true;
     }
 
     /**
+     * Set the content caching setting for this load balancer
+     *
+     * @param $bool  Set to TRUE to enable, FALSE to disable
+     * @return \Guzzle\Http\Message\Response
      */
-    public function metadataList() 
+    public function enableContentCaching($bool)
+    {
+        $url = clone $this->getUrl();
+        $url->addPath('contentcaching');
+
+        $body = array('contentCaching' => array('enabled' => (bool) $bool));
+        $body = json_encode($body);
+        $this->checkJsonError();
+
+        return $this->getClient()->put($url, self::getJsonHeader(), $body)->send();
+    }
+
+    /**
+     * @deprecated
+     */
+    public function contentCaching()
+    {
+        $this->getLogger()->warning(sprintf(
+            'The %s method is deprecated, please use %s instead', __METHOD__, 'hasContentCaching or setContentCaching'));
+    }
+
+    /**
+     * Return a SSL Termination resource
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\SSLTermination
+     */
+    public function SSLTermination()
+    {
+        return $this->getService()->resource('SSLTermination', null, $this);
+    }
+
+    /**
+     * Return a metadata item
+     *
+     * @return \OpenCloud\LoadBalancer\Resource\Metadata
+     */
+    public function metadata($data = null)
+    {
+        return $this->getService()->resource('Metadata', $data, $this);
+    }
+
+    /**
+     * Return a collection of metadata items
+     *
+     * @return \OpenCloud\Common\Collection\PaginatedIterator
+     */
+    public function metadataList()
     {
         return $this->getService()->resourceList('Metadata', null, $this);
     }
 
-    /**
-     * returns the JSON object for Create()
-     *
-     * @return stdClass
-     */
-    protected function createJson() 
+    protected function createJson()
     {
         $element = (object) array();
 
@@ -533,34 +716,26 @@ class LoadBalancer extends PersistentObject
                     }
                     $element->nodes[] = (object) $nodeObject;
                 }
-            } elseif($key == 'virtualIps') {
-                foreach ($this->virtualIps  as $virtualIp) {
+            } elseif ($key == 'virtualIps') {
+                foreach ($this->virtualIps as $virtualIp) {
                     $element->virtualIps[] = $virtualIp;
                 }
             } elseif (isset($this->$key)) {
                 $element->$key = $this->$key;
             }
         }
-        
+
         $object = (object) array($this->jsonName() => $element);
 
         return $object;
     }
 
-    /**
-     * returns the JSON object for Update()
-     *
-     * @return stdClass
-     * @throws \OpenCloud\Common\Exceptions\InvalidParameterError
-     */
     protected function updateJson($params = array())
     {
+        $updatableFields = array('name', 'algorithm', 'protocol', 'port', 'timeout', 'halfClosed', 'httpsRedirect');
 
-        $updatableFields = array('name','algorithm','protocol','port','timeout','halfClosed');
-
-        //Validate supplied fields
         $fields = array_keys($params);
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!in_array($field, $updatableFields)) {
                 throw new Exceptions\InvalidArgumentError("You cannot update $field.");
             }
@@ -568,9 +743,10 @@ class LoadBalancer extends PersistentObject
 
         $object = new \stdClass();
         $object->loadBalancer = new \stdClass();
-        foreach($params as $name => $value) {
+        foreach ($params as $name => $value) {
             $object->loadBalancer->$name = $this->$name;
         }
+
         return $object;
-    } 
+    }
 }

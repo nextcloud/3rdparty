@@ -8,6 +8,7 @@ $baseDir = $vendorDir;
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
+    'mikemccabe\\JsonPatch\\' => array($vendorDir . '/mikemccabe/json-patch-php/src'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
     'ZipStreamer\\' => array($vendorDir . '/mcnetic/zipstreamer/src'),
     'Symfony\\Polyfill\\Php70\\' => array($vendorDir . '/symfony/polyfill-php70'),

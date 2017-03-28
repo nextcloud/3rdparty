@@ -1,20 +1,29 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\DNS;
 
-use OpenCloud\Common\Service\CatalogService;
-use OpenCloud\OpenStack;
-use OpenCloud\Compute\Resource\Server;
 use OpenCloud\Common\Http\Message\Formatter;
+use OpenCloud\Common\Service\CatalogService;
+use OpenCloud\Common\Exceptions\DomainNotFoundException;
 use OpenCloud\DNS\Collection\DnsIterator;
+use OpenCloud\DNS\Resource\AsyncResponse;
+use OpenCloud\DNS\Resource\Domain;
+use OpenCloud\DNS\Resource\HasPtrRecordsInterface;
 
 /**
  * DNS Service.
@@ -31,34 +40,52 @@ class Service extends CatalogService
         $options = $this->makeResourceIteratorOptions($this->resolveResourceClass($class));
         $options['baseUrl'] = $url;
 
-        $parent = $parent ?: $this;
+        $parent = $parent ? : $this;
 
         return DnsIterator::factory($parent, $options, $data);
     }
 
     /**
-     * returns a DNS::Domain object
+     * Returns a domain
      *
-     * @api
      * @param mixed $info either the ID, an object, or array of parameters
      * @return Resource\Domain
      */
     public function domain($info = null)
     {
-        return new Resource\Domain($this, $info);
+        return $this->resource('Domain', $info);
     }
 
     /**
-     * returns a Collection of DNS::Domain objects
+     * Returns a domain, given a domain name
      *
-     * @api
+     * @param string $domainName Domain name
+     * @return Domain the domain object
+     */
+    public function domainByName($domainName)
+    {
+        $domainList = $this->domainList(array("name" => $domainName));
+
+        if (count($domainList) != 1) {
+            throw new DomainNotFoundException();
+        }
+
+        return $this->resource('Domain', $domainList[0]);
+    }
+
+
+    /**
+     * Returns a collection of domains
+     *
      * @param array $filter key/value pairs to use as query strings
-     * @return \OpenCloud\Common\Collection
+     * @return OpenCloud\DNS\Collection\DnsIterator
      */
     public function domainList($filter = array())
     {
-        $url = $this->getUrl(Resource\Domain::resourceName(), $filter);
-        return $this->collection('OpenCloud\DNS\Resource\Domain', $url);
+        $url = $this->getUrl(Domain::resourceName());
+        $url->setQuery($filter);
+
+        return $this->resourceList('Domain', $url);
     }
 
     /**
@@ -69,24 +96,24 @@ class Service extends CatalogService
      */
     public function ptrRecord($info = null)
     {
-        return new Resource\PtrRecord($this, $info);
+        return $this->resource('PtrRecord', $info);
     }
 
     /**
      * returns a Collection of PTR records for a given Server
      *
      * @param \OpenCloud\Compute\Resource\Server $server the server for which to
-     *      retrieve the PTR records
-     * @return \OpenCloud\Common\Collection
+     *                                                   retrieve the PTR records
+     * @return OpenCloud\DNS\Collection\DnsIterator
      */
-    public function ptrRecordList(Server $server)
+    public function ptrRecordList(HasPtrRecordsInterface $parent)
     {
         $url = $this->getUrl()
             ->addPath('rdns')
-            ->addPath($server->getService()->name())
-            ->setQuery(array('href' => $server->url()));
+            ->addPath($parent->getService()->getName())
+            ->setQuery(array('href' => (string) $parent->getUrl()));
 
-        return $this->collection('OpenCloud\DNS\Resource\PtrRecord', $url);
+        return $this->resourceList('PtrRecord', $url);
     }
 
     /**
@@ -97,34 +124,35 @@ class Service extends CatalogService
      * an `AsyncResponse` object. This object can then be used to poll
      * for the status or to retrieve the final data as needed.
      *
-     * @param string $url the URL of the request
-     * @param string $method the HTTP method to use
-     * @param array $headers key/value pairs for headers to include
-     * @param string $body the body of the request (for PUT and POST)
+     * @param string $url     the URL of the request
+     * @param string $method  the HTTP method to use
+     * @param array  $headers key/value pairs for headers to include
+     * @param string $body    the body of the request (for PUT and POST)
      * @return Resource\AsyncResponse
      */
     public function asyncRequest($url, $method = 'GET', $headers = array(), $body = null)
     {
         $response = $this->getClient()->createRequest($method, $url, $headers, $body)->send();
-        return new Resource\AsyncResponse($this, Formatter::decode($response));
+
+        return new AsyncResponse($this, Formatter::decode($response));
     }
 
     /**
-     * imports domain records
+     * Imports domain records
      *
      * Note that this function is called from the service (DNS) level, and
      * not (as you might suspect) from the Domain object. Because the function
      * return an AsyncResponse, the domain object will not actually exist
      * until some point after the import has occurred.
      *
-     * @api
      * @param string $data the BIND_9 formatted data to import
      * @return Resource\AsyncResponse
      */
     public function import($data)
     {
-        // determine the URL
-        $url = $this->url('domains/import');
+        $url = clone $this->getUrl();
+        $url->addPath('domains');
+        $url->addPath('import');
 
         $object = (object) array(
             'domains' => array(
@@ -138,11 +166,8 @@ class Service extends CatalogService
         // encode it
         $json = json_encode($object);
 
-        // debug it
-        $this->getLogger()->info('Importing [{json}]', array('json' => $json));
-
         // perform the request
-        return $this->asyncRequest($url, 'POST', array(), $json);
+        return $this->asyncRequest($url, 'POST', self::getJsonHeader(), $json);
     }
 
     /**
@@ -150,12 +175,16 @@ class Service extends CatalogService
      */
     public function limits($type = null)
     {
-        $url = $this->url('limits') . ($type ? "/$type" : '');
+        $url = $this->getUrl('limits');
+
+        if ($type) {
+            $url->addPath($type);
+        }
 
         $response = $this->getClient()->get($url)->send();
         $body = Formatter::decode($response);
 
-        return ($body) ? $body : $body->limits;
+        return isset($body->limits) ? $body->limits : $body;
     }
 
     /**
@@ -167,7 +196,39 @@ class Service extends CatalogService
     {
         $response = $this->getClient()->get($this->getUrl('limits/types'))->send();
         $body = Formatter::decode($response);
+
         return $body->limitTypes;
     }
 
+    /**
+     * List asynchronous responses' statuses.
+     * @see http://docs.rackspace.com/cdns/api/v1.0/cdns-devguide/content/viewing_status_all_asynch_jobs.html
+     *
+     * @param array $query Any query parameters. Optional.
+     * @return OpenCloud\DNS\Collection\DnsIterator
+     */
+    public function listAsyncJobs(array $query = array())
+    {
+        $url = clone $this->getUrl();
+        $url->addPath('status');
+        $url->setQuery($query);
+
+        return DnsIterator::factory($this, array(
+            'baseUrl'        => $url,
+            'resourceClass'  => 'AsyncResponse',
+            'key.collection' => 'asyncResponses'
+        ));
+    }
+
+    public function getAsyncJob($jobId, $showDetails = true)
+    {
+        $url = clone $this->getUrl();
+        $url->addPath('status');
+        $url->addPath((string) $jobId);
+        $url->setQuery(array('showDetails' => ($showDetails) ? 'true' : 'false'));
+
+        $response = $this->getClient()->get($url)->send();
+
+        return new AsyncResponse($this, Formatter::decode($response));
+    }
 }

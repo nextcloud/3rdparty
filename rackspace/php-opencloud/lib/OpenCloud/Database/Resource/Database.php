@@ -1,63 +1,54 @@
 <?php
 /**
- * PHP OpenCloud library.
- * 
- * @copyright 2014 Rackspace Hosting, Inc. See LICENSE for information.
- * @license   https://www.apache.org/licenses/LICENSE-2.0
- * @author    Glen Campbell <glen.campbell@rackspace.com>
- * @author    Jamie Hannaford <jamie.hannaford@rackspace.com>
+ * Copyright 2012-2014 Rackspace US, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace OpenCloud\Database\Resource;
 
-use OpenCloud\Common\PersistentObject;
 use OpenCloud\Common\Exceptions;
 use OpenCloud\Common\Lang;
+use OpenCloud\Common\Resource\PersistentResource;
 
 /**
  * This class represents a Database in the Rackspace "Red Dwarf"
  * database-as-a-service product.
  */
-class Database extends PersistentObject
+class Database extends PersistentResource
 {
-    protected static $json_collection_name = 'databases';
-    protected static $url_resource = 'databases';
-    
+    /** @var string */
     public $name;
 
-    /**
-     * Creates a new database object
-     *
-     * Unlike other objects (Servers, DataObjects, etc.), passing a database
-     * name to the constructor does *not* pull information from the database.
-     * For example, if you pass an ID to the `Server()` constructor, it will
-     * attempt to retrieve the information on that server from the service,
-     * and will return an error if it is not found. However, the Cloud
-     * Databases service does not permit retrieval of information on
-     * individual databases (only via Collection), and thus passing in a
-     * name via the `$info` parameter only creates an in-memory object that
-     * is not necessarily tied to an actual database.
-     *
-     * @param Instance $instance the parent DbService\Instance of the database
-     * @param mixed $info if an array or object, treated as properties to set;
-     *      if a string, treated as the database name
-     * @return void
-     * @throws DatabaseNameError if `$info` is not a string, object, or array
-     */
+    protected static $json_collection_name = 'databases';
+    protected static $url_resource = 'databases';
+
     public function __construct(Instance $instance, $info = null)
     {
         $this->setParent($instance);
+
         // Catering for laziness
         if (is_string($info)) {
             $info = array('name' => $info);
         }
+
         return parent::__construct($instance->getService(), $info);
     }
-    
+
     /**
      * Returns name of this database. Because it's so important (i.e. as an
      * identifier), it will throw an error if not set/empty.
-     * 
+     *
      * @return type
      * @throws Exceptions\DatabaseNameError
      */
@@ -68,6 +59,7 @@ class Database extends PersistentObject
                 Lang::translate('The database does not have a Url yet')
             );
         }
+
         return $this->name;
     }
 
@@ -75,7 +67,7 @@ class Database extends PersistentObject
     {
         return 'name';
     }
-    
+
     /**
      * Returns the Instance of the database
      *
@@ -99,7 +91,7 @@ class Database extends PersistentObject
         $url = $this->getParent()->url('databases');
 
         if (isset($params['name'])) {
-        	$this->name = $params['name'];
+            $this->name = $params['name'];
         }
 
         $json = json_encode($this->createJson($params));
@@ -118,18 +110,7 @@ class Database extends PersistentObject
      */
     public function update($params = array())
     {
-    	return $this->noUpdate();
-    }
-
-    /**
-     * Deletes a database
-     *
-     * @api
-     * @return \OpenCloud\HttpResponseb
-     */
-    public function delete()
-    {
-    	return $this->getClient()->delete($this->url())->send();
+        return $this->noUpdate();
     }
 
     /**
@@ -143,5 +124,4 @@ class Database extends PersistentObject
             'databases' => array($database)
         );
     }
-
 }
