@@ -2,8 +2,8 @@
 
 namespace Sabre\CalDAV\Notifications;
 
-use Sabre\DAV;
 use Sabre\CalDAV;
+use Sabre\DAV;
 use Sabre\DAVACL;
 
 /**
@@ -27,7 +27,7 @@ class Collection extends DAV\Collection implements ICollection, DAVACL\IACL {
     /**
      * The notification backend
      *
-     * @var Sabre\CalDAV\Backend\NotificationSupport
+     * @var CalDAV\Backend\NotificationSupport
      */
     protected $caldavBackend;
 

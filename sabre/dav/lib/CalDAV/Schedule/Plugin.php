@@ -3,29 +3,28 @@
 namespace Sabre\CalDAV\Schedule;
 
 use DateTimeZone;
-use Sabre\DAV\Server;
-use Sabre\DAV\ServerPlugin;
-use Sabre\DAV\Sharing;
-use Sabre\DAV\PropFind;
-use Sabre\DAV\PropPatch;
-use Sabre\DAV\INode;
-use Sabre\DAV\Xml\Property\Href;
-use Sabre\DAV\Xml\Property\LocalHref;
-use Sabre\HTTP\RequestInterface;
-use Sabre\HTTP\ResponseInterface;
-use Sabre\VObject;
-use Sabre\VObject\Reader;
-use Sabre\VObject\Component\VCalendar;
-use Sabre\VObject\ITip;
-use Sabre\VObject\ITip\Message;
-use Sabre\DAVACL;
 use Sabre\CalDAV\ICalendar;
 use Sabre\CalDAV\ICalendarObject;
 use Sabre\CalDAV\Xml\Property\ScheduleCalendarTransp;
-use Sabre\DAV\Exception\NotFound;
-use Sabre\DAV\Exception\Forbidden;
 use Sabre\DAV\Exception\BadRequest;
+use Sabre\DAV\Exception\Forbidden;
+use Sabre\DAV\Exception\NotFound;
 use Sabre\DAV\Exception\NotImplemented;
+use Sabre\DAV\INode;
+use Sabre\DAV\PropFind;
+use Sabre\DAV\PropPatch;
+use Sabre\DAV\Server;
+use Sabre\DAV\ServerPlugin;
+use Sabre\DAV\Sharing;
+use Sabre\DAV\Xml\Property\LocalHref;
+use Sabre\DAVACL;
+use Sabre\HTTP\RequestInterface;
+use Sabre\HTTP\ResponseInterface;
+use Sabre\VObject;
+use Sabre\VObject\Component\VCalendar;
+use Sabre\VObject\ITip;
+use Sabre\VObject\ITip\Message;
+use Sabre\VObject\Reader;
 
 /**
  * CalDAV scheduling plugin.
@@ -377,7 +376,7 @@ class Plugin extends ServerPlugin {
     /**
      * This method is responsible for delivering the ITip message.
      *
-     * @param ITip\Message $itipMessage
+     * @param ITip\Message $iTipMessage
      * @return void
      */
     function deliver(ITip\Message $iTipMessage) {
@@ -890,8 +889,8 @@ class Plugin extends ServerPlugin {
      *   * 3.7;description
      *
      * @param string $email address
-     * @param DateTimeInterface $start
-     * @param DateTimeInterface $end
+     * @param \DateTimeInterface $start
+     * @param \DateTimeInterface $end
      * @param VObject\Component $request
      * @return array
      */
@@ -1059,7 +1058,7 @@ class Plugin extends ServerPlugin {
 
         return [
             'name'        => $this->getPluginName(),
-            'description' => 'Adds calendar-auto-schedule, as defined in rf6868',
+            'description' => 'Adds calendar-auto-schedule, as defined in rfc6638',
             'link'        => 'http://sabre.io/dav/scheduling/',
         ];
 

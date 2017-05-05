@@ -26,7 +26,7 @@ class AddressData implements XmlDeserializable {
     /**
      * The deserialize method is called during xml parsing.
      *
-     * This method is called statictly, this is because in theory this method
+     * This method is called statically, this is because in theory this method
      * may be used as a type of constructor, or factory method.
      *
      * Often you want to return an instance of the current class, but you are
@@ -51,7 +51,11 @@ class AddressData implements XmlDeserializable {
             'version'     => $reader->getAttribute('version') ?: '3.0',
         ];
 
-        $reader->next();
+        $elems = (array)$reader->parseInnerTree();
+        $result['addressDataProperties'] = array_map(function($element) {
+            return $element['attributes']['name'];
+        }, $elems);
+
         return $result;
 
     }
