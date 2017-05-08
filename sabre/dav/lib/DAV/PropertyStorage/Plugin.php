@@ -2,11 +2,11 @@
 
 namespace Sabre\DAV\PropertyStorage;
 
+use Sabre\DAV\INode;
+use Sabre\DAV\PropFind;
+use Sabre\DAV\PropPatch;
 use Sabre\DAV\Server;
 use Sabre\DAV\ServerPlugin;
-use Sabre\DAV\PropPatch;
-use Sabre\DAV\PropFind;
-use Sabre\DAV\INode;
 
 /**
  * PropertyStorage Plugin.
@@ -30,12 +30,17 @@ class Plugin extends ServerPlugin {
      * paths, you can use a pathFilter to do this.
      *
      * The pathFilter should be a callable. The callable retrieves a path as
-     * its argument, and should return true or false wether it allows
+     * its argument, and should return true or false whether it allows
      * properties to be stored.
      *
      * @var callable
      */
     public $pathFilter;
+
+    /**
+     * @var Backend\BackendInterface
+     */
+    public $backend;
 
     /**
      * Creates the plugin
