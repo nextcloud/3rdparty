@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "23a2198ec19e77d8eb206404b47277ec",
+    "content-hash": "7765524586dc986adca385026b108dad",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -1479,16 +1479,16 @@
         },
         {
             "name": "pear/archive_tar",
-            "version": "1.4.1",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Archive_Tar.git",
-                "reference": "fc2937c0e5a2a1c62a378d16394893172f970064"
+                "reference": "43455c960da70e655c6bdf8ea2bc8cc1a6034afb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/fc2937c0e5a2a1c62a378d16394893172f970064",
-                "reference": "fc2937c0e5a2a1c62a378d16394893172f970064",
+                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/43455c960da70e655c6bdf8ea2bc8cc1a6034afb",
+                "reference": "43455c960da70e655c6bdf8ea2bc8cc1a6034afb",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1541,7 @@
                 "archive",
                 "tar"
             ],
-            "time": "2015-08-05T12:31:03+00:00"
+            "time": "2017-06-11T17:28:11+00:00"
         },
         {
             "name": "pear/console_getopt",
