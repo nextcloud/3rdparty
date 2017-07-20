@@ -16,7 +16,7 @@
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"natxet/CssMin": "dev-master",
 		"punic/punic": "^1.6",
-		"pear/archive_tar": "1.4.1",
+		"pear/archive_tar": "1.4.3",
 		"patchwork/utf8": "1.2.6",
 		"symfony/console": "^3.0.0",
 		"symfony/event-dispatcher": "^3.0.0",
