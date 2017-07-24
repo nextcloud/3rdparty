@@ -2,3 +2,4 @@ Patches:
 
 - patchwork/utf8: Remove trigger_error() that spammed the error log
 - Doctrine: fix error handling for not null columns on some mysql servers https://github.com/doctrine/dbal/pull/2422
+- SabreDAV: Make sure that files that are children of directories, are reported as files https://github.com/fruux/sabre-dav/issues/982
