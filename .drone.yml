@@ -19,3 +19,6 @@ pipeline:
 matrix:
   include:
     - TESTS: signed-off-check
+
+branches: [ master, stable* ]
+
