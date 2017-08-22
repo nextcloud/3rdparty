@@ -5,3 +5,4 @@ Patches:
 - SabreDAV: Make sure that files that are children of directories, are reported as files https://github.com/fruux/sabre-dav/issues/982
 - SabreXML: Fix invalid PHP docs https://github.com/fruux/sabre-xml/pull/128
 - php-opencloud: Fix invalid PHP docs https://github.com/rackspace/php-opencloud/pull/711
+- SabreXML: Prevent infinite loops for empty props element https://github.com/fruux/sabre-xml/pull/132
