@@ -68,6 +68,7 @@ symfony/process/Symfony/Component/Process/Routing/Tests/
 symfony/process/Symfony/Component/Process/phpunit.xml.dist
 symfony/process/Symfony/Component/Process/Tests
 symfony/process/Symfony/Component/Process/.gitignore
+symfony/process/Tests
 
 pimple/pimple/ext
 pimple/pimple/.gitignore
