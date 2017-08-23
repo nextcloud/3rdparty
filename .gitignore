@@ -47,9 +47,12 @@ phpseclib/phpseclib/composer.json
 phpseclib/phpseclib/composer.lock
 phpseclib/phpseclib/phpunit.xml.dist
 
+symfony/debug/Tests
+
 symfony/console/Symfony/Component/Console/Tests
 symfony/console/Symfony/Component/Console/.gitignore
 symfony/console/Symfony/Component/Console/composer.json
+symfony/console/Tests
 
 symfony/routing/Tests/
 symfony/routing/phpunit.xml.dist
