@@ -20,7 +20,7 @@
 		"patchwork/utf8": "1.2.6",
 		"symfony/console": "^3.3.0",
 		"symfony/event-dispatcher": "^3.3.0",
-		"symfony/routing": "^3.0.0",
+		"symfony/routing": "^3.3.0",
 		"symfony/process": "^3.3.0",
 		"pimple/pimple": "3.0.2",
 		"nikic/php-parser": "1.4.1",
