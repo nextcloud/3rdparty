@@ -63,6 +63,9 @@ symfony/event-dispatcher/Symfony/Component/EventDispatcher/Tests/
 symfony/event-dispatcher/Symfony/EventDispatcher/Debug/Routing/Tests/
 symfony/event-dispatcher/Symfony/EventDispatcher/Debug/phpunit.xml.dist
 symfony/event-dispatcher/Symfony/EventDispatcher/Debug/.gitignore
+symfony/event-dispatcher/Tests
+
+symfony/finder/Tests
 
 symfony/process/Symfony/Component/Process/Routing/Tests/
 symfony/process/Symfony/Component/Process/phpunit.xml.dist
