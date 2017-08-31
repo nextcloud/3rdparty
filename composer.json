@@ -38,6 +38,7 @@
 		"stecman/symfony-console-completion": "^0.7.0",
 		"leafo/scssphp": "^0.6.6",
 		"icewind/searchdav": "0.3.1",
-		"symfony/translation": "^3.3"
+		"symfony/translation": "^3.3",
+		"aws/aws-sdk-php": "^3.35"
 	}
 }
