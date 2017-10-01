@@ -120,6 +120,11 @@ class User extends DAVACL\Principal implements DAV\ICollection {
         $acl = parent::getACL();
         $acl[] = [
             'privilege' => '{DAV:}read',
+            'principal' => '{DAV:}authenticated',
+            'protected' => true,
+        ];
+        $acl[] = [
+            'privilege' => '{DAV:}read',
             'principal' => $this->principalProperties['uri'] . '/calendar-proxy-read',
             'protected' => true,
         ];
