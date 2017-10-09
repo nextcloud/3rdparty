@@ -4,6 +4,8 @@ bin
 james-heinrich/getid3/demos
 james-heinrich/getid3/helperapps
 
+aws/aws-sdk-php/.changes
+
 doctrine/annotations/tests
 doctrine/annotations/.travis.yml
 doctrine/cache/tests
@@ -200,6 +202,8 @@ rackspace/php-opencloud/tests
 rackspace/php-opencloud/doc
 rackspace/php-opencloud/docs
 rackspace/php-opencloud/samples
+
+mtdowling/jmespath.php/tests
 
 paragonie/random_compat/tests
 paragonie/random_compat/phpunit.sh
