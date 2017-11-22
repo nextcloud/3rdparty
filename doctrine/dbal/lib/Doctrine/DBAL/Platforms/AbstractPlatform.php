@@ -2214,10 +2214,10 @@ abstract class AbstractPlatform
 
             $typeDecl = $field['type']->getSqlDeclaration($field, $this);
             $columnDef = $typeDecl . $charset . $default . $notnull . $unique . $check . $collation;
-        }
 
-        if ($this->supportsInlineColumnComments() && isset($field['comment']) && $field['comment'] !== '') {
-            $columnDef .= " COMMENT " . $this->quoteStringLiteral($field['comment']);
+            if ($this->supportsInlineColumnComments() && isset($field['comment']) && $field['comment'] !== '') {
+                $columnDef .= " COMMENT " . $this->quoteStringLiteral($field['comment']);
+            }
         }
 
         return $name . ' ' . $columnDef;
@@ -3532,5 +3532,10 @@ abstract class AbstractPlatform
     public function getStringLiteralQuoteCharacter()
     {
         return "'";
+    }
+
+    public function getSequenceDataSQL($sequenceName, $schemaName)
+    {
+        throw DBALException::notSupported(__METHOD__);
     }
 }

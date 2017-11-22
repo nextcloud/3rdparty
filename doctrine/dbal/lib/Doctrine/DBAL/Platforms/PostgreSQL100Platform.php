@@ -17,37 +17,33 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAL\Platforms;
 
 /**
- * Class to store and retrieve the version of Doctrine.
+ * Provides the behavior, features and SQL dialect of the PostgreSQL 10.0 database platform.
  *
  * @link   www.doctrine-project.org
- * @since  2.0
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author Jonathan Wage <jonwage@gmail.com>
- * @author Roman Borschel <roman@code-factory.org>
+ * @since  2.6
  */
-class Version
+class PostgreSQL100Platform extends PostgreSQL92Platform
 {
-    /**
-     * Current Doctrine Version.
-     */
-    const VERSION = '2.5.14-DEV';
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getReservedKeywordsClass()
+	{
+		return Keywords\PostgreSQL100Keywords::class;
+	}
 
-    /**
-     * Compares a Doctrine version with the current one.
-     *
-     * @param string $version The Doctrine version to compare to.
-     *
-     * @return integer -1 if older, 0 if it is the same, 1 if version passed as argument is newer.
-     */
-    public static function compare($version)
-    {
-        $currentVersion = str_replace(' ', '', strtolower(self::VERSION));
-        $version = str_replace(' ', '', $version);
+	public function getSequenceDataSQL($rawSequenceName, $schemaName)
+	{
+		$sequenceName = $this->cleanSequenceNameFromSchemaName($rawSequenceName, $schemaName);
 
-        return version_compare($version, $currentVersion);
-    }
+		return 'SELECT min_value, increment_by FROM pg_sequences WHERE schemaname = '.$this->quoteStringLiteral($schemaName).' AND sequencename = ' . $this->quoteStringLiteral($sequenceName);
+	}
+
+	private function cleanSequenceNameFromSchemaName($rawSequenceName, $schemaName)
+	{
+		return str_replace($schemaName . '.', '', $rawSequenceName);
+	}
 }
