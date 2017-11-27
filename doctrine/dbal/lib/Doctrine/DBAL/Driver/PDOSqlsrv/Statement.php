@@ -17,37 +17,33 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAL\Driver\PDOSqlsrv;
+
+use Doctrine\DBAL\Driver\PDOStatement;
+use PDO;
 
 /**
- * Class to store and retrieve the version of Doctrine.
- *
- * @link   www.doctrine-project.org
- * @since  2.0
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author Jonathan Wage <jonwage@gmail.com>
- * @author Roman Borschel <roman@code-factory.org>
+ * PDO SQL Server Statement
  */
-class Version
+class Statement extends PDOStatement
 {
     /**
-     * Current Doctrine Version.
+     * {@inheritdoc}
      */
-    const VERSION = '2.5.14-DEV';
+    public function bindParam($column, &$variable, $type = PDO::PARAM_STR, $length = null, $driverOptions = null)
+    {
+        if ($type === PDO::PARAM_LOB && $driverOptions === null) {
+            $driverOptions = PDO::SQLSRV_ENCODING_BINARY;
+        }
+
+        return parent::bindParam($column, $variable, $type, $length, $driverOptions);
+    }
 
     /**
-     * Compares a Doctrine version with the current one.
-     *
-     * @param string $version The Doctrine version to compare to.
-     *
-     * @return integer -1 if older, 0 if it is the same, 1 if version passed as argument is newer.
+     * {@inheritdoc}
      */
-    public static function compare($version)
+    public function bindValue($param, $value, $type = PDO::PARAM_STR)
     {
-        $currentVersion = str_replace(' ', '', strtolower(self::VERSION));
-        $version = str_replace(' ', '', $version);
-
-        return version_compare($version, $currentVersion);
+        return $this->bindParam($param, $value, $type);
     }
 }

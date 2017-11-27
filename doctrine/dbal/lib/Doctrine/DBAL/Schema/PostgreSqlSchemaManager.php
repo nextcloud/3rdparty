@@ -289,7 +289,7 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
             $sequenceName = $sequence['relname'];
         }
 
-        $data = $this->_conn->fetchAll('SELECT min_value, increment_by FROM ' . $this->_platform->quoteIdentifier($sequenceName));
+        $data = $this->_conn->fetchAll($this->_platform->getSequenceDataSQL($sequenceName, $sequence['schemaname']));
 
         return new Sequence($sequenceName, $data[0]['increment_by'], $data[0]['min_value']);
     }

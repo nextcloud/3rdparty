@@ -22,6 +22,11 @@ doctrine/dbal/tests
 doctrine/dbal/docs
 doctrine/dbal/run-all.sh
 doctrine/dbal/.travis.yml
+doctrine/dbal/.gitignore
+doctrine/dbal/.gitattributes
+doctrine/dbal/.gitmodules
+doctrine/dbal/build.*
+doctrine/dbal/phpunit.xml.dist
 doctrine/inflector/tests
 doctrine/lexer/composer.json
 doctrine/lexer/LICENSE
