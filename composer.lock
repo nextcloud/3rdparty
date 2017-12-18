@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e7a5d85f0c0757a5ac7de0b8ab4c84a",
+    "content-hash": "b4bc3b1fe3db5cad14d7d8d2f775fc21",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1197,24 +1197,23 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "v0.6.7",
+            "version": "v0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "562213cd803e42ea53b0735554794c4022d8db89"
+                "reference": "4f605a51462c85cf6df5bb45460483a138e04025"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/562213cd803e42ea53b0735554794c4022d8db89",
-                "reference": "562213cd803e42ea53b0735554794c4022d8db89",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/4f605a51462c85cf6df5bb45460483a138e04025",
+                "reference": "4f605a51462c85cf6df5bb45460483a138e04025",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "kherge/box": "~2.5",
-                "phpunit/phpunit": "~3.7",
+                "phpunit/phpunit": "~4.6",
                 "squizlabs/php_codesniffer": "~2.5"
             },
             "bin": [
@@ -1246,7 +1245,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2017-02-23T05:07:33+00:00"
+            "time": "2017-10-14T21:35:01+00:00"
         },
         {
             "name": "league/flysystem",

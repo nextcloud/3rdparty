@@ -42,7 +42,7 @@
 		"symfony/polyfill-php70": "^1.0",
 		"lukasreschke/id3parser": "^0.0.1",
 		"stecman/symfony-console-completion": "^0.7.0",
-		"leafo/scssphp": "^0.6.6",
+		"leafo/scssphp": "^0.7.2",
 		"icewind/searchdav": "0.3.1",
 		"symfony/translation": "^3.3",
 		"aws/aws-sdk-php": "^3.35"

@@ -31,7 +31,7 @@ class Number extends Node implements \ArrayAccess
     /**
      * @var integer
      */
-    static public $precision = 5;
+    static public $precision = 10;
 
     /**
      * @see http://www.w3.org/TR/2012/WD-css3-values-20120308/
@@ -290,9 +290,10 @@ class Number extends Node implements \ArrayAccess
         }
 
         reset($units);
-        list($unit, ) = each($units);
-
-        return (string) $dimension . $unit;
+        $unit = key($units);
+        $dimension = number_format($dimension, static::$precision, '.', '');
+        
+        return (static::$precision ? rtrim(rtrim($dimension, '0'), '.') : $dimension) . $unit;
     }
 
     /**
