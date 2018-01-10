@@ -4,3 +4,4 @@ Patches:
 - Doctrine: fix error handling for not null columns on some mysql servers https://github.com/doctrine/dbal/pull/2422
 - SabreDAV: Make sure that files that are children of directories, are reported as files https://github.com/fruux/sabre-dav/issues/982
 - SabreXML: Prevent infinite loops for empty props element https://github.com/fruux/sabre-xml/pull/132
+- ZipStreamer: Fix zip generation for 7zip https://github.com/McNetic/PHPZipStreamer/pull/39
