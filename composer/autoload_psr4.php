@@ -35,6 +35,7 @@ return array(
     'Punic\\' => array($vendorDir . '/punic/punic/code'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Patchwork\\' => array($vendorDir . '/patchwork/utf8/src/Patchwork', $vendorDir . '/patchwork/jsqueeze/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Leafo\\ScssPhp\\' => array($vendorDir . '/leafo/scssphp/src'),
