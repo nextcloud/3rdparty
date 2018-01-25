@@ -26,9 +26,6 @@ use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 
 class Order implements XmlDeserializable {
-	const ASC = 'ascending';
-	const DESC = 'descending';
-
 	/**
 	 * @var string
 	 *
@@ -48,7 +45,7 @@ class Order implements XmlDeserializable {
 	 * @param string $property
 	 * @param string $order
 	 */
-	public function __construct($property = '', $order = self::ASC) {
+	public function __construct($property = '', $order = \SearchDAV\Query\Order::ASC) {
 		$this->property = $property;
 		$this->order = $order;
 	}
@@ -58,7 +55,7 @@ class Order implements XmlDeserializable {
 
 		$childs = \Sabre\Xml\Deserializer\keyValue($reader);
 
-		$order->order = array_key_exists('{DAV:}descending', $childs) ? self::DESC : self::ASC;
+		$order->order = array_key_exists('{DAV:}descending', $childs) ? \SearchDAV\Query\Order::DESC : \SearchDAV\Query\Order::ASC;
 		$order->property = $childs['{DAV:}prop'][0];
 
 		return $order;

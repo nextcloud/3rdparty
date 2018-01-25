@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
+ * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,20 +19,16 @@
  *
  */
 
-namespace SearchDAV\XML;
+namespace SearchDAV\Query;
 
-use Sabre\Xml\ParseException;
-use Sabre\Xml\Reader;
-use Sabre\Xml\XmlDeserializable;
 
-/**
- * The object representation of a search query made by the client
- */
-class BasicSearch implements XmlDeserializable {
+use SearchDAV\Backend\SearchPropertyDefinition;
+
+class Query {
 	/**
-	 * @var string[]
+	 * @var SearchPropertyDefinition[]
 	 *
-	 * The list of properties to be selected, specified in clark notation
+	 * The list of properties to be selected
 	 */
 	public $select;
 	/**
@@ -66,25 +62,18 @@ class BasicSearch implements XmlDeserializable {
 	public $limit;
 
 	/**
-	 * @param Reader $reader
-	 * @return BasicSearch
-	 * @throws ParseException
+	 * Query constructor.
+	 * @param SearchPropertyDefinition[] $select
+	 * @param Scope[] $from
+	 * @param Operator $where
+	 * @param Order[] $orderBy
+	 * @param Limit $limit
 	 */
-	static function xmlDeserialize(Reader $reader) {
-		$search = new self();
-
-		$elements = \Sabre\Xml\Deserializer\keyValue($reader);
-
-		if (!isset($elements['{DAV:}from'])) {
-			throw new ParseException('Missing {DAV:}from when parsing {DAV:}basicsearch');
-		}
-
-		$search->select = isset($elements['{DAV:}select']) ? $elements['{DAV:}select'] : [];
-		$search->from = $elements['{DAV:}from'];
-		$search->where = isset($elements['{DAV:}where']) ? $elements['{DAV:}where'] : null;
-		$search->orderBy = isset($elements['{DAV:}orderby']) ? $elements['{DAV:}orderby'] : [];
-		$search->limit = isset($elements['{DAV:}limit']) ? $elements['{DAV:}limit'] : new Limit();
-
-		return $search;
+	public function __construct(array $select, array $from, Operator $where, array $orderBy, Limit $limit) {
+		$this->select = $select;
+		$this->from = $from;
+		$this->where = $where;
+		$this->orderBy = $orderBy;
+		$this->limit = $limit;
 	}
 }

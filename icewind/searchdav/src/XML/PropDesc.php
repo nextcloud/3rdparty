@@ -30,9 +30,21 @@ class PropDesc implements XmlSerializable {
 	 * @var string[]
 	 */
 	public $properties = [];
+	/**
+	 * @var string
+	 */
 	public $dataType;
+	/**
+	 * @var boolean
+	 */
 	public $searchable;
+	/**
+	 * @var boolean
+	 */
 	public $selectable;
+	/**
+	 * @var boolean
+	 */
 	public $sortable;
 
 	function xmlSerialize(Writer $writer) {

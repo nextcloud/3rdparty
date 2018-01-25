@@ -25,24 +25,7 @@ namespace SearchDAV\XML;
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 
-class Literal implements XmlDeserializable {
-	/**
-	 * @var string|boolean|\DateTime|integer
-	 *
-	 * The value of the literal
-	 */
-	public $value;
-
-	/**
-	 * Literal constructor.
-	 *
-	 * @param bool|\DateTime|int|string $value
-	 */
-	public function __construct($value = '') {
-		$this->value = $value;
-	}
-
-
+class Literal extends \SearchDAV\Query\Literal implements XmlDeserializable {
 	static function xmlDeserialize(Reader $reader) {
 		$literal = new self();
 
