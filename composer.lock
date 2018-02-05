@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c708b5c8d3ecd43d3dd6e2f388c6d414",
+    "content-hash": "f05ac60f311c0f006e1ee4fb4d2ff0dc",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1004,16 +1004,16 @@
         },
         {
             "name": "icewind/searchdav",
-            "version": "v0.3.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/SearchDAV.git",
-                "reference": "3071937c64a5e45d23c2600e5524538694e03042"
+                "reference": "282bdeea56e9d5991163a6181439dfcd2d64efcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/3071937c64a5e45d23c2600e5524538694e03042",
-                "reference": "3071937c64a5e45d23c2600e5524538694e03042",
+                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/282bdeea56e9d5991163a6181439dfcd2d64efcd",
+                "reference": "282bdeea56e9d5991163a6181439dfcd2d64efcd",
                 "shasum": ""
             },
             "require": {
@@ -1032,7 +1032,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "AGPL"
+                "AGPL-3.0-or-later"
             ],
             "authors": [
                 {
@@ -1041,7 +1041,7 @@
                 }
             ],
             "description": "sabre/dav plugin to implement rfc5323 SEARCH",
-            "time": "2017-03-15T13:21:40+00:00"
+            "time": "2018-01-25T14:01:11+00:00"
         },
         {
             "name": "icewind/streams",

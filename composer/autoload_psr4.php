@@ -36,7 +36,7 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
-    'Patchwork\\' => array($vendorDir . '/patchwork/utf8/src/Patchwork', $vendorDir . '/patchwork/jsqueeze/src'),
+    'Patchwork\\' => array($vendorDir . '/patchwork/jsqueeze/src', $vendorDir . '/patchwork/utf8/src/Patchwork'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Leafo\\ScssPhp\\' => array($vendorDir . '/leafo/scssphp/src'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),

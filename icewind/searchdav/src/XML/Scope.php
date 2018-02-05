@@ -21,46 +21,10 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 
-class Scope implements XmlDeserializable {
-	/**
-	 * @var string
-	 *
-	 * The scope of the search, either as absolute uri or as a path relative to the
-	 * search arbiter.
-	 */
-	public $href;
-
-	/**
-	 * @var string|int 0, 1 or 'infinite'
-	 *
-	 * How deep the search query should be with 0 being only the scope itself,
-	 * 1 being all direct child entries of the scope and infinite being all entries
-	 * in the scope collection at any depth.
-	 */
-	public $depth;
-
-	/**
-	 * @var string|null
-	 *
-	 * the path of the search scope relative to the dav server, or null if the scope is outside the dav server
-	 */
-	public $path;
-
-	/**
-	 * @param string $href
-	 * @param int|string $depth
-	 * @param string|null $path
-	 */
-	public function __construct($href = '', $depth = 1, $path = null) {
-		$this->href = $href;
-		$this->depth = $depth;
-		$this->path = $path;
-	}
-
+class Scope extends \SearchDAV\Query\Scope implements XmlDeserializable {
 	static function xmlDeserialize(Reader $reader) {
 		$scope = new self();
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
+ * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,12 +19,22 @@
  *
  */
 
-namespace SearchDAV\XML;
+namespace SearchDAV\Query;
 
-use Sabre\Xml\Reader;
-use Sabre\Xml\XmlDeserializable;
+class Operator {
+	const OPERATION_AND = '{DAV:}and';
+	const OPERATION_OR = '{DAV:}or';
+	const OPERATION_NOT = '{DAV:}not';
+	const OPERATION_EQUAL = '{DAV:}eq';
+	const OPERATION_LESS_THAN = '{DAV:}lt';
+	const OPERATION_LESS_OR_EQUAL_THAN = '{DAV:}lte';
+	const OPERATION_GREATER_THAN = '{DAV:}gt';
+	const OPERATION_GREATER_OR_EQUAL_THAN = '{DAV:}gte';
+	const OPERATION_IS_COLLECTION = '{DAV:}is-collection';
+	const OPERATION_IS_DEFINED = '{DAV:}is-defined';
+	const OPERATION_IS_LIKE = '{DAV:}like';
+	const OPERATION_CONTAINS = '{DAV:}contains';
 
-class Operator implements XmlDeserializable {
 	/**
 	 * @var string
 	 *
@@ -32,11 +42,11 @@ class Operator implements XmlDeserializable {
 	 */
 	public $type;
 	/**
-	 * @var (Literal|string|Operation)[]
+	 * @var (Literal|SearchPropDefinition|Operation)[]
 	 *
 	 * The list of arguments for the operation
 	 *
-	 *  - string: property name for comparison
+	 *  - SearchPropDefinition: property for comparison
 	 *  - Literal: literal value for comparison
 	 *  - Operation: nested operation for and/or/not operations
 	 *
@@ -53,32 +63,5 @@ class Operator implements XmlDeserializable {
 	public function __construct($type = '', array $arguments = []) {
 		$this->type = $type;
 		$this->arguments = $arguments;
-	}
-
-	static function xmlDeserialize(Reader $reader) {
-		$operator = new self();
-
-		$operator->type = $reader->getClark();
-		if ($reader->isEmptyElement) {
-			$reader->next();
-			return $operator;
-		}
-		$reader->read();
-		do {
-			if ($reader->nodeType === Reader::ELEMENT) {
-				$argument = $reader->parseCurrentElement();
-				if ($argument['name'] === '{DAV:}prop') {
-					$operator->arguments[] = $argument['value'][0];
-				} else {
-					$operator->arguments[] = $argument['value'];
-				}
-			} else {
-				$reader->read();
-			}
-		} while ($reader->nodeType !== Reader::END_ELEMENT);
-
-		$reader->read();
-
-		return $operator;
 	}
 }

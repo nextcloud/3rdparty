@@ -26,6 +26,9 @@ use Sabre\DAV\Xml\Element\Response;
 use Sabre\Xml\Writer;
 
 class QueryDiscoverResponse extends Response {
+	/**
+	 * @var BasicSearchSchema|null
+	 */
 	protected $schema;
 
 	/**

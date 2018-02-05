@@ -21,11 +21,16 @@
 
 namespace SearchDAV\DAV;
 
+use Sabre\DAV\Exception\BadRequest;
 use Sabre\DAV\PropFind;
 use Sabre\DAV\Server;
 use Sabre\HTTP\ResponseInterface;
 use SearchDAV\Backend\ISearchBackend;
+use SearchDAV\Backend\SearchPropertyDefinition;
 use SearchDAV\Backend\SearchResult;
+use SearchDAV\Query\Operator;
+use SearchDAV\Query\Order;
+use SearchDAV\Query\Query;
 use SearchDAV\XML\BasicSearch;
 
 class SearchHandler {
@@ -69,13 +74,77 @@ class SearchHandler {
 		}
 		$response->setStatus(207);
 		$response->setHeader('Content-Type', 'application/xml; charset="utf-8"');
+		$allProps = [];
 		foreach ($query->from as $scope) {
 			$scope->path = $this->pathHelper->getPathFromUri($scope->href);
+			$props = $this->searchBackend->getPropertyDefinitionsForScope($scope->href, $scope->path);
+			foreach ($props as $prop) {
+				$allProps[$prop->name] = $prop;
+			}
 		}
-		$results = $this->searchBackend->search($query);
+		try {
+			$results = $this->searchBackend->search($this->getQueryForXML($query, $allProps));
+		} catch (BadRequest $e) {
+			$response->setStatus(400);
+			$response->setBody($e->getMessage());
+			return false;
+		}
 		$data = $this->server->generateMultiStatus(iterator_to_array($this->getPropertiesIteratorResults($results, $query->select)), false);
 		$response->setBody($data);
 		return false;
+	}
+
+	/**
+	 * @param BasicSearch $xml
+	 * @param SearchPropertyDefinition[] $allProps
+	 * @return Query
+	 */
+	private function getQueryForXML(BasicSearch $xml, array $allProps) {
+		$orderBy = array_map(function (\SearchDAV\XML\Order $order) use ($allProps) {
+			if (!isset($allProps[$order->property])) {
+				throw new BadRequest('requested order by property is not a valid property for this scope');
+			}
+			$prop = $allProps[$order->property];
+			if (!$prop->sortable) {
+				throw new BadRequest('requested order by property is not sortable');
+			}
+			return new Order($prop, $order->order);
+		}, $xml->orderBy);
+		$select = array_map(function ($propName) use ($allProps) {
+			if (!isset($allProps[$propName])) {
+				throw new BadRequest('requested property is not a valid property for this scope');
+			}
+			$prop = $allProps[$propName];
+			if (!$prop->selectable) {
+				throw new BadRequest('requested property is not selectable');
+			}
+			return $prop;
+		}, $xml->select);
+
+		$where = $this->transformOperator($xml->where, $allProps);
+
+		return new Query($select, $xml->from, $where, $orderBy, $xml->limit);
+	}
+
+	private function transformOperator(\SearchDAV\XML\Operator $operator, array $allProps) {
+		$arguments = array_map(function ($argument) use ($allProps) {
+			if (is_string($argument)) {
+				if (!isset($allProps[$argument])) {
+					throw new BadRequest('requested search property is not a valid property for this scope');
+				}
+				$prop = $allProps[$argument];
+				if (!$prop->searchable) {
+					throw new BadRequest('requested search property is not searchable');
+				}
+				return $prop;
+			} else if ($argument instanceof \SearchDAV\XML\Operator) {
+				return $this->transformOperator($argument, $allProps);
+			} else {
+				return $argument;
+			}
+		}, $operator->arguments);
+
+		return new Operator($operator->type, $arguments);
 	}
 
 	/**

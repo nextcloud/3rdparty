@@ -21,9 +21,7 @@
 
 namespace SearchDAV\Backend;
 
-use Sabre\DAV\INode;
-use SearchDAV\XML\BasicSearch;
-use SearchDAV\XML\Scope;
+use SearchDAV\Query\Query;
 
 interface ISearchBackend {
 	/**
@@ -79,8 +77,8 @@ interface ISearchBackend {
 	 * To return the properties requested by the query sabre's existing PropFind method is used, thus the search implementation
 	 * is not required to collect these properties and is free to ignore the `select` part of the query
 	 *
-	 * @param BasicSearch $query
+	 * @param Query $query
 	 * @return SearchResult[]
 	 */
-	public function search(BasicSearch $query);
+	public function search(Query $query);
 }

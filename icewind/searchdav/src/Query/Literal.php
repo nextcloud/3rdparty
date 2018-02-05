@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
+ * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,26 +19,23 @@
  *
  */
 
-namespace SearchDAV\XML;
+namespace SearchDAV\Query;
 
-use Sabre\Xml\Reader;
-use Sabre\Xml\XmlDeserializable;
-use SearchDAV\DAV\SearchPlugin;
 
-/**
- * The limit and offset of a search query
- */
-class Limit extends \SearchDAV\Query\Limit implements XmlDeserializable {
-	static function xmlDeserialize(Reader $reader) {
-		$limit = new self();
+class Literal {
+	/**
+	 * @var string|boolean|\DateTime|integer
+	 *
+	 * The value of the literal
+	 */
+	public $value;
 
-		$elements = \Sabre\Xml\Deserializer\keyValue($reader);
-		$namespace = SearchPlugin::SEARCHDAV_NS;
-
-		$limit->maxResults = isset($elements['{DAV:}nresults']) ? $elements['{DAV:}nresults'] : 0;
-		$firstResult = '{' . $namespace . '}firstresult';
-		$limit->firstResult = isset($elements[$firstResult]) ? $elements[$firstResult] : 0;
-
-		return $limit;
+	/**
+	 * Literal constructor.
+	 *
+	 * @param bool|\DateTime|int|string $value
+	 */
+	public function __construct($value = '') {
+		$this->value = $value;
 	}
 }
