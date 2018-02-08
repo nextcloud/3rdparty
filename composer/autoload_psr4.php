@@ -8,7 +8,6 @@ $baseDir = $vendorDir;
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
-    'mikemccabe\\JsonPatch\\' => array($vendorDir . '/mikemccabe/json-patch-php/src'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
     'ZipStreamer\\' => array($vendorDir . '/mcnetic/zipstreamer/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
@@ -37,8 +36,10 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Patchwork\\' => array($vendorDir . '/patchwork/jsqueeze/src', $vendorDir . '/patchwork/utf8/src/Patchwork'),
+    'OpenStack\\' => array($vendorDir . '/php-opencloud/openstack/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Leafo\\ScssPhp\\' => array($vendorDir . '/leafo/scssphp/src'),
+    'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'InterfaSys\\LogNormalizer\\' => array($vendorDir . '/interfasys/lognormalizer/src'),
     'Icewind\\Streams\\Tests\\' => array($vendorDir . '/icewind/streams/tests'),
