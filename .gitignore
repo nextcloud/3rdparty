@@ -54,6 +54,10 @@ phpseclib/phpseclib/composer.json
 phpseclib/phpseclib/composer.lock
 phpseclib/phpseclib/phpunit.xml.dist
 
+php-opencloud/openstack/doc
+php-opencloud/openstack/tests
+php-opencloud/openstack/samples
+
 symfony/debug/Tests
 
 symfony/console/Symfony/Component/Console/Tests
@@ -113,6 +117,8 @@ icewind/streams/composer.json
 icewind/searchdav/tests
 icewind/searchdav/README.md
 icewind/searchdav/composer.json
+
+justinrainbow/json-schema/demo
 
 swiftmailer/swiftmailer/.travis.yml
 swiftmailer/swiftmailer/phpunit.xml.dist
