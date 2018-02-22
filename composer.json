@@ -17,7 +17,6 @@
 		"doctrine/dbal": "dev-2.5-pg10",
 		"mcnetic/zipstreamer": "^1.0",
 		"phpseclib/phpseclib": "2.0.4",
-		"rackspace/php-opencloud": "v1.16.0",
 		"jeremeamia/superclosure": "2.1.0",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"natxet/CssMin": "dev-master",
@@ -45,6 +44,7 @@
 		"leafo/scssphp": "^0.7.2",
 		"icewind/searchdav": "0.3.1",
 		"symfony/translation": "^3.3",
-		"aws/aws-sdk-php": "^3.35"
+		"aws/aws-sdk-php": "^3.35",
+		"php-opencloud/openstack": "3.0.2"
 	}
 }
