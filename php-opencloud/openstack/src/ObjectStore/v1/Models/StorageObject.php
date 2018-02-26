@@ -47,7 +47,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     protected $aliases = [
         'bytes' => 'contentLength',
         'content_type' => 'contentType',
-		'subdir' => 'name',
+        'subdir' => 'name',
     ];
 
     /**
@@ -105,8 +105,22 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
      */
     public function create(array $data): Creatable
     {
-        $response = $this->execute($this->api->putObject(), $data + ['containerName' => $this->containerName]);
-        return $this->populateFromResponse($response);
+        // Override containerName from input params only if local instance contains containerName attr
+        if ($this->containerName) {
+            $data['containerName'] = $this->containerName;
+        }
+
+        $response = $this->execute($this->api->putObject(), $data);
+        $storageObject = $this->populateFromResponse($response);
+
+        // Repopulate data for this newly created object instance
+        // due to the response from API does not contain object name and containerName
+        $storageObject = $storageObject->populateFromArray([
+            'name'          => $data['name'],
+            'containerName' => $data['containerName']
+        ]);
+
+        return $storageObject;
     }
 
     /**

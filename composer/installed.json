@@ -1974,17 +1974,17 @@
     },
     {
         "name": "php-opencloud/openstack",
-        "version": "v3.0.2",
-        "version_normalized": "3.0.2.0",
+        "version": "v3.0.4",
+        "version_normalized": "3.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-opencloud/openstack.git",
-            "reference": "1033431aff131cfc4b005758d6baf549026884be"
+            "reference": "92109146fb6f4168afc5a27dfdc6f2c8317a0e29"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/1033431aff131cfc4b005758d6baf549026884be",
-            "reference": "1033431aff131cfc4b005758d6baf549026884be",
+            "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/92109146fb6f4168afc5a27dfdc6f2c8317a0e29",
+            "reference": "92109146fb6f4168afc5a27dfdc6f2c8317a0e29",
             "shasum": ""
         },
         "require": {
@@ -2000,7 +2000,7 @@
             "sami/sami": "dev-master",
             "satooshi/php-coveralls": "~1.0"
         },
-        "time": "2018-02-08T06:45:53+00:00",
+        "time": "2018-02-16T08:28:10+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
