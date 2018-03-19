@@ -45,6 +45,6 @@
 		"icewind/searchdav": "0.3.1",
 		"symfony/translation": "^3.3",
 		"aws/aws-sdk-php": "^3.35",
-		"php-opencloud/openstack": "3.0.2"
+		"php-opencloud/openstack": "3.0.5"
 	}
 }
