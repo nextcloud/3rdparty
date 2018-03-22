@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5240c111efd121297f02efab3bc5559c",
+    "content-hash": "beb88b5d90900fd5280d77f2fb2de50b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1913,16 +1913,16 @@
         },
         {
             "name": "php-opencloud/openstack",
-            "version": "v3.0.2",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-opencloud/openstack.git",
-                "reference": "1033431aff131cfc4b005758d6baf549026884be"
+                "reference": "2883c92cdfe05d4a11533497c2b74cc018c7cf0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/1033431aff131cfc4b005758d6baf549026884be",
-                "reference": "1033431aff131cfc4b005758d6baf549026884be",
+                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/2883c92cdfe05d4a11533497c2b74cc018c7cf0b",
+                "reference": "2883c92cdfe05d4a11533497c2b74cc018c7cf0b",
                 "shasum": ""
             },
             "require": {
@@ -1932,11 +1932,11 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.9",
-                "jakub-onderka/php-parallel-lint": "0.*",
+                "jakub-onderka/php-parallel-lint": "^1.0",
                 "phpunit/phpunit": "^6.5",
-                "psr/log": "~1.0",
+                "psr/log": "^1.0",
                 "sami/sami": "dev-master",
-                "satooshi/php-coveralls": "~1.0"
+                "satooshi/php-coveralls": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -1973,7 +1973,7 @@
                 "php",
                 "sdk"
             ],
-            "time": "2018-02-08T06:45:53+00:00"
+            "time": "2018-03-13T10:03:02+00:00"
         },
         {
             "name": "phpseclib/phpseclib",

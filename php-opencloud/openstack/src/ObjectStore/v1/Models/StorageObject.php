@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OpenStack\ObjectStore\v1\Models;
 
@@ -45,13 +47,13 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     protected $markerKey = 'name';
 
     protected $aliases = [
-        'bytes' => 'contentLength',
+        'bytes'        => 'contentLength',
         'content_type' => 'contentType',
-		'subdir' => 'name',
+        'subdir'       => 'name',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getAliases(): array
     {
@@ -79,11 +81,11 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
      */
     private function populateHeaders(ResponseInterface $response): self
     {
-        $this->hash = $response->getHeaderLine('ETag');
+        $this->hash          = $response->getHeaderLine('ETag');
         $this->contentLength = $response->getHeaderLine('Content-Length');
-        $this->lastModified = $response->getHeaderLine('Last-Modified');
-        $this->contentType = $response->getHeaderLine('Content-Type');
-        $this->metadata = $this->parseMetadata($response);
+        $this->lastModified  = $response->getHeaderLine('Last-Modified');
+        $this->contentType   = $response->getHeaderLine('Content-Type');
+        $this->metadata      = $this->parseMetadata($response);
 
         return $this;
     }
@@ -105,8 +107,22 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
      */
     public function create(array $data): Creatable
     {
-        $response = $this->execute($this->api->putObject(), $data + ['containerName' => $this->containerName]);
-        return $this->populateFromResponse($response);
+        // Override containerName from input params only if local instance contains containerName attr
+        if ($this->containerName) {
+            $data['containerName'] = $this->containerName;
+        }
+
+        $response      = $this->execute($this->api->putObject(), $data);
+        $storageObject = $this->populateFromResponse($response);
+
+        // Repopulate data for this newly created object instance
+        // due to the response from API does not contain object name and containerName
+        $storageObject = $storageObject->populateFromArray([
+            'name'          => $data['name'],
+            'containerName' => $data['containerName'],
+        ]);
+
+        return $storageObject;
     }
 
     /**
@@ -128,7 +144,6 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
      *
      * @return StreamInterface
      */
-
     public function download(array $data = []): StreamInterface
     {
         $data += ['name' => $this->name, 'containerName' => $this->containerName];
@@ -168,7 +183,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
             'metadata'      => array_merge($metadata, $this->getMetadata()),
         ];
 
-        $response = $this->execute($this->api->postObject(), $options);
+        $response       = $this->execute($this->api->postObject(), $options);
         $this->metadata = $this->parseMetadata($response);
     }
 
@@ -178,12 +193,12 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     public function resetMetadata(array $metadata)
     {
         $options = [
-            'containerName'  => $this->containerName,
-            'name'           => $this->name,
-            'metadata'       => $metadata,
+            'containerName' => $this->containerName,
+            'name'          => $this->name,
+            'metadata'      => $metadata,
         ];
 
-        $response = $this->execute($this->api->postObject(), $options);
+        $response       = $this->execute($this->api->postObject(), $options);
         $this->metadata = $this->parseMetadata($response);
     }
 
@@ -193,6 +208,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     public function getMetadata(): array
     {
         $response = $this->executeWithState($this->api->headObject());
+
         return $this->parseMetadata($response);
     }
 }
