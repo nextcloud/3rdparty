@@ -19,7 +19,7 @@
 		"deepdiver1975/TarStreamer": "v0.1.0",
 		"doctrine/dbal": "dev-2.5-pg10",
 		"guzzlehttp/guzzle": "6.3.0",
-		"icewind/searchdav": "1.0.0",
+		"icewind/searchdav": "1.0.1",
 		"icewind/Streams": "0.5.2",
 		"interfasys/lognormalizer": "^v1.0",
 		"jeremeamia/superclosure": "2.1.0",

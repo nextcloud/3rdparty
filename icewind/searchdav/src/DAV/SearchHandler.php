@@ -100,7 +100,7 @@ class SearchHandler {
 	 * @return Query
 	 */
 	private function getQueryForXML(BasicSearch $xml, array $allProps) {
-		$orderBy = array_map(function (\SearchDAV\XML\Order $order) use ($allProps) {
+		$orderBy = array_map(function(\SearchDAV\XML\Order $order) use ($allProps) {
 			if (!isset($allProps[$order->property])) {
 				throw new BadRequest('requested order by property is not a valid property for this scope');
 			}
@@ -110,9 +110,9 @@ class SearchHandler {
 			}
 			return new Order($prop, $order->order);
 		}, $xml->orderBy);
-		$select = array_map(function ($propName) use ($allProps) {
+		$select = array_map(function($propName) use ($allProps) {
 			if (!isset($allProps[$propName])) {
-				throw new BadRequest('requested property is not a valid property for this scope');
+				return;
 			}
 			$prop = $allProps[$propName];
 			if (!$prop->selectable) {
@@ -120,6 +120,7 @@ class SearchHandler {
 			}
 			return $prop;
 		}, $xml->select);
+		$select = array_filter($select);
 
 		$where = $this->transformOperator($xml->where, $allProps);
 
@@ -127,7 +128,7 @@ class SearchHandler {
 	}
 
 	private function transformOperator(\SearchDAV\XML\Operator $operator, array $allProps) {
-		$arguments = array_map(function ($argument) use ($allProps) {
+		$arguments = array_map(function($argument) use ($allProps) {
 			if (is_string($argument)) {
 				if (!isset($allProps[$argument])) {
 					throw new BadRequest('requested search property is not a valid property for this scope');
