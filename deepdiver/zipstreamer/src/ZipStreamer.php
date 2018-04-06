@@ -31,7 +31,7 @@
  */
 namespace ZipStreamer;
 
-require "lib/Count64.php";
+require_once __DIR__ . "/lib/Count64.php";
 
 class COMPR {
   // compression method
@@ -49,6 +49,7 @@ class ZipStreamer {
   const VERSION = "1.0";
 
   const ZIP_LOCAL_FILE_HEADER = 0x04034b50; // local file header signature
+  const ZIP_DATA_DESCRIPTOR_HEADER = 0x08074b50; //data descriptor header signature
   const ZIP_CENTRAL_FILE_HEADER = 0x02014b50; // central file header signature
   const ZIP_END_OF_CENTRAL_DIRECTORY = 0x06054b50; // end of central directory record
   const ZIP64_END_OF_CENTRAL_DIRECTORY = 0x06064b50; //zip64 end of central directory record
@@ -76,8 +77,10 @@ class ZipStreamer {
   private $offset;
   /** @var boolean indicates zip is finalized and sent to client; no further addition possible */
   private $isFinalized = false;
+  /** @var bool only used for unit testing */
+  public $turnOffOutputBuffering = true;
 
-  /**
+    /**
    * Constructor. Initializes ZipStreamer object for immediate usage.
    * @param array $options Optional, ZipStreamer and zip file options as key/value pairs.
    *                       Valid options are:
@@ -178,7 +181,9 @@ class ZipStreamer {
     }
     $this->flush();
     // turn off output buffering
-    @ob_end_flush();
+      if ($this->turnOffOutputBuffering) {
+          @ob_end_flush();
+      }
   }
 
   /**
@@ -427,16 +432,17 @@ class ZipStreamer {
 
   private function addDataDescriptor($dataLength, $gzLength, $dataCRC32) {
     if ($this->zip64) {
-      $length = 20;
+      $length = 24;
       $packedGzLength = pack64le($gzLength);
       $packedDataLength = pack64le($dataLength);
     } else {
-      $length = 12;
+      $length = 16;
       $packedGzLength = pack32le($gzLength->getLoBytes());
       $packedDataLength = pack32le($dataLength->getLoBytes());
      }
 
     $this->write(''
+        . pack32le(self::ZIP_DATA_DESCRIPTOR_HEADER)  // data descriptor header signature    4 bytes (0x08074b50)
         . pack32le($dataCRC32)  // crc-32                          4 bytes
         . $packedGzLength       // compressed size                 4/8 bytes (depending on zip64 enabled)
         . $packedDataLength     // uncompressed size               4/8 bytes (depending on zip64 enabled)

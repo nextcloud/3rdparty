@@ -210,7 +210,7 @@ stecman/symfony-console-completion/composer.json
 stecman/symfony-console-completion/phpunit.xml.dist
 stecman/symfony-console-completion/README.md
 
-mcnetic/zipstreamer/tests
+deepdiver/zipstreamer/tests
 
 ircmaxell/security-lib/tests
 
