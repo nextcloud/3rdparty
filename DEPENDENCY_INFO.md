@@ -1,4 +1,4 @@
-NextCloud 3rdparty Dependency Info
+Nextcloud 3rdparty Dependency Info
 ==================================
 
 External PHP libs required by core.
