@@ -300,5 +300,3 @@ abstract class Count64 {
     }
   }
 }
-
-?>
