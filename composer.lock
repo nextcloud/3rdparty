@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a1871b802dea64b305aaa34c4aaf898",
+    "content-hash": "8220dbbea7bb4be271d6f17a7f5efdd3",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1030,16 +1030,16 @@
         },
         {
             "name": "icewind/streams",
-            "version": "0.5.2",
+            "version": "0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "6bfd2fdbd99319f5e010d0a684409189a562cb1e"
+                "reference": "0a78597117d8a02937ea05206f219294449fb06e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/6bfd2fdbd99319f5e010d0a684409189a562cb1e",
-                "reference": "6bfd2fdbd99319f5e010d0a684409189a562cb1e",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/0a78597117d8a02937ea05206f219294449fb06e",
+                "reference": "0a78597117d8a02937ea05206f219294449fb06e",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 }
             ],
             "description": "A set of generic stream wrappers",
-            "time": "2016-12-02T14:21:23+00:00"
+            "time": "2018-04-24T09:07:38+00:00"
         },
         {
             "name": "interfasys/lognormalizer",
