@@ -40,10 +40,10 @@
 		"sabre/dav": "^3.2.0",
 		"stecman/symfony-console-completion": "^0.7.0",
 		"swiftmailer/swiftmailer": "^5.4",
-		"symfony/console": "^3.3.0",
-		"symfony/event-dispatcher": "^3.3.0",
-		"symfony/process": "^3.3.0",
-		"symfony/routing": "^3.3.0",
-		"symfony/translation": "^3.3"
+		"symfony/console": "3.4.9",
+		"symfony/event-dispatcher": "3.4.9",
+		"symfony/process": "3.4.9",
+		"symfony/routing": "3.4.9",
+		"symfony/translation": "3.4.9"
 	}
 }
