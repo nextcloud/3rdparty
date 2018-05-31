@@ -38,7 +38,7 @@
 		"pimple/pimple": "3.2.3",
 		"punic/punic": "^1.6",
 		"sabre/dav": "^3.2.0",
-		"stecman/symfony-console-completion": "^0.7.0",
+		"stecman/symfony-console-completion": "^0.8.0",
 		"swiftmailer/swiftmailer": "^5.4",
 		"symfony/console": "3.4.9",
 		"symfony/event-dispatcher": "3.4.9",
