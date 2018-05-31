@@ -30,7 +30,7 @@
 		"natxet/CssMin": "dev-master",
 		"nikic/php-parser": "1.4.1",
 		"patchwork/jsqueeze": "^2.0",
-		"patchwork/utf8": "1.2.6",
+		"patchwork/utf8": "1.3.1",
 		"pear/archive_tar": "1.4.3",
 		"pear/pear-core-minimal": "^v1.10",
 		"phpseclib/phpseclib": "2.0.11",
