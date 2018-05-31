@@ -45,5 +45,8 @@
 		"symfony/process": "3.4.9",
 		"symfony/routing": "3.4.9",
 		"symfony/translation": "3.4.9"
+	},
+	"platform": {
+		"php": "7.0.8"
 	}
 }
