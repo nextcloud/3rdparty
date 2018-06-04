@@ -37,6 +37,8 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Patchwork\\' => array($vendorDir . '/patchwork/jsqueeze/src', $vendorDir . '/patchwork/utf8/src/Patchwork'),
     'OpenStack\\' => array($vendorDir . '/php-opencloud/openstack/src'),
+    'MicrosoftAzure\\Storage\\Common\\' => array($vendorDir . '/microsoft/azure-storage-common/src/Common'),
+    'MicrosoftAzure\\Storage\\Blob\\' => array($vendorDir . '/microsoft/azure-storage-blob/src/Blob'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Leafo\\ScssPhp\\' => array($vendorDir . '/leafo/scssphp/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
