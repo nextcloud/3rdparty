@@ -3,15 +3,18 @@
 	"description": "All 3rdparty components",
 	"license": "MIT",
 	"repositories": [
-	{
-		"type": "vcs",
-		"url": "https://github.com/icewind1991/dbal"
-	}
-],
+		{
+			"type": "vcs",
+			"url": "https://github.com/icewind1991/dbal"
+		}
+	],
 	"config": {
 		"vendor-dir": ".",
 		"optimize-autoloader": true,
-		"classmap-authoritative": true
+		"classmap-authoritative": true,
+		"platform": {
+			"php": "7.0.8"
+		}
 	},
 	"require": {
 		"aws/aws-sdk-php": "^3.35",
@@ -40,14 +43,10 @@
 		"sabre/dav": "^3.2.0",
 		"stecman/symfony-console-completion": "^0.7.0",
 		"swiftmailer/swiftmailer": "^5.4",
-		"symfony/console": "3.4.9",
-		"symfony/event-dispatcher": "3.4.9",
-		"symfony/process": "3.4.9",
-		"symfony/routing": "3.4.9",
-		"symfony/translation": "3.4.9",
-		"microsoft/azure-storage-blob": "1.1.0"
-	},
-	"platform": {
-		"php": "7.0.8"
-	}
+		"symfony/console": "3.4.11",
+		"symfony/event-dispatcher": "3.4.11",
+		"symfony/process": "3.4.11",
+		"symfony/routing": "3.4.11",
+		"symfony/translation": "3.4.11",
+		"microsoft/azure-storage-blob": "1.1.0"	}
 }
