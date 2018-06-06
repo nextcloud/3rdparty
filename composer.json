@@ -45,7 +45,7 @@
 		"swiftmailer/swiftmailer": "^5.4",
 		"symfony/console": "3.4.11",
 		"symfony/event-dispatcher": "3.4.11",
-		"symfony/process": "3.4.11",
+		"symfony/process": "4.1.0",
 		"symfony/routing": "3.4.11",
 		"symfony/translation": "3.4.11",
 		"microsoft/azure-storage-blob": "1.1.0"	}
