@@ -961,6 +961,8 @@ return array(
     'Leafo\\ScssPhp\\Node' => $vendorDir . '/leafo/scssphp/src/Node.php',
     'Leafo\\ScssPhp\\Node\\Number' => $vendorDir . '/leafo/scssphp/src/Node/Number.php',
     'Leafo\\ScssPhp\\Parser' => $vendorDir . '/leafo/scssphp/src/Parser.php',
+    'Leafo\\ScssPhp\\SourceMap\\Base64VLQEncoder' => $vendorDir . '/leafo/scssphp/src/SourceMap/Base64VLQEncoder.php',
+    'Leafo\\ScssPhp\\SourceMap\\SourceMapGenerator' => $vendorDir . '/leafo/scssphp/src/SourceMap/SourceMapGenerator.php',
     'Leafo\\ScssPhp\\Type' => $vendorDir . '/leafo/scssphp/src/Type.php',
     'Leafo\\ScssPhp\\Util' => $vendorDir . '/leafo/scssphp/src/Util.php',
     'Leafo\\ScssPhp\\Version' => $vendorDir . '/leafo/scssphp/src/Version.php',

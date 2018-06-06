@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ce4c7b5ce8f502095a7249ec42504e8",
+    "content-hash": "1c33bf265f6342e9e95cefd36b917ea7",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1248,16 +1248,16 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "v0.7.2",
+            "version": "v0.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "4f605a51462c85cf6df5bb45460483a138e04025"
+                "reference": "585f6ae84de62ffecf69c23805f25d78d7e4b794"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/4f605a51462c85cf6df5bb45460483a138e04025",
-                "reference": "4f605a51462c85cf6df5bb45460483a138e04025",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/585f6ae84de62ffecf69c23805f25d78d7e4b794",
+                "reference": "585f6ae84de62ffecf69c23805f25d78d7e4b794",
                 "shasum": ""
             },
             "require": {
@@ -1296,7 +1296,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2017-10-14T21:35:01+00:00"
+            "time": "2018-05-24T02:18:53+00:00"
         },
         {
             "name": "league/flysystem",
