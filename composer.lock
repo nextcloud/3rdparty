@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c33bf265f6342e9e95cefd36b917ea7",
+    "content-hash": "aea021e68a6147e80bbe513113355205",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1565,18 +1565,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/natxet/CssMin.git",
-                "reference": "003920e783c568c2d8fdf03999eebefb8479092a"
+                "reference": "d5d9f4c3e5cedb1ae96a95a21731f8790e38f1dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natxet/CssMin/zipball/003920e783c568c2d8fdf03999eebefb8479092a",
-                "reference": "003920e783c568c2d8fdf03999eebefb8479092a",
+                "url": "https://api.github.com/repos/natxet/CssMin/zipball/d5d9f4c3e5cedb1ae96a95a21731f8790e38f1dd",
+                "reference": "d5d9f4c3e5cedb1ae96a95a21731f8790e38f1dd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "src/"
@@ -1599,7 +1604,7 @@
                 "css",
                 "minify"
             ],
-            "time": "2014-09-10T14:34:00+00:00"
+            "time": "2018-01-09T11:15:01+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1743,16 +1748,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.2.6",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tchwork/utf8.git",
-                "reference": "f986d18f4e37ab70b792e977c7d85970cf84f164"
+                "reference": "30ec6451aec7d2536f0af8fe535f70c764f2c47a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/utf8/zipball/f986d18f4e37ab70b792e977c7d85970cf84f164",
-                "reference": "f986d18f4e37ab70b792e977c7d85970cf84f164",
+                "url": "https://api.github.com/repos/tchwork/utf8/zipball/30ec6451aec7d2536f0af8fe535f70c764f2c47a",
+                "reference": "30ec6451aec7d2536f0af8fe535f70c764f2c47a",
                 "shasum": ""
             },
             "require": {
@@ -1768,7 +1773,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -1798,7 +1803,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-12-15T15:33:41+00:00"
+            "time": "2016-05-18T13:57:10+00:00"
         },
         {
             "name": "pear/archive_tar",
