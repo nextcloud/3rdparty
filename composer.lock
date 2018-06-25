@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3acd0cf49d469ff33383e5ebecb0db7",
+    "content-hash": "cc5bd7d37965b93e53b218c79c9e18d6",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3371,7 +3371,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
