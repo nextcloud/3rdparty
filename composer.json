@@ -46,6 +46,6 @@
 		"symfony/event-dispatcher": "3.4.11",
 		"symfony/process": "3.4.11",
 		"symfony/routing": "3.4.11",
-		"symfony/translation": "3.4.11",
+		"symfony/translation": "3.4.12",
 		"microsoft/azure-storage-blob": "1.1.0"	}
 }
