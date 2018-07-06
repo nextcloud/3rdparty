@@ -3094,17 +3094,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v3.4.11",
-        "version_normalized": "3.4.11.0",
+        "version": "v3.4.12",
+        "version_normalized": "3.4.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "36f83f642443c46f3cf751d4d2ee5d047d757a27"
+            "reference": "1b97071a26d028c9bd4588264e101e14f6e7cd00"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/36f83f642443c46f3cf751d4d2ee5d047d757a27",
-            "reference": "36f83f642443c46f3cf751d4d2ee5d047d757a27",
+            "url": "https://api.github.com/repos/symfony/console/zipball/1b97071a26d028c9bd4588264e101e14f6e7cd00",
+            "reference": "1b97071a26d028c9bd4588264e101e14f6e7cd00",
             "shasum": ""
         },
         "require": {
@@ -3130,7 +3130,7 @@
             "symfony/lock": "",
             "symfony/process": ""
         },
-        "time": "2018-05-16T08:49:21+00:00",
+        "time": "2018-05-23T05:02:55+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3223,8 +3223,8 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v3.4.11",
-        "version_normalized": "3.4.11.0",
+        "version": "v3.4.12",
+        "version_normalized": "3.4.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/event-dispatcher.git",
@@ -3349,23 +3349,23 @@
     },
     {
         "name": "symfony/process",
-        "version": "v3.4.11",
-        "version_normalized": "3.4.11.0",
+        "version": "v3.4.12",
+        "version_normalized": "3.4.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/process.git",
-            "reference": "4cbf2db9abcb01486a21b7a059e03a62fae63187"
+            "reference": "acc5a37c706ace827962851b69705b24e71ca17c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/process/zipball/4cbf2db9abcb01486a21b7a059e03a62fae63187",
-            "reference": "4cbf2db9abcb01486a21b7a059e03a62fae63187",
+            "url": "https://api.github.com/repos/symfony/process/zipball/acc5a37c706ace827962851b69705b24e71ca17c",
+            "reference": "acc5a37c706ace827962851b69705b24e71ca17c",
             "shasum": ""
         },
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2018-05-16T08:49:21+00:00",
+        "time": "2018-05-30T04:24:30+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3400,17 +3400,17 @@
     },
     {
         "name": "symfony/routing",
-        "version": "v3.4.11",
-        "version_normalized": "3.4.11.0",
+        "version": "v3.4.12",
+        "version_normalized": "3.4.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/routing.git",
-            "reference": "e382da877f5304aabc12ec3073eec430670c8296"
+            "reference": "6b9fef5343828e542db17e2519722ef08992f2c1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/routing/zipball/e382da877f5304aabc12ec3073eec430670c8296",
-            "reference": "e382da877f5304aabc12ec3073eec430670c8296",
+            "url": "https://api.github.com/repos/symfony/routing/zipball/6b9fef5343828e542db17e2519722ef08992f2c1",
+            "reference": "6b9fef5343828e542db17e2519722ef08992f2c1",
             "shasum": ""
         },
         "require": {
@@ -3423,7 +3423,6 @@
         },
         "require-dev": {
             "doctrine/annotations": "~1.0",
-            "doctrine/common": "~2.2",
             "psr/log": "~1.0",
             "symfony/config": "^3.3.1|~4.0",
             "symfony/dependency-injection": "~3.3|~4.0",
@@ -3439,7 +3438,7 @@
             "symfony/http-foundation": "For using a Symfony Request object",
             "symfony/yaml": "For using the YAML loader"
         },
-        "time": "2018-05-16T12:49:49+00:00",
+        "time": "2018-06-19T20:52:10+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3480,8 +3479,8 @@
     },
     {
         "name": "symfony/translation",
-        "version": "v3.4.11",
-        "version_normalized": "3.4.11.0",
+        "version": "v3.4.12",
+        "version_normalized": "3.4.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/translation.git",
