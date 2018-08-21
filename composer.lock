@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.62.10",
+            "version": "3.63.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b45b916eceb20d3c9e2b36e9e93e926a278d97ca"
+                "reference": "e12a6fb9045720fd96bd75e801b23e2877aa1245"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b45b916eceb20d3c9e2b36e9e93e926a278d97ca",
-                "reference": "b45b916eceb20d3c9e2b36e9e93e926a278d97ca",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e12a6fb9045720fd96bd75e801b23e2877aa1245",
+                "reference": "e12a6fb9045720fd96bd75e801b23e2877aa1245",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-07-06T17:41:33+00:00"
+            "time": "2018-07-20T21:01:32+00:00"
         },
         {
             "name": "bantu/ini-get-wrapper",
