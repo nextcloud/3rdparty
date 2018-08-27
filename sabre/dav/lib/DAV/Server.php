@@ -1655,6 +1655,7 @@ class Server extends EventEmitter implements LoggerAwareInterface {
      * @return string
      */
     function generateMultiStatus($fileProperties, $strip404s = false) {
+		$this->emit('beforeMultiStatus', [&$fileProperties]);
 
         $w = $this->xml->getWriter();
         $w->openMemory();
