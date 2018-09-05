@@ -27,7 +27,7 @@
 		"icewind/Streams": "0.6.1",
 		"interfasys/lognormalizer": "^v1.0",
 		"jeremeamia/superclosure": "2.1.0",
-		"leafo/scssphp": "0.7.6",
+		"leafo/scssphp": "0.7.7",
 		"league/flysystem": "^1.0",
 		"lukasreschke/id3parser": "^0.0.1",
 		"nikic/php-parser": "1.4.1",
