@@ -22,7 +22,7 @@
 		"deepdiver/zipstreamer": "1.1.1",
 		"deepdiver1975/TarStreamer": "v0.1.0",
 		"doctrine/dbal": "dev-2.5-pg10",
-		"guzzlehttp/guzzle": "6.3.0",
+		"guzzlehttp/guzzle": "6.3.3",
 		"icewind/searchdav": "1.0.1",
 		"icewind/Streams": "0.6.1",
 		"interfasys/lognormalizer": "^v1.0",
