@@ -39,12 +39,13 @@ class CompletionHandler
         $this->application = $application;
         $this->context = $context;
 
+        // Set up completions for commands that are built-into Application
         $this->addHandler(
             new Completion(
                 'help',
                 'command_name',
                 Completion::TYPE_ARGUMENT,
-                array_keys($application->all())
+                $this->getCommandNames()
             )
         );
 
@@ -256,14 +257,7 @@ class CompletionHandler
     protected function completeForCommandName()
     {
         if (!$this->command || (count($this->context->getWords()) == 2 && $this->context->getWordIndex() == 1)) {
-            $commands = $this->application->all();
-            $names = array_keys($commands);
-
-            if ($key = array_search('_completion', $names)) {
-                unset($names[$key]);
-            }
-
-            return $names;
+            return $this->getCommandNames();
         }
 
         return false;
@@ -441,5 +435,38 @@ class CompletionHandler
             $this->command->getNativeDefinition()->getOptions(),
             $this->application->getDefinition()->getOptions()
         );
+    }
+
+    /**
+     * Get command names available for completion
+     *
+     * Filters out hidden commands where supported.
+     *
+     * @return string[]
+     */
+    protected function getCommandNames()
+    {
+        // Command::Hidden isn't supported before Symfony Console 3.2.0
+        // We don't complete hidden command names as these are intended to be private
+        if (method_exists('\Symfony\Component\Console\Command\Command', 'isHidden')) {
+            $commands = array();
+
+            foreach ($this->application->all() as $name => $command) {
+                if (!$command->isHidden()) {
+                    $commands[] = $name;
+                }
+            }
+
+            return $commands;
+
+        } else {
+
+            // Fallback for compatibility with Symfony Console < 3.2.0
+            // This was the behaviour prior to pull #75
+            $commands = $this->application->all();
+            unset($commands['_completion']);
+
+            return array_keys($commands);
+        }
     }
 }
