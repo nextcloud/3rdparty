@@ -84,7 +84,17 @@ abstract class getid3_handler {
 		if (!getid3_lib::intValueSupported($pos)) {
 			throw new getid3_exception('cannot fread('.$bytes.' from '.$this->ftell().') because beyond PHP filesystem limit', 10);
 		}
-		return fread($this->getid3->fp, $bytes);
+
+		// System fread function may return less data than requested in case the file is not a regular local file.
+		// See http://php.net/manual/en/function.fread.php. Call it repeatedly in a loop if that is the case.
+		$contents = '';
+		do {
+			$part = fread($this->getid3->fp, $bytes);
+			$partLength = strlen($part);
+			$bytes -= $partLength;
+			$contents .= $part;
+		} while ($bytes > 0 && $partLength > 0);
+		return $contents;
 	}
 
 	protected function fseek($bytes, $whence=SEEK_SET) {
