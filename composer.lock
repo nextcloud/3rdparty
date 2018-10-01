@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ffb917bd2bbcd49da8c68085b51834b",
+    "content-hash": "9b5b61d18789436e4b25d642d03398b2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3122,7 +3122,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.4.15",
+            "version": "v3.4.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
