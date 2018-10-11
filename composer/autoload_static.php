@@ -22,7 +22,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'fe1bcd0336136e435eaf197895daf81a' => __DIR__ . '/..' . '/nikic/php-parser/lib/bootstrap.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
@@ -2174,10 +2173,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'SearchDAV\\Query\\Order' => __DIR__ . '/..' . '/icewind/searchdav/src/Query/Order.php',
         'SearchDAV\\Query\\Query' => __DIR__ . '/..' . '/icewind/searchdav/src/Query/Query.php',
         'SearchDAV\\Query\\Scope' => __DIR__ . '/..' . '/icewind/searchdav/src/Query/Scope.php',
-        'SearchDAV\\Test\\DummyBackend' => __DIR__ . '/..' . '/icewind/searchdav/tests/DummyBackend.php',
-        'SearchDAV\\Test\\PathHelperTest' => __DIR__ . '/..' . '/icewind/searchdav/tests/PathHelperTest.php',
-        'SearchDAV\\Test\\QueryParserTest' => __DIR__ . '/..' . '/icewind/searchdav/tests/QueryParserTest.php',
-        'SearchDAV\\Test\\SearchPluginTest' => __DIR__ . '/..' . '/icewind/searchdav/tests/SearchPluginTest.php',
         'SearchDAV\\XML\\BasicSearch' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/BasicSearch.php',
         'SearchDAV\\XML\\BasicSearchSchema' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/BasicSearchSchema.php',
         'SearchDAV\\XML\\Limit' => __DIR__ . '/..' . '/icewind/searchdav/src/XML/Limit.php',
