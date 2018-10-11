@@ -223,11 +223,4 @@ rackspace/php-opencloud/samples
 
 mtdowling/jmespath.php/tests
 
-paragonie/random_compat/tests
-paragonie/random_compat/phpunit.sh
-paragonie/random_compat/.scrutinizer.yml
-paragonie/random_compat/ERRATA.md
-paragonie/random_compat/README.md
-paragonie/random_compat/SECURITY.md
-
 leafo/scssphp/example
