@@ -38,7 +38,7 @@
 		"phpseclib/phpseclib": "2.0.11",
 		"php-opencloud/openstack": "3.0.5",
 		"pimple/pimple": "3.2.3",
-		"punic/punic": "^1.6",
+		"punic/punic": "^3.1",
 		"sabre/dav": "^3.2.0",
 		"stecman/symfony-console-completion": "^0.8.0",
 		"swiftmailer/swiftmailer": "^6.0",
