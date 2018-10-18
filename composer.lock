@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35e953689077841d9bed263f3d961b05",
+    "content-hash": "86347379256dbee99c4c900777b268ef",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1475,20 +1475,20 @@
         },
         {
             "name": "microsoft/azure-storage-blob",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Azure/azure-storage-blob-php.git",
-                "reference": "9a8c8a8f03ddbf5d3fa83927b6af112967a99fa2"
+                "reference": "6a89f277e876056cc80bd867f7d6104557ee26a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Azure/azure-storage-blob-php/zipball/9a8c8a8f03ddbf5d3fa83927b6af112967a99fa2",
-                "reference": "9a8c8a8f03ddbf5d3fa83927b6af112967a99fa2",
+                "url": "https://api.github.com/repos/Azure/azure-storage-blob-php/zipball/6a89f277e876056cc80bd867f7d6104557ee26a4",
+                "reference": "6a89f277e876056cc80bd867f7d6104557ee26a4",
                 "shasum": ""
             },
             "require": {
-                "microsoft/azure-storage-common": "~1.1",
+                "microsoft/azure-storage-common": "~1.2.0",
                 "php": ">=5.6.0"
             },
             "type": "library",
@@ -1515,20 +1515,20 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2018-04-26T07:38:33+00:00"
+            "time": "2018-08-02T11:05:31+00:00"
         },
         {
             "name": "microsoft/azure-storage-common",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Azure/azure-storage-common-php.git",
-                "reference": "d44421b8f7b69368d7732f0d765c2be1623df396"
+                "reference": "5a721c15a4eba9233e423203bee168e47c7f8682"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Azure/azure-storage-common-php/zipball/d44421b8f7b69368d7732f0d765c2be1623df396",
-                "reference": "d44421b8f7b69368d7732f0d765c2be1623df396",
+                "url": "https://api.github.com/repos/Azure/azure-storage-common-php/zipball/5a721c15a4eba9233e423203bee168e47c7f8682",
+                "reference": "5a721c15a4eba9233e423203bee168e47c7f8682",
                 "shasum": ""
             },
             "require": {
@@ -1559,7 +1559,7 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2018-04-26T07:46:59+00:00"
+            "time": "2018-08-02T10:54:53+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
