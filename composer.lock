@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.62.10",
+            "version": "3.69.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b45b916eceb20d3c9e2b36e9e93e926a278d97ca"
+                "reference": "eda89d207e40f3abb0b5e2fb1fabcebe668116fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b45b916eceb20d3c9e2b36e9e93e926a278d97ca",
-                "reference": "b45b916eceb20d3c9e2b36e9e93e926a278d97ca",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/eda89d207e40f3abb0b5e2fb1fabcebe668116fb",
+                "reference": "eda89d207e40f3abb0b5e2fb1fabcebe668116fb",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
                 "ext-spl": "*",
-                "guzzlehttp/guzzle": "^5.3.1|^6.2.1",
+                "guzzlehttp/guzzle": "^5.3.3|^6.2.1",
                 "guzzlehttp/promises": "~1.0",
                 "guzzlehttp/psr7": "^1.4.1",
                 "mtdowling/jmespath.php": "~2.2",
@@ -38,6 +38,8 @@
                 "doctrine/cache": "~1.4",
                 "ext-dom": "*",
                 "ext-openssl": "*",
+                "ext-pcntl": "*",
+                "ext-sockets": "*",
                 "nette/neon": "^2.3",
                 "phpunit/phpunit": "^4.8.35|^5.4.3",
                 "psr/cache": "^1.0"
@@ -46,7 +48,8 @@
                 "aws/aws-php-sns-message-validator": "To validate incoming SNS notifications",
                 "doctrine/cache": "To use the DoctrineCacheAdapter",
                 "ext-curl": "To send requests using cURL",
-                "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages"
+                "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
+                "ext-sockets": "To use client-side monitoring"
             },
             "type": "library",
             "extra": {
@@ -84,7 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-07-06T17:41:33+00:00"
+            "time": "2018-10-26T20:05:18+00:00"
         },
         {
             "name": "bantu/ini-get-wrapper",
