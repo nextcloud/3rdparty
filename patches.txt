@@ -5,6 +5,7 @@ Patches:
 - SabreDAV: Make sure that files that are children of directories, are reported as files https://github.com/fruux/sabre-dav/issues/982
 - SabreDAV: Don't open the file on HEAD requests https://github.com/sabre-io/dav/pull/1058
 - SabreDAV: Properly parse carddav address-data https://github.com/sabre-io/dav/pull/1025
+- SabreVObject: Broker: add timezone to CANCEL messages https://github.com/sabre-io/vobject/pull/412
 - SabreXML: Fix invalid PHP docs https://github.com/fruux/sabre-xml/pull/128
 - SabreXML: Prevent infinite loops for empty props element https://github.com/fruux/sabre-xml/pull/132
 - ZipStreamer: Fix zip generation for 7zip https://github.com/McNetic/PHPZipStreamer/pull/39
