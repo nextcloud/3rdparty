@@ -47,5 +47,6 @@
 		"symfony/process": "3.4.17",
 		"symfony/routing": "3.4.17",
 		"symfony/translation": "3.4.17",
-		"microsoft/azure-storage-blob": "1.2.0"	}
+		"microsoft/azure-storage-blob": "1.2.0",
+		"rlanvin/php-ip": "^1.0"	}
 }

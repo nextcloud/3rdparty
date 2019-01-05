@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86347379256dbee99c4c900777b268ef",
+    "content-hash": "6db1b38cd31c749e31f6b0e736fa2cc2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2441,6 +2441,43 @@
             "time": "2015-07-03T13:48:55+00:00"
         },
         {
+            "name": "rlanvin/php-ip",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rlanvin/php-ip.git",
+                "reference": "03e507114b95e2d3a9b9621dc6fb583401afbf5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rlanvin/php-ip/zipball/03e507114b95e2d3a9b9621dc6fb583401afbf5e",
+                "reference": "03e507114b95e2d3a9b9621dc6fb583401afbf5e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gmp": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "IPv4/IPv6 manipulation library for PHP",
+            "homepage": "https://github.com/rlanvin/php-ip",
+            "keywords": [
+                "IP",
+                "ipv4",
+                "ipv6"
+            ],
+            "time": "2015-06-26T06:50:37+00:00"
+        },
+        {
             "name": "sabre/dav",
             "version": "3.2.3",
             "source": {
@@ -3404,6 +3441,6 @@
     "platform": [],
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.0.8"
+        "php": "7.1.8"
     }
 }
