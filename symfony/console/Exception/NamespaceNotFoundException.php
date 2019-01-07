@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Debug\Exception;
+namespace Symfony\Component\Console\Exception;
 
 /**
- * Out of memory exception.
+ * Represents an incorrect namespace typed in the console.
  *
- * @author Nicolas Grekas <p@tchwork.com>
+ * @author Pierre du Plessis <pdples@gmail.com>
  */
-class OutOfMemoryException extends FatalErrorException
+class NamespaceNotFoundException extends CommandNotFoundException
 {
 }
