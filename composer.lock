@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fdde7f5bf3624280ae7b72d223c1f1ba",
+    "content-hash": "06406b9863a9130341e5dcdb1496f8ab",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3338,16 +3338,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.4.17",
+            "version": "v3.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "94bc3a79008e6640defedf5e14eb3b4f20048352"
+                "reference": "5f357063f4907cef47e5cf82fa3187fbfb700456"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/94bc3a79008e6640defedf5e14eb3b4f20048352",
-                "reference": "94bc3a79008e6640defedf5e14eb3b4f20048352",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/5f357063f4907cef47e5cf82fa3187fbfb700456",
+                "reference": "5f357063f4907cef47e5cf82fa3187fbfb700456",
                 "shasum": ""
             },
             "require": {
@@ -3402,7 +3402,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:33:53+00:00"
+            "time": "2019-01-01T13:45:19+00:00"
         }
     ],
     "packages-dev": [],
