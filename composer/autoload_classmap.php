@@ -1909,7 +1909,6 @@ return array(
     'Symfony\\Component\\Console\\Tester\\ApplicationTester' => $vendorDir . '/symfony/console/Tester/ApplicationTester.php',
     'Symfony\\Component\\Console\\Tester\\CommandTester' => $vendorDir . '/symfony/console/Tester/CommandTester.php',
     'Symfony\\Component\\Console\\Tester\\TesterTrait' => $vendorDir . '/symfony/console/Tester/TesterTrait.php',
-    'Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher' => $vendorDir . '/symfony/event-dispatcher/ContainerAwareEventDispatcher.php',
     'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => $vendorDir . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
     'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcherInterface' => $vendorDir . '/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php',
     'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => $vendorDir . '/symfony/event-dispatcher/Debug/WrappedListener.php',
