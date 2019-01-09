@@ -3189,41 +3189,42 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v3.4.17",
-        "version_normalized": "3.4.17.0",
+        "version": "v4.2.2",
+        "version_normalized": "4.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/event-dispatcher.git",
-            "reference": "b2e1f19280c09a42dc64c0b72b80fe44dd6e88fb"
+            "reference": "887de6d34c86cf0cb6cbf910afb170cdb743cb5e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b2e1f19280c09a42dc64c0b72b80fe44dd6e88fb",
-            "reference": "b2e1f19280c09a42dc64c0b72b80fe44dd6e88fb",
+            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/887de6d34c86cf0cb6cbf910afb170cdb743cb5e",
+            "reference": "887de6d34c86cf0cb6cbf910afb170cdb743cb5e",
             "shasum": ""
         },
         "require": {
-            "php": "^5.5.9|>=7.0.8"
+            "php": "^7.1.3",
+            "symfony/contracts": "^1.0"
         },
         "conflict": {
-            "symfony/dependency-injection": "<3.3"
+            "symfony/dependency-injection": "<3.4"
         },
         "require-dev": {
             "psr/log": "~1.0",
-            "symfony/config": "~2.8|~3.0|~4.0",
-            "symfony/dependency-injection": "~3.3|~4.0",
-            "symfony/expression-language": "~2.8|~3.0|~4.0",
-            "symfony/stopwatch": "~2.8|~3.0|~4.0"
+            "symfony/config": "~3.4|~4.0",
+            "symfony/dependency-injection": "~3.4|~4.0",
+            "symfony/expression-language": "~3.4|~4.0",
+            "symfony/stopwatch": "~3.4|~4.0"
         },
         "suggest": {
             "symfony/dependency-injection": "",
             "symfony/http-kernel": ""
         },
-        "time": "2018-07-26T09:06:28+00:00",
+        "time": "2019-01-05T16:37:49+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.4-dev"
+                "dev-master": "4.2-dev"
             }
         },
         "installation-source": "dist",
