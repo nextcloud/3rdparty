@@ -45,7 +45,7 @@
 		"symfony/console": "4.2.2",
 		"symfony/event-dispatcher": "4.2.2",
 		"symfony/process": "3.4.17",
-		"symfony/routing": "3.4.17",
+		"symfony/routing": "3.4.21",
 		"symfony/translation": "4.2.2",
 		"microsoft/azure-storage-blob": "1.2.0"	}
 }
