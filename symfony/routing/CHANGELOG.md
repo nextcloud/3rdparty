@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+4.2.0
+-----
+
+ * added fallback to cultureless locale for internationalized routes
+
+4.0.0
+-----
+
+ * dropped support for using UTF-8 route patterns without using the `utf8` option
+ * dropped support for using UTF-8 route requirements without using the `utf8` option
+
 3.4.0
 -----
 
