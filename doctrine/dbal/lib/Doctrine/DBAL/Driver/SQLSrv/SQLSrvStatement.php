@@ -1,33 +1,41 @@
 <?php
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
 
 namespace Doctrine\DBAL\Driver\SQLSrv;
 
-use PDO;
-use IteratorAggregate;
 use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Driver\StatementIterator;
+use Doctrine\DBAL\FetchMode;
+use Doctrine\DBAL\ParameterType;
+use IteratorAggregate;
+use PDO;
+use const SQLSRV_ENC_BINARY;
+use const SQLSRV_ERR_ERRORS;
+use const SQLSRV_FETCH_ASSOC;
+use const SQLSRV_FETCH_BOTH;
+use const SQLSRV_FETCH_NUMERIC;
+use const SQLSRV_PARAM_IN;
+use function array_key_exists;
+use function count;
+use function func_get_args;
+use function in_array;
+use function is_numeric;
+use function sqlsrv_errors;
+use function sqlsrv_execute;
+use function sqlsrv_fetch;
+use function sqlsrv_fetch_array;
+use function sqlsrv_fetch_object;
+use function sqlsrv_get_field;
+use function sqlsrv_next_result;
+use function sqlsrv_num_fields;
+use function SQLSRV_PHPTYPE_STREAM;
+use function SQLSRV_PHPTYPE_STRING;
+use function sqlsrv_prepare;
+use function sqlsrv_rows_affected;
+use function SQLSRV_SQLTYPE_VARBINARY;
+use function stripos;
 
 /**
  * SQL Server Statement.
- *
- * @since 2.3
- * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class SQLSrvStatement implements IteratorAggregate, Statement
 {
@@ -48,60 +56,60 @@ class SQLSrvStatement implements IteratorAggregate, Statement
     /**
      * The SQLSRV statement resource.
      *
-     * @var resource
+     * @var resource|null
      */
     private $stmt;
 
     /**
      * References to the variables bound as statement parameters.
      *
-     * @var array
+     * @var mixed
      */
-    private $variables = array();
+    private $variables = [];
 
     /**
      * Bound parameter types.
      *
-     * @var array
+     * @var int[]
      */
-    private $types = array();
+    private $types = [];
 
     /**
      * Translations.
      *
-     * @var array
+     * @var int[]
      */
-    private static $fetchMap = array(
-        PDO::FETCH_BOTH => SQLSRV_FETCH_BOTH,
-        PDO::FETCH_ASSOC => SQLSRV_FETCH_ASSOC,
-        PDO::FETCH_NUM => SQLSRV_FETCH_NUMERIC,
-    );
+    private static $fetchMap = [
+        FetchMode::MIXED       => SQLSRV_FETCH_BOTH,
+        FetchMode::ASSOCIATIVE => SQLSRV_FETCH_ASSOC,
+        FetchMode::NUMERIC     => SQLSRV_FETCH_NUMERIC,
+    ];
 
     /**
-     * The name of the default class to instantiate when fetch mode is \PDO::FETCH_CLASS.
+     * The name of the default class to instantiate when fetching class instances.
      *
      * @var string
      */
     private $defaultFetchClass = '\stdClass';
 
     /**
-     * The constructor arguments for the default class to instantiate when fetch mode is \PDO::FETCH_CLASS.
+     * The constructor arguments for the default class to instantiate when fetching class instances.
      *
-     * @var string
+     * @var mixed[]
      */
-    private $defaultFetchClassCtorArgs = array();
+    private $defaultFetchClassCtorArgs = [];
 
     /**
      * The fetch style.
      *
-     * @param integer
+     * @var int
      */
-    private $defaultFetchMode = PDO::FETCH_BOTH;
+    private $defaultFetchMode = FetchMode::MIXED;
 
     /**
      * The last insert ID.
      *
-     * @var \Doctrine\DBAL\Driver\SQLSrv\LastInsertId|null
+     * @var LastInsertId|null
      */
     private $lastInsertId;
 
@@ -114,53 +122,52 @@ class SQLSrvStatement implements IteratorAggregate, Statement
 
     /**
      * Append to any INSERT query to retrieve the last insert id.
-     *
-     * @var string
      */
-    const LAST_INSERT_ID_SQL = ';SELECT SCOPE_IDENTITY() AS LastInsertId;';
+    public const LAST_INSERT_ID_SQL = ';SELECT SCOPE_IDENTITY() AS LastInsertId;';
 
     /**
-     * @param resource                                       $conn
-     * @param string                                         $sql
-     * @param \Doctrine\DBAL\Driver\SQLSrv\LastInsertId|null $lastInsertId
+     * @param resource $conn
+     * @param string   $sql
      */
-    public function __construct($conn, $sql, LastInsertId $lastInsertId = null)
+    public function __construct($conn, $sql, ?LastInsertId $lastInsertId = null)
     {
         $this->conn = $conn;
-        $this->sql = $sql;
+        $this->sql  = $sql;
 
-        if (stripos($sql, 'INSERT INTO ') === 0) {
-            $this->sql .= self::LAST_INSERT_ID_SQL;
-            $this->lastInsertId = $lastInsertId;
+        if (stripos($sql, 'INSERT INTO ') !== 0) {
+            return;
         }
+
+        $this->sql         .= self::LAST_INSERT_ID_SQL;
+        $this->lastInsertId = $lastInsertId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function bindValue($param, $value, $type = null)
+    public function bindValue($param, $value, $type = ParameterType::STRING)
     {
-        if (!is_numeric($param)) {
+        if (! is_numeric($param)) {
             throw new SQLSrvException(
                 'sqlsrv does not support named parameters to queries, use question mark (?) placeholders instead.'
             );
         }
 
         $this->variables[$param] = $value;
-        $this->types[$param] = $type;
+        $this->types[$param]     = $type;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function bindParam($column, &$variable, $type = null, $length = null)
+    public function bindParam($column, &$variable, $type = ParameterType::STRING, $length = null)
     {
-        if (!is_numeric($column)) {
-            throw new SQLSrvException("sqlsrv does not support named parameters to queries, use question mark (?) placeholders instead.");
+        if (! is_numeric($column)) {
+            throw new SQLSrvException('sqlsrv does not support named parameters to queries, use question mark (?) placeholders instead.');
         }
 
         $this->variables[$column] =& $variable;
-        $this->types[$column] = $type;
+        $this->types[$column]     = $type;
 
         // unset the statement resource if it exists as the new one will need to be bound to the new variable
         $this->stmt = null;
@@ -172,7 +179,7 @@ class SQLSrvStatement implements IteratorAggregate, Statement
     public function closeCursor()
     {
         // not having the result means there's nothing to close
-        if (!$this->result) {
+        if (! $this->result) {
             return true;
         }
 
@@ -180,7 +187,8 @@ class SQLSrvStatement implements IteratorAggregate, Statement
         // @link http://php.net/manual/en/pdostatement.closecursor.php
         // @link https://github.com/php/php-src/blob/php-7.0.11/ext/pdo/pdo_stmt.c#L2075
         // deliberately do not consider multiple result sets, since doctrine/dbal doesn't support them
-        while (sqlsrv_fetch($this->stmt));
+        while (sqlsrv_fetch($this->stmt)) {
+        }
 
         $this->result = false;
 
@@ -224,16 +232,16 @@ class SQLSrvStatement implements IteratorAggregate, Statement
         if ($params) {
             $hasZeroIndex = array_key_exists(0, $params);
             foreach ($params as $key => $val) {
-                $key = ($hasZeroIndex && is_numeric($key)) ? $key + 1 : $key;
+                $key = $hasZeroIndex && is_numeric($key) ? $key + 1 : $key;
                 $this->bindValue($key, $val);
             }
         }
 
-        if ( ! $this->stmt) {
+        if (! $this->stmt) {
             $this->stmt = $this->prepare();
         }
 
-        if (!sqlsrv_execute($this->stmt)) {
+        if (! sqlsrv_execute($this->stmt)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
 
@@ -250,28 +258,41 @@ class SQLSrvStatement implements IteratorAggregate, Statement
      * Prepares SQL Server statement resource
      *
      * @return resource
+     *
      * @throws SQLSrvException
      */
     private function prepare()
     {
-        $params = array();
+        $params = [];
 
         foreach ($this->variables as $column => &$variable) {
-            if ($this->types[$column] === \PDO::PARAM_LOB) {
-                $params[$column - 1] = array(
-                    &$variable,
-                    SQLSRV_PARAM_IN,
-                    SQLSRV_PHPTYPE_STREAM(SQLSRV_ENC_BINARY),
-                    SQLSRV_SQLTYPE_VARBINARY('max'),
-                );
-            } else {
-                $params[$column - 1] =& $variable;
+            switch ($this->types[$column]) {
+                case ParameterType::LARGE_OBJECT:
+                    $params[$column - 1] = [
+                        &$variable,
+                        SQLSRV_PARAM_IN,
+                        SQLSRV_PHPTYPE_STREAM(SQLSRV_ENC_BINARY),
+                        SQLSRV_SQLTYPE_VARBINARY('max'),
+                    ];
+                    break;
+
+                case ParameterType::BINARY:
+                    $params[$column - 1] = [
+                        &$variable,
+                        SQLSRV_PARAM_IN,
+                        SQLSRV_PHPTYPE_STRING(SQLSRV_ENC_BINARY),
+                    ];
+                    break;
+
+                default:
+                    $params[$column - 1] =& $variable;
+                    break;
             }
         }
 
         $stmt = sqlsrv_prepare($this->conn, $this->sql, $params);
 
-        if (!$stmt) {
+        if (! $stmt) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
 
@@ -295,64 +316,70 @@ class SQLSrvStatement implements IteratorAggregate, Statement
      */
     public function getIterator()
     {
-        $data = $this->fetchAll();
-
-        return new \ArrayIterator($data);
+        return new StatementIterator($this);
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @throws SQLSrvException
      */
-    public function fetch($fetchMode = null)
+    public function fetch($fetchMode = null, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
     {
         // do not try fetching from the statement if it's not expected to contain result
         // in order to prevent exceptional situation
-        if (!$this->result) {
+        if (! $this->result) {
             return false;
         }
 
         $args      = func_get_args();
         $fetchMode = $fetchMode ?: $this->defaultFetchMode;
 
+        if ($fetchMode === FetchMode::COLUMN) {
+            return $this->fetchColumn();
+        }
+
         if (isset(self::$fetchMap[$fetchMode])) {
             return sqlsrv_fetch_array($this->stmt, self::$fetchMap[$fetchMode]) ?: false;
         }
 
-        if ($fetchMode == PDO::FETCH_OBJ || $fetchMode == PDO::FETCH_CLASS) {
+        if (in_array($fetchMode, [FetchMode::STANDARD_OBJECT, FetchMode::CUSTOM_OBJECT], true)) {
             $className = $this->defaultFetchClass;
             $ctorArgs  = $this->defaultFetchClassCtorArgs;
 
             if (count($args) >= 2) {
                 $className = $args[1];
-                $ctorArgs  = (isset($args[2])) ? $args[2] : array();
+                $ctorArgs  = $args[2] ?? [];
             }
 
             return sqlsrv_fetch_object($this->stmt, $className, $ctorArgs) ?: false;
         }
 
-        throw new SQLSrvException("Fetch mode is not supported!");
+        throw new SQLSrvException('Fetch mode is not supported!');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function fetchAll($fetchMode = null)
+    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
     {
-        $rows = array();
+        $rows = [];
 
         switch ($fetchMode) {
-            case PDO::FETCH_CLASS:
-                while ($row = call_user_func_array(array($this, 'fetch'), func_get_args())) {
+            case FetchMode::CUSTOM_OBJECT:
+                while (($row = $this->fetch(...func_get_args())) !== false) {
                     $rows[] = $row;
                 }
                 break;
-            case PDO::FETCH_COLUMN:
-                while ($row = $this->fetchColumn()) {
+
+            case FetchMode::COLUMN:
+                while (($row = $this->fetchColumn()) !== false) {
                     $rows[] = $row;
                 }
                 break;
+
             default:
-                while ($row = $this->fetch($fetchMode)) {
+                while (($row = $this->fetch($fetchMode)) !== false) {
                     $rows[] = $row;
                 }
         }
@@ -365,13 +392,13 @@ class SQLSrvStatement implements IteratorAggregate, Statement
      */
     public function fetchColumn($columnIndex = 0)
     {
-        $row = $this->fetch(PDO::FETCH_NUM);
+        $row = $this->fetch(FetchMode::NUMERIC);
 
-        if (false === $row) {
+        if ($row === false) {
             return false;
         }
 
-        return isset($row[$columnIndex]) ? $row[$columnIndex] : null;
+        return $row[$columnIndex] ?? null;
     }
 
     /**

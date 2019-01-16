@@ -1,48 +1,22 @@
 <?php
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
 
 namespace Doctrine\Common\Cache;
 
-use \Memcached;
+use Memcached;
+use function time;
 
 /**
  * Memcached cache provider.
  *
  * @link   www.doctrine-project.org
- * @since  2.2
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author Jonathan Wage <jonwage@gmail.com>
- * @author Roman Borschel <roman@code-factory.org>
- * @author David Abdemoulaie <dave@hobodave.com>
  */
 class MemcachedCache extends CacheProvider
 {
-    /**
-     * @var Memcached|null
-     */
+    /** @var Memcached|null */
     private $memcached;
 
     /**
      * Sets the memcache instance to use.
-     *
-     * @param Memcached $memcached
      *
      * @return void
      */
@@ -74,7 +48,7 @@ class MemcachedCache extends CacheProvider
      */
     protected function doFetchMultiple(array $keys)
     {
-        return $this->memcached->getMulti($keys);
+        return $this->memcached->getMulti($keys) ?: [];
     }
 
     /**
@@ -86,7 +60,7 @@ class MemcachedCache extends CacheProvider
             $lifetime = time() + $lifetime;
         }
 
-        return $this->memcached->setMulti($keysAndValues, null, $lifetime);
+        return $this->memcached->setMulti($keysAndValues, $lifetime);
     }
 
     /**
@@ -94,8 +68,9 @@ class MemcachedCache extends CacheProvider
      */
     protected function doContains($id)
     {
-        return false !== $this->memcached->get($id)
-            || $this->memcached->getResultCode() !== Memcached::RES_NOTFOUND;
+        $this->memcached->get($id);
+
+        return $this->memcached->getResultCode() === Memcached::RES_SUCCESS;
     }
 
     /**
@@ -107,6 +82,15 @@ class MemcachedCache extends CacheProvider
             $lifeTime = time() + $lifeTime;
         }
         return $this->memcached->set($id, $data, (int) $lifeTime);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDeleteMultiple(array $keys)
+    {
+        return $this->memcached->deleteMulti($keys)
+            || $this->memcached->getResultCode() === Memcached::RES_NOTFOUND;
     }
 
     /**
@@ -135,12 +119,12 @@ class MemcachedCache extends CacheProvider
         $servers = $this->memcached->getServerList();
         $key     = $servers[0]['host'] . ':' . $servers[0]['port'];
         $stats   = $stats[$key];
-        return array(
+        return [
             Cache::STATS_HITS   => $stats['get_hits'],
             Cache::STATS_MISSES => $stats['get_misses'],
             Cache::STATS_UPTIME => $stats['uptime'],
             Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
             Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],
-        );
+        ];
     }
 }

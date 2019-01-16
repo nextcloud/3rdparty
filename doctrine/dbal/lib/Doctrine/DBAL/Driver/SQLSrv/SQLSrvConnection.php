@@ -1,59 +1,51 @@
 <?php
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
 
 namespace Doctrine\DBAL\Driver\SQLSrv;
 
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAL\ParameterType;
+use const SQLSRV_ERR_ERRORS;
+use function func_get_args;
+use function is_float;
+use function is_int;
+use function sprintf;
+use function sqlsrv_begin_transaction;
+use function sqlsrv_commit;
+use function sqlsrv_configure;
+use function sqlsrv_connect;
+use function sqlsrv_errors;
+use function sqlsrv_query;
+use function sqlsrv_rollback;
+use function sqlsrv_rows_affected;
+use function sqlsrv_server_info;
+use function str_replace;
 
 /**
  * SQL Server implementation for the Connection interface.
- *
- * @since 2.3
- * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class SQLSrvConnection implements Connection, ServerInfoAwareConnection
 {
-    /**
-     * @var resource
-     */
+    /** @var resource */
     protected $conn;
 
-    /**
-     * @var \Doctrine\DBAL\Driver\SQLSrv\LastInsertId
-     */
+    /** @var LastInsertId */
     protected $lastInsertId;
 
     /**
-     * @param string $serverName
-     * @param array  $connectionOptions
+     * @param string  $serverName
+     * @param mixed[] $connectionOptions
      *
-     * @throws \Doctrine\DBAL\Driver\SQLSrv\SQLSrvException
+     * @throws SQLSrvException
      */
     public function __construct($serverName, $connectionOptions)
     {
-        if ( ! sqlsrv_configure('WarningsReturnAsErrors', 0)) {
+        if (! sqlsrv_configure('WarningsReturnAsErrors', 0)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
 
         $this->conn = sqlsrv_connect($serverName, $connectionOptions);
-        if ( ! $this->conn) {
+        if (! $this->conn) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
         $this->lastInsertId = new LastInsertId();
@@ -91,7 +83,7 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
     public function query()
     {
         $args = func_get_args();
-        $sql = $args[0];
+        $sql  = $args[0];
         $stmt = $this->prepare($sql);
         $stmt->execute();
 
@@ -100,9 +92,8 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
 
     /**
      * {@inheritDoc}
-     * @license New BSD, code from Zend Framework
      */
-    public function quote($value, $type=\PDO::PARAM_STR)
+    public function quote($value, $type = ParameterType::STRING)
     {
         if (is_int($value)) {
             return $value;
@@ -118,10 +109,13 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
      */
     public function exec($statement)
     {
-        $stmt = $this->prepare($statement);
-        $stmt->execute();
+        $stmt = sqlsrv_query($this->conn, $statement);
 
-        return $stmt->rowCount();
+        if ($stmt === false) {
+            throw SQLSrvException::fromSqlSrvErrors();
+        }
+
+        return sqlsrv_rows_affected($stmt);
     }
 
     /**
@@ -131,12 +125,12 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
     {
         if ($name !== null) {
             $stmt = $this->prepare('SELECT CONVERT(VARCHAR(MAX), current_value) FROM sys.sequences WHERE name = ?');
-            $stmt->execute(array($name));
-
-            return $stmt->fetchColumn();
+            $stmt->execute([$name]);
+        } else {
+            $stmt = $this->query('SELECT @@IDENTITY');
         }
 
-        return $this->lastInsertId->getId();
+        return $stmt->fetchColumn();
     }
 
     /**
@@ -144,7 +138,7 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
      */
     public function beginTransaction()
     {
-        if ( ! sqlsrv_begin_transaction($this->conn)) {
+        if (! sqlsrv_begin_transaction($this->conn)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
     }
@@ -154,7 +148,7 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
      */
     public function commit()
     {
-        if ( ! sqlsrv_commit($this->conn)) {
+        if (! sqlsrv_commit($this->conn)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
     }
@@ -164,7 +158,7 @@ class SQLSrvConnection implements Connection, ServerInfoAwareConnection
      */
     public function rollBack()
     {
-        if ( ! sqlsrv_rollback($this->conn)) {
+        if (! sqlsrv_rollback($this->conn)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
     }
