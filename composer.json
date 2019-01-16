@@ -2,12 +2,6 @@
 	"name": "nextcloud/3rdparty",
 	"description": "All 3rdparty components",
 	"license": "MIT",
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/icewind1991/dbal"
-		}
-	],
 	"config": {
 		"vendor-dir": ".",
 		"optimize-autoloader": true,
@@ -21,7 +15,7 @@
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"deepdiver/zipstreamer": "1.1.1",
 		"deepdiver1975/TarStreamer": "v0.1.0",
-		"doctrine/dbal": "dev-2.5-pg10",
+		"doctrine/dbal": "2.6.3",
 		"guzzlehttp/guzzle": "6.3.3",
 		"icewind/searchdav": "1.0.1",
 		"icewind/Streams": "0.6.1",
