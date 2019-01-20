@@ -2,19 +2,26 @@
 $meta #
 #semval($) $this->semValue
 #semval($,%t) $this->semValue
-#semval(%n) $this->stackPos-(%l-%n)
-#semval(%n,%t) $this->stackPos-(%l-%n)
+#semval(%n) $stackPos-(%l-%n)
+#semval(%n,%t) $stackPos-(%l-%n)
 
-namespace PhpParser;
+namespace PhpParser\Parser;
+
+use PhpParser\Error;
+use PhpParser\Node;
+use PhpParser\Node\Expr;
+use PhpParser\Node\Name;
+use PhpParser\Node\Scalar;
+use PhpParser\Node\Stmt;
 #include;
 
 /* This is an automatically GENERATED file, which should not be manually edited.
  * Instead edit one of the following:
- *  * the grammar file grammar/zend_language_parser.phpy
- *  * the skeleton file grammar/kymacc.php.parser
- *  * the preprocessing script grammar/rebuildParser.php
+ *  * the grammar files grammar/php5.y or grammar/php7.y
+ *  * the skeleton file grammar/parser.template
+ *  * the preprocessing script grammar/rebuildParsers.php
  */
-class Parser extends ParserAbstract
+class #(-p) extends \PhpParser\ParserAbstract
 {
     protected $tokenToSymbolMapSize = #(YYMAXLEX);
     protected $actionTableSize = #(YYLAST);
@@ -25,12 +32,8 @@ class Parser extends ParserAbstract
     protected $defaultAction = #(YYDEFAULT);
     protected $unexpectedTokenRule = #(YYUNEXPECTED);
 
-    protected $YY2TBLSTATE  = #(YY2TBLSTATE);
-    protected $YYNLSTATES   = #(YYNLSTATES);
-
-#tokenval
-    const %s = %n;
-#endtokenval
+    protected $YY2TBLSTATE = #(YY2TBLSTATE);
+    protected $numNonLeafStates = #(YYNLSTATES);
 
     protected $symbolToName = array(
         #listvar terminals
@@ -85,16 +88,19 @@ class Parser extends ParserAbstract
         #production-strings;
     );
 #endif
+
+    protected function initReduceCallbacks() {
+        $this->reduceCallbacks = [
 #reduce
-
-    protected function reduceRule%n() {
-        %b
-    }
+            %n => function ($stackPos) {
+                %b
+            },
 #noact
-
-    protected function reduceRule%n() {
-        $this->semValue = $this->semStack[$this->stackPos];
-    }
+            %n => function ($stackPos) {
+                $this->semValue = $this->semStack[$stackPos];
+            },
 #endreduce
+        ];
+    }
 }
 #tailcode;

@@ -54,16 +54,16 @@ final class ClosureLocatorVisitor extends NodeVisitor
         // Determine information about the closure's location
         if (!$this->closureNode) {
             if ($node instanceof NamespaceNode) {
-                $namespace = ($node->name && is_array($node->name->parts))
-                    ? implode('\\', $node->name->parts)
+                $namespace = $node->name !== null
+                    ? $node->name->toString()
                     : null;
                 $this->location['namespace'] = $namespace;
             }
             if ($node instanceof TraitNode) {
-                $this->location['trait'] = $node->name;
+                $this->location['trait'] = (string) $node->name;
                 $this->location['class'] = null;
             } elseif ($node instanceof ClassNode) {
-                $this->location['class'] = $node->name;
+                $this->location['class'] = (string) $node->name;
                 $this->location['trait'] = null;
             }
         }
@@ -106,12 +106,15 @@ final class ClosureLocatorVisitor extends NodeVisitor
         } elseif ($this->location['trait']) {
             $this->location['trait'] = $this->location['namespace'] . '\\' . $this->location['trait'];
             $this->location['method'] = "{$this->location['trait']}::{$this->location['function']}";
-        }
 
-        if (!$this->location['class']) {
-            /** @var \ReflectionClass $closureScopeClass */
-            $closureScopeClass = $this->reflection->getClosureScopeClass();
-            $this->location['class'] = $closureScopeClass ? $closureScopeClass->getName() : null;
+            // If the closure was declared in a trait, then we will do a best
+            // effort guess on the name of the class that used the trait. It's
+            // actually impossible at this point to know for sure what it is.
+            if ($closureScope = $this->reflection->getClosureScopeClass()) {
+                $this->location['class'] = $closureScope ? $closureScope->getName() : null;
+            } elseif ($closureThis = $this->reflection->getClosureThis()) {
+                $this->location['class'] = get_class($closureThis);
+            }
         }
     }
 }

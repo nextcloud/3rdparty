@@ -1,13 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PhpParser\Node\Expr;
 
 use PhpParser\Node\Expr;
 
-/**
- * @property Expr $var  Variable
- * @property Expr $expr Expression
- */
 abstract class AssignOp extends Expr
 {
     /** @var Expr Variable */
@@ -22,13 +18,13 @@ abstract class AssignOp extends Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(Expr $var, Expr $expr, array $attributes = array()) {
-        parent::__construct(null, $attributes);
+    public function __construct(Expr $var, Expr $expr, array $attributes = []) {
+        parent::__construct($attributes);
         $this->var = $var;
         $this->expr = $expr;
     }
 
-    public function getSubNodeNames() {
-        return array('var', 'expr');
+    public function getSubNodeNames() : array {
+        return ['var', 'expr'];
     }
 }

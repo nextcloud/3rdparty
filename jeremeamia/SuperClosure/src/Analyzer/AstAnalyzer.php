@@ -7,8 +7,10 @@ use SuperClosure\Analyzer\Visitor\MagicConstantVisitor;
 use PhpParser\NodeTraverser;
 use PhpParser\PrettyPrinter\Standard as NodePrinter;
 use PhpParser\Error as ParserError;
+use PhpParser\Node\Expr\Variable as VariableNode;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\Parser as CodeParser;
+use PhpParser\ParserFactory;
 use PhpParser\Lexer\Emulative as EmulativeLexer;
 
 /**
@@ -91,7 +93,13 @@ class AstAnalyzer extends ClosureAnalyzer
             if ($node->byRef) {
                 $refs++;
             }
-            return $node->var;
+            if ($node->var instanceof VariableNode) {
+                // For PHP-Parser >=4.0
+                return $node->var->name;
+            } else {
+                // For PHP-Parser <4.0
+                return $node->var;
+            }
         }, $data['ast']->uses);
         $data['hasRefs'] = ($refs > 0);
 
@@ -122,8 +130,19 @@ class AstAnalyzer extends ClosureAnalyzer
             );
         }
 
-        $parser = new CodeParser(new EmulativeLexer);
 
-        return $parser->parse(file_get_contents($fileName));
+        return $this->getParser()->parse(file_get_contents($fileName));
+    }
+
+    /**
+     * @return CodeParser
+     */
+    private function getParser()
+    {
+        if (class_exists('PhpParser\ParserFactory')) {
+            return (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        }
+
+        return new CodeParser(new EmulativeLexer);
     }
 }

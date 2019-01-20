@@ -2,6 +2,7 @@
 
 use SuperClosure\Analyzer\AstAnalyzer as DefaultAnalyzer;
 use SuperClosure\Analyzer\ClosureAnalyzer;
+use SuperClosure\Exception\ClosureSerializationException;
 use SuperClosure\Exception\ClosureUnserializationException;
 
 /**
@@ -66,6 +67,12 @@ class Serializer implements SerializerInterface
     public function serialize(\Closure $closure)
     {
         $serialized = serialize(new SerializableClosure($closure, $this));
+        
+        if ($serialized === null) {
+            throw new ClosureSerializationException(
+                'The closure could not be serialized.'
+            );
+        }
 
         if ($this->signingKey) {
             $signature = $this->calculateSignature($serialized);
@@ -92,8 +99,18 @@ class Serializer implements SerializerInterface
             $this->verifySignature($signature, $serialized);
         }
 
-        /** @var SerializableClosure $unserialized */
+        set_error_handler(function () {});
         $unserialized = unserialize($serialized);
+        restore_error_handler();
+        if ($unserialized === false) {
+            throw new ClosureUnserializationException(
+                'The closure could not be unserialized.'
+            );
+        } elseif (!$unserialized instanceof SerializableClosure) {
+            throw new ClosureUnserializationException(
+                'The closure did not unserialize to a SuperClosure.'
+            );
+        }
 
         return $unserialized->getClosure();
     }
@@ -193,13 +210,6 @@ class Serializer implements SerializerInterface
      */
     private function verifySignature($signature, $data)
     {
-        // Ensure that hash_equals() is available.
-        static $hashEqualsFnExists = false;
-        if (!$hashEqualsFnExists) {
-            require __DIR__ . '/hash_equals.php';
-            $hashEqualsFnExists = true;
-        }
-
         // Verify that the provided signature matches the calculated signature.
         if (!hash_equals($signature, $this->calculateSignature($data))) {
             throw new ClosureUnserializationException('The signature of the'
