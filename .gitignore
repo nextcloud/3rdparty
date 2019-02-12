@@ -175,6 +175,22 @@ nikic/php-parser/test/
 nikic/php-parser/test_old/
 nikic/php-parser/grammar/analyze.php
 nikic/php-parser/grammar/rebuildParser.php
+nikic/php-parser/.gitignore
+nikic/php-parser/CHANGELOG.md
+nikic/php-parser/README.md
+nikic/php-parser/UPGRADE-1.0.md
+nikic/php-parser/UPGRADE-2.0.md
+nikic/php-parser/UPGRADE-3.0.md
+nikic/php-parser/UPGRADE-4.0.md
+nikic/php-parser/composer.json
+nikic/php-parser/grammar/parser.template
+nikic/php-parser/grammar/php5.y
+nikic/php-parser/grammar/php7.y
+nikic/php-parser/grammar/rebuildParsers.php
+nikic/php-parser/grammar/tokens.template
+nikic/php-parser/grammar/tokens.y
+nikic/php-parser/phpunit.xml.dist
+
 
 interfasys/lognormalizer/.gitignore
 interfasys/lognormalizer/.travis.yml
