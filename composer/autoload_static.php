@@ -20,6 +20,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'ebdb698ed4152ae445614b69b5e4bb6a' => __DIR__ . '/..' . '/sabre/http/lib/functions.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -44,6 +45,8 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Util\\' => 22,
+            'Symfony\\Polyfill\\Php56\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Contracts\\' => 18,
             'Symfony\\Component\\Translation\\' => 30,
@@ -51,6 +54,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
+            'SuperClosure\\' => 13,
             'Stecman\\Component\\Symfony\\Console\\BashCompletion\\' => 49,
             'SearchDAV\\Test\\' => 15,
             'SearchDAV\\' => 10,
@@ -145,6 +149,14 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             0 => __DIR__ . '/..' . '/deepdiver/zipstreamer/src',
         ),
+        'Symfony\\Polyfill\\Util\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-util',
+        ),
+        'Symfony\\Polyfill\\Php56\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php56',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -172,6 +184,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'SuperClosure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src',
         ),
         'Stecman\\Component\\Symfony\\Console\\BashCompletion\\' => 
         array (
@@ -2445,6 +2461,20 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Stecman\\Component\\Symfony\\Console\\BashCompletion\\Completion\\ShellPathCompletion' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/Completion/ShellPathCompletion.php',
         'Stecman\\Component\\Symfony\\Console\\BashCompletion\\EnvironmentCompletionContext' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/EnvironmentCompletionContext.php',
         'Stecman\\Component\\Symfony\\Console\\BashCompletion\\HookFactory' => __DIR__ . '/..' . '/stecman/symfony-console-completion/src/HookFactory.php',
+        'SuperClosure\\Analyzer\\AstAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/AstAnalyzer.php',
+        'SuperClosure\\Analyzer\\ClosureAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/ClosureAnalyzer.php',
+        'SuperClosure\\Analyzer\\Token' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Token.php',
+        'SuperClosure\\Analyzer\\TokenAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/TokenAnalyzer.php',
+        'SuperClosure\\Analyzer\\Visitor\\ClosureLocatorVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Visitor/ClosureLocatorVisitor.php',
+        'SuperClosure\\Analyzer\\Visitor\\MagicConstantVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Visitor/MagicConstantVisitor.php',
+        'SuperClosure\\Analyzer\\Visitor\\ThisDetectorVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Visitor/ThisDetectorVisitor.php',
+        'SuperClosure\\Exception\\ClosureAnalysisException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/ClosureAnalysisException.php',
+        'SuperClosure\\Exception\\ClosureSerializationException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/ClosureSerializationException.php',
+        'SuperClosure\\Exception\\ClosureUnserializationException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/ClosureUnserializationException.php',
+        'SuperClosure\\Exception\\SuperClosureException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/SuperClosureException.php',
+        'SuperClosure\\SerializableClosure' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/SerializableClosure.php',
+        'SuperClosure\\Serializer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Serializer.php',
+        'SuperClosure\\SerializerInterface' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/SerializerInterface.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -2690,6 +2720,13 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorTrait.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'Symfony\\Polyfill\\Php56\\Php56' => __DIR__ . '/..' . '/symfony/polyfill-php56/Php56.php',
+        'Symfony\\Polyfill\\Util\\Binary' => __DIR__ . '/..' . '/symfony/polyfill-util/Binary.php',
+        'Symfony\\Polyfill\\Util\\BinaryNoFuncOverload' => __DIR__ . '/..' . '/symfony/polyfill-util/BinaryNoFuncOverload.php',
+        'Symfony\\Polyfill\\Util\\BinaryOnFuncOverload' => __DIR__ . '/..' . '/symfony/polyfill-util/BinaryOnFuncOverload.php',
+        'Symfony\\Polyfill\\Util\\LegacyTestListener' => __DIR__ . '/..' . '/symfony/polyfill-util/LegacyTestListener.php',
+        'Symfony\\Polyfill\\Util\\TestListener' => __DIR__ . '/..' . '/symfony/polyfill-util/TestListener.php',
+        'Symfony\\Polyfill\\Util\\TestListenerTrait' => __DIR__ . '/..' . '/symfony/polyfill-util/TestListenerTrait.php',
         'System' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/System.php',
         'ZipStreamer\\COMPR' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'ZipStreamer\\Count64' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/lib/Count64.php',
