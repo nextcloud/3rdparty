@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7b3aefd3a5febf8421a1018062160c7",
+    "content-hash": "eed4ad27d48df0ce9f8d4ab7c85d4601",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1323,16 +1323,16 @@
         },
         {
             "name": "icewind/streams",
-            "version": "v0.7.0",
+            "version": "v0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "e1b5ac12e9482c3679388f677d6e7a5268b4fdcf"
+                "reference": "4db3ed6c366e90b958d00e1d4c6360a9b39b2121"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/e1b5ac12e9482c3679388f677d6e7a5268b4fdcf",
-                "reference": "e1b5ac12e9482c3679388f677d6e7a5268b4fdcf",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/4db3ed6c366e90b958d00e1d4c6360a9b39b2121",
+                "reference": "4db3ed6c366e90b958d00e1d4c6360a9b39b2121",
                 "shasum": ""
             },
             "require": {
@@ -1360,7 +1360,7 @@
                 }
             ],
             "description": "A set of generic stream wrappers",
-            "time": "2019-02-14T15:43:18+00:00"
+            "time": "2019-02-15T12:57:29+00:00"
         },
         {
             "name": "interfasys/lognormalizer",
