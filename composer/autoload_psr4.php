@@ -49,7 +49,7 @@ return array(
     'InterfaSys\\LogNormalizer\\' => array($vendorDir . '/interfasys/lognormalizer/src'),
     'Icewind\\Streams\\Tests\\' => array($vendorDir . '/icewind/streams/tests'),
     'Icewind\\Streams\\' => array($vendorDir . '/icewind/streams/src'),
-    'ID3Parser\\' => array($vendorDir . '/lukasreschke/id3parser/src'),
+    'ID3Parser\\' => array($vendorDir . '/christophwurst/id3parser/src'),
     'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
     'GuzzleHttp\\Ring\\' => array($vendorDir . '/guzzlehttp/ringphp/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),

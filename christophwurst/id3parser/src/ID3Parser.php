@@ -8,7 +8,7 @@
 
 namespace ID3Parser;
 
-use ID3Parser\getID3\getID3;
+use ID3Parser\getID3\getid3;
 
 class ID3Parser {
 	/**
@@ -16,7 +16,7 @@ class ID3Parser {
 	 * @return array
 	 */
 	public function analyze($fileName) {
-		$getID3 = new getID3();
+		$getID3 = new getid3();
 		return $getID3->analyze($fileName);
 	}
 }
