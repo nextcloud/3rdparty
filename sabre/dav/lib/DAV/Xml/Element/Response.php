@@ -118,10 +118,6 @@ class Response implements Element {
      * @return void
      */
     function xmlSerialize(Writer $writer) {
-
-        if ($status = $this->getHTTPStatus()) {
-            $writer->writeElement('{DAV:}status', 'HTTP/1.1 ' . $status . ' ' . \Sabre\HTTP\Response::$statusCodes[$status]);
-        }
         $writer->writeElement('{DAV:}href', $writer->contextUri . \Sabre\HTTP\encodePath($this->getHref()));
 
         $empty = true;
