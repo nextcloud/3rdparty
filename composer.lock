@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e5dceb33c26ee3cbbb6f74a758c64d6",
+    "content-hash": "7692b00a8c93de8d710f875c5793344b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2490,16 +2490,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "3.2.2",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/dav.git",
-                "reference": "e987775e619728f12205606c9cc3ee565ffb1516"
+                "reference": "a9780ce4f35560ecbd0af524ad32d9d2c8954b80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/dav/zipball/e987775e619728f12205606c9cc3ee565ffb1516",
-                "reference": "e987775e619728f12205606c9cc3ee565ffb1516",
+                "url": "https://api.github.com/repos/sabre-io/dav/zipball/a9780ce4f35560ecbd0af524ad32d9d2c8954b80",
+                "reference": "a9780ce4f35560ecbd0af524ad32d9d2c8954b80",
                 "shasum": ""
             },
             "require": {
@@ -2569,7 +2569,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2017-02-15T03:06:08+00:00"
+            "time": "2018-10-19T09:58:27+00:00"
         },
         {
             "name": "sabre/event",

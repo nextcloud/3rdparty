@@ -2571,17 +2571,17 @@
     },
     {
         "name": "sabre/dav",
-        "version": "3.2.2",
-        "version_normalized": "3.2.2.0",
+        "version": "3.2.3",
+        "version_normalized": "3.2.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sabre-io/dav.git",
-            "reference": "e987775e619728f12205606c9cc3ee565ffb1516"
+            "reference": "a9780ce4f35560ecbd0af524ad32d9d2c8954b80"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sabre-io/dav/zipball/e987775e619728f12205606c9cc3ee565ffb1516",
-            "reference": "e987775e619728f12205606c9cc3ee565ffb1516",
+            "url": "https://api.github.com/repos/sabre-io/dav/zipball/a9780ce4f35560ecbd0af524ad32d9d2c8954b80",
+            "reference": "a9780ce4f35560ecbd0af524ad32d9d2c8954b80",
             "shasum": ""
         },
         "require": {
@@ -2612,7 +2612,7 @@
             "ext-curl": "*",
             "ext-pdo": "*"
         },
-        "time": "2017-02-15T03:06:08+00:00",
+        "time": "2018-10-19T09:58:27+00:00",
         "bin": [
             "bin/sabredav",
             "bin/naturalselection"
