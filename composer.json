@@ -42,6 +42,6 @@
 		"symfony/event-dispatcher": "4.2.3",
 		"symfony/process": "4.2.3",
 		"symfony/routing": "4.2.3",
-		"symfony/translation": "4.2.3"
+		"symfony/translation": "4.2.5"
 	}
 }
