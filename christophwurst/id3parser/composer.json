@@ -1,6 +1,6 @@
 {
-  "name": "lukasreschke/id3parser",
-  "homepage" : "https://github.com/LukasReschke/ID3Parser/",
+  "name": "christophwurst/id3parser",
+  "homepage" : "https://github.com/ChristophWurst/ID3Parser/",
   "require" : {
     "php" : ">=5.4.0"
   },

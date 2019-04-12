@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a54ad5add86c8bf26b7b25569d1636ef",
+    "content-hash": "abf9e11c1bbcbd05b3c337bc0311de6d",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -115,6 +115,41 @@
             ],
             "description": "Convenience wrapper around ini_get()",
             "time": "2014-09-15T13:12:35+00:00"
+        },
+        {
+            "name": "christophwurst/id3parser",
+            "version": "v0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ChristophWurst/ID3Parser.git",
+                "reference": "0faaddd3d4c89b15c219e9ec78bef204e2eaa20a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/0faaddd3d4c89b15c219e9ec78bef204e2eaa20a",
+                "reference": "0faaddd3d4c89b15c219e9ec78bef204e2eaa20a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ID3Parser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "homepage": "https://github.com/ChristophWurst/ID3Parser/",
+            "keywords": [
+                "codecs",
+                "php",
+                "tags"
+            ],
+            "time": "2019-04-05T14:53:35+00:00"
         },
         {
             "name": "deepdiver/zipstreamer",
@@ -1673,41 +1708,6 @@
                 "storage"
             ],
             "time": "2017-03-22T15:43:14+00:00"
-        },
-        {
-            "name": "lukasreschke/id3parser",
-            "version": "v0.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LukasReschke/ID3Parser.git",
-                "reference": "62f4de76d4eaa9ea13c66dacc1f22977dace6638"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LukasReschke/ID3Parser/zipball/62f4de76d4eaa9ea13c66dacc1f22977dace6638",
-                "reference": "62f4de76d4eaa9ea13c66dacc1f22977dace6638",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ID3Parser\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL"
-            ],
-            "homepage": "https://github.com/LukasReschke/ID3Parser/",
-            "keywords": [
-                "codecs",
-                "php",
-                "tags"
-            ],
-            "time": "2016-09-22T15:10:54+00:00"
         },
         {
             "name": "microsoft/azure-storage-blob",

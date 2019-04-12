@@ -308,7 +308,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'ID3Parser\\' => 
         array (
-            0 => __DIR__ . '/..' . '/lukasreschke/id3parser/src',
+            0 => __DIR__ . '/..' . '/christophwurst/id3parser/src',
         ),
         'GuzzleHttp\\Stream\\' => 
         array (
@@ -1398,13 +1398,13 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'GuzzleHttp\\Stream\\Utils' => __DIR__ . '/..' . '/guzzlehttp/streams/src/Utils.php',
         'GuzzleHttp\\TransferStats' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/TransferStats.php',
         'GuzzleHttp\\UriTemplate' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/UriTemplate.php',
-        'ID3Parser\\ID3Parser' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/ID3Parser.php',
-        'ID3Parser\\getID3\\Tags\\getid3_id3v1' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/getID3/Tags/getid3_id3v1.php',
-        'ID3Parser\\getID3\\Tags\\getid3_id3v2' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/getID3/Tags/getid3_id3v2.php',
-        'ID3Parser\\getID3\\getID3' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/getID3/getid3.php',
-        'ID3Parser\\getID3\\getid3_exception' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/getID3/getid3_exception.php',
-        'ID3Parser\\getID3\\getid3_handler' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/getID3/getid3_handler.php',
-        'ID3Parser\\getID3\\getid3_lib' => __DIR__ . '/..' . '/lukasreschke/id3parser/src/getID3/getid3_lib.php',
+        'ID3Parser\\ID3Parser' => __DIR__ . '/..' . '/christophwurst/id3parser/src/ID3Parser.php',
+        'ID3Parser\\getID3\\Tags\\getid3_id3v1' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/Tags/getid3_id3v1.php',
+        'ID3Parser\\getID3\\Tags\\getid3_id3v2' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/Tags/getid3_id3v2.php',
+        'ID3Parser\\getID3\\getid3' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3.php',
+        'ID3Parser\\getID3\\getid3_exception' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_exception.php',
+        'ID3Parser\\getID3\\getid3_handler' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_handler.php',
+        'ID3Parser\\getID3\\getid3_lib' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_lib.php',
         'Icewind\\Streams\\CallbackWrapper' => __DIR__ . '/..' . '/icewind/streams/src/CallbackWrapper.php',
         'Icewind\\Streams\\CountWrapper' => __DIR__ . '/..' . '/icewind/streams/src/CountWrapper.php',
         'Icewind\\Streams\\Directory' => __DIR__ . '/..' . '/icewind/streams/src/Directory.php',

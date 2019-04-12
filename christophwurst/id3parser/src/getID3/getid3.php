@@ -8,7 +8,7 @@
 
 namespace ID3Parser\getID3;
 
-class getID3 {
+class getid3 {
 	// public: Settings
 	private $encoding        = 'UTF-8';        // CASE SENSITIVE! - i.e. (must be supported by iconv()). Examples:  ISO-8859-1  UTF-8  UTF-16  UTF-16BE
 
