@@ -1467,6 +1467,7 @@ return array(
     'PhpParser\\Node\\Expr\\AssignOp\\BitwiseAnd' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseAnd.php',
     'PhpParser\\Node\\Expr\\AssignOp\\BitwiseOr' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseOr.php',
     'PhpParser\\Node\\Expr\\AssignOp\\BitwiseXor' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseXor.php',
+    'PhpParser\\Node\\Expr\\AssignOp\\Coalesce' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Coalesce.php',
     'PhpParser\\Node\\Expr\\AssignOp\\Concat' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Concat.php',
     'PhpParser\\Node\\Expr\\AssignOp\\Div' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Div.php',
     'PhpParser\\Node\\Expr\\AssignOp\\Minus' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Minus.php',
