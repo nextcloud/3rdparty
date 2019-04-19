@@ -1,0 +1,66 @@
+{
+    "name": "bcarrella/backblaze-b2",
+    "description": "An SDK for working with B2 cloud storage.",
+    "keywords": [
+        "b2",
+        "storage",
+        "backblaze",
+        "cloud",
+        "filesystem",
+        "backup",
+        "backblaze-b2",
+        "backblaze-api"
+    ],
+    "homepage": "https://github.com/bcarrella/backblaze-b2",
+    "license": "LGPL-3.0-or-later",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Chris White",
+            "email": "chris@cwhite.me",
+            "homepage": "https://cwhite.me"
+        },
+        {
+            "name": "Ahmad Fikrizaman",
+            "email": "fikri@runcloud.io",
+            "homepage": "https://runcloud.io",
+            "role": "CTO"
+        },
+        {
+            "name": "Ricardo Obregón",
+            "email": "ricardo@obregon.co",
+            "homepage": "http://obregonco",
+            "role": "Founder"
+        },
+        {
+            "name": "Rick O'Brien",
+            "email": "rick@obregon.co",
+            "homepage": "http://obregonco"
+        },
+        {
+            "name": "Biagio Carrella",
+            "email": "biagio@biagiocarrella.it",
+            "homepage": "https://www.biagiocarrella.it"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "^6.1",
+        "illuminate/cache": ">=5.1.0",
+        "illuminate/container": ">=5.1.0",
+        "illuminate/filesystem": ">=5.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "obregonco\\B2\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "obregonco\\B2\\Tests\\": "tests/"
+        }
+    }
+}
