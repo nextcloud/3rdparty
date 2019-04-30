@@ -17,7 +17,7 @@
 		"christophwurst/id3parser": "^0.0.4",
 		"deepdiver/zipstreamer": "1.1.1",
 		"deepdiver1975/TarStreamer": "v0.1.0",
-		"doctrine/dbal": "2.7.2",
+		"doctrine/dbal": "2.9.2",
 		"guzzlehttp/guzzle": "6.3.3",
 		"icewind/searchdav": "1.0.1",
 		"icewind/streams": "v0.7.1",
