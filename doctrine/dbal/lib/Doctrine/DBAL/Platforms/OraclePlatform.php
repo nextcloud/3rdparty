@@ -31,10 +31,11 @@ use Doctrine\DBAL\Types\BinaryType;
 use function array_merge;
 use function count;
 use function explode;
+use function func_get_arg;
+use function func_num_args;
 use function implode;
 use function preg_match;
 use function sprintf;
-use function str_replace;
 use function strlen;
 use function strpos;
 use function strtoupper;
@@ -106,6 +107,8 @@ class OraclePlatform extends AbstractPlatform
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated Use application-generated UUIDs instead
      */
     public function getGuidExpression()
     {
@@ -160,14 +163,10 @@ class OraclePlatform extends AbstractPlatform
 
     /**
      * {@inheritDoc}
-     *
-     * Note: Since Oracle timestamp differences are calculated down to the microsecond we have to truncate
-     * them to the difference in days. This is obviously a restriction of the original functionality, but we
-     * need to make this a portable function.
      */
     public function getDateDiffExpression($date1, $date2)
     {
-        return "TRUNC(TO_NUMBER(SUBSTR((" . $date1 . "-" . $date2 . "), 1, INSTR(" . $date1 . "-" . $date2 .", ' '))))";
+        return sprintf('TRUNC(%s) - TRUNC(%s)', $date1, $date2);
     }
 
     /**
@@ -404,7 +403,7 @@ class OraclePlatform extends AbstractPlatform
 
         foreach ($columns as $name => $column) {
             if (isset($column['sequence'])) {
-                $sql[] = $this->getCreateSequenceSQL($column['sequence'], 1);
+                $sql[] = $this->getCreateSequenceSQL($column['sequence']);
             }
 
             if (isset($column['autoincrement']) && $column['autoincrement'] ||
@@ -989,7 +988,7 @@ END;';
      */
     protected function doModifyLimitQuery($query, $limit, $offset = null)
     {
-        if ($limit === null && $offset === null) {
+        if ($limit === null && $offset <= 0) {
             return $query;
         }
 
@@ -1120,7 +1119,9 @@ END;';
      */
     public function getDummySelectSQL()
     {
-        return 'SELECT 1 FROM DUAL';
+        $expression = func_num_args() > 0 ? func_get_arg(0) : '1';
+
+        return sprintf('SELECT %s FROM DUAL', $expression);
     }
 
     /**
@@ -1177,15 +1178,5 @@ END;';
     public function getBlobTypeDeclarationSQL(array $field)
     {
         return 'BLOB';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function quoteStringLiteral($str)
-    {
-        $str = str_replace('\\', '\\\\', $str); // Oracle requires backslashes to be escaped aswell.
-
-        return parent::quoteStringLiteral($str);
     }
 }

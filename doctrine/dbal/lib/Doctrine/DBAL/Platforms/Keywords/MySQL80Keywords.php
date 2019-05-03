@@ -17,44 +17,65 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAL\Platforms\Keywords;
 
-use Doctrine\DBAL\Schema\Index;
-use UnexpectedValueException;
+use function array_merge;
 
 /**
- * The SQLAnywhere16Platform provides the behavior, features and SQL dialect of the
- * SAP Sybase SQL Anywhere 16 database platform.
+ * MySQL 8.0 reserved keywords list.
  *
- * @author Steve Müller <st.mueller@dzh-online.de>
  * @link   www.doctrine-project.org
- * @since  2.5
  */
-class SQLAnywhere16Platform extends SQLAnywhere12Platform
+class MySQL80Keywords extends MySQL57Keywords
 {
     /**
      * {@inheritdoc}
      */
-    protected function getAdvancedIndexOptionsSQL(Index $index)
+    public function getName()
     {
-        if ($index->hasFlag('with_nulls_distinct') && $index->hasFlag('with_nulls_not_distinct')) {
-            throw new UnexpectedValueException(
-                'An Index can either have a "with_nulls_distinct" or "with_nulls_not_distinct" flag but not both.'
-            );
-        }
-
-        if ( ! $index->isPrimary() && $index->isUnique() && $index->hasFlag('with_nulls_distinct')) {
-            return ' WITH NULLS DISTINCT' . parent::getAdvancedIndexOptionsSQL($index);
-        }
-
-        return parent::getAdvancedIndexOptionsSQL($index);
+        return 'MySQL80';
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @link https://dev.mysql.com/doc/refman/8.0/en/keywords.html
      */
-    protected function getReservedKeywordsClass()
+    protected function getKeywords()
     {
-        return Keywords\SQLAnywhere16Keywords::class;
+        $keywords = parent::getKeywords();
+
+        $keywords = array_merge($keywords, [
+            'ADMIN',
+            'CUBE',
+            'CUME_DIST',
+            'DENSE_RANK',
+            'EMPTY',
+            'EXCEPT',
+            'FIRST_VALUE',
+            'FUNCTION',
+            'GROUPING',
+            'GROUPS',
+            'JSON_TABLE',
+            'LAG',
+            'LAST_VALUE',
+            'LEAD',
+            'NTH_VALUE',
+            'NTILE',
+            'OF',
+            'OVER',
+            'PERCENT_RANK',
+            'PERSIST',
+            'PERSIST_ONLY',
+            'RANK',
+            'RECURSIVE',
+            'ROW',
+            'ROWS',
+            'ROW_NUMBER',
+            'SYSTEM',
+            'WINDOW',
+        ]);
+
+        return $keywords;
     }
 }

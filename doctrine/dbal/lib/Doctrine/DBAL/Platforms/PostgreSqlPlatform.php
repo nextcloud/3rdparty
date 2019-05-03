@@ -42,7 +42,6 @@ use function is_array;
 use function is_bool;
 use function is_numeric;
 use function is_string;
-use function str_replace;
 use function strpos;
 use function strtolower;
 use function trim;
@@ -591,11 +590,14 @@ class PostgreSqlPlatform extends AbstractPlatform
                 }
             }
 
-            if ($columnDiff->hasChanged('comment')) {
+            $newComment = $this->getColumnComment($column);
+            $oldComment = $this->getOldColumnComment($columnDiff);
+
+            if ($columnDiff->hasChanged('comment') || ($columnDiff->fromColumn !== null && $oldComment !== $newComment)) {
                 $commentsSQL[] = $this->getCommentOnColumnSQL(
                     $diff->getName($this)->getQuotedName($this),
                     $column->getQuotedName($this),
-                    $this->getColumnComment($column)
+                    $newComment
                 );
             }
 
@@ -782,7 +784,7 @@ class PostgreSqlPlatform extends AbstractPlatform
 
         $query = 'CREATE TABLE ' . $tableName . ' (' . $queryFields . ')';
 
-        $sql[] = $query;
+        $sql = [$query];
 
         if (isset($options['indexes']) && ! empty($options['indexes'])) {
             foreach ($options['indexes'] as $index) {
@@ -829,11 +831,11 @@ class PostgreSqlPlatform extends AbstractPlatform
         /**
          * Better safe than sorry: http://php.net/in_array#106319
          */
-        if (in_array(trim(strtolower($value)), $this->booleanLiterals['false'], true)) {
+        if (in_array(strtolower(trim($value)), $this->booleanLiterals['false'], true)) {
             return $callback(false);
         }
 
-        if (in_array(trim(strtolower($value)), $this->booleanLiterals['true'], true)) {
+        if (in_array(strtolower(trim($value)), $this->booleanLiterals['true'], true)) {
             return $callback(true);
         }
 
@@ -1016,6 +1018,8 @@ class PostgreSqlPlatform extends AbstractPlatform
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated Use application-generated UUIDs instead
      */
     public function getGuidExpression()
     {
@@ -1203,16 +1207,6 @@ class PostgreSqlPlatform extends AbstractPlatform
     /**
      * {@inheritdoc}
      */
-    public function quoteStringLiteral($str)
-    {
-        $str = str_replace('\\', '\\\\', $str); // PostgreSQL requires backslashes to be escaped aswell.
-
-        return parent::quoteStringLiteral($str);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultValueDeclarationSQL($field)
     {
         if ($this->isSerialField($field)) {
@@ -1251,5 +1245,10 @@ class PostgreSqlPlatform extends AbstractPlatform
     private function isNumericType(Type $type) : bool
     {
         return $type instanceof IntegerType || $type instanceof BigIntType;
+    }
+
+    private function getOldColumnComment(ColumnDiff $columnDiff) : ?string
+    {
+        return $columnDiff->fromColumn ? $this->getColumnComment($columnDiff->fromColumn) : null;
     }
 }

@@ -31,6 +31,7 @@ use function is_int;
 use function key;
 use function ksort;
 use function preg_match_all;
+use function sprintf;
 use function strlen;
 use function strpos;
 use function substr;
@@ -48,10 +49,10 @@ class SQLParserUtils
     const NAMED_TOKEN      = '(?<!:):[a-zA-Z_][a-zA-Z0-9_]*';
 
     // Quote characters within string literals can be preceded by a backslash.
-    const ESCAPED_SINGLE_QUOTED_TEXT = "(?:'(?:\\\\\\\\)+'|(?<=ESCAPE\\s)'(?:\\\\)+'|'(?:[^'\\\\]|\\\\'?|'')*')";
-    const ESCAPED_DOUBLE_QUOTED_TEXT = '(?:"(?:\\\\\\\\)+"|(?<=ESCAPE\\s)"(?:\\\\)+"|"(?:[^"\\\\]|\\\\"?)*")';
-    const ESCAPED_BACKTICK_QUOTED_TEXT = '(?:`(?:\\\\\\\\)+`|(?<=ESCAPE\\s)`(?:\\\\)+`|`(?:[^`\\\\]|\\\\`?)*`)';
-    const ESCAPED_BRACKET_QUOTED_TEXT = '(?<!\bARRAY)\[(?:[^\]])*\]';
+    const ESCAPED_SINGLE_QUOTED_TEXT = "(?:'(?:\\\\\\\\)+'|'(?:[^'\\\\]|\\\\'?|'')*')";
+    const ESCAPED_DOUBLE_QUOTED_TEXT = '(?:"(?:\\\\\\\\)+"|"(?:[^"\\\\]|\\\\"?)*")';
+    const ESCAPED_BACKTICK_QUOTED_TEXT = '(?:`(?:\\\\\\\\)+`|`(?:[^`\\\\]|\\\\`?)*`)';
+    private const ESCAPED_BRACKET_QUOTED_TEXT = '(?<!\b(?i:ARRAY))\[(?:[^\]])*\]';
 
     /**
      * Gets an array of the placeholders in an sql statements as keys and their positions in the query string.
@@ -219,11 +220,13 @@ class SQLParserUtils
      */
     private static function getUnquotedStatementFragments($statement)
     {
-        $literal = self::ESCAPED_SINGLE_QUOTED_TEXT . '|' .
-                   self::ESCAPED_DOUBLE_QUOTED_TEXT . '|' .
-                   self::ESCAPED_BACKTICK_QUOTED_TEXT . '|' .
-                   self::ESCAPED_BRACKET_QUOTED_TEXT;
-        preg_match_all("/([^'\"`\[]+)(?:$literal)?/s", $statement, $fragments, PREG_OFFSET_CAPTURE);
+        $literal    = self::ESCAPED_SINGLE_QUOTED_TEXT . '|' .
+            self::ESCAPED_DOUBLE_QUOTED_TEXT . '|' .
+            self::ESCAPED_BACKTICK_QUOTED_TEXT . '|' .
+            self::ESCAPED_BRACKET_QUOTED_TEXT;
+        $expression = sprintf('/((.+(?i:ARRAY)\\[.+\\])|([^\'"`\\[]+))(?:%s)?/s', $literal);
+
+        preg_match_all($expression, $statement, $fragments, PREG_OFFSET_CAPTURE);
 
         return $fragments[1];
     }
