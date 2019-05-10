@@ -1,21 +1,4 @@
 <?php
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
 
 namespace Doctrine\DBAL\Driver\OCI8;
 
@@ -23,8 +6,11 @@ use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Driver\StatementIterator;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\ParameterType;
+use InvalidArgumentException;
 use IteratorAggregate;
+use PDO;
 use const OCI_ASSOC;
+use const OCI_B_BIN;
 use const OCI_B_BLOB;
 use const OCI_BOTH;
 use const OCI_D_LOB;
@@ -35,6 +21,7 @@ use const OCI_RETURN_LOBS;
 use const OCI_RETURN_NULLS;
 use const OCI_TEMP_BLOB;
 use const PREG_OFFSET_CAPTURE;
+use const SQLT_CHR;
 use function array_key_exists;
 use function count;
 use function implode;
@@ -57,35 +44,22 @@ use function substr;
 
 /**
  * The OCI8 implementation of the Statement interface.
- *
- * @since 2.0
- * @author Roman Borschel <roman@code-factory.org>
  */
 class OCI8Statement implements IteratorAggregate, Statement
 {
-    /**
-     * @var resource
-     */
+    /** @var resource */
     protected $_dbh;
 
-    /**
-     * @var resource
-     */
+    /** @var resource */
     protected $_sth;
 
-    /**
-     * @var \Doctrine\DBAL\Driver\OCI8\OCI8Connection
-     */
+    /** @var OCI8Connection */
     protected $_conn;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected static $_PARAM = ':param';
 
-    /**
-     * @var array
-     */
+    /** @var int[] */
     protected static $fetchModeMap = [
         FetchMode::MIXED       => OCI_BOTH,
         FetchMode::ASSOCIATIVE => OCI_ASSOC,
@@ -93,14 +67,10 @@ class OCI8Statement implements IteratorAggregate, Statement
         FetchMode::COLUMN      => OCI_NUM,
     ];
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $_defaultFetchMode = FetchMode::MIXED;
 
-    /**
-     * @var array
-     */
+    /** @var string[] */
     protected $_paramMap = [];
 
     /**
@@ -108,7 +78,7 @@ class OCI8Statement implements IteratorAggregate, Statement
      *
      * This is a new requirement for PHP7's oci8 extension that prevents bound values from being garbage collected.
      *
-     * @var array
+     * @var mixed[]
      */
     private $boundValues = [];
 
@@ -122,17 +92,16 @@ class OCI8Statement implements IteratorAggregate, Statement
     /**
      * Creates a new OCI8Statement that uses the given connection handle and SQL statement.
      *
-     * @param resource                                  $dbh       The connection handle.
-     * @param string                                    $statement The SQL statement.
-     * @param \Doctrine\DBAL\Driver\OCI8\OCI8Connection $conn
+     * @param resource $dbh       The connection handle.
+     * @param string   $statement The SQL statement.
      */
     public function __construct($dbh, $statement, OCI8Connection $conn)
     {
-        list($statement, $paramMap) = self::convertPositionalToNamedPlaceholders($statement);
-        $this->_sth = oci_parse($dbh, $statement);
-        $this->_dbh = $dbh;
-        $this->_paramMap = $paramMap;
-        $this->_conn = $conn;
+        [$statement, $paramMap] = self::convertPositionalToNamedPlaceholders($statement);
+        $this->_sth             = oci_parse($dbh, $statement);
+        $this->_dbh             = $dbh;
+        $this->_paramMap        = $paramMap;
+        $this->_conn            = $conn;
     }
 
     /**
@@ -147,22 +116,23 @@ class OCI8Statement implements IteratorAggregate, Statement
      * Question marks inside literal strings are therefore handled correctly by this method.
      * This comes at a cost, the whole sql statement has to be looped over.
      *
-     * @todo extract into utility class in Doctrine\DBAL\Util namespace
-     * @todo review and test for lost spaces. we experienced missing spaces with oci8 in some sql statements.
-     *
      * @param string $statement The SQL statement to convert.
      *
-     * @return array [0] => the statement value (string), [1] => the paramMap value (array).
-     * @throws \Doctrine\DBAL\Driver\OCI8\OCI8Exception
+     * @return mixed[] [0] => the statement value (string), [1] => the paramMap value (array).
+     *
+     * @throws OCI8Exception
+     *
+     * @todo extract into utility class in Doctrine\DBAL\Util namespace
+     * @todo review and test for lost spaces. we experienced missing spaces with oci8 in some sql statements.
      */
     public static function convertPositionalToNamedPlaceholders($statement)
     {
-        $fragmentOffset = $tokenOffset = 0;
-        $fragments = $paramMap = [];
+        $fragmentOffset          = $tokenOffset = 0;
+        $fragments               = $paramMap = [];
         $currentLiteralDelimiter = null;
 
         do {
-            if (!$currentLiteralDelimiter) {
+            if (! $currentLiteralDelimiter) {
                 $result = self::findPlaceholderOrOpeningQuote(
                     $statement,
                     $tokenOffset,
@@ -184,7 +154,7 @@ class OCI8Statement implements IteratorAggregate, Statement
         }
 
         $fragments[] = substr($statement, $fragmentOffset);
-        $statement = implode('', $fragments);
+        $statement   = implode('', $fragments);
 
         return [$statement, $paramMap];
     }
@@ -199,6 +169,7 @@ class OCI8Statement implements IteratorAggregate, Statement
      * @param string|null        $currentLiteralDelimiter The delimiter of the current string literal
      *                                                    or NULL if not currently in a literal
      * @param array<int, string> $paramMap                Mapping of the original parameter positions to their named replacements
+     *
      * @return bool Whether the token was found
      */
     private static function findPlaceholderOrOpeningQuote(
@@ -211,18 +182,18 @@ class OCI8Statement implements IteratorAggregate, Statement
     ) {
         $token = self::findToken($statement, $tokenOffset, '/[?\'"]/');
 
-        if (!$token) {
+        if (! $token) {
             return false;
         }
 
         if ($token === '?') {
-            $position = count($paramMap) + 1;
-            $param = ':param' . $position;
-            $fragments[] = substr($statement, $fragmentOffset, $tokenOffset - $fragmentOffset);
-            $fragments[] = $param;
+            $position            = count($paramMap) + 1;
+            $param               = ':param' . $position;
+            $fragments[]         = substr($statement, $fragmentOffset, $tokenOffset - $fragmentOffset);
+            $fragments[]         = $param;
             $paramMap[$position] = $param;
-            $tokenOffset += 1;
-            $fragmentOffset = $tokenOffset;
+            $tokenOffset        += 1;
+            $fragmentOffset      = $tokenOffset;
 
             return true;
         }
@@ -240,6 +211,7 @@ class OCI8Statement implements IteratorAggregate, Statement
      * @param string      $tokenOffset             The offset to start searching from
      * @param string|null $currentLiteralDelimiter The delimiter of the current string literal
      *                                             or NULL if not currently in a literal
+     *
      * @return bool Whether the token was found
      */
     private static function findClosingQuote(
@@ -253,7 +225,7 @@ class OCI8Statement implements IteratorAggregate, Statement
             '/' . preg_quote($currentLiteralDelimiter, '/') . '/'
         );
 
-        if (!$token) {
+        if (! $token) {
             return false;
         }
 
@@ -270,6 +242,7 @@ class OCI8Statement implements IteratorAggregate, Statement
      * @param string $statement The SQL statement to parse
      * @param string $offset    The offset to start searching from
      * @param string $regex     The regex containing token pattern
+     *
      * @return string|null Token or NULL if not found
      */
     private static function findToken($statement, &$offset, $regex)
@@ -301,18 +274,35 @@ class OCI8Statement implements IteratorAggregate, Statement
             $lob = oci_new_descriptor($this->_dbh, OCI_D_LOB);
             $lob->writeTemporary($variable, OCI_TEMP_BLOB);
 
-            $this->boundValues[$column] =& $lob;
-
-            return oci_bind_by_name($this->_sth, $column, $lob, -1, OCI_B_BLOB);
-        } elseif ($length !== null) {
-            $this->boundValues[$column] =& $variable;
-
-            return oci_bind_by_name($this->_sth, $column, $variable, $length);
+            $variable =& $lob;
         }
 
         $this->boundValues[$column] =& $variable;
 
-        return oci_bind_by_name($this->_sth, $column, $variable);
+        return oci_bind_by_name(
+            $this->_sth,
+            $column,
+            $variable,
+            $length ?? -1,
+            $this->convertParameterType($type)
+        );
+    }
+
+    /**
+     * Converts DBAL parameter type to oci8 parameter type
+     */
+    private function convertParameterType(int $type) : int
+    {
+        switch ($type) {
+            case ParameterType::BINARY:
+                return OCI_B_BIN;
+
+            case ParameterType::LARGE_OBJECT:
+                return OCI_B_BLOB;
+
+            default:
+                return SQLT_CHR;
+        }
     }
 
     /**
@@ -321,7 +311,7 @@ class OCI8Statement implements IteratorAggregate, Statement
     public function closeCursor()
     {
         // not having the result means there's nothing to close
-        if (!$this->result) {
+        if (! $this->result) {
             return true;
         }
 
@@ -378,7 +368,7 @@ class OCI8Statement implements IteratorAggregate, Statement
         }
 
         $ret = @oci_execute($this->_sth, $this->_conn->getExecuteMode());
-        if ( ! $ret) {
+        if (! $ret) {
             throw OCI8Exception::fromErrorInfo($this->errorInfo());
         }
 
@@ -408,11 +398,11 @@ class OCI8Statement implements IteratorAggregate, Statement
     /**
      * {@inheritdoc}
      */
-    public function fetch($fetchMode = null, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    public function fetch($fetchMode = null, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
     {
         // do not try fetching from the statement if it's not expected to contain result
         // in order to prevent exceptional situation
-        if (!$this->result) {
+        if (! $this->result) {
             return false;
         }
 
@@ -427,7 +417,7 @@ class OCI8Statement implements IteratorAggregate, Statement
         }
 
         if (! isset(self::$fetchModeMap[$fetchMode])) {
-            throw new \InvalidArgumentException("Invalid fetch style: " . $fetchMode);
+            throw new InvalidArgumentException('Invalid fetch style: ' . $fetchMode);
         }
 
         return oci_fetch_array(
@@ -453,8 +443,8 @@ class OCI8Statement implements IteratorAggregate, Statement
             return $result;
         }
 
-        if ( ! isset(self::$fetchModeMap[$fetchMode])) {
-            throw new \InvalidArgumentException("Invalid fetch style: " . $fetchMode);
+        if (! isset(self::$fetchModeMap[$fetchMode])) {
+            throw new InvalidArgumentException('Invalid fetch style: ' . $fetchMode);
         }
 
         if (self::$fetchModeMap[$fetchMode] === OCI_BOTH) {
@@ -470,12 +460,17 @@ class OCI8Statement implements IteratorAggregate, Statement
 
             // do not try fetching from the statement if it's not expected to contain result
             // in order to prevent exceptional situation
-            if (!$this->result) {
+            if (! $this->result) {
                 return [];
             }
 
-            oci_fetch_all($this->_sth, $result, 0, -1,
-                self::$fetchModeMap[$fetchMode] | OCI_RETURN_NULLS | $fetchStructure | OCI_RETURN_LOBS);
+            oci_fetch_all(
+                $this->_sth,
+                $result,
+                0,
+                -1,
+                self::$fetchModeMap[$fetchMode] | OCI_RETURN_NULLS | $fetchStructure | OCI_RETURN_LOBS
+            );
 
             if ($fetchMode === FetchMode::COLUMN) {
                 $result = $result[0];
@@ -492,13 +487,13 @@ class OCI8Statement implements IteratorAggregate, Statement
     {
         // do not try fetching from the statement if it's not expected to contain result
         // in order to prevent exceptional situation
-        if (!$this->result) {
+        if (! $this->result) {
             return false;
         }
 
         $row = oci_fetch_array($this->_sth, OCI_NUM | OCI_RETURN_NULLS | OCI_RETURN_LOBS);
 
-        if (false === $row) {
+        if ($row === false) {
             return false;
         }
 
