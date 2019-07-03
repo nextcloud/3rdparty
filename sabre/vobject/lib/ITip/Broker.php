@@ -531,6 +531,7 @@ class Broker {
                 $event = $icalMsg->add('VEVENT', [
                     'UID'      => $message->uid,
                     'SEQUENCE' => $message->sequence,
+                    'DTSTAMP' => gmdate('Ymd\\THis\\Z'),
                 ]);
                 if (isset($calendar->VEVENT->SUMMARY)) {
                     $event->add('SUMMARY', $calendar->VEVENT->SUMMARY->getValue());
@@ -619,7 +620,7 @@ class Broker {
                         }
 
                     }
-
+                    $currentEvent->DTSTAMP = gmdate('Ymd\\THis\\Z');
                     $icalMsg->add($currentEvent);
 
                 }
