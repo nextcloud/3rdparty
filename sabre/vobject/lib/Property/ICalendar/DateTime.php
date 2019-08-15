@@ -143,7 +143,7 @@ class DateTime extends Property {
      *
      * @param DateTimeZone $timeZone
      *
-     * @return DateTimeImmutable
+     * @return \DateTimeImmutable
      */
     function getDateTime(DateTimeZone $timeZone = null) {
 
@@ -163,7 +163,7 @@ class DateTime extends Property {
      *
      * @param DateTimeZone $timeZone
      *
-     * @return DateTimeImmutable[]
+     * @return \DateTimeImmutable[]
      * @return \DateTime[]
      */
     function getDateTimes(DateTimeZone $timeZone = null) {
