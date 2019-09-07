@@ -62,12 +62,9 @@ class Route implements \Serializable
         $this->setCondition($condition);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function serialize()
+    public function __serialize(): array
     {
-        return serialize([
+        return [
             'path' => $this->path,
             'host' => $this->host,
             'defaults' => $this->defaults,
@@ -77,15 +74,20 @@ class Route implements \Serializable
             'methods' => $this->methods,
             'condition' => $this->condition,
             'compiled' => $this->compiled,
-        ]);
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * @internal since Symfony 4.3
+     * @final since Symfony 4.3
      */
-    public function unserialize($serialized)
+    public function serialize()
     {
-        $data = unserialize($serialized);
+        return serialize($this->__serialize());
+    }
+
+    public function __unserialize(array $data): void
+    {
         $this->path = $data['path'];
         $this->host = $data['host'];
         $this->defaults = $data['defaults'];
@@ -100,6 +102,15 @@ class Route implements \Serializable
         if (isset($data['compiled'])) {
             $this->compiled = $data['compiled'];
         }
+    }
+
+    /**
+     * @internal since Symfony 4.3
+     * @final since Symfony 4.3
+     */
+    public function unserialize($serialized)
+    {
+        $this->__unserialize(unserialize($serialized));
     }
 
     /**
