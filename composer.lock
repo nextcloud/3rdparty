@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d6e1b7dcad4d7c6638d258bdac5988e",
+    "content-hash": "ad5a3521002c706a3b60d9beb88e8948",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -187,28 +187,28 @@
             "authors": [
                 {
                     "name": "Nicolai Ehemann",
-                    "email": "en@enlightened.de",
-                    "role": "Author/Maintainer"
+                    "role": "Author/Maintainer",
+                    "email": "en@enlightened.de"
                 },
                 {
                     "name": "André Rothe",
-                    "email": "arothe@zks.uni-leipzig.de",
-                    "role": "Contributor"
+                    "role": "Contributor",
+                    "email": "arothe@zks.uni-leipzig.de"
                 },
                 {
                     "name": "Lukas Reschke",
-                    "email": "lukas@owncloud.com",
-                    "role": "Contributor"
+                    "role": "Contributor",
+                    "email": "lukas@owncloud.com"
                 },
                 {
                     "name": "Thomas Müller",
-                    "email": "thomas.mueller@tmit.eu",
-                    "role": "Contributor"
+                    "role": "Contributor",
+                    "email": "thomas.mueller@tmit.eu"
                 },
                 {
                     "name": "Roeland Jago Douma",
-                    "email": "roeland@famdouma.nl",
-                    "role": "Contributor"
+                    "role": "Contributor",
+                    "email": "roeland@famdouma.nl"
                 }
             ],
             "description": "Stream zip files without i/o overhead",
@@ -1463,7 +1463,7 @@
             "time": "2015-08-01T16:27:37+00:00"
         },
         {
-            "name": "jeremeamia/SuperClosure",
+            "name": "jeremeamia/superclosure",
             "version": "2.4.0",
             "source": {
                 "type": "git",
@@ -2117,18 +2117,18 @@
             "authors": [
                 {
                     "name": "Greg Beaver",
-                    "email": "cellog@php.net",
-                    "role": "Helper"
+                    "role": "Helper",
+                    "email": "cellog@php.net"
                 },
                 {
                     "name": "Andrei Zmievski",
-                    "email": "andrei@php.net",
-                    "role": "Lead"
+                    "role": "Lead",
+                    "email": "andrei@php.net"
                 },
                 {
                     "name": "Stig Bakken",
-                    "email": "stig@php.net",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "stig@php.net"
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Console_Getopt",
@@ -2298,16 +2298,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.15",
+            "version": "2.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "11cf67cf78dc4acb18dc9149a57be4aee5036ce0"
+                "reference": "9f1287e68b3f283339a9f98f67515dd619e5bf9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/11cf67cf78dc4acb18dc9149a57be4aee5036ce0",
-                "reference": "11cf67cf78dc4acb18dc9149a57be4aee5036ce0",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/9f1287e68b3f283339a9f98f67515dd619e5bf9d",
+                "reference": "9f1287e68b3f283339a9f98f67515dd619e5bf9d",
                 "shasum": ""
             },
             "require": {
@@ -2386,7 +2386,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2019-03-10T16:53:45+00:00"
+            "time": "2019-07-12T12:53:49+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2621,13 +2621,13 @@
             "authors": [
                 {
                     "name": "Michele Locati",
-                    "email": "mlocati@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "mlocati@gmail.com"
                 },
                 {
                     "name": "Remo Laubacher",
-                    "email": "remo.laubacher@gmail.com",
-                    "role": "Collaborator, motivator and perfectionist supporter"
+                    "role": "Collaborator, motivator and perfectionist supporter",
+                    "email": "remo.laubacher@gmail.com"
                 }
             ],
             "description": "PHP-Unicode CLDR",
@@ -2855,9 +2855,9 @@
             "authors": [
                 {
                     "name": "Evert Pot",
+                    "role": "Developer",
                     "email": "me@evertpot.com",
-                    "homepage": "http://evertpot.com/",
-                    "role": "Developer"
+                    "homepage": "http://evertpot.com/"
                 }
             ],
             "description": "sabre/event is a library for lightweight event-based programming",
