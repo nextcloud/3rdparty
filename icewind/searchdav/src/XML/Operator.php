@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -23,6 +23,7 @@ namespace SearchDAV\XML;
 
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
+use SearchDAV\Query\Operator as QueryOperator;
 
 class Operator implements XmlDeserializable {
 	/**
@@ -50,12 +51,12 @@ class Operator implements XmlDeserializable {
 	 * @param string $type
 	 * @param array $arguments
 	 */
-	public function __construct($type = '', array $arguments = []) {
+	public function __construct(string $type = '', array $arguments = []) {
 		$this->type = $type;
 		$this->arguments = $arguments;
 	}
 
-	static function xmlDeserialize(Reader $reader) {
+	static function xmlDeserialize(Reader $reader): Operator {
 		$operator = new self();
 
 		$operator->type = $reader->getClark();
@@ -63,17 +64,26 @@ class Operator implements XmlDeserializable {
 			$reader->next();
 			return $operator;
 		}
+
+		if ($operator->type === QueryOperator::OPERATION_CONTAINS) {
+			$operator->arguments[] = $reader->readString();
+			$reader->next();
+			return $operator;
+		}
+
 		$reader->read();
 		do {
 			if ($reader->nodeType === Reader::ELEMENT) {
 				$argument = $reader->parseCurrentElement();
 				if ($argument['name'] === '{DAV:}prop') {
-					$operator->arguments[] = $argument['value'][0];
+					$operator->arguments[] = $argument['value'][0] ?? '';
 				} else {
 					$operator->arguments[] = $argument['value'];
 				}
 			} else {
-				$reader->read();
+			       if (!$reader->read()) {
+                			break;
+            		       }
 			}
 		} while ($reader->nodeType !== Reader::END_ELEMENT);
 

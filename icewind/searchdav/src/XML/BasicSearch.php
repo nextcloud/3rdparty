@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -70,7 +70,7 @@ class BasicSearch implements XmlDeserializable {
 	 * @return BasicSearch
 	 * @throws ParseException
 	 */
-	static function xmlDeserialize(Reader $reader) {
+	static function xmlDeserialize(Reader $reader): BasicSearch {
 		$search = new self();
 
 		$elements = \Sabre\Xml\Deserializer\keyValue($reader);

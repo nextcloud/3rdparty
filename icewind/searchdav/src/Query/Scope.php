@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
@@ -52,7 +52,7 @@ class Scope {
 	 * @param int|string $depth
 	 * @param string|null $path
 	 */
-	public function __construct($href = '', $depth = 1, $path = null) {
+	public function __construct(string $href = '', $depth = 1, string $path = null) {
 		$this->href = $href;
 		$this->depth = $depth;
 		$this->path = $path;
