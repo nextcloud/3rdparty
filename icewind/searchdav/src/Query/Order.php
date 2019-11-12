@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
@@ -46,7 +46,7 @@ class Order {
 	 * @param SearchPropertyDefinition $property
 	 * @param string $order
 	 */
-	public function __construct(SearchPropertyDefinition $property, $order) {
+	public function __construct(SearchPropertyDefinition $property, string $order) {
 		$this->property = $property;
 		$this->order = $order;
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -25,7 +25,7 @@ use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 
 class Scope extends \SearchDAV\Query\Scope implements XmlDeserializable {
-	static function xmlDeserialize(Reader $reader) {
+	static function xmlDeserialize(Reader $reader): Scope {
 		$scope = new self();
 
 		$values = \Sabre\Xml\Deserializer\keyValue($reader);
