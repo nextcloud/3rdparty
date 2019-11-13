@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
@@ -60,7 +60,7 @@ class Operator {
 	 * @param string $type
 	 * @param array $arguments
 	 */
-	public function __construct($type = '', array $arguments = []) {
+	public function __construct(string $type = '', array $arguments = []) {
 		$this->type = $type;
 		$this->arguments = $arguments;
 	}

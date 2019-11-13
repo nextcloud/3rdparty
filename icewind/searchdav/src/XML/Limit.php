@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -29,7 +29,7 @@ use SearchDAV\DAV\SearchPlugin;
  * The limit and offset of a search query
  */
 class Limit extends \SearchDAV\Query\Limit implements XmlDeserializable {
-	static function xmlDeserialize(Reader $reader) {
+	static function xmlDeserialize(Reader $reader): Limit {
 		$limit = new self();
 
 		$elements = \Sabre\Xml\Deserializer\keyValue($reader);

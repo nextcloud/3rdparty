@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a54ad5add86c8bf26b7b25569d1636ef",
+    "content-hash": "c0e54b6e6689b510f86d0107f4001474",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1282,20 +1282,20 @@
         },
         {
             "name": "icewind/searchdav",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/SearchDAV.git",
-                "reference": "b3fde1c79bc9c53f329f8ae1ee93d377903bf616"
+                "reference": "7174c023485c23037c6af786fce5a382fc72a75d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/b3fde1c79bc9c53f329f8ae1ee93d377903bf616",
-                "reference": "b3fde1c79bc9c53f329f8ae1ee93d377903bf616",
+                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/7174c023485c23037c6af786fce5a382fc72a75d",
+                "reference": "7174c023485c23037c6af786fce5a382fc72a75d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6",
+                "php": ">=7.1",
                 "sabre/dav": "^3.2.0"
             },
             "require-dev": {
@@ -1319,7 +1319,7 @@
                 }
             ],
             "description": "sabre/dav plugin to implement rfc5323 SEARCH",
-            "time": "2018-03-22T16:07:21+00:00"
+            "time": "2019-11-06T13:15:26+00:00"
         },
         {
             "name": "icewind/streams",
