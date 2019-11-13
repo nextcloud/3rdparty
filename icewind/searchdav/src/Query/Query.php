@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
@@ -65,11 +65,11 @@ class Query {
 	 * Query constructor.
 	 * @param SearchPropertyDefinition[] $select
 	 * @param Scope[] $from
-	 * @param Operator $where
+	 * @param Operator|null $where
 	 * @param Order[] $orderBy
 	 * @param Limit $limit
 	 */
-	public function __construct(array $select, array $from, Operator $where, array $orderBy, Limit $limit) {
+	public function __construct(array $select, array $from, ?Operator $where, array $orderBy, Limit $limit) {
 		$this->select = $select;
 		$this->from = $from;
 		$this->where = $where;
