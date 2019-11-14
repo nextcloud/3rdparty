@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -45,12 +45,12 @@ class Order implements XmlDeserializable {
 	 * @param string $property
 	 * @param string $order
 	 */
-	public function __construct($property = '', $order = \SearchDAV\Query\Order::ASC) {
+	public function __construct(string $property = '', string $order = \SearchDAV\Query\Order::ASC) {
 		$this->property = $property;
 		$this->order = $order;
 	}
 
-	static function xmlDeserialize(Reader $reader) {
+	static function xmlDeserialize(Reader $reader): Order {
 		$order = new self();
 
 		$childs = \Sabre\Xml\Deserializer\keyValue($reader);
