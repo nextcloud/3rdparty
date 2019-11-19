@@ -997,16 +997,7 @@ class getid3_lib
 
 
 	public static function GetDataImageSize($imgData, &$imageinfo=array()) {
-		$GetDataImageSize = false;
-		if ($tempfilename = tempnam(sys_get_temp_dir(), 'gI3')) {
-			if (is_writable($tempfilename) && is_file($tempfilename) && ($tmp = fopen($tempfilename, 'wb'))) {
-				fwrite($tmp, $imgData);
-				fclose($tmp);
-				$GetDataImageSize = @getimagesize($tempfilename, $imageinfo);
-			}
-			unlink($tempfilename);
-		}
-		return $GetDataImageSize;
+		return @getimagesizefromstring($imgData, $imageinfo);
 	}
 
 	public static function ImageExtFromMime($mime_type) {
