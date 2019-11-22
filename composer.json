@@ -7,11 +7,11 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "7.1.8"
+			"php": "7.2.0"
 		}
 	},
 	"require": {
-		"php": ">=7.1",
+		"php": ">=7.2",
 		"aws/aws-sdk-php": "^3.35",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"christophwurst/id3parser": "^0.1.0",
