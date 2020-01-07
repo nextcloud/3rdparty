@@ -14,7 +14,7 @@
 		"php": ">=7.2",
 		"aws/aws-sdk-php": "^3.35",
 		"bantu/ini-get-wrapper": "v1.0.1",
-		"christophwurst/id3parser": "^0.1.0",
+		"christophwurst/id3parser": "^0.1.1",
 		"deepdiver/zipstreamer": "1.1.1",
 		"deepdiver1975/tarstreamer": "v0.1.0",
 		"doctrine/dbal": "2.9.2",
