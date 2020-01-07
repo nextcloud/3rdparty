@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a022c2f9b60b10e5dfd10ad011f32c93",
+    "content-hash": "3fd6c147656a9ff308546b1f30171f3f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -121,16 +121,16 @@
         },
         {
             "name": "christophwurst/id3parser",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/ID3Parser.git",
-                "reference": "5c655185dea2ce5ca905e223ddbc33f4d815b4de"
+                "reference": "c0e56c336bd6131c199827f928e5a9aec89aa4da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/5c655185dea2ce5ca905e223ddbc33f4d815b4de",
-                "reference": "5c655185dea2ce5ca905e223ddbc33f4d815b4de",
+                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/c0e56c336bd6131c199827f928e5a9aec89aa4da",
+                "reference": "c0e56c336bd6131c199827f928e5a9aec89aa4da",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 "php",
                 "tags"
             ],
-            "time": "2019-09-27T10:34:30+00:00"
+            "time": "2020-01-07T09:05:03+00:00"
         },
         {
             "name": "deepdiver/zipstreamer",
@@ -1473,7 +1473,7 @@
             "time": "2015-08-01T16:27:37+00:00"
         },
         {
-            "name": "jeremeamia/superclosure",
+            "name": "jeremeamia/SuperClosure",
             "version": "2.4.0",
             "source": {
                 "type": "git",
