@@ -16,7 +16,7 @@
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"christophwurst/id3parser": "^0.1.1",
 		"deepdiver/zipstreamer": "1.1.1",
-		"deepdiver1975/tarstreamer": "v0.1.0",
+		"deepdiver1975/tarstreamer": "v0.1.1",
 		"doctrine/dbal": "2.9.2",
 		"guzzlehttp/guzzle": "6.3.3",
 		"icewind/searchdav": "1.0.2",

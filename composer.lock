@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fd6c147656a9ff308546b1f30171f3f",
+    "content-hash": "d317f2844713550da3d1d71465193162",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -222,16 +222,16 @@
         },
         {
             "name": "deepdiver1975/tarstreamer",
-            "version": "v0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owncloud/TarStreamer.git",
-                "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b"
+                "reference": "2d99636ded9c8a8a1ecd8129e7976dcd606106d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/859a0170de120c66b042e6c0dbc1a9979c74669b",
-                "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b",
+                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/2d99636ded9c8a8a1ecd8129e7976dcd606106d9",
+                "reference": "2d99636ded9c8a8a1ecd8129e7976dcd606106d9",
                 "shasum": ""
             },
             "require": {
@@ -260,7 +260,7 @@
                 "stream",
                 "tar"
             ],
-            "time": "2016-02-15T10:52:44+00:00"
+            "time": "2019-02-11T13:56:51+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1473,7 +1473,7 @@
             "time": "2015-08-01T16:27:37+00:00"
         },
         {
-            "name": "jeremeamia/SuperClosure",
+            "name": "jeremeamia/superclosure",
             "version": "2.4.0",
             "source": {
                 "type": "git",
