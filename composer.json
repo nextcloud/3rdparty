@@ -43,6 +43,7 @@
 		"symfony/event-dispatcher-contracts": "1.1.5",
 		"symfony/process": "4.3.4",
 		"symfony/routing": "4.3.4",
-		"symfony/translation": "4.3.4"
+		"symfony/translation": "4.3.4",
+		"php-http/guzzle6-adapter": "^2.0"
 	}
 }

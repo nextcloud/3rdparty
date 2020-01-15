@@ -54,6 +54,18 @@ phpseclib/phpseclib/composer.json
 phpseclib/phpseclib/composer.lock
 phpseclib/phpseclib/phpunit.xml.dist
 
+php-http/guzzle6-adapter/CHANGELOG.md
+php-http/guzzle6-adapter/README.md
+
+php-http/httplug/CHANGELOG.md
+php-http/httplug/README.md
+
+php-http/promise/CHANGELOG.md
+php-http/promise/README.md
+
+psr/http-client/CHANGELOG.md
+psr/http-client/README.md
+
 php-opencloud/openstack/doc
 php-opencloud/openstack/tests
 php-opencloud/openstack/samples
