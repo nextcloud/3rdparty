@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26311e0cefed3ed8e23fd6ce2ed2b7a3",
+    "content-hash": "f7c1ef67950349233bc050270a7f2fdd",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1474,7 +1474,7 @@
             "time": "2015-08-01T16:27:37+00:00"
         },
         {
-            "name": "jeremeamia/SuperClosure",
+            "name": "jeremeamia/superclosure",
             "version": "2.4.0",
             "source": {
                 "type": "git",
@@ -2764,16 +2764,16 @@
         },
         {
             "name": "punic/punic",
-            "version": "1.6.5",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/punic/punic.git",
-                "reference": "7bc85ce1137cf52db4d2a6298256a4c4a24da99a"
+                "reference": "fd8f0b6e3f2cdebc3ad9bfce8ecdba091a827621"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/punic/punic/zipball/7bc85ce1137cf52db4d2a6298256a4c4a24da99a",
-                "reference": "7bc85ce1137cf52db4d2a6298256a4c4a24da99a",
+                "url": "https://api.github.com/repos/punic/punic/zipball/fd8f0b6e3f2cdebc3ad9bfce8ecdba091a827621",
+                "reference": "fd8f0b6e3f2cdebc3ad9bfce8ecdba091a827621",
                 "shasum": ""
             },
             "require": {
@@ -2784,12 +2784,16 @@
                 "punic/common": "*"
             },
             "require-dev": {
-                "apigen/apigen": "4.0.*"
+                "friendsofphp/php-cs-fixer": "2.2.*",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.4"
             },
+            "bin": [
+                "bin/punic-data"
+            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Punic\\": "code/"
+                    "Punic\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2806,6 +2810,11 @@
                     "name": "Remo Laubacher",
                     "email": "remo.laubacher@gmail.com",
                     "role": "Collaborator, motivator and perfectionist supporter"
+                },
+                {
+                    "name": "Christian Schmidt",
+                    "email": "github@chsc.dk",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP-Unicode CLDR",
@@ -2825,7 +2834,7 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2017-02-03T16:13:09+00:00"
+            "time": "2019-12-02T15:03:02+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

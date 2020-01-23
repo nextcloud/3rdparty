@@ -33,7 +33,7 @@
 		"phpseclib/phpseclib": "2.0.23",
 		"php-opencloud/openstack": "3.0.6",
 		"pimple/pimple": "3.2.3",
-		"punic/punic": "^1.6",
+		"punic/punic": "^3.5",
 		"sabre/dav": "^3.2.0",
 		"scssphp/scssphp": "1.0.3",
 		"stecman/symfony-console-completion": "^0.8.0",
