@@ -150,7 +150,7 @@ class Command
      * execute() method, you set the code to execute by passing
      * a Closure to the setCode() method.
      *
-     * @return int|null null or 0 if everything went fine, or an error code
+     * @return int 0 if everything went fine, or an exit code
      *
      * @throws LogicException When this abstract method is not implemented
      *
@@ -253,6 +253,10 @@ class Command
             $statusCode = ($this->code)($input, $output);
         } else {
             $statusCode = $this->execute($input, $output);
+
+            if (!\is_int($statusCode)) {
+                @trigger_error(sprintf('Return value of "%s::execute()" should always be of the type int since Symfony 4.4, %s returned.', \get_class($this), \gettype($statusCode)), E_USER_DEPRECATED);
+            }
         }
 
         return is_numeric($statusCode) ? (int) $statusCode : 0;
@@ -445,14 +449,10 @@ class Command
     /**
      * Returns the command name.
      *
-     * @return string The command name
+     * @return string|null
      */
     public function getName()
     {
-        if (!$this->name) {
-            throw new LogicException(sprintf('The command defined in "%s" cannot have an empty name.', \get_class($this)));
-        }
-
         return $this->name;
     }
 

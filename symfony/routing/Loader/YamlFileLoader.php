@@ -28,7 +28,7 @@ use Symfony\Component\Yaml\Yaml;
 class YamlFileLoader extends FileLoader
 {
     private static $availableKeys = [
-        'resource', 'type', 'prefix', 'path', 'host', 'schemes', 'methods', 'defaults', 'requirements', 'options', 'condition', 'controller', 'name_prefix', 'trailing_slash_on_root', 'locale', 'format', 'utf8',
+        'resource', 'type', 'prefix', 'path', 'host', 'schemes', 'methods', 'defaults', 'requirements', 'options', 'condition', 'controller', 'name_prefix', 'trailing_slash_on_root', 'locale', 'format', 'utf8', 'exclude',
     ];
     private $yamlParser;
 
@@ -101,10 +101,9 @@ class YamlFileLoader extends FileLoader
     /**
      * Parses a route and adds it to the RouteCollection.
      *
-     * @param RouteCollection $collection A RouteCollection instance
-     * @param string          $name       Route name
-     * @param array           $config     Route definition
-     * @param string          $path       Full path of the YAML file being processed
+     * @param string $name   Route name
+     * @param array  $config Route definition
+     * @param string $path   Full path of the YAML file being processed
      */
     protected function parseRoute(RouteCollection $collection, $name, array $config, $path)
     {
@@ -154,10 +153,9 @@ class YamlFileLoader extends FileLoader
     /**
      * Parses an import and adds the routes in the resource to the RouteCollection.
      *
-     * @param RouteCollection $collection A RouteCollection instance
-     * @param array           $config     Route definition
-     * @param string          $path       Full path of the YAML file being processed
-     * @param string          $file       Loaded file name
+     * @param array  $config Route definition
+     * @param string $path   Full path of the YAML file being processed
+     * @param string $file   Loaded file name
      */
     protected function parseImport(RouteCollection $collection, array $config, $path, $file)
     {
@@ -171,6 +169,7 @@ class YamlFileLoader extends FileLoader
         $schemes = isset($config['schemes']) ? $config['schemes'] : null;
         $methods = isset($config['methods']) ? $config['methods'] : null;
         $trailingSlashOnRoot = $config['trailing_slash_on_root'] ?? true;
+        $exclude = $config['exclude'] ?? null;
 
         if (isset($config['controller'])) {
             $defaults['_controller'] = $config['controller'];
@@ -187,7 +186,7 @@ class YamlFileLoader extends FileLoader
 
         $this->setCurrentDir(\dirname($path));
 
-        $imported = $this->import($config['resource'], $type, false, $file);
+        $imported = $this->import($config['resource'], $type, false, $file, $exclude) ?: [];
 
         if (!\is_array($imported)) {
             $imported = [$imported];

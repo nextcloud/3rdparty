@@ -38,12 +38,12 @@
 		"scssphp/scssphp": "1.0.3",
 		"stecman/symfony-console-completion": "^0.8.0",
 		"swiftmailer/swiftmailer": "^6.0",
-		"symfony/console": "4.3.4",
-		"symfony/event-dispatcher": "4.3.4",
+		"symfony/console": "4.4.4",
+		"symfony/event-dispatcher": "4.4.4",
 		"symfony/event-dispatcher-contracts": "1.1.5",
-		"symfony/process": "4.3.4",
-		"symfony/routing": "4.3.4",
-		"symfony/translation": "4.3.4",
+		"symfony/process": "4.4.4",
+		"symfony/routing": "4.4.4",
+		"symfony/translation": "4.4.4",
 		"php-http/guzzle6-adapter": "^2.0"
 	}
 }
