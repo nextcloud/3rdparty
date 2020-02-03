@@ -45,10 +45,10 @@ class Route implements \Serializable
      * @param array           $defaults     An array of default parameter values
      * @param array           $requirements An array of requirements for parameters (regexes)
      * @param array           $options      An array of options
-     * @param string          $host         The host pattern to match
+     * @param string|null     $host         The host pattern to match
      * @param string|string[] $schemes      A required URI scheme or an array of restricted schemes
      * @param string|string[] $methods      A required HTTP method or an array of restricted methods
-     * @param string          $condition    A condition that should evaluate to true for the route to match
+     * @param string|null     $condition    A condition that should evaluate to true for the route to match
      */
     public function __construct(string $path, array $defaults = [], array $requirements = [], array $options = [], ?string $host = '', $schemes = [], $methods = [], ?string $condition = '')
     {
@@ -78,6 +78,8 @@ class Route implements \Serializable
     }
 
     /**
+     * @return string
+     *
      * @internal since Symfony 4.3
      * @final since Symfony 4.3
      */
@@ -267,8 +269,6 @@ class Route implements \Serializable
      *
      * This method implements a fluent interface.
      *
-     * @param array $options The options
-     *
      * @return $this
      */
     public function setOptions(array $options)
@@ -284,8 +284,6 @@ class Route implements \Serializable
      * Adds options.
      *
      * This method implements a fluent interface.
-     *
-     * @param array $options The options
      *
      * @return $this
      */
@@ -559,7 +557,7 @@ class Route implements \Serializable
         return $this->compiled = $class::compile($this);
     }
 
-    private function sanitizeRequirement($key, $regex)
+    private function sanitizeRequirement(string $key, $regex)
     {
         if (!\is_string($regex)) {
             throw new \InvalidArgumentException(sprintf('Routing requirement for "%s" must be a string.', $key));

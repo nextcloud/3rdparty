@@ -91,7 +91,7 @@ EOF;
 
         while (true) {
             try {
-                $this->signalingException = new \RuntimeException('preg_match(): Compilation failed: regular expression is too large');
+                $this->signalingException = new \RuntimeException('Compilation failed: regular expression is too large');
                 $compiledRoutes = array_merge($compiledRoutes, $this->compileDynamicRoutes($dynamicRoutes, $matchHost, $chunkLimit, $conditions));
 
                 break;
@@ -121,7 +121,7 @@ EOF;
         }
     }
 EOF;
-            $compiledRoutes[4] = $forDump ? $checkConditionCode .= ",\n" : eval('return '.$checkConditionCode.';');
+            $compiledRoutes[4] = $forDump ? $checkConditionCode.",\n" : eval('return '.$checkConditionCode.';');
         } else {
             $compiledRoutes[4] = $forDump ? "    null, // \$checkCondition\n" : null;
         }
@@ -187,7 +187,7 @@ EOF;
                     $url = substr($url, 0, -1);
                 }
                 foreach ($dynamicRegex as list($hostRx, $rx, $prefix)) {
-                    if (('' === $prefix || 0 === strpos($url, $prefix)) && preg_match($rx, $url) && (!$host || !$hostRx || preg_match($hostRx, $host))) {
+                    if (('' === $prefix || 0 === strpos($url, $prefix)) && (preg_match($rx, $url) || preg_match($rx, $url.'/')) && (!$host || !$hostRx || preg_match($hostRx, $host))) {
                         $dynamicRegex[] = [$hostRegex, $regex, $staticPrefix];
                         $dynamicRoutes->add($name, $route);
                         continue 2;
@@ -349,7 +349,7 @@ EOF;
             $state->markTail = 0;
 
             // if the regex is too large, throw a signaling exception to recompute with smaller chunk size
-            set_error_handler(function ($type, $message) { throw 0 === strpos($message, $this->signalingException->getMessage()) ? $this->signalingException : new \ErrorException($message); });
+            set_error_handler(function ($type, $message) { throw false !== strpos($message, $this->signalingException->getMessage()) ? $this->signalingException : new \ErrorException($message); });
             try {
                 preg_match($state->regex, '');
             } finally {
@@ -443,7 +443,7 @@ EOF;
         ];
     }
 
-    private function getExpressionLanguage()
+    private function getExpressionLanguage(): ExpressionLanguage
     {
         if (null === $this->expressionLanguage) {
             if (!class_exists('Symfony\Component\ExpressionLanguage\ExpressionLanguage')) {
@@ -455,7 +455,7 @@ EOF;
         return $this->expressionLanguage;
     }
 
-    private function indent($code, $level = 1)
+    private function indent(string $code, int $level = 1): string
     {
         return preg_replace('/^./m', str_repeat('    ', $level).'$0', $code);
     }
