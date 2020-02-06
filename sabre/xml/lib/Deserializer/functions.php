@@ -79,9 +79,7 @@ function keyValue(Reader $reader, $namespace = null) {
                 $values[$clark] = $reader->parseCurrentElement()['value'];
             }
         } else {
-            if (!$reader->read()) {
-                break;
-            }
+            $reader->read();
         }
     } while ($reader->nodeType !== Reader::END_ELEMENT);
 
