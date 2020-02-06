@@ -40,7 +40,7 @@
 		"swiftmailer/swiftmailer": "^6.0",
 		"symfony/console": "4.4.4",
 		"symfony/event-dispatcher": "4.4.4",
-		"symfony/event-dispatcher-contracts": "1.1.5",
+		"symfony/event-dispatcher-contracts": "1.1.7",
 		"symfony/process": "4.4.4",
 		"symfony/routing": "4.4.4",
 		"symfony/translation": "4.4.4",
