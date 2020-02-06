@@ -126,6 +126,7 @@ icewind/streams/tests
 icewind/streams/README.md
 icewind/streams/LICENCE
 icewind/streams/composer.json
+icewind/searchdav/.github/
 icewind/searchdav/tests
 icewind/searchdav/README.md
 icewind/searchdav/composer.json
