@@ -108,7 +108,7 @@ class SearchPlugin extends ServerPlugin {
 
 		try {
 			$xml = $this->queryParser->parse(
-				$request->getBody(),
+				$request->getBodyAsString(),
 				$request->getUrl(),
 				$documentType
 			);

@@ -1,5 +1,7 @@
 .DS_Store
 bin
+*/**/phpstan.neon
+.php_cs.dist
 # ignore demo files
 james-heinrich/getid3/demos
 james-heinrich/getid3/helperapps
@@ -127,6 +129,7 @@ icewind/streams/README.md
 icewind/streams/LICENCE
 icewind/streams/composer.json
 icewind/searchdav/.github/
+icewind/searchdav/.scrutinizer.yml
 icewind/searchdav/tests
 icewind/searchdav/README.md
 icewind/searchdav/composer.json
@@ -228,7 +231,9 @@ sabre/dav/tests
 sabre/event/tests
 sabre/http/examples
 sabre/http/tests
+sabre/uri/.gitattributes
 sabre/uri/tests
+sabre/vobject/CHANGELOG.md
 sabre/vobject/tests
 sabre/xml/tests
 

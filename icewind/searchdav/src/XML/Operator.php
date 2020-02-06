@@ -81,9 +81,9 @@ class Operator implements XmlDeserializable {
 					$operator->arguments[] = $argument['value'];
 				}
 			} else {
-			       if (!$reader->read()) {
-                			break;
-            		       }
+				if (!$reader->read()) {
+					break;
+				}
 			}
 		} while ($reader->nodeType !== Reader::END_ELEMENT);
 

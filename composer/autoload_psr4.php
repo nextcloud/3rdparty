@@ -27,7 +27,6 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
     'Stecman\\Component\\Symfony\\Console\\BashCompletion\\' => array($vendorDir . '/stecman/symfony-console-completion/src'),
-    'SearchDAV\\Test\\' => array($vendorDir . '/icewind/searchdav/tests'),
     'SearchDAV\\' => array($vendorDir . '/icewind/searchdav/src'),
     'ScssPhp\\ScssPhp\\' => array($vendorDir . '/scssphp/scssphp/src'),
     'Sabre\\Xml\\' => array($vendorDir . '/sabre/xml/lib'),
