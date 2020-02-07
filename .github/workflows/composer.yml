@@ -1,0 +1,33 @@
+name: Composer
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - stable*
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+  
+    name: Check vendor changes
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Set up php
+      uses: shivammathur/setup-php@master
+      with:
+        php-version: 7.4
+        coverage: none
+    - name: Update composer
+      run: composer self-update && composer --version
+    - name: Install dependencies
+      run: composer install --no-dev
+    - name: Remove ignored files
+      run: git clean -xdf
+    - name: Update autoloader
+      run: composer dump-autoload
+    - name: Check vendor changes
+      run: |
+        bash -c "[[ ! \"`git status --porcelain `\" ]] || ( echo 'Uncommited vendor changes' && git status && git diff && exit 1 )"
