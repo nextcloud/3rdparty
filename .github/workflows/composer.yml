@@ -21,7 +21,11 @@ jobs:
         php-version: 7.4
         coverage: none
     - name: Install dependencies
-      run: composer i
+      run: composer install --no-dev
+    - name: Remove ignored files
+      run: git clean -xf
+    - name: Update autoloader
+      run: composer dump-autoload
     - name: Check vendor changes
       run: |
         bash -c "[[ ! \"`git status --porcelain `\" ]] || ( echo 'Uncommited vendor changes' && git status && exit 1 )"
