@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35769b25869daec9928c7fb512339f95",
+    "content-hash": "793518dcaeb9b4414c55ba913e6ef485",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3327,23 +3327,25 @@
         },
         {
             "name": "scssphp/scssphp",
-            "version": "1.0.3",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scssphp/scssphp.git",
-                "reference": "616c518333c656eaa23182ac6cfc01453f1e7c78"
+                "reference": "e2dadd21ef6188f038aaf72cd2d55d0e1b522741"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/616c518333c656eaa23182ac6cfc01453f1e7c78",
-                "reference": "616c518333c656eaa23182ac6cfc01453f1e7c78",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/e2dadd21ef6188f038aaf72cd2d55d0e1b522741",
+                "reference": "e2dadd21ef6188f038aaf72cd2d55d0e1b522741",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6.0 || ^7"
+                "ext-ctype": "*",
+                "ext-json": "*",
+                "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.6",
+                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.3",
                 "squizlabs/php_codesniffer": "~2.5",
                 "twbs/bootstrap": "~4.3",
                 "zurb/foundation": "~6.5"
@@ -3382,7 +3384,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2019-08-07T20:16:04+00:00"
+            "time": "2020-01-31T16:45:58+00:00"
         },
         {
             "name": "stecman/symfony-console-completion",
