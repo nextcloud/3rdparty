@@ -44,6 +44,7 @@
 		"symfony/process": "4.4.4",
 		"symfony/routing": "4.4.4",
 		"symfony/translation": "4.4.4",
-		"php-http/guzzle6-adapter": "^2.0"
+		"php-http/guzzle6-adapter": "^2.0",
+		"daita/nc-small-php-tools": "^18.0"
 	}
 }
