@@ -10,7 +10,7 @@ on:
 jobs:
   php:
     runs-on: ubuntu-latest
-  
+
     name: Check vendor changes
     steps:
     - name: Checkout
@@ -21,7 +21,7 @@ jobs:
         php-version: 7.4
         coverage: none
     - name: Update composer
-      run: composer self-update && composer --version
+      run: sudo composer self-update && composer --version
     - name: Install dependencies
       run: composer install --no-dev
     - name: Remove ignored files
