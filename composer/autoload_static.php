@@ -434,10 +434,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
-            'PEAR' => 
-            array (
-                0 => __DIR__ . '/..' . '/pear/pear_exception',
-            ),
         ),
         'D' => 
         array (
