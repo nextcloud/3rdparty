@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35769b25869daec9928c7fb512339f95",
+    "content-hash": "49c1978483df19dab268eb02f207a4c4",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -222,25 +222,25 @@
         },
         {
             "name": "deepdiver1975/tarstreamer",
-            "version": "v0.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owncloud/TarStreamer.git",
-                "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b"
+                "reference": "ad48505d1ab54a8e94e6b1cc5297bbed72e956de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/859a0170de120c66b042e6c0dbc1a9979c74669b",
-                "reference": "859a0170de120c66b042e6c0dbc1a9979c74669b",
+                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/ad48505d1ab54a8e94e6b1cc5297bbed72e956de",
+                "reference": "ad48505d1ab54a8e94e6b1cc5297bbed72e956de",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.8"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "pear/archive_tar": "~1.4",
-                "pear/pear-core-minimal": "v1.10.0alpha2",
-                "phpunit/phpunit": "^4.8"
+                "pear/pear-core-minimal": "v1.10.10",
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "autoload": {
@@ -260,7 +260,7 @@
                 "stream",
                 "tar"
             ],
-            "time": "2016-02-15T10:52:44+00:00"
+            "time": "2020-01-08T09:55:35+00:00"
         },
         {
             "name": "doctrine/annotations",

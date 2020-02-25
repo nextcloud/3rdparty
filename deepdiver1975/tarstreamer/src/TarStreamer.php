@@ -2,11 +2,14 @@
 
 namespace ownCloud\TarStreamer;
 
+use ownCloud\TarStreamer\TarHeader;
+
 class TarStreamer {
 
 	const REGTYPE = 0;
 	const DIRTYPE = 5;
 	const XHDTYPE = 'x';
+	const LONGNAMETYPE = 'L';
 
 	/**
 	 * Process in 1 MB chunks
@@ -14,6 +17,7 @@ class TarStreamer {
 	protected $blockSize = 1048576;
 	protected $outStream;
 	protected $needHeaders = false;
+	protected $longNameHeaderType;
 
 	/**
 	 * Create a new TarStreamer object.
@@ -29,6 +33,11 @@ class TarStreamer {
 			while (ob_get_level() > 0){
 				ob_end_flush();
 			}
+		}
+		if (isset($options['longnames'])) {
+			$this->longNameHeaderType = $options['longnames'];
+		} else {
+			$this->longNameHeaderType = self::LONGNAMETYPE;
 		}
 	}
 
@@ -152,54 +161,48 @@ class TarStreamer {
 		$fileName = ($type == self::DIRTYPE) ? basename($name) . '/' : basename($name);
 
 
-		// handle long file names via PAX
+		// handle long file names
 		if (strlen($fileName) > 99 || strlen($dirName) > 154){
-			$pax = $this->paxGenerate([ 'path' => $dirName . '/' . $fileName]);
-			$paxSize = strlen($pax);
-
-			$this->initFileStreamTransfer('', self::XHDTYPE, $paxSize);
-
-			$this->streamFilePart($pax);
-			$this->completeFileStream($paxSize);
+			$this->writeLongName($fileName, $dirName);
 		}
 
 		// process optional arguments
 		$time = isset($opt['timestamp']) ? $opt['timestamp'] : time();
 
-		// build data descriptor
-		$fields = [
-			['a100', substr($fileName, 0, 100)],
-			['a8', str_pad('777', 7, '0', STR_PAD_LEFT)],
-			['a8', decoct(str_pad('0', 7, '0', STR_PAD_LEFT))],
-			['a8', decoct(str_pad('0', 7, '0', STR_PAD_LEFT))],
-			['a12', str_pad(decoct($size), 11, '0', STR_PAD_LEFT)],
-			['a12', str_pad(decoct($time), 11, '0', STR_PAD_LEFT)],
-			['a8', ''],
-			['a1', $type],
-			['a100', ''],
-			['a6', 'ustar'],
-			['a2', '00'],
-			['a32', ''],
-			['a32', ''],
-			['a8', ''],
-			['a8', ''],
-			['a155', substr($dirName, 0, 155)],
-			['a12', ''],
-		];
-
-		// pack fields and calculate "total" length
-		$header = $this->packFields($fields);
-
-		// Compute header checksum
-		$checksum = str_pad(decoct($this->computeUnsignedChecksum($header)), 6, "0", STR_PAD_LEFT);
-		for ($i = 0; $i < 6; $i++){
-			$header[(148 + $i)] = substr($checksum, $i, 1);
-		}
-		$header[154] = chr(0);
-		$header[155] = chr(32);
-
+		$tarHeader = new TarHeader();
+		$header = $tarHeader->setName($fileName)
+				->setSize($size)
+				->setMtime($time)
+				->setTypeflag($type)
+				->setPrefix($dirName)
+				->getHeader()
+			;
 		// print header
 		$this->send($header);
+	}
+	
+	protected function writeLongName($fileName, $dirName){
+		$internalPath = trim($dirName . '/' . $fileName, '/');
+		if ($this->longNameHeaderType === self::XHDTYPE) {
+			// Long names via PAX
+			$pax = $this->paxGenerate([ 'path' => $internalPath]);
+			$paxSize = strlen($pax);
+			$this->initFileStreamTransfer('', self::XHDTYPE, $paxSize);
+			$this->streamFilePart($pax);
+			$this->completeFileStream($paxSize);
+		} else {
+			// long names via 'L' header
+			$pathSize = strlen($internalPath);
+			$tarHeader = new TarHeader();
+			$header = $tarHeader->setName('././@LongLink')
+					->setSize($pathSize)
+					->setTypeflag(self::LONGNAMETYPE)
+					->getHeader()
+				;
+			$this->send($header);
+			$this->streamFilePart($internalPath);
+			$this->completeFileStream($pathSize);
+		}
 	}
 
 	/**
@@ -241,47 +244,6 @@ class TarStreamer {
 		$this->needHeaders = false;
 
 		fwrite($this->outStream, $data);
-	}
-
-	/**
-	 * Create a format string and argument list for pack(), then call pack() and return the result.
-	 *
-	 * @param array $fields key being the format string and value being the data to pack
-	 * @return string binary packed data returned from pack()
-	 */
-	protected function packFields($fields){
-		list ($fmt, $args) = ['', []];
-
-		// populate format string and argument list
-		foreach ($fields as $field){
-			$fmt .= $field[0];
-			$args[] = $field[1];
-		}
-
-		// prepend format string to argument list
-		array_unshift($args, $fmt);
-
-		// build output string from header and compressed data
-		return call_user_func_array('pack', $args);
-	}
-
-	/**
-	 * Generate unsigned checksum of header
-	 *
-	 * @param string $header
-	 * @return string unsigned checksum
-	 */
-	protected function computeUnsignedChecksum($header){
-		$unsignedChecksum = 0;
-		for ($i = 0; $i < 512; $i++){
-			$unsignedChecksum += ord($header[$i]);
-		}
-		for ($i = 0; $i < 8; $i++){
-			$unsignedChecksum -= ord($header[148 + $i]);
-		}
-		$unsignedChecksum += ord(" ") * 8;
-
-		return $unsignedChecksum;
 	}
 
 	/**
