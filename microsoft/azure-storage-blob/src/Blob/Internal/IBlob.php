@@ -407,7 +407,7 @@ interface IBlob
     * a 512-byte boundary.
     * @param BlobModels\CreatePageBlobOptions $options   optional parameters
     *
-    * @return BlobModels\CopyBlobResult
+    * @return BlobModels\PutBlobResult
     *
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
     */
@@ -489,10 +489,10 @@ interface IBlob
     *
     * @param string                            $container name of the container
     * @param string                            $blob      name of the blob
-    * @param string                            $content   content of the blob
+    * @param string|resource|StreamInterface   $content   content of the blob
     * @param BlobModels\CreateBlockBlobOptions $options   optional parameters
     *
-    * @return BlobModels\CopyBlobResult
+    * @return BlobModels\PutBlobResult
     *
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
     */

@@ -46,6 +46,7 @@ use MicrosoftAzure\Storage\Blob\Models\CreateBlobSnapshotOptions;
 use MicrosoftAzure\Storage\Blob\Models\CreateBlobSnapshotResult;
 use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
 use MicrosoftAzure\Storage\Blob\Models\CreatePageBlobOptions;
+use MicrosoftAzure\Storage\Blob\Models\UndeleteBlobOptions;
 use MicrosoftAzure\Storage\Blob\Models\DeleteBlobOptions;
 use MicrosoftAzure\Storage\Blob\Models\GetBlobMetadataOptions;
 use MicrosoftAzure\Storage\Blob\Models\GetBlobMetadataResult;
@@ -75,6 +76,7 @@ use MicrosoftAzure\Storage\Blob\Models\SetBlobPropertiesResult;
 use MicrosoftAzure\Storage\Blob\Models\SetBlobTierOptions;
 use MicrosoftAzure\Storage\Common\Internal\Authentication\SharedAccessSignatureAuthScheme;
 use MicrosoftAzure\Storage\Common\Internal\Authentication\SharedKeyAuthScheme;
+use MicrosoftAzure\Storage\Common\Internal\Authentication\TokenAuthScheme;
 use MicrosoftAzure\Storage\Common\Internal\Http\HttpFormatter;
 use MicrosoftAzure\Storage\Common\Internal\Middlewares\CommonRequestMiddleware;
 use MicrosoftAzure\Storage\Common\Internal\Serialization\XmlSerializer;
@@ -159,6 +161,66 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
                 $settings->getKey()
             );
         }
+
+        // Adding common request middleware
+        $commonRequestMiddleware = new CommonRequestMiddleware(
+            $authScheme,
+            Resources::STORAGE_API_LATEST_VERSION,
+            Resources::BLOB_SDK_VERSION
+        );
+        $blobWrapper->pushMiddleware($commonRequestMiddleware);
+
+        return $blobWrapper;
+    }
+
+    /**
+     * Builds a blob service object, it accepts the following
+     * options:
+     *
+     * - http: (array) the underlying guzzle options. refer to
+     *   http://docs.guzzlephp.org/en/latest/request-options.html for detailed available options
+     * - middlewares: (mixed) the middleware should be either an instance of a sub-class that
+     *   implements {@see MicrosoftAzure\Storage\Common\Middlewares\IMiddleware}, or a
+     *   `callable` that follows the Guzzle middleware implementation convention
+     *
+     * Please refer to
+     * https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad
+     * for authenticate access to Azure blobs and queues using Azure Active Directory.
+     *
+     * @param string $token            The bearer token passed as reference.
+     * @param string $connectionString The configuration connection string.
+     * @param array  $options          Array of options to pass to the service
+     *
+     * @return BlobRestProxy
+     */
+    public static function createBlobServiceWithTokenCredential(
+        &$token,
+        $connectionString,
+        array $options = []
+    ) {
+        $settings = StorageServiceSettings::createFromConnectionStringForTokenCredential(
+            $connectionString
+        );
+
+        $primaryUri = Utilities::tryAddUrlScheme(
+            $settings->getBlobEndpointUri()
+        );
+
+        $secondaryUri = Utilities::tryAddUrlScheme(
+            $settings->getBlobSecondaryEndpointUri()
+        );
+
+        $blobWrapper = new BlobRestProxy(
+            $primaryUri,
+            $secondaryUri,
+            $settings->getName(),
+            $options
+        );
+
+        // Getting authentication scheme
+        $authScheme = new TokenAuthScheme(
+            $token
+        );
 
         // Adding common request middleware
         $commonRequestMiddleware = new CommonRequestMiddleware(
@@ -347,27 +409,21 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function createPath($container, $blob = '')
     {
-        if (empty($blob)) {
-            if (!empty($container)) {
-                return $container;
-            } else {
-                return '/' . $container;
-            }
-        } else {
-            $encodedBlob = urlencode($blob);
-            // Unencode the forward slashes to match what the server expects.
-            $encodedBlob = str_replace('%2F', '/', $encodedBlob);
-            // Unencode the backward slashes to match what the server expects.
-            $encodedBlob = str_replace('%5C', '/', $encodedBlob);
-            // Re-encode the spaces (encoded as space) to the % encoding.
-            $encodedBlob = str_replace('+', '%20', $encodedBlob);
-            // Empty container means accessing default container
-            if (empty($container)) {
-                return $encodedBlob;
-            } else {
-                return '/' . $container . '/' . $encodedBlob;
-            }
+        if (empty($blob) && ($blob != '0')) {
+            return empty($container) ? '/' : $container;
         }
+        $encodedBlob = urlencode($blob);
+        // Unencode the forward slashes to match what the server expects.
+        $encodedBlob = str_replace('%2F', '/', $encodedBlob);
+        // Unencode the backward slashes to match what the server expects.
+        $encodedBlob = str_replace('%5C', '/', $encodedBlob);
+        // Re-encode the spaces (encoded as space) to the % encoding.
+        $encodedBlob = str_replace('+', '%20', $encodedBlob);
+        // Empty container means accessing default container
+        if (empty($container)) {
+            return $encodedBlob;
+        }
+        return '/' . $container . '/' . $encodedBlob;
     }
 
     /**
@@ -556,7 +612,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private static function getStatusCodeOfLeaseAction($leaseAction)
     {
-        $statusCode = Resources::EMPTY_STRING;
         switch ($leaseAction) {
             case LeaseMode::ACQUIRE_ACTION:
                 $statusCode = Resources::STATUS_CREATED;
@@ -885,7 +940,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         Validate::notNullOrEmpty($container, 'container');
 
         $method      = Resources::HTTP_PUT;
-        $headers     = array();
         $postParams  = array();
         $queryParams = array(Resources::QP_REST_TYPE => 'container');
         $path        = $this->createPath($container);
@@ -1097,7 +1151,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $postParams  = array();
         $queryParams = array();
         $path        = $this->createPath($container);
-        $statusCode  = Resources::STATUS_OK;
 
         if (is_null($options)) {
             $options = new BlobServiceOptions();
@@ -1492,13 +1545,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $includeSnapshots        = $options->getIncludeSnapshots();
         $includeUncommittedBlobs = $options->getIncludeUncommittedBlobs();
         $includecopy             = $options->getIncludeCopy();
+        $includeDeleted          = $options->getIncludeDeleted();
 
         $includeValue = static::groupQueryValues(
             array(
                 $includeMetadata ? 'metadata' : null,
                 $includeSnapshots ? 'snapshots' : null,
                 $includeUncommittedBlobs ? 'uncommittedblobs' : null,
-                $includecopy ? 'copy' : null
+                $includecopy ? 'copy' : null,
+                $includeDeleted ? 'deleted' : null,
             )
         );
 
@@ -1691,7 +1746,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $postParams  = array();
         $queryParams = array();
         $path        = $this->createPath($container, $blob);
-        $statusCode  = Resources::STATUS_CREATED;
 
         if (is_null($options)) {
             $options = new CreateBlobOptions();
@@ -2462,7 +2516,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $postParams     = array();
         $queryParams    = $this->createBlobBlockQueryParams($options, $blockId);
         $path           = $this->createPath($container, $blob);
-        $statusCode     = Resources::STATUS_CREATED;
         $contentStream  = Psr7\stream_for($content);
         $body           = $contentStream->getContents();
 
@@ -2543,7 +2596,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $postParams     = array();
         $queryParams    = array();
         $path           = $this->createPath($container, $blob);
-        $statusCode     = Resources::STATUS_CREATED;
 
         $contentStream  = Psr7\stream_for($content);
         $length         = $contentStream->getSize();
@@ -2744,7 +2796,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
 
         $method      = Resources::HTTP_PUT;
-        $headers     = array();
         $postParams  = array();
         $queryParams = array();
         $path        = $this->createPath($container, $blob);
@@ -3739,6 +3790,84 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
                 $metadata
             );
         });
+    }
+    
+    /**
+     * Undeletes a blob.
+     *
+     * @param string                      $container name of the container
+     * @param string                      $blob      name of the blob
+     * @param Models\UndeleteBlobOptions  $options   optional parameters
+     *
+     * @return void
+     *
+     * @see https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
+     */
+    public function undeleteBlob(
+        $container,
+        $blob,
+        Models\UndeleteBlobOptions $options = null
+    ) {
+        $this->undeleteBlobAsync($container, $blob, $options)->wait();
+    }
+    
+    /**
+     * Undeletes a blob.
+     *
+     * @param string                      $container name of the container
+     * @param string                      $blob      name of the blob
+     * @param Models\UndeleteBlobOptions  $options   optional parameters
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     *
+     * @see https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
+     */
+    public function undeleteBlobAsync(
+        $container,
+        $blob,
+        Models\UndeleteBlobOptions $options = null
+    ) {
+        Validate::canCastAsString($container, 'container');
+        Validate::canCastAsString($blob, 'blob');
+        Validate::notNullOrEmpty($blob, 'blob');
+
+        $method      = Resources::HTTP_PUT;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = $this->createPath($container, $blob);
+
+        if (is_null($options)) {
+            $options = new UndeleteBlobOptions();
+        }
+
+        $leaseId = $options->getLeaseId();
+
+        $headers = $this->addOptionalAccessConditionHeader(
+            $headers,
+            $options->getAccessConditions()
+        );
+
+        $this->addOptionalHeader(
+            $headers,
+            Resources::X_MS_LEASE_ID,
+            $leaseId
+        );
+
+        $this->addOptionalQueryParam($queryParams, Resources::QP_COMP, 'undelete');
+
+        $options->setLocationMode(LocationMode::PRIMARY_ONLY);
+
+        return $this->sendAsync(
+            $method,
+            $headers,
+            $queryParams,
+            $postParams,
+            $path,
+            Resources::STATUS_OK,
+            Resources::EMPTY_STRING,
+            $options
+        );
     }
 
     /**
