@@ -2116,20 +2116,20 @@
     },
     {
         "name": "pear/console_getopt",
-        "version": "v1.4.1",
-        "version_normalized": "1.4.1.0",
+        "version": "v1.4.3",
+        "version_normalized": "1.4.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/pear/Console_Getopt.git",
-            "reference": "82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f"
+            "reference": "a41f8d3e668987609178c7c4a9fe48fecac53fa0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/pear/Console_Getopt/zipball/82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f",
-            "reference": "82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f",
+            "url": "https://api.github.com/repos/pear/Console_Getopt/zipball/a41f8d3e668987609178c7c4a9fe48fecac53fa0",
+            "reference": "a41f8d3e668987609178c7c4a9fe48fecac53fa0",
             "shasum": ""
         },
-        "time": "2015-07-20T20:28:12+00:00",
+        "time": "2019-11-20T18:27:48+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2146,11 +2146,6 @@
         ],
         "authors": [
             {
-                "name": "Greg Beaver",
-                "email": "cellog@php.net",
-                "role": "Helper"
-            },
-            {
                 "name": "Andrei Zmievski",
                 "email": "andrei@php.net",
                 "role": "Lead"
@@ -2159,23 +2154,28 @@
                 "name": "Stig Bakken",
                 "email": "stig@php.net",
                 "role": "Developer"
+            },
+            {
+                "name": "Greg Beaver",
+                "email": "cellog@php.net",
+                "role": "Helper"
             }
         ],
         "description": "More info available on: http://pear.php.net/package/Console_Getopt"
     },
     {
         "name": "pear/pear-core-minimal",
-        "version": "v1.10.3",
-        "version_normalized": "1.10.3.0",
+        "version": "v1.10.10",
+        "version_normalized": "1.10.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/pear/pear-core-minimal.git",
-            "reference": "070f0b600b2caca2501e2c9b7e553016e4b0d115"
+            "reference": "625a3c429d9b2c1546438679074cac1b089116a7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/070f0b600b2caca2501e2c9b7e553016e4b0d115",
-            "reference": "070f0b600b2caca2501e2c9b7e553016e4b0d115",
+            "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/625a3c429d9b2c1546438679074cac1b089116a7",
+            "reference": "625a3c429d9b2c1546438679074cac1b089116a7",
             "shasum": ""
         },
         "require": {
@@ -2185,7 +2185,7 @@
         "replace": {
             "rsky/pear-core-min": "self.version"
         },
-        "time": "2017-02-28T16:46:11+00:00",
+        "time": "2019-11-19T19:00:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2211,17 +2211,17 @@
     },
     {
         "name": "pear/pear_exception",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/pear/PEAR_Exception.git",
-            "reference": "8c18719fdae000b690e3912be401c76e406dd13b"
+            "reference": "dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/8c18719fdae000b690e3912be401c76e406dd13b",
-            "reference": "8c18719fdae000b690e3912be401c76e406dd13b",
+            "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7",
+            "reference": "dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7",
             "shasum": ""
         },
         "require": {
@@ -2230,7 +2230,7 @@
         "require-dev": {
             "phpunit/phpunit": "*"
         },
-        "time": "2015-02-10T20:07:52+00:00",
+        "time": "2019-12-10T10:24:42+00:00",
         "type": "class",
         "extra": {
             "branch-alias": {
@@ -2239,9 +2239,9 @@
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "PEAR": ""
-            }
+            "classmap": [
+                "PEAR/"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "include-path": [
