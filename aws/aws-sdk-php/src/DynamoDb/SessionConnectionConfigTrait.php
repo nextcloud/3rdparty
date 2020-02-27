@@ -12,6 +12,9 @@ trait SessionConnectionConfigTrait
     /** @var string Name of the data attribute in table. Default: "data" */
     protected $dataAttribute = 'data';
 
+    /** @var string Type of the data attribute in table. Default: "string" */
+    protected $dataAttributeType = 'string';
+
     /** @var integer Lifetime of inactive sessions expiration */
     protected $sessionLifetime;
 
@@ -115,6 +118,22 @@ trait SessionConnectionConfigTrait
     }
 
     /**
+     * @return string
+     */
+    public function getDataAttributeType()
+    {
+        return $this->dataAttributeType;
+    }
+
+    /**
+     * @param string $dataAttributeType
+     */
+    public function setDataAttributeType($dataAttributeType)
+    {
+        $this->dataAttributeType = $dataAttributeType;
+    }
+
+    /**
      * @return number
      */
     public function getSessionLifetime()
@@ -163,7 +182,7 @@ trait SessionConnectionConfigTrait
     }
 
     /**
-     * @return multitype:
+     * @return mixed
      */
     public function getBatchConfig()
     {
@@ -171,7 +190,7 @@ trait SessionConnectionConfigTrait
     }
 
     /**
-     * @param multitype: $batchConfig
+     * @param mixed $batchConfig
      */
     public function setBatchConfig($batchConfig)
     {
