@@ -1583,28 +1583,28 @@
     },
     {
         "name": "justinrainbow/json-schema",
-        "version": "5.2.8",
-        "version_normalized": "5.2.8.0",
+        "version": "5.2.9",
+        "version_normalized": "5.2.9.0",
         "source": {
             "type": "git",
             "url": "https://github.com/justinrainbow/json-schema.git",
-            "reference": "dcb6e1006bb5fd1e392b4daa68932880f37550d4"
+            "reference": "44c6787311242a979fa15c704327c20e7221a0e4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/dcb6e1006bb5fd1e392b4daa68932880f37550d4",
-            "reference": "dcb6e1006bb5fd1e392b4daa68932880f37550d4",
+            "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/44c6787311242a979fa15c704327c20e7221a0e4",
+            "reference": "44c6787311242a979fa15c704327c20e7221a0e4",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
         "require-dev": {
-            "friendsofphp/php-cs-fixer": "~2.2.20",
+            "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
             "json-schema/json-schema-test-suite": "1.2.0",
             "phpunit/phpunit": "^4.8.35"
         },
-        "time": "2019-01-14T23:55:14+00:00",
+        "time": "2019-09-25T14:49:45+00:00",
         "bin": [
             "bin/validate-json"
         ],
@@ -2445,17 +2445,17 @@
     },
     {
         "name": "php-opencloud/openstack",
-        "version": "v3.0.6",
-        "version_normalized": "3.0.6.0",
+        "version": "v3.0.7",
+        "version_normalized": "3.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-opencloud/openstack.git",
-            "reference": "3eba351cd04cf73a54984334e5da2fe4cf6efe1a"
+            "reference": "5d73ff577731fc473448c489acfca9730aa39c88"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/3eba351cd04cf73a54984334e5da2fe4cf6efe1a",
-            "reference": "3eba351cd04cf73a54984334e5da2fe4cf6efe1a",
+            "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/5d73ff577731fc473448c489acfca9730aa39c88",
+            "reference": "5d73ff577731fc473448c489acfca9730aa39c88",
             "shasum": ""
         },
         "require": {
@@ -2470,7 +2470,7 @@
             "phpunit/phpunit": "^6.5",
             "psr/log": "^1.0"
         },
-        "time": "2018-09-14T06:58:32+00:00",
+        "time": "2020-01-07T08:46:53+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
