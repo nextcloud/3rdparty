@@ -45,5 +45,8 @@
 		"symfony/routing": "4.4.4",
 		"symfony/translation": "4.4.4",
 		"php-http/guzzle6-adapter": "^2.0"
+	},
+	"scripts": {
+		"vendor": "composer install --no-dev && git clean -xdf && composer dump-autoload"
 	}
 }

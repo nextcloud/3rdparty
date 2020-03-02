@@ -22,12 +22,8 @@ jobs:
         coverage: none
     - name: Update composer
       run: sudo composer self-update && composer --version
-    - name: Install dependencies
-      run: composer install --no-dev
-    - name: Remove ignored files
-      run: git clean -xdf
-    - name: Update autoloader
-      run: composer dump-autoload
+    - name: Vendor dependencies
+      run: composer run vendor
     - name: Check vendor changes
       run: |
         bash -c "[[ ! \"`git status --porcelain `\" ]] || ( echo 'Uncommited vendor changes' && git status && git diff && exit 1 )"
