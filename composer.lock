@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "933dd74a8067e774b729dca029437fb1",
+    "content-hash": "a4733b1b1af31e9aa9ed261b8b31edc1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1481,7 +1481,7 @@
             "time": "2015-08-01T16:27:37+00:00"
         },
         {
-            "name": "jeremeamia/SuperClosure",
+            "name": "jeremeamia/superclosure",
             "version": "2.4.0",
             "source": {
                 "type": "git",
@@ -4101,16 +4101,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.4",
+            "version": "v4.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "f5697ab4cb14a5deed7473819e63141bf5352c36"
+                "reference": "bf9166bac906c9e69fb7a11d94875e7ced97bcd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/f5697ab4cb14a5deed7473819e63141bf5352c36",
-                "reference": "f5697ab4cb14a5deed7473819e63141bf5352c36",
+                "url": "https://api.github.com/repos/symfony/process/zipball/bf9166bac906c9e69fb7a11d94875e7ced97bcd7",
+                "reference": "bf9166bac906c9e69fb7a11d94875e7ced97bcd7",
                 "shasum": ""
             },
             "require": {
@@ -4146,7 +4146,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-09T09:50:08+00:00"
+            "time": "2020-02-07T20:06:44+00:00"
         },
         {
             "name": "symfony/routing",
