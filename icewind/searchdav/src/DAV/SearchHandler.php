@@ -96,7 +96,7 @@ class SearchHandler {
 	 * @return Query
 	 * @throws BadRequest
 	 */
-	private function getQueryForXML(BasicSearch $xml, array $allProps) {
+	private function getQueryForXML(BasicSearch $xml, array $allProps): Query {
 		$orderBy = array_map(function (\SearchDAV\XML\Order $order) use ($allProps) {
 			if (!isset($allProps[$order->property])) {
 				throw new BadRequest('requested order by property is not a valid property for this scope');
@@ -109,7 +109,7 @@ class SearchHandler {
 		}, $xml->orderBy);
 		$select = array_map(function ($propName) use ($allProps) {
 			if (!isset($allProps[$propName])) {
-				return;
+				return null;
 			}
 			$prop = $allProps[$propName];
 			if (!$prop->selectable) {
@@ -130,7 +130,7 @@ class SearchHandler {
 	 * @return Operator
 	 * @throws BadRequest
 	 */
-	private function transformOperator(\SearchDAV\XML\Operator $operator, array $allProps) {
+	private function transformOperator(\SearchDAV\XML\Operator $operator, array $allProps): Operator {
 		$arguments = array_map(function ($argument) use ($allProps) {
 			if (is_string($argument)) {
 				if (!isset($allProps[$argument])) {
@@ -167,7 +167,7 @@ class SearchHandler {
 	 * @param int $depth
 	 * @return \Iterator
 	 */
-	private function getPropertiesIteratorResults($results, $propertyNames = [], $depth = 0) {
+	private function getPropertiesIteratorResults($results, $propertyNames = [], $depth = 0): \Iterator {
 		$propFindType = $propertyNames ? PropFind::NORMAL : PropFind::ALLPROPS;
 
 		foreach ($results as $result) {

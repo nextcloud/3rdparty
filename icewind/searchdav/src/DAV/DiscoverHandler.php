@@ -80,7 +80,7 @@ class DiscoverHandler {
 		return false;
 	}
 
-	private function hashDefinition(SearchPropertyDefinition $definition) {
+	private function hashDefinition(SearchPropertyDefinition $definition): string {
 		return $definition->dataType
 			. (($definition->searchable) ? '1' : '0')
 			. (($definition->sortable) ? '1' : '0')
@@ -91,7 +91,7 @@ class DiscoverHandler {
 	 * @param SearchPropertyDefinition[] $propertyDefinitions
 	 * @return BasicSearchSchema
 	 */
-	private function getBasicSearchForProperties(array $propertyDefinitions) {
+	private function getBasicSearchForProperties(array $propertyDefinitions): BasicSearchSchema {
 		/** @var PropDesc[] $groups */
 		$groups = [];
 		foreach ($propertyDefinitions as $propertyDefinition) {
