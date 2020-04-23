@@ -2,7 +2,7 @@
 /**
  * SCSSPHP
  *
- * @copyright 2012-2019 Leaf Corcoran
+ * @copyright 2012-2020 Leaf Corcoran
  *
  * @license http://opensource.org/licenses/MIT MIT
  *
@@ -27,6 +27,7 @@ class Type
     const T_COMMENT = 'comment';
     const T_CONTINUE = 'continue';
     const T_CONTROL = 'control';
+    const T_CUSTOM_PROPERTY = 'custom';
     const T_DEBUG = 'debug';
     const T_DIRECTIVE = 'directive';
     const T_EACH = 'each';
