@@ -15,10 +15,18 @@
 
     <rule ref="Doctrine">
         <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint"/>
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming"/>
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing.IncorrectLinesCountAfterLastControlStructure"/>
+        <exclude name="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants.DisallowedLateStaticBindingForConstant"/>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint">
+        <exclude-pattern>*/lib/*</exclude-pattern>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint">
+        <exclude-pattern>*/lib/*</exclude-pattern>
     </rule>
 
     <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
@@ -41,6 +49,7 @@
     <rule ref="Squiz.Commenting.FunctionComment.InvalidNoReturn">
         <exclude-pattern>lib/Doctrine/DBAL/Platforms/AbstractPlatform.php</exclude-pattern>
         <exclude-pattern>lib/Doctrine/DBAL/Schema/AbstractSchemaManager.php</exclude-pattern>
+        <exclude-pattern>tests/Doctrine/Tests/DBAL/Platforms/AbstractPlatformTestCase.php</exclude-pattern>
     </rule>
 
     <!-- some statement classes close cursor using an empty while-loop -->
@@ -60,7 +69,14 @@
     </rule>
 
     <!-- see https://github.com/doctrine/dbal/issues/3377 -->
-    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowEqualOperators.DisallowedNotEqualOperator">
+    <rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators.DisallowedNotEqualOperator">
         <exclude-pattern>lib/Doctrine/DBAL/Schema/Comparator.php</exclude-pattern>
+    </rule>
+
+    <!-- see https://github.com/slevomat/coding-standard/issues/737 -->
+    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.IncorrectReturnTypeHint">
+        <exclude-pattern>lib/Doctrine/DBAL/Types/ArrayType.php</exclude-pattern>
+        <exclude-pattern>lib/Doctrine/DBAL/Types/ObjectType.php</exclude-pattern>
+        <exclude-pattern>tests/Doctrine/Tests/DBAL/Driver/Mysqli/MysqliConnectionTest.php</exclude-pattern>
     </rule>
 </ruleset>

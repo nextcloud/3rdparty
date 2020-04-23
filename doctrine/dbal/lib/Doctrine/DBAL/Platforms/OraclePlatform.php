@@ -37,6 +37,8 @@ class OraclePlatform extends AbstractPlatform
      *
      * @param string $identifier
      *
+     * @return void
+     *
      * @throws DBALException
      */
     public static function assertValidIdentifier($identifier)
@@ -59,7 +61,9 @@ class OraclePlatform extends AbstractPlatform
     }
 
     /**
-     * {@inheritDoc}
+     * @param string $type
+     *
+     * @return string
      */
     public function getNowExpression($type = 'timestamp')
     {
@@ -201,9 +205,13 @@ class OraclePlatform extends AbstractPlatform
     {
         if ($sequence->getCache() === 0) {
             return ' NOCACHE';
-        } elseif ($sequence->getCache() === 1) {
+        }
+
+        if ($sequence->getCache() === 1) {
             return ' NOCACHE';
-        } elseif ($sequence->getCache() > 1) {
+        }
+
+        if ($sequence->getCache() > 1) {
             return ' CACHE ' . $sequence->getCache();
         }
 
@@ -869,8 +877,14 @@ SQL
         if (! $this->onSchemaAlterTable($diff, $tableSql)) {
             $sql = array_merge($sql, $commentsSQL);
 
-            if ($diff->newName !== false) {
-                $sql[] = 'ALTER TABLE ' . $diff->getName($this)->getQuotedName($this) . ' RENAME TO ' . $diff->getNewName()->getQuotedName($this);
+            $newName = $diff->getNewName();
+
+            if ($newName !== false) {
+                $sql[] = sprintf(
+                    'ALTER TABLE %s RENAME TO %s',
+                    $diff->getName($this)->getQuotedName($this),
+                    $newName->getQuotedName($this)
+                );
             }
 
             $sql = array_merge(
@@ -1171,5 +1185,26 @@ SQL
     public function getBlobTypeDeclarationSQL(array $field)
     {
         return 'BLOB';
+    }
+
+    public function getListTableCommentsSQL(string $table, ?string $database = null) : string
+    {
+        $tableCommentsName = 'user_tab_comments';
+        $ownerCondition    = '';
+
+        if ($database !== null && $database !== '/') {
+            $tableCommentsName = 'all_tab_comments';
+            $ownerCondition    = ' AND owner = ' . $this->quoteStringLiteral($this->normalizeIdentifier($database)->getName());
+        }
+
+        return sprintf(
+            <<<'SQL'
+SELECT comments FROM %s WHERE table_name = %s%s
+SQL
+            ,
+            $tableCommentsName,
+            $this->quoteStringLiteral($this->normalizeIdentifier($table)->getName()),
+            $ownerCondition
+        );
     }
 }

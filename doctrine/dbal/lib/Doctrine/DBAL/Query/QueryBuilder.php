@@ -3,7 +3,7 @@
 namespace Doctrine\DBAL\Query;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Driver\ResultStatement;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\Expression\CompositeExpression;
 use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
@@ -52,22 +52,28 @@ class QueryBuilder
      */
     private $connection;
 
+    /*
+     * The default values of SQL parts collection
+     */
+    private const SQL_PARTS_DEFAULTS = [
+        'select'   => [],
+        'distinct' => false,
+        'from'     => [],
+        'join'     => [],
+        'set'      => [],
+        'where'    => null,
+        'groupBy'  => [],
+        'having'   => null,
+        'orderBy'  => [],
+        'values'   => [],
+    ];
+
     /**
      * The array of SQL parts collected.
      *
      * @var mixed[]
      */
-    private $sqlParts = [
-        'select'  => [],
-        'from'    => [],
-        'join'    => [],
-        'set'     => [],
-        'where'   => null,
-        'groupBy' => [],
-        'having'  => null,
-        'orderBy' => [],
-        'values'  => [],
-    ];
+    private $sqlParts = self::SQL_PARTS_DEFAULTS;
 
     /**
      * The complete SQL string for this query.
@@ -112,9 +118,9 @@ class QueryBuilder
     private $firstResult = null;
 
     /**
-     * The maximum number of results to retrieve.
+     * The maximum number of results to retrieve or NULL to retrieve all results.
      *
-     * @var int
+     * @var int|null
      */
     private $maxResults = null;
 
@@ -192,7 +198,7 @@ class QueryBuilder
      * Uses {@see Connection::executeQuery} for select statements and {@see Connection::executeUpdate}
      * for insert, update and delete statements.
      *
-     * @return Statement|int
+     * @return ResultStatement|int
      */
     public function execute()
     {
@@ -361,7 +367,6 @@ class QueryBuilder
 
     /**
      * Gets the position of the first result the query object was set to retrieve (the "offset").
-     * Returns NULL if {@link setFirstResult} was not applied to this QueryBuilder.
      *
      * @return int The position of the first result.
      */
@@ -373,7 +378,7 @@ class QueryBuilder
     /**
      * Sets the maximum number of results to retrieve (the "limit").
      *
-     * @param int $maxResults The maximum number of results to retrieve.
+     * @param int|null $maxResults The maximum number of results to retrieve or NULL to retrieve all results.
      *
      * @return $this This QueryBuilder instance.
      */
@@ -387,7 +392,7 @@ class QueryBuilder
 
     /**
      * Gets the maximum number of results the query object was set to retrieve (the "limit").
-     * Returns NULL if {@link setMaxResults} was not applied to this query builder.
+     * Returns NULL if all results will be returned.
      *
      * @return int The maximum number of results.
      */
@@ -403,7 +408,7 @@ class QueryBuilder
      * 'groupBy', 'having' and 'orderBy'.
      *
      * @param string $sqlPartName
-     * @param string $sqlPart
+     * @param mixed  $sqlPart
      * @param bool   $append
      *
      * @return $this This QueryBuilder instance.
@@ -470,6 +475,25 @@ class QueryBuilder
     }
 
     /**
+     * Adds DISTINCT to the query.
+     *
+     * <code>
+     *     $qb = $conn->createQueryBuilder()
+     *         ->select('u.id')
+     *         ->distinct()
+     *         ->from('users', 'u')
+     * </code>
+     *
+     * @return $this This QueryBuilder instance.
+     */
+    public function distinct() : self
+    {
+        $this->sqlParts['distinct'] = true;
+
+        return $this;
+    }
+
+    /**
      * Adds an item that is to be returned in the query result.
      *
      * <code>
@@ -504,7 +528,7 @@ class QueryBuilder
      * <code>
      *     $qb = $conn->createQueryBuilder()
      *         ->delete('users', 'u')
-     *         ->where('u.id = :user_id');
+     *         ->where('u.id = :user_id')
      *         ->setParameter(':user_id', 1);
      * </code>
      *
@@ -866,7 +890,6 @@ class QueryBuilder
         return $this->add('groupBy', $groupBy, false);
     }
 
-
     /**
      * Adds a grouping expression to the query.
      *
@@ -874,8 +897,8 @@ class QueryBuilder
      *     $qb = $conn->createQueryBuilder()
      *         ->select('u.name')
      *         ->from('users', 'u')
-     *         ->groupBy('u.lastLogin');
-     *         ->addGroupBy('u.createdAt')
+     *         ->groupBy('u.lastLogin')
+     *         ->addGroupBy('u.createdAt');
      * </code>
      *
      * @param mixed $groupBy The grouping expression.
@@ -1084,8 +1107,7 @@ class QueryBuilder
      */
     public function resetQueryPart($queryPartName)
     {
-        $this->sqlParts[$queryPartName] = is_array($this->sqlParts[$queryPartName])
-            ? [] : null;
+        $this->sqlParts[$queryPartName] = self::SQL_PARTS_DEFAULTS[$queryPartName];
 
         $this->state = self::STATE_DIRTY;
 
@@ -1099,7 +1121,8 @@ class QueryBuilder
      */
     private function getSQLForSelect()
     {
-        $query = 'SELECT ' . implode(', ', $this->sqlParts['select']);
+        $query = 'SELECT ' . ($this->sqlParts['distinct'] ? 'DISTINCT ' : '') .
+                  implode(', ', $this->sqlParts['select']);
 
         $query .= ($this->sqlParts['from'] ? ' FROM ' . implode(', ', $this->getFromClauses()) : '')
             . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '')
@@ -1151,7 +1174,7 @@ class QueryBuilder
      *
      * @throws QueryException
      */
-    private function verifyAllAliasesAreKnown(array $knownAliases)
+    private function verifyAllAliasesAreKnown(array $knownAliases) : void
     {
         foreach ($this->sqlParts['join'] as $fromAlias => $joins) {
             if (! isset($knownAliases[$fromAlias])) {
@@ -1188,6 +1211,7 @@ class QueryBuilder
     private function getSQLForUpdate()
     {
         $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
+
         return 'UPDATE ' . $table
             . ' SET ' . implode(', ', $this->sqlParts['set'])
             . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
@@ -1201,6 +1225,7 @@ class QueryBuilder
     private function getSQLForDelete()
     {
         $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
+
         return 'DELETE FROM ' . $table . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
     }
 
@@ -1301,9 +1326,11 @@ class QueryBuilder
                 if (array_key_exists($join['joinAlias'], $knownAliases)) {
                     throw QueryException::nonUniqueAlias($join['joinAlias'], array_keys($knownAliases));
                 }
-                $sql                             .= ' ' . strtoupper($join['joinType'])
-                    . ' JOIN ' . $join['joinTable'] . ' ' . $join['joinAlias']
-                    . ' ON ' . ((string) $join['joinCondition']);
+                $sql .= ' ' . strtoupper($join['joinType'])
+                    . ' JOIN ' . $join['joinTable'] . ' ' . $join['joinAlias'];
+                if ($join['joinCondition'] !== null) {
+                    $sql .= ' ON ' . $join['joinCondition'];
+                }
                 $knownAliases[$join['joinAlias']] = true;
             }
 

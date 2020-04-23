@@ -47,9 +47,7 @@ class DrizzlePlatform extends AbstractPlatform
      */
     public function getConcatExpression()
     {
-        $args = func_get_args();
-
-        return 'CONCAT(' . implode(', ', (array) $args) . ')';
+        return 'CONCAT(' . implode(', ', func_get_args()) . ')';
     }
 
     /**
@@ -337,7 +335,10 @@ class DrizzlePlatform extends AbstractPlatform
     }
 
     /**
-     * {@inheritDoc}
+     * @param string      $table
+     * @param string|null $database
+     *
+     * @return string
      */
     public function getListTableForeignKeysSQL($table, $database = null)
     {
@@ -437,7 +438,9 @@ class DrizzlePlatform extends AbstractPlatform
     }
 
     /**
-     * {@inheritDoc}
+     * @param string $table
+     *
+     * @return string
      */
     protected function getDropPrimaryKeySQL($table)
     {
@@ -480,8 +483,10 @@ class DrizzlePlatform extends AbstractPlatform
         $columnSql  = [];
         $queryParts = [];
 
-        if ($diff->newName !== false) {
-            $queryParts[] =  'RENAME TO ' . $diff->getNewName()->getQuotedName($this);
+        $newName = $diff->getNewName();
+
+        if ($newName !== false) {
+            $queryParts[] = 'RENAME TO ' . $newName->getQuotedName($this);
         }
 
         foreach ($diff->addedColumns as $column) {
@@ -576,7 +581,7 @@ class DrizzlePlatform extends AbstractPlatform
     {
         if (is_array($item)) {
             foreach ($item as $key => $value) {
-                if (! is_bool($value) && ! is_numeric($item)) {
+                if (! is_bool($value) && ! is_numeric($value)) {
                     continue;
                 }
 

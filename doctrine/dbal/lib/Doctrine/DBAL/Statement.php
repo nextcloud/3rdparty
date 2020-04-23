@@ -217,7 +217,9 @@ class Statement implements IteratorAggregate, DriverStatement
     {
         if ($arg2 === null) {
             return $this->stmt->setFetchMode($fetchMode);
-        } elseif ($arg3 === null) {
+        }
+
+        if ($arg3 === null) {
             return $this->stmt->setFetchMode($fetchMode, $arg2);
         }
 
@@ -247,11 +249,7 @@ class Statement implements IteratorAggregate, DriverStatement
      */
     public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
     {
-        if ($fetchArgument) {
-            return $this->stmt->fetchAll($fetchMode, $fetchArgument);
-        }
-
-        return $this->stmt->fetchAll($fetchMode);
+        return $this->stmt->fetchAll($fetchMode, $fetchArgument, $ctorArgs);
     }
 
     /**
