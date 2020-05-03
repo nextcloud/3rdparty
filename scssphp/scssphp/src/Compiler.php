@@ -2712,7 +2712,6 @@ class Compiler
      */
     protected function reduce($value, $inExp = false)
     {
-
         switch ($value[0]) {
             case Type::T_EXPRESSION:
                 list(, $op, $left, $right, $inParens) = $value;
@@ -6170,10 +6169,10 @@ class Compiler
         return new Node\Number(strlen($stringContent), '');
     }
 
-    protected static $libStrSlice = ['string', 'start-at', 'end-at:null'];
+    protected static $libStrSlice = ['string', 'start-at', 'end-at:-1'];
     protected function libStrSlice($args)
     {
-        if (isset($args[2]) && $args[2][1] == 0) {
+        if (isset($args[2]) && ! $args[2][1]) {
             return static::$nullString;
         }
 
@@ -6186,7 +6185,7 @@ class Compiler
             $start--;
         }
 
-        $end    = (int) $args[2][1];
+        $end    = isset($args[2]) ? (int) $args[2][1] : -1;
         $length = $end < 0 ? $end + 1 : ($end > 0 ? $end - $start : $end);
 
         $string[2] = $length

@@ -9,3 +9,4 @@ Patches:
 - SabreXML: Fix invalid PHP docs https://github.com/fruux/sabre-xml/pull/128
 - SabreXML: Prevent infinite loops for empty props element https://github.com/fruux/sabre-xml/pull/132
 - ZipStreamer: Fix zip generation for 7zip https://github.com/McNetic/PHPZipStreamer/pull/39
+- scssphp: Fix Trying to access array offset on value of type null https://github.com/scssphp/scssphp/commit/05a5d11ea7f68c52fdb6a5ca35cf46613b608445
