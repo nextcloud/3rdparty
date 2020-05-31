@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.133.27",
+            "version": "3.138.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5527195465ac42cb5127a60b84eb2d8dc3b0d5c9"
+                "reference": "cf197a033ad75cd9e3a90a207cf5ec8935aafa48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5527195465ac42cb5127a60b84eb2d8dc3b0d5c9",
-                "reference": "5527195465ac42cb5127a60b84eb2d8dc3b0d5c9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cf197a033ad75cd9e3a90a207cf5ec8935aafa48",
+                "reference": "cf197a033ad75cd9e3a90a207cf5ec8935aafa48",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-03-02T19:20:19+00:00"
+            "time": "2020-05-28T18:12:07+00:00"
         },
         {
             "name": "bantu/ini-get-wrapper",
@@ -1667,6 +1667,7 @@
                 "serialize",
                 "tokenizer"
             ],
+            "abandoned": "opis/closure",
             "time": "2018-03-21T22:21:57+00:00"
         },
         {
@@ -1898,12 +1899,6 @@
                 "uri-template",
                 "url",
                 "ws"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/nyamsprod",
-                    "type": "github"
-                }
             ],
             "time": "2020-03-17T14:40:17+00:00"
         },
@@ -2330,6 +2325,7 @@
                 "javascript",
                 "minification"
             ],
+            "abandoned": true,
             "time": "2016-04-19T09:28:22+00:00"
         },
         {
@@ -4413,20 +4409,6 @@
                 "polyfill",
                 "portable"
             ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-02-27T09:26:54+00:00"
         },
         {
@@ -4552,16 +4534,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.14.0",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2"
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/34094cfa9abe1f0f14f48f490772db7a775559f2",
-                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fa79b11539418b02fc5e1897267673ba2c19419c",
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c",
                 "shasum": ""
             },
             "require": {
@@ -4573,7 +4555,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -4607,7 +4589,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-05-12T16:47:27+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -5357,6 +5339,5 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.2.0"
-    },
-    "plugin-api-version": "1.1.0"
+    }
 }
