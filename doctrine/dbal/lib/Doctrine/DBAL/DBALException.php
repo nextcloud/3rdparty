@@ -6,6 +6,7 @@ use Doctrine\DBAL\Driver\DriverException as DriverExceptionInterface;
 use Doctrine\DBAL\Driver\ExceptionConverterDriver;
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
 use Exception;
 use Throwable;
 use function array_map;
@@ -17,9 +18,13 @@ use function is_object;
 use function is_resource;
 use function is_string;
 use function json_encode;
+use function preg_replace;
+use function spl_object_hash;
 use function sprintf;
-use function str_split;
 
+/**
+ * @psalm-immutable
+ */
 class DBALException extends Exception
 {
     /**
@@ -128,11 +133,10 @@ class DBALException extends Exception
     }
 
     /**
-     * @param Exception $driverEx
-     * @param string    $sql
-     * @param mixed[]   $params
+     * @param string  $sql
+     * @param mixed[] $params
      *
-     * @return \Doctrine\DBAL\DBALException
+     * @return self
      */
     public static function driverExceptionDuringQuery(Driver $driver, Throwable $driverEx, $sql, array $params = [])
     {
@@ -146,9 +150,7 @@ class DBALException extends Exception
     }
 
     /**
-     * @param Exception $driverEx
-     *
-     * @return \Doctrine\DBAL\DBALException
+     * @return self
      */
     public static function driverException(Driver $driver, Throwable $driverEx)
     {
@@ -156,11 +158,9 @@ class DBALException extends Exception
     }
 
     /**
-     * @param Exception $driverEx
-     *
-     * @return \Doctrine\DBAL\DBALException
+     * @return self
      */
-    private static function wrapException(Driver $driver, Throwable $driverEx, $msg)
+    private static function wrapException(Driver $driver, Throwable $driverEx, string $msg)
     {
         if ($driverEx instanceof DriverException) {
             return $driverEx;
@@ -191,7 +191,7 @@ class DBALException extends Exception
 
             if (! is_string($json) || $json === 'null' && is_string($param)) {
                 // JSON encoding failed, this is not a UTF-8 string.
-                return '"\x' . implode('\x', str_split(bin2hex($param), 2)) . '"';
+                return sprintf('"%s"', preg_replace('/.{2}/', '\\x$0', bin2hex($param)));
             }
 
             return $json;
@@ -281,5 +281,17 @@ class DBALException extends Exception
     public static function typeNotFound($name)
     {
         return new self('Type to be overwritten ' . $name . ' does not exist.');
+    }
+
+    public static function typeNotRegistered(Type $type) : self
+    {
+        return new self(sprintf('Type of the class %s@%s is not registered.', get_class($type), spl_object_hash($type)));
+    }
+
+    public static function typeAlreadyRegistered(Type $type) : self
+    {
+        return new self(
+            sprintf('Type of the class %s@%s is already registered.', get_class($type), spl_object_hash($type))
+        );
     }
 }

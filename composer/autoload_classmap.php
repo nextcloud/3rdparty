@@ -789,7 +789,6 @@ return array(
     'Doctrine\\Common\\Cache\\PhpFileCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/PhpFileCache.php',
     'Doctrine\\Common\\Cache\\PredisCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/PredisCache.php',
     'Doctrine\\Common\\Cache\\RedisCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/RedisCache.php',
-    'Doctrine\\Common\\Cache\\RiakCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/RiakCache.php',
     'Doctrine\\Common\\Cache\\SQLite3Cache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/SQLite3Cache.php',
     'Doctrine\\Common\\Cache\\Version' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/Version.php',
     'Doctrine\\Common\\Cache\\VoidCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/VoidCache.php',

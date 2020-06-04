@@ -23,7 +23,7 @@ use function func_get_args;
 use function get_class;
 use function implode;
 use function is_string;
-use function preg_replace;
+use function preg_match;
 use function sprintf;
 use function strlen;
 use function strpos;
@@ -184,9 +184,11 @@ class SQLAnywherePlatform extends AbstractPlatform
 
             $sql = array_merge($sql, $commentsSQL);
 
-            if ($diff->newName !== false) {
+            $newName = $diff->getNewName();
+
+            if ($newName !== false) {
                 $sql[] = $this->getAlterTableClause($diff->getName($this)) . ' ' .
-                    $this->getAlterTableRenameTableClause($diff->getNewName());
+                    $this->getAlterTableRenameTableClause($newName);
             }
 
             $sql = array_merge(
@@ -625,13 +627,13 @@ class SQLAnywherePlatform extends AbstractPlatform
         switch ((int) $type) {
             case self::FOREIGN_KEY_MATCH_SIMPLE:
                 return 'SIMPLE';
-                break;
+
             case self::FOREIGN_KEY_MATCH_FULL:
                 return 'FULL';
-                break;
+
             case self::FOREIGN_KEY_MATCH_SIMPLE_UNIQUE:
                 return 'UNIQUE SIMPLE';
-                break;
+
             case self::FOREIGN_KEY_MATCH_FULL_UNIQUE:
                 return 'UNIQUE FULL';
             default:
@@ -1291,13 +1293,13 @@ SQL
     {
         switch ($level) {
             case TransactionIsolationLevel::READ_UNCOMMITTED:
-                return 0;
+                return '0';
             case TransactionIsolationLevel::READ_COMMITTED:
-                return 1;
+                return '1';
             case TransactionIsolationLevel::REPEATABLE_READ:
-                return 2;
+                return '2';
             case TransactionIsolationLevel::SERIALIZABLE:
-                return 3;
+                return '3';
             default:
                 throw new InvalidArgumentException('Invalid isolation level:' . $level);
         }
@@ -1310,9 +1312,15 @@ SQL
     {
         $limitOffsetClause = $this->getTopClauseSQL($limit, $offset);
 
-        return $limitOffsetClause === ''
-            ? $query
-            : preg_replace('/^\s*(SELECT\s+(DISTINCT\s+)?)/i', '\1' . $limitOffsetClause . ' ', $query);
+        if ($limitOffsetClause === '') {
+            return $query;
+        }
+
+        if (! preg_match('/^\s*(SELECT\s+(DISTINCT\s+)?)(.*)/i', $query, $matches)) {
+            return $query;
+        }
+
+        return $matches[1] . $limitOffsetClause . ' ' . $matches[3];
     }
 
     private function getTopClauseSQL(?int $limit, ?int $offset) : string

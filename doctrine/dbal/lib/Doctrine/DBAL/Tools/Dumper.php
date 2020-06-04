@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\Proxy;
 use stdClass;
 use function array_keys;
+use function assert;
 use function class_exists;
 use function count;
 use function end;
@@ -16,13 +17,14 @@ use function explode;
 use function extension_loaded;
 use function get_class;
 use function html_entity_decode;
-use function ini_get;
 use function ini_set;
 use function is_array;
 use function is_object;
+use function is_string;
 use function ob_get_clean;
 use function ob_start;
 use function strip_tags;
+use function strlen;
 use function strrpos;
 use function substr;
 use function var_dump;
@@ -52,14 +54,11 @@ final class Dumper
      */
     public static function dump($var, int $maxDepth = 2) : string
     {
-        $html = ini_get('html_errors');
-
-        if ($html !== true) {
-            ini_set('html_errors', true);
-        }
+        $html = ini_set('html_errors', '1');
+        assert(is_string($html));
 
         if (extension_loaded('xdebug')) {
-            ini_set('xdebug.var_display_max_depth', $maxDepth);
+            ini_set('xdebug.var_display_max_depth', (string) $maxDepth);
         }
 
         $var = self::export($var, $maxDepth);
@@ -68,7 +67,10 @@ final class Dumper
         var_dump($var);
 
         try {
-            return strip_tags(html_entity_decode(ob_get_clean()));
+            $output = ob_get_clean();
+            assert(is_string($output));
+
+            return strip_tags(html_entity_decode($output));
         } finally {
             ini_set('html_errors', $html);
         }
@@ -171,6 +173,6 @@ final class Dumper
             return $class;
         }
 
-        return substr($class, $pos + Proxy::MARKER_LENGTH + 2);
+        return substr($class, $pos + strlen(Proxy::MARKER) + 2);
     }
 }
