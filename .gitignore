@@ -13,6 +13,7 @@ doctrine/annotations/.travis.yml
 doctrine/cache/tests
 doctrine/cache/.travis.yml
 doctrine/cache/composer.json
+doctrine/cache/README.md
 doctrine/collections/tests
 doctrine/collections/.travis.yml
 doctrine/collections/README.md
@@ -23,11 +24,13 @@ doctrine/common/composer.json
 doctrine/dbal/tests
 doctrine/dbal/docs
 doctrine/dbal/run-all.sh
+doctrine/dbal/.doctrine-project.json
 doctrine/dbal/.travis.yml
 doctrine/dbal/.gitignore
 doctrine/dbal/.gitattributes
 doctrine/dbal/.gitmodules
 doctrine/dbal/build.*
+doctrine/dbal/phpcs.xml.dist
 doctrine/dbal/phpunit.xml.dist
 doctrine/inflector/tests
 doctrine/lexer/composer.json
