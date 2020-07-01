@@ -2917,6 +2917,7 @@ return array(
     'ZipStreamer\\UNIX' => $vendorDir . '/deepdiver/zipstreamer/src/ZipStreamer.php',
     'ZipStreamer\\ZipStreamer' => $vendorDir . '/deepdiver/zipstreamer/src/ZipStreamer.php',
     'bantu\\IniGetWrapper\\IniGetWrapper' => $vendorDir . '/bantu/ini-get-wrapper/src/IniGetWrapper.php',
+    'ownCloud\\TarStreamer\\TarHeader' => $vendorDir . '/deepdiver1975/tarstreamer/src/TarHeader.php',
     'ownCloud\\TarStreamer\\TarStreamer' => $vendorDir . '/deepdiver1975/tarstreamer/src/TarStreamer.php',
     'phpseclib\\Crypt\\AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
     'phpseclib\\Crypt\\Base' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',

@@ -3437,6 +3437,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'ZipStreamer\\UNIX' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'ZipStreamer\\ZipStreamer' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'bantu\\IniGetWrapper\\IniGetWrapper' => __DIR__ . '/..' . '/bantu/ini-get-wrapper/src/IniGetWrapper.php',
+        'ownCloud\\TarStreamer\\TarHeader' => __DIR__ . '/..' . '/deepdiver1975/tarstreamer/src/TarHeader.php',
         'ownCloud\\TarStreamer\\TarStreamer' => __DIR__ . '/..' . '/deepdiver1975/tarstreamer/src/TarStreamer.php',
         'phpseclib\\Crypt\\AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
         'phpseclib\\Crypt\\Base' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
