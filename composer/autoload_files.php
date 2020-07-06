@@ -19,6 +19,7 @@ return array(
     '3569eecfeed3bcf0bad3c998a494ecb8' => $vendorDir . '/sabre/xml/lib/Deserializer/functions.php',
     '93aa591bc4ca510c520999e34229ee79' => $vendorDir . '/sabre/xml/lib/Serializer/functions.php',
     '0d59ee240a4cd96ddbb4ff164fccea4d' => $vendorDir . '/symfony/polyfill-php73/bootstrap.php',
+    'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'ebdb698ed4152ae445614b69b5e4bb6a' => $vendorDir . '/sabre/http/lib/functions.php',
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
     '25072dd6e2470089de65ae7bf11d3109' => $vendorDir . '/symfony/polyfill-php72/bootstrap.php',
