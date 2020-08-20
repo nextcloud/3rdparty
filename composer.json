@@ -47,7 +47,8 @@
 		"symfony/routing": "4.4.10",
 		"symfony/translation": "4.4.10",
 		"php-http/guzzle6-adapter": "^2.0",
-		"web-auth/webauthn-lib": "^3.1"
+		"web-auth/webauthn-lib": "^3.1",
+		"qcloud/cos-sdk-v5": "^2.0"
 	},
 	"scripts": {
 		"vendor": "composer install --no-dev && git clean -xdf && composer dump-autoload"
