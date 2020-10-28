@@ -155,6 +155,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'D' => 
         array (
+            'Ds\\' => 3,
             'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
@@ -446,6 +447,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+        ),
+        'Ds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-ds/php-ds/src',
         ),
         'Doctrine\\DBAL\\' => 
         array (
@@ -1648,6 +1653,22 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Doctrine\\DBAL\\Types\\VarDateTimeType' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Types/VarDateTimeType.php',
         'Doctrine\\DBAL\\Version' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Version.php',
         'Doctrine\\DBAL\\VersionAwarePlatformDriver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/VersionAwarePlatformDriver.php',
+        'Ds\\Collection' => __DIR__ . '/..' . '/php-ds/php-ds/src/Collection.php',
+        'Ds\\Deque' => __DIR__ . '/..' . '/php-ds/php-ds/src/Deque.php',
+        'Ds\\Hashable' => __DIR__ . '/..' . '/php-ds/php-ds/src/Hashable.php',
+        'Ds\\Map' => __DIR__ . '/..' . '/php-ds/php-ds/src/Map.php',
+        'Ds\\Pair' => __DIR__ . '/..' . '/php-ds/php-ds/src/Pair.php',
+        'Ds\\PriorityNode' => __DIR__ . '/..' . '/php-ds/php-ds/src/PriorityQueue.php',
+        'Ds\\PriorityQueue' => __DIR__ . '/..' . '/php-ds/php-ds/src/PriorityQueue.php',
+        'Ds\\Queue' => __DIR__ . '/..' . '/php-ds/php-ds/src/Queue.php',
+        'Ds\\Sequence' => __DIR__ . '/..' . '/php-ds/php-ds/src/Sequence.php',
+        'Ds\\Set' => __DIR__ . '/..' . '/php-ds/php-ds/src/Set.php',
+        'Ds\\Stack' => __DIR__ . '/..' . '/php-ds/php-ds/src/Stack.php',
+        'Ds\\Traits\\Capacity' => __DIR__ . '/..' . '/php-ds/php-ds/src/Traits/Capacity.php',
+        'Ds\\Traits\\GenericCollection' => __DIR__ . '/..' . '/php-ds/php-ds/src/Traits/GenericCollection.php',
+        'Ds\\Traits\\GenericSequence' => __DIR__ . '/..' . '/php-ds/php-ds/src/Traits/GenericSequence.php',
+        'Ds\\Traits\\SquaredCapacity' => __DIR__ . '/..' . '/php-ds/php-ds/src/Traits/SquaredCapacity.php',
+        'Ds\\Vector' => __DIR__ . '/..' . '/php-ds/php-ds/src/Vector.php',
         'Egulias\\EmailValidator\\EmailLexer' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/EmailLexer.php',
         'Egulias\\EmailValidator\\EmailParser' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/EmailParser.php',
         'Egulias\\EmailValidator\\EmailValidator' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/EmailValidator.php',
