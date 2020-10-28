@@ -47,7 +47,8 @@
 		"symfony/routing": "4.4.15",
 		"symfony/translation": "4.4.15",
 		"php-http/guzzle6-adapter": "^2.0",
-		"web-auth/webauthn-lib": "^3.1"
+		"web-auth/webauthn-lib": "^3.1",
+		"php-ds/php-ds": "^1.3"
 	},
 	"scripts": {
 		"vendor": "composer install --no-dev && git clean -xdf && composer dump-autoload"
