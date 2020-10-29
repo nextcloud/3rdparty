@@ -37,7 +37,7 @@
 		"psr/container": "^1.0",
 		"punic/punic": "^1.6",
 		"sabre/dav": "^4.0.0",
-		"scssphp/scssphp": "1.0.3",
+		"scssphp/scssphp": "1.2.1",
 		"stecman/symfony-console-completion": "^0.11.0",
 		"swiftmailer/swiftmailer": "^6.0",
 		"symfony/console": "4.4.15",
