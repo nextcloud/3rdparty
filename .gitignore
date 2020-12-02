@@ -211,14 +211,14 @@ nikic/php-parser/grammar/tokens.y
 nikic/php-parser/phpunit.xml.dist
 
 
-interfasys/lognormalizer/.gitignore
-interfasys/lognormalizer/.travis.yml
-interfasys/lognormalizer/.scrutinizer.yml
-interfasys/lognormalizer/CHANGELOG.md
-interfasys/lognormalizer/README.md
-interfasys/lognormalizer/composer.json
-interfasys/lognormalizer/phpunit.xml
-interfasys/lognormalizer/tests
+nextcloud/lognormalizer/.gitignore
+nextcloud/lognormalizer/.travis.yml
+nextcloud/lognormalizer/.scrutinizer.yml
+nextcloud/lognormalizer/CHANGELOG.md
+nextcloud/lognormalizer/README.md
+nextcloud/lognormalizer/composer.json
+nextcloud/lognormalizer/phpunit.xml
+nextcloud/lognormalizer/tests
 
 deepdiver1975/tarstreamer/.gitignore
 deepdiver1975/tarstreamer/.travis.yml
