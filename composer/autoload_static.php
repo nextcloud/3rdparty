@@ -7,20 +7,20 @@ namespace Composer\Autoload;
 class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
 {
     public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a4ecaeafb8cfb009ad0e052c90355e98' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '2b9d0f43f9552984cfa82fee95491826' => __DIR__ . '/..' . '/sabre/event/lib/coroutine.php',
         'd81bab31d3feb45bfe2f283ea3c8fdf7' => __DIR__ . '/..' . '/sabre/event/lib/Loop/functions.php',
         'a1cce3d26cc15c00fcd0b3354bd72c88' => __DIR__ . '/..' . '/sabre/event/lib/Promise/functions.php',
         '3569eecfeed3bcf0bad3c998a494ecb8' => __DIR__ . '/..' . '/sabre/xml/lib/Deserializer/functions.php',
         '93aa591bc4ca510c520999e34229ee79' => __DIR__ . '/..' . '/sabre/xml/lib/Serializer/functions.php',
-        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'ebdb698ed4152ae445614b69b5e4bb6a' => __DIR__ . '/..' . '/sabre/http/lib/functions.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
@@ -43,6 +43,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'o' => 
         array (
             'ownCloud\\TarStreamer\\' => 21,
+        ),
+        'l' => 
+        array (
+            'libphonenumber\\' => 15,
         ),
         'b' => 
         array (
@@ -144,6 +148,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Giggsey\\Locale\\' => 15,
         ),
         'F' => 
         array (
@@ -187,6 +192,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'ownCloud\\TarStreamer\\' => 
         array (
             0 => __DIR__ . '/..' . '/deepdiver1975/tarstreamer/src',
+        ),
+        'libphonenumber\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src',
         ),
         'bantu\\IniGetWrapper\\' => 
         array (
@@ -427,6 +436,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Giggsey\\Locale\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/giggsey/locale/src',
         ),
         'FG\\' => 
         array (
@@ -1828,6 +1841,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'FG\\X509\\SAN\\DNSName' => __DIR__ . '/..' . '/fgrosse/phpasn1/lib/X509/SAN/DNSName.php',
         'FG\\X509\\SAN\\IPAddress' => __DIR__ . '/..' . '/fgrosse/phpasn1/lib/X509/SAN/IPAddress.php',
         'FG\\X509\\SAN\\SubjectAlternativeNames' => __DIR__ . '/..' . '/fgrosse/phpasn1/lib/X509/SAN/SubjectAlternativeNames.php',
+        'Giggsey\\Locale\\Locale' => __DIR__ . '/..' . '/giggsey/locale/src/Locale.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
@@ -3506,6 +3520,47 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'ZipStreamer\\UNIX' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'ZipStreamer\\ZipStreamer' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'bantu\\IniGetWrapper\\IniGetWrapper' => __DIR__ . '/..' . '/bantu/ini-get-wrapper/src/IniGetWrapper.php',
+        'libphonenumber\\AlternateFormatsCountryCodeSet' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/AlternateFormatsCountryCodeSet.php',
+        'libphonenumber\\AsYouTypeFormatter' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/AsYouTypeFormatter.php',
+        'libphonenumber\\CountryCodeSource' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/CountryCodeSource.php',
+        'libphonenumber\\CountryCodeToRegionCodeMap' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/CountryCodeToRegionCodeMap.php',
+        'libphonenumber\\CountryCodeToRegionCodeMapForTesting' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/CountryCodeToRegionCodeMapForTesting.php',
+        'libphonenumber\\DefaultMetadataLoader' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/DefaultMetadataLoader.php',
+        'libphonenumber\\Leniency' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Leniency.php',
+        'libphonenumber\\Leniency\\AbstractLeniency' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Leniency/AbstractLeniency.php',
+        'libphonenumber\\Leniency\\ExactGrouping' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Leniency/ExactGrouping.php',
+        'libphonenumber\\Leniency\\Possible' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Leniency/Possible.php',
+        'libphonenumber\\Leniency\\StrictGrouping' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Leniency/StrictGrouping.php',
+        'libphonenumber\\Leniency\\Valid' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Leniency/Valid.php',
+        'libphonenumber\\MatchType' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/MatchType.php',
+        'libphonenumber\\Matcher' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/Matcher.php',
+        'libphonenumber\\MatcherAPIInterface' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/MatcherAPIInterface.php',
+        'libphonenumber\\MetadataLoaderInterface' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/MetadataLoaderInterface.php',
+        'libphonenumber\\MetadataSourceInterface' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/MetadataSourceInterface.php',
+        'libphonenumber\\MultiFileMetadataSourceImpl' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/MultiFileMetadataSourceImpl.php',
+        'libphonenumber\\NumberFormat' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/NumberFormat.php',
+        'libphonenumber\\NumberParseException' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/NumberParseException.php',
+        'libphonenumber\\PhoneMetadata' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneMetadata.php',
+        'libphonenumber\\PhoneNumber' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumber.php',
+        'libphonenumber\\PhoneNumberDesc' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberDesc.php',
+        'libphonenumber\\PhoneNumberFormat' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberFormat.php',
+        'libphonenumber\\PhoneNumberMatch' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberMatch.php',
+        'libphonenumber\\PhoneNumberMatcher' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberMatcher.php',
+        'libphonenumber\\PhoneNumberToCarrierMapper' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberToCarrierMapper.php',
+        'libphonenumber\\PhoneNumberToTimeZonesMapper' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberToTimeZonesMapper.php',
+        'libphonenumber\\PhoneNumberType' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberType.php',
+        'libphonenumber\\PhoneNumberUtil' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/PhoneNumberUtil.php',
+        'libphonenumber\\RegexBasedMatcher' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/RegexBasedMatcher.php',
+        'libphonenumber\\RegionCode' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/RegionCode.php',
+        'libphonenumber\\ShortNumberCost' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/ShortNumberCost.php',
+        'libphonenumber\\ShortNumberInfo' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/ShortNumberInfo.php',
+        'libphonenumber\\ShortNumbersRegionCodeSet' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/ShortNumbersRegionCodeSet.php',
+        'libphonenumber\\ValidationResult' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/ValidationResult.php',
+        'libphonenumber\\geocoding\\PhoneNumberOfflineGeocoder' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/geocoding/PhoneNumberOfflineGeocoder.php',
+        'libphonenumber\\prefixmapper\\MappingFileProvider' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/prefixmapper/MappingFileProvider.php',
+        'libphonenumber\\prefixmapper\\PhonePrefixMap' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/prefixmapper/PhonePrefixMap.php',
+        'libphonenumber\\prefixmapper\\PrefixFileReader' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/prefixmapper/PrefixFileReader.php',
+        'libphonenumber\\prefixmapper\\PrefixTimeZonesMap' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/prefixmapper/PrefixTimeZonesMap.php',
         'ownCloud\\TarStreamer\\TarHeader' => __DIR__ . '/..' . '/deepdiver1975/tarstreamer/src/TarHeader.php',
         'ownCloud\\TarStreamer\\TarStreamer' => __DIR__ . '/..' . '/deepdiver1975/tarstreamer/src/TarStreamer.php',
         'phpseclib\\Crypt\\AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
