@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4764fd6a98b2b95475d06d646177637",
+    "content-hash": "57dab65713c8431b9d8f67cd6eddca77",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1609,59 +1609,6 @@
             "time": "2019-02-15T12:57:29+00:00"
         },
         {
-            "name": "interfasys/lognormalizer",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/interfasys/lognormalizer.git",
-                "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/interfasys/lognormalizer/zipball/d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
-                "reference": "d5e4c95e0b0ecc886b78aafda3773b3bcf2ec116",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "codacy/coverage": "dev-master",
-                "codeclimate/php-test-reporter": "dev-master",
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "InterfaSys\\LogNormalizer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "AGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Paroz",
-                    "email": "dev-lognormalizer@interfasys.ch",
-                    "homepage": "http://www.interfasys.ch",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Parses variables and converts them to string so that they can be logged",
-            "homepage": "https://github.com/interfasys/lognormalizer",
-            "keywords": [
-                "log",
-                "normalizer"
-            ],
-            "time": "2015-08-01T16:27:37+00:00"
-        },
-        {
             "name": "jeremeamia/SuperClosure",
             "version": "2.4.0",
             "source": {
@@ -2232,6 +2179,62 @@
                 "jsonpath"
             ],
             "time": "2019-12-30T18:03:34+00:00"
+        },
+        {
+            "name": "nextcloud/lognormalizer",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nextcloud/lognormalizer.git",
+                "reference": "87445d69225c247aaff64643b1fc83c6d6df741f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/87445d69225c247aaff64643b1fc83c6d6df741f",
+                "reference": "87445d69225c247aaff64643b1fc83c6d6df741f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nextcloud\\LogNormalizer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Wurst",
+                    "email": "christoph@winzerhof-wurst.at"
+                },
+                {
+                    "name": "Olivier Paroz",
+                    "email": "dev-lognormalizer@interfasys.ch",
+                    "homepage": "http://www.interfasys.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Parses variables and converts them to string so that they can be logged",
+            "homepage": "https://github.com/interfasys/lognormalizer",
+            "keywords": [
+                "log",
+                "normalizer"
+            ],
+            "time": "2020-12-02T09:34:47+00:00"
         },
         {
             "name": "nikic/php-parser",
