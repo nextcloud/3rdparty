@@ -109,6 +109,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'OpenStack\\' => 10,
         ),
+        'N' => 
+        array (
+            'Nextcloud\\LogNormalizer\\' => 24,
+        ),
         'M' => 
         array (
             'MicrosoftAzure\\Storage\\Common\\' => 30,
@@ -126,7 +130,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'I' => 
         array (
-            'InterfaSys\\LogNormalizer\\' => 25,
             'Icewind\\Streams\\Tests\\' => 22,
             'Icewind\\Streams\\' => 16,
             'ID3Parser\\' => 10,
@@ -365,6 +368,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             0 => __DIR__ . '/..' . '/php-opencloud/openstack/src',
         ),
+        'Nextcloud\\LogNormalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextcloud/lognormalizer/src',
+        ),
         'MicrosoftAzure\\Storage\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common',
@@ -390,10 +397,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
-        ),
-        'InterfaSys\\LogNormalizer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/interfasys/lognormalizer/src',
         ),
         'Icewind\\Streams\\Tests\\' => 
         array (
@@ -1913,7 +1916,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Icewind\\Streams\\Url' => __DIR__ . '/..' . '/icewind/streams/src/Url.php',
         'Icewind\\Streams\\UrlCallback' => __DIR__ . '/..' . '/icewind/streams/src/UrlCallBack.php',
         'Icewind\\Streams\\Wrapper' => __DIR__ . '/..' . '/icewind/streams/src/Wrapper.php',
-        'InterfaSys\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/interfasys/lognormalizer/src/Normalizer.php',
         'JmesPath\\AstRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/AstRuntime.php',
         'JmesPath\\CompilerRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/CompilerRuntime.php',
         'JmesPath\\DebugRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/DebugRuntime.php',
@@ -2174,6 +2176,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'MicrosoftAzure\\Storage\\Common\\Models\\SignedIdentifier' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/Models/SignedIdentifier.php',
         'MicrosoftAzure\\Storage\\Common\\Models\\TransactionalMD5Trait' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/Models/TransactionalMD5Trait.php',
         'MicrosoftAzure\\Storage\\Common\\SharedAccessSignatureHelper' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/SharedAccessSignatureHelper.php',
+        'Nextcloud\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/nextcloud/lognormalizer/src/Normalizer.php',
         'Normalizer' => __DIR__ . '/..' . '/patchwork/utf8/src/Normalizer.php',
         'OS_Guess' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/OS/Guess.php',
         'OpenStack\\BlockStorage\\v2\\Api' => __DIR__ . '/..' . '/php-opencloud/openstack/src/BlockStorage/v2/Api.php',
