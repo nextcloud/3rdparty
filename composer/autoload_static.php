@@ -30,6 +30,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
+        '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
@@ -103,7 +104,12 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'O' => 
         array (
+            'Opis\\Closure\\' => 13,
             'OpenStack\\' => 10,
+        ),
+        'N' => 
+        array (
+            'Nextcloud\\LogNormalizer\\' => 24,
         ),
         'M' => 
         array (
@@ -345,9 +351,17 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             0 => __DIR__ . '/..' . '/patchwork/jsqueeze/src',
             1 => __DIR__ . '/..' . '/patchwork/utf8/src/Patchwork',
         ),
+        'Opis\\Closure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
         'OpenStack\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-opencloud/openstack/src',
+        ),
+        'Nextcloud\\LogNormalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextcloud/lognormalizer/src',
         ),
         'MicrosoftAzure\\Storage\\Common\\' => 
         array (
@@ -1219,7 +1233,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'CBOR\\TextStringObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/TextStringObject.php',
         'CBOR\\TextStringWithChunkObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/TextStringWithChunkObject.php',
         'CBOR\\UnsignedIntegerObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/UnsignedIntegerObject.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Console_Getopt' => __DIR__ . '/..' . '/pear/console_getopt/Console/Getopt.php',
         'Cose\\Algorithm\\Algorithm' => __DIR__ . '/..' . '/web-auth/cose-lib/src/Algorithm/Algorithm.php',
         'Cose\\Algorithm\\Mac\\HS256' => __DIR__ . '/..' . '/web-auth/cose-lib/src/Algorithm/Mac/HS256.php',
@@ -1692,6 +1705,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Ds\\Hashable' => __DIR__ . '/..' . '/php-ds/php-ds/src/Hashable.php',
         'Ds\\Map' => __DIR__ . '/..' . '/php-ds/php-ds/src/Map.php',
         'Ds\\Pair' => __DIR__ . '/..' . '/php-ds/php-ds/src/Pair.php',
+        'Ds\\PriorityNode' => __DIR__ . '/..' . '/php-ds/php-ds/src/PriorityQueue.php',
         'Ds\\PriorityQueue' => __DIR__ . '/..' . '/php-ds/php-ds/src/PriorityQueue.php',
         'Ds\\Queue' => __DIR__ . '/..' . '/php-ds/php-ds/src/Queue.php',
         'Ds\\Sequence' => __DIR__ . '/..' . '/php-ds/php-ds/src/Sequence.php',
@@ -1965,6 +1979,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Icewind\\Streams\\RetryWrapper' => __DIR__ . '/..' . '/icewind/streams/src/RetryWrapper.php',
         'Icewind\\Streams\\SeekableWrapper' => __DIR__ . '/..' . '/icewind/streams/src/SeekableWrapper.php',
         'Icewind\\Streams\\Url' => __DIR__ . '/..' . '/icewind/streams/src/Url.php',
+        'Icewind\\Streams\\UrlCallback' => __DIR__ . '/..' . '/icewind/streams/src/UrlCallBack.php',
         'Icewind\\Streams\\Wrapper' => __DIR__ . '/..' . '/icewind/streams/src/Wrapper.php',
         'JmesPath\\AstRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/AstRuntime.php',
         'JmesPath\\CompilerRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/CompilerRuntime.php',
@@ -2226,6 +2241,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'MicrosoftAzure\\Storage\\Common\\Models\\SignedIdentifier' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/Models/SignedIdentifier.php',
         'MicrosoftAzure\\Storage\\Common\\Models\\TransactionalMD5Trait' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/Models/TransactionalMD5Trait.php',
         'MicrosoftAzure\\Storage\\Common\\SharedAccessSignatureHelper' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/SharedAccessSignatureHelper.php',
+        'Nextcloud\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/nextcloud/lognormalizer/src/Normalizer.php',
         'Normalizer' => __DIR__ . '/..' . '/patchwork/utf8/src/Normalizer.php',
         'OS_Guess' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/OS/Guess.php',
         'OpenStack\\BlockStorage\\v2\\Api' => __DIR__ . '/..' . '/php-opencloud/openstack/src/BlockStorage/v2/Api.php',
@@ -2364,7 +2380,18 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'OpenStack\\ObjectStore\\v1\\Params' => __DIR__ . '/..' . '/php-opencloud/openstack/src/ObjectStore/v1/Params.php',
         'OpenStack\\ObjectStore\\v1\\Service' => __DIR__ . '/..' . '/php-opencloud/openstack/src/ObjectStore/v1/Service.php',
         'OpenStack\\OpenStack' => __DIR__ . '/..' . '/php-opencloud/openstack/src/OpenStack.php',
+        'Opis\\Closure\\Analyzer' => __DIR__ . '/..' . '/opis/closure/src/Analyzer.php',
+        'Opis\\Closure\\ClosureContext' => __DIR__ . '/..' . '/opis/closure/src/ClosureContext.php',
+        'Opis\\Closure\\ClosureScope' => __DIR__ . '/..' . '/opis/closure/src/ClosureScope.php',
+        'Opis\\Closure\\ClosureStream' => __DIR__ . '/..' . '/opis/closure/src/ClosureStream.php',
+        'Opis\\Closure\\ISecurityProvider' => __DIR__ . '/..' . '/opis/closure/src/ISecurityProvider.php',
+        'Opis\\Closure\\ReflectionClosure' => __DIR__ . '/..' . '/opis/closure/src/ReflectionClosure.php',
+        'Opis\\Closure\\SecurityException' => __DIR__ . '/..' . '/opis/closure/src/SecurityException.php',
+        'Opis\\Closure\\SecurityProvider' => __DIR__ . '/..' . '/opis/closure/src/SecurityProvider.php',
+        'Opis\\Closure\\SelfReference' => __DIR__ . '/..' . '/opis/closure/src/SelfReference.php',
+        'Opis\\Closure\\SerializableClosure' => __DIR__ . '/..' . '/opis/closure/src/SerializableClosure.php',
         'PEAR' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
+        'PEAR_Error' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
         'PEAR_ErrorStack' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'Patchwork\\JSqueeze' => __DIR__ . '/..' . '/patchwork/jsqueeze/src/JSqueeze.php',
@@ -2637,6 +2664,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
+        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'Punic\\Calendar' => __DIR__ . '/..' . '/punic/punic/code/Calendar.php',
@@ -3208,6 +3236,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\Event' => __DIR__ . '/..' . '/symfony/event-dispatcher/Event.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
@@ -3269,6 +3298,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Component\\Routing\\Loader\\ObjectLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectRouteLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectRouteLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
+        'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
         'Symfony\\Component\\Routing\\Matcher\\CompiledUrlMatcher' => __DIR__ . '/..' . '/symfony/routing/Matcher/CompiledUrlMatcher.php',
@@ -3463,6 +3493,18 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Webauthn\\TrustPath\\TrustPath' => __DIR__ . '/..' . '/web-auth/webauthn-lib/src/TrustPath/TrustPath.php',
         'Webauthn\\TrustPath\\TrustPathLoader' => __DIR__ . '/..' . '/web-auth/webauthn-lib/src/TrustPath/TrustPathLoader.php',
         'Webauthn\\Util\\CoseSignatureFixer' => __DIR__ . '/..' . '/web-auth/webauthn-lib/src/Util/CoseSignatureFixer.php',
+        'ZipStreamer\\COMPR' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\Count64' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/lib/Count64.php',
+        'ZipStreamer\\Count64Base' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/lib/Count64.php',
+        'ZipStreamer\\Count64_32' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/lib/Count64.php',
+        'ZipStreamer\\Count64_64' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/lib/Count64.php',
+        'ZipStreamer\\DOS' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\DeflatePeclStream' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\DeflateStoreStream' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\DeflateStream' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\ExtFileAttr' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\GPFLAGS' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
+        'ZipStreamer\\UNIX' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'ZipStreamer\\ZipStreamer' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'bantu\\IniGetWrapper\\IniGetWrapper' => __DIR__ . '/..' . '/bantu/ini-get-wrapper/src/IniGetWrapper.php',
         'ownCloud\\TarStreamer\\TarHeader' => __DIR__ . '/..' . '/deepdiver1975/tarstreamer/src/TarHeader.php',
