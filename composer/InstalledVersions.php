@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'b4e3e839fbc939c2e6dc9452fb7043e667202755',
+    'reference' => '60762c70810df5211ee770691099174cf6d5a3a8',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -116,12 +116,12 @@ private static $installed = array (
     ),
     'doctrine/dbal' => 
     array (
-      'pretty_version' => '2.10.2',
-      'version' => '2.10.2.0',
+      'pretty_version' => '2.12.0',
+      'version' => '2.12.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'aab745e7b6b2de3b47019da81e7225e14dcfdac8',
+      'reference' => 'c6d37b4c42aaa3c3ee175f05eca68056f4185646',
     ),
     'doctrine/event-manager' => 
     array (
@@ -346,7 +346,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'b4e3e839fbc939c2e6dc9452fb7043e667202755',
+      'reference' => '60762c70810df5211ee770691099174cf6d5a3a8',
     ),
     'nikic/php-parser' => 
     array (
