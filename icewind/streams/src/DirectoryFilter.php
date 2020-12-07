@@ -25,7 +25,7 @@ class DirectoryFilter extends DirectoryWrapper {
 	 * @return bool
 	 */
 	public function dir_opendir($path, $options) {
-		$context = $this->loadContext();
+		$context = $this->loadContext('filter');
 		$this->filter = $context['filter'];
 		return true;
 	}
@@ -36,7 +36,7 @@ class DirectoryFilter extends DirectoryWrapper {
 	public function dir_readdir() {
 		$file = readdir($this->source);
 		$filter = $this->filter;
-		// keep reading until we have an accepted entry or we're at the end of the folder
+		// keep reading untill we have an accepted entry or we're at the end of the folder
 		while ($file !== false && $filter($file) === false) {
 			$file = readdir($this->source);
 		}
@@ -46,12 +46,15 @@ class DirectoryFilter extends DirectoryWrapper {
 	/**
 	 * @param resource $source
 	 * @param callable $filter
-	 * @return resource|bool
+	 * @return resource
 	 */
 	public static function wrap($source, callable $filter) {
-		return self::wrapSource($source, [
-			'source' => $source,
-			'filter' => $filter
-		]);
+		$options = array(
+			'filter' => array(
+				'source' => $source,
+				'filter' => $filter
+			)
+		);
+		return self::wrapWithOptions($options, '\Icewind\Streams\DirectoryFilter');
 	}
 }

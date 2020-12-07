@@ -25,8 +25,21 @@ class SeekableWrapper extends Wrapper {
 	 */
 	protected $cache;
 
+	/**
+	 * Wraps a stream to make it seekable
+	 *
+	 * @param resource $source
+	 * @return resource
+	 *
+	 * @throws \BadMethodCallException
+	 */
 	public static function wrap($source) {
-		return self::wrapSource($source);
+		$context = stream_context_create(array(
+			'callback' => array(
+				'source' => $source
+			)
+		));
+		return Wrapper::wrapSource($source, $context, 'callback', '\Icewind\Streams\SeekableWrapper');
 	}
 
 	public function dir_opendir($path, $options) {
@@ -34,12 +47,8 @@ class SeekableWrapper extends Wrapper {
 	}
 
 	public function stream_open($path, $mode, $options, &$opened_path) {
-		$this->loadContext();
-		$cache = fopen('php://temp', 'w+');
-		if ($cache === false) {
-			return false;
-		}
-		$this->cache = $cache;
+		$this->loadContext('callback');
+		$this->cache = fopen('php://temp', 'w+');
 		return true;
 	}
 

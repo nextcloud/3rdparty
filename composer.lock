@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1aefb44e9f9ae6f02d4b59bdea75ff7",
+    "content-hash": "9f6e2f20fbb836e19a3c1b58de400d30",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1685,28 +1685,29 @@
         },
         {
             "name": "icewind/streams",
-            "version": "v0.7.2",
+            "version": "v0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "77d750ccc654c0eda4a41fedb2dbd71053755790"
+                "reference": "4db3ed6c366e90b958d00e1d4c6360a9b39b2121"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/77d750ccc654c0eda4a41fedb2dbd71053755790",
-                "reference": "77d750ccc654c0eda4a41fedb2dbd71053755790",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/4db3ed6c366e90b958d00e1d4c6360a9b39b2121",
+                "reference": "4db3ed6c366e90b958d00e1d4c6360a9b39b2121",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=5.3"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "v2.1.0",
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^4.8",
+                "satooshi/php-coveralls": "v1.0.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
+                    "Icewind\\Streams\\Tests\\": "tests/",
                     "Icewind\\Streams\\": "src/"
                 }
             },
@@ -1721,7 +1722,7 @@
                 }
             ],
             "description": "A set of generic stream wrappers",
-            "time": "2020-04-08T14:59:33+00:00"
+            "time": "2019-02-15T12:57:29+00:00"
         },
         {
             "name": "justinrainbow/json-schema",

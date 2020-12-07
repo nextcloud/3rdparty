@@ -11,8 +11,25 @@ namespace Icewind\Streams;
  * Wrapper that retries reads/writes to remote streams that dont deliver/recieve all requested data at once
  */
 class RetryWrapper extends Wrapper {
+
+	/**
+	 * Wraps a stream with the provided callbacks
+	 *
+	 * @param resource $source
+	 * @return resource
+	 */
 	public static function wrap($source) {
-		return self::wrapSource($source);
+		$context = stream_context_create(array(
+			'retry' => array(
+				'source' => $source
+			)
+		));
+		return Wrapper::wrapSource($source, $context, 'retry', '\Icewind\Streams\RetryWrapper');
+	}
+
+	protected function open() {
+		$this->loadContext('retry');
+		return true;
 	}
 
 	public function dir_opendir($path, $options) {
@@ -20,8 +37,7 @@ class RetryWrapper extends Wrapper {
 	}
 
 	public function stream_open($path, $mode, $options, &$opened_path) {
-		$this->loadContext();
-		return true;
+		return $this->open();
 	}
 
 	public function stream_read($count) {
