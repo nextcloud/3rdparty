@@ -16,8 +16,10 @@ class PathWrapper extends NullWrapper {
 	 * @return Path|string
 	 */
 	public static function getPath($source) {
-		return new Path(NullWrapper::class, [
-			NullWrapper::getProtocol() => ['source' => $source]
+		return new Path(__CLASS__, [
+			'null' => [
+				'source' => $source
+			]
 		]);
 	}
 }

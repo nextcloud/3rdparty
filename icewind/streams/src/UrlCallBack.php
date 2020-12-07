@@ -47,10 +47,11 @@ class UrlCallback extends Wrapper implements Url {
 	 * @return \Icewind\Streams\Path
 	 *
 	 * @throws \BadMethodCallException
+	 * @throws \Exception
 	 */
 	public static function wrap($source, $fopen = null, $opendir = null, $mkdir = null, $rename = null, $rmdir = null,
 								$unlink = null, $stat = null) {
-		return new Path(static::class, [
+		$options = array(
 			'source' => $source,
 			'fopen' => $fopen,
 			'opendir' => $opendir,
@@ -59,10 +60,11 @@ class UrlCallback extends Wrapper implements Url {
 			'rmdir' => $rmdir,
 			'unlink' => $unlink,
 			'stat' => $stat
-		]);
+		);
+		return new Path('\Icewind\Streams\UrlCallBack', $options);
 	}
 
-	protected function loadUrlContext($url) {
+	protected function loadContext($url) {
 		list($protocol) = explode('://', $url);
 		$options = stream_context_get_options($this->context);
 		return $options[$protocol];
@@ -75,48 +77,40 @@ class UrlCallback extends Wrapper implements Url {
 	}
 
 	public function stream_open($path, $mode, $options, &$opened_path) {
-		$context = $this->loadUrlContext($path);
+		$context = $this->loadContext($path);
 		$this->callCallBack($context, 'fopen');
-		$source = fopen($context['source'], $mode);
-		if ($source === false) {
-			return false;
-		}
-		$this->setSourceStream($source);
+		$this->setSourceStream(fopen($context['source'], $mode));
 		return true;
 	}
 
 	public function dir_opendir($path, $options) {
-		$context = $this->loadUrlContext($path);
+		$context = $this->loadContext($path);
 		$this->callCallBack($context, 'opendir');
-		$source = opendir($context['source']);
-		if ($source === false) {
-			return false;
-		}
-		$this->setSourceStream($source);
+		$this->setSourceStream(opendir($context['source']));
 		return true;
 	}
 
 	public function mkdir($path, $mode, $options) {
-		$context = $this->loadUrlContext($path);
+		$context = $this->loadContext($path);
 		$this->callCallBack($context, 'mkdir');
-		return mkdir($context['source'], $mode, ($options & STREAM_MKDIR_RECURSIVE) > 0);
+		return mkdir($context['source'], $mode, $options & STREAM_MKDIR_RECURSIVE);
 	}
 
 	public function rmdir($path, $options) {
-		$context = $this->loadUrlContext($path);
+		$context = $this->loadContext($path);
 		$this->callCallBack($context, 'rmdir');
 		return rmdir($context['source']);
 	}
 
 	public function rename($source, $target) {
-		$context = $this->loadUrlContext($source);
+		$context = $this->loadContext($source);
 		$this->callCallBack($context, 'rename');
 		list(, $target) = explode('://', $target);
 		return rename($context['source'], $target);
 	}
 
 	public function unlink($path) {
-		$context = $this->loadUrlContext($path);
+		$context = $this->loadContext($path);
 		$this->callCallBack($context, 'unlink');
 		return unlink($context['source']);
 	}

@@ -55,7 +55,7 @@ class CountWrapper extends Wrapper {
 	 *
 	 * @param resource $source
 	 * @param callable $callback
-	 * @return resource|bool
+	 * @return resource
 	 *
 	 * @throws \BadMethodCallException
 	 */
@@ -63,14 +63,17 @@ class CountWrapper extends Wrapper {
 		if (!is_callable($callback)) {
 			throw new \InvalidArgumentException('Invalid or missing callback');
 		}
-		return self::wrapSource($source, [
-			'source' => $source,
-			'callback' => $callback
-		]);
+		$context = stream_context_create(array(
+			'count' => array(
+				'source' => $source,
+				'callback' => $callback
+			)
+		));
+		return Wrapper::wrapSource($source, $context, 'callback', '\Icewind\Streams\CountWrapper');
 	}
 
 	protected function open() {
-		$context = $this->loadContext();
+		$context = $this->loadContext('count');
 		$this->callback = $context['callback'];
 		return true;
 	}

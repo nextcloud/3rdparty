@@ -11,17 +11,29 @@ namespace Icewind\Streams;
  * Stream wrapper that does nothing, used for tests
  */
 class NullWrapper extends Wrapper {
+	/**
+	 * Wraps a stream with the provided callbacks
+	 *
+	 * @param resource $source
+	 * @return resource
+	 *
+	 * @throws \BadMethodCallException
+	 */
 	public static function wrap($source) {
-		return self::wrapSource($source);
+		$context = stream_context_create(array(
+			'null' => array(
+				'source' => $source)
+		));
+		return Wrapper::wrapSource($source, $context, 'null', '\Icewind\Streams\NullWrapper');
 	}
 
 	public function stream_open($path, $mode, $options, &$opened_path) {
-		$this->loadContext();
+		$this->loadContext('null');
 		return true;
 	}
 
 	public function dir_opendir($path, $options) {
-		$this->loadContext();
+		$this->loadContext('null');
 		return true;
 	}
 }
