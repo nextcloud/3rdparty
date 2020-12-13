@@ -16,7 +16,7 @@
 		"aws/aws-sdk-php": "^3.35",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"christophwurst/id3parser": "^0.1.1",
-		"deepdiver/zipstreamer": "1.1.1",
+		"deepdiver/zipstreamer": "2.0.0",
 		"deepdiver1975/tarstreamer": "v2.0.0",
 		"doctrine/dbal": "2.12.0",
 		"guzzlehttp/guzzle": "6.5.2",

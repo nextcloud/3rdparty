@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '81a9fcefae15dfe4fb7c581ff99708e176c7a88d',
+    'reference' => '455f47df98504ef1336cd9e4c5b59c60903ebb22',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -49,12 +49,12 @@
     ),
     'deepdiver/zipstreamer' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '2.0.0',
+      'version' => '2.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c8e73ca3204bd0e06abdb0bc533f073b616d6e47',
+      'reference' => 'b8c59647ff34fb97e8937aefb2a65de2bc4b4755',
     ),
     'deepdiver1975/tarstreamer' => 
     array (
@@ -261,7 +261,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '81a9fcefae15dfe4fb7c581ff99708e176c7a88d',
+      'reference' => '455f47df98504ef1336cd9e4c5b59c60903ebb22',
     ),
     'nextcloud/lognormalizer' => 
     array (

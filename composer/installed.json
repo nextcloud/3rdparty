@@ -226,17 +226,17 @@
         },
         {
             "name": "deepdiver/zipstreamer",
-            "version": "1.1.1",
-            "version_normalized": "1.1.1.0",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DeepDiver1975/PHPZipStreamer.git",
-                "reference": "c8e73ca3204bd0e06abdb0bc533f073b616d6e47"
+                "reference": "b8c59647ff34fb97e8937aefb2a65de2bc4b4755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DeepDiver1975/PHPZipStreamer/zipball/c8e73ca3204bd0e06abdb0bc533f073b616d6e47",
-                "reference": "c8e73ca3204bd0e06abdb0bc533f073b616d6e47",
+                "url": "https://api.github.com/repos/DeepDiver1975/PHPZipStreamer/zipball/b8c59647ff34fb97e8937aefb2a65de2bc4b4755",
+                "reference": "b8c59647ff34fb97e8937aefb2a65de2bc4b4755",
                 "shasum": ""
             },
             "require": {
@@ -245,7 +245,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^5.7"
             },
-            "time": "2018-03-26T14:48:40+00:00",
+            "time": "2020-07-21T07:45:14+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -290,6 +290,10 @@
                 "stream",
                 "zip"
             ],
+            "support": {
+                "issues": "https://github.com/DeepDiver1975/PHPZipStreamer/issues",
+                "source": "https://github.com/DeepDiver1975/PHPZipStreamer/tree/master"
+            },
             "install-path": "../deepdiver/zipstreamer"
         },
         {
@@ -5242,6 +5246,6 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }
