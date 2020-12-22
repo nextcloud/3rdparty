@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '175e8e04c82f14cbd84aa7cbff746495595536e6',
+    'reference' => '81a9fcefae15dfe4fb7c581ff99708e176c7a88d',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -65,15 +65,6 @@
       ),
       'reference' => 'ad48505d1ab54a8e94e6b1cc5297bbed72e956de',
     ),
-    'doctrine/annotations' => 
-    array (
-      'pretty_version' => 'v1.6.0',
-      'version' => '1.6.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5',
-    ),
     'doctrine/cache' => 
     array (
       'pretty_version' => '1.10.1',
@@ -82,24 +73,6 @@
       array (
       ),
       'reference' => '35a4a70cd94e09e2259dfae7488afc6b474ecbd3',
-    ),
-    'doctrine/collections' => 
-    array (
-      'pretty_version' => 'v1.5.0',
-      'version' => '1.5.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a01ee38fcd999f34d9bfbcee59dbda5105449cbf',
-    ),
-    'doctrine/common' => 
-    array (
-      'pretty_version' => 'v2.10.0',
-      'version' => '2.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '30e33f60f64deec87df728c02b107f82cdafad9d',
     ),
     'doctrine/dbal' => 
     array (
@@ -119,15 +92,6 @@
       ),
       'reference' => '629572819973f13486371cb611386eb17851e85c',
     ),
-    'doctrine/inflector' => 
-    array (
-      'pretty_version' => 'v1.3.0',
-      'version' => '1.3.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5527a48b7313d15261292c149e55e26eae771b0a',
-    ),
     'doctrine/lexer' => 
     array (
       'pretty_version' => '1.2.0',
@@ -136,24 +100,6 @@
       array (
       ),
       'reference' => '5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6',
-    ),
-    'doctrine/persistence' => 
-    array (
-      'pretty_version' => 'v1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38',
-    ),
-    'doctrine/reflection' => 
-    array (
-      'pretty_version' => 'v1.0.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '02538d3f95e88eb397a5f86274deb2c6175c2ab6',
     ),
     'egulias/email-validator' => 
     array (
@@ -217,24 +163,6 @@
       array (
       ),
       'reference' => '239400de7a173fe9901b9ac7c06497751f00727a',
-    ),
-    'guzzlehttp/ringphp' => 
-    array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'dbbb91d7f6c191e5e405e900e3102ac7f261bc0b',
-    ),
-    'guzzlehttp/streams' => 
-    array (
-      'pretty_version' => '3.0.0',
-      'version' => '3.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5',
     ),
     'icewind/searchdav' => 
     array (
@@ -333,7 +261,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '175e8e04c82f14cbd84aa7cbff746495595536e6',
+      'reference' => '81a9fcefae15dfe4fb7c581ff99708e176c7a88d',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -615,15 +543,6 @@
       array (
       ),
       'reference' => '7e1633a6964b48589b142d60542f9ed31bd37a92',
-    ),
-    'react/promise' => 
-    array (
-      'pretty_version' => 'v2.2.1',
-      'version' => '2.2.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3b6fca09c7d56321057fa8867c8dbe1abf648627',
     ),
     'rhumsaa/uuid' => 
     array (
