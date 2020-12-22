@@ -1,6 +1,26 @@
 ChangeLog
 =========
 
+4.1.3 (2020-11-09)
+-------------------------
+* #1306: Return 409 when trying to PUT a file into a non-existent collection
+
+4.1.2 (2020-10-04)
+-------------------------
+* #1296: Add experimental support for PHP 8.0
+
+4.1.1 (2020-07-13)
+-------------------------
+* Fix PHPdoc of Tree:move method
+* Allow using custom SAPI implementations
+* Include baseUri in lock responses
+
+4.1.0 (2020-03-20)
+-------------------------
+* Support PHP 7.4
+* Drop support for PHP 7.0
+* CalDAV: send MIME-Version header in scheduling emails
+
 4.0.3 (2020-01-10)
 -------------------------
 * DAV: Streaming PROPFIND server implementation
@@ -234,7 +254,7 @@ ChangeLog
   [sabre/uri 1.1.0][uri] and [sabre/xml 1.4.1][xml].
 
 
-3.1.5 (????-??-??)
+3.1.5 (2018-10-19)
 ------------------
 
 * Fixed: Creating a new calendar on some MySQL configurations caused an error.
