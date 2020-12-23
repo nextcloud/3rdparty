@@ -21,7 +21,7 @@ jobs:
         php-version: 7.4
         coverage: none
     - name: Update composer
-      run: sudo composer self-update && composer --version
+      run: sudo composer self-update --1 && composer --version
     - name: Vendor dependencies
       run: composer run vendor
     - name: Check vendor changes
