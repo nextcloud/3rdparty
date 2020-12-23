@@ -1,5 +1,15 @@
 <?php
 
+
+
+
+
+
+
+
+
+
+
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -19,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '60762c70810df5211ee770691099174cf6d5a3a8',
+    'reference' => '81a9fcefae15dfe4fb7c581ff99708e176c7a88d',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -78,15 +88,6 @@ private static $installed = array (
       ),
       'reference' => 'ad48505d1ab54a8e94e6b1cc5297bbed72e956de',
     ),
-    'doctrine/annotations' => 
-    array (
-      'pretty_version' => 'v1.6.0',
-      'version' => '1.6.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5',
-    ),
     'doctrine/cache' => 
     array (
       'pretty_version' => '1.10.1',
@@ -95,24 +96,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '35a4a70cd94e09e2259dfae7488afc6b474ecbd3',
-    ),
-    'doctrine/collections' => 
-    array (
-      'pretty_version' => 'v1.5.0',
-      'version' => '1.5.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a01ee38fcd999f34d9bfbcee59dbda5105449cbf',
-    ),
-    'doctrine/common' => 
-    array (
-      'pretty_version' => 'v2.10.0',
-      'version' => '2.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '30e33f60f64deec87df728c02b107f82cdafad9d',
     ),
     'doctrine/dbal' => 
     array (
@@ -132,15 +115,6 @@ private static $installed = array (
       ),
       'reference' => '629572819973f13486371cb611386eb17851e85c',
     ),
-    'doctrine/inflector' => 
-    array (
-      'pretty_version' => 'v1.3.0',
-      'version' => '1.3.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5527a48b7313d15261292c149e55e26eae771b0a',
-    ),
     'doctrine/lexer' => 
     array (
       'pretty_version' => '1.2.0',
@@ -149,24 +123,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6',
-    ),
-    'doctrine/persistence' => 
-    array (
-      'pretty_version' => 'v1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38',
-    ),
-    'doctrine/reflection' => 
-    array (
-      'pretty_version' => 'v1.0.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '02538d3f95e88eb397a5f86274deb2c6175c2ab6',
     ),
     'egulias/email-validator' => 
     array (
@@ -185,6 +141,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '7ebf2a09084a7bbdb7b879c66fdf7ad80461bbe8',
+    ),
+    'giggsey/libphonenumber-for-php' => 
+    array (
+      'pretty_version' => '8.12.4',
+      'version' => '8.12.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cb79970730aacaedb74c8288214a5576572fa7b0',
+    ),
+    'giggsey/locale' => 
+    array (
+      'pretty_version' => '1.9',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b07f1eace8072ccc61445ad8fbd493ff9d783043',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -213,24 +187,6 @@ private static $installed = array (
       ),
       'reference' => '239400de7a173fe9901b9ac7c06497751f00727a',
     ),
-    'guzzlehttp/ringphp' => 
-    array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'dbbb91d7f6c191e5e405e900e3102ac7f261bc0b',
-    ),
-    'guzzlehttp/streams' => 
-    array (
-      'pretty_version' => '3.0.0',
-      'version' => '3.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5',
-    ),
     'icewind/searchdav' => 
     array (
       'pretty_version' => 'v2.0.0',
@@ -248,24 +204,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '4db3ed6c366e90b958d00e1d4c6360a9b39b2121',
-    ),
-    'interfasys/lognormalizer' => 
-    array (
-      'pretty_version' => 'v1.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd5e4c95e0b0ecc886b78aafda3773b3bcf2ec116',
-    ),
-    'jeremeamia/superclosure' => 
-    array (
-      'pretty_version' => '2.4.0',
-      'version' => '2.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5707d5821b30b9a07acfb4d76949784aaa0e9ce9',
     ),
     'justinrainbow/json-schema' => 
     array (
@@ -346,7 +284,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '60762c70810df5211ee770691099174cf6d5a3a8',
+      'reference' => '81a9fcefae15dfe4fb7c581ff99708e176c7a88d',
+    ),
+    'nextcloud/lognormalizer' => 
+    array (
+      'pretty_version' => 'v1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '87445d69225c247aaff64643b1fc83c6d6df741f',
     ),
     'nikic/php-parser' => 
     array (
@@ -356,6 +303,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '9a9981c347c5c49d6dfe5cf826bb882b824080dc',
+    ),
+    'opis/closure' => 
+    array (
+      'pretty_version' => '3.6.1',
+      'version' => '3.6.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5',
     ),
     'paragonie/random_compat' => 
     array (
@@ -611,15 +567,6 @@ private static $installed = array (
       ),
       'reference' => '7e1633a6964b48589b142d60542f9ed31bd37a92',
     ),
-    'react/promise' => 
-    array (
-      'pretty_version' => 'v2.2.1',
-      'version' => '2.2.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3b6fca09c7d56321057fa8867c8dbe1abf648627',
-    ),
     'rhumsaa/uuid' => 
     array (
       'replaced' => 
@@ -803,15 +750,6 @@ private static $installed = array (
       ),
       'reference' => '34094cfa9abe1f0f14f48f490772db7a775559f2',
     ),
-    'symfony/polyfill-php56' => 
-    array (
-      'pretty_version' => 'v1.10.0',
-      'version' => '1.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'ff208829fe1aa48ab9af356992bb7199fed551af',
-    ),
     'symfony/polyfill-php72' => 
     array (
       'pretty_version' => 'v1.12.0',
@@ -838,15 +776,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '4a5b6bba3259902e386eb80dd1956181ee90b5b2',
-    ),
-    'symfony/polyfill-util' => 
-    array (
-      'pretty_version' => 'v1.10.0',
-      'version' => '1.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3b58903eae668d348a7126f999b0da0f2f93611c',
     ),
     'symfony/process' => 
     array (
