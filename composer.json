@@ -19,7 +19,7 @@
 		"deepdiver/zipstreamer": "2.0.0",
 		"deepdiver1975/tarstreamer": "v2.0.0",
 		"doctrine/dbal": "2.12.0",
-		"guzzlehttp/guzzle": "6.5.2",
+		"guzzlehttp/guzzle": "6.5.5",
 		"icewind/searchdav": "^2.0.0",
 		"icewind/streams": "v0.7.1",
 		"league/flysystem": "^1.0",

@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '455f47df98504ef1336cd9e4c5b59c60903ebb22',
+    'reference' => 'aea1df9dcc0ae1b774e15edf07a470198b952e45',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -162,12 +162,12 @@ private static $installed = array (
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '6.5.2',
-      'version' => '6.5.2.0',
+      'pretty_version' => '6.5.5',
+      'version' => '6.5.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '43ece0e75098b7ecd8d13918293029e555a50f82',
+      'reference' => '9d4290de1cfd701f38099ef7e183b64b4b7b0c5e',
     ),
     'guzzlehttp/promises' => 
     array (
@@ -284,7 +284,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '455f47df98504ef1336cd9e4c5b59c60903ebb22',
+      'reference' => 'aea1df9dcc0ae1b774e15edf07a470198b952e45',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -734,12 +734,21 @@ private static $installed = array (
     ),
     'symfony/polyfill-intl-idn' => 
     array (
-      'pretty_version' => 'v1.12.0',
-      'version' => '1.12.0.0',
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6af626ae6fa37d396dc90a399c0ff08e5cfc45b2',
+      'reference' => '3b75acd829741c768bc8b1f84eb33265e7cc5117',
+    ),
+    'symfony/polyfill-intl-normalizer' => 
+    array (
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '727d1096295d807c309fb01a851577302394c897',
     ),
     'symfony/polyfill-mbstring' => 
     array (
