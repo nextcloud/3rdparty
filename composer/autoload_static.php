@@ -130,7 +130,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'I' => 
         array (
-            'Icewind\\Streams\\Tests\\' => 22,
             'Icewind\\Streams\\' => 16,
             'ID3Parser\\' => 10,
         ),
@@ -387,10 +386,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
-        ),
-        'Icewind\\Streams\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/icewind/streams/tests',
         ),
         'Icewind\\Streams\\' => 
         array (
