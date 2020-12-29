@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '1c9341631508ff217c3ebec6b64a97eb1137248c',
+    'reference' => '3a98f51c7293a2559b6ff31ffba4ab7571be9992',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -94,21 +94,21 @@
     ),
     'doctrine/lexer' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6',
+      'reference' => 'e864bbf5904cb8f5bb334f99209b48018522f042',
     ),
     'egulias/email-validator' => 
     array (
-      'pretty_version' => '2.1.11',
-      'version' => '2.1.11.0',
+      'pretty_version' => '2.1.24',
+      'version' => '2.1.24.0',
       'aliases' => 
       array (
       ),
-      'reference' => '92dd169c32f6f55ba570c309d83f5209cefb5e23',
+      'reference' => 'ca90a3291eee1538cd48ff25163240695bd95448',
     ),
     'fgrosse/phpasn1' => 
     array (
@@ -261,7 +261,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '1c9341631508ff217c3ebec6b64a97eb1137248c',
+      'reference' => '3a98f51c7293a2559b6ff31ffba4ab7571be9992',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -650,12 +650,12 @@
     ),
     'swiftmailer/swiftmailer' => 
     array (
-      'pretty_version' => 'v6.2.3',
-      'version' => '6.2.3.0',
+      'pretty_version' => 'v6.2.4',
+      'version' => '6.2.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '149cfdf118b169f7840bbe3ef0d4bc795d1780c9',
+      'reference' => '56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e',
     ),
     'symfony/console' => 
     array (
