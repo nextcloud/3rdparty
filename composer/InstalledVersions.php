@@ -24,12 +24,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'v21.0.0beta4',
+    'version' => '21.0.0.0-beta4',
     'aliases' => 
     array (
     ),
-    'reference' => 'b5b70263cc7626a8422445ba908d5bb81c50f524',
+    'reference' => 'fbe551895d32ce5b1f0323be79044c6af755c666',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -279,12 +279,12 @@ private static $installed = array (
     ),
     'nextcloud/3rdparty' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'v21.0.0beta4',
+      'version' => '21.0.0.0-beta4',
       'aliases' => 
       array (
       ),
-      'reference' => 'b5b70263cc7626a8422445ba908d5bb81c50f524',
+      'reference' => 'fbe551895d32ce5b1f0323be79044c6af755c666',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -342,12 +342,12 @@ private static $installed = array (
     ),
     'pear/archive_tar' => 
     array (
-      'pretty_version' => '1.4.9',
-      'version' => '1.4.9.0',
+      'pretty_version' => '1.4.11',
+      'version' => '1.4.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c5b00053770e1d72128252c62c2c1a12c26639f0',
+      'reference' => '17d355cb7d3c4ff08e5729f29cd7660145208d9d',
     ),
     'pear/console_getopt' => 
     array (
