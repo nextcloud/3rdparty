@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => '1.0.0+no-version-set',
+    'version' => '1.0.0.0',
     'aliases' => 
     array (
     ),
-    'reference' => 'aea1df9dcc0ae1b774e15edf07a470198b952e45',
+    'reference' => NULL,
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -256,12 +256,12 @@
     ),
     'nextcloud/3rdparty' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => '1.0.0+no-version-set',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'aea1df9dcc0ae1b774e15edf07a470198b952e45',
+      'reference' => NULL,
     ),
     'nextcloud/lognormalizer' => 
     array (
