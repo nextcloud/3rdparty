@@ -57,7 +57,6 @@ return array(
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
-    'Icewind\\Streams\\Tests\\' => array($vendorDir . '/icewind/streams/tests'),
     'Icewind\\Streams\\' => array($vendorDir . '/icewind/streams/src'),
     'ID3Parser\\' => array($vendorDir . '/christophwurst/id3parser/src'),
     'Http\\Promise\\' => array($vendorDir . '/php-http/promise/src'),

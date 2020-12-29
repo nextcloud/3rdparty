@@ -24,12 +24,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '4ff56cd34055c01ef9671481a82492a0d4fd7b99',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -198,12 +198,12 @@ private static $installed = array (
     ),
     'icewind/streams' => 
     array (
-      'pretty_version' => 'v0.7.1',
-      'version' => '0.7.1.0',
+      'pretty_version' => 'v0.7.2',
+      'version' => '0.7.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4db3ed6c366e90b958d00e1d4c6360a9b39b2121',
+      'reference' => '77d750ccc654c0eda4a41fedb2dbd71053755790',
     ),
     'justinrainbow/json-schema' => 
     array (
@@ -279,12 +279,12 @@ private static $installed = array (
     ),
     'nextcloud/3rdparty' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '4ff56cd34055c01ef9671481a82492a0d4fd7b99',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -583,12 +583,12 @@ private static $installed = array (
     ),
     'sabre/dav' => 
     array (
-      'pretty_version' => '4.0.3',
-      'version' => '4.0.3.0',
+      'pretty_version' => '4.1.3',
+      'version' => '4.1.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b793fb4ce27cf0f981b540ad771281c430ffe818',
+      'reference' => 'b903eeedfbdcd6cab7935661ec6dc2d90cdf8a1e',
     ),
     'sabre/event' => 
     array (
