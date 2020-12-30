@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3a98f51c7293a2559b6ff31ffba4ab7571be9992',
+    'reference' => '47d9890329b4e3a19ead2a3c90727963bcd1cca3',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -126,12 +126,12 @@ private static $installed = array (
     ),
     'egulias/email-validator' => 
     array (
-      'pretty_version' => '2.1.24',
-      'version' => '2.1.24.0',
+      'pretty_version' => '2.1.25',
+      'version' => '2.1.25.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ca90a3291eee1538cd48ff25163240695bd95448',
+      'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
     ),
     'fgrosse/phpasn1' => 
     array (
@@ -284,7 +284,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3a98f51c7293a2559b6ff31ffba4ab7571be9992',
+      'reference' => '47d9890329b4e3a19ead2a3c90727963bcd1cca3',
     ),
     'nextcloud/lognormalizer' => 
     array (
