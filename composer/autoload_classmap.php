@@ -2042,8 +2042,6 @@ return array(
     'Psr\\Log\\LoggerInterface' => $vendorDir . '/psr/log/Psr/Log/LoggerInterface.php',
     'Psr\\Log\\LoggerTrait' => $vendorDir . '/psr/log/Psr/Log/LoggerTrait.php',
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/Psr/Log/NullLogger.php',
-    'Psr\\Log\\Test\\LoggerInterfaceTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-    'Psr\\Log\\Test\\TestLogger' => $vendorDir . '/psr/log/Psr/Log/Test/TestLogger.php',
     'Punic\\Calendar' => $vendorDir . '/punic/punic/code/Calendar.php',
     'Punic\\Comparer' => $vendorDir . '/punic/punic/code/Comparer.php',
     'Punic\\Currency' => $vendorDir . '/punic/punic/code/Currency.php',
