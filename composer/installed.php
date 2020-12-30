@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'v21.0.0beta5',
+    'version' => '21.0.0.0-beta5',
     'aliases' => 
     array (
     ),
-    'reference' => '65a8a4553327c818931876ac1aa80a2143e02733',
+    'reference' => '09596e43fba86a3643879595a8fb6fece4af6a78',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -274,12 +274,12 @@
     ),
     'nextcloud/3rdparty' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'v21.0.0beta5',
+      'version' => '21.0.0.0-beta5',
       'aliases' => 
       array (
       ),
-      'reference' => '65a8a4553327c818931876ac1aa80a2143e02733',
+      'reference' => '09596e43fba86a3643879595a8fb6fece4af6a78',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -630,12 +630,12 @@
     ),
     'scssphp/scssphp' => 
     array (
-      'pretty_version' => '1.0.3',
-      'version' => '1.0.3.0',
+      'pretty_version' => 'v1.4.1',
+      'version' => '1.4.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '616c518333c656eaa23182ac6cfc01453f1e7c78',
+      'reference' => 'ba86c963b94ec7ebd6e19d90cdab90d89667dbf7',
     ),
     'spomky-labs/base64url' => 
     array (
