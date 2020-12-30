@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'v21.0.0beta4',
-    'version' => '21.0.0.0-beta4',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => 'fbe551895d32ce5b1f0323be79044c6af755c666',
+    'reference' => '7fd440b16ef3dc16447e4565246c00e981ab9298',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -256,12 +256,12 @@
     ),
     'nextcloud/3rdparty' => 
     array (
-      'pretty_version' => 'v21.0.0beta4',
-      'version' => '21.0.0.0-beta4',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => 'fbe551895d32ce5b1f0323be79044c6af755c666',
+      'reference' => '7fd440b16ef3dc16447e4565246c00e981ab9298',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -448,12 +448,12 @@
     ),
     'psr/http-client' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '496a823ef742b632934724bf769560c2a5c7c44e',
+      'reference' => '2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
     ),
     'psr/http-client-implementation' => 
     array (
@@ -489,12 +489,12 @@
     ),
     'psr/log' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.3',
+      'version' => '1.1.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd',
+      'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
     ),
     'psr/log-implementation' => 
     array (
