@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '47d9890329b4e3a19ead2a3c90727963bcd1cca3',
+    'reference' => '80cbffbe19083ba1c5a707f8353c1736a14a9c2e',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -261,7 +261,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '47d9890329b4e3a19ead2a3c90727963bcd1cca3',
+      'reference' => '80cbffbe19083ba1c5a707f8353c1736a14a9c2e',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -274,12 +274,12 @@
     ),
     'nikic/php-parser' => 
     array (
-      'pretty_version' => 'v4.3.0',
-      'version' => '4.3.0.0',
+      'pretty_version' => 'v4.10.4',
+      'version' => '4.10.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9a9981c347c5c49d6dfe5cf826bb882b824080dc',
+      'reference' => 'c6d052fc58cb876152f89f532b95a8d7907e7f0e',
     ),
     'opis/closure' => 
     array (
