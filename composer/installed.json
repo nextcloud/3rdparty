@@ -2094,17 +2094,17 @@
     },
     {
         "name": "pear/archive_tar",
-        "version": "1.4.8",
-        "version_normalized": "1.4.8.0",
+        "version": "1.4.11",
+        "version_normalized": "1.4.11.0",
         "source": {
             "type": "git",
             "url": "https://github.com/pear/Archive_Tar.git",
-            "reference": "442bdffb7edb84c898cfd94f7ac8500e49d5bbb5"
+            "reference": "17d355cb7d3c4ff08e5729f29cd7660145208d9d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/442bdffb7edb84c898cfd94f7ac8500e49d5bbb5",
-            "reference": "442bdffb7edb84c898cfd94f7ac8500e49d5bbb5",
+            "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/17d355cb7d3c4ff08e5729f29cd7660145208d9d",
+            "reference": "17d355cb7d3c4ff08e5729f29cd7660145208d9d",
             "shasum": ""
         },
         "require": {
@@ -2119,7 +2119,7 @@
             "ext-xz": "Lzma2 compression support.",
             "ext-zlib": "Gzip compression support."
         },
-        "time": "2019-10-21T13:31:24+00:00",
+        "time": "2020-11-19T22:10:24+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
