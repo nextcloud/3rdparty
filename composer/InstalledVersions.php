@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7fd440b16ef3dc16447e4565246c00e981ab9298',
+    'reference' => '225c51509edf9ab3557ce109c3762731e7863e10',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -284,7 +284,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7fd440b16ef3dc16447e4565246c00e981ab9298',
+      'reference' => '225c51509edf9ab3557ce109c3762731e7863e10',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -592,48 +592,48 @@ private static $installed = array (
     ),
     'sabre/event' => 
     array (
-      'pretty_version' => '5.1.0',
-      'version' => '5.1.0.0',
+      'pretty_version' => '5.1.2',
+      'version' => '5.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd00a17507af0e7544cfe17096372f5d733e3b276',
+      'reference' => 'c120bec57c17b6251a496efc82b732418b49d50a',
     ),
     'sabre/http' => 
     array (
-      'pretty_version' => '5.1.0',
-      'version' => '5.1.0.0',
+      'pretty_version' => '5.1.1',
+      'version' => '5.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '23446999f1f6e62892bbd89745070aa902dd3539',
+      'reference' => 'd0aafede6961df6195ce7a8dad49296b0aaee22e',
     ),
     'sabre/uri' => 
     array (
-      'pretty_version' => '2.2.0',
-      'version' => '2.2.0.0',
+      'pretty_version' => '2.2.1',
+      'version' => '2.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '059d11012603be2e32ddb7543602965563ddbb09',
+      'reference' => 'f502edffafea8d746825bd5f0b923a60fd2715ff',
     ),
     'sabre/vobject' => 
     array (
-      'pretty_version' => '4.3.0',
-      'version' => '4.3.0.0',
+      'pretty_version' => '4.3.3',
+      'version' => '4.3.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5b2248d965160f93053f3a24704794a13a22a1bb',
+      'reference' => '58f9f9b46a1080c0130bd86f4df9a568aacb9c79',
     ),
     'sabre/xml' => 
     array (
-      'pretty_version' => '2.2.0',
-      'version' => '2.2.0.0',
+      'pretty_version' => '2.2.3',
+      'version' => '2.2.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '705f5cbf7f4fb1e3dd47173e3f026892818c8d46',
+      'reference' => 'c3b959f821c19b36952ec4a595edd695c216bfc6',
     ),
     'scssphp/scssphp' => 
     array (

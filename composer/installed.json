@@ -3393,27 +3393,28 @@
         },
         {
             "name": "sabre/event",
-            "version": "5.1.0",
-            "version_normalized": "5.1.0.0",
+            "version": "5.1.2",
+            "version_normalized": "5.1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/event.git",
-                "reference": "d00a17507af0e7544cfe17096372f5d733e3b276"
+                "reference": "c120bec57c17b6251a496efc82b732418b49d50a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/event/zipball/d00a17507af0e7544cfe17096372f5d733e3b276",
-                "reference": "d00a17507af0e7544cfe17096372f5d733e3b276",
+                "url": "https://api.github.com/repos/sabre-io/event/zipball/c120bec57c17b6251a496efc82b732418b49d50a",
+                "reference": "c120bec57c17b6251a496efc82b732418b49d50a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.16.1",
-                "phpunit/phpunit": "^7 || ^8"
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
             },
-            "time": "2020-01-31T18:52:29+00:00",
+            "time": "2020-10-03T11:02:22+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3452,39 +3453,45 @@
                 "reactor",
                 "signal"
             ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/event/issues",
+                "source": "https://github.com/fruux/sabre-event"
+            },
             "install-path": "../sabre/event"
         },
         {
             "name": "sabre/http",
-            "version": "5.1.0",
-            "version_normalized": "5.1.0.0",
+            "version": "5.1.1",
+            "version_normalized": "5.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/http.git",
-                "reference": "23446999f1f6e62892bbd89745070aa902dd3539"
+                "reference": "d0aafede6961df6195ce7a8dad49296b0aaee22e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/http/zipball/23446999f1f6e62892bbd89745070aa902dd3539",
-                "reference": "23446999f1f6e62892bbd89745070aa902dd3539",
+                "url": "https://api.github.com/repos/sabre-io/http/zipball/d0aafede6961df6195ce7a8dad49296b0aaee22e",
+                "reference": "d0aafede6961df6195ce7a8dad49296b0aaee22e",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
                 "ext-curl": "*",
                 "ext-mbstring": "*",
-                "php": "^7.1",
+                "php": "^7.1 || ^8.0",
                 "sabre/event": ">=4.0 <6.0",
                 "sabre/uri": "^2.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.16.1",
-                "phpunit/phpunit": "^7.0 || ^8.0"
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
             },
             "suggest": {
                 "ext-curl": " to make http requests with the Client class"
             },
-            "time": "2020-01-31T20:07:09+00:00",
+            "time": "2020-10-03T11:27:32+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3512,31 +3519,37 @@
             "keywords": [
                 "http"
             ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/http/issues",
+                "source": "https://github.com/fruux/sabre-http"
+            },
             "install-path": "../sabre/http"
         },
         {
             "name": "sabre/uri",
-            "version": "2.2.0",
-            "version_normalized": "2.2.0.0",
+            "version": "2.2.1",
+            "version_normalized": "2.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/uri.git",
-                "reference": "059d11012603be2e32ddb7543602965563ddbb09"
+                "reference": "f502edffafea8d746825bd5f0b923a60fd2715ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/uri/zipball/059d11012603be2e32ddb7543602965563ddbb09",
-                "reference": "059d11012603be2e32ddb7543602965563ddbb09",
+                "url": "https://api.github.com/repos/sabre-io/uri/zipball/f502edffafea8d746825bd5f0b923a60fd2715ff",
+                "reference": "f502edffafea8d746825bd5f0b923a60fd2715ff",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.16.1",
-                "phpunit/phpunit": "^7 || ^8"
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
             },
-            "time": "2020-01-31T18:53:43+00:00",
+            "time": "2020-10-03T10:33:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3566,36 +3579,42 @@
                 "uri",
                 "url"
             ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/uri/issues",
+                "source": "https://github.com/fruux/sabre-uri"
+            },
             "install-path": "../sabre/uri"
         },
         {
             "name": "sabre/vobject",
-            "version": "4.3.0",
-            "version_normalized": "4.3.0.0",
+            "version": "4.3.3",
+            "version_normalized": "4.3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/vobject.git",
-                "reference": "5b2248d965160f93053f3a24704794a13a22a1bb"
+                "reference": "58f9f9b46a1080c0130bd86f4df9a568aacb9c79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/vobject/zipball/5b2248d965160f93053f3a24704794a13a22a1bb",
-                "reference": "5b2248d965160f93053f3a24704794a13a22a1bb",
+                "url": "https://api.github.com/repos/sabre-io/vobject/zipball/58f9f9b46a1080c0130bd86f4df9a568aacb9c79",
+                "reference": "58f9f9b46a1080c0130bd86f4df9a568aacb9c79",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": "^7.1",
+                "php": "^7.1 || ^8.0",
                 "sabre/xml": "^2.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "~2.16.1",
-                "phpunit/phpunit": "^7 || ^8"
+                "friendsofphp/php-cs-fixer": "~2.16.7",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
             },
             "suggest": {
                 "hoa/bench": "If you would like to run the benchmark scripts"
             },
-            "time": "2020-01-31T18:50:58+00:00",
+            "time": "2020-11-09T04:31:38+00:00",
             "bin": [
                 "bin/vobject",
                 "bin/generate_vcards"
@@ -3666,21 +3685,26 @@
                 "xCal",
                 "xCard"
             ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/vobject/issues",
+                "source": "https://github.com/fruux/sabre-vobject"
+            },
             "install-path": "../sabre/vobject"
         },
         {
             "name": "sabre/xml",
-            "version": "2.2.0",
-            "version_normalized": "2.2.0.0",
+            "version": "2.2.3",
+            "version_normalized": "2.2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/xml.git",
-                "reference": "705f5cbf7f4fb1e3dd47173e3f026892818c8d46"
+                "reference": "c3b959f821c19b36952ec4a595edd695c216bfc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/xml/zipball/705f5cbf7f4fb1e3dd47173e3f026892818c8d46",
-                "reference": "705f5cbf7f4fb1e3dd47173e3f026892818c8d46",
+                "url": "https://api.github.com/repos/sabre-io/xml/zipball/c3b959f821c19b36952ec4a595edd695c216bfc6",
+                "reference": "c3b959f821c19b36952ec4a595edd695c216bfc6",
                 "shasum": ""
             },
             "require": {
@@ -3688,14 +3712,15 @@
                 "ext-xmlreader": "*",
                 "ext-xmlwriter": "*",
                 "lib-libxml": ">=2.6.20",
-                "php": "^7.1",
+                "php": "^7.1 || ^8.0",
                 "sabre/uri": ">=1.0,<3.0.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.16.1",
-                "phpunit/phpunit": "^7 || ^8"
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
             },
-            "time": "2020-01-31T18:52:58+00:00",
+            "time": "2020-10-03T10:08:14+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3732,6 +3757,11 @@
                 "dom",
                 "xml"
             ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/xml/issues",
+                "source": "https://github.com/fruux/sabre-xml"
+            },
             "install-path": "../sabre/xml"
         },
         {
