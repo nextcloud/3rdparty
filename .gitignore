@@ -32,6 +32,7 @@ doctrine/common/.travis.yml
 doctrine/common/composer.json
 doctrine/dbal/tests
 doctrine/dbal/docs
+doctrine/dbal/psalm.xml
 doctrine/dbal/run-all.sh
 doctrine/dbal/.doctrine-project.json
 doctrine/dbal/.travis.yml

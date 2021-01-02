@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '875ee27505a280f58a893b16976fe36572fd82c4',
+    'reference' => '65a8a4553327c818931876ac1aa80a2143e02733',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -70,6 +70,15 @@ private static $installed = array (
       ),
       'reference' => 'c0e56c336bd6131c199827f928e5a9aec89aa4da',
     ),
+    'composer/package-versions-deprecated' => 
+    array (
+      'pretty_version' => '1.11.99.1',
+      'version' => '1.11.99.1',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7413f0b55a051e89485c5cb9f765fe24bb02a7b6',
+    ),
     'deepdiver/zipstreamer' => 
     array (
       'pretty_version' => '2.0.0',
@@ -90,21 +99,21 @@ private static $installed = array (
     ),
     'doctrine/cache' => 
     array (
-      'pretty_version' => '1.10.1',
-      'version' => '1.10.1.0',
+      'pretty_version' => '1.10.2',
+      'version' => '1.10.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '35a4a70cd94e09e2259dfae7488afc6b474ecbd3',
+      'reference' => '13e3381b25847283a91948d04640543941309727',
     ),
     'doctrine/dbal' => 
     array (
-      'pretty_version' => '2.12.0',
-      'version' => '2.12.0.0',
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c6d37b4c42aaa3c3ee175f05eca68056f4185646',
+      'reference' => 'ee6d1260d5cc20ec506455a585945d7bdb98662c',
     ),
     'doctrine/event-manager' => 
     array (
@@ -293,7 +302,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '875ee27505a280f58a893b16976fe36572fd82c4',
+      'reference' => '65a8a4553327c818931876ac1aa80a2143e02733',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -312,6 +321,13 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c6d052fc58cb876152f89f532b95a8d7907e7f0e',
+    ),
+    'ocramius/package-versions' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '1.11.99',
+      ),
     ),
     'opis/closure' => 
     array (
@@ -734,12 +750,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-intl-grapheme' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c7cf3f858ec7d70b89559d6e6eb1f7c2517d479c',
+      'reference' => '267a9adeb8ecb8071040a740930e077cdfb987af',
     ),
     'symfony/polyfill-intl-idn' => 
     array (
