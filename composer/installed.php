@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '225c51509edf9ab3557ce109c3762731e7863e10',
+    'reference' => '3ef1e39eacdf85047a98074a26bea1373366dd60',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -85,12 +85,12 @@
     ),
     'doctrine/event-manager' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '629572819973f13486371cb611386eb17851e85c',
+      'reference' => '41370af6a30faa9dc0368c4a6814d596e81aba7f',
     ),
     'doctrine/lexer' => 
     array (
@@ -261,7 +261,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '225c51509edf9ab3557ce109c3762731e7863e10',
+      'reference' => '3ef1e39eacdf85047a98074a26bea1373366dd60',
     ),
     'nextcloud/lognormalizer' => 
     array (
