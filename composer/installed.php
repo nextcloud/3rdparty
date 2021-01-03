@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3ef1e39eacdf85047a98074a26bea1373366dd60',
+    'reference' => '67f8231b05ee94be64e6449fbde4ab36a00c57b3',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -261,7 +261,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3ef1e39eacdf85047a98074a26bea1373366dd60',
+      'reference' => '67f8231b05ee94be64e6449fbde4ab36a00c57b3',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -423,12 +423,12 @@
     ),
     'pimple/pimple' => 
     array (
-      'pretty_version' => 'v3.2.3',
-      'version' => '3.2.3.0',
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9e403941ef9d65d20cba7d54e29fe906db42cf32',
+      'reference' => '21e45061c3429b1e06233475cc0e1f6fc774d5b0',
     ),
     'psr/container' => 
     array (
