@@ -1,10 +1,12 @@
 <?php
 
-namespace Http\Adapter\Guzzle6;
+declare(strict_types=1);
+
+namespace Http\Adapter\Guzzle7;
 
 use GuzzleHttp\Exception as GuzzleExceptions;
 use GuzzleHttp\Promise\PromiseInterface;
-use Http\Adapter\Guzzle6\Exception\UnexpectedValueException;
+use Http\Adapter\Guzzle7\Exception\UnexpectedValueException;
 use Http\Client\Exception as HttplugException;
 use Http\Promise\Promise as HttpPromise;
 use Psr\Http\Message\RequestInterface;
@@ -42,10 +44,6 @@ final class Promise implements HttpPromise
      */
     private $request;
 
-    /**
-     * @param PromiseInterface $promise
-     * @param RequestInterface $request
-     */
     public function __construct(PromiseInterface $promise, RequestInterface $request)
     {
         $this->request = $request;
@@ -63,9 +61,9 @@ final class Promise implements HttpPromise
             } elseif ($reason instanceof GuzzleExceptions\GuzzleException) {
                 $this->exception = $this->handleException($reason, $request);
             } elseif ($reason instanceof \Throwable) {
-                $this->exception = new HttplugException\TransferException('Invalid exception returned from Guzzle6', 0, $reason);
+                $this->exception = new HttplugException\TransferException('Invalid exception returned from Guzzle7', 0, $reason);
             } else {
-                $this->exception = new UnexpectedValueException('Reason returned from Guzzle6 must be an Exception');
+                $this->exception = new UnexpectedValueException('Reason returned from Guzzle7 must be an Exception');
             }
 
             throw $this->exception;
@@ -107,17 +105,10 @@ final class Promise implements HttpPromise
     /**
      * Converts a Guzzle exception into an Httplug exception.
      *
-     * @param GuzzleExceptions\GuzzleException $exception
-     * @param RequestInterface                 $request
-     *
      * @return HttplugException
      */
     private function handleException(GuzzleExceptions\GuzzleException $exception, RequestInterface $request)
     {
-        if ($exception instanceof GuzzleExceptions\SeekException) {
-            return new HttplugException\RequestException($exception->getMessage(), $request, $exception);
-        }
-
         if ($exception instanceof GuzzleExceptions\ConnectException) {
             return new HttplugException\NetworkException($exception->getMessage(), $exception->getRequest(), $exception);
         }

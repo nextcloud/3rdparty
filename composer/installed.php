@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '67f8231b05ee94be64e6449fbde4ab36a00c57b3',
+    'reference' => '4af3600c082507576a57c89736450dd7cfe76821',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -139,12 +139,12 @@
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '6.5.5',
-      'version' => '6.5.5.0',
+      'pretty_version' => '7.2.0',
+      'version' => '7.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9d4290de1cfd701f38099ef7e183b64b4b7b0c5e',
+      'reference' => '0aa74dfb41ae110835923ef10a9d803a22d50e79',
     ),
     'guzzlehttp/promises' => 
     array (
@@ -163,6 +163,15 @@
       array (
       ),
       'reference' => '53330f47520498c0ae1f61f7e2c90f55690c06a3',
+    ),
+    'guzzlehttp/uri-template' => 
+    array (
+      'pretty_version' => 'v0.2.0',
+      'version' => '0.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'db46525d6d8fee71033b73cc07160f3e5271a8ce',
     ),
     'icewind/searchdav' => 
     array (
@@ -184,12 +193,12 @@
     ),
     'justinrainbow/json-schema' => 
     array (
-      'pretty_version' => '5.2.9',
-      'version' => '5.2.9.0',
+      'pretty_version' => '5.2.10',
+      'version' => '5.2.10.0',
       'aliases' => 
       array (
       ),
-      'reference' => '44c6787311242a979fa15c704327c20e7221a0e4',
+      'reference' => '2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b',
     ),
     'league/flysystem' => 
     array (
@@ -229,21 +238,21 @@
     ),
     'microsoft/azure-storage-blob' => 
     array (
-      'pretty_version' => '1.5.0',
-      'version' => '1.5.0.0',
+      'pretty_version' => '1.5.2',
+      'version' => '1.5.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6a333cd28a3742c3e99e79042dc6510f9f917919',
+      'reference' => '2475330963372d519387cb8135d6a9cfd42272da',
     ),
     'microsoft/azure-storage-common' => 
     array (
-      'pretty_version' => '1.4.1',
-      'version' => '1.4.1.0',
+      'pretty_version' => '1.5.1',
+      'version' => '1.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'be4df800761d0d0fa91a9460c7f42517197d57a0',
+      'reference' => 'e5738035891546075bd369954e8af121d65ebd6d',
     ),
     'mtdowling/jmespath.php' => 
     array (
@@ -261,7 +270,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '67f8231b05ee94be64e6449fbde4ab36a00c57b3',
+      'reference' => '4af3600c082507576a57c89736450dd7cfe76821',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -376,41 +385,41 @@
         0 => '1.0',
       ),
     ),
-    'php-http/guzzle6-adapter' => 
+    'php-http/guzzle7-adapter' => 
     array (
-      'pretty_version' => 'v2.0.1',
-      'version' => '2.0.1.0',
+      'pretty_version' => '0.1.1',
+      'version' => '0.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6074a4b1f4d5c21061b70bab3b8ad484282fe31f',
+      'reference' => '1967de656b9679a2a6a66d0e4e16fa99bbed1ad1',
     ),
     'php-http/httplug' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '72d2b129a48f0490d55b7f89be0d6aa0597ffb06',
+      'reference' => '191a0a1b41ed026b717421931f8d3bd2514ffbf9',
     ),
     'php-http/promise' => 
     array (
-      'pretty_version' => 'v1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.1.0',
+      'version' => '1.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'dc494cdc9d7160b9a09bd5573272195242ce7980',
+      'reference' => '4c4c1f9b7289a2ec57cde7f1e9762a5789506f88',
     ),
     'php-opencloud/openstack' => 
     array (
-      'pretty_version' => 'v3.0.7',
-      'version' => '3.0.7.0',
+      'pretty_version' => 'v3.1.0',
+      'version' => '3.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5d73ff577731fc473448c489acfca9730aa39c88',
+      'reference' => '7b0eeb63defe533fb802514af3c70855c45eaf1e',
     ),
     'phpseclib/phpseclib' => 
     array (
