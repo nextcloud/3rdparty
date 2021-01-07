@@ -20,6 +20,7 @@
 		"deepdiver1975/tarstreamer": "v2.0.0",
 		"doctrine/dbal": "2.12.0",
 		"egulias/email-validator": "2.1.25",
+		"giggsey/libphonenumber-for-php": "^8.12",
 		"guzzlehttp/guzzle": "^7.2",
 		"icewind/searchdav": "^2.0.0",
 		"icewind/streams": "v0.7.2",
@@ -28,7 +29,6 @@
 		"nextcloud/lognormalizer": "^1.0",
 		"nikic/php-parser": "^4.2",
 		"patchwork/jsqueeze": "^2.0",
-		"patchwork/utf8": "1.3.1",
 		"pear/archive_tar": "^1.4.9",
 		"pear/pear-core-minimal": "^v1.10",
 		"phpseclib/phpseclib": "2.0.25",
@@ -44,13 +44,14 @@
 		"symfony/console": "4.4.18",
 		"symfony/event-dispatcher": "4.4.18",
 		"symfony/event-dispatcher-contracts": "1.1.9",
+		"symfony/polyfill-intl-normalizer": "^1.20",
+		"symfony/polyfill-intl-grapheme": "^1.20",
 		"symfony/process": "4.4.18",
 		"symfony/routing": "4.4.18",
 		"symfony/translation": "4.4.18",
 		"web-auth/webauthn-lib": "^3.1",
 		"php-ds/php-ds": "^1.3",
-		"opis/closure": "^3.6",
-		"giggsey/libphonenumber-for-php": "^8.12"
+		"opis/closure": "^3.6"
 	},
 	"scripts": {
 		"vendor": "composer install --no-dev && git clean -xdf && composer dump-autoload"
