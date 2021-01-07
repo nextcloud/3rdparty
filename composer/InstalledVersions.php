@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '4af3600c082507576a57c89736450dd7cfe76821',
+    'reference' => '875ee27505a280f58a893b16976fe36572fd82c4',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -293,7 +293,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '4af3600c082507576a57c89736450dd7cfe76821',
+      'reference' => '875ee27505a280f58a893b16976fe36572fd82c4',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -339,15 +339,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '693d64850eab2ce6a7c8f7cf547e1ab46e69d542',
-    ),
-    'patchwork/utf8' => 
-    array (
-      'pretty_version' => 'v1.3.1',
-      'version' => '1.3.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '30ec6451aec7d2536f0af8fe535f70c764f2c47a',
     ),
     'pear/archive_tar' => 
     array (
@@ -740,6 +731,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c536646fdb4f29104dd26effc2fdcb9a5b085024',
+    ),
+    'symfony/polyfill-intl-grapheme' => 
+    array (
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c7cf3f858ec7d70b89559d6e6eb1f7c2517d479c',
     ),
     'symfony/polyfill-intl-idn' => 
     array (
