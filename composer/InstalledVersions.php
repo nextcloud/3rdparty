@@ -24,12 +24,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'v21.0.0beta5',
-    'version' => '21.0.0.0-beta5',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => '09596e43fba86a3643879595a8fb6fece4af6a78',
+    'reference' => 'e753fbef86be2dd17a3bddd6c10b10612090c609',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -297,12 +297,12 @@ private static $installed = array (
     ),
     'nextcloud/3rdparty' => 
     array (
-      'pretty_version' => 'v21.0.0beta5',
-      'version' => '21.0.0.0-beta5',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => '09596e43fba86a3643879595a8fb6fece4af6a78',
+      'reference' => 'e753fbef86be2dd17a3bddd6c10b10612090c609',
     ),
     'nextcloud/lognormalizer' => 
     array (
