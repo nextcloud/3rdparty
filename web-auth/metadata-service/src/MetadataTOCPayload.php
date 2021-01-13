@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Webauthn\MetadataService;
 
+use function array_key_exists;
 use Assert\Assertion;
 use JsonSerializable;
+use function Safe\sprintf;
 
 class MetadataTOCPayload implements JsonSerializable
 {
@@ -37,6 +39,11 @@ class MetadataTOCPayload implements JsonSerializable
      * @var MetadataTOCPayloadEntry[]
      */
     private $entries = [];
+
+    /**
+     * @var string[]
+     */
+    private $rootCertificates;
 
     public function __construct(int $no, string $nextUpdate, ?string $legalHeader = null)
     {
@@ -84,7 +91,7 @@ class MetadataTOCPayload implements JsonSerializable
         Assertion::integer($data['no'], Utils::logicException('Invalid data. The parameter "no" shall be an integer'));
         Assertion::string($data['nextUpdate'], Utils::logicException('Invalid data. The parameter "nextUpdate" shall be a string'));
         Assertion::isArray($data['entries'], Utils::logicException('Invalid data. The parameter "entries" shall be a n array of entries'));
-        if (\array_key_exists('legalHeader', $data)) {
+        if (array_key_exists('legalHeader', $data)) {
             Assertion::string($data['legalHeader'], Utils::logicException('Invalid data. The parameter "legalHeader" shall be a string'));
         }
         $object = new self(
@@ -95,6 +102,7 @@ class MetadataTOCPayload implements JsonSerializable
         foreach ($data['entries'] as $k => $entry) {
             $object->addEntry(MetadataTOCPayloadEntry::createFromArray($entry));
         }
+        $object->rootCertificates = $data['rootCertificates'] ?? [];
 
         return $object;
     }
@@ -105,9 +113,30 @@ class MetadataTOCPayload implements JsonSerializable
             'legalHeader' => $this->legalHeader,
             'nextUpdate' => $this->nextUpdate,
             'no' => $this->no,
-            'entries' => $this->entries,
+            'entries' => array_map(static function (MetadataTOCPayloadEntry $object): array {
+                return $object->jsonSerialize();
+            }, $this->entries),
+            'rootCertificates' => $this->rootCertificates,
         ];
 
         return Utils::filterNullValues($data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRootCertificates(): array
+    {
+        return $this->rootCertificates;
+    }
+
+    /**
+     * @param string[] $rootCertificates
+     */
+    public function setRootCertificates(array $rootCertificates): self
+    {
+        $this->rootCertificates = $rootCertificates;
+
+        return $this;
     }
 }

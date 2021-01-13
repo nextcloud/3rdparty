@@ -4,10 +4,15 @@ bin
 .php_cs.dist
 # ignore demo files
 **/.travis.yml
+# ignore .github files
+**/.github
 
 aws/aws-sdk-php/.changes
 
 bantu/ini-get-wrapper/tests
+
+/brick/math/random-tests.php
+/brick/math/psalm*.xmls
 
 deepdiver/zipstreamer/tests
 

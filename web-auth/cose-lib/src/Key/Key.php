@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Cose\Key;
 
+use function array_key_exists;
 use Assert\Assertion;
+use function Safe\sprintf;
 
 class Key
 {
@@ -75,7 +77,7 @@ class Key
 
     public function has(int $key): bool
     {
-        return \array_key_exists($key, $this->data);
+        return array_key_exists($key, $this->data);
     }
 
     /**

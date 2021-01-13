@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Webauthn;
 
 use Assert\Assertion;
+use function Safe\base64_decode;
+use function Safe\json_decode;
 
 class PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity
 {
@@ -47,14 +49,13 @@ class PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity
     public static function createFromString(string $data): self
     {
         $data = json_decode($data, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Invalid data');
         Assertion::isArray($data, 'Invalid data');
 
         return self::createFromArray($data);
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      */
     public static function createFromArray(array $json): self
     {
@@ -62,7 +63,6 @@ class PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity
         Assertion::keyExists($json, 'id', 'Invalid input. "id" is missing.');
         Assertion::keyExists($json, 'displayName', 'Invalid input. "displayName" is missing.');
         $id = base64_decode($json['id'], true);
-        Assertion::string($id, 'Invalid parameter "id".');
 
         return new self(
             $json['name'],
@@ -73,7 +73,7 @@ class PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {

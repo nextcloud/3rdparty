@@ -30,94 +30,95 @@ use Traversable;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
- * @method static bool allAlnum(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for all values.
- * @method static bool allBase64(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
- * @method static bool allBetween(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
- * @method static bool allBetweenExclusive(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
- * @method static bool allBetweenLength(mixed[] $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths for all values.
- * @method static bool allBoolean(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is php boolean for all values.
- * @method static bool allChoice(mixed[] $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices for all values.
- * @method static bool allChoicesNotEmpty(array[] $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content for all values.
- * @method static bool allClassExists(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the class exists for all values.
- * @method static bool allContains(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars for all values.
- * @method static bool allCount(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the count of countable is equal to count for all values.
- * @method static bool allDate(string[] $value, string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format for all values.
- * @method static bool allDefined(mixed[] $constant, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
- * @method static bool allDigit(mixed[] $value, string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit for all values.
- * @method static bool allDirectory(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a directory exists for all values.
- * @method static bool allE164(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
- * @method static bool allEmail(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
- * @method static bool allEndsWith(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
- * @method static bool allEq(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for all values.
- * @method static bool allEqArraySubset(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset for all values.
- * @method static bool allExtensionLoaded(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
- * @method static bool allExtensionVersion(string[] $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed for all values.
- * @method static bool allFalse(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False for all values.
- * @method static bool allFile(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a file exists for all values.
- * @method static bool allFloat(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php float for all values.
- * @method static bool allGreaterOrEqualThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit for all values.
- * @method static bool allGreaterThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit for all values.
- * @method static bool allImplementsInterface(mixed[] $class, string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface for all values.
- * @method static bool allInArray(mixed[] $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice() for all values.
- * @method static bool allInteger(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer for all values.
- * @method static bool allIntegerish(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish for all values.
- * @method static bool allInterfaceExists(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the interface exists for all values.
- * @method static bool allIp(string[] $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address for all values.
- * @method static bool allIpv4(string[] $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv4 address for all values.
- * @method static bool allIpv6(string[] $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv6 address for all values.
- * @method static bool allIsArray(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for all values.
- * @method static bool allIsArrayAccessible(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
- * @method static bool allIsCallable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for all values.
- * @method static bool allIsCountable(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for all values.
- * @method static bool allIsInstanceOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for all values.
- * @method static bool allIsJsonString(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for all values.
- * @method static bool allIsObject(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
- * @method static bool allIsResource(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource for all values.
- * @method static bool allIsTraversable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object for all values.
- * @method static bool allKeyExists(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array for all values.
- * @method static bool allKeyIsset(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() for all values.
- * @method static bool allKeyNotExists(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array for all values.
- * @method static bool allLength(mixed[] $value, int $length, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string has a given length for all values.
- * @method static bool allLessOrEqualThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less or equal than given limit for all values.
- * @method static bool allLessThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less than given limit for all values.
- * @method static bool allMax(mixed[] $value, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that a number is smaller as a given limit for all values.
- * @method static bool allMaxCount(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at most $count elements for all values.
- * @method static bool allMaxLength(mixed[] $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars for all values.
- * @method static bool allMethodExists(string[] $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object for all values.
- * @method static bool allMin(mixed[] $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit for all values.
- * @method static bool allMinCount(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for all values.
- * @method static bool allMinLength(mixed[] $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for all values.
- * @method static bool allNoContent(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
- * @method static bool allNotBlank(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for all values.
- * @method static bool allNotContains(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars for all values.
- * @method static bool allNotEmpty(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty for all values.
- * @method static bool allNotEmptyKey(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty for all values.
- * @method static bool allNotEq(mixed[] $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using ==) for all values.
- * @method static bool allNotInArray(mixed[] $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices for all values.
- * @method static bool allNotIsInstanceOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name for all values.
- * @method static bool allNotNull(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null for all values.
- * @method static bool allNotRegex(mixed[] $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex for all values.
- * @method static bool allNotSame(mixed[] $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using ===) for all values.
- * @method static bool allNull(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is null for all values.
- * @method static bool allNumeric(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric for all values.
- * @method static bool allObjectOrClass(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists for all values.
- * @method static bool allPhpVersion(string[] $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version for all values.
- * @method static bool allPropertiesExist(mixed[] $value, array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist for all values.
- * @method static bool allPropertyExists(mixed[] $value, string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists for all values.
- * @method static bool allRange(mixed[] $value, mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers for all values.
- * @method static bool allReadable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something readable for all values.
- * @method static bool allRegex(mixed[] $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value matches a regex for all values.
- * @method static bool allSame(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are the same (using ===) for all values.
- * @method static bool allSatisfy(mixed[] $value, callable $callback, string|callable $message = null, string $propertyPath = null) Assert that the provided value is valid according to a callback for all values.
- * @method static bool allScalar(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a PHP scalar for all values.
- * @method static bool allStartsWith(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string starts with a sequence of chars for all values.
- * @method static bool allString(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a string for all values.
- * @method static bool allSubclassOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name for all values.
- * @method static bool allTrue(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True for all values.
- * @method static bool allUrl(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an URL for all values.
- * @method static bool allUuid(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID for all values.
- * @method static bool allVersion(string[] $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
- * @method static bool allWriteable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
+ * @method static bool allAlnum(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for all values.
+ * @method static bool allBase64(string $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
+ * @method static bool allBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
+ * @method static bool allBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
+ * @method static bool allBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths for all values.
+ * @method static bool allBoolean(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is php boolean for all values.
+ * @method static bool allChoice(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices for all values.
+ * @method static bool allChoicesNotEmpty(array $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content for all values.
+ * @method static bool allClassExists(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the class exists for all values.
+ * @method static bool allContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars for all values.
+ * @method static bool allCount(array|Countable|ResourceBundle|SimpleXMLElement $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the count of countable is equal to count for all values.
+ * @method static bool allDate(string $value, string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format for all values.
+ * @method static bool allDefined(mixed $constant, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
+ * @method static bool allDigit(mixed $value, string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit for all values.
+ * @method static bool allDirectory(string $value, string|callable $message = null, string $propertyPath = null) Assert that a directory exists for all values.
+ * @method static bool allE164(string $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
+ * @method static bool allEmail(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
+ * @method static bool allEndsWith(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
+ * @method static bool allEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for all values.
+ * @method static bool allEqArraySubset(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset for all values.
+ * @method static bool allExtensionLoaded(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
+ * @method static bool allExtensionVersion(string $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed for all values.
+ * @method static bool allFalse(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False for all values.
+ * @method static bool allFile(string $value, string|callable $message = null, string $propertyPath = null) Assert that a file exists for all values.
+ * @method static bool allFloat(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php float for all values.
+ * @method static bool allGreaterOrEqualThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit for all values.
+ * @method static bool allGreaterThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit for all values.
+ * @method static bool allImplementsInterface(mixed $class, string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface for all values.
+ * @method static bool allInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice() for all values.
+ * @method static bool allInteger(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer for all values.
+ * @method static bool allIntegerish(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish for all values.
+ * @method static bool allInterfaceExists(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the interface exists for all values.
+ * @method static bool allIp(string $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address for all values.
+ * @method static bool allIpv4(string $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv4 address for all values.
+ * @method static bool allIpv6(string $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv6 address for all values.
+ * @method static bool allIsArray(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for all values.
+ * @method static bool allIsArrayAccessible(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
+ * @method static bool allIsCallable(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for all values.
+ * @method static bool allIsCountable(array|Countable|ResourceBundle|SimpleXMLElement $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for all values.
+ * @method static bool allIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for all values.
+ * @method static bool allIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for all values.
+ * @method static bool allIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
+ * @method static bool allIsResource(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource for all values.
+ * @method static bool allIsTraversable(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object for all values.
+ * @method static bool allKeyExists(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array for all values.
+ * @method static bool allKeyIsset(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() for all values.
+ * @method static bool allKeyNotExists(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array for all values.
+ * @method static bool allLength(mixed $value, int $length, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string has a given length for all values.
+ * @method static bool allLessOrEqualThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less or equal than given limit for all values.
+ * @method static bool allLessThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less than given limit for all values.
+ * @method static bool allMax(mixed $value, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that a number is smaller as a given limit for all values.
+ * @method static bool allMaxCount(array|Countable|ResourceBundle|SimpleXMLElement $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at most $count elements for all values.
+ * @method static bool allMaxLength(mixed $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars for all values.
+ * @method static bool allMethodExists(string $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object for all values.
+ * @method static bool allMin(mixed $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit for all values.
+ * @method static bool allMinCount(array|Countable|ResourceBundle|SimpleXMLElement $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for all values.
+ * @method static bool allMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for all values.
+ * @method static bool allNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
+ * @method static bool allNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for all values.
+ * @method static bool allNotContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars for all values.
+ * @method static bool allNotEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty for all values.
+ * @method static bool allNotEmptyKey(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty for all values.
+ * @method static bool allNotEq(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using ==) for all values.
+ * @method static bool allNotInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices for all values.
+ * @method static bool allNotIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name for all values.
+ * @method static bool allNotNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null for all values.
+ * @method static bool allNotRegex(mixed $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex for all values.
+ * @method static bool allNotSame(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using ===) for all values.
+ * @method static bool allNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is null for all values.
+ * @method static bool allNumeric(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric for all values.
+ * @method static bool allObjectOrClass(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists for all values.
+ * @method static bool allPhpVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version for all values.
+ * @method static bool allPropertiesExist(mixed $value, array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist for all values.
+ * @method static bool allPropertyExists(mixed $value, string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists for all values.
+ * @method static bool allRange(mixed $value, mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers for all values.
+ * @method static bool allReadable(string $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something readable for all values.
+ * @method static bool allRegex(mixed $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value matches a regex for all values.
+ * @method static bool allSame(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are the same (using ===) for all values.
+ * @method static bool allSatisfy(mixed $value, callable $callback, string|callable $message = null, string $propertyPath = null) Assert that the provided value is valid according to a callback for all values.
+ * @method static bool allScalar(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a PHP scalar for all values.
+ * @method static bool allStartsWith(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string starts with a sequence of chars for all values.
+ * @method static bool allString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a string for all values.
+ * @method static bool allSubclassOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name for all values.
+ * @method static bool allTrue(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True for all values.
+ * @method static bool allUniqueValues(array $values, string|callable $message = null, string $propertyPath = null) Assert that values in array are unique (using strict equality) for all values.
+ * @method static bool allUrl(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an URL for all values.
+ * @method static bool allUuid(string $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID for all values.
+ * @method static bool allVersion(string $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
+ * @method static bool allWriteable(string $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static bool nullOrAlnum(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
  * @method static bool nullOrBase64(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrBetween(mixed|null $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
@@ -202,6 +203,7 @@ use Traversable;
  * @method static bool nullOrString(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is a string or that the value is null.
  * @method static bool nullOrSubclassOf(mixed|null $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name or that the value is null.
  * @method static bool nullOrTrue(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True or that the value is null.
+ * @method static bool nullOrUniqueValues(array|null $values, string|callable $message = null, string $propertyPath = null) Assert that values in array are unique (using strict equality) or that the value is null.
  * @method static bool nullOrUrl(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an URL or that the value is null.
  * @method static bool nullOrUuid(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID or that the value is null.
  * @method static bool nullOrVersion(string|null $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions or that the value is null.
@@ -287,6 +289,7 @@ class Assertion
     const INVALID_MIN_COUNT = 227;
     const INVALID_MAX_COUNT = 228;
     const INVALID_STRING_NOT_CONTAINS = 229;
+    const INVALID_UNIQUE_VALUES = 230;
 
     /**
      * Exception to throw when an assertion failed.
@@ -301,9 +304,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -328,9 +328,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -352,6 +349,10 @@ class Assertion
      * @param mixed $value2
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-template ExpectedType
+     * @psalm-param ExpectedType $value2
+     * @psalm-assert =ExpectedType $value
      *
      * @return bool
      *
@@ -378,9 +379,6 @@ class Assertion
      * @param mixed $value1
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -406,6 +404,10 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-template ExpectedType
+     * @psalm-param ExpectedType $value2
+     * @psalm-assert !=ExpectedType $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -428,11 +430,7 @@ class Assertion
      * Assert that value is not in array of choices.
      *
      * @param mixed $value
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -456,6 +454,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert int $value
      *
      * @return bool
      *
@@ -482,6 +482,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert float $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -507,6 +509,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert =numeric $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -530,9 +534,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -570,6 +571,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert bool $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -594,6 +597,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert scalar $value
      *
      * @return bool
      *
@@ -620,6 +625,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert !empty $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -644,6 +651,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert empty $value
      *
      * @return bool
      *
@@ -670,6 +679,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert null $value
+     *
      * @return bool
      */
     public static function null($value, $message = null, string $propertyPath = null): bool
@@ -692,6 +703,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert !null $value
      *
      * @return bool
      *
@@ -717,6 +730,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert string $value
      *
      * @return bool
      *
@@ -744,6 +759,8 @@ class Assertion
      * @param string $pattern
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
      *
      * @return bool
      *
@@ -773,7 +790,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @return bool
+     * @psalm-assert !=string $value
      *
      * @throws AssertionFailedException
      */
@@ -801,6 +818,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $value
      *
      * @return bool
      *
@@ -833,6 +852,8 @@ class Assertion
      * @param string|null $propertyPath
      * @param string $encoding
      *
+     * @psalm-assert =string $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -863,6 +884,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $value
      *
      * @return bool
      *
@@ -896,6 +919,8 @@ class Assertion
      * @param string|null $propertyPath
      * @param string $encoding
      *
+     * @psalm-assert =string $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -917,6 +942,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $string
      *
      * @return bool
      *
@@ -947,6 +974,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $string
      *
      * @return bool
      *
@@ -980,6 +1009,8 @@ class Assertion
      * @param string|null $propertyPath
      * @param string $encoding
      *
+     * @psalm-assert =string $string
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1010,6 +1041,8 @@ class Assertion
      * @param string|null $propertyPath
      * @param string $encoding
      *
+     * @psalm-assert =string $string
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1035,11 +1068,7 @@ class Assertion
      * Assert that value is in array of choices.
      *
      * @param mixed $value
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1064,11 +1093,7 @@ class Assertion
      * This is an alias of {@see choice()}.
      *
      * @param mixed $value
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1083,6 +1108,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert numeric $string
      *
      * @return bool
      *
@@ -1109,6 +1136,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert resource $string
+     *
      * @return bool
      */
     public static function isResource($value, $message = null, string $propertyPath = null): bool
@@ -1131,6 +1160,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert array $string
      *
      * @return bool
      *
@@ -1157,6 +1188,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert iterable $string
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1180,9 +1213,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1206,6 +1236,8 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert countable $string
      *
      * @return bool
      *
@@ -1237,9 +1269,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1265,9 +1294,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1288,14 +1314,35 @@ class Assertion
     }
 
     /**
+     * Assert that values in array are unique (using strict equality).
+     *
+     * @param mixed[] $values
+     * @param string|callable|null $message
+     *
+     * @throws AssertionFailedException
+     */
+    public static function uniqueValues(array $values, $message = null, string $propertyPath = null): bool
+    {
+        foreach ($values as $key => $value) {
+            if (\array_search($value, $values, true) !== $key) {
+                $message = \sprintf(
+                    static::generateMessage($message ?: 'Value "%s" occurs more than once in array'),
+                    static::stringify($value)
+                );
+
+                throw static::createException($value, $message, static::INVALID_UNIQUE_VALUES, $propertyPath, ['value' => $value]);
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Assert that key exists in an array/array-accessible object using isset().
      *
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1321,9 +1368,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1340,9 +1384,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1367,6 +1408,10 @@ class Assertion
      * @param string $className
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-template ExpectedType of object
+     * @psalm-param class-string<ExpectedType> $className
+     * @psalm-assert ExpectedType $value
      *
      * @return bool
      *
@@ -1395,6 +1440,10 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-template ExpectedType of object
+     * @psalm-param class-string<ExpectedType> $className
+     * @psalm-assert !ExpectedType $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1420,9 +1469,6 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1449,6 +1495,8 @@ class Assertion
      * @param mixed $maxValue
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert =numeric $value
      *
      * @return bool
      *
@@ -1480,6 +1528,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert =numeric $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1509,6 +1559,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert =numeric $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1535,9 +1587,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1563,9 +1612,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1590,9 +1636,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1617,9 +1660,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1645,6 +1685,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
      *
      * @return bool
      *
@@ -1674,6 +1716,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
      *
      * @return bool
      *
@@ -1725,9 +1769,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1754,6 +1795,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert true $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1778,6 +1821,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert false $value
      *
      * @return bool
      *
@@ -1804,6 +1849,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert class-string $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1829,6 +1876,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert class-string $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1853,9 +1902,6 @@ class Assertion
      * @param mixed $class
      * @param string $interfaceName
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1896,6 +1942,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert =string $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -1921,9 +1969,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1954,9 +1999,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1981,6 +2023,8 @@ class Assertion
      * @param int $count
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert non-empty-countable $value
      *
      * @return bool
      *
@@ -2007,9 +2051,6 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2034,9 +2075,6 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2107,12 +2145,7 @@ class Assertion
     /**
      * Determines if the values array has every choice as key and that this choice has content.
      *
-     * @param array $values
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2133,9 +2166,6 @@ class Assertion
      * @param string $value
      * @param mixed $object
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2162,6 +2192,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-assert object $value
+     *
      * @return bool
      *
      * @throws AssertionFailedException
@@ -2186,9 +2218,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2213,9 +2242,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2240,9 +2266,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2267,9 +2290,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2296,8 +2316,6 @@ class Assertion
      * @param mixed $upperLimit
      * @param string|callable|null $message
      * @param string $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2326,8 +2344,6 @@ class Assertion
      * @param string|callable|null $message
      * @param string $propertyPath
      *
-     * @return bool
-     *
      * @throws AssertionFailedException
      */
     public static function betweenExclusive($value, $lowerLimit, $upperLimit, $message = null, string $propertyPath = null): bool
@@ -2351,9 +2367,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2378,9 +2391,6 @@ class Assertion
      * @param string $format supports all of the options date(), except for the following:
      *                       N, w, W, t, L, o, B, a, A, g, h, I, O, P, Z, c, r
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2411,9 +2421,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2432,9 +2439,6 @@ class Assertion
      * @param mixed $value
      * @param string $property
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2459,11 +2463,7 @@ class Assertion
      * Assert that the value is an object or class, and that the properties all exist.
      *
      * @param mixed $value
-     * @param array $properties
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2499,9 +2499,6 @@ class Assertion
      * @param string $operator
      * @param string $version2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2529,9 +2526,6 @@ class Assertion
      * @param string $operator
      * @param mixed $version
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2549,9 +2543,6 @@ class Assertion
      * @param string $operator
      * @param mixed $version
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2568,6 +2559,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-assert callable $value
      *
      * @return bool
      *
@@ -2595,9 +2588,6 @@ class Assertion
      * @param mixed $value
      * @param callable $callback
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2624,9 +2614,6 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2653,9 +2640,6 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2675,9 +2659,6 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2695,9 +2676,6 @@ class Assertion
      *
      * @param mixed $constant
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      */
     public static function defined($constant, $message = null, string $propertyPath = null): bool
     {
@@ -2715,9 +2693,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2740,12 +2715,10 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param int $code
-     * @param string|null $propertyPath
-     * @param array $constraints
      *
      * @return mixed
      */
-    protected static function createException($value, $message, $code, $propertyPath = null, array $constraints = [])
+    protected static function createException($value, $message, $code, string $propertyPath = null, array $constraints = [])
     {
         $exceptionClass = static::$exceptionClass;
 
@@ -2756,8 +2729,6 @@ class Assertion
      * Make a string version of a value.
      *
      * @param mixed $value
-     *
-     * @return string
      */
     protected static function stringify($value): string
     {
@@ -2768,8 +2739,8 @@ class Assertion
         } elseif (\is_scalar($value)) {
             $val = (string)$value;
 
-            if (\mb_strlen($val) > 100) {
-                $val = \mb_substr($val, 0, 97).'...';
+            if (\strlen($val) > 100) {
+                $val = \substr($val, 0, 97).'...';
             }
 
             $result = $val;
@@ -2790,8 +2761,6 @@ class Assertion
      * Generate the message.
      *
      * @param string|callable|null $message
-     *
-     * @return string
      */
     protected static function generateMessage($message): string
     {
