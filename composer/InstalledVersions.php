@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7f30b1d37a82519fb482a957fdc19e3cea0c2896',
+    'reference' => '263574371f59d50a62558ac9a3adeb2acf3f5025',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -302,7 +302,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7f30b1d37a82519fb482a957fdc19e3cea0c2896',
+      'reference' => '263574371f59d50a62558ac9a3adeb2acf3f5025',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -768,12 +768,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-intl-normalizer' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '727d1096295d807c309fb01a851577302394c897',
+      'reference' => '6e971c891537eb617a00bb07a43d182a6915faba',
     ),
     'symfony/polyfill-mbstring' => 
     array (
