@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '89184bb343bc24ea8fbfbd983829e9e74e31cf54',
+    'reference' => 'f3a4c3133db0350c560b0052e1ebb318b58bd2c7',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -162,12 +162,12 @@ private static $installed = array (
     ),
     'giggsey/libphonenumber-for-php' => 
     array (
-      'pretty_version' => '8.12.4',
-      'version' => '8.12.4.0',
+      'pretty_version' => '8.12.16',
+      'version' => '8.12.16.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'cb79970730aacaedb74c8288214a5576572fa7b0',
+      'reference' => 'd3d4ed9466249747249f3032717c4aebaaa8363e',
     ),
     'giggsey/locale' => 
     array (
@@ -302,7 +302,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '89184bb343bc24ea8fbfbd983829e9e74e31cf54',
+      'reference' => 'f3a4c3133db0350c560b0052e1ebb318b58bd2c7',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -777,12 +777,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '39d483bdf39be819deabf04ec872eb0b2410b531',
+      'reference' => 'f377a3dd1fde44d37b9831d68dc8dea3ffd28e13',
     ),
     'symfony/polyfill-php72' => 
     array (
