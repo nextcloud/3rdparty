@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -19,6 +19,8 @@ use InvalidArgumentException;
 use JsonSerializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use function Safe\base64_decode;
+use function Safe\sprintf;
 use Throwable;
 use Webauthn\TrustPath\TrustPath;
 use Webauthn\TrustPath\TrustPathLoader;
@@ -74,7 +76,7 @@ class PublicKeyCredentialSource implements JsonSerializable
     protected $counter;
 
     /**
-     * @param array<string> $transports
+     * @param string[] $transports
      */
     public function __construct(string $publicKeyCredentialId, string $type, array $transports, string $attestationType, TrustPath $trustPath, UuidInterface $aaguid, string $credentialPublicKey, string $userHandle, int $counter)
     {
@@ -161,7 +163,7 @@ class PublicKeyCredentialSource implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param mixed[] $data
      */
     public static function createFromArray(array $data): self
     {
@@ -175,7 +177,6 @@ class PublicKeyCredentialSource implements JsonSerializable
                 break;
             default: // Kept for compatibility with old format
                 $decoded = base64_decode($data['aaguid'], true);
-                Assertion::string($decoded, 'Invalid AAGUID');
                 $uuid = Uuid::fromBytes($decoded);
         }
 
@@ -197,7 +198,7 @@ class PublicKeyCredentialSource implements JsonSerializable
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {
@@ -206,7 +207,7 @@ class PublicKeyCredentialSource implements JsonSerializable
             'type' => $this->type,
             'transports' => $this->transports,
             'attestationType' => $this->attestationType,
-            'trustPath' => $this->trustPath,
+            'trustPath' => $this->trustPath->jsonSerialize(),
             'aaguid' => $this->aaguid->toString(),
             'credentialPublicKey' => Base64Url::encode($this->credentialPublicKey),
             'userHandle' => Base64Url::encode($this->userHandle),

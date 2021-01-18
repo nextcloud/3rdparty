@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'e753fbef86be2dd17a3bddd6c10b10612090c609',
+    'reference' => '7f30b1d37a82519fb482a957fdc19e3cea0c2896',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -54,12 +54,21 @@ private static $installed = array (
     ),
     'beberlei/assert' => 
     array (
-      'pretty_version' => 'v3.2.7',
-      'version' => '3.2.7.0',
+      'pretty_version' => 'v3.3.0',
+      'version' => '3.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd63a6943fc4fd1a2aedb65994e3548715105abcf',
+      'reference' => '5367e3895976b49704ae671f75bc5f0ba1b986ab',
+    ),
+    'brick/math' => 
+    array (
+      'pretty_version' => '0.9.1',
+      'version' => '0.9.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '283a40c901101e66de7061bd359252c013dcc43c',
     ),
     'christophwurst/id3parser' => 
     array (
@@ -144,12 +153,12 @@ private static $installed = array (
     ),
     'fgrosse/phpasn1' => 
     array (
-      'pretty_version' => 'v2.1.1',
-      'version' => '2.1.1.0',
+      'pretty_version' => 'v2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7ebf2a09084a7bbdb7b879c66fdf7ad80461bbe8',
+      'reference' => 'd1978f7abd580f3fc33561e7f71d4c12c7531fad',
     ),
     'giggsey/libphonenumber-for-php' => 
     array (
@@ -243,30 +252,21 @@ private static $installed = array (
     ),
     'league/uri' => 
     array (
-      'pretty_version' => '6.2.1',
-      'version' => '6.2.1.0',
+      'pretty_version' => '6.4.0',
+      'version' => '6.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6998530902550c6e3fefb5ef98d56fe92ecdb603',
-    ),
-    'league/uri-components' => 
-    array (
-      'pretty_version' => '2.2.1',
-      'version' => '2.2.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '14bab20b05bc20d16dec17401a9027c679412589',
+      'reference' => '09da64118eaf4c5d52f9923a1e6a5be1da52fd9a',
     ),
     'league/uri-interfaces' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0068a469958895ceaf3afcb489c0258adfa1e406',
+      'reference' => '667f150e589d65d79c89ffe662e426704f84224f',
     ),
     'microsoft/azure-storage-blob' => 
     array (
@@ -302,7 +302,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'e753fbef86be2dd17a3bddd6c10b10612090c609',
+      'reference' => '7f30b1d37a82519fb482a957fdc19e3cea0c2896',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -337,15 +337,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5',
-    ),
-    'paragonie/random_compat' => 
-    array (
-      'pretty_version' => 'v9.99.99',
-      'version' => '9.99.99.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95',
     ),
     'patchwork/jsqueeze' => 
     array (
@@ -574,20 +565,29 @@ private static $installed = array (
       ),
       'reference' => '120b605dfeb996808c31b6477290a714d356e822',
     ),
-    'ramsey/uuid' => 
+    'ramsey/collection' => 
     array (
-      'pretty_version' => '3.9.3',
-      'version' => '3.9.3.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7e1633a6964b48589b142d60542f9ed31bd37a92',
+      'reference' => '24d93aefb2cd786b7edd9f45b554aea20b28b9b1',
+    ),
+    'ramsey/uuid' => 
+    array (
+      'pretty_version' => '4.1.1',
+      'version' => '4.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cd4032040a750077205918c86049aa0f43d22947',
     ),
     'rhumsaa/uuid' => 
     array (
       'replaced' => 
       array (
-        0 => '3.9.3',
+        0 => '4.1.1',
       ),
     ),
     'rsky/pear-core-min' => 
@@ -662,21 +662,21 @@ private static $installed = array (
     ),
     'spomky-labs/base64url' => 
     array (
+      'pretty_version' => 'v2.0.4',
+      'version' => '2.0.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7752ce931ec285da4ed1f4c5aa27e45e097be61d',
+    ),
+    'spomky-labs/cbor-php' => 
+    array (
       'pretty_version' => 'v2.0.1',
       'version' => '2.0.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3eb46a1de803f0078962d910e3a2759224a68c61',
-    ),
-    'spomky-labs/cbor-php' => 
-    array (
-      'pretty_version' => 'v1.0.8',
-      'version' => '1.0.8.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '575a66dc406575b030e3ba541b33447842f93185',
+      'reference' => '9776578000be884cd7864eeb7c37a4ac92d8c995',
     ),
     'stecman/symfony-console-completion' => 
     array (
@@ -732,12 +732,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f4ba089a5b6366e453971d3aad5fe8e897b37f41',
+      'reference' => 'c6c942b1ac76c82448322025e084cadc56048b4e',
     ),
     'symfony/polyfill-iconv' => 
     array (
@@ -863,32 +863,41 @@ private static $installed = array (
         0 => '1.0',
       ),
     ),
-    'web-auth/cose-lib' => 
+    'thecodingmachine/safe' => 
     array (
-      'pretty_version' => 'v3.1.1',
-      'version' => '3.1.1.0',
+      'pretty_version' => 'v1.3.3',
+      'version' => '1.3.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'bc28b39608b0674546d89318e55fb37eaec1a9e9',
+      'reference' => 'a8ab0876305a4cdaef31b2350fcb9811b5608dbc',
+    ),
+    'web-auth/cose-lib' => 
+    array (
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'eea6fae63ff5c81bf98c115b1be5f38a69682c16',
     ),
     'web-auth/metadata-service' => 
     array (
-      'pretty_version' => 'v3.1.1',
-      'version' => '3.1.1.0',
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0e9d9b85590a0c5155b99d9a4b5bdaa01b1748e3',
+      'reference' => '8488d3a832a38cc81c670fce05de1e515c6e64b1',
     ),
     'web-auth/webauthn-lib' => 
     array (
-      'pretty_version' => 'v3.1.1',
-      'version' => '3.1.1.0',
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a8a11bc30480e98768987fe0fc266aef08ec99da',
+      'reference' => 'e411527a41c1013512fccdfce61681eb36484c77',
     ),
   ),
 );

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Webauthn\AttestationStatement;
 
+use function array_key_exists;
 use Assert\Assertion;
 use JsonSerializable;
+use function Safe\sprintf;
 use Webauthn\TrustPath\TrustPath;
 use Webauthn\TrustPath\TrustPathLoader;
 
@@ -32,7 +34,7 @@ class AttestationStatement implements JsonSerializable
     private $fmt;
 
     /**
-     * @var array<string, mixed>
+     * @var mixed[]
      */
     private $attStmt;
 
@@ -47,7 +49,7 @@ class AttestationStatement implements JsonSerializable
     private $type;
 
     /**
-     * @param array<string, mixed> $attStmt
+     * @param mixed[] $attStmt
      */
     public function __construct(string $fmt, array $attStmt, string $type, TrustPath $trustPath)
     {
@@ -58,7 +60,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $attStmt
+     * @param mixed[] $attStmt
      */
     public static function createNone(string $fmt, array $attStmt, TrustPath $trustPath): self
     {
@@ -66,7 +68,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $attStmt
+     * @param mixed[] $attStmt
      */
     public static function createBasic(string $fmt, array $attStmt, TrustPath $trustPath): self
     {
@@ -74,7 +76,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $attStmt
+     * @param mixed[] $attStmt
      */
     public static function createSelf(string $fmt, array $attStmt, TrustPath $trustPath): self
     {
@@ -82,7 +84,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $attStmt
+     * @param mixed[] $attStmt
      */
     public static function createAttCA(string $fmt, array $attStmt, TrustPath $trustPath): self
     {
@@ -90,7 +92,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $attStmt
+     * @param mixed[] $attStmt
      */
     public static function createEcdaa(string $fmt, array $attStmt, TrustPath $trustPath): self
     {
@@ -103,7 +105,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function getAttStmt(): array
     {
@@ -112,7 +114,7 @@ class AttestationStatement implements JsonSerializable
 
     public function has(string $key): bool
     {
-        return \array_key_exists($key, $this->attStmt);
+        return array_key_exists($key, $this->attStmt);
     }
 
     /**
@@ -136,7 +138,7 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param mixed[] $data
      */
     public static function createFromArray(array $data): self
     {
@@ -153,14 +155,14 @@ class AttestationStatement implements JsonSerializable
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {
         return [
             'fmt' => $this->fmt,
             'attStmt' => $this->attStmt,
-            'trustPath' => $this->trustPath,
+            'trustPath' => $this->trustPath->jsonSerialize(),
             'type' => $this->type,
         ];
     }
