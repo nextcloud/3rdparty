@@ -31,7 +31,7 @@
 		"patchwork/jsqueeze": "^2.0",
 		"pear/archive_tar": "^1.4.9",
 		"pear/pear-core-minimal": "^v1.10",
-		"phpseclib/phpseclib": "2.0.25",
+		"phpseclib/phpseclib": "2.0.30",
 		"php-http/guzzle7-adapter": "^0.1.1",
 		"php-opencloud/openstack": "^3.1",
 		"pimple/pimple": "3.3.1",
