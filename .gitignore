@@ -169,6 +169,7 @@ phpseclib/phpseclib/phpunit.xml.dist
 phpseclib/phpseclib/build/
 phpseclib/phpseclib/tests/
 phpseclib/phpseclib/travis/
+phpseclib/phpseclib/BACKERS.md
 phpseclib/phpseclib/CHANGELOG.md
 phpseclib/phpseclib/README.md
 phpseclib/phpseclib/composer.json
