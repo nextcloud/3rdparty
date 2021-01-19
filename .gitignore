@@ -31,6 +31,7 @@ doctrine/inflector/tests
 doctrine/lexer/composer.json
 doctrine/lexer/LICENSE
 
+pear/archive_tar/.github
 pear/archive_tar/.travis.sh
 pear/archive_tar/.travis.yml
 pear/archive_tar/tests/
