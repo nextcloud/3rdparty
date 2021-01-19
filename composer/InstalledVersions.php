@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '263574371f59d50a62558ac9a3adeb2acf3f5025',
+    'reference' => 'a9db460535cf4f02e8004ccd22fefffe2a11026e',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -302,7 +302,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '263574371f59d50a62558ac9a3adeb2acf3f5025',
+      'reference' => 'a9db460535cf4f02e8004ccd22fefffe2a11026e',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -349,12 +349,12 @@ private static $installed = array (
     ),
     'pear/archive_tar' => 
     array (
-      'pretty_version' => '1.4.11',
-      'version' => '1.4.11.0',
+      'pretty_version' => '1.4.12',
+      'version' => '1.4.12.0',
       'aliases' => 
       array (
       ),
-      'reference' => '17d355cb7d3c4ff08e5729f29cd7660145208d9d',
+      'reference' => '19bb8e95490d3e3ad92fcac95500ca80bdcc7495',
     ),
     'pear/console_getopt' => 
     array (
