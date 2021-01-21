@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'f3a4c3133db0350c560b0052e1ebb318b58bd2c7',
+    'reference' => 'aac888c2cfcf143782d30d8b13921235aef89c08',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -279,7 +279,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'f3a4c3133db0350c560b0052e1ebb318b58bd2c7',
+      'reference' => 'aac888c2cfcf143782d30d8b13921235aef89c08',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -576,12 +576,12 @@
     ),
     'sabre/dav' => 
     array (
-      'pretty_version' => '4.1.3',
-      'version' => '4.1.3.0',
+      'pretty_version' => '4.1.4',
+      'version' => '4.1.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b903eeedfbdcd6cab7935661ec6dc2d90cdf8a1e',
+      'reference' => '4258420f15425a5f128fe5cad454e00ab4a68ae5',
     ),
     'sabre/event' => 
     array (
