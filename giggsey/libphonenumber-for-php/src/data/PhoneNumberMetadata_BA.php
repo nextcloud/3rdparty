@@ -40,7 +40,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '6040[0-4]\\d{4}|6(?:03|[1-356]|44|7\\d)\\d{6}',
+    'NationalNumberPattern' => '6040\\d{5}|6(?:03|[1-356]|44|7\\d)\\d{6}',
     'ExampleNumber' => '61123456',
     'PossibleLength' => 
     array (
@@ -117,7 +117,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '70(?:3[0146]|[56]0)\\d{4}',
+    'NationalNumberPattern' => '703[235]0\\d{3}|70(?:2[0-5]|3[0146]|[56]0)\\d{4}',
     'ExampleNumber' => '70341234',
     'PossibleLength' => 
     array (
