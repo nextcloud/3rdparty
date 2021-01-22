@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'aac888c2cfcf143782d30d8b13921235aef89c08',
+    'reference' => '2e63710ff9549c67db6c4e10b7cce159d0a2f566',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -302,7 +302,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'aac888c2cfcf143782d30d8b13921235aef89c08',
+      'reference' => '2e63710ff9549c67db6c4e10b7cce159d0a2f566',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -689,12 +689,12 @@ private static $installed = array (
     ),
     'swiftmailer/swiftmailer' => 
     array (
-      'pretty_version' => 'v6.2.4',
-      'version' => '6.2.4.0',
+      'pretty_version' => 'v6.2.5',
+      'version' => '6.2.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e',
+      'reference' => '698a6a9f54d7eb321274de3ad19863802c879fb7',
     ),
     'symfony/console' => 
     array (
@@ -741,12 +741,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-iconv' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c536646fdb4f29104dd26effc2fdcb9a5b085024',
+      'reference' => 'b34bfb8c4c22650ac080d2662ae3502e5f2f4ae6',
     ),
     'symfony/polyfill-intl-grapheme' => 
     array (
@@ -759,12 +759,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-intl-idn' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3b75acd829741c768bc8b1f84eb33265e7cc5117',
+      'reference' => '0eb8293dbbcd6ef6bf81404c9ce7d95bcdf34f44',
     ),
     'symfony/polyfill-intl-normalizer' => 
     array (
@@ -786,12 +786,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-php72' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'cede45fcdfabdd6043b3592e83678e42ec69e930',
+      'reference' => 'cc6e6f9b39fe8075b3dabfbaf5b5f645ae1340c9',
     ),
     'symfony/polyfill-php73' => 
     array (
