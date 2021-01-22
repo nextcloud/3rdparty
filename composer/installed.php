@@ -6,19 +6,19 @@
     'aliases' => 
     array (
     ),
-    'reference' => '2e63710ff9549c67db6c4e10b7cce159d0a2f566',
+    'reference' => '09fbf841632791d214ce6599cbb3d508bf9f09aa',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
   array (
     'aws/aws-sdk-php' => 
     array (
-      'pretty_version' => '3.133.27',
-      'version' => '3.133.27.0',
+      'pretty_version' => '3.171.21',
+      'version' => '3.171.21.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5527195465ac42cb5127a60b84eb2d8dc3b0d5c9',
+      'reference' => '0455d92bb12d44f80db96a4e70861d186063e9e5',
     ),
     'bantu/ini-get-wrapper' => 
     array (
@@ -265,12 +265,12 @@
     ),
     'mtdowling/jmespath.php' => 
     array (
-      'pretty_version' => '2.5.0',
-      'version' => '2.5.0.0',
+      'pretty_version' => '2.6.0',
+      'version' => '2.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '52168cb9472de06979613d365c7f1ab8798be895',
+      'reference' => '42dae2cbd13154083ca6d70099692fef8ca84bfb',
     ),
     'nextcloud/3rdparty' => 
     array (
@@ -279,7 +279,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '2e63710ff9549c67db6c4e10b7cce159d0a2f566',
+      'reference' => '09fbf841632791d214ce6599cbb3d508bf9f09aa',
     ),
     'nextcloud/lognormalizer' => 
     array (

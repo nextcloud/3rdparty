@@ -8,6 +8,7 @@ bin
 **/.github
 
 aws/aws-sdk-php/.changes
+aws/aws-sdk-php/CODE_OF_CONDUCT.md
 
 bantu/ini-get-wrapper/tests
 
