@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '09fbf841632791d214ce6599cbb3d508bf9f09aa',
+    'reference' => 'a41f89238e9f1b27184c46d8476d57a86fba9eb1',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -243,12 +243,21 @@ private static $installed = array (
     ),
     'league/flysystem' => 
     array (
-      'pretty_version' => '1.0.64',
-      'version' => '1.0.64.0',
+      'pretty_version' => '1.1.3',
+      'version' => '1.1.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd13c43dbd4b791f815215959105a008515d1a2e0',
+      'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
+    ),
+    'league/mime-type-detection' => 
+    array (
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
     ),
     'league/uri' => 
     array (
@@ -302,7 +311,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '09fbf841632791d214ce6599cbb3d508bf9f09aa',
+      'reference' => 'a41f89238e9f1b27184c46d8476d57a86fba9eb1',
     ),
     'nextcloud/lognormalizer' => 
     array (

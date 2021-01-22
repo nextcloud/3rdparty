@@ -2,7 +2,6 @@
 
 namespace League\Flysystem\Adapter;
 
-use ErrorException;
 use League\Flysystem\Adapter\Polyfill\StreamedCopyTrait;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
@@ -130,13 +129,20 @@ class Ftp extends AbstractFtpAdapter
      */
     public function connect()
     {
+        $tries = 3;
+        start_connecting:
+
         if ($this->ssl) {
-            $this->connection = ftp_ssl_connect($this->getHost(), $this->getPort(), $this->getTimeout());
+            $this->connection = @ftp_ssl_connect($this->getHost(), $this->getPort(), $this->getTimeout());
         } else {
-            $this->connection = ftp_connect($this->getHost(), $this->getPort(), $this->getTimeout());
+            $this->connection = @ftp_connect($this->getHost(), $this->getPort(), $this->getTimeout());
         }
 
         if ( ! $this->connection) {
+            $tries--;
+
+            if ($tries > 0) goto start_connecting;
+
             throw new ConnectionRuntimeException('Could not connect to host: ' . $this->getHost() . ', port:' . $this->getPort());
         }
 
@@ -230,7 +236,7 @@ class Ftp extends AbstractFtpAdapter
     public function disconnect()
     {
         if (is_resource($this->connection)) {
-            ftp_close($this->connection);
+            @ftp_close($this->connection);
         }
 
         $this->connection = null;
@@ -394,7 +400,7 @@ class Ftp extends AbstractFtpAdapter
             return ['type' => 'dir', 'path' => $path];
         }
 
-        $listing = $this->ftpRawlist('-A', str_replace('*', '\\*', $path));
+        $listing = $this->ftpRawlist('-A', $path);
 
         if (empty($listing) || in_array('total 0', $listing, true)) {
             return false;
@@ -490,8 +496,6 @@ class Ftp extends AbstractFtpAdapter
      */
     protected function listDirectoryContents($directory, $recursive = true)
     {
-        $directory = str_replace('*', '\\*', $directory);
-
         if ($recursive && $this->recurseManually) {
             return $this->listDirectoryContentsRecursive($directory);
         }
@@ -560,6 +564,7 @@ class Ftp extends AbstractFtpAdapter
 
         if ($this->isPureFtpd) {
             $path = str_replace(' ', '\ ', $path);
+            $this->escapePath($path);
         }
 
         return ftp_rawlist($connection, $options . ' ' . $path);

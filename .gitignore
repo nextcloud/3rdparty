@@ -6,9 +6,12 @@ bin
 **/.travis.yml
 # ignore .github files
 **/.github
+# ignore changelogs
+**/CHANGELOG.md
+# ignore coc
+**/CODE_OF_CONDUCT.md
 
 aws/aws-sdk-php/.changes
-aws/aws-sdk-php/CODE_OF_CONDUCT.md
 
 bantu/ini-get-wrapper/tests
 
@@ -114,6 +117,9 @@ justinrainbow/json-schema/demo
 
 james-heinrich/getid3/demos
 james-heinrich/getid3/helperapps
+
+league/flysystem/SECURITY.md
+league/flysystem/deprecations.md
 
 mikey179/vfsstream
 
