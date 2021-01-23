@@ -29,19 +29,19 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a41f89238e9f1b27184c46d8476d57a86fba9eb1',
+    'reference' => '969df599a08384a4a600400f129f2b4767fd9af5',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
   array (
     'aws/aws-sdk-php' => 
     array (
-      'pretty_version' => '3.171.21',
-      'version' => '3.171.21.0',
+      'pretty_version' => '3.172.0',
+      'version' => '3.172.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0455d92bb12d44f80db96a4e70861d186063e9e5',
+      'reference' => '5a5e66c4d54c392042820703eeb8a6bd3d222924',
     ),
     'bantu/ini-get-wrapper' => 
     array (
@@ -311,7 +311,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a41f89238e9f1b27184c46d8476d57a86fba9eb1',
+      'reference' => '969df599a08384a4a600400f129f2b4767fd9af5',
     ),
     'nextcloud/lognormalizer' => 
     array (

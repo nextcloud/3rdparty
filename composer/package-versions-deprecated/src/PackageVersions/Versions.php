@@ -33,7 +33,7 @@ final class Versions
      * @internal
      */
     const VERSIONS          = array (
-  'aws/aws-sdk-php' => '3.171.21@0455d92bb12d44f80db96a4e70861d186063e9e5',
+  'aws/aws-sdk-php' => '3.172.0@5a5e66c4d54c392042820703eeb8a6bd3d222924',
   'bantu/ini-get-wrapper' => 'v1.0.1@4770c7feab370c62e23db4f31c112b7c6d90aee2',
   'beberlei/assert' => 'v3.3.0@5367e3895976b49704ae671f75bc5f0ba1b986ab',
   'brick/math' => '0.9.1@283a40c901101e66de7061bd359252c013dcc43c',
@@ -119,7 +119,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@a41f89238e9f1b27184c46d8476d57a86fba9eb1',
+  'nextcloud/3rdparty' => 'dev-master@969df599a08384a4a600400f129f2b4767fd9af5',
 );
 
     private function __construct()
