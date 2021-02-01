@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'a41f89238e9f1b27184c46d8476d57a86fba9eb1',
+    'reference' => 'daa427e4fb1f7457c5facc2997bbfff06f7acf34',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'a41f89238e9f1b27184c46d8476d57a86fba9eb1',
+      'reference' => 'daa427e4fb1f7457c5facc2997bbfff06f7acf34',
     ),
     'nextcloud/lognormalizer' => 
     array (

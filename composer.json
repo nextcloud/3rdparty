@@ -9,7 +9,8 @@
 		"classmap-authoritative": true,
 		"platform": {
 			"php": "7.3.0"
-		}
+		},
+		"sort-packages": true
 	},
 	"require": {
 		"php": "^7.3|^8.0",
