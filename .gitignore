@@ -2,6 +2,8 @@
 bin
 */**/phpstan.neon
 .php_cs.dist
+# ignore editor config
+**/*.editorconfig
 # ignore demo files
 **/.travis.yml
 # ignore .github files

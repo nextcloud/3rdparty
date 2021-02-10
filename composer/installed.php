@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3c8d312d2b0ca138164e37ef147329fb3b666436',
+    'reference' => '90a8336c3b51a3be5869569ef8e84949a1e67608',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3c8d312d2b0ca138164e37ef147329fb3b666436',
+      'reference' => '90a8336c3b51a3be5869569ef8e84949a1e67608',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -454,6 +454,15 @@
       array (
       ),
       'reference' => 'b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
+    ),
+    'psr/event-dispatcher' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'dbefd12671e8a14ec7f180cab83036ed26714bb0',
     ),
     'psr/event-dispatcher-implementation' => 
     array (
