@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '2149715371fa9376487b481015a5ad7d823a69b1',
+    'reference' => 'b792087a9fc062adc19abb014a837c4891401235',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '2149715371fa9376487b481015a5ad7d823a69b1',
+      'reference' => 'b792087a9fc062adc19abb014a837c4891401235',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -763,12 +763,12 @@
     ),
     'symfony/polyfill-intl-normalizer' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6e971c891537eb617a00bb07a43d182a6915faba',
+      'reference' => '43a0283138253ed1d48d352ab6d0bdb3f809f248',
     ),
     'symfony/polyfill-mbstring' => 
     array (
