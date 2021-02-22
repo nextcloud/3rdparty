@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '90a8336c3b51a3be5869569ef8e84949a1e67608',
+    'reference' => '2149715371fa9376487b481015a5ad7d823a69b1',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -312,7 +312,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '90a8336c3b51a3be5869569ef8e84949a1e67608',
+      'reference' => '2149715371fa9376487b481015a5ad7d823a69b1',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -769,12 +769,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-intl-grapheme' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '267a9adeb8ecb8071040a740930e077cdfb987af',
+      'reference' => '5601e09b69f26c1828b13b6bb87cb07cddba3170',
     ),
     'symfony/polyfill-intl-idn' => 
     array (
