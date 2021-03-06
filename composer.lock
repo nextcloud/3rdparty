@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bd5afe10bb7cd72024d5e52d17d1252",
+    "content-hash": "d65dff5f333cf5ab06c5abab96706476",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -4979,16 +4979,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13"
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/5232de97ee3b75b0360528dae24e73db49566ab1",
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1",
                 "shasum": ""
             },
             "require": {
@@ -5039,7 +5039,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -5055,7 +5055,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T16:49:33+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -5525,16 +5525,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v4.4.19",
+            "version": "v4.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "e1d0c67167a553556d9f974b5fa79c2448df317a"
+                "reference": "2271b6d577018a7dea75a9162a08ac84f8234deb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/e1d0c67167a553556d9f974b5fa79c2448df317a",
-                "reference": "e1d0c67167a553556d9f974b5fa79c2448df317a",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/2271b6d577018a7dea75a9162a08ac84f8234deb",
+                "reference": "2271b6d577018a7dea75a9162a08ac84f8234deb",
                 "shasum": ""
             },
             "require": {
@@ -5549,7 +5549,7 @@
                 "symfony/yaml": "<3.4"
             },
             "provide": {
-                "symfony/translation-implementation": "1.0"
+                "symfony/translation-implementation": "1.0|2.0"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -5593,7 +5593,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v4.4.19"
+                "source": "https://github.com/symfony/translation/tree/v4.4.20"
             },
             "funding": [
                 {
@@ -5609,7 +5609,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-27T09:09:26+00:00"
+            "time": "2021-02-26T13:53:48+00:00"
         },
         {
             "name": "symfony/translation-contracts",
