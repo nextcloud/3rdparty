@@ -88,11 +88,11 @@ final class Versions
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
   'ramsey/collection' => '1.1.1@24d93aefb2cd786b7edd9f45b554aea20b28b9b1',
   'ramsey/uuid' => '4.1.1@cd4032040a750077205918c86049aa0f43d22947',
-  'sabre/dav' => '4.1.4@4258420f15425a5f128fe5cad454e00ab4a68ae5',
+  'sabre/dav' => '4.1.5@c1afdc77a95efea6ee40c03c45f57c3c0c80ec22',
   'sabre/event' => '5.1.2@c120bec57c17b6251a496efc82b732418b49d50a',
   'sabre/http' => '5.1.1@d0aafede6961df6195ce7a8dad49296b0aaee22e',
   'sabre/uri' => '2.2.1@f502edffafea8d746825bd5f0b923a60fd2715ff',
-  'sabre/vobject' => '4.3.3@58f9f9b46a1080c0130bd86f4df9a568aacb9c79',
+  'sabre/vobject' => '4.3.5@d8a0a9ae215a8acfb51afc29101c7344670b9c83',
   'sabre/xml' => '2.2.3@c3b959f821c19b36952ec4a595edd695c216bfc6',
   'scssphp/scssphp' => 'v1.4.1@ba86c963b94ec7ebd6e19d90cdab90d89667dbf7',
   'spomky-labs/base64url' => 'v2.0.4@7752ce931ec285da4ed1f4c5aa27e45e097be61d',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@b792087a9fc062adc19abb014a837c4891401235',
+  'nextcloud/3rdparty' => 'dev-master@6c5e16eb3488ceb6ef5c08147d83d8e567374f23',
 );
 
     private function __construct()
