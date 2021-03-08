@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'b792087a9fc062adc19abb014a837c4891401235',
+    'reference' => '6c5e16eb3488ceb6ef5c08147d83d8e567374f23',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -312,7 +312,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'b792087a9fc062adc19abb014a837c4891401235',
+      'reference' => '6c5e16eb3488ceb6ef5c08147d83d8e567374f23',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -618,12 +618,12 @@ private static $installed = array (
     ),
     'sabre/dav' => 
     array (
-      'pretty_version' => '4.1.4',
-      'version' => '4.1.4.0',
+      'pretty_version' => '4.1.5',
+      'version' => '4.1.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4258420f15425a5f128fe5cad454e00ab4a68ae5',
+      'reference' => 'c1afdc77a95efea6ee40c03c45f57c3c0c80ec22',
     ),
     'sabre/event' => 
     array (
@@ -654,12 +654,12 @@ private static $installed = array (
     ),
     'sabre/vobject' => 
     array (
-      'pretty_version' => '4.3.3',
-      'version' => '4.3.3.0',
+      'pretty_version' => '4.3.5',
+      'version' => '4.3.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '58f9f9b46a1080c0130bd86f4df9a568aacb9c79',
+      'reference' => 'd8a0a9ae215a8acfb51afc29101c7344670b9c83',
     ),
     'sabre/xml' => 
     array (
@@ -1141,7 +1141,6 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
-
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];
