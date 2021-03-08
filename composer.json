@@ -37,7 +37,7 @@
 		"php-http/guzzle7-adapter": "^0.1.1",
 		"php-opencloud/openstack": "^3.1",
 		"phpseclib/phpseclib": "2.0.30",
-		"pimple/pimple": "3.3.1",
+		"pimple/pimple": "3.4.0",
 		"psr/container": "^1.0",
 		"psr/event-dispatcher": "^1.0",
 		"punic/punic": "^1.6",
