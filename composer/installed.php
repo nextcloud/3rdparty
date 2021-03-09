@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '6c5e16eb3488ceb6ef5c08147d83d8e567374f23',
+    'reference' => '23be10a49b68719097315db4c673594d0834cdad',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '6c5e16eb3488ceb6ef5c08147d83d8e567374f23',
+      'reference' => '23be10a49b68719097315db4c673594d0834cdad',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -439,21 +439,21 @@
     ),
     'pimple/pimple' => 
     array (
-      'pretty_version' => 'v3.3.1',
-      'version' => '3.3.1.0',
+      'pretty_version' => 'v3.4.0',
+      'version' => '3.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '21e45061c3429b1e06233475cc0e1f6fc774d5b0',
+      'reference' => '86406047271859ffc13424a048541f4531f53601',
     ),
     'psr/container' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
+      'reference' => '8622567409010282b7aeebe4bb841fe98b58dcaf',
     ),
     'psr/event-dispatcher' => 
     array (
