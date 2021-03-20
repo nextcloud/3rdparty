@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '166c9696fbe3fee8e5ea7732e592e01bd291afcd',
+    'reference' => '0d770f0d47d905f207c3a14f4450db65b538dcc9',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -163,12 +163,12 @@ private static $installed = array (
     ),
     'giggsey/libphonenumber-for-php' => 
     array (
-      'pretty_version' => '8.12.19',
-      'version' => '8.12.19.0',
+      'pretty_version' => '8.12.20',
+      'version' => '8.12.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f3c196dcb3e76e456783a38bab87d99b4d727918',
+      'reference' => '743585979ef96f2be123518c0a58083cf678bd47',
     ),
     'giggsey/locale' => 
     array (
@@ -312,7 +312,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '166c9696fbe3fee8e5ea7732e592e01bd291afcd',
+      'reference' => '0d770f0d47d905f207c3a14f4450db65b538dcc9',
     ),
     'nextcloud/lognormalizer' => 
     array (
