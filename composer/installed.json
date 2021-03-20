@@ -1033,17 +1033,17 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.12.19",
-            "version_normalized": "8.12.19.0",
+            "version": "8.12.20",
+            "version_normalized": "8.12.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "f3c196dcb3e76e456783a38bab87d99b4d727918"
+                "reference": "743585979ef96f2be123518c0a58083cf678bd47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/f3c196dcb3e76e456783a38bab87d99b4d727918",
-                "reference": "f3c196dcb3e76e456783a38bab87d99b4d727918",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/743585979ef96f2be123518c0a58083cf678bd47",
+                "reference": "743585979ef96f2be123518c0a58083cf678bd47",
                 "shasum": ""
             },
             "require": {
@@ -1060,7 +1060,7 @@
                 "symfony/console": "^2.8|^3.0",
                 "symfony/phpunit-bridge": "^4.2 || ^5"
             },
-            "time": "2021-03-01T16:07:56+00:00",
+            "time": "2021-03-17T11:05:55+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
