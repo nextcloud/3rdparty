@@ -2932,17 +2932,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.25",
-        "version_normalized": "2.0.25.0",
+        "version": "2.0.31",
+        "version_normalized": "2.0.31.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "c18159618ed7cd7ff721ac1a8fec7860a475d2f0"
+            "reference": "233a920cb38636a43b18d428f9a8db1f0a1a08f4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c18159618ed7cd7ff721ac1a8fec7860a475d2f0",
-            "reference": "c18159618ed7cd7ff721ac1a8fec7860a475d2f0",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/233a920cb38636a43b18d428f9a8db1f0a1a08f4",
+            "reference": "233a920cb38636a43b18d428f9a8db1f0a1a08f4",
             "shasum": ""
         },
         "require": {
@@ -2950,8 +2950,7 @@
         },
         "require-dev": {
             "phing/phing": "~2.7",
-            "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
-            "sami/sami": "~2.0",
+            "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^9.4",
             "squizlabs/php_codesniffer": "~2.0"
         },
         "suggest": {
@@ -2960,7 +2959,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2020-02-25T04:16:50+00:00",
+        "time": "2021-04-06T13:56:45+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3022,6 +3021,20 @@
             "twofish",
             "x.509",
             "x509"
+        ],
+        "funding": [
+            {
+                "url": "https://github.com/terrafrost",
+                "type": "github"
+            },
+            {
+                "url": "https://www.patreon.com/phpseclib",
+                "type": "patreon"
+            },
+            {
+                "url": "https://tidelift.com/funding/github/packagist/phpseclib/phpseclib",
+                "type": "tidelift"
+            }
         ]
     },
     {
