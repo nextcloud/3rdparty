@@ -24,7 +24,7 @@
 		"giggsey/libphonenumber-for-php": "^8.12",
 		"guzzlehttp/guzzle": "^7.2",
 		"icewind/searchdav": "^2.0.0",
-		"icewind/streams": "v0.7.2",
+		"icewind/streams": "v0.7.4",
 		"league/flysystem": "^1.0",
 		"microsoft/azure-storage-blob": "^1.5",
 		"nextcloud/lognormalizer": "^1.0",

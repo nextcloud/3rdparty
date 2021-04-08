@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '25265c5d601a621789e427d57c8a04163da7697f',
+    'reference' => '95fa66be1968d0e47c6d7ee2be257b726bfd2dc0',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -226,12 +226,12 @@ private static $installed = array (
     ),
     'icewind/streams' => 
     array (
-      'pretty_version' => 'v0.7.2',
-      'version' => '0.7.2.0',
+      'pretty_version' => 'v0.7.4',
+      'version' => '0.7.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '77d750ccc654c0eda4a41fedb2dbd71053755790',
+      'reference' => '93bce472202d36d9808c30eaa52a1dc72b39e04c',
     ),
     'justinrainbow/json-schema' => 
     array (
@@ -312,7 +312,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '25265c5d601a621789e427d57c8a04163da7697f',
+      'reference' => '95fa66be1968d0e47c6d7ee2be257b726bfd2dc0',
     ),
     'nextcloud/lognormalizer' => 
     array (
