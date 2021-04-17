@@ -193,26 +193,26 @@
         },
         {
             "name": "brick/math",
-            "version": "0.9.1",
+            "version": "0.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "283a40c901101e66de7061bd359252c013dcc43c"
+                "reference": "dff976c2f3487d42c1db75a3b180e2b9f0e72ce0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/283a40c901101e66de7061bd359252c013dcc43c",
-                "reference": "283a40c901101e66de7061bd359252c013dcc43c",
+                "url": "https://api.github.com/repos/brick/math/zipball/dff976c2f3487d42c1db75a3b180e2b9f0e72ce0",
+                "reference": "dff976c2f3487d42c1db75a3b180e2b9f0e72ce0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.1|^8.0"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.2",
-                "phpunit/phpunit": "^7.5.15|^8.5",
-                "vimeo/psalm": "^3.5"
+                "phpunit/phpunit": "^7.5.15 || ^8.5 || ^9.0",
+                "vimeo/psalm": "4.3.2"
             },
             "type": "library",
             "autoload": {
@@ -237,7 +237,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/master"
+                "source": "https://github.com/brick/math/tree/0.9.2"
             },
             "funding": [
                 {
@@ -245,7 +245,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-18T23:57:15+00:00"
+            "time": "2021-01-20T22:51:39+00:00"
         },
         {
             "name": "christophwurst/id3parser",
@@ -3384,16 +3384,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "1.1.1",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "24d93aefb2cd786b7edd9f45b554aea20b28b9b1"
+                "reference": "28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/24d93aefb2cd786b7edd9f45b554aea20b28b9b1",
-                "reference": "24d93aefb2cd786b7edd9f45b554aea20b28b9b1",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1",
+                "reference": "28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1",
                 "shasum": ""
             },
             "require": {
@@ -3403,19 +3403,19 @@
                 "captainhook/captainhook": "^5.3",
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "ergebnis/composer-normalize": "^2.6",
-                "fzaninotto/faker": "^1.5",
+                "fakerphp/faker": "^1.5",
                 "hamcrest/hamcrest-php": "^2",
-                "jangregor/phpstan-prophecy": "^0.6",
+                "jangregor/phpstan-prophecy": "^0.8",
                 "mockery/mockery": "^1.3",
                 "phpstan/extension-installer": "^1",
                 "phpstan/phpstan": "^0.12.32",
                 "phpstan/phpstan-mockery": "^0.12.5",
                 "phpstan/phpstan-phpunit": "^0.12.11",
-                "phpunit/phpunit": "^8.5",
+                "phpunit/phpunit": "^8.5 || ^9",
                 "psy/psysh": "^0.10.4",
                 "slevomat/coding-standard": "^6.3",
                 "squizlabs/php_codesniffer": "^3.5",
-                "vimeo/psalm": "^3.12.2"
+                "vimeo/psalm": "^4.4"
             },
             "type": "library",
             "autoload": {
@@ -3445,15 +3445,19 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/1.1.1"
+                "source": "https://github.com/ramsey/collection/tree/1.1.3"
             },
             "funding": [
                 {
                     "url": "https://github.com/ramsey",
                     "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/ramsey/collection",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2020-09-10T20:58:17+00:00"
+            "time": "2021-01-21T17:40:04+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -4564,7 +4568,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -4623,7 +4627,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -5826,7 +5830,7 @@
         },
         {
             "name": "web-auth/cose-lib",
-            "version": "v3.3.1",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/cose-lib.git",
@@ -5873,7 +5877,7 @@
                 "RFC8152"
             ],
             "support": {
-                "source": "https://github.com/web-auth/cose-lib/tree/v3.3.1"
+                "source": "https://github.com/web-auth/cose-lib/tree/v3.3.4"
             },
             "funding": [
                 {
@@ -5889,7 +5893,7 @@
         },
         {
             "name": "web-auth/metadata-service",
-            "version": "v3.3.1",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-metadata-service.git",
@@ -5942,22 +5946,22 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-metadata-service/tree/v3.3.1"
+                "source": "https://github.com/web-auth/webauthn-metadata-service/tree/v3.3.4"
             },
             "time": "2021-01-09T13:31:01+00:00"
         },
         {
             "name": "web-auth/webauthn-lib",
-            "version": "v3.3.1",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-lib.git",
-                "reference": "e411527a41c1013512fccdfce61681eb36484c77"
+                "reference": "20f99eb615aeeaee1231d91e46c691860c9054f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-auth/webauthn-lib/zipball/e411527a41c1013512fccdfce61681eb36484c77",
-                "reference": "e411527a41c1013512fccdfce61681eb36484c77",
+                "url": "https://api.github.com/repos/web-auth/webauthn-lib/zipball/20f99eb615aeeaee1231d91e46c691860c9054f9",
+                "reference": "20f99eb615aeeaee1231d91e46c691860c9054f9",
                 "shasum": ""
             },
             "require": {
@@ -6014,7 +6018,7 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-lib/tree/v3.3.1"
+                "source": "https://github.com/web-auth/webauthn-lib/tree/v3.3.4"
             },
             "funding": [
                 {
@@ -6026,7 +6030,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-01-09T13:31:01+00:00"
+            "time": "2021-04-16T11:31:10+00:00"
         }
     ],
     "packages-dev": [],
