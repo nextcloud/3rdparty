@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '25265c5d601a621789e427d57c8a04163da7697f',
+    'reference' => 'e60c58d28ed17251ce7ecb3166bafd11159619ff',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -73,12 +73,12 @@ private static $installed = array (
     ),
     'christophwurst/id3parser' => 
     array (
-      'pretty_version' => 'v0.1.1',
-      'version' => '0.1.1.0',
+      'pretty_version' => 'v0.1.2',
+      'version' => '0.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c0e56c336bd6131c199827f928e5a9aec89aa4da',
+      'reference' => 'd7f5e9e7db69a24e3111a2033cbdf640f9456f2f',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -312,7 +312,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '25265c5d601a621789e427d57c8a04163da7697f',
+      'reference' => 'e60c58d28ed17251ce7ecb3166bafd11159619ff',
     ),
     'nextcloud/lognormalizer' => 
     array (
