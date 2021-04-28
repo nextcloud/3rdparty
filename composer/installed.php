@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '25265c5d601a621789e427d57c8a04163da7697f',
+    'reference' => '6eb56696440861fbf74d24f30816806c8586aadd',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '25265c5d601a621789e427d57c8a04163da7697f',
+      'reference' => '6eb56696440861fbf74d24f30816806c8586aadd',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -335,12 +335,12 @@
     ),
     'pear/archive_tar' => 
     array (
-      'pretty_version' => '1.4.12',
-      'version' => '1.4.12.0',
+      'pretty_version' => '1.4.13',
+      'version' => '1.4.13.0',
       'aliases' => 
       array (
       ),
-      'reference' => '19bb8e95490d3e3ad92fcac95500ca80bdcc7495',
+      'reference' => '2b87b41178cc6d4ad3cba678a46a1cae49786011',
     ),
     'pear/console_getopt' => 
     array (
@@ -362,12 +362,12 @@
     ),
     'pear/pear_exception' => 
     array (
-      'pretty_version' => 'v1.0.1',
-      'version' => '1.0.1.0',
+      'pretty_version' => 'v1.0.2',
+      'version' => '1.0.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'dbb42a5a0e45f3adcf99babfb2a1ba77b8ac36a7',
+      'reference' => 'b14fbe2ddb0b9f94f5b24cf08783d599f776fff0',
     ),
     'php-ds/php-ds' => 
     array (
