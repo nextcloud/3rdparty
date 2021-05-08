@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '8a9382c005b7339feeb0c5b78906e335b520736e',
+    'reference' => '47ef0d3d299f471883102b7bd1712727b9a62d8b',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -314,7 +314,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '8a9382c005b7339feeb0c5b78906e335b520736e',
+      'reference' => '47ef0d3d299f471883102b7bd1712727b9a62d8b',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -327,12 +327,12 @@ private static $installed = array (
     ),
     'nikic/php-parser' => 
     array (
-      'pretty_version' => 'v4.10.4',
-      'version' => '4.10.4.0',
+      'pretty_version' => 'v4.10.5',
+      'version' => '4.10.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c6d052fc58cb876152f89f532b95a8d7907e7f0e',
+      'reference' => '4432ba399e47c66624bc73c8c0f811e5c109576f',
     ),
     'ocramius/package-versions' => 
     array (
