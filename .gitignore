@@ -258,6 +258,7 @@ swiftmailer/swiftmailer/VERSION
 swiftmailer/swiftmailer/LICENSE
 swiftmailer/swiftmailer/composer.json
 
+symfony/*/Test
 symfony/debug/Tests
 
 symfony/console/Symfony/Component/Console/Tests
