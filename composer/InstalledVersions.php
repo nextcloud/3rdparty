@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1d1f743b8adb5123016837f5d0adcd9414d28bef',
+    'reference' => '0ff11bf7c9cbf121d1a67db80fd9bbc6d88dd2bc',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -314,7 +314,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1d1f743b8adb5123016837f5d0adcd9414d28bef',
+      'reference' => '0ff11bf7c9cbf121d1a67db80fd9bbc6d88dd2bc',
     ),
     'nextcloud/lognormalizer' => 
     array (
@@ -343,12 +343,12 @@ private static $installed = array (
     ),
     'opis/closure' => 
     array (
-      'pretty_version' => '3.6.1',
-      'version' => '3.6.1.0',
+      'pretty_version' => '3.6.2',
+      'version' => '3.6.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5',
+      'reference' => '06e2ebd25f2869e54a306dda991f7db58066f7f6',
     ),
     'patchwork/jsqueeze' => 
     array (
