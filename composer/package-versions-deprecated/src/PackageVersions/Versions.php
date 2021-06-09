@@ -47,7 +47,7 @@ final class Versions
   'doctrine/lexer' => '1.2.1@e864bbf5904cb8f5bb334f99209b48018522f042',
   'egulias/email-validator' => '2.1.25@0dbf5d78455d4d6a41d186da50adc1122ec066f4',
   'fgrosse/phpasn1' => 'v2.2.0@d1978f7abd580f3fc33561e7f71d4c12c7531fad',
-  'giggsey/libphonenumber-for-php' => '8.12.20@743585979ef96f2be123518c0a58083cf678bd47',
+  'giggsey/libphonenumber-for-php' => '8.12.24@bbefdd7ff0bae7bf5a62fc9e8c939fb40dd6d638',
   'giggsey/locale' => '1.9@b07f1eace8072ccc61445ad8fbd493ff9d783043',
   'guzzlehttp/guzzle' => '7.2.0@0aa74dfb41ae110835923ef10a9d803a22d50e79',
   'guzzlehttp/promises' => '1.4.0@60d379c243457e073cff02bc323a2a86cb355631',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@ddd1d67f008b1d0169021f3ea6a5a3398691ab77',
+  'nextcloud/3rdparty' => 'dev-master@8a9382c005b7339feeb0c5b78906e335b520736e',
 );
 
     private function __construct()
