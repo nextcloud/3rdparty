@@ -64,7 +64,7 @@ final class Versions
   'microsoft/azure-storage-common' => '1.5.1@e5738035891546075bd369954e8af121d65ebd6d',
   'mtdowling/jmespath.php' => '2.6.0@42dae2cbd13154083ca6d70099692fef8ca84bfb',
   'nextcloud/lognormalizer' => 'v1.0.0@87445d69225c247aaff64643b1fc83c6d6df741f',
-  'nikic/php-parser' => 'v4.10.4@c6d052fc58cb876152f89f532b95a8d7907e7f0e',
+  'nikic/php-parser' => 'v4.10.5@4432ba399e47c66624bc73c8c0f811e5c109576f',
   'opis/closure' => '3.6.1@943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5',
   'patchwork/jsqueeze' => 'v2.0.5@693d64850eab2ce6a7c8f7cf547e1ab46e69d542',
   'pear/archive_tar' => '1.4.13@2b87b41178cc6d4ad3cba678a46a1cae49786011',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@8a9382c005b7339feeb0c5b78906e335b520736e',
+  'nextcloud/3rdparty' => 'dev-master@47ef0d3d299f471883102b7bd1712727b9a62d8b',
 );
 
     private function __construct()
