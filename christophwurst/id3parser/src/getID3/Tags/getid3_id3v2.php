@@ -1382,7 +1382,7 @@ class getid3_id3v2 extends getid3_handler
 				$parsedFrame['image_mime'] = '';
 				$imageinfo = array();
 				$imagechunkcheck = getid3_lib::GetDataImageSize($parsedFrame['data'], $imageinfo);
-				if (($imagechunkcheck[2] >= 1) && ($imagechunkcheck[2] <= 3)) {
+				if (is_array($imagechunkcheck) && ($imagechunkcheck[2] >= 1) && ($imagechunkcheck[2] <= 3)) {
 					$parsedFrame['image_mime']       = 'image/'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
 					if ($imagechunkcheck[0]) {
 						$parsedFrame['image_width']  = $imagechunkcheck[0];
