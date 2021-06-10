@@ -25,6 +25,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Webauthn\AttestationStatement\AndroidKeyAttestationStatementSupport;
 use Webauthn\AttestationStatement\AndroidSafetyNetAttestationStatementSupport;
 use Webauthn\AttestationStatement\AttestationObjectLoader;
@@ -88,17 +89,17 @@ class Server
     private $metadataStatementRepository;
 
     /**
-     * @var ClientInterface
+     * @var ClientInterface|null
      */
     private $httpClient;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $googleApiKey;
 
     /**
-     * @var RequestFactoryInterface
+     * @var RequestFactoryInterface|null
      */
     private $requestFactory;
 
@@ -108,7 +109,7 @@ class Server
     private $counterChecker;
 
     /**
-     * @var LoggerInterface|null
+     * @var LoggerInterface
      */
     private $logger;
 
@@ -117,12 +118,13 @@ class Server
      */
     private $securedRelyingPartyId = [];
 
-    public function __construct(PublicKeyCredentialRpEntity $relyingParty, PublicKeyCredentialSourceRepository $publicKeyCredentialSourceRepository, ?MetadataStatementRepository $metadataStatementRepository)
+    public function __construct(PublicKeyCredentialRpEntity $relyingParty, PublicKeyCredentialSourceRepository $publicKeyCredentialSourceRepository, ?MetadataStatementRepository $metadataStatementRepository = null)
     {
         if (null !== $metadataStatementRepository) {
             @trigger_error('The argument "metadataStatementRepository" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setMetadataStatementRepository".', E_USER_DEPRECATED);
         }
         $this->rpEntity = $relyingParty;
+        $this->logger = new NullLogger();
 
         $this->coseAlgorithmManagerFactory = new ManagerFactory();
         $this->coseAlgorithmManagerFactory->add('RS1', new RSA\RS1());
@@ -142,7 +144,7 @@ class Server
         $this->publicKeyCredentialSourceRepository = $publicKeyCredentialSourceRepository;
         $this->tokenBindingHandler = new IgnoreTokenBindingHandler();
         $this->extensionOutputCheckerHandler = new ExtensionOutputCheckerHandler();
-        $this->setMetadataStatementRepository($metadataStatementRepository);
+        $this->metadataStatementRepository = $metadataStatementRepository;
     }
 
     public function setMetadataStatementRepository(MetadataStatementRepository $metadataStatementRepository): self
@@ -262,9 +264,9 @@ class Server
             $this->publicKeyCredentialSourceRepository,
             $this->tokenBindingHandler,
             $this->extensionOutputCheckerHandler,
-            $this->metadataStatementRepository,
-            $this->logger
+            $this->metadataStatementRepository
         );
+        $authenticatorAttestationResponseValidator->setLogger($this->logger);
 
         return $authenticatorAttestationResponseValidator->check($authenticatorResponse, $publicKeyCredentialCreationOptions, $serverRequest, $this->securedRelyingPartyId);
     }
@@ -288,9 +290,9 @@ class Server
             $this->tokenBindingHandler,
             $this->extensionOutputCheckerHandler,
             $this->coseAlgorithmManagerFactory->create($this->selectedAlgorithms),
-            $this->counterChecker,
-            $this->logger
+            $this->counterChecker
         );
+        $authenticatorAssertionResponseValidator->setLogger($this->logger);
 
         return $authenticatorAssertionResponseValidator->check(
             $publicKeyCredential->getRawId(),
@@ -332,11 +334,13 @@ class Server
         $attestationStatementSupportManager->add(new FidoU2FAttestationStatementSupport());
         if (class_exists(RS256::class) && class_exists(JWKFactory::class)) {
             $androidSafetyNetAttestationStatementSupport = new AndroidSafetyNetAttestationStatementSupport();
-            $androidSafetyNetAttestationStatementSupport
-                ->enableApiVerification($this->httpClient, $this->googleApiKey, $this->requestFactory)
-                ->setLeeway(2000)
-                ->setMaxAge(60000)
-            ;
+            if (null !== $this->httpClient && null !== $this->googleApiKey && null !== $this->requestFactory) {
+                $androidSafetyNetAttestationStatementSupport
+                    ->enableApiVerification($this->httpClient, $this->googleApiKey, $this->requestFactory)
+                    ->setLeeway(2000)
+                    ->setMaxAge(60000)
+                ;
+            }
             $attestationStatementSupportManager->add($androidSafetyNetAttestationStatementSupport);
         }
         $attestationStatementSupportManager->add(new AndroidKeyAttestationStatementSupport());
