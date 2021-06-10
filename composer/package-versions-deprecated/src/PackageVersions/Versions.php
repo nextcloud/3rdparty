@@ -72,7 +72,7 @@ final class Versions
   'pear/pear-core-minimal' => 'v1.10.10@625a3c429d9b2c1546438679074cac1b089116a7',
   'pear/pear_exception' => 'v1.0.2@b14fbe2ddb0b9f94f5b24cf08783d599f776fff0',
   'php-ds/php-ds' => 'v1.3.0@b98396862fb8a13cbdbbaf4d18be28ee5c01ed3c',
-  'php-http/guzzle7-adapter' => '0.1.1@1967de656b9679a2a6a66d0e4e16fa99bbed1ad1',
+  'php-http/guzzle7-adapter' => '1.0.0@fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01',
   'php-http/httplug' => '2.2.0@191a0a1b41ed026b717421931f8d3bd2514ffbf9',
   'php-http/promise' => '1.1.0@4c4c1f9b7289a2ec57cde7f1e9762a5789506f88',
   'php-opencloud/openstack' => 'v3.1.0@7b0eeb63defe533fb802514af3c70855c45eaf1e',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@66c8387d49d488de71659890c3fe2d0c940c0f0f',
+  'nextcloud/3rdparty' => 'dev-master@ad908d967ece603882ae5da4745fcffe185b0d9a',
 );
 
     private function __construct()

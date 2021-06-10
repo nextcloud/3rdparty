@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '66c8387d49d488de71659890c3fe2d0c940c0f0f',
+        'reference' => 'ad908d967ece603882ae5da4745fcffe185b0d9a',
         'name' => 'nextcloud/3rdparty',
         'dev' => true,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '66c8387d49d488de71659890c3fe2d0c940c0f0f',
+            'reference' => 'ad908d967ece603882ae5da4745fcffe185b0d9a',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -389,12 +389,12 @@
             ),
         ),
         'php-http/guzzle7-adapter' => array(
-            'pretty_version' => '0.1.1',
-            'version' => '0.1.1.0',
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../php-http/guzzle7-adapter',
             'aliases' => array(),
-            'reference' => '1967de656b9679a2a6a66d0e4e16fa99bbed1ad1',
+            'reference' => 'fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01',
             'dev_requirement' => false,
         ),
         'php-http/httplug' => array(
