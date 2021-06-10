@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0ff11bf7c9cbf121d1a67db80fd9bbc6d88dd2bc',
+    'reference' => 'fa2370cb3b5ec72666bc8e8de2e6ec08e8cf96c5',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -49,12 +49,12 @@
     ),
     'christophwurst/id3parser' => 
     array (
-      'pretty_version' => 'v0.1.1',
-      'version' => '0.1.1.0',
+      'pretty_version' => 'v0.1.2',
+      'version' => '0.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c0e56c336bd6131c199827f928e5a9aec89aa4da',
+      'reference' => 'd7f5e9e7db69a24e3111a2033cbdf640f9456f2f',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0ff11bf7c9cbf121d1a67db80fd9bbc6d88dd2bc',
+      'reference' => 'fa2370cb3b5ec72666bc8e8de2e6ec08e8cf96c5',
     ),
     'nextcloud/lognormalizer' => 
     array (

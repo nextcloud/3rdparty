@@ -37,7 +37,7 @@ final class Versions
   'bantu/ini-get-wrapper' => 'v1.0.1@4770c7feab370c62e23db4f31c112b7c6d90aee2',
   'beberlei/assert' => 'v3.3.0@5367e3895976b49704ae671f75bc5f0ba1b986ab',
   'brick/math' => '0.9.1@283a40c901101e66de7061bd359252c013dcc43c',
-  'christophwurst/id3parser' => 'v0.1.1@c0e56c336bd6131c199827f928e5a9aec89aa4da',
+  'christophwurst/id3parser' => 'v0.1.2@d7f5e9e7db69a24e3111a2033cbdf640f9456f2f',
   'composer/package-versions-deprecated' => '1.11.99.1@7413f0b55a051e89485c5cb9f765fe24bb02a7b6',
   'deepdiver/zipstreamer' => '2.0.0@b8c59647ff34fb97e8937aefb2a65de2bc4b4755',
   'deepdiver1975/tarstreamer' => '2.0.0@ad48505d1ab54a8e94e6b1cc5297bbed72e956de',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@0ff11bf7c9cbf121d1a67db80fd9bbc6d88dd2bc',
+  'nextcloud/3rdparty' => 'dev-master@fa2370cb3b5ec72666bc8e8de2e6ec08e8cf96c5',
 );
 
     private function __construct()
