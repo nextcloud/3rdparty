@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '47ef0d3d299f471883102b7bd1712727b9a62d8b',
+    'reference' => '1d1f743b8adb5123016837f5d0adcd9414d28bef',
     'name' => 'nextcloud/3rdparty',
   ),
   'versions' => 
@@ -202,12 +202,12 @@
     ),
     'icewind/streams' => 
     array (
-      'pretty_version' => 'v0.7.2',
-      'version' => '0.7.2.0',
+      'pretty_version' => 'v0.7.4',
+      'version' => '0.7.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '77d750ccc654c0eda4a41fedb2dbd71053755790',
+      'reference' => '93bce472202d36d9808c30eaa52a1dc72b39e04c',
     ),
     'justinrainbow/json-schema' => 
     array (
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '47ef0d3d299f471883102b7bd1712727b9a62d8b',
+      'reference' => '1d1f743b8adb5123016837f5d0adcd9414d28bef',
     ),
     'nextcloud/lognormalizer' => 
     array (
