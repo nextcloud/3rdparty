@@ -2673,17 +2673,17 @@
         },
         {
             "name": "php-http/guzzle7-adapter",
-            "version": "0.1.1",
-            "version_normalized": "0.1.1.0",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/guzzle7-adapter.git",
-                "reference": "1967de656b9679a2a6a66d0e4e16fa99bbed1ad1"
+                "reference": "fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/guzzle7-adapter/zipball/1967de656b9679a2a6a66d0e4e16fa99bbed1ad1",
-                "reference": "1967de656b9679a2a6a66d0e4e16fa99bbed1ad1",
+                "url": "https://api.github.com/repos/php-http/guzzle7-adapter/zipball/fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01",
+                "reference": "fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01",
                 "shasum": ""
             },
             "require": {
@@ -2701,7 +2701,7 @@
                 "php-http/client-integration-tests": "^3.0",
                 "phpunit/phpunit": "^8.0|^9.3"
             },
-            "time": "2020-10-21T17:30:51+00:00",
+            "time": "2021-03-09T07:35:15+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2732,7 +2732,7 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/guzzle7-adapter/issues",
-                "source": "https://github.com/php-http/guzzle7-adapter/tree/0.1.1"
+                "source": "https://github.com/php-http/guzzle7-adapter/tree/1.0.0"
             },
             "install-path": "../php-http/guzzle7-adapter"
         },
