@@ -49,9 +49,9 @@ final class Versions
   'fgrosse/phpasn1' => 'v2.2.0@d1978f7abd580f3fc33561e7f71d4c12c7531fad',
   'giggsey/libphonenumber-for-php' => '8.12.24@bbefdd7ff0bae7bf5a62fc9e8c939fb40dd6d638',
   'giggsey/locale' => '1.9@b07f1eace8072ccc61445ad8fbd493ff9d783043',
-  'guzzlehttp/guzzle' => '7.2.0@0aa74dfb41ae110835923ef10a9d803a22d50e79',
-  'guzzlehttp/promises' => '1.4.0@60d379c243457e073cff02bc323a2a86cb355631',
-  'guzzlehttp/psr7' => '1.7.0@53330f47520498c0ae1f61f7e2c90f55690c06a3',
+  'guzzlehttp/guzzle' => '7.3.0@7008573787b430c1c1f650e3722d9bba59967628',
+  'guzzlehttp/promises' => '1.4.1@8e7d04f1f6450fef59366c399cfad4b9383aa30d',
+  'guzzlehttp/psr7' => '1.8.2@dc960a912984efb74d0a90222870c72c87f10c91',
   'guzzlehttp/uri-template' => 'v0.2.0@db46525d6d8fee71033b73cc07160f3e5271a8ce',
   'icewind/searchdav' => 'v2.0.0@c69806d900c2c9a5954bfabc80178d6eb0d63df4',
   'icewind/streams' => 'v0.7.4@93bce472202d36d9808c30eaa52a1dc72b39e04c',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@fa2370cb3b5ec72666bc8e8de2e6ec08e8cf96c5',
+  'nextcloud/3rdparty' => 'dev-master@66c8387d49d488de71659890c3fe2d0c940c0f0f',
 );
 
     private function __construct()
