@@ -5,18 +5,18 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'ad908d967ece603882ae5da4745fcffe185b0d9a',
+        'reference' => '8ad453e849bfce8d360f4cc4fa547214930f880e',
         'name' => 'nextcloud/3rdparty',
         'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.171.21',
-            'version' => '3.171.21.0',
+            'pretty_version' => '3.184.2',
+            'version' => '3.184.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
-            'reference' => '0455d92bb12d44f80db96a4e70861d186063e9e5',
+            'reference' => '78fe691ab466fecf195209672f6c00c5d4ed219a',
             'dev_requirement' => false,
         ),
         'bantu/ini-get-wrapper' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'ad908d967ece603882ae5da4745fcffe185b0d9a',
+            'reference' => '8ad453e849bfce8d360f4cc4fa547214930f880e',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
