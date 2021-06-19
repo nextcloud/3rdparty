@@ -33,7 +33,7 @@ final class Versions
      * @internal
      */
     const VERSIONS          = array (
-  'aws/aws-sdk-php' => '3.184.2@78fe691ab466fecf195209672f6c00c5d4ed219a',
+  'aws/aws-sdk-php' => '3.184.6@0b7187c96ced465d400ad9427157e05ddee68edc',
   'bantu/ini-get-wrapper' => 'v1.0.1@4770c7feab370c62e23db4f31c112b7c6d90aee2',
   'beberlei/assert' => 'v3.3.0@5367e3895976b49704ae671f75bc5f0ba1b986ab',
   'brick/math' => '0.9.1@283a40c901101e66de7061bd359252c013dcc43c',
@@ -62,7 +62,7 @@ final class Versions
   'league/uri-interfaces' => '2.2.0@667f150e589d65d79c89ffe662e426704f84224f',
   'microsoft/azure-storage-blob' => '1.5.2@2475330963372d519387cb8135d6a9cfd42272da',
   'microsoft/azure-storage-common' => '1.5.1@e5738035891546075bd369954e8af121d65ebd6d',
-  'mtdowling/jmespath.php' => '2.6.0@42dae2cbd13154083ca6d70099692fef8ca84bfb',
+  'mtdowling/jmespath.php' => '2.6.1@9b87907a81b87bc76d19a7fb2d61e61486ee9edb',
   'nextcloud/lognormalizer' => 'v1.0.0@87445d69225c247aaff64643b1fc83c6d6df741f',
   'nikic/php-parser' => 'v4.10.5@4432ba399e47c66624bc73c8c0f811e5c109576f',
   'opis/closure' => '3.6.2@06e2ebd25f2869e54a306dda991f7db58066f7f6',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@f88f337fc7129e75a49ca4124c8432b546144f57',
+  'nextcloud/3rdparty' => 'dev-master@e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
 );
 
     private function __construct()
