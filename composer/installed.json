@@ -1520,17 +1520,17 @@
         },
         {
             "name": "icewind/streams",
-            "version": "v0.7.4",
-            "version_normalized": "0.7.4.0",
+            "version": "v0.7.5",
+            "version_normalized": "0.7.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "93bce472202d36d9808c30eaa52a1dc72b39e04c"
+                "reference": "0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/93bce472202d36d9808c30eaa52a1dc72b39e04c",
-                "reference": "93bce472202d36d9808c30eaa52a1dc72b39e04c",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2",
+                "reference": "0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1541,7 @@
                 "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "^9"
             },
-            "time": "2021-03-12T15:48:22+00:00",
+            "time": "2021-06-14T14:02:48+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1562,7 +1562,7 @@
             "description": "A set of generic stream wrappers",
             "support": {
                 "issues": "https://github.com/icewind1991/Streams/issues",
-                "source": "https://github.com/icewind1991/Streams/tree/v0.7.4"
+                "source": "https://github.com/icewind1991/Streams/tree/v0.7.5"
             },
             "install-path": "../icewind/streams"
         },
