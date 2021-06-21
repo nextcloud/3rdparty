@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'ace54d905eb58dce4866c6b2a5ad80382a2e9019',
+        'reference' => 'fdd5a6a23827e127577a93914eaf6282839201c2',
         'name' => 'nextcloud/3rdparty',
         'dev' => true,
     ),
@@ -200,12 +200,12 @@
             'dev_requirement' => false,
         ),
         'icewind/streams' => array(
-            'pretty_version' => 'v0.7.4',
-            'version' => '0.7.4.0',
+            'pretty_version' => 'v0.7.5',
+            'version' => '0.7.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../icewind/streams',
             'aliases' => array(),
-            'reference' => '93bce472202d36d9808c30eaa52a1dc72b39e04c',
+            'reference' => '0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2',
             'dev_requirement' => false,
         ),
         'justinrainbow/json-schema' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'ace54d905eb58dce4866c6b2a5ad80382a2e9019',
+            'reference' => 'fdd5a6a23827e127577a93914eaf6282839201c2',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
