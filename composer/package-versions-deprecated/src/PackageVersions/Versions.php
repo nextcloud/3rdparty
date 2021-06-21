@@ -76,7 +76,7 @@ final class Versions
   'php-http/httplug' => '2.2.0@191a0a1b41ed026b717421931f8d3bd2514ffbf9',
   'php-http/promise' => '1.1.0@4c4c1f9b7289a2ec57cde7f1e9762a5789506f88',
   'php-opencloud/openstack' => 'v3.1.0@7b0eeb63defe533fb802514af3c70855c45eaf1e',
-  'phpseclib/phpseclib' => '2.0.31@233a920cb38636a43b18d428f9a8db1f0a1a08f4',
+  'phpseclib/phpseclib' => '2.0.32@f5c4c19880d45d0be3e7d24ae8ac434844a898cd',
   'pimple/pimple' => 'v3.4.0@86406047271859ffc13424a048541f4531f53601',
   'psr/container' => '1.1.1@8622567409010282b7aeebe4bb841fe98b58dcaf',
   'psr/event-dispatcher' => '1.0.0@dbefd12671e8a14ec7f180cab83036ed26714bb0',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@8ad453e849bfce8d360f4cc4fa547214930f880e',
+  'nextcloud/3rdparty' => 'dev-master@ace54d905eb58dce4866c6b2a5ad80382a2e9019',
 );
 
     private function __construct()

@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '8ad453e849bfce8d360f4cc4fa547214930f880e',
+        'reference' => 'ace54d905eb58dce4866c6b2a5ad80382a2e9019',
         'name' => 'nextcloud/3rdparty',
         'dev' => true,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '8ad453e849bfce8d360f4cc4fa547214930f880e',
+            'reference' => 'ace54d905eb58dce4866c6b2a5ad80382a2e9019',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -425,12 +425,12 @@
             'dev_requirement' => false,
         ),
         'phpseclib/phpseclib' => array(
-            'pretty_version' => '2.0.31',
-            'version' => '2.0.31.0',
+            'pretty_version' => '2.0.32',
+            'version' => '2.0.32.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpseclib/phpseclib',
             'aliases' => array(),
-            'reference' => '233a920cb38636a43b18d428f9a8db1f0a1a08f4',
+            'reference' => 'f5c4c19880d45d0be3e7d24ae8ac434844a898cd',
             'dev_requirement' => false,
         ),
         'pimple/pimple' => array(
