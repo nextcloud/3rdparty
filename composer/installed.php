@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'fdd5a6a23827e127577a93914eaf6282839201c2',
+        'reference' => 'c43adc622e03fe222662397916edb210f5ad18d3',
         'name' => 'nextcloud/3rdparty',
         'dev' => true,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'fdd5a6a23827e127577a93914eaf6282839201c2',
+            'reference' => 'c43adc622e03fe222662397916edb210f5ad18d3',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -671,12 +671,12 @@
             'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(
-            'pretty_version' => 'v6.2.5',
-            'version' => '6.2.5.0',
+            'pretty_version' => 'v6.2.7',
+            'version' => '6.2.7.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../swiftmailer/swiftmailer',
             'aliases' => array(),
-            'reference' => '698a6a9f54d7eb321274de3ad19863802c879fb7',
+            'reference' => '15f7faf8508e04471f666633addacf54c0ab5933',
             'dev_requirement' => false,
         ),
         'symfony/console' => array(
