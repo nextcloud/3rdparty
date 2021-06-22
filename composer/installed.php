@@ -5,18 +5,18 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'f88f337fc7129e75a49ca4124c8432b546144f57',
+        'reference' => 'e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
         'name' => 'nextcloud/3rdparty',
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.184.2',
-            'version' => '3.184.2.0',
+            'pretty_version' => '3.184.6',
+            'version' => '3.184.6.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
-            'reference' => '78fe691ab466fecf195209672f6c00c5d4ed219a',
+            'reference' => '0b7187c96ced465d400ad9427157e05ddee68edc',
             'dev_requirement' => false,
         ),
         'bantu/ini-get-wrapper' => array(
@@ -272,12 +272,12 @@
             'dev_requirement' => false,
         ),
         'mtdowling/jmespath.php' => array(
-            'pretty_version' => '2.6.0',
-            'version' => '2.6.0.0',
+            'pretty_version' => '2.6.1',
+            'version' => '2.6.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mtdowling/jmespath.php',
             'aliases' => array(),
-            'reference' => '42dae2cbd13154083ca6d70099692fef8ca84bfb',
+            'reference' => '9b87907a81b87bc76d19a7fb2d61e61486ee9edb',
             'dev_requirement' => false,
         ),
         'nextcloud/3rdparty' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'f88f337fc7129e75a49ca4124c8432b546144f57',
+            'reference' => 'e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
