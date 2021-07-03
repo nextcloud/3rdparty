@@ -56,7 +56,7 @@ final class Versions
   'icewind/searchdav' => 'v2.0.0@c69806d900c2c9a5954bfabc80178d6eb0d63df4',
   'icewind/streams' => 'v0.7.5@0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2',
   'justinrainbow/json-schema' => '5.2.10@2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b',
-  'league/flysystem' => '1.1.3@9be3b16c877d477357c015cec057548cf9b2a14a',
+  'league/flysystem' => '1.1.4@f3ad69181b8afed2c9edf7be5a2918144ff4ea32',
   'league/mime-type-detection' => '1.7.0@3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
   'league/uri' => '6.4.0@09da64118eaf4c5d52f9923a1e6a5be1da52fd9a',
   'league/uri-interfaces' => '2.2.0@667f150e589d65d79c89ffe662e426704f84224f',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.1@eea6fae63ff5c81bf98c115b1be5f38a69682c16',
   'web-auth/metadata-service' => 'v3.3.1@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.1@e411527a41c1013512fccdfce61681eb36484c77',
-  'nextcloud/3rdparty' => 'dev-master@e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
+  'nextcloud/3rdparty' => 'dev-master@557bcea1bcccc0dbbb66305c98d208b1135b6096',
 );
 
     private function __construct()
