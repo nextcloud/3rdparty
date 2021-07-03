@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
+        'reference' => '557bcea1bcccc0dbbb66305c98d208b1135b6096',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -218,12 +218,12 @@
             'dev_requirement' => false,
         ),
         'league/flysystem' => array(
-            'pretty_version' => '1.1.3',
-            'version' => '1.1.3.0',
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/flysystem',
             'aliases' => array(),
-            'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
+            'reference' => 'f3ad69181b8afed2c9edf7be5a2918144ff4ea32',
             'dev_requirement' => false,
         ),
         'league/mime-type-detection' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
+            'reference' => '557bcea1bcccc0dbbb66305c98d208b1135b6096',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
