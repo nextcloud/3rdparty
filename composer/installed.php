@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
+        'reference' => '9719b46b7c61239adae3649751bbc2d510e9700a',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'e6a054be58a6c8b2fda92fbc7fbfd898f26fa0d2',
+            'reference' => '9719b46b7c61239adae3649751bbc2d510e9700a',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -320,15 +320,6 @@
             'install_path' => __DIR__ . '/../opis/closure',
             'aliases' => array(),
             'reference' => '06e2ebd25f2869e54a306dda991f7db58066f7f6',
-            'dev_requirement' => false,
-        ),
-        'patchwork/jsqueeze' => array(
-            'pretty_version' => 'v2.0.5',
-            'version' => '2.0.5.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../patchwork/jsqueeze',
-            'aliases' => array(),
-            'reference' => '693d64850eab2ce6a7c8f7cf547e1ab46e69d542',
             'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(

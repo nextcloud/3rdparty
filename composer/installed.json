@@ -2317,57 +2317,6 @@
             "install-path": "../opis/closure"
         },
         {
-            "name": "patchwork/jsqueeze",
-            "version": "v2.0.5",
-            "version_normalized": "2.0.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tchwork/jsqueeze.git",
-                "reference": "693d64850eab2ce6a7c8f7cf547e1ab46e69d542"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/jsqueeze/zipball/693d64850eab2ce6a7c8f7cf547e1ab46e69d542",
-                "reference": "693d64850eab2ce6a7c8f7cf547e1ab46e69d542",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "time": "2016-04-19T09:28:22+00:00",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Patchwork\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "(Apache-2.0 or GPL-2.0)"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                }
-            ],
-            "description": "Efficient JavaScript minification in PHP",
-            "homepage": "https://github.com/tchwork/jsqueeze",
-            "keywords": [
-                "compression",
-                "javascript",
-                "minification"
-            ],
-            "abandoned": true,
-            "install-path": "../patchwork/jsqueeze"
-        },
-        {
             "name": "pear/archive_tar",
             "version": "1.4.13",
             "version_normalized": "1.4.13.0",
@@ -6290,6 +6239,6 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }
