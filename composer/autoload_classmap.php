@@ -1868,7 +1868,6 @@ return array(
     'PackageVersions\\FallbackVersions' => $vendorDir . '/composer/package-versions-deprecated/src/PackageVersions/FallbackVersions.php',
     'PackageVersions\\Installer' => $vendorDir . '/composer/package-versions-deprecated/src/PackageVersions/Installer.php',
     'PackageVersions\\Versions' => $vendorDir . '/composer/package-versions-deprecated/src/PackageVersions/Versions.php',
-    'Patchwork\\JSqueeze' => $vendorDir . '/patchwork/jsqueeze/src/JSqueeze.php',
     'PhpParser\\Builder' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder.php',
     'PhpParser\\BuilderFactory' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderFactory.php',
     'PhpParser\\BuilderHelpers' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderHelpers.php',
