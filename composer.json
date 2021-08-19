@@ -45,7 +45,7 @@
 		"symfony/event-dispatcher-contracts": "1.1.7",
 		"symfony/process": "4.4.10",
 		"symfony/routing": "4.4.10",
-		"symfony/translation": "4.4.10",
+		"symfony/translation": "4.4.27",
 		"php-http/guzzle6-adapter": "^2.0",
 		"web-auth/webauthn-lib": "^3.1"
 	},
