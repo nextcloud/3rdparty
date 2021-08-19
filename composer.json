@@ -49,7 +49,7 @@
 		"symfony/polyfill-intl-grapheme": "^1.20",
 		"symfony/process": "4.4.19",
 		"symfony/routing": "4.4.19",
-		"symfony/translation": "4.4.19",
+		"symfony/translation": "4.4.27",
 		"web-auth/webauthn-lib": "^3.1",
 		"php-ds/php-ds": "^1.3",
 		"opis/closure": "^3.6"
