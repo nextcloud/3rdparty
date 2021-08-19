@@ -8,58 +8,42 @@ updates:
     time: "03:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
+
+- package-ecosystem: composer
+  directory: "/"
+  target-branch: stable22
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
   ignore:
-  - dependency-name: league/flysystem
-    versions:
-    - ">= 2.a, < 3"
-  - dependency-name: phpseclib/phpseclib
-    versions:
-    - ">= 3.a, < 4"
-  - dependency-name: symfony/console
-    versions:
-    - ">= 5.a, < 6"
-  - dependency-name: symfony/process
-    versions:
-    - ">= 5.a, < 6"
-  - dependency-name: symfony/routing
-    versions:
-    - ">= 5.a, < 6"
-  - dependency-name: symfony/translation
-    versions:
-    - ">= 5.a, < 6"
-  - dependency-name: web-auth/webauthn-lib
-    versions:
-    - 3.3.2
-    - 3.3.4
-  - dependency-name: icewind/streams
-    versions:
-    - 0.7.3
-  - dependency-name: pimple/pimple
-    versions:
-    - 3.4.0
-  - dependency-name: swiftmailer/swiftmailer
-    versions:
-    - 6.2.6
-  - dependency-name: symfony/translation
-    versions:
-    - 4.4.19
-    - 4.4.20
-  - dependency-name: symfony/process
-    versions:
-    - 4.4.19
-    - 4.4.20
-  - dependency-name: symfony/console
-    versions:
-    - 4.4.19
-    - 4.4.20
-  - dependency-name: symfony/routing
-    versions:
-    - 4.4.19
-    - 4.4.20
-  - dependency-name: giggsey/libphonenumber-for-php
-    versions:
-    - 8.12.17
-    - 8.12.18
-  - dependency-name: symfony/event-dispatcher
-    versions:
-    - 4.4.19
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
+
+- package-ecosystem: composer
+  directory: "/"
+  target-branch: stable21
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
+
+- package-ecosystem: composer
+  directory: "/"
+  target-branch: stable20
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
