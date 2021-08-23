@@ -17,6 +17,7 @@ use Assert\Assertion;
 use function count;
 use function in_array;
 use InvalidArgumentException;
+use function is_string;
 use LogicException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -169,7 +170,7 @@ class AuthenticatorAttestationResponseValidator
             Assertion::true(hash_equals($rpIdHash, $attestationObject->getAuthData()->getRpIdHash()), 'rpId hash mismatch.');
 
             /* @see 7.1.10 */
-            //Nothing to do. The verification of the bit is done during the authenticator data loading
+            Assertion::true($attestationObject->getAuthData()->isUserPresent(), 'User was not present');
             /* @see 7.1.11 */
             if (AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_REQUIRED === $publicKeyCredentialCreationOptions->getAuthenticatorSelection()->getUserVerification()) {
                 Assertion::true($attestationObject->getAuthData()->isUserVerified(), 'User authentication required.');
@@ -369,14 +370,15 @@ class AuthenticatorAttestationResponseValidator
 
     private function getFacetId(string $rpId, AuthenticationExtensionsClientInputs $authenticationExtensionsClientInputs, ?AuthenticationExtensionsClientOutputs $authenticationExtensionsClientOutputs): string
     {
-        switch (true) {
-            case null === $authenticationExtensionsClientOutputs:
-            case !$authenticationExtensionsClientOutputs->has('appid'):
-            case true !== $authenticationExtensionsClientOutputs->get('appid'):
-            case !$authenticationExtensionsClientInputs->has('appid'):
-                return $rpId;
-            default:
-                return $authenticationExtensionsClientInputs->get('appid');
+        if (null === $authenticationExtensionsClientOutputs || !$authenticationExtensionsClientInputs->has('appid') || !$authenticationExtensionsClientOutputs->has('appid')) {
+            return $rpId;
         }
+        $appId = $authenticationExtensionsClientInputs->get('appid')->value();
+        $wasUsed = $authenticationExtensionsClientOutputs->get('appid')->value();
+        if (!is_string($appId) || true !== $wasUsed) {
+            return $rpId;
+        }
+
+        return $appId;
     }
 }
