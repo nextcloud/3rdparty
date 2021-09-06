@@ -76,9 +76,14 @@ class PublicKeyCredentialSource implements JsonSerializable
     protected $counter;
 
     /**
+     * @var array|null
+     */
+    protected $otherUI;
+
+    /**
      * @param string[] $transports
      */
-    public function __construct(string $publicKeyCredentialId, string $type, array $transports, string $attestationType, TrustPath $trustPath, UuidInterface $aaguid, string $credentialPublicKey, string $userHandle, int $counter)
+    public function __construct(string $publicKeyCredentialId, string $type, array $transports, string $attestationType, TrustPath $trustPath, UuidInterface $aaguid, string $credentialPublicKey, string $userHandle, int $counter, ?array $otherUI = null)
     {
         $this->publicKeyCredentialId = $publicKeyCredentialId;
         $this->type = $type;
@@ -89,6 +94,7 @@ class PublicKeyCredentialSource implements JsonSerializable
         $this->counter = $counter;
         $this->attestationType = $attestationType;
         $this->trustPath = $trustPath;
+        $this->otherUI = $otherUI;
     }
 
     public function getPublicKeyCredentialId(): string
@@ -162,6 +168,18 @@ class PublicKeyCredentialSource implements JsonSerializable
         $this->counter = $counter;
     }
 
+    public function getOtherUI(): ?array
+    {
+        return $this->otherUI;
+    }
+
+    public function setOtherUI(?array $otherUI): self
+    {
+        $this->otherUI = $otherUI;
+
+        return $this;
+    }
+
     /**
      * @param mixed[] $data
      */
@@ -169,6 +187,9 @@ class PublicKeyCredentialSource implements JsonSerializable
     {
         $keys = array_keys(get_class_vars(self::class));
         foreach ($keys as $key) {
+            if ('otherUI' === $key) {
+                continue;
+            }
             Assertion::keyExists($data, $key, sprintf('The parameter "%s" is missing', $key));
         }
         switch (true) {
@@ -190,7 +211,8 @@ class PublicKeyCredentialSource implements JsonSerializable
                 $uuid,
                 Base64Url::decode($data['credentialPublicKey']),
                 Base64Url::decode($data['userHandle']),
-                $data['counter']
+                $data['counter'],
+                $data['otherUI'] ?? null
             );
         } catch (Throwable $throwable) {
             throw new InvalidArgumentException('Unable to load the data', $throwable->getCode(), $throwable);
@@ -212,6 +234,7 @@ class PublicKeyCredentialSource implements JsonSerializable
             'credentialPublicKey' => Base64Url::encode($this->credentialPublicKey),
             'userHandle' => Base64Url::encode($this->userHandle),
             'counter' => $this->counter,
+            'otherUI' => $this->otherUI,
         ];
     }
 }
