@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'd1bf85a7c711a101a13f65443216d76426e804fc',
+        'reference' => '1f66cef37b83a89a902e595e79e05c4eafbc855e',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -268,7 +268,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'd1bf85a7c711a101a13f65443216d76426e804fc',
+            'reference' => '1f66cef37b83a89a902e595e79e05c4eafbc855e',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -305,12 +305,12 @@
             'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(
-            'pretty_version' => '1.4.13',
-            'version' => '1.4.13.0',
+            'pretty_version' => '1.4.14',
+            'version' => '1.4.14.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/archive_tar',
             'aliases' => array(),
-            'reference' => '2b87b41178cc6d4ad3cba678a46a1cae49786011',
+            'reference' => '4d761c5334c790e45ef3245f0864b8955c562caa',
             'dev_requirement' => false,
         ),
         'pear/console_getopt' => array(
