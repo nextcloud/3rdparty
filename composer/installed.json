@@ -2359,17 +2359,17 @@
         },
         {
             "name": "pear/archive_tar",
-            "version": "1.4.12",
-            "version_normalized": "1.4.12.0",
+            "version": "1.4.14",
+            "version_normalized": "1.4.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Archive_Tar.git",
-                "reference": "19bb8e95490d3e3ad92fcac95500ca80bdcc7495"
+                "reference": "4d761c5334c790e45ef3245f0864b8955c562caa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/19bb8e95490d3e3ad92fcac95500ca80bdcc7495",
-                "reference": "19bb8e95490d3e3ad92fcac95500ca80bdcc7495",
+                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/4d761c5334c790e45ef3245f0864b8955c562caa",
+                "reference": "4d761c5334c790e45ef3245f0864b8955c562caa",
                 "shasum": ""
             },
             "require": {
@@ -2384,7 +2384,7 @@
                 "ext-xz": "Lzma2 compression support.",
                 "ext-zlib": "Gzip compression support."
             },
-            "time": "2021-01-18T19:32:54+00:00",
+            "time": "2021-07-20T13:53:39+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -6231,6 +6231,6 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }
