@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '92f18e31c4e877ee7f7088f7e10977ac3d67e9e2',
+        'reference' => 'd1bf85a7c711a101a13f65443216d76426e804fc',
         'name' => 'nextcloud/3rdparty',
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -217,24 +217,6 @@
             'reference' => '2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b',
             'dev_requirement' => false,
         ),
-        'league/flysystem' => array(
-            'pretty_version' => '1.1.3',
-            'version' => '1.1.3.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../league/flysystem',
-            'aliases' => array(),
-            'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
-            'dev_requirement' => false,
-        ),
-        'league/mime-type-detection' => array(
-            'pretty_version' => '1.7.0',
-            'version' => '1.7.0.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../league/mime-type-detection',
-            'aliases' => array(),
-            'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
-            'dev_requirement' => false,
-        ),
         'league/uri' => array(
             'pretty_version' => '6.4.0',
             'version' => '6.4.0.0',
@@ -286,7 +268,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '92f18e31c4e877ee7f7088f7e10977ac3d67e9e2',
+            'reference' => 'd1bf85a7c711a101a13f65443216d76426e804fc',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
