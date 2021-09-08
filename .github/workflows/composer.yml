@@ -19,7 +19,6 @@ jobs:
       uses: shivammathur/setup-php@master
       with:
         php-version: 7.4
-        tools: composer:v1
         coverage: none
     - name: Update composer
       run: sudo composer self-update && composer --version
@@ -27,4 +26,5 @@ jobs:
       run: composer run vendor
     - name: Check vendor changes
       run: |
-        bash -c "[[ ! \"`git status --porcelain `\" ]] || ( echo 'Uncommited vendor changes' && git status && git diff && exit 1 )"
+        bash -c "[[ ! \"`git status --porcelain . :!composer/installed.json :!composer/installed.php :!composer/package-versions-deprecated/src/PackageVersions/Versions.php `\" ]] || ( echo 'Uncommited vendor changes' && git status && git diff && exit 1 )"
+
