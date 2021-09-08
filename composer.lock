@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5dea2d7bd1867cc25b73974988330b2",
+    "content-hash": "9c6212de31a4d05911f32fb1fabb3db8",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -391,6 +391,10 @@
                 "docblock",
                 "parser"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/annotations/issues",
+                "source": "https://github.com/doctrine/annotations/tree/master"
+            },
             "time": "2017-12-06T07:11:42+00:00"
         },
         {
@@ -533,6 +537,10 @@
                 "collections",
                 "iterator"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/collections/issues",
+                "source": "https://github.com/doctrine/collections/tree/master"
+            },
             "time": "2017-07-22T10:37:32+00:00"
         },
         {
@@ -614,6 +622,10 @@
                 "doctrine",
                 "php"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/common/issues",
+                "source": "https://github.com/doctrine/common/tree/master"
+            },
             "time": "2018-11-21T01:24:55+00:00"
         },
         {
@@ -837,6 +849,10 @@
                 "singularize",
                 "string"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/inflector/issues",
+                "source": "https://github.com/doctrine/inflector/tree/master"
+            },
             "time": "2018-01-09T20:05:19+00:00"
         },
         {
@@ -981,6 +997,10 @@
                 "orm",
                 "persistence"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/persistence/issues",
+                "source": "https://github.com/doctrine/persistence/tree/master"
+            },
             "time": "2018-11-21T00:33:13+00:00"
         },
         {
@@ -1056,6 +1076,10 @@
             "keywords": [
                 "reflection"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/reflection/issues",
+                "source": "https://github.com/doctrine/reflection/tree/master"
+            },
             "abandoned": "roave/better-reflection",
             "time": "2018-06-14T14:45:07+00:00"
         },
@@ -1424,6 +1448,10 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "support": {
+                "issues": "https://github.com/guzzle/RingPHP/issues",
+                "source": "https://github.com/guzzle/RingPHP/tree/master"
+            },
             "abandoned": true,
             "time": "2015-05-20T03:37:09+00:00"
         },
@@ -1475,6 +1503,10 @@
                 "Guzzle",
                 "stream"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/streams/issues",
+                "source": "https://github.com/guzzle/streams/tree/master"
+            },
             "abandoned": true,
             "time": "2014-10-12T19:18:40+00:00"
         },
@@ -3486,6 +3518,10 @@
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "support": {
+                "issues": "https://github.com/reactphp/promise/issues",
+                "source": "https://github.com/reactphp/promise/tree/master"
+            },
             "time": "2015-07-03T13:48:55+00:00"
         },
         {
@@ -5386,5 +5422,5 @@
     "platform-overrides": {
         "php": "7.2.0"
     },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }
