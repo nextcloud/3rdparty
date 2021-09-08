@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '7d96defa8d1e38ec419647272a9b00032fbd34d2',
+        'reference' => '28d59882293145ed2e3719f4af2fe2dbc83e6513',
         'name' => 'nextcloud/3rdparty',
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -331,7 +331,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '7d96defa8d1e38ec419647272a9b00032fbd34d2',
+            'reference' => '28d59882293145ed2e3719f4af2fe2dbc83e6513',
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
