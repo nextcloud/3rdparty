@@ -5785,6 +5785,6 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }
