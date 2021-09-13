@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -20,9 +20,13 @@ use CBOR\Tag\TagObjectManager;
 use Cose\Algorithm\Manager;
 use Cose\Algorithm\Signature\Signature;
 use Cose\Key\Key;
+use function count;
+use function in_array;
+use function is_string;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use function Safe\parse_url;
 use Throwable;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientInputs;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientOutputs;
@@ -69,6 +73,12 @@ class AuthenticatorAssertionResponseValidator
 
     public function __construct(PublicKeyCredentialSourceRepository $publicKeyCredentialSourceRepository, TokenBindingHandler $tokenBindingHandler, ExtensionOutputCheckerHandler $extensionOutputCheckerHandler, Manager $algorithmManager, ?CounterChecker $counterChecker = null, ?LoggerInterface $logger = null)
     {
+        if (null !== $logger) {
+            @trigger_error('The argument "logger" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setLogger".', E_USER_DEPRECATED);
+        }
+        if (null !== $counterChecker) {
+            @trigger_error('The argument "counterChecker" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setCounterChecker".', E_USER_DEPRECATED);
+        }
         $this->publicKeyCredentialSourceRepository = $publicKeyCredentialSourceRepository;
         $this->decoder = new Decoder(new TagObjectManager(), new OtherObjectManager());
         $this->tokenBindingHandler = $tokenBindingHandler;
@@ -81,7 +91,7 @@ class AuthenticatorAssertionResponseValidator
     /**
      * @see https://www.w3.org/TR/webauthn/#verifying-assertion
      */
-    public function check(string $credentialId, AuthenticatorAssertionResponse $authenticatorAssertionResponse, PublicKeyCredentialRequestOptions $publicKeyCredentialRequestOptions, ServerRequestInterface $request, ?string $userHandle): PublicKeyCredentialSource
+    public function check(string $credentialId, AuthenticatorAssertionResponse $authenticatorAssertionResponse, PublicKeyCredentialRequestOptions $publicKeyCredentialRequestOptions, ServerRequestInterface $request, ?string $userHandle, array $securedRelyingPartyId = []): PublicKeyCredentialSource
     {
         try {
             $this->logger->info('Checking the authenticator assertion response', [
@@ -92,7 +102,7 @@ class AuthenticatorAssertionResponseValidator
                 'userHandle' => $userHandle,
             ]);
             /* @see 7.2.1 */
-            if (0 !== \count($publicKeyCredentialRequestOptions->getAllowCredentials())) {
+            if (0 !== count($publicKeyCredentialRequestOptions->getAllowCredentials())) {
                 Assertion::true($this->isCredentialIdAllowed($credentialId, $publicKeyCredentialRequestOptions->getAllowCredentials()), 'The credential ID is not allowed.');
             }
 
@@ -138,14 +148,17 @@ class AuthenticatorAssertionResponseValidator
 
             /** @see 7.2.9 */
             $rpId = $publicKeyCredentialRequestOptions->getRpId() ?? $request->getUri()->getHost();
-            $rpIdLength = mb_strlen($rpId);
+            $facetId = $this->getFacetId($rpId, $publicKeyCredentialRequestOptions->getExtensions(), $authenticatorAssertionResponse->getAuthenticatorData()->getExtensions());
             $parsedRelyingPartyId = parse_url($C->getOrigin());
             Assertion::isArray($parsedRelyingPartyId, 'Invalid origin');
-            $scheme = $parsedRelyingPartyId['scheme'] ?? '';
-            Assertion::eq('https', $scheme, 'Invalid scheme. HTTPS required.');
+            if (!in_array($facetId, $securedRelyingPartyId, true)) {
+                $scheme = $parsedRelyingPartyId['scheme'] ?? '';
+                Assertion::eq('https', $scheme, 'Invalid scheme. HTTPS required.');
+            }
             $clientDataRpId = $parsedRelyingPartyId['host'] ?? '';
             Assertion::notEmpty($clientDataRpId, 'Invalid origin rpId.');
-            Assertion::eq(mb_substr($clientDataRpId, -$rpIdLength), $rpId, 'rpId mismatch.');
+            $rpIdLength = mb_strlen($facetId);
+            Assertion::eq(mb_substr('.'.$clientDataRpId, -($rpIdLength + 1)), '.'.$facetId, 'rpId mismatch.');
 
             /* @see 7.2.10 */
             if (null !== $C->getTokenBinding()) {
@@ -153,14 +166,13 @@ class AuthenticatorAssertionResponseValidator
             }
 
             /** @see 7.2.11 */
-            $facetId = $this->getFacetId($rpId, $publicKeyCredentialRequestOptions->getExtensions(), $authenticatorAssertionResponse->getAuthenticatorData()->getExtensions());
-            $rpIdHash = hash('sha256', $rpId, true);
+            $rpIdHash = hash('sha256', $facetId, true);
             Assertion::true(hash_equals($rpIdHash, $authenticatorAssertionResponse->getAuthenticatorData()->getRpIdHash()), 'rpId hash mismatch.');
 
             /* @see 7.2.12 */
+            Assertion::true($authenticatorAssertionResponse->getAuthenticatorData()->isUserPresent(), 'User was not present');
             /* @see 7.2.13 */
             if (AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_REQUIRED === $publicKeyCredentialRequestOptions->getUserVerification()) {
-                Assertion::true($authenticatorAssertionResponse->getAuthenticatorData()->isUserPresent(), 'User was not present');
                 Assertion::true($authenticatorAssertionResponse->getAuthenticatorData()->isUserVerified(), 'User authentication required.');
             }
 
@@ -187,11 +199,11 @@ class AuthenticatorAssertionResponseValidator
 
             /* @see 7.2.17 */
             $storedCounter = $publicKeyCredentialSource->getCounter();
-            $currentCounter = $authenticatorAssertionResponse->getAuthenticatorData()->getSignCount();
-            if (0 !== $currentCounter || 0 !== $storedCounter) {
-                $this->counterChecker->check($publicKeyCredentialSource, $currentCounter);
+            $responseCounter = $authenticatorAssertionResponse->getAuthenticatorData()->getSignCount();
+            if (0 !== $responseCounter || 0 !== $storedCounter) {
+                $this->counterChecker->check($publicKeyCredentialSource, $responseCounter);
             }
-            $publicKeyCredentialSource->setCounter($currentCounter);
+            $publicKeyCredentialSource->setCounter($responseCounter);
             $this->publicKeyCredentialSourceRepository->saveCredentialSource($publicKeyCredentialSource);
 
             /* @see 7.2.18 */
@@ -206,6 +218,20 @@ class AuthenticatorAssertionResponseValidator
             ]);
             throw $throwable;
         }
+    }
+
+    public function setLogger(LoggerInterface $logger): self
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
+
+    public function setCounterChecker(CounterChecker $counterChecker): self
+    {
+        $this->counterChecker = $counterChecker;
+
+        return $this;
     }
 
     /**
@@ -224,17 +250,15 @@ class AuthenticatorAssertionResponseValidator
 
     private function getFacetId(string $rpId, AuthenticationExtensionsClientInputs $authenticationExtensionsClientInputs, ?AuthenticationExtensionsClientOutputs $authenticationExtensionsClientOutputs): string
     {
-        switch (true) {
-            case !$authenticationExtensionsClientInputs->has('appid'):
-                return $rpId;
-            case null === $authenticationExtensionsClientOutputs:
-                return $rpId;
-            case !$authenticationExtensionsClientOutputs->has('appid'):
-                return $rpId;
-            case true !== $authenticationExtensionsClientOutputs->get('appid'):
-                return $rpId;
-            default:
-                return $authenticationExtensionsClientInputs->get('appid');
+        if (null === $authenticationExtensionsClientOutputs || !$authenticationExtensionsClientInputs->has('appid') || !$authenticationExtensionsClientOutputs->has('appid')) {
+            return $rpId;
         }
+        $appId = $authenticationExtensionsClientInputs->get('appid')->value();
+        $wasUsed = $authenticationExtensionsClientOutputs->get('appid')->value();
+        if (!is_string($appId) || true !== $wasUsed) {
+            return $rpId;
+        }
+
+        return $appId;
     }
 }

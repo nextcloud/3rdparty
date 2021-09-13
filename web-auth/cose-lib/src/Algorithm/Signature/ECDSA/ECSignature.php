@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -13,7 +13,13 @@ declare(strict_types=1);
 
 namespace Cose\Algorithm\Signature\ECDSA;
 
+use function bin2hex;
+use function dechex;
+use function hexdec;
 use InvalidArgumentException;
+use function mb_strlen;
+use function mb_substr;
+use function str_pad;
 use const STR_PAD_LEFT;
 
 /**
@@ -46,31 +52,42 @@ final class ECSignature
         $totalLength = $lengthR + $lengthS + self::BYTE_SIZE + self::BYTE_SIZE;
         $lengthPrefix = $totalLength > self::ASN1_MAX_SINGLE_BYTE ? self::ASN1_LENGTH_2BYTES : '';
 
-        return self::hex2bin(
+        $bin = hex2bin(
             self::ASN1_SEQUENCE
             .$lengthPrefix.dechex($totalLength)
             .self::ASN1_INTEGER.dechex($lengthR).$pointR
             .self::ASN1_INTEGER.dechex($lengthS).$pointS
         );
+        if (false === $bin) {
+            throw new InvalidArgumentException('Unable to convert into ASN.1');
+        }
+
+        return $bin;
     }
 
     public static function fromAsn1(string $signature, int $length): string
     {
         $message = bin2hex($signature);
+        $position = 0;
 
-        if (0 !== mb_strpos($message, self::ASN1_SEQUENCE, 0, '8bit')) {
+        if (self::ASN1_SEQUENCE !== self::readAsn1Content($message, $position, self::BYTE_SIZE)) {
             throw new InvalidArgumentException('Invalid data. Should start with a sequence.');
         }
 
-        $position = 2;
-        if (0 !== mb_strpos($message, self::ASN1_LENGTH_2BYTES, 2, '8bit')) {
+        // @phpstan-ignore-next-line
+        if (self::ASN1_LENGTH_2BYTES === self::readAsn1Content($message, $position, self::BYTE_SIZE)) {
             $position += self::BYTE_SIZE;
         }
 
         $pointR = self::retrievePositiveInteger(self::readAsn1Integer($message, $position));
         $pointS = self::retrievePositiveInteger(self::readAsn1Integer($message, $position));
 
-        return self::hex2bin(str_pad($pointR, $length, '0', STR_PAD_LEFT).str_pad($pointS, $length, '0', STR_PAD_LEFT));
+        $bin = hex2bin(str_pad($pointR, $length, '0', STR_PAD_LEFT).str_pad($pointS, $length, '0', STR_PAD_LEFT));
+        if (false === $bin) {
+            throw new InvalidArgumentException('Unable to convert from ASN.1');
+        }
+
+        return $bin;
     }
 
     private static function octetLength(string $data): int
@@ -84,8 +101,10 @@ final class ECSignature
             return self::ASN1_NEGATIVE_INTEGER.$data;
         }
 
-        while (0 === mb_strpos($data, self::ASN1_NEGATIVE_INTEGER, 0, '8bit')
-            && mb_substr($data, 2, self::BYTE_SIZE, '8bit') <= self::ASN1_BIG_INTEGER_LIMIT) {
+        while (
+            self::ASN1_NEGATIVE_INTEGER === mb_substr($data, 0, self::BYTE_SIZE, '8bit')
+            && mb_substr($data, 2, self::BYTE_SIZE, '8bit') <= self::ASN1_BIG_INTEGER_LIMIT
+        ) {
             $data = mb_substr($data, 2, null, '8bit');
         }
 
@@ -113,21 +132,13 @@ final class ECSignature
 
     private static function retrievePositiveInteger(string $data): string
     {
-        while (0 === mb_strpos($data, self::ASN1_NEGATIVE_INTEGER, 0, '8bit')
-            && mb_substr($data, 2, self::BYTE_SIZE, '8bit') > self::ASN1_BIG_INTEGER_LIMIT) {
+        while (
+            self::ASN1_NEGATIVE_INTEGER === mb_substr($data, 0, self::BYTE_SIZE, '8bit')
+            && mb_substr($data, 2, self::BYTE_SIZE, '8bit') > self::ASN1_BIG_INTEGER_LIMIT
+        ) {
             $data = mb_substr($data, 2, null, '8bit');
         }
 
         return $data;
-    }
-
-    private static function hex2bin(string $data): string
-    {
-        $result = \hex2bin($data);
-        if (false === $result) {
-            throw new InvalidArgumentException('Unable to convert the data');
-        }
-
-        return $result;
     }
 }
