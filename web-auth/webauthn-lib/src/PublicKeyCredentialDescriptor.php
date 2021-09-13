@@ -15,7 +15,9 @@ namespace Webauthn;
 
 use Assert\Assertion;
 use Base64Url\Base64Url;
+use function count;
 use JsonSerializable;
+use function Safe\json_decode;
 
 class PublicKeyCredentialDescriptor implements JsonSerializable
 {
@@ -42,7 +44,7 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
     protected $transports;
 
     /**
-     * @param array<string> $transports
+     * @param string[] $transports
      */
     public function __construct(string $type, string $id, array $transports = [])
     {
@@ -62,7 +64,7 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
     }
 
     /**
-     * @return array<string>
+     * @return string[]
      */
     public function getTransports(): array
     {
@@ -72,14 +74,13 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
     public static function createFromString(string $data): self
     {
         $data = json_decode($data, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Invalid data');
         Assertion::isArray($data, 'Invalid data');
 
         return self::createFromArray($data);
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      */
     public static function createFromArray(array $json): self
     {
@@ -94,7 +95,7 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {
@@ -102,7 +103,7 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
             'type' => $this->type,
             'id' => Base64Url::encode($this->id),
         ];
-        if (0 !== \count($this->transports)) {
+        if (0 !== count($this->transports)) {
             $json['transports'] = $this->transports;
         }
 

@@ -20,7 +20,12 @@ use Jose\Component\Signature\Algorithm\ES256;
 use Jose\Component\Signature\Serializer\CompactSerializer;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use function Safe\json_decode;
+use function Safe\sprintf;
 
+/**
+ * @deprecated This class is deprecated since v3.3 and will be removed in v4.0
+ */
 class MetadataStatementFetcher
 {
     public static function fetchTableOfContent(string $uri, ClientInterface $client, RequestFactoryInterface $requestFactory, array $additionalHeaders = []): MetadataTOCPayload
@@ -28,7 +33,6 @@ class MetadataStatementFetcher
         $content = self::fetch($uri, $client, $requestFactory, $additionalHeaders);
         $payload = self::getJwsPayload($content);
         $data = json_decode($payload, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Unable to decode the data');
 
         return MetadataTOCPayload::createFromArray($data);
     }
@@ -41,7 +45,6 @@ class MetadataStatementFetcher
         }
         $json = $isBase64UrlEncoded ? Base64Url::decode($payload) : $payload;
         $data = json_decode($json, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Unable to decode the data');
 
         return MetadataStatement::createFromArray($data);
     }

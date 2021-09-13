@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Webauthn;
 
+use function array_key_exists;
 use Assert\Assertion;
 use Base64Url\Base64Url;
 use CBOR\Decoder;
@@ -20,9 +21,13 @@ use CBOR\MapObject;
 use CBOR\OtherObject\OtherObjectManager;
 use CBOR\Tag\TagObjectManager;
 use InvalidArgumentException;
+use function ord;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ramsey\Uuid\Uuid;
+use function Safe\json_decode;
+use function Safe\sprintf;
+use function Safe\unpack;
 use Throwable;
 use Webauthn\AttestationStatement\AttestationObjectLoader;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientOutputsLoader;
@@ -49,13 +54,28 @@ class PublicKeyCredentialLoader
 
     public function __construct(AttestationObjectLoader $attestationObjectLoader, ?LoggerInterface $logger = null)
     {
+        if (null !== $logger) {
+            @trigger_error('The argument "logger" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setLogger".', E_USER_DEPRECATED);
+        }
         $this->decoder = new Decoder(new TagObjectManager(), new OtherObjectManager());
         $this->attestationObjectLoader = $attestationObjectLoader;
         $this->logger = $logger ?? new NullLogger();
     }
 
+    public static function create(AttestationObjectLoader $attestationObjectLoader): self
+    {
+        return new self($attestationObjectLoader);
+    }
+
+    public function setLogger(LoggerInterface $logger): self
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
+
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      */
     public function loadArray(array $json): PublicKeyCredential
     {
@@ -96,31 +116,30 @@ class PublicKeyCredentialLoader
         $this->logger->info('Trying to load data from a string', ['data' => $data]);
         try {
             $json = json_decode($data, true);
-            Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Invalid data');
+
+            return $this->loadArray($json);
         } catch (Throwable $throwable) {
             $this->logger->error('An error occurred', [
                 'exception' => $throwable,
             ]);
             throw $throwable;
         }
-
-        return $this->loadArray($json);
     }
 
     /**
-     * @param array<string, mixed> $response
+     * @param mixed[] $response
      */
     private function createResponse(array $response): AuthenticatorResponse
     {
         Assertion::keyExists($response, 'clientDataJSON', 'Invalid data. The parameter "clientDataJSON" is missing');
         Assertion::string($response['clientDataJSON'], 'Invalid data. The parameter "clientDataJSON" is invalid');
         switch (true) {
-            case \array_key_exists('attestationObject', $response):
+            case array_key_exists('attestationObject', $response):
                 Assertion::string($response['attestationObject'], 'Invalid data. The parameter "attestationObject   " is invalid');
                 $attestationObject = $this->attestationObjectLoader->load($response['attestationObject']);
 
                 return new AuthenticatorAttestationResponse(CollectedClientData::createFormJson($response['clientDataJSON']), $attestationObject);
-            case \array_key_exists('authenticatorData', $response) && \array_key_exists('signature', $response):
+            case array_key_exists('authenticatorData', $response) && array_key_exists('signature', $response):
                 $authData = Base64Url::decode($response['authenticatorData']);
 
                 $authDataStream = new StringStream($authData);
@@ -130,7 +149,7 @@ class PublicKeyCredentialLoader
                 $signCount = unpack('N', $signCount)[1];
 
                 $attestedCredentialData = null;
-                if (0 !== (\ord($flags) & self::FLAG_AT)) {
+                if (0 !== (ord($flags) & self::FLAG_AT)) {
                     $aaguid = Uuid::fromBytes($authDataStream->read(16));
                     $credentialLength = $authDataStream->read(2);
                     $credentialLength = unpack('n', $credentialLength)[1];
@@ -141,7 +160,7 @@ class PublicKeyCredentialLoader
                 }
 
                 $extension = null;
-                if (0 !== (\ord($flags) & self::FLAG_ED)) {
+                if (0 !== (ord($flags) & self::FLAG_ED)) {
                     $extension = $this->decoder->decode($authDataStream);
                     $extension = AuthenticationExtensionsClientOutputsLoader::load($extension);
                 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Webauthn;
 
-use Assert\Assertion;
+use function Safe\json_encode;
 
 /**
  * @see https://www.w3.org/TR/webauthn/#iface-pkcredential
@@ -37,6 +37,11 @@ class PublicKeyCredential extends Credential
         $this->response = $response;
     }
 
+    public function __toString()
+    {
+        return json_encode($this);
+    }
+
     public function getRawId(): string
     {
         return $this->rawId;
@@ -53,13 +58,5 @@ class PublicKeyCredential extends Credential
     public function getPublicKeyCredentialDescriptor(array $transport = []): PublicKeyCredentialDescriptor
     {
         return new PublicKeyCredentialDescriptor($this->getType(), $this->getRawId(), $transport);
-    }
-
-    public function __toString()
-    {
-        $encoded = json_encode($this);
-        Assertion::string($encoded, 'Unable to encode the data');
-
-        return $encoded;
     }
 }

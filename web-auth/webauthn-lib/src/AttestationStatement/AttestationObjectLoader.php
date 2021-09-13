@@ -19,9 +19,12 @@ use CBOR\Decoder;
 use CBOR\MapObject;
 use CBOR\OtherObject\OtherObjectManager;
 use CBOR\Tag\TagObjectManager;
+use function ord;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ramsey\Uuid\Uuid;
+use function Safe\sprintf;
+use function Safe\unpack;
 use Throwable;
 use Webauthn\AttestedCredentialData;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientOutputsLoader;
@@ -54,9 +57,17 @@ class AttestationObjectLoader
         if (null !== $metadataStatementRepository) {
             @trigger_error('The argument "metadataStatementRepository" is deprecated since version 3.2 and will be removed in 4.0. Please set `null` instead.', E_USER_DEPRECATED);
         }
+        if (null !== $logger) {
+            @trigger_error('The argument "logger" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setLogger" instead.', E_USER_DEPRECATED);
+        }
         $this->decoder = new Decoder(new TagObjectManager(), new OtherObjectManager());
         $this->attestationStatementSupportManager = $attestationStatementSupportManager;
         $this->logger = $logger ?? new NullLogger();
+    }
+
+    public static function create(AttestationStatementSupportManager $attestationStatementSupportManager): self
+    {
+        return new self($attestationStatementSupportManager);
     }
 
     public function load(string $data): AttestationObject
@@ -90,7 +101,7 @@ class AttestationObjectLoader
             $this->logger->debug(sprintf('Signature counter: %d', $signCount));
 
             $attestedCredentialData = null;
-            if (0 !== (\ord($flags) & self::FLAG_AT)) {
+            if (0 !== (ord($flags) & self::FLAG_AT)) {
                 $this->logger->info('Attested Credential Data is present');
                 $aaguid = Uuid::fromBytes($authDataStream->read(16));
                 $credentialLength = $authDataStream->read(2);
@@ -104,7 +115,7 @@ class AttestationObjectLoader
             }
 
             $extension = null;
-            if (0 !== (\ord($flags) & self::FLAG_ED)) {
+            if (0 !== (ord($flags) & self::FLAG_ED)) {
                 $this->logger->info('Extension Data loaded');
                 $extension = $this->decoder->decode($authDataStream);
                 $extension = AuthenticationExtensionsClientOutputsLoader::load($extension);
@@ -126,5 +137,12 @@ class AttestationObjectLoader
             ]);
             throw $throwable;
         }
+    }
+
+    public function setLogger(LoggerInterface $logger): self
+    {
+        $this->logger = $logger;
+
+        return $this;
     }
 }

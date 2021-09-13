@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace Webauthn;
 
+use function array_key_exists;
 use Assert\Assertion;
 use Base64Url\Base64Url;
 use InvalidArgumentException;
+use function Safe\json_decode;
+use function Safe\sprintf;
 use Webauthn\TokenBinding\TokenBinding;
 
 class CollectedClientData
@@ -26,7 +29,7 @@ class CollectedClientData
     private $rawData;
 
     /**
-     * @var array<string, mixed>
+     * @var mixed[]
      */
     private $data;
 
@@ -46,12 +49,12 @@ class CollectedClientData
     private $origin;
 
     /**
-     * @var array<string, mixed>|null
+     * @var mixed[]|null
      */
     private $tokenBinding;
 
     /**
-     * @param array<string, mixed> $data
+     * @param mixed[] $data
      */
     public function __construct(string $rawData, array $data)
     {
@@ -67,7 +70,6 @@ class CollectedClientData
     {
         $rawData = Base64Url::decode($data);
         $json = json_decode($rawData, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Invalid collected client data');
         Assertion::isArray($json, 'Invalid collected client data');
 
         return new self($rawData, $json);
@@ -108,7 +110,7 @@ class CollectedClientData
 
     public function has(string $key): bool
     {
-        return \array_key_exists($key, $this->data);
+        return array_key_exists($key, $this->data);
     }
 
     /**
@@ -124,13 +126,13 @@ class CollectedClientData
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      *
      * @return mixed|null
      */
     private function findData(array $json, string $key, bool $isRequired = true, bool $isB64 = false)
     {
-        if (!\array_key_exists($key, $json)) {
+        if (!array_key_exists($key, $json)) {
             if ($isRequired) {
                 throw new InvalidArgumentException(sprintf('The key "%s" is missing', $key));
             }

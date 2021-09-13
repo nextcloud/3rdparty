@@ -13,17 +13,21 @@ declare(strict_types=1);
 
 namespace Webauthn\AuthenticationExtensions;
 
+use function array_key_exists;
 use ArrayIterator;
 use Assert\Assertion;
+use function count;
 use Countable;
 use Iterator;
 use IteratorAggregate;
 use JsonSerializable;
+use function Safe\json_decode;
+use function Safe\sprintf;
 
 class AuthenticationExtensionsClientOutputs implements JsonSerializable, Countable, IteratorAggregate
 {
     /**
-     * @var array<string, AuthenticationExtension>
+     * @var AuthenticationExtension[]
      */
     private $extensions = [];
 
@@ -35,14 +39,13 @@ class AuthenticationExtensionsClientOutputs implements JsonSerializable, Countab
     public static function createFromString(string $data): self
     {
         $data = json_decode($data, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Invalid data');
         Assertion::isArray($data, 'Invalid data');
 
         return self::createFromArray($data);
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      */
     public static function createFromArray(array $json): self
     {
@@ -56,7 +59,7 @@ class AuthenticationExtensionsClientOutputs implements JsonSerializable, Countab
 
     public function has(string $key): bool
     {
-        return \array_key_exists($key, $this->extensions);
+        return array_key_exists($key, $this->extensions);
     }
 
     /**
@@ -70,11 +73,13 @@ class AuthenticationExtensionsClientOutputs implements JsonSerializable, Countab
     }
 
     /**
-     * @return array<string, AuthenticationExtension>
+     * @return AuthenticationExtension[]
      */
     public function jsonSerialize(): array
     {
-        return $this->extensions;
+        return array_map(static function (AuthenticationExtension $object) {
+            return $object->jsonSerialize();
+        }, $this->extensions);
     }
 
     /**
@@ -87,6 +92,6 @@ class AuthenticationExtensionsClientOutputs implements JsonSerializable, Countab
 
     public function count(int $mode = COUNT_NORMAL): int
     {
-        return \count($this->extensions, $mode);
+        return count($this->extensions, $mode);
     }
 }

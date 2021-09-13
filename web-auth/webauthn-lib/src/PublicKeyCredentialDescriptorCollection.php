@@ -13,17 +13,20 @@ declare(strict_types=1);
 
 namespace Webauthn;
 
+use function array_key_exists;
 use ArrayIterator;
 use Assert\Assertion;
+use function count;
 use Countable;
 use Iterator;
 use IteratorAggregate;
 use JsonSerializable;
+use function Safe\json_decode;
 
 class PublicKeyCredentialDescriptorCollection implements JsonSerializable, Countable, IteratorAggregate
 {
     /**
-     * @var array<string, PublicKeyCredentialDescriptor>
+     * @var PublicKeyCredentialDescriptor[]
      */
     private $publicKeyCredentialDescriptors = [];
 
@@ -34,7 +37,7 @@ class PublicKeyCredentialDescriptorCollection implements JsonSerializable, Count
 
     public function has(string $id): bool
     {
-        return \array_key_exists($id, $this->publicKeyCredentialDescriptors);
+        return array_key_exists($id, $this->publicKeyCredentialDescriptors);
     }
 
     public function remove(string $id): void
@@ -56,28 +59,29 @@ class PublicKeyCredentialDescriptorCollection implements JsonSerializable, Count
 
     public function count(int $mode = COUNT_NORMAL): int
     {
-        return \count($this->publicKeyCredentialDescriptors, $mode);
+        return count($this->publicKeyCredentialDescriptors, $mode);
     }
 
     /**
-     * @return array<PublicKeyCredentialDescriptor>
+     * @return array[]
      */
     public function jsonSerialize(): array
     {
-        return array_values($this->publicKeyCredentialDescriptors);
+        return array_map(static function (PublicKeyCredentialDescriptor $object): array {
+            return $object->jsonSerialize();
+        }, $this->publicKeyCredentialDescriptors);
     }
 
     public static function createFromString(string $data): self
     {
         $data = json_decode($data, true);
-        Assertion::eq(JSON_ERROR_NONE, json_last_error(), 'Invalid data');
         Assertion::isArray($data, 'Invalid data');
 
         return self::createFromArray($data);
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      */
     public static function createFromArray(array $json): self
     {

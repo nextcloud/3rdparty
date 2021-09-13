@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Webauthn\AuthenticationExtensions;
 
+use function array_key_exists;
 use ArrayIterator;
 use Assert\Assertion;
 use function count;
@@ -20,11 +21,12 @@ use Countable;
 use Iterator;
 use IteratorAggregate;
 use JsonSerializable;
+use function Safe\sprintf;
 
 class AuthenticationExtensionsClientInputs implements JsonSerializable, Countable, IteratorAggregate
 {
     /**
-     * @var array<string, AuthenticationExtension>
+     * @var AuthenticationExtension[]
      */
     private $extensions = [];
 
@@ -34,7 +36,7 @@ class AuthenticationExtensionsClientInputs implements JsonSerializable, Countabl
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param mixed[] $json
      */
     public static function createFromArray(array $json): self
     {
@@ -48,7 +50,7 @@ class AuthenticationExtensionsClientInputs implements JsonSerializable, Countabl
 
     public function has(string $key): bool
     {
-        return \array_key_exists($key, $this->extensions);
+        return array_key_exists($key, $this->extensions);
     }
 
     /**
@@ -62,11 +64,13 @@ class AuthenticationExtensionsClientInputs implements JsonSerializable, Countabl
     }
 
     /**
-     * @return array<string, AuthenticationExtension>
+     * @return AuthenticationExtension[]
      */
     public function jsonSerialize(): array
     {
-        return $this->extensions;
+        return array_map(static function (AuthenticationExtension $object) {
+            return $object->jsonSerialize();
+        }, $this->extensions);
     }
 
     /**
@@ -79,6 +83,6 @@ class AuthenticationExtensionsClientInputs implements JsonSerializable, Countabl
 
     public function count(int $mode = COUNT_NORMAL): int
     {
-        return \count($this->extensions, $mode);
+        return count($this->extensions, $mode);
     }
 }

@@ -16,6 +16,7 @@ namespace Webauthn\MetadataService;
 use Assert\Assertion;
 use Base64Url\Base64Url;
 use JsonSerializable;
+use function Safe\sprintf;
 
 class EcdaaTrustAnchor implements JsonSerializable
 {
@@ -95,7 +96,8 @@ class EcdaaTrustAnchor implements JsonSerializable
         foreach (['X', 'Y', 'c', 'sx', 'sy', 'G1Curve'] as $key) {
             Assertion::keyExists($data, $key, sprintf('Invalid data. The key "%s" is missing', $key));
         }
-        $object = new self(
+
+        return new self(
             Base64Url::decode($data['X']),
             Base64Url::decode($data['Y']),
             Base64Url::decode($data['c']),
@@ -103,8 +105,6 @@ class EcdaaTrustAnchor implements JsonSerializable
             Base64Url::decode($data['sy']),
             $data['G1Curve']
         );
-
-        return $object;
     }
 
     public function jsonSerialize(): array

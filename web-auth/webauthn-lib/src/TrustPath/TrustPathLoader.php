@@ -13,13 +13,17 @@ declare(strict_types=1);
 
 namespace Webauthn\TrustPath;
 
+use function array_key_exists;
 use Assert\Assertion;
+use function in_array;
 use InvalidArgumentException;
+use function Safe\class_implements;
+use function Safe\sprintf;
 
 abstract class TrustPathLoader
 {
     /**
-     * @param array<string, mixed> $data
+     * @param mixed[] $data
      */
     public static function loadTrustPath(array $data): TrustPath
     {
@@ -27,11 +31,11 @@ abstract class TrustPathLoader
         $type = $data['type'];
         $oldTypes = self::oldTrustPathTypes();
         switch (true) {
-            case \array_key_exists($type, $oldTypes):
+            case array_key_exists($type, $oldTypes):
                 return $oldTypes[$type]::createFromArray($data);
             case class_exists($type):
                 $implements = class_implements($type);
-                if (\is_array($implements) && \in_array(TrustPath::class, $implements, true)) {
+                if (in_array(TrustPath::class, $implements, true)) {
                     return $type::createFromArray($data);
                 }
                 // no break
@@ -41,7 +45,7 @@ abstract class TrustPathLoader
     }
 
     /**
-     * @return array<string, string>
+     * @return string[]
      */
     private static function oldTrustPathTypes(): array
     {
