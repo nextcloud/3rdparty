@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -15,6 +15,7 @@ namespace Webauthn\MetadataService;
 
 use Assert\Assertion;
 use JsonSerializable;
+use function Safe\sprintf;
 
 class VerificationMethodDescriptor implements JsonSerializable
 {
@@ -157,9 +158,9 @@ class VerificationMethodDescriptor implements JsonSerializable
     {
         $data = [
             'userVerification' => $this->userVerification,
-            'caDesc' => $this->caDesc,
-            'baDesc' => $this->baDesc,
-            'paDesc' => $this->paDesc,
+            'caDesc' => null === $this->caDesc ? null : $this->caDesc->jsonSerialize(),
+            'baDesc' => null === $this->baDesc ? null : $this->baDesc->jsonSerialize(),
+            'paDesc' => null === $this->paDesc ? null : $this->paDesc->jsonSerialize(),
         ];
 
         return Utils::filterNullValues($data);

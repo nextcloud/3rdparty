@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2019 Spomky-Labs
+ * Copyright (c) 2014-2020 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -19,6 +19,8 @@ use InvalidArgumentException;
 use JsonSerializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use function Safe\base64_decode;
+use function Safe\sprintf;
 use Throwable;
 use Webauthn\TrustPath\TrustPath;
 use Webauthn\TrustPath\TrustPathLoader;
@@ -74,9 +76,14 @@ class PublicKeyCredentialSource implements JsonSerializable
     protected $counter;
 
     /**
-     * @param array<string> $transports
+     * @var array|null
      */
-    public function __construct(string $publicKeyCredentialId, string $type, array $transports, string $attestationType, TrustPath $trustPath, UuidInterface $aaguid, string $credentialPublicKey, string $userHandle, int $counter)
+    protected $otherUI;
+
+    /**
+     * @param string[] $transports
+     */
+    public function __construct(string $publicKeyCredentialId, string $type, array $transports, string $attestationType, TrustPath $trustPath, UuidInterface $aaguid, string $credentialPublicKey, string $userHandle, int $counter, ?array $otherUI = null)
     {
         $this->publicKeyCredentialId = $publicKeyCredentialId;
         $this->type = $type;
@@ -87,6 +94,7 @@ class PublicKeyCredentialSource implements JsonSerializable
         $this->counter = $counter;
         $this->attestationType = $attestationType;
         $this->trustPath = $trustPath;
+        $this->otherUI = $otherUI;
     }
 
     public function getPublicKeyCredentialId(): string
@@ -160,13 +168,28 @@ class PublicKeyCredentialSource implements JsonSerializable
         $this->counter = $counter;
     }
 
+    public function getOtherUI(): ?array
+    {
+        return $this->otherUI;
+    }
+
+    public function setOtherUI(?array $otherUI): self
+    {
+        $this->otherUI = $otherUI;
+
+        return $this;
+    }
+
     /**
-     * @param array<string, mixed> $data
+     * @param mixed[] $data
      */
     public static function createFromArray(array $data): self
     {
         $keys = array_keys(get_class_vars(self::class));
         foreach ($keys as $key) {
+            if ('otherUI' === $key) {
+                continue;
+            }
             Assertion::keyExists($data, $key, sprintf('The parameter "%s" is missing', $key));
         }
         switch (true) {
@@ -175,7 +198,6 @@ class PublicKeyCredentialSource implements JsonSerializable
                 break;
             default: // Kept for compatibility with old format
                 $decoded = base64_decode($data['aaguid'], true);
-                Assertion::string($decoded, 'Invalid AAGUID');
                 $uuid = Uuid::fromBytes($decoded);
         }
 
@@ -189,7 +211,8 @@ class PublicKeyCredentialSource implements JsonSerializable
                 $uuid,
                 Base64Url::decode($data['credentialPublicKey']),
                 Base64Url::decode($data['userHandle']),
-                $data['counter']
+                $data['counter'],
+                $data['otherUI'] ?? null
             );
         } catch (Throwable $throwable) {
             throw new InvalidArgumentException('Unable to load the data', $throwable->getCode(), $throwable);
@@ -197,7 +220,7 @@ class PublicKeyCredentialSource implements JsonSerializable
     }
 
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {
@@ -206,11 +229,12 @@ class PublicKeyCredentialSource implements JsonSerializable
             'type' => $this->type,
             'transports' => $this->transports,
             'attestationType' => $this->attestationType,
-            'trustPath' => $this->trustPath,
+            'trustPath' => $this->trustPath->jsonSerialize(),
             'aaguid' => $this->aaguid->toString(),
             'credentialPublicKey' => Base64Url::encode($this->credentialPublicKey),
             'userHandle' => Base64Url::encode($this->userHandle),
             'counter' => $this->counter,
+            'otherUI' => $this->otherUI,
         ];
     }
 }
