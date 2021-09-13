@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '39a30ba9f1e3c2cc43623c253add19deb348c180',
+        'reference' => '9c2048fd07e407edcf3dce5e6037896f0cf2a16e',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -322,7 +322,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '39a30ba9f1e3c2cc43623c253add19deb348c180',
+            'reference' => '9c2048fd07e407edcf3dce5e6037896f0cf2a16e',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -371,12 +371,12 @@
             'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(
-            'pretty_version' => '1.4.12',
-            'version' => '1.4.12.0',
+            'pretty_version' => '1.4.14',
+            'version' => '1.4.14.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/archive_tar',
             'aliases' => array(),
-            'reference' => '19bb8e95490d3e3ad92fcac95500ca80bdcc7495',
+            'reference' => '4d761c5334c790e45ef3245f0864b8955c562caa',
             'dev_requirement' => false,
         ),
         'pear/console_getopt' => array(
