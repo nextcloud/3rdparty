@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '28d59882293145ed2e3719f4af2fe2dbc83e6513',
+        'reference' => 'bb3b8160b897f8474ba27dd8c1bd6a408c519a07',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -331,7 +331,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '28d59882293145ed2e3719f4af2fe2dbc83e6513',
+            'reference' => 'bb3b8160b897f8474ba27dd8c1bd6a408c519a07',
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
@@ -371,12 +371,12 @@
             'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(
-            'pretty_version' => '1.4.12',
-            'version' => '1.4.12.0',
+            'pretty_version' => '1.4.14',
+            'version' => '1.4.14.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/archive_tar',
             'aliases' => array(),
-            'reference' => '19bb8e95490d3e3ad92fcac95500ca80bdcc7495',
+            'reference' => '4d761c5334c790e45ef3245f0864b8955c562caa',
             'dev_requirement' => false,
         ),
         'pear/console_getopt' => array(
