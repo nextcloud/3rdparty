@@ -22,12 +22,6 @@ jobs:
         coverage: none
     - name: Update composer
       run: sudo composer self-update && composer --version
-    - name: Delete dependencies
-      run: rm -rf ./*/
-    - name: Download dependencies
-      run: composer install
-    - name: Git Add
-      run: git add .
     - name: Vendor dependencies
       run: composer run vendor
     - name: Check vendor changes
