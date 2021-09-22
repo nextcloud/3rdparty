@@ -24,6 +24,8 @@ jobs:
       run: sudo composer self-update && composer --version
     - name: Delete dependencies
       run: rm -rf ./*/
+    - name: Git Add
+      run: git add . -m 'Temporary commit'
     - name: Download dependencies
       run: composer install
     - name: Vendor dependencies
