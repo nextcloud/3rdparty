@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '6d1cad56adb576b120b26329303e06166024cd20',
+        'reference' => '59af07061eb8d123f872c8fd05a306100c073333',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -63,6 +63,15 @@
             'aliases' => array(),
             'reference' => '7413f0b55a051e89485c5cb9f765fe24bb02a7b6',
             'dev_requirement' => false,
+        ),
+        'cweagans/composer-patches' => array(
+            'pretty_version' => '1.7.1',
+            'version' => '1.7.1.0',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../cweagans/composer-patches',
+            'aliases' => array(),
+            'reference' => '9888dcc74993c030b75f3dd548bb5e20cdbd740c',
+            'dev_requirement' => true,
         ),
         'deepdiver/zipstreamer' => array(
             'pretty_version' => '2.0.0',
@@ -268,7 +277,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '6d1cad56adb576b120b26329303e06166024cd20',
+            'reference' => '59af07061eb8d123f872c8fd05a306100c073333',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(

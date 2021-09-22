@@ -1,0 +1,7 @@
+{
+    "patches": {
+        "sabre/xml": {
+            "Correct version check": "patches/sabre-xml/correct-version-check.patch"
+        }
+    }
+}

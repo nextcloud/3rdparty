@@ -23,7 +23,7 @@ jobs:
     - name: Update composer
       run: sudo composer self-update && composer --version
     - name: Delete dependencies
-      run: rm -rf ./*/
+      run: find . -maxdepth 1 -mindepth 1 -type d ! -name 'patches' ! -name '.github' -exec rm -rf {} \;
     - name: Download dependencies
       run: composer install --no-dev
     - name: Dump Autoload
