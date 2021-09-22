@@ -25,7 +25,7 @@ jobs:
     - name: Delete dependencies
       run: rm -rf ./*/
     - name: Download dependencies
-      run: composer install
+      run: composer install --no-dev
     - name: Git Add
       run: git add .
     - name: Vendor dependencies
