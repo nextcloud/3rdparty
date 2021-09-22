@@ -1353,6 +1353,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'CBOR\\TextStringObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/TextStringObject.php',
         'CBOR\\TextStringWithChunkObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/TextStringWithChunkObject.php',
         'CBOR\\UnsignedIntegerObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/UnsignedIntegerObject.php',
+        'CBOR\\Utils' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/Utils.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Console_Getopt' => __DIR__ . '/..' . '/pear/console_getopt/Console/Getopt.php',
         'Cose\\Algorithm\\Algorithm' => __DIR__ . '/..' . '/web-auth/cose-lib/src/Algorithm/Algorithm.php',
