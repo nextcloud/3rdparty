@@ -724,6 +724,7 @@ return array(
     'CBOR\\TextStringObject' => $vendorDir . '/spomky-labs/cbor-php/src/TextStringObject.php',
     'CBOR\\TextStringWithChunkObject' => $vendorDir . '/spomky-labs/cbor-php/src/TextStringWithChunkObject.php',
     'CBOR\\UnsignedIntegerObject' => $vendorDir . '/spomky-labs/cbor-php/src/UnsignedIntegerObject.php',
+    'CBOR\\Utils' => $vendorDir . '/spomky-labs/cbor-php/src/Utils.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Console_Getopt' => $vendorDir . '/pear/console_getopt/Console/Getopt.php',
     'Cose\\Algorithm\\Algorithm' => $vendorDir . '/web-auth/cose-lib/src/Algorithm/Algorithm.php',
