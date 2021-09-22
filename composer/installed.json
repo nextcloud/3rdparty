@@ -6098,6 +6098,6 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }

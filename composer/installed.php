@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '1f66cef37b83a89a902e595e79e05c4eafbc855e',
+        'reference' => 'a39c1fd340a095c0814ddf5db2d7f97a592a2d16',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -268,7 +268,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '1f66cef37b83a89a902e595e79e05c4eafbc855e',
+            'reference' => 'a39c1fd340a095c0814ddf5db2d7f97a592a2d16',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
