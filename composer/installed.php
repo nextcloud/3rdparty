@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'd0f1d27e428ffee1f2ab9de3111a73877b9e8aff',
+        'reference' => 'f6f275f4cb1c6d0f9773ef42f10ab210a12a683b',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -331,7 +331,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'd0f1d27e428ffee1f2ab9de3111a73877b9e8aff',
+            'reference' => 'f6f275f4cb1c6d0f9773ef42f10ab210a12a683b',
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
