@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'b712fcb86411da2f8547100e28f3e586dee52ead',
+        'reference' => 'b656b5f2fc141d723435dce052ed9bb1c2154f1f',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'b712fcb86411da2f8547100e28f3e586dee52ead',
+            'reference' => 'b656b5f2fc141d723435dce052ed9bb1c2154f1f',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
