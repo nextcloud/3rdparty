@@ -375,6 +375,57 @@
             "install-path": "./package-versions-deprecated"
         },
         {
+            "name": "cweagans/composer-patches",
+            "version": "1.7.1",
+            "version_normalized": "1.7.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "9888dcc74993c030b75f3dd548bb5e20cdbd740c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/9888dcc74993c030b75f3dd548bb5e20cdbd740c",
+                "reference": "9888dcc74993c030b75f3dd548bb5e20cdbd740c",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "~1.0 || ~2.0",
+                "phpunit/phpunit": "~4.6"
+            },
+            "time": "2021-06-08T15:12:46+00:00",
+            "type": "composer-plugin",
+            "extra": {
+                "class": "cweagans\\Composer\\Patches"
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-patches/issues",
+                "source": "https://github.com/cweagans/composer-patches/tree/1.7.1"
+            },
+            "install-path": "../cweagans/composer-patches"
+        },
+        {
             "name": "deepdiver/zipstreamer",
             "version": "2.0.0",
             "version_normalized": "2.0.0.0",
@@ -3935,6 +3986,11 @@
             },
             "time": "2020-10-03T10:08:14+00:00",
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "Correct version check": "patches/sabre-xml/correct-version-check.patch"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
@@ -6102,6 +6158,8 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": false,
-    "dev-package-names": []
+    "dev": true,
+    "dev-package-names": [
+        "cweagans/composer-patches"
+    ]
 }

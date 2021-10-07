@@ -51,6 +51,10 @@
 		"symfony/process": "4.4.25",
 		"symfony/routing": "4.4.25",
 		"symfony/translation": "4.4.25",
-		"web-auth/webauthn-lib": "^3.1"
+		"web-auth/webauthn-lib": "^3.1",
+		"cweagans/composer-patches": "^1.7"
+	},
+	"extra": {
+		"patches-file": "composer.patches.json"
 	}
 }
