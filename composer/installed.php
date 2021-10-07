@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '59af07061eb8d123f872c8fd05a306100c073333',
+        'reference' => '019d4384a1dcf022e430821bfe8b100dbc4884f3',
         'name' => 'nextcloud/3rdparty',
         'dev' => true,
     ),
@@ -71,7 +71,7 @@
             'install_path' => __DIR__ . '/../cweagans/composer-patches',
             'aliases' => array(),
             'reference' => '9888dcc74993c030b75f3dd548bb5e20cdbd740c',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'deepdiver/zipstreamer' => array(
             'pretty_version' => '2.0.0',
@@ -277,7 +277,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '59af07061eb8d123f872c8fd05a306100c073333',
+            'reference' => '019d4384a1dcf022e430821bfe8b100dbc4884f3',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(

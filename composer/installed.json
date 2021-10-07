@@ -3988,7 +3988,7 @@
             "type": "library",
             "extra": {
                 "patches_applied": {
-                    "Correct version check": "patches/sabre-xml/correct-version-check.patch"
+                    "Correct version check": ".patches/sabre-xml/correct-version-check.patch"
                 }
             },
             "installation-source": "dist",
@@ -6159,7 +6159,5 @@
         }
     ],
     "dev": true,
-    "dev-package-names": [
-        "cweagans/composer-patches"
-    ]
+    "dev-package-names": []
 }
