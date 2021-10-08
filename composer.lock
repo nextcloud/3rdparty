@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d4217a542dabeb47e9bb783dee9a10d",
+    "content-hash": "a9accd4099809e3c525713a5db3e25f9",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1462,24 +1462,25 @@
         },
         {
             "name": "icewind/streams",
-            "version": "v0.7.2",
+            "version": "v0.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "77d750ccc654c0eda4a41fedb2dbd71053755790"
+                "reference": "0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/77d750ccc654c0eda4a41fedb2dbd71053755790",
-                "reference": "77d750ccc654c0eda4a41fedb2dbd71053755790",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2",
+                "reference": "0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "v2.1.0",
-                "phpunit/phpunit": "^5.7"
+                "friendsofphp/php-cs-fixer": "^2",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^9"
             },
             "type": "library",
             "autoload": {
@@ -1500,9 +1501,9 @@
             "description": "A set of generic stream wrappers",
             "support": {
                 "issues": "https://github.com/icewind1991/Streams/issues",
-                "source": "https://github.com/icewind1991/Streams/tree/master"
+                "source": "https://github.com/icewind1991/Streams/tree/v0.7.5"
             },
-            "time": "2020-04-08T14:59:33+00:00"
+            "time": "2021-06-14T14:02:48+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
