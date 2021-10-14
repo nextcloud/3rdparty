@@ -220,7 +220,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'I' => 
         array (
-            'Icewind\\Streams\\Tests\\' => 22,
             'Icewind\\Streams\\' => 16,
             'ID3Parser\\' => 10,
         ),
@@ -493,10 +492,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
-        ),
-        'Icewind\\Streams\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/icewind/streams/tests',
         ),
         'Icewind\\Streams\\' => 
         array (
@@ -2024,14 +2019,19 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Icewind\\Streams\\DirectoryFilter' => __DIR__ . '/..' . '/icewind/streams/src/DirectoryFilter.php',
         'Icewind\\Streams\\DirectoryWrapper' => __DIR__ . '/..' . '/icewind/streams/src/DirectoryWrapper.php',
         'Icewind\\Streams\\File' => __DIR__ . '/..' . '/icewind/streams/src/File.php',
+        'Icewind\\Streams\\HashWrapper' => __DIR__ . '/..' . '/icewind/streams/src/HashWrapper.php',
         'Icewind\\Streams\\IteratorDirectory' => __DIR__ . '/..' . '/icewind/streams/src/IteratorDirectory.php',
         'Icewind\\Streams\\NullWrapper' => __DIR__ . '/..' . '/icewind/streams/src/NullWrapper.php',
         'Icewind\\Streams\\Path' => __DIR__ . '/..' . '/icewind/streams/src/Path.php',
         'Icewind\\Streams\\PathWrapper' => __DIR__ . '/..' . '/icewind/streams/src/PathWrapper.php',
+        'Icewind\\Streams\\ReadHashWrapper' => __DIR__ . '/..' . '/icewind/streams/src/ReadHashWrapper.php',
         'Icewind\\Streams\\RetryWrapper' => __DIR__ . '/..' . '/icewind/streams/src/RetryWrapper.php',
         'Icewind\\Streams\\SeekableWrapper' => __DIR__ . '/..' . '/icewind/streams/src/SeekableWrapper.php',
         'Icewind\\Streams\\Url' => __DIR__ . '/..' . '/icewind/streams/src/Url.php',
+        'Icewind\\Streams\\UrlCallback' => __DIR__ . '/..' . '/icewind/streams/src/UrlCallback.php',
         'Icewind\\Streams\\Wrapper' => __DIR__ . '/..' . '/icewind/streams/src/Wrapper.php',
+        'Icewind\\Streams\\WrapperHandler' => __DIR__ . '/..' . '/icewind/streams/src/WrapperHandler.php',
+        'Icewind\\Streams\\WriteHashWrapper' => __DIR__ . '/..' . '/icewind/streams/src/WriteHashWrapper.php',
         'JmesPath\\AstRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/AstRuntime.php',
         'JmesPath\\CompilerRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/CompilerRuntime.php',
         'JmesPath\\DebugRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/DebugRuntime.php',
