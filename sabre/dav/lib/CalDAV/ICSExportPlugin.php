@@ -197,7 +197,7 @@ class ICSExportPlugin extends DAV\ServerPlugin
                 ],
                 'prop-filters' => [],
                 'is-not-defined' => false,
-                'time-range' => null,
+                'time-range' => null,  // FIXME: setting start-end range without jcal format results in an empty ICS file.
             ]);
 
             // queryResult is just a list of base urls. We need to prefix the
