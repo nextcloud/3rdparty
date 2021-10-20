@@ -3,6 +3,7 @@
 namespace Doctrine\DBAL\Platforms;
 
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Deprecations\Deprecation;
 
 /**
  * Provides the behavior, features and SQL dialect of the MariaDB 10.2 (10.2.7 GA) database platform.
@@ -21,8 +22,18 @@ final class MariaDb1027Platform extends MySQLPlatform
         return 'LONGTEXT';
     }
 
+    /**
+     * @deprecated Implement {@link createReservedKeywordsList()} instead.
+     */
     protected function getReservedKeywordsClass(): string
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4510',
+            'MariaDb1027Platform::getReservedKeywordsClass() is deprecated,'
+                . ' use MariaDb1027Platform::createReservedKeywordsList() instead.'
+        );
+
         return Keywords\MariaDb102Keywords::class;
     }
 

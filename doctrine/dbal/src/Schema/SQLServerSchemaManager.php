@@ -5,6 +5,7 @@ namespace Doctrine\DBAL\Schema;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\SQLServer2012Platform;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\Deprecations\Deprecation;
 use PDOException;
 
 use function assert;
@@ -21,6 +22,20 @@ use function strtok;
  */
 class SQLServerSchemaManager extends AbstractSchemaManager
 {
+    /**
+     * {@inheritDoc}
+     */
+    public function listSchemaNames(): array
+    {
+        return $this->_conn->fetchFirstColumn(
+            <<<'SQL'
+SELECT name
+FROM   sys.schemas
+WHERE  name NOT IN('guest', 'INFORMATION_SCHEMA', 'sys')
+SQL
+        );
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -64,6 +79,13 @@ class SQLServerSchemaManager extends AbstractSchemaManager
                 }
 
                 break;
+
+            case 'varbinary':
+                if ($length === -1) {
+                    $dbType = 'blob';
+                }
+
+                break;
         }
 
         if ($dbType === 'char' || $dbType === 'nchar' || $dbType === 'binary') {
@@ -85,7 +107,7 @@ class SQLServerSchemaManager extends AbstractSchemaManager
             'comment'       => $tableColumn['comment'] !== '' ? $tableColumn['comment'] : null,
         ];
 
-        if ($length !== 0 && ($type === 'text' || $type === 'string')) {
+        if ($length !== 0 && ($type === 'text' || $type === 'string' || $type === 'binary')) {
             $options['length'] = $length;
         }
 
@@ -199,9 +221,18 @@ class SQLServerSchemaManager extends AbstractSchemaManager
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Use {@link listSchemaNames()} instead.
      */
     protected function getPortableNamespaceDefinition(array $namespace)
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4503',
+            'SQLServerSchemaManager::getPortableNamespaceDefinition() is deprecated,'
+                . ' use SQLServerSchemaManager::listSchemaNames() instead.'
+        );
+
         return $namespace['name'];
     }
 

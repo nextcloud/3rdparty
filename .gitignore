@@ -41,6 +41,7 @@ doctrine/collections/composer.json
 doctrine/common/tests
 doctrine/common/.travis.yml
 doctrine/common/composer.json
+doctrine/deprecations/tests
 doctrine/dbal/tests
 doctrine/dbal/docs
 doctrine/dbal/psalm.xml

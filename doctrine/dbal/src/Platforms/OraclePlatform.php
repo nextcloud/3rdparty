@@ -11,6 +11,7 @@ use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\TransactionIsolationLevel;
 use Doctrine\DBAL\Types\BinaryType;
+use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 
 use function array_merge;
@@ -506,8 +507,10 @@ class OraclePlatform extends AbstractPlatform
         $sql[] = "DECLARE
   constraints_Count NUMBER;
 BEGIN
-  SELECT COUNT(CONSTRAINT_NAME) INTO constraints_Count FROM USER_CONSTRAINTS WHERE TABLE_NAME = '" . $unquotedTableName
-            . "' AND CONSTRAINT_TYPE = 'P';
+  SELECT COUNT(CONSTRAINT_NAME) INTO constraints_Count
+    FROM USER_CONSTRAINTS
+   WHERE TABLE_NAME = '" . $unquotedTableName . "'
+     AND CONSTRAINT_TYPE = 'P';
   IF constraints_Count = 0 OR constraints_Count = '' THEN
     EXECUTE IMMEDIATE '" . $this->getCreateConstraintSQL($idx, $quotedTableName) . "';
   END IF;
@@ -528,7 +531,6 @@ DECLARE
    last_Sequence NUMBER;
    last_InsertID NUMBER;
 BEGIN
-   SELECT ' . $sequenceName . '.NEXTVAL INTO :NEW.' . $quotedName . ' FROM DUAL;
    IF (:NEW.' . $quotedName . ' IS NULL OR :NEW.' . $quotedName . ' = 0) THEN
       SELECT ' . $sequenceName . '.NEXTVAL INTO :NEW.' . $quotedName . ' FROM DUAL;
    ELSE
@@ -539,6 +541,7 @@ BEGIN
       WHILE (last_InsertID > last_Sequence) LOOP
          SELECT ' . $sequenceName . '.NEXTVAL INTO last_Sequence FROM DUAL;
       END LOOP;
+      SELECT ' . $sequenceName . '.NEXTVAL INTO last_Sequence FROM DUAL;
    END IF;
 END;';
 
@@ -783,9 +786,9 @@ SQL
     /**
      * {@inheritDoc}
      */
-    public function getDropDatabaseSQL($database)
+    public function getDropDatabaseSQL($name)
     {
-        return 'DROP USER ' . $database . ' CASCADE';
+        return 'DROP USER ' . $name . ' CASCADE';
     }
 
     /**
@@ -1160,9 +1163,18 @@ SQL
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated Implement {@link createReservedKeywordsList()} instead.
      */
     protected function getReservedKeywordsClass()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4510',
+            'OraclePlatform::getReservedKeywordsClass() is deprecated,'
+            . ' use OraclePlatform::createReservedKeywordsList() instead.'
+        );
+
         return Keywords\OracleKeywords::class;
     }
 
