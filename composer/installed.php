@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '1d7fff4111e438dd496fb8a5d518ea6b8b910b83',
+        'reference' => '29af52b3dc398b88d754adcc11c7586a14d5d4f1',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '1d7fff4111e438dd496fb8a5d518ea6b8b910b83',
+            'reference' => '29af52b3dc398b88d754adcc11c7586a14d5d4f1',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -299,12 +299,12 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.10.5',
-            'version' => '4.10.5.0',
+            'pretty_version' => 'v4.13.1',
+            'version' => '4.13.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'reference' => '4432ba399e47c66624bc73c8c0f811e5c109576f',
+            'reference' => '63a79e8daa781cac14e5195e63ed8ae231dd10fd',
             'dev_requirement' => false,
         ),
         'ocramius/package-versions' => array(
