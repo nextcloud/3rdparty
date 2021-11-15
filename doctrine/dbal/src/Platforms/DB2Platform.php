@@ -9,6 +9,7 @@ use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Deprecations\Deprecation;
 
 use function array_merge;
 use function count;
@@ -290,6 +291,7 @@ class DB2Platform extends AbstractPlatform
                  c.colname,
                  c.colno,
                  c.typename,
+                 c.codepage,
                  c.nulls,
                  c.length,
                  c.scale,
@@ -413,17 +415,17 @@ class DB2Platform extends AbstractPlatform
     /**
      * {@inheritDoc}
      */
-    public function getCreateDatabaseSQL($database)
+    public function getCreateDatabaseSQL($name)
     {
-        return 'CREATE DATABASE ' . $database;
+        return 'CREATE DATABASE ' . $name;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getDropDatabaseSQL($database)
+    public function getDropDatabaseSQL($name)
     {
-        return 'DROP DATABASE ' . $database;
+        return 'DROP DATABASE ' . $name;
     }
 
     /**
@@ -896,9 +898,18 @@ class DB2Platform extends AbstractPlatform
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated Implement {@link createReservedKeywordsList()} instead.
      */
     protected function getReservedKeywordsClass()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4510',
+            'DB2Platform::getReservedKeywordsClass() is deprecated,'
+                . ' use DB2Platform::createReservedKeywordsList() instead.'
+        );
+
         return Keywords\DB2Keywords::class;
     }
 

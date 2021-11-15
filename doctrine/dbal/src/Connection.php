@@ -21,6 +21,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\SQL\Parser;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\Deprecations\Deprecation;
 use Throwable;
 use Traversable;
 
@@ -35,6 +36,8 @@ use function key;
 /**
  * A database abstraction-level connection that implements features like events, transaction isolation levels,
  * configuration, emulated transaction nesting, lazy connecting and more.
+ *
+ * @psalm-import-type Params from DriverManager
  */
 class Connection
 {
@@ -66,7 +69,11 @@ class Connection
     /** @var EventManager */
     protected $_eventManager;
 
-    /** @var ExpressionBuilder */
+    /**
+     * @deprecated Use {@link createExpressionBuilder()} instead.
+     *
+     * @var ExpressionBuilder
+     */
     protected $_expr;
 
     /**
@@ -84,9 +91,9 @@ class Connection
     private $transactionNestingLevel = 0;
 
     /**
-     * The currently active transaction isolation level.
+     * The currently active transaction isolation level or NULL before it has been determined.
      *
-     * @var int
+     * @var int|null
      */
     private $transactionIsolationLevel;
 
@@ -100,15 +107,16 @@ class Connection
     /**
      * The parameters used during creation of the Connection instance.
      *
-     * @var mixed[]
+     * @var array<string,mixed>
+     * @phpstan-var array<string,mixed>
+     * @psalm-var Params
      */
-    private $params = [];
+    private $params;
 
     /**
-     * The DatabasePlatform object that provides information about the
-     * database platform used by the connection.
+     * The database platform object used by the connection or NULL before it's initialized.
      *
-     * @var AbstractPlatform
+     * @var AbstractPlatform|null
      */
     private $platform;
 
@@ -120,6 +128,8 @@ class Connection
 
     /**
      * The schema manager.
+     *
+     * @deprecated Use {@link createSchemaManager()} instead.
      *
      * @var AbstractSchemaManager|null
      */
@@ -144,10 +154,12 @@ class Connection
      *
      * @internal The connection can be only instantiated by the driver manager.
      *
-     * @param mixed[]            $params       The connection parameters.
-     * @param Driver             $driver       The driver to use.
-     * @param Configuration|null $config       The configuration, optional.
-     * @param EventManager|null  $eventManager The event manager, optional.
+     * @param array<string,mixed> $params       The connection parameters.
+     * @param Driver              $driver       The driver to use.
+     * @param Configuration|null  $config       The configuration, optional.
+     * @param EventManager|null   $eventManager The event manager, optional.
+     * @psalm-param Params $params
+     * @phpstan-param array<string,mixed> $params
      *
      * @throws Exception
      */
@@ -180,7 +192,7 @@ class Connection
         $this->_config       = $config;
         $this->_eventManager = $eventManager;
 
-        $this->_expr = new Query\Expression\ExpressionBuilder($this);
+        $this->_expr = $this->createExpressionBuilder();
 
         $this->autoCommit = $config->getAutoCommit();
     }
@@ -190,7 +202,9 @@ class Connection
      *
      * @internal
      *
-     * @return mixed[]
+     * @return array<string,mixed>
+     * @psalm-return Params
+     * @phpstan-return array<string,mixed>
      */
     public function getParams()
     {
@@ -257,19 +271,37 @@ class Connection
     public function getDatabasePlatform()
     {
         if ($this->platform === null) {
-            $this->detectDatabasePlatform();
+            $this->platform = $this->detectDatabasePlatform();
+            $this->platform->setEventManager($this->_eventManager);
         }
 
         return $this->platform;
     }
 
     /**
+     * Creates an expression builder for the connection.
+     */
+    public function createExpressionBuilder(): ExpressionBuilder
+    {
+        return new ExpressionBuilder($this);
+    }
+
+    /**
      * Gets the ExpressionBuilder for the connection.
+     *
+     * @deprecated Use {@link createExpressionBuilder()} instead.
      *
      * @return ExpressionBuilder
      */
     public function getExpressionBuilder()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4515',
+            'Connection::getExpressionBuilder() is deprecated,'
+                . ' use Connection::createExpressionBuilder() instead.'
+        );
+
         return $this->_expr;
     }
 
@@ -293,8 +325,6 @@ class Connection
             throw $this->convertException($e);
         }
 
-        $this->transactionNestingLevel = 0;
-
         if ($this->autoCommit === false) {
             $this->beginTransaction();
         }
@@ -314,19 +344,17 @@ class Connection
      *
      * @throws Exception If an invalid platform was specified for this connection.
      */
-    private function detectDatabasePlatform(): void
+    private function detectDatabasePlatform(): AbstractPlatform
     {
         $version = $this->getDatabasePlatformVersion();
 
         if ($version !== null) {
             assert($this->_driver instanceof VersionAwarePlatformDriver);
 
-            $this->platform = $this->_driver->createDatabasePlatformForVersion($version);
-        } else {
-            $this->platform = $this->_driver->getDatabasePlatform();
+            return $this->_driver->createDatabasePlatformForVersion($version);
         }
 
-        $this->platform->setEventManager($this->_eventManager);
+        return $this->_driver->getDatabasePlatform();
     }
 
     /**
@@ -364,23 +392,21 @@ class Connection
 
                 // The database to connect to might not yet exist.
                 // Retry detection without database name connection parameter.
-                $databaseName           = $this->params['dbname'];
-                $this->params['dbname'] = null;
+                $params = $this->params;
+
+                unset($this->params['dbname']);
 
                 try {
                     $this->connect();
                 } catch (Exception $fallbackException) {
                     // Either the platform does not support database-less connections
                     // or something else went wrong.
-                    // Reset connection parameters and rethrow the original exception.
-                    $this->params['dbname'] = $databaseName;
-
                     throw $originalException;
+                } finally {
+                    $this->params = $params;
                 }
 
-                // Reset connection parameters.
-                $this->params['dbname'] = $databaseName;
-                $serverVersion          = $this->getServerVersion();
+                $serverVersion = $this->getServerVersion();
 
                 // Close "temporary" connection to allow connecting to the real database again.
                 $this->close();
@@ -549,10 +575,10 @@ class Connection
     /**
      * Adds condition based on the criteria to the query components
      *
-     * @param mixed[]  $criteria   Map of key columns to their values
-     * @param string[] $columns    Column names
-     * @param mixed[]  $values     Column values
-     * @param string[] $conditions Key conditions
+     * @param array<string,mixed> $criteria   Map of key columns to their values
+     * @param string[]            $columns    Column names
+     * @param mixed[]             $values     Column values
+     * @param string[]            $conditions Key conditions
      *
      * @throws Exception
      */
@@ -613,7 +639,8 @@ class Connection
      */
     public function close()
     {
-        $this->_conn = null;
+        $this->_conn                   = null;
+        $this->transactionNestingLevel = 0;
     }
 
     /**
@@ -733,7 +760,7 @@ class Connection
     {
         $typeValues = [];
 
-        foreach ($columnList as $columnIndex => $columnName) {
+        foreach ($columnList as $columnName) {
             $typeValues[] = $types[$columnName] ?? ParameterType::STRING;
         }
 
@@ -836,9 +863,9 @@ class Connection
      * to the first column and the values being an associative array representing the rest of the columns
      * and their values.
      *
-     * @param string                                           $query  SQL query
-     * @param list<mixed>|array<string, mixed>                 $params Query parameters
-     * @param array<int, int|string>|array<string, int|string> $types  Parameter types
+     * @param string                                                               $query  SQL query
+     * @param list<mixed>|array<string, mixed>                                     $params Query parameters
+     * @param array<int, int|string|Type|null>|array<string, int|string|Type|null> $types  Parameter types
      *
      * @return array<mixed,array<string,mixed>>
      *
@@ -1171,7 +1198,7 @@ class Connection
      *
      * @param string|null $name Name of the sequence object from which the ID should be returned.
      *
-     * @return string A string representation of the last inserted ID.
+     * @return string|int|false A string representation of the last inserted ID.
      *
      * @throws Exception
      */
@@ -1427,11 +1454,13 @@ class Connection
      */
     public function createSavepoint($savepoint)
     {
-        if (! $this->getDatabasePlatform()->supportsSavepoints()) {
+        $platform = $this->getDatabasePlatform();
+
+        if (! $platform->supportsSavepoints()) {
             throw ConnectionException::savepointsNotSupported();
         }
 
-        $this->executeStatement($this->platform->createSavePoint($savepoint));
+        $this->executeStatement($platform->createSavePoint($savepoint));
     }
 
     /**
@@ -1445,15 +1474,17 @@ class Connection
      */
     public function releaseSavepoint($savepoint)
     {
-        if (! $this->getDatabasePlatform()->supportsSavepoints()) {
+        $platform = $this->getDatabasePlatform();
+
+        if (! $platform->supportsSavepoints()) {
             throw ConnectionException::savepointsNotSupported();
         }
 
-        if (! $this->platform->supportsReleaseSavepoints()) {
+        if (! $platform->supportsReleaseSavepoints()) {
             return;
         }
 
-        $this->executeStatement($this->platform->releaseSavePoint($savepoint));
+        $this->executeStatement($platform->releaseSavePoint($savepoint));
     }
 
     /**
@@ -1467,11 +1498,13 @@ class Connection
      */
     public function rollbackSavepoint($savepoint)
     {
-        if (! $this->getDatabasePlatform()->supportsSavepoints()) {
+        $platform = $this->getDatabasePlatform();
+
+        if (! $platform->supportsSavepoints()) {
             throw ConnectionException::savepointsNotSupported();
         }
 
-        $this->executeStatement($this->platform->rollbackSavePoint($savepoint));
+        $this->executeStatement($platform->rollbackSavePoint($savepoint));
     }
 
     /**
@@ -1491,8 +1524,24 @@ class Connection
     }
 
     /**
+     * Creates a SchemaManager that can be used to inspect or change the
+     * database schema through the connection.
+     *
+     * @throws Exception
+     */
+    public function createSchemaManager(): AbstractSchemaManager
+    {
+        return $this->_driver->getSchemaManager(
+            $this,
+            $this->getDatabasePlatform()
+        );
+    }
+
+    /**
      * Gets the SchemaManager that can be used to inspect or change the
      * database schema through the connection.
+     *
+     * @deprecated Use {@link createSchemaManager()} instead.
      *
      * @return AbstractSchemaManager
      *
@@ -1500,11 +1549,14 @@ class Connection
      */
     public function getSchemaManager()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4515',
+            'Connection::getSchemaManager() is deprecated, use Connection::createSchemaManager() instead.'
+        );
+
         if ($this->_schemaManager === null) {
-            $this->_schemaManager = $this->_driver->getSchemaManager(
-                $this,
-                $this->getDatabasePlatform()
-            );
+            $this->_schemaManager = $this->createSchemaManager();
         }
 
         return $this->_schemaManager;
@@ -1622,11 +1674,11 @@ class Connection
      * @param mixed                $value The value to bind.
      * @param int|string|Type|null $type  The type to bind (PDO or DBAL).
      *
-     * @return mixed[] [0] => the (escaped) value, [1] => the binding type.
+     * @return array{mixed, int} [0] => the (escaped) value, [1] => the binding type.
      *
      * @throws Exception
      */
-    private function getBindingInfo($value, $type)
+    private function getBindingInfo($value, $type): array
     {
         if (is_string($type)) {
             $type = Type::getType($type);
@@ -1636,7 +1688,7 @@ class Connection
             $value       = $type->convertToDatabaseValue($value, $this->getDatabasePlatform());
             $bindingType = $type->getBindingType();
         } else {
-            $bindingType = $type;
+            $bindingType = $type ?? ParameterType::STRING;
         }
 
         return [$value, $bindingType];
