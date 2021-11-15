@@ -1010,7 +1010,8 @@ class SQLServer2012Platform extends AbstractPlatform
                 INNER JOIN sys.objects AS o ON o.OBJECT_ID = fc.referenced_object_id
                 ON f.OBJECT_ID = fc.constraint_object_id
                 WHERE ' .
-                $this->getTableWhereClause($table, 'SCHEMA_NAME (f.schema_id)', 'OBJECT_NAME (f.parent_object_id)');
+                $this->getTableWhereClause($table, 'SCHEMA_NAME (f.schema_id)', 'OBJECT_NAME (f.parent_object_id)') .
+                ' ORDER BY fc.constraint_column_id';
     }
 
     /**
@@ -1146,9 +1147,7 @@ class SQLServer2012Platform extends AbstractPlatform
      */
     public function getConcatExpression()
     {
-        $args = func_get_args();
-
-        return '(' . implode(' + ', $args) . ')';
+        return sprintf('CONCAT(%s)', implode(', ', func_get_args()));
     }
 
     /**
