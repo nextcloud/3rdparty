@@ -30,4 +30,4 @@ jobs:
       run: composer dump-autoload
     - name: Check vendor changes
       run: |
-        bash -c "[[ ! \"`git status --porcelain . :!composer/installed.json :!composer/installed.php :!composer/package-versions-deprecated/src/PackageVersions/Versions.php `\" ]] || ( echo 'Uncommited vendor changes' && git status && git diff && exit 1 )"
+        bash -c "[[ ! \"`git status --porcelain . ':!composer/installed.json' ':!composer/installed.php' ':!composer/package-versions-deprecated/src/PackageVersions/Versions.php' `\" ]] || ( echo 'Uncommited vendor changes' && git status && git diff && exit 1 )"
