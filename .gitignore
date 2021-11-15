@@ -281,3 +281,9 @@ symfony/process/Symfony/Component/Process/phpunit.xml.dist
 symfony/process/Symfony/Component/Process/Tests
 symfony/process/Symfony/Component/Process/.gitignore
 symfony/process/Tests
+
+cweagans/composer-patches/phpunit.xml.dist
+cweagans/composer-patches/README.md
+cweagans/composer-patches/tests
+cweagans/composer-patches/.gitignore
+cweagans/composer-patches/.editorconfig
