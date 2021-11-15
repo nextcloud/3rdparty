@@ -3,6 +3,7 @@
 namespace Doctrine\DBAL\Query\Expression;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\Deprecations\Deprecation;
 
 use function func_get_arg;
 use function func_get_args;
@@ -71,6 +72,12 @@ class ExpressionBuilder
      */
     public function andX($x = null)
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/3851',
+            'ExpressionBuilder::andX() is deprecated, use ExpressionBuilder::and() instead.'
+        );
+
         return new CompositeExpression(CompositeExpression::TYPE_AND, func_get_args());
     }
 
@@ -84,6 +91,12 @@ class ExpressionBuilder
      */
     public function orX($x = null)
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/3851',
+            'ExpressionBuilder::orX() is deprecated, use ExpressionBuilder::or() instead.'
+        );
+
         return new CompositeExpression(CompositeExpression::TYPE_OR, func_get_args());
     }
 
@@ -243,8 +256,8 @@ class ExpressionBuilder
     /**
      * Creates a LIKE() comparison expression with the given arguments.
      *
-     * @param string $x Field in string format to be inspected by LIKE() comparison.
-     * @param mixed  $y Argument to be used in LIKE() comparison.
+     * @param string $x The expression to be inspected by the LIKE comparison
+     * @param mixed  $y The pattern to compare against
      *
      * @return string
      */
@@ -257,8 +270,8 @@ class ExpressionBuilder
     /**
      * Creates a NOT LIKE() comparison expression with the given arguments.
      *
-     * @param string $x Field in string format to be inspected by NOT LIKE() comparison.
-     * @param mixed  $y Argument to be used in NOT LIKE() comparison.
+     * @param string $x The expression to be inspected by the NOT LIKE comparison
+     * @param mixed  $y The pattern to compare against
      *
      * @return string
      */
@@ -269,10 +282,10 @@ class ExpressionBuilder
     }
 
     /**
-     * Creates a IN () comparison expression with the given arguments.
+     * Creates an IN () comparison expression with the given arguments.
      *
-     * @param string          $x The field in string format to be inspected by IN() comparison.
-     * @param string|string[] $y The placeholder or the array of values to be used by IN() comparison.
+     * @param string          $x The SQL expression to be matched against the set.
+     * @param string|string[] $y The SQL expression or an array of SQL expressions representing the set.
      *
      * @return string
      */
@@ -284,8 +297,8 @@ class ExpressionBuilder
     /**
      * Creates a NOT IN () comparison expression with the given arguments.
      *
-     * @param string          $x The expression to be inspected by NOT IN() comparison.
-     * @param string|string[] $y The placeholder or the array of values to be used by NOT IN() comparison.
+     * @param string          $x The SQL expression to be matched against the set.
+     * @param string|string[] $y The SQL expression or an array of SQL expressions representing the set.
      *
      * @return string
      */

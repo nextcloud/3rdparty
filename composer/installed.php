@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '40760a4a1a27329d466579e360ae199e44f1f914',
+        'reference' => 'bf2bcdc22908b96ef44ef8c44f647a5a4cf803b6',
         'name' => 'nextcloud/3rdparty',
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -101,12 +101,21 @@
             'dev_requirement' => false,
         ),
         'doctrine/dbal' => array(
-            'pretty_version' => '3.0.0',
-            'version' => '3.0.0.0',
+            'pretty_version' => '3.1.4',
+            'version' => '3.1.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/dbal',
             'aliases' => array(),
-            'reference' => 'ee6d1260d5cc20ec506455a585945d7bdb98662c',
+            'reference' => '821b4f01a36ce63ed36c090ea74767b72db367e9',
+            'dev_requirement' => false,
+        ),
+        'doctrine/deprecations' => array(
+            'pretty_version' => 'v0.5.3',
+            'version' => '0.5.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/deprecations',
+            'aliases' => array(),
+            'reference' => '9504165960a1f83cc1480e2be1dd0a0478561314',
             'dev_requirement' => false,
         ),
         'doctrine/event-manager' => array(
@@ -295,7 +304,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '40760a4a1a27329d466579e360ae199e44f1f914',
+            'reference' => 'bf2bcdc22908b96ef44ef8c44f647a5a4cf803b6',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(

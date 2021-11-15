@@ -6,6 +6,7 @@ use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Deprecations\Deprecation;
 
 use function array_change_key_case;
 use function array_filter;
@@ -20,7 +21,6 @@ use function preg_match;
 use function preg_replace;
 use function sprintf;
 use function str_replace;
-use function strlen;
 use function strpos;
 use function strtolower;
 use function trim;
@@ -32,11 +32,13 @@ use const CASE_LOWER;
  */
 class PostgreSQLSchemaManager extends AbstractSchemaManager
 {
-    /** @var string[] */
+    /** @var string[]|null */
     private $existingSchemaPaths;
 
     /**
      * Gets all the existing schema names.
+     *
+     * @deprecated Use {@link listSchemaNames()} instead.
      *
      * @return string[]
      *
@@ -44,8 +46,28 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
      */
     public function getSchemaNames()
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4503',
+            'PostgreSQLSchemaManager::getSchemaNames() is deprecated,'
+                . ' use PostgreSQLSchemaManager::listSchemaNames() instead.'
+        );
+
+        return $this->listNamespaceNames();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function listSchemaNames(): array
+    {
         return $this->_conn->fetchFirstColumn(
-            "SELECT nspname FROM pg_namespace WHERE nspname !~ '^pg_.*' AND nspname != 'information_schema'"
+            <<<'SQL'
+SELECT schema_name
+FROM   information_schema.schemata
+WHERE  schema_name NOT LIKE 'pg\_%'
+AND    schema_name != 'information_schema'
+SQL
         );
     }
 
@@ -73,6 +95,8 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
      *
      * This is a PostgreSQL only function.
      *
+     * @internal The method should be only used from within the PostgreSQLSchemaManager class hierarchy.
+     *
      * @return string[]
      */
     public function getExistingSchemaSearchPaths()
@@ -80,6 +104,8 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
         if ($this->existingSchemaPaths === null) {
             $this->determineExistingSchemaSearchPaths();
         }
+
+        assert($this->existingSchemaPaths !== null);
 
         return $this->existingSchemaPaths;
     }
@@ -89,11 +115,13 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
      *
      * This is a PostgreSQL only function.
      *
+     * @internal The method should be only used from within the PostgreSQLSchemaManager class hierarchy.
+     *
      * @return void
      */
     public function determineExistingSchemaSearchPaths()
     {
-        $names = $this->getSchemaNames();
+        $names = $this->listSchemaNames();
         $paths = $this->getSchemaSearchPaths();
 
         $this->existingSchemaPaths = array_filter($paths, static function ($v) use ($names): bool {
@@ -106,11 +134,8 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
      */
     protected function _getPortableTableForeignKeyDefinition($tableForeignKey)
     {
-        $onUpdate       = null;
-        $onDelete       = null;
-        $localColumns   = [];
-        $foreignColumns = [];
-        $foreignTable   = null;
+        $onUpdate = null;
+        $onDelete = null;
 
         if (
             preg_match(
@@ -267,9 +292,18 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Use {@link listSchemaNames()} instead.
      */
     protected function getPortableNamespaceDefinition(array $namespace)
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4503',
+            'PostgreSQLSchemaManager::getPortableNamespaceDefinition() is deprecated,'
+                . ' use PostgreSQLSchemaManager::listSchemaNames() instead.'
+        );
+
         return $namespace['nspname'];
     }
 
@@ -312,16 +346,22 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
         $matches = [];
 
         $autoincrement = false;
-        if (preg_match("/^nextval\('(.*)'(::.*)?\)$/", $tableColumn['default'], $matches) === 1) {
+
+        if (
+            $tableColumn['default'] !== null
+            && preg_match("/^nextval\('(.*)'(::.*)?\)$/", $tableColumn['default'], $matches) === 1
+        ) {
             $tableColumn['sequence'] = $matches[1];
             $tableColumn['default']  = null;
             $autoincrement           = true;
         }
 
-        if (preg_match("/^['(](.*)[')]::/", $tableColumn['default'], $matches) === 1) {
-            $tableColumn['default'] = $matches[1];
-        } elseif (preg_match('/^NULL::/', $tableColumn['default']) === 1) {
-            $tableColumn['default'] = null;
+        if ($tableColumn['default'] !== null) {
+            if (preg_match("/^['(](.*)[')]::/", $tableColumn['default'], $matches) === 1) {
+                $tableColumn['default'] = $matches[1];
+            } elseif (preg_match('/^NULL::/', $tableColumn['default']) === 1) {
+                $tableColumn['default'] = null;
+            }
         }
 
         $length = $tableColumn['length'] ?? null;
@@ -345,7 +385,8 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
 
         $dbType = strtolower($tableColumn['type']);
         if (
-            strlen($tableColumn['domain_type']) > 0
+            $tableColumn['domain_type'] !== null
+            && $tableColumn['domain_type'] !== ''
             && ! $this->_platform->hasDoctrineTypeMappingFor($tableColumn['type'])
         ) {
             $dbType                       = strtolower($tableColumn['domain_type']);
@@ -485,7 +526,7 @@ class PostgreSQLSchemaManager extends AbstractSchemaManager
      */
     private function fixVersion94NegativeNumericDefaultValue($defaultValue)
     {
-        if (strpos($defaultValue, '(') === 0) {
+        if ($defaultValue !== null && strpos($defaultValue, '(') === 0) {
             return trim($defaultValue, '()');
         }
 
