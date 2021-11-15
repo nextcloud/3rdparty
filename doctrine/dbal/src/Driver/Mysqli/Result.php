@@ -8,15 +8,14 @@ use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\FetchUtils;
 use Doctrine\DBAL\Driver\Mysqli\Exception\StatementError;
 use Doctrine\DBAL\Driver\Result as ResultInterface;
+use mysqli_sql_exception;
 use mysqli_stmt;
 use stdClass;
 
 use function array_combine;
 use function array_fill;
 use function array_map;
-use function assert;
 use function count;
-use function is_array;
 
 final class Result implements ResultInterface
 {
@@ -60,7 +59,6 @@ final class Result implements ResultInterface
         $this->hasColumns = true;
 
         $fields = $meta->fetch_fields();
-        assert(is_array($fields));
 
         $this->columnNames = array_map(static function (stdClass $field): string {
             return $field->name;
@@ -101,7 +99,11 @@ final class Result implements ResultInterface
      */
     public function fetchNumeric()
     {
-        $ret = $this->statement->fetch();
+        try {
+            $ret = $this->statement->fetch();
+        } catch (mysqli_sql_exception $e) {
+            throw StatementError::upcast($e);
+        }
 
         if ($ret === false) {
             throw StatementError::new($this->statement);
