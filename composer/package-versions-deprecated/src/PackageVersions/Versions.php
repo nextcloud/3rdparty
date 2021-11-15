@@ -122,7 +122,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.9@ed172d2dc1a6b87b5c644c07c118cd30c1b3819b',
   'web-auth/metadata-service' => 'v3.3.9@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.9@04b98ee3d39cb79dad68a7c15c297c085bf66bfe',
-  'nextcloud/3rdparty' => 'dev-master@ca58d28f104cf532e992a0586e5300e03b3832d3',
+  'nextcloud/3rdparty' => 'dev-master@bf2bcdc22908b96ef44ef8c44f647a5a4cf803b6',
 );
 
     private function __construct()
