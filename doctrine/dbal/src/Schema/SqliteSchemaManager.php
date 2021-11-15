@@ -52,13 +52,12 @@ class SqliteSchemaManager extends AbstractSchemaManager
      */
     public function createDatabase($database)
     {
-        $params  = $this->_conn->getParams();
-        $driver  = $params['driver'];
-        $options = [
-            'driver' => $driver,
-            'path' => $database,
-        ];
-        $conn    = DriverManager::getConnection($options);
+        $params = $this->_conn->getParams();
+
+        $params['path'] = $database;
+        unset($params['memory']);
+
+        $conn = DriverManager::getConnection($params);
         $conn->connect();
         $conn->close();
     }
@@ -181,15 +180,23 @@ class SqliteSchemaManager extends AbstractSchemaManager
             $this->_conn->quote($tableName)
         ));
 
-        usort($indexArray, static function ($a, $b) {
-            if ($a['pk'] === $b['pk']) {
-                return $a['cid'] - $b['cid'];
-            }
+        usort(
+            $indexArray,
+            /**
+             * @param array<string,mixed> $a
+             * @param array<string,mixed> $b
+             */
+            static function (array $a, array $b): int {
+                if ($a['pk'] === $b['pk']) {
+                    return $a['cid'] - $b['cid'];
+                }
 
-            return $a['pk'] - $b['pk'];
-        });
+                return $a['pk'] - $b['pk'];
+            }
+        );
+
         foreach ($indexArray as $indexColumnRow) {
-            if ($indexColumnRow['pk'] === '0') {
+            if ($indexColumnRow['pk'] === 0 || $indexColumnRow['pk'] === '0') {
                 continue;
             }
 
@@ -240,7 +247,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
         $autoincrementCount  = 0;
 
         foreach ($tableColumns as $tableColumn) {
-            if ($tableColumn['pk'] === '0') {
+            if ($tableColumn['pk'] === 0 || $tableColumn['pk'] === '0') {
                 continue;
             }
 
@@ -362,7 +369,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
 
         $options = [
             'length'   => $length,
-            'unsigned' => (bool) $unsigned,
+            'unsigned' => $unsigned,
             'fixed'    => $fixed,
             'notnull'  => $notnull,
             'default'  => $default,
@@ -412,7 +419,12 @@ class SqliteSchemaManager extends AbstractSchemaManager
                 ];
             }
 
-            $list[$name]['local'][]   = $value['from'];
+            $list[$name]['local'][] = $value['from'];
+
+            if ($value['to'] === null) {
+                continue;
+            }
+
             $list[$name]['foreign'][] = $value['to'];
         }
 
@@ -555,5 +567,14 @@ SQL
         }
 
         return $table;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSchemaSearchPaths()
+    {
+        // SQLite does not support schemas or databases
+        return [];
     }
 }

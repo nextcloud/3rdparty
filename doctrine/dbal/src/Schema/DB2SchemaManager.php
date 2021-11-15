@@ -5,6 +5,7 @@ namespace Doctrine\DBAL\Schema;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\DB2Platform;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 
 use function array_change_key_case;
 use function assert;
@@ -69,11 +70,19 @@ class DB2SchemaManager extends AbstractSchemaManager
 
         switch (strtolower($tableColumn['typename'])) {
             case 'varchar':
+                if ($tableColumn['codepage'] === 0) {
+                    $type = Types::BINARY;
+                }
+
                 $length = $tableColumn['length'];
                 $fixed  = false;
                 break;
 
             case 'character':
+                if ($tableColumn['codepage'] === 0) {
+                    $type = Types::BINARY;
+                }
+
                 $length = $tableColumn['length'];
                 $fixed  = true;
                 break;
@@ -96,7 +105,7 @@ class DB2SchemaManager extends AbstractSchemaManager
             'fixed'         => (bool) $fixed,
             'default'       => $default,
             'autoincrement' => (bool) $tableColumn['autoincrement'],
-            'notnull'       => (bool) ($tableColumn['nulls'] === 'N'),
+            'notnull'       => $tableColumn['nulls'] === 'N',
             'scale'         => null,
             'precision'     => null,
             'comment'       => isset($tableColumn['comment']) && $tableColumn['comment'] !== ''

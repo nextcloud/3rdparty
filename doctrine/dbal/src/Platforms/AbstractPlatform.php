@@ -30,6 +30,7 @@ use Doctrine\DBAL\SQL\Parser;
 use Doctrine\DBAL\TransactionIsolationLevel;
 use Doctrine\DBAL\Types;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 use UnexpectedValueException;
 
@@ -58,9 +59,6 @@ use function strlen;
 use function strpos;
 use function strtolower;
 use function strtoupper;
-use function trigger_error;
-
-use const E_USER_DEPRECATED;
 
 /**
  * Base class for all DatabasePlatforms. The DatabasePlatforms are the central
@@ -245,12 +243,14 @@ abstract class AbstractPlatform
 
         if ($column['length'] > $maxLength) {
             if ($maxLength > 0) {
-                @trigger_error(sprintf(
+                Deprecation::trigger(
+                    'doctrine/dbal',
+                    'https://github.com/doctrine/dbal/issues/3187',
                     'Binary column length %d is greater than supported by the platform (%d).'
                         . ' Reduce the column length or use a BLOB column instead.',
                     $column['length'],
                     $maxLength
-                ), E_USER_DEPRECATED);
+                );
             }
 
             return $this->getBlobTypeDeclarationSQL($column);
@@ -1352,13 +1352,21 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL snippet to drop an existing database.
      *
-     * @param string $database The name of the database that should be dropped.
+     * @param string $name The name of the database that should be dropped.
      *
      * @return string
      */
-    public function getDropDatabaseSQL($database)
+    public function getDropDatabaseSQL($name)
     {
-        return 'DROP DATABASE ' . $database;
+        return 'DROP DATABASE ' . $name;
+    }
+
+    /**
+     * Returns the SQL snippet to drop a schema.
+     */
+    public function getDropSchemaSQL(string $schemaName): string
+    {
+        return 'DROP SCHEMA ' . $schemaName;
     }
 
     /**
@@ -1768,6 +1776,8 @@ abstract class AbstractPlatform
                     'Can only create primary or unique constraints, no common indexes with getCreateConstraintSQL().'
                 );
             }
+        } elseif ($constraint instanceof UniqueConstraint) {
+            $query .= ' UNIQUE';
         } elseif ($constraint instanceof ForeignKeyConstraint) {
             $query .= ' FOREIGN KEY';
 
@@ -2742,12 +2752,21 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL statement for retrieving the namespaces defined in the database.
      *
+     * @deprecated Use {@link AbstractSchemaManager::listSchemaNames()} instead.
+     *
      * @return string
      *
      * @throws Exception If not supported on this platform.
      */
     public function getListNamespacesSQL()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4503',
+            'AbstractPlatform::getListNamespacesSQL() is deprecated,'
+                . ' use AbstractSchemaManager::listSchemaNames() instead.'
+        );
+
         throw Exception::notSupported(__METHOD__);
     }
 
@@ -2910,13 +2929,13 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to create a new database.
      *
-     * @param string $database The name of the database that should be created.
+     * @param string $name The name of the database that should be created.
      *
      * @return string
      *
      * @throws Exception If not supported on this platform.
      */
-    public function getCreateDatabaseSQL($database)
+    public function getCreateDatabaseSQL($name)
     {
         throw Exception::notSupported(__METHOD__);
     }
@@ -3346,7 +3365,11 @@ abstract class AbstractPlatform
             ));
         }
 
-        return $this->doModifyLimitQuery($query, $limit, $offset);
+        if ($limit !== null) {
+            $limit = (int) $limit;
+        }
+
+        return $this->doModifyLimitQuery($query, $limit, (int) $offset);
     }
 
     /**
@@ -3480,18 +3503,28 @@ abstract class AbstractPlatform
     final public function getReservedKeywordsList()
     {
         // Check for an existing instantiation of the keywords class.
-        if ($this->_keywords !== null) {
-            return $this->_keywords;
+        if ($this->_keywords === null) {
+            // Store the instance so it doesn't need to be generated on every request.
+            $this->_keywords = $this->createReservedKeywordsList();
         }
 
+        return $this->_keywords;
+    }
+
+    /**
+     * Creates an instance of the reserved keyword list of this platform.
+     *
+     * This method will become @abstract in DBAL 4.0.0.
+     *
+     * @throws Exception
+     */
+    protected function createReservedKeywordsList(): KeywordList
+    {
         $class    = $this->getReservedKeywordsClass();
         $keywords = new $class();
         if (! $keywords instanceof KeywordList) {
             throw Exception::notSupported(__METHOD__);
         }
-
-        // Store the instance so it doesn't need to be generated on every request.
-        $this->_keywords = $keywords;
 
         return $keywords;
     }
@@ -3499,12 +3532,22 @@ abstract class AbstractPlatform
     /**
      * Returns the class name of the reserved keywords list.
      *
+     * @deprecated Implement {@link createReservedKeywordsList()} instead.
+     *
      * @return string
+     * @psalm-return class-string<KeywordList>
      *
      * @throws Exception If not supported on this platform.
      */
     protected function getReservedKeywordsClass()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4510',
+            'AbstractPlatform::getReservedKeywordsClass() is deprecated,'
+                . ' use AbstractPlatform::createReservedKeywordsList() instead.'
+        );
+
         throw Exception::notSupported(__METHOD__);
     }
 

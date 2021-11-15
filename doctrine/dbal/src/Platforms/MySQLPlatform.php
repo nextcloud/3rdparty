@@ -11,6 +11,7 @@ use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\TransactionIsolationLevel;
 use Doctrine\DBAL\Types\BlobType;
 use Doctrine\DBAL\Types\TextType;
+use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 
 use function array_diff_key;
@@ -32,8 +33,6 @@ use function trim;
  * The MySQLPlatform provides the behavior, features and SQL dialect of the
  * MySQL database platform. This platform represents a MySQL 5.0 or greater platform that
  * uses the InnoDB storage engine.
- *
- * @todo   Rename: MySQLPlatform
  */
 class MySQLPlatform extends AbstractPlatform
 {
@@ -186,7 +185,7 @@ class MySQLPlatform extends AbstractPlatform
         }
 
         $sql = 'SELECT DISTINCT k.`CONSTRAINT_NAME`, k.`COLUMN_NAME`, k.`REFERENCED_TABLE_NAME`, ' .
-               'k.`REFERENCED_COLUMN_NAME` /*!50116 , c.update_rule, c.delete_rule */ ' .
+               'k.`REFERENCED_COLUMN_NAME`, k.`ORDINAL_POSITION` /*!50116 , c.update_rule, c.delete_rule */ ' .
                'FROM information_schema.key_column_usage k /*!50116 ' .
                'INNER JOIN information_schema.referential_constraints c ON ' .
                '  c.constraint_name = k.constraint_name AND ' .
@@ -196,7 +195,8 @@ class MySQLPlatform extends AbstractPlatform
 
         return $sql . ' AND k.table_schema = ' . $databaseNameSql
             . ' /*!50116 AND c.constraint_schema = ' . $databaseNameSql . ' */'
-            . ' AND k.`REFERENCED_COLUMN_NAME` is not NULL';
+            . ' AND k.`REFERENCED_COLUMN_NAME` is not NULL'
+            . ' ORDER BY k.`ORDINAL_POSITION`';
     }
 
     /**
@@ -1105,9 +1105,18 @@ SQL
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated Implement {@link createReservedKeywordsList()} instead.
      */
     protected function getReservedKeywordsClass()
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4510',
+            'MySQLPlatform::getReservedKeywordsClass() is deprecated,'
+                . ' use MySQLPlatform::createReservedKeywordsList() instead.'
+        );
+
         return Keywords\MySQLKeywords::class;
     }
 
