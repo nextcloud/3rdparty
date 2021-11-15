@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '1d7fff4111e438dd496fb8a5d518ea6b8b910b83',
+        'reference' => '6dbc988f738b92a5da1da47e5bad328eebb04ee5',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -101,12 +101,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/dbal' => array(
-            'pretty_version' => '3.1.3',
-            'version' => '3.1.3.0',
+            'pretty_version' => '3.1.4',
+            'version' => '3.1.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/dbal',
             'aliases' => array(),
-            'reference' => '96b0053775a544b4a6ab47654dac0621be8b4cf8',
+            'reference' => '821b4f01a36ce63ed36c090ea74767b72db367e9',
             'dev_requirement' => false,
         ),
         'doctrine/deprecations' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '1d7fff4111e438dd496fb8a5d518ea6b8b910b83',
+            'reference' => '6dbc988f738b92a5da1da47e5bad328eebb04ee5',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
