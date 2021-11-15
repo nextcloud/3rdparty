@@ -20,7 +20,7 @@ class QueryCacheProfile
     private $resultCacheDriver;
 
     /** @var int */
-    private $lifetime = 0;
+    private $lifetime;
 
     /** @var string|null */
     private $cacheKey;
@@ -78,6 +78,10 @@ class QueryCacheProfile
      */
     public function generateCacheKeys($sql, $params, $types, array $connectionParams = [])
     {
+        if (isset($connectionParams['password'])) {
+            unset($connectionParams['password']);
+        }
+
         $realCacheKey = 'query=' . $sql .
             '&params=' . serialize($params) .
             '&types=' . serialize($types) .

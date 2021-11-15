@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Type;
 use function array_change_key_case;
 use function array_values;
 use function assert;
+use function is_string;
 use function preg_match;
 use function str_replace;
 use function strpos;
@@ -68,7 +69,7 @@ class OracleSchemaManager extends AbstractSchemaManager
             $keyName = strtolower($tableIndex['name']);
             $buffer  = [];
 
-            if (strtolower($tableIndex['is_primary']) === 'p') {
+            if ($tableIndex['is_primary'] === 'P') {
                 $keyName              = 'primary';
                 $buffer['primary']    = true;
                 $buffer['non_unique'] = false;
@@ -108,7 +109,9 @@ class OracleSchemaManager extends AbstractSchemaManager
         }
 
         // Default values returned from database sometimes have trailing spaces.
-        $tableColumn['data_default'] = trim($tableColumn['data_default']);
+        if (is_string($tableColumn['data_default'])) {
+            $tableColumn['data_default'] = trim($tableColumn['data_default']);
+        }
 
         if ($tableColumn['data_default'] === '' || $tableColumn['data_default'] === 'NULL') {
             $tableColumn['data_default'] = null;
@@ -154,6 +157,11 @@ class OracleSchemaManager extends AbstractSchemaManager
                 $fixed  = false;
                 break;
 
+            case 'raw':
+                $length = $tableColumn['data_length'];
+                $fixed  = true;
+                break;
+
             case 'char':
             case 'nchar':
                 $length = $tableColumn['char_length'];
@@ -162,7 +170,7 @@ class OracleSchemaManager extends AbstractSchemaManager
         }
 
         $options = [
-            'notnull'    => (bool) ($tableColumn['nullable'] === 'N'),
+            'notnull'    => $tableColumn['nullable'] === 'N',
             'fixed'      => (bool) $fixed,
             'unsigned'   => (bool) $unsigned,
             'default'    => $tableColumn['data_default'],
@@ -249,18 +257,23 @@ class OracleSchemaManager extends AbstractSchemaManager
      */
     public function createDatabase($database)
     {
-        $params   = $this->_conn->getParams();
-        $username = $database;
-        $password = $params['password'];
+        $statement = 'CREATE USER ' . $database;
 
-        $query = 'CREATE USER ' . $username . ' IDENTIFIED BY ' . $password;
-        $this->_conn->executeStatement($query);
+        $params = $this->_conn->getParams();
 
-        $query = 'GRANT DBA TO ' . $username;
-        $this->_conn->executeStatement($query);
+        if (isset($params['password'])) {
+            $statement .= ' IDENTIFIED BY ' . $params['password'];
+        }
+
+        $this->_conn->executeStatement($statement);
+
+        $statement = 'GRANT DBA TO ' . $database;
+        $this->_conn->executeStatement($statement);
     }
 
     /**
+     * @internal The method should be only used from within the OracleSchemaManager class hierarchy.
+     *
      * @param string $table
      *
      * @return bool

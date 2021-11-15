@@ -3,6 +3,8 @@
 namespace Doctrine\DBAL\Query\Expression;
 
 use Countable;
+use Doctrine\Deprecations\Deprecation;
+use ReturnTypeWillChange;
 
 use function array_merge;
 use function count;
@@ -48,6 +50,12 @@ class CompositeExpression implements Countable
         $this->type = $type;
 
         $this->addMultiple($parts);
+
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/3864',
+            'Do not use CompositeExpression constructor directly, use static and() and or() factory methods.'
+        );
     }
 
     /**
@@ -79,6 +87,12 @@ class CompositeExpression implements Countable
      */
     public function addMultiple(array $parts = [])
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/3844',
+            'CompositeExpression::addMultiple() is deprecated, use CompositeExpression::with() instead.'
+        );
+
         foreach ($parts as $part) {
             $this->add($part);
         }
@@ -97,6 +111,12 @@ class CompositeExpression implements Countable
      */
     public function add($part)
     {
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/3844',
+            'CompositeExpression::add() is deprecated, use CompositeExpression::with() instead.'
+        );
+
         if ($part === null) {
             return $this;
         }
@@ -130,6 +150,7 @@ class CompositeExpression implements Countable
      *
      * @return int
      */
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->parts);
