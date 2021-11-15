@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'b656b5f2fc141d723435dce052ed9bb1c2154f1f',
+        'reference' => '40760a4a1a27329d466579e360ae199e44f1f914',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -62,6 +62,15 @@
             'install_path' => __DIR__ . '/./package-versions-deprecated',
             'aliases' => array(),
             'reference' => '7413f0b55a051e89485c5cb9f765fe24bb02a7b6',
+            'dev_requirement' => false,
+        ),
+        'cweagans/composer-patches' => array(
+            'pretty_version' => '1.7.1',
+            'version' => '1.7.1.0',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../cweagans/composer-patches',
+            'aliases' => array(),
+            'reference' => '9888dcc74993c030b75f3dd548bb5e20cdbd740c',
             'dev_requirement' => false,
         ),
         'deepdiver/zipstreamer' => array(
@@ -286,7 +295,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'b656b5f2fc141d723435dce052ed9bb1c2154f1f',
+            'reference' => '40760a4a1a27329d466579e360ae199e44f1f914',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(

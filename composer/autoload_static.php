@@ -138,6 +138,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'libphonenumber\\' => 15,
         ),
+        'c' => 
+        array (
+            'cweagans\\Composer\\' => 18,
+        ),
         'b' => 
         array (
             'bantu\\IniGetWrapper\\' => 20,
@@ -290,6 +294,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'libphonenumber\\' => 
         array (
             0 => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src',
+        ),
+        'cweagans\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
         ),
         'bantu\\IniGetWrapper\\' => 
         array (
@@ -3809,6 +3817,9 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'ZipStreamer\\Lib\\Count64_64' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/Lib/Count64_64.php',
         'ZipStreamer\\ZipStreamer' => __DIR__ . '/..' . '/deepdiver/zipstreamer/src/ZipStreamer.php',
         'bantu\\IniGetWrapper\\IniGetWrapper' => __DIR__ . '/..' . '/bantu/ini-get-wrapper/src/IniGetWrapper.php',
+        'cweagans\\Composer\\PatchEvent' => __DIR__ . '/..' . '/cweagans/composer-patches/src/PatchEvent.php',
+        'cweagans\\Composer\\PatchEvents' => __DIR__ . '/..' . '/cweagans/composer-patches/src/PatchEvents.php',
+        'cweagans\\Composer\\Patches' => __DIR__ . '/..' . '/cweagans/composer-patches/src/Patches.php',
         'libphonenumber\\AlternateFormatsCountryCodeSet' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/AlternateFormatsCountryCodeSet.php',
         'libphonenumber\\AsYouTypeFormatter' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/AsYouTypeFormatter.php',
         'libphonenumber\\CountryCodeSource' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src/CountryCodeSource.php',
