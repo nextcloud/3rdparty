@@ -58,7 +58,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '00(?:(?:37|66)\\d{6,13}|(?:777(?:[01]|(?:5|8\\d)\\d)|882[1245]\\d\\d)\\d\\d)|(?:120|800\\d)\\d{6}',
+    'NationalNumberPattern' => '00777(?:[01]|5\\d)\\d\\d|(?:00(?:7778|882[1245])|(?:120|800\\d)\\d\\d)\\d{4}|00(?:37|66|78)\\d{6,13}',
     'ExampleNumber' => '120123456',
     'PossibleLength' => 
     array (
@@ -115,7 +115,7 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '20[1-9]\\d{7}',
+    'NationalNumberPattern' => '20\\d{8}',
     'ExampleNumber' => '2012345678',
     'PossibleLength' => 
     array (
@@ -149,7 +149,7 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '00(?:777(?:[01]|(?:5|8\\d)\\d)|882[1245]\\d\\d)\\d\\d|00(?:37|66)\\d{6,13}',
+    'NationalNumberPattern' => '00(?:777(?:[01]|(?:5|8\\d)\\d)|882[1245]\\d\\d)\\d\\d|00(?:37|66|78)\\d{6,13}',
     'PossibleLength' => 
     array (
     ),
@@ -265,6 +265,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '007',
+        1 => '0077',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

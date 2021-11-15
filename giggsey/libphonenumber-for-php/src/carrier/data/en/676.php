@@ -11,6 +11,9 @@
  */
 
 return array (
+  676554 => 'Toko Wireless',
+  676555 => 'Toko Wireless',
+  676556 => 'Toko Wireless',
   67668 => 'Digicel',
   67670 => 'Digicel',
   67672 => 'U-Call Tonga',
@@ -26,4 +29,5 @@ return array (
   67687 => 'Digicel',
   67688 => 'Digicel',
   67689 => 'Digicel',
+  6769 => 'Digicel',
 );
