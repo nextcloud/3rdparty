@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'e2d57e734afb86184ddae5e69ef072049902be26',
+        'reference' => '63fb4b71ca413ca603257752b73af5dcd11a0b7e',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -155,12 +155,12 @@
             'dev_requirement' => false,
         ),
         'giggsey/libphonenumber-for-php' => array(
-            'pretty_version' => '8.12.25',
-            'version' => '8.12.25.0',
+            'pretty_version' => '8.12.37',
+            'version' => '8.12.37.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../giggsey/libphonenumber-for-php',
             'aliases' => array(),
-            'reference' => '7d397cbd2e01e78cf79ff347e40a403dbc4c22fa',
+            'reference' => '4113157949337384c41b77bc1d5c0d46c1c3201b',
             'dev_requirement' => false,
         ),
         'giggsey/locale' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'e2d57e734afb86184ddae5e69ef072049902be26',
+            'reference' => '63fb4b71ca413ca603257752b73af5dcd11a0b7e',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
