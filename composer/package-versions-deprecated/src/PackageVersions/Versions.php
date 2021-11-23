@@ -51,9 +51,9 @@ final class Versions
   'fgrosse/phpasn1' => 'v2.3.0@20299033c35f4300eb656e7e8e88cf52d1d6694e',
   'giggsey/libphonenumber-for-php' => '8.12.25@7d397cbd2e01e78cf79ff347e40a403dbc4c22fa',
   'giggsey/locale' => '1.9@b07f1eace8072ccc61445ad8fbd493ff9d783043',
-  'guzzlehttp/guzzle' => '7.3.0@7008573787b430c1c1f650e3722d9bba59967628',
-  'guzzlehttp/promises' => '1.4.1@8e7d04f1f6450fef59366c399cfad4b9383aa30d',
-  'guzzlehttp/psr7' => '1.8.2@dc960a912984efb74d0a90222870c72c87f10c91',
+  'guzzlehttp/guzzle' => '7.4.0@868b3571a039f0ebc11ac8f344f4080babe2cb94',
+  'guzzlehttp/promises' => '1.5.1@fe752aedc9fd8fcca3fe7ad05d419d32998a06da',
+  'guzzlehttp/psr7' => '1.8.3@1afdd860a2566ed3c2b0b4a3de6e23434a79ec85',
   'guzzlehttp/uri-template' => 'v0.2.0@db46525d6d8fee71033b73cc07160f3e5271a8ce',
   'icewind/searchdav' => 'v2.0.0@c69806d900c2c9a5954bfabc80178d6eb0d63df4',
   'icewind/streams' => 'v0.7.5@0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2',
@@ -99,6 +99,7 @@ final class Versions
   'stecman/symfony-console-completion' => '0.11.0@a9502dab59405e275a9f264536c4e1cb61fc3518',
   'swiftmailer/swiftmailer' => 'v6.2.7@15f7faf8508e04471f666633addacf54c0ab5933',
   'symfony/console' => 'v4.4.30@a3f7189a0665ee33b50e9e228c46f50f5acbed22',
+  'symfony/deprecation-contracts' => 'v2.5.0@6f981ee24cf69ee7ce9736146d1c57c2780598a8',
   'symfony/event-dispatcher' => 'v4.4.30@2fe81680070043c4c80e7cedceb797e34f377bac',
   'symfony/event-dispatcher-contracts' => 'v1.1.9@84e23fdcd2517bf37aecbd16967e83f0caee25a7',
   'symfony/polyfill-ctype' => 'v1.23.0@46cd95797e9df938fdd2b03693b5fca5e64b01ce',
@@ -119,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.9@ed172d2dc1a6b87b5c644c07c118cd30c1b3819b',
   'web-auth/metadata-service' => 'v3.3.9@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.9@04b98ee3d39cb79dad68a7c15c297c085bf66bfe',
-  'nextcloud/3rdparty' => 'dev-master@991ab6cf6ecfd7795a4cbcedf6de0b0293fa34cf',
+  'nextcloud/3rdparty' => 'dev-master@e2d57e734afb86184ddae5e69ef072049902be26',
 );
 
     private function __construct()
