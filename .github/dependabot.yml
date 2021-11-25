@@ -28,6 +28,19 @@ updates:
 
 - package-ecosystem: composer
   directory: "/"
+  target-branch: stable23
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
+
+- package-ecosystem: composer
+  directory: "/"
   target-branch: stable22
   schedule:
     interval: weekly
@@ -42,19 +55,6 @@ updates:
 - package-ecosystem: composer
   directory: "/"
   target-branch: stable21
-  schedule:
-    interval: weekly
-    day: saturday
-    time: "03:00"
-    timezone: Europe/Paris
-  open-pull-requests-limit: 10
-  ignore:
-    - dependency-name: "*"
-      update-types: ["version-update:semver-major"]
-
-- package-ecosystem: composer
-  directory: "/"
-  target-branch: stable20
   schedule:
     interval: weekly
     day: saturday
