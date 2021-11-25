@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'f8988a124c3daf700baee88010e9b7dfc189a8b4',
+        'reference' => '991ab6cf6ecfd7795a4cbcedf6de0b0293fa34cf',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'f8988a124c3daf700baee88010e9b7dfc189a8b4',
+            'reference' => '991ab6cf6ecfd7795a4cbcedf6de0b0293fa34cf',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -425,12 +425,12 @@
             'dev_requirement' => false,
         ),
         'pimple/pimple' => array(
-            'pretty_version' => 'v3.4.0',
-            'version' => '3.4.0.0',
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pimple/pimple',
             'aliases' => array(),
-            'reference' => '86406047271859ffc13424a048541f4531f53601',
+            'reference' => 'a94b3a4db7fb774b3d78dad2315ddc07629e1bed',
             'dev_requirement' => false,
         ),
         'psr/container' => array(
