@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '11d0523a07f09a005bace79d4172b734517f760d',
+        'reference' => 'a4ce933baff9c07e2bd9005cc101b791ea455682',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -47,12 +47,12 @@
             'dev_requirement' => false,
         ),
         'christophwurst/id3parser' => array(
-            'pretty_version' => 'v0.1.2',
-            'version' => '0.1.2.0',
+            'pretty_version' => 'v0.1.4',
+            'version' => '0.1.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../christophwurst/id3parser',
             'aliases' => array(),
-            'reference' => 'd7f5e9e7db69a24e3111a2033cbdf640f9456f2f',
+            'reference' => '050c9d81ea89b0cf53e23a27efc4e1840f9ab260',
             'dev_requirement' => false,
         ),
         'composer/package-versions-deprecated' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '11d0523a07f09a005bace79d4172b734517f760d',
+            'reference' => 'a4ce933baff9c07e2bd9005cc101b791ea455682',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
