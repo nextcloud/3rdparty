@@ -87,12 +87,12 @@ final class Versions
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
   'ramsey/collection' => '1.1.3@28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1',
   'ramsey/uuid' => '4.1.1@cd4032040a750077205918c86049aa0f43d22947',
-  'sabre/dav' => '4.1.5@c1afdc77a95efea6ee40c03c45f57c3c0c80ec22',
-  'sabre/event' => '5.1.2@c120bec57c17b6251a496efc82b732418b49d50a',
-  'sabre/http' => '5.1.1@d0aafede6961df6195ce7a8dad49296b0aaee22e',
-  'sabre/uri' => '2.2.1@f502edffafea8d746825bd5f0b923a60fd2715ff',
-  'sabre/vobject' => '4.3.5@d8a0a9ae215a8acfb51afc29101c7344670b9c83',
-  'sabre/xml' => '2.2.3@c3b959f821c19b36952ec4a595edd695c216bfc6',
+  'sabre/dav' => '4.2.0@af125a40abdac787c438a6fed6da3451bcaa0886',
+  'sabre/event' => '5.1.4@d7da22897125d34d7eddf7977758191c06a74497',
+  'sabre/http' => '5.1.3@315f592adfcba8aeb73c2fd64285205747acbbd7',
+  'sabre/uri' => '2.2.2@7cb0f489578afad5006e85cd60f18ff33f2d440d',
+  'sabre/vobject' => '4.4.0@0a2e27c797ec0934f376764e1a16567bbbcece0b',
+  'sabre/xml' => '2.2.5@a6af111850e7536d200d9637c34885cd3c77a86c',
   'scssphp/scssphp' => 'v1.4.1@ba86c963b94ec7ebd6e19d90cdab90d89667dbf7',
   'spomky-labs/base64url' => 'v2.0.4@7752ce931ec285da4ed1f4c5aa27e45e097be61d',
   'spomky-labs/cbor-php' => 'v2.0.1@9776578000be884cd7864eeb7c37a4ac92d8c995',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.9@ed172d2dc1a6b87b5c644c07c118cd30c1b3819b',
   'web-auth/metadata-service' => 'v3.3.9@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.9@04b98ee3d39cb79dad68a7c15c297c085bf66bfe',
-  'nextcloud/3rdparty' => 'dev-master@a4ce933baff9c07e2bd9005cc101b791ea455682',
+  'nextcloud/3rdparty' => 'dev-master@6e181eb3fbf0e2213da1765a56f95d6e18302a3c',
 );
 
     private function __construct()
