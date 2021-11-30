@@ -3746,11 +3746,6 @@
                 "bin/naturalselection"
             ],
             "type": "library",
-            "extra": {
-                "patches_applied": {
-                    "Fix BackendInterface phpdoc return type": ".patches/sabre-dav/fix-backendinterface-phpdoc.patch"
-                }
-            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {

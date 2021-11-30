@@ -1,7 +1,4 @@
 {
     "patches": {
-        "sabre/dav": {
-            "Fix BackendInterface phpdoc return type": ".patches/sabre-dav/fix-backendinterface-phpdoc.patch"
-        }
     }
 }

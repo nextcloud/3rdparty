@@ -110,7 +110,7 @@ interface BackendInterface
      * @param string $uri
      * @param string $principalPrefix
      *
-     * @return string|null
+     * @return string
      */
     public function findByUri($uri, $principalPrefix);
 
