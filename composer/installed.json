@@ -257,23 +257,23 @@
         },
         {
             "name": "christophwurst/id3parser",
-            "version": "v0.1.2",
-            "version_normalized": "0.1.2.0",
+            "version": "v0.1.4",
+            "version_normalized": "0.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/ID3Parser.git",
-                "reference": "d7f5e9e7db69a24e3111a2033cbdf640f9456f2f"
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/d7f5e9e7db69a24e3111a2033cbdf640f9456f2f",
-                "reference": "d7f5e9e7db69a24e3111a2033cbdf640f9456f2f",
+                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
-            "time": "2021-02-09T08:04:08+00:00",
+            "time": "2021-11-29T15:02:22+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -294,7 +294,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ChristophWurst/ID3Parser/issues",
-                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.2"
+                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.4"
             },
             "install-path": "../christophwurst/id3parser"
         },
