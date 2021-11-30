@@ -87,7 +87,7 @@ final class Versions
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
   'ramsey/collection' => '1.1.3@28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1',
   'ramsey/uuid' => '4.1.1@cd4032040a750077205918c86049aa0f43d22947',
-  'sabre/dav' => '4.2.0@af125a40abdac787c438a6fed6da3451bcaa0886',
+  'sabre/dav' => '4.2.1@5e651f9ddc2b05745f5b28cd697c8e8c6a0b6146',
   'sabre/event' => '5.1.4@d7da22897125d34d7eddf7977758191c06a74497',
   'sabre/http' => '5.1.3@315f592adfcba8aeb73c2fd64285205747acbbd7',
   'sabre/uri' => '2.2.2@7cb0f489578afad5006e85cd60f18ff33f2d440d',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.9@ed172d2dc1a6b87b5c644c07c118cd30c1b3819b',
   'web-auth/metadata-service' => 'v3.3.9@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.9@04b98ee3d39cb79dad68a7c15c297c085bf66bfe',
-  'nextcloud/3rdparty' => 'dev-master@05db439e16650a0853234618956eff645c505fcd',
+  'nextcloud/3rdparty' => 'dev-master@b29c900406729b0783b91e7b57ce02cdf4c0e61f',
 );
 
     private function __construct()

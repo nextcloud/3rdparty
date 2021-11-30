@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '05db439e16650a0853234618956eff645c505fcd',
+        'reference' => 'b29c900406729b0783b91e7b57ce02cdf4c0e61f',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '05db439e16650a0853234618956eff645c505fcd',
+            'reference' => 'b29c900406729b0783b91e7b57ce02cdf4c0e61f',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -572,12 +572,12 @@
             ),
         ),
         'sabre/dav' => array(
-            'pretty_version' => '4.2.0',
-            'version' => '4.2.0.0',
+            'pretty_version' => '4.2.1',
+            'version' => '4.2.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabre/dav',
             'aliases' => array(),
-            'reference' => 'af125a40abdac787c438a6fed6da3451bcaa0886',
+            'reference' => '5e651f9ddc2b05745f5b28cd697c8e8c6a0b6146',
             'dev_requirement' => false,
         ),
         'sabre/event' => array(
