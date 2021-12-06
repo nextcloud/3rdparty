@@ -93,7 +93,7 @@ final class Versions
   'sabre/uri' => '2.2.2@7cb0f489578afad5006e85cd60f18ff33f2d440d',
   'sabre/vobject' => '4.4.0@0a2e27c797ec0934f376764e1a16567bbbcece0b',
   'sabre/xml' => '2.2.5@a6af111850e7536d200d9637c34885cd3c77a86c',
-  'scssphp/scssphp' => 'v1.4.1@ba86c963b94ec7ebd6e19d90cdab90d89667dbf7',
+  'scssphp/scssphp' => 'v1.8.1@5e37759a63caf54392a4b709358a39ac7425a69f',
   'spomky-labs/base64url' => 'v2.0.4@7752ce931ec285da4ed1f4c5aa27e45e097be61d',
   'spomky-labs/cbor-php' => 'v2.0.1@9776578000be884cd7864eeb7c37a4ac92d8c995',
   'stecman/symfony-console-completion' => '0.11.0@a9502dab59405e275a9f264536c4e1cb61fc3518',
@@ -120,7 +120,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.9@ed172d2dc1a6b87b5c644c07c118cd30c1b3819b',
   'web-auth/metadata-service' => 'v3.3.9@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.9@04b98ee3d39cb79dad68a7c15c297c085bf66bfe',
-  'nextcloud/3rdparty' => 'dev-master@b29c900406729b0783b91e7b57ce02cdf4c0e61f',
+  'nextcloud/3rdparty' => 'dev-master@f6cbbf593249674d24c195e756437ea8417c1c06',
 );
 
     private function __construct()

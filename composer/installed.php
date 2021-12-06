@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'b29c900406729b0783b91e7b57ce02cdf4c0e61f',
+        'reference' => 'f6cbbf593249674d24c195e756437ea8417c1c06',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'b29c900406729b0783b91e7b57ce02cdf4c0e61f',
+            'reference' => 'f6cbbf593249674d24c195e756437ea8417c1c06',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -626,12 +626,12 @@
             'dev_requirement' => false,
         ),
         'scssphp/scssphp' => array(
-            'pretty_version' => 'v1.4.1',
-            'version' => '1.4.1.0',
+            'pretty_version' => 'v1.8.1',
+            'version' => '1.8.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../scssphp/scssphp',
             'aliases' => array(),
-            'reference' => 'ba86c963b94ec7ebd6e19d90cdab90d89667dbf7',
+            'reference' => '5e37759a63caf54392a4b709358a39ac7425a69f',
             'dev_requirement' => false,
         ),
         'spomky-labs/base64url' => array(
