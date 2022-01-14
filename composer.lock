@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bda90e6f905c21268c5b79f41bc0f31",
+    "content-hash": "c45b81a122ff60aecf0e70de58c85839",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "christophwurst/id3parser",
-            "version": "v0.1.1",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/ID3Parser.git",
-                "reference": "c0e56c336bd6131c199827f928e5a9aec89aa4da"
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/c0e56c336bd6131c199827f928e5a9aec89aa4da",
-                "reference": "c0e56c336bd6131c199827f928e5a9aec89aa4da",
+                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
                 "shasum": ""
             },
             "require": {
@@ -281,7 +281,11 @@
                 "php",
                 "tags"
             ],
-            "time": "2020-01-07T09:05:03+00:00"
+            "support": {
+                "issues": "https://github.com/ChristophWurst/ID3Parser/issues",
+                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.4"
+            },
+            "time": "2021-11-29T15:02:22+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -6096,5 +6100,5 @@
     "platform-overrides": {
         "php": "7.3.0"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

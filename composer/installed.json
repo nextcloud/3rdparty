@@ -255,23 +255,23 @@
         },
         {
             "name": "christophwurst/id3parser",
-            "version": "v0.1.1",
-            "version_normalized": "0.1.1.0",
+            "version": "v0.1.4",
+            "version_normalized": "0.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/ID3Parser.git",
-                "reference": "c0e56c336bd6131c199827f928e5a9aec89aa4da"
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/c0e56c336bd6131c199827f928e5a9aec89aa4da",
-                "reference": "c0e56c336bd6131c199827f928e5a9aec89aa4da",
+                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
-            "time": "2020-01-07T09:05:03+00:00",
+            "time": "2021-11-29T15:02:22+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -290,6 +290,10 @@
                 "php",
                 "tags"
             ],
+            "support": {
+                "issues": "https://github.com/ChristophWurst/ID3Parser/issues",
+                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.4"
+            },
             "install-path": "../christophwurst/id3parser"
         },
         {
@@ -6341,6 +6345,6 @@
             "install-path": "../web-auth/webauthn-lib"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }

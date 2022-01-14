@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '34a8469e1633be33aa57119d8e5f02808db33eae',
+        'reference' => 'fde26117e66ae3556c87a90b63e99a14231949c0',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -47,12 +47,12 @@
             'dev_requirement' => false,
         ),
         'christophwurst/id3parser' => array(
-            'pretty_version' => 'v0.1.1',
-            'version' => '0.1.1.0',
+            'pretty_version' => 'v0.1.4',
+            'version' => '0.1.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../christophwurst/id3parser',
             'aliases' => array(),
-            'reference' => 'c0e56c336bd6131c199827f928e5a9aec89aa4da',
+            'reference' => '050c9d81ea89b0cf53e23a27efc4e1840f9ab260',
             'dev_requirement' => false,
         ),
         'composer/package-versions-deprecated' => array(
@@ -304,7 +304,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '34a8469e1633be33aa57119d8e5f02808db33eae',
+            'reference' => 'fde26117e66ae3556c87a90b63e99a14231949c0',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
