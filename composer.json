@@ -44,7 +44,7 @@
 		"scssphp/scssphp": "^1.4.0",
 		"stecman/symfony-console-completion": "^0.11.0",
 		"swiftmailer/swiftmailer": "^6.0",
-		"symfony/console": "4.4.30",
+		"symfony/console": "4.4.37",
 		"symfony/event-dispatcher": "4.4.30",
 		"symfony/event-dispatcher-contracts": "1.1.9",
 		"symfony/polyfill-intl-grapheme": "^1.20",
