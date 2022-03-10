@@ -10,7 +10,10 @@
 		"platform": {
 			"php": "7.3.0"
 		},
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"cweagans/composer-patches": true
+		}
 	},
 	"require": {
 		"php": "^7.3|^8.0",
