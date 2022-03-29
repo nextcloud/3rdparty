@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => 'f6e3fb0265ac03394420525b26ab7f306ae373d5',
+        'reference' => '609d7c54d2b9a6e39e7ec1e19a126fa3011a624a',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -191,12 +191,12 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '1.8.3',
-            'version' => '1.8.3.0',
+            'pretty_version' => '1.8.5',
+            'version' => '1.8.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
-            'reference' => '1afdd860a2566ed3c2b0b4a3de6e23434a79ec85',
+            'reference' => '337e3ad8e5716c15f9657bd214d16cc5e69df268',
             'dev_requirement' => false,
         ),
         'guzzlehttp/uri-template' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => 'f6e3fb0265ac03394420525b26ab7f306ae373d5',
+            'reference' => '609d7c54d2b9a6e39e7ec1e19a126fa3011a624a',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
