@@ -21,19 +21,16 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 class SupportedQueryGrammar implements XmlSerializable {
-	const GRAMMAR_BASICSEARCH = '{DAV:}basicsearch';
+	const GRAMMAR_BASIC_SEARCH = '{DAV:}basicsearch';
 
-	public $grammar = self::GRAMMAR_BASICSEARCH;
-
-	function xmlSerialize(Writer $writer) {
+	public function xmlSerialize(Writer $writer): void {
 		$writer->startElement('{DAV:}supported-query-grammar');
 		$writer->startElement('{DAV:}grammar');
-		$writer->startElement($this->grammar);
+		$writer->startElement(self::GRAMMAR_BASIC_SEARCH);
 		$writer->endElement();
 		$writer->endElement();
 		$writer->endElement();

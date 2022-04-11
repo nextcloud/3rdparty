@@ -21,7 +21,6 @@
 
 namespace SearchDAV\Backend;
 
-
 use Sabre\DAV\INode;
 
 class SearchResult {
@@ -36,7 +35,7 @@ class SearchResult {
 	 * @param INode $node
 	 * @param string $href
 	 */
-	public function __construct(INode $node, $href) {
+	public function __construct(INode $node, string $href) {
 		$this->node = $node;
 		$this->href = $href;
 	}

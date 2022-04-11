@@ -21,7 +21,6 @@
 
 namespace SearchDAV\Query;
 
-
 use SearchDAV\Backend\SearchPropertyDefinition;
 
 class Query {
@@ -38,7 +37,7 @@ class Query {
 	 */
 	public $from;
 	/**
-	 * @var Operator
+	 * @var ?Operator
 	 *
 	 * The search operator, either a comparison ('gt', 'eq', ...) or a boolean operator ('and', 'or', 'not')
 	 */
@@ -49,7 +48,7 @@ class Query {
 	 * The list of order operations that should be used to order the results.
 	 *
 	 * Each order operations consists of a property to sort on and a sort direction.
-	 * If more then one order operations are specified, the comparisons for ordering should
+	 * If more than one order operations are specified, the comparisons for ordering should
 	 * be applied in the order that the order operations are defined in with the earlier comparisons being
 	 * more significant.
 	 */

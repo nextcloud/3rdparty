@@ -21,12 +21,11 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 
 class Literal extends \SearchDAV\Query\Literal implements XmlDeserializable {
-	static function xmlDeserialize(Reader $reader): Literal {
+	public static function xmlDeserialize(Reader $reader): Literal {
 		$literal = new self();
 
 		if ($reader->isEmptyElement) {

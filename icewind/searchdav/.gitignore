@@ -2,3 +2,4 @@ composer.lock
 vendor
 coverage.xml
 .phpunit.result.cache
+*.cache

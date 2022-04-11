@@ -21,7 +21,6 @@
 
 namespace SearchDAV\Query;
 
-
 use SearchDAV\Backend\SearchPropertyDefinition;
 
 class Order {

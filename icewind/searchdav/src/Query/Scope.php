@@ -21,7 +21,6 @@
 
 namespace SearchDAV\Query;
 
-
 class Scope {
 	/**
 	 * @var string
