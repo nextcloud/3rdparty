@@ -26,6 +26,7 @@ class SearchPropertyDefinition {
 	const DATATYPE_STRING = self::XS . 'string';
 	const DATATYPE_INTEGER = self::XS . 'integer';
 	const DATATYPE_NONNEGATIVE_INTEGER = self::XS . 'nonNegativeInteger';
+	const DATATYPE_NON_NEGATIVE_INTEGER = self::XS . 'nonNegativeInteger';
 	const DATATYPE_DECIMAL = self::XS . 'decimal';
 	const DATATYPE_DATETIME = self::XS . 'dateTime';
 	const DATATYPE_BOOLEAN = self::XS . 'boolean';
@@ -48,13 +49,13 @@ class SearchPropertyDefinition {
 	 * SearchProperty constructor.
 	 *
 	 * @param string $name the name and namespace of the property in clark notation
-	 * @param bool $searchable whether or not this property can be used as part of a search query
-	 * @param bool $selectable whether or not this property can be returned as part of a search result
-	 * @param bool $sortable whether or not this property can be used to sort the search result
+	 * @param bool $searchable whether this property can be used as part of a search query
+	 * @param bool $selectable whether this property can be returned as part of a search result
+	 * @param bool $sortable whether this property can be used to sort the search result
 	 * @param string $dataType the datatype of the property, one of the SearchProperty::DATATYPE_ constants or any XSD datatype in clark notation
-	 * @param bool $caseSensitive whether or not comparisons on the property are case sensitive, only applies to string propertries
+	 * @param bool $caseSensitive whether comparisons on the property are case-sensitive, only applies to string properties
 	 */
-	public function __construct($name, $searchable, $selectable, $sortable, $dataType = self::DATATYPE_STRING, $caseSensitive = true) {
+	public function __construct(string $name, bool $selectable, bool $searchable, bool $sortable, string $dataType = self::DATATYPE_STRING, bool $caseSensitive = true) {
 		$this->searchable = $searchable;
 		$this->selectable = $selectable;
 		$this->sortable = $sortable;

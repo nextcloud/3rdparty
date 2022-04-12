@@ -34,9 +34,6 @@ use SearchDAV\XML\SupportedQueryGrammar;
 class SearchPlugin extends ServerPlugin {
 	const SEARCHDAV_NS = 'https://github.com/icewind1991/SearchDAV/ns';
 
-	/** @var Server */
-	private $server;
-
 	/** @var ISearchBackend */
 	private $searchBackend;
 
@@ -57,8 +54,7 @@ class SearchPlugin extends ServerPlugin {
 		$this->queryParser = new QueryParser();
 	}
 
-	public function initialize(Server $server) {
-		$this->server = $server;
+	public function initialize(Server $server): void {
 		$this->pathHelper = new PathHelper($server);
 		$this->search = new SearchHandler($this->searchBackend, $this->pathHelper, $server);
 		$this->discover = new DiscoverHandler($this->searchBackend, $this->pathHelper, $this->queryParser);
@@ -67,7 +63,7 @@ class SearchPlugin extends ServerPlugin {
 		$server->on('propFind', [$this, 'propFindHandler']);
 	}
 
-	public function propFindHandler(PropFind $propFind, INode $node) {
+	public function propFindHandler(PropFind $propFind, INode $node): void {
 		if ($propFind->getPath() === $this->searchBackend->getArbiterPath()) {
 			$propFind->handle('{DAV:}supported-query-grammar-set', new SupportedQueryGrammar());
 		}
@@ -76,11 +72,11 @@ class SearchPlugin extends ServerPlugin {
 	/**
 	 * SEARCH is allowed for users files
 	 *
-	 * @param string $uri
-	 * @return array
+	 * @param string $path
+	 * @return string[]
 	 */
-	public function getHTTPMethods($uri) {
-		$path = $this->pathHelper->getPathFromUri($uri);
+	public function getHTTPMethods($path): array {
+		$path = $this->pathHelper->getPathFromUri($path);
 		if ($this->searchBackend->getArbiterPath() === $path) {
 			return ['SEARCH'];
 		} else {
@@ -88,16 +84,16 @@ class SearchPlugin extends ServerPlugin {
 		}
 	}
 
-	public function optionHandler(RequestInterface $request, ResponseInterface $response) {
+	public function optionHandler(RequestInterface $request, ResponseInterface $response): void {
 		if ($request->getPath() === $this->searchBackend->getArbiterPath()) {
 			$response->addHeader('DASL', '<DAV:basicsearch>');
 		}
 	}
 
-	public function searchHandler(RequestInterface $request, ResponseInterface $response) {
-		$contentType = $request->getHeader('Content-Type');
+	public function searchHandler(RequestInterface $request, ResponseInterface $response): bool {
+		$contentType = $request->getHeader('Content-Type') ?? '';
 
-		// Currently we only support xml search queries
+		// Currently, we only support xml search queries
 		if ((strpos($contentType, 'text/xml') === false) && (strpos($contentType, 'application/xml') === false)) {
 			return true;
 		}

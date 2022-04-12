@@ -21,9 +21,9 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
+use SearchDAV\Backend\SearchPropertyDefinition;
 
 class PropDesc implements XmlSerializable {
 	/**
@@ -47,7 +47,14 @@ class PropDesc implements XmlSerializable {
 	 */
 	public $sortable;
 
-	function xmlSerialize(Writer $writer) {
+	public function __construct(SearchPropertyDefinition $propertyDefinition) {
+		$this->dataType = $propertyDefinition->dataType;
+		$this->sortable = $propertyDefinition->sortable;
+		$this->selectable = $propertyDefinition->selectable;
+		$this->searchable = $propertyDefinition->searchable;
+	}
+
+	public function xmlSerialize(Writer $writer): void {
 		$data = [
 			'{DAV:}dataType' => [$this->dataType => null]
 		];
@@ -62,7 +69,7 @@ class PropDesc implements XmlSerializable {
 		}
 		$writer->write(array_map(function ($propName) {
 			return [
-				'name' => '{DAV:}prop',
+				'name'  => '{DAV:}prop',
 				'value' => $propName
 			];
 		}, $this->properties));

@@ -54,7 +54,7 @@ class DiscoverHandler {
 		$this->queryParser = $queryParser;
 	}
 
-	public function handelDiscoverRequest($xml, RequestInterface $request, ResponseInterface $response) {
+	public function handelDiscoverRequest($xml, RequestInterface $request, ResponseInterface $response): bool {
 		if (!isset($xml['{DAV:}basicsearch'])) {
 			$response->setStatus(400);
 			$response->setBody('Unexpected xml content for query-schema-discovery, expected basicsearch');
@@ -97,12 +97,7 @@ class DiscoverHandler {
 		foreach ($propertyDefinitions as $propertyDefinition) {
 			$key = $this->hashDefinition($propertyDefinition);
 			if (!isset($groups[$key])) {
-				$desc = new PropDesc();
-				$desc->dataType = $propertyDefinition->dataType;
-				$desc->sortable = $propertyDefinition->sortable;
-				$desc->selectable = $propertyDefinition->selectable;
-				$desc->searchable = $propertyDefinition->searchable;
-				$groups[$key] = $desc;
+				$groups[$key] = new PropDesc($propertyDefinition);
 			}
 			$groups[$key]->properties[] = $propertyDefinition->name;
 		}

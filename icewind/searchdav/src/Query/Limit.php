@@ -21,7 +21,6 @@
 
 namespace SearchDAV\Query;
 
-
 class Limit {
 	/**
 	 * @var integer

@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '609d7c54d2b9a6e39e7ec1e19a126fa3011a624a',
+        'reference' => '94cc96de7a8f34b4da8e165ec7308a0024a1d9d6',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -209,12 +209,12 @@
             'dev_requirement' => false,
         ),
         'icewind/searchdav' => array(
-            'pretty_version' => 'v2.0.0',
-            'version' => '2.0.0.0',
+            'pretty_version' => 'v3.0.1',
+            'version' => '3.0.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../icewind/searchdav',
             'aliases' => array(),
-            'reference' => 'c69806d900c2c9a5954bfabc80178d6eb0d63df4',
+            'reference' => '52c8cfc21bd69271f224671c4924d260b0a8d4fb',
             'dev_requirement' => false,
         ),
         'icewind/streams' => array(
@@ -286,7 +286,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '609d7c54d2b9a6e39e7ec1e19a126fa3011a624a',
+            'reference' => '94cc96de7a8f34b4da8e165ec7308a0024a1d9d6',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(

@@ -37,7 +37,7 @@ class PathHelper {
 		$this->server = $server;
 	}
 
-	public function getPathFromUri($uri): ?string {
+	public function getPathFromUri(string $uri): ?string {
 		if (strpos($uri, '://') === false) {
 			return $uri;
 		}

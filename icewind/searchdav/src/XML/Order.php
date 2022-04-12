@@ -21,9 +21,9 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
+use function Sabre\Xml\Deserializer\keyValue;
 
 class Order implements XmlDeserializable {
 	/**
@@ -50,10 +50,10 @@ class Order implements XmlDeserializable {
 		$this->order = $order;
 	}
 
-	static function xmlDeserialize(Reader $reader): Order {
+	public static function xmlDeserialize(Reader $reader): Order {
 		$order = new self();
 
-		$childs = \Sabre\Xml\Deserializer\keyValue($reader);
+		$childs = keyValue($reader);
 
 		$order->order = array_key_exists('{DAV:}descending', $childs) ? \SearchDAV\Query\Order::DESC : \SearchDAV\Query\Order::ASC;
 		$order->property = $childs['{DAV:}prop'][0];

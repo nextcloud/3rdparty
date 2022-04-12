@@ -30,29 +30,31 @@ use SearchDAV\XML\Literal;
 use SearchDAV\XML\Operator;
 use SearchDAV\XML\Order;
 use SearchDAV\XML\Scope;
+use function Sabre\Xml\Deserializer\keyValue;
+use function Sabre\Xml\Deserializer\repeatingElements;
 
 class QueryParser extends Service {
 	public $namespaceMap = [
-		'DAV:' => 'd',
-		'http://sabredav.org/ns' => 's',
+		'DAV:'                             => 'd',
+		'http://sabredav.org/ns'           => 's',
 		'http://www.w3.org/2001/XMLSchema' => 'xs',
-		SearchPlugin::SEARCHDAV_NS => 'sd'
+		SearchPlugin::SEARCHDAV_NS         => 'sd'
 	];
 
 	public function __construct() {
 		$this->elementMap = [
-			'{DAV:}literal' => Literal::class,
-			'{DAV:}searchrequest' => Element\KeyValue::class,
+			'{DAV:}literal'                => Literal::class,
+			'{DAV:}searchrequest'          => Element\KeyValue::class,
 			'{DAV:}query-schema-discovery' => Element\KeyValue::class,
-			'{DAV:}basicsearch' => BasicSearch::class,
-			'{DAV:}select' => function (Reader $reader) {
-				return \Sabre\Xml\Deserializer\keyValue($reader, '{DAV:}scope')['{DAV:}prop'];
+			'{DAV:}basicsearch'            => BasicSearch::class,
+			'{DAV:}select'                 => function (Reader $reader) {
+				return keyValue($reader, '{DAV:}scope')['{DAV:}prop'];
 			},
 			'{DAV:}from' => function (Reader $reader) {
-				return \Sabre\Xml\Deserializer\repeatingElements($reader, '{DAV:}scope');
+				return repeatingElements($reader, '{DAV:}scope');
 			},
 			'{DAV:}orderby' => function (Reader $reader) {
-				return \Sabre\Xml\Deserializer\repeatingElements($reader, '{DAV:}order');
+				return repeatingElements($reader, '{DAV:}order');
 			},
 			'{DAV:}scope' => Scope::class,
 			'{DAV:}where' => function (Reader $reader) {
@@ -61,20 +63,20 @@ class QueryParser extends Service {
 				}, $reader->parseGetElements());
 				return (isset($operators[0])) ? $operators[0] : null;
 			},
-			'{DAV:}prop' => Element\Elements::class,
-			'{DAV:}order' => Order::class,
-			'{DAV:}eq' => Operator::class,
-			'{DAV:}gt' => Operator::class,
-			'{DAV:}gte' => Operator::class,
-			'{DAV:}lt' => Operator::class,
-			'{DAV:}lte' => Operator::class,
-			'{DAV:}and' => Operator::class,
-			'{DAV:}or' => Operator::class,
-			'{DAV:}like' => Operator::class,
-			'{DAV:}contains' => Operator::class,
-			'{DAV:}not' => Operator::class,
+			'{DAV:}prop'          => Element\Elements::class,
+			'{DAV:}order'         => Order::class,
+			'{DAV:}eq'            => Operator::class,
+			'{DAV:}gt'            => Operator::class,
+			'{DAV:}gte'           => Operator::class,
+			'{DAV:}lt'            => Operator::class,
+			'{DAV:}lte'           => Operator::class,
+			'{DAV:}and'           => Operator::class,
+			'{DAV:}or'            => Operator::class,
+			'{DAV:}like'          => Operator::class,
+			'{DAV:}contains'      => Operator::class,
+			'{DAV:}not'           => Operator::class,
 			'{DAV:}is-collection' => Operator::class,
-			'{DAV:}limit' => Limit::class,
+			'{DAV:}limit'         => Limit::class,
 		];
 	}
 }

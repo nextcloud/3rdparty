@@ -33,7 +33,7 @@ class Operator implements XmlDeserializable {
 	 */
 	public $type;
 	/**
-	 * @var (Literal|string|Operation)[]
+	 * @var (Literal|string|Operator)[]
 	 *
 	 * The list of arguments for the operation
 	 *
@@ -49,17 +49,17 @@ class Operator implements XmlDeserializable {
 	 * Operator constructor.
 	 *
 	 * @param string $type
-	 * @param array $arguments
+	 * @param (Literal|string|Operator)[] $arguments
 	 */
 	public function __construct(string $type = '', array $arguments = []) {
 		$this->type = $type;
 		$this->arguments = $arguments;
 	}
 
-	static function xmlDeserialize(Reader $reader): Operator {
+	public static function xmlDeserialize(Reader $reader): Operator {
 		$operator = new self();
 
-		$operator->type = $reader->getClark();
+		$operator->type = $reader->getClark() ?? '';
 		if ($reader->isEmptyElement) {
 			$reader->next();
 			return $operator;

@@ -24,15 +24,16 @@ namespace SearchDAV\XML;
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
 use SearchDAV\DAV\SearchPlugin;
+use function Sabre\Xml\Deserializer\keyValue;
 
 /**
  * The limit and offset of a search query
  */
 class Limit extends \SearchDAV\Query\Limit implements XmlDeserializable {
-	static function xmlDeserialize(Reader $reader): Limit {
+	public static function xmlDeserialize(Reader $reader): Limit {
 		$limit = new self();
 
-		$elements = \Sabre\Xml\Deserializer\keyValue($reader);
+		$elements = keyValue($reader);
 		$namespace = SearchPlugin::SEARCHDAV_NS;
 
 		$limit->maxResults = isset($elements['{DAV:}nresults']) ? $elements['{DAV:}nresults'] : 0;

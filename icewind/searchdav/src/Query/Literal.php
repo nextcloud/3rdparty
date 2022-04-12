@@ -21,7 +21,6 @@
 
 namespace SearchDAV\Query;
 
-
 class Literal {
 	/**
 	 * @var string|boolean|\DateTime|integer

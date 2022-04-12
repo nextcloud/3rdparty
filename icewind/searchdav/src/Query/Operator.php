@@ -41,14 +41,15 @@ class Operator {
 	 * The type of operation, one of the Operator::OPERATION_* constants
 	 */
 	public $type;
+
 	/**
-	 * @var (Literal|SearchPropDefinition|Operation)[]
+	 * @var (Literal|\SearchDAV\Backend\SearchPropertyDefinition|Operator)[]
 	 *
 	 * The list of arguments for the operation
 	 *
 	 *  - SearchPropDefinition: property for comparison
 	 *  - Literal: literal value for comparison
-	 *  - Operation: nested operation for and/or/not operations
+	 *  - Operator: nested operation for and/or/not operations
 	 *
 	 * Which type and what number of argument an Operator takes depends on the operator type.
 	 */
@@ -58,7 +59,7 @@ class Operator {
 	 * Operator constructor.
 	 *
 	 * @param string $type
-	 * @param array $arguments
+	 * @param (Literal|\SearchDAV\Backend\SearchPropertyDefinition|Operator)[] $arguments
 	 */
 	public function __construct(string $type = '', array $arguments = []) {
 		$this->type = $type;

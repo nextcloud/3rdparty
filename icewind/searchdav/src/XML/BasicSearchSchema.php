@@ -21,7 +21,6 @@
 
 namespace SearchDAV\XML;
 
-
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -38,10 +37,10 @@ class BasicSearchSchema implements XmlSerializable {
 		$this->properties = $properties;
 	}
 
-	function xmlSerialize(Writer $writer) {
-		$childs = array_map(function(PropDesc $propDesc) {
+	public function xmlSerialize(Writer $writer): void {
+		$childs = array_map(function (PropDesc $propDesc) {
 			return [
-				'name' => '{DAV:}propdesc',
+				'name'  => '{DAV:}propdesc',
 				'value' => $propDesc
 			];
 		}, $this->properties);

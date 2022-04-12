@@ -23,12 +23,13 @@ namespace SearchDAV\XML;
 
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
+use function Sabre\Xml\Deserializer\keyValue;
 
 class Scope extends \SearchDAV\Query\Scope implements XmlDeserializable {
-	static function xmlDeserialize(Reader $reader): Scope {
+	public static function xmlDeserialize(Reader $reader): Scope {
 		$scope = new self();
 
-		$values = \Sabre\Xml\Deserializer\keyValue($reader);
+		$values = keyValue($reader);
 		$scope->href = $values['{DAV:}href'];
 		$scope->depth = $values['{DAV:}depth'];
 
