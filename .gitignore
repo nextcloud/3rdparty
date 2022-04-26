@@ -124,6 +124,13 @@ james-heinrich/getid3/helperapps
 league/flysystem/SECURITY.md
 league/flysystem/deprecations.md
 
+mexitek/phpcolors/demo
+mexitek/phpcolors/tests
+mexitek/phpcolors/.gitignore
+mexitek/phpcolors/.phpcs.xml
+mexitek/phpcolors/composer.json
+mexitek/phpcolors/README.md
+
 mikey179/vfsstream
 
 mtdowling/jmespath.php/tests
