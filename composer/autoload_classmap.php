@@ -1544,6 +1544,7 @@ return array(
     'League\\Uri\\UriTemplate\\Template' => $vendorDir . '/league/uri/src/UriTemplate/Template.php',
     'League\\Uri\\UriTemplate\\VarSpecifier' => $vendorDir . '/league/uri/src/UriTemplate/VarSpecifier.php',
     'League\\Uri\\UriTemplate\\VariableBag' => $vendorDir . '/league/uri/src/UriTemplate/VariableBag.php',
+    'Mexitek\\PHPColors\\Color' => $vendorDir . '/mexitek/phpcolors/src/Mexitek/PHPColors/Color.php',
     'MicrosoftAzure\\Storage\\Blob\\BlobRestProxy' => $vendorDir . '/microsoft/azure-storage-blob/src/Blob/BlobRestProxy.php',
     'MicrosoftAzure\\Storage\\Blob\\BlobSharedAccessSignatureHelper' => $vendorDir . '/microsoft/azure-storage-blob/src/Blob/BlobSharedAccessSignatureHelper.php',
     'MicrosoftAzure\\Storage\\Blob\\Internal\\BlobResources' => $vendorDir . '/microsoft/azure-storage-blob/src/Blob/Internal/BlobResources.php',
