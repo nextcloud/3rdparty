@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '94cc96de7a8f34b4da8e165ec7308a0024a1d9d6',
+        'reference' => '04b80d6c8d44a2a844d0b8f81a4ba745c48980f8',
         'name' => 'nextcloud/3rdparty',
         'dev' => false,
     ),
@@ -253,6 +253,15 @@
             'reference' => '667f150e589d65d79c89ffe662e426704f84224f',
             'dev_requirement' => false,
         ),
+        'mexitek/phpcolors' => array(
+            'pretty_version' => 'v1.0.4',
+            'version' => '1.0.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mexitek/phpcolors',
+            'aliases' => array(),
+            'reference' => '4043974240ca7dc3c2bec3c158588148b605b206',
+            'dev_requirement' => false,
+        ),
         'microsoft/azure-storage-blob' => array(
             'pretty_version' => '1.5.2',
             'version' => '1.5.2.0',
@@ -286,7 +295,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '94cc96de7a8f34b4da8e165ec7308a0024a1d9d6',
+            'reference' => '04b80d6c8d44a2a844d0b8f81a4ba745c48980f8',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
