@@ -13,6 +13,24 @@ bin
 # ignore coc
 **/CODE_OF_CONDUCT.md
 
+aws/aws-crt-php/.clang-format
+aws/aws-crt-php/.clang-format-ignore
+aws/aws-crt-php/.gitignore
+aws/aws-crt-php/.gitmodules
+aws/aws-crt-php/builder.json
+aws/aws-crt-php/Makefile.frag*
+aws/aws-crt-php/composer.json
+aws/aws-crt-php/config.*
+aws/aws-crt-php/ext
+aws/aws-crt-php/format-check.sh
+aws/aws-crt-php/gen_*.php
+aws/aws-crt-php/package.xml*
+aws/aws-crt-php/*.ini
+aws/aws-crt-php/*.sh
+aws/aws-crt-php/run_*
+aws/aws-crt-php/src/.gitignore
+aws/aws-crt-php/tests
+
 aws/aws-sdk-php/.changes
 
 bantu/ini-get-wrapper/tests
