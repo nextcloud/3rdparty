@@ -24,7 +24,7 @@
 		"deepdiver/zipstreamer": "2.0.0",
 		"deepdiver1975/tarstreamer": "v2.0.0",
 		"doctrine/dbal": "3.1.4",
-		"egulias/email-validator": "3.1.1",
+		"egulias/email-validator": "3.1.2",
 		"giggsey/libphonenumber-for-php": "^8.12.37",
 		"guzzlehttp/guzzle": "^7.4.0",
 		"icewind/searchdav": "^3.0",
