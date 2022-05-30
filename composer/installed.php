@@ -5,9 +5,9 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'reference' => '04b80d6c8d44a2a844d0b8f81a4ba745c48980f8',
+        'reference' => '59f4851dc2729f449d4a9e6fb211bebe3818cb6f',
         'name' => 'nextcloud/3rdparty',
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -295,7 +295,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
-            'reference' => '04b80d6c8d44a2a844d0b8f81a4ba745c48980f8',
+            'reference' => '59f4851dc2729f449d4a9e6fb211bebe3818cb6f',
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
@@ -830,12 +830,12 @@
             'dev_requirement' => false,
         ),
         'symfony/translation' => array(
-            'pretty_version' => 'v4.4.30',
-            'version' => '4.4.30.0',
+            'pretty_version' => 'v4.4.41',
+            'version' => '4.4.41.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/translation',
             'aliases' => array(),
-            'reference' => 'db0ba1e85280d8ff11e38d53c70f8814d4d740f5',
+            'reference' => 'dcb67eae126e74507e0b4f0b9ac6ef35b37c3331',
             'dev_requirement' => false,
         ),
         'symfony/translation-contracts' => array(
