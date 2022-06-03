@@ -295,14 +295,20 @@ class getid3_lib
 
 
 	public static function Dec2Bin($number) {
+		if (!is_numeric($number)) {
+			// https://github.com/JamesHeinrich/getID3/issues/299
+			trigger_error('TypeError: Dec2Bin(): Argument #1 ($number) must be numeric, '.gettype($number).' given', E_USER_WARNING);
+			return '';
+		}
+		$bytes = array();
 		while ($number >= 256) {
-			$bytes[] = (($number / 256) - (floor($number / 256))) * 256;
+			$bytes[] = (int) (($number / 256) - (floor($number / 256))) * 256;
 			$number = floor($number / 256);
 		}
-		$bytes[] = $number;
+		$bytes[] = (int) $number;
 		$binstring = '';
-		for ($i = 0; $i < count($bytes); $i++) {
-			$binstring = (($i == count($bytes) - 1) ? decbin($bytes[$i]) : str_pad(decbin($bytes[$i]), 8, '0', STR_PAD_LEFT)).$binstring;
+		foreach ($bytes as $i => $byte) {
+			$binstring = (($i == count($bytes) - 1) ? decbin($byte) : str_pad(decbin($byte), 8, '0', STR_PAD_LEFT)).$binstring;
 		}
 		return $binstring;
 	}
@@ -1147,7 +1153,7 @@ class getid3_lib
 	* @param string $suffix If the name component ends in suffix this will also be cut off.
 	* @return string
 	*/
-	public static function mb_basename($path, $suffix = null) {
+	public static function mb_basename($path, $suffix = '') {
 		$splited = preg_split('#/#', rtrim($path, '/ '));
 		return substr(basename('X'.$splited[count($splited) - 1], $suffix), 1);
 	}

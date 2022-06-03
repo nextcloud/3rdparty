@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cee71fcb7f3737ed57d66f6692425ce",
+    "content-hash": "25d41a67b2b4c979bacbaab5f54b7b43",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -300,16 +300,16 @@
         },
         {
             "name": "christophwurst/id3parser",
-            "version": "v0.1.2",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/ID3Parser.git",
-                "reference": "d7f5e9e7db69a24e3111a2033cbdf640f9456f2f"
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/d7f5e9e7db69a24e3111a2033cbdf640f9456f2f",
-                "reference": "d7f5e9e7db69a24e3111a2033cbdf640f9456f2f",
+                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
                 "shasum": ""
             },
             "require": {
@@ -334,9 +334,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ChristophWurst/ID3Parser/issues",
-                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.2"
+                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.4"
             },
-            "time": "2021-02-09T08:04:08+00:00"
+            "time": "2021-11-29T15:02:22+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
