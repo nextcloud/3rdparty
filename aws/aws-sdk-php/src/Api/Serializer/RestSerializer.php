@@ -96,8 +96,6 @@ abstract class RestSerializer
 
         if (isset($bodyMembers)) {
             $this->payload($operation->getInput(), $bodyMembers, $opts);
-        } else if (!isset($opts['body']) && $this->hasPayloadParam($input, $payload)) {
-            $this->payload($operation->getInput(), [], $opts);
         }
 
         return $opts;
@@ -223,28 +221,5 @@ abstract class RestSerializer
         // Expand path place holders using Amazon's slightly different URI
         // template syntax.
         return UriResolver::resolve($this->endpoint, new Uri($relative));
-    }
-
-    /**
-     * @param StructureShape $input
-     */
-    private function hasPayloadParam(StructureShape $input, $payload)
-    {
-        if ($payload) {
-            $potentiallyEmptyTypes = ['blob','string'];
-            if ($this->api->getMetadata('protocol') == 'rest-xml') {
-                $potentiallyEmptyTypes[] = 'structure';
-            }
-            $payloadMember = $input->getMember($payload);
-            if (in_array($payloadMember['type'], $potentiallyEmptyTypes)) {
-                return false;
-            }
-        }
-        foreach ($input->getMembers() as $member) {
-            if (!isset($member['location'])) {
-                return true;
-            }
-        }
-        return false;
     }
 }

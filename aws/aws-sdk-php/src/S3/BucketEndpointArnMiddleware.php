@@ -8,7 +8,6 @@ use Aws\Arn\ObjectLambdaAccessPointArn;
 use Aws\Arn\Exception\InvalidArnException;
 use Aws\Arn\AccessPointArn as BaseAccessPointArn;
 use Aws\Arn\S3\OutpostsAccessPointArn;
-use Aws\Arn\S3\MultiRegionAccessPointArn;
 use Aws\Arn\S3\OutpostsArnInterface;
 use Aws\CommandInterface;
 use Aws\Endpoint\PartitionEndpointProvider;
@@ -104,9 +103,6 @@ class BucketEndpointArnMiddleware
                         $len = strlen($encoded) + 1;
                         if (trim(substr($path, 0, $len), '/') === "{$encoded}") {
                             $path = substr($path, $len);
-                            if (substr($path, 0, 1) !== "/") {
-                                $path = '/' . $path;
-                            }
                         }
                         if (empty($path)) {
                             $path = '';
@@ -114,12 +110,12 @@ class BucketEndpointArnMiddleware
 
                         // Set modified request
                         $req = $req->withUri(
-                            $req->getUri()->withPath($path)->withHost($host)
+                            $req->getUri()->withHost($host)->withPath($path)
                         );
 
                         // Update signing region based on ARN data if configured to do so
                         if ($this->config['use_arn_region']->isUseArnRegion()
-                            && !$this->config['use_fips_endpoint']->isUseFipsEndpoint()
+                            && !$this->isFipsPseudoRegion($this->region)
                         ) {
                             $region = $arn->getRegion();
                         } else {
@@ -164,19 +160,7 @@ class BucketEndpointArnMiddleware
             $accesspointName = $arn->getResourceId();
         }
 
-        if ($arn instanceof MultiRegionAccessPointArn) {
-            $partition = $this->partitionProvider->getPartitionByName(
-                $arn->getPartition(),
-                's3'
-            );
-            $dnsSuffix = $partition->getDnsSuffix();
-            return "{$accesspointName}.accesspoint.s3-global.{$dnsSuffix}";
-        }
-
         $host = "{$accesspointName}-" . $arn->getAccountId();
-        
-        $useFips = $this->config['use_fips_endpoint']->isUseFipsEndpoint();
-        $fipsString = $useFips ? "-fips" : "";
 
         if ($arn instanceof OutpostsAccessPointArn) {
             $host .= '.' . $arn->getOutpostId() . '.s3-outposts';
@@ -184,10 +168,14 @@ class BucketEndpointArnMiddleware
             if (!empty($this->config['endpoint'])) {
                return $host . '.' . $this->config['endpoint'];
             } else {
-                $host .= ".s3-object-lambda{$fipsString}";
+                $host .= '.s3-object-lambda';
             }
         } else {
-            $host .= ".s3-accesspoint{$fipsString}";
+            if ($this->isFipsPseudoRegion($this->region)) {
+                $host .= ".s3-accesspoint-fips";
+            } else {
+                $host .= '.s3-accesspoint';
+            }
             if (!empty($this->config['dual_stack'])) {
                 $host .= '.dualstack';
             }
@@ -198,7 +186,6 @@ class BucketEndpointArnMiddleware
         } else {
             $region = $this->region;
         }
-        $region = \Aws\strip_fips_pseudo_regions($region);
         $host .= '.' . $region . '.' . $this->getPartitionSuffix($arn, $this->partitionProvider);
         return $host;
     }
@@ -223,20 +210,7 @@ class BucketEndpointArnMiddleware
                     . ' points. Please disable dualstack or do not supply an'
                     . ' access point ARN.');
             }
-            if ($arn instanceof MultiRegionAccessPointArn) {
-                if (!empty($this->config['disable_multiregion_access_points'])) {
-                    throw new UnresolvedEndpointException(
-                        'Multi-Region Access Point ARNs are disabled, but one was provided.  Please'
-                        . ' enable them or provide a different ARN.'
-                    );
-                }
-                if (!empty($this->config['dual_stack'])) {
-                    throw new UnresolvedEndpointException(
-                        'Multi-Region Access Point ARNs do not currently support dual stack. Please'
-                        . ' disable dual stack or provide a different ARN.'
-                    );
-                }
-            }
+
             // Accelerate is not supported with access points
             if (!empty($this->config['accelerate'])) {
                 throw new UnresolvedEndpointException(
@@ -276,10 +250,9 @@ class BucketEndpointArnMiddleware
             if ($this->isGlobal($this->region)
                 && $this->config['use_arn_region']->isUseArnRegion() == false
                 && $arn->getRegion() != $this->region
-                && !$arn instanceof MultiRegionAccessPointArn
             ) {
                 throw new UnresolvedEndpointException(
-                    'Global endpoints do not support cross region requests.'
+                    'Global endpoints do not support cross region requests'
                     . ' Please enable use_arn_region or do not supply a global region'
                     . ' with a different region in the ARN.');
             }
@@ -297,29 +270,28 @@ class BucketEndpointArnMiddleware
             // If client partition not found, try removing pseudo-region qualifiers
             if (!($clientPart->isRegionMatch($this->region, 's3'))) {
                 $clientPart = $this->partitionProvider->getPartition(
-                    \Aws\strip_fips_pseudo_regions($this->region),
+                    $this->stripPseudoRegions($this->region),
                     's3'
                 );
             }
-            if (!$arn instanceof MultiRegionAccessPointArn) {
-                // Verify that the partition matches for supplied partition and region
-                if ($arn->getPartition() !== $clientPart->getName()) {
-                    throw new InvalidRegionException('The supplied ARN partition'
-                        . " does not match the client's partition.");
-                }
-                if ($clientPart->getName() !== $arnPart->getName()) {
-                    throw new InvalidRegionException('The corresponding partition'
-                        . ' for the supplied ARN region does not match the'
-                        . " client's partition.");
-                }
 
-                // Ensure ARN region matches client region unless
-                // configured for using ARN region over client region
-                $this->validateMatchingRegion($arn);
-
-                // Ensure it is not resolved to fips pseudo-region for S3 Outposts
-                $this->validateFipsConfigurations($arn);
+            // Verify that the partition matches for supplied partition and region
+            if ($arn->getPartition() !== $clientPart->getName()) {
+                throw new InvalidRegionException('The supplied ARN partition'
+                    . " does not match the client's partition.");
             }
+            if ($clientPart->getName() !== $arnPart->getName()) {
+                throw new InvalidRegionException('The corresponding partition'
+                    . ' for the supplied ARN region does not match the'
+                    . " client's partition.");
+            }
+
+            // Ensure ARN region matches client region unless
+            // configured for using ARN region over client region
+            $this->validateMatchingRegion($arn);
+
+            // Ensure it is not resolved to fips pseudo-region for S3 Outposts
+            $this->validateFipsConfigurations($arn);
 
             return $arnPart;
         }

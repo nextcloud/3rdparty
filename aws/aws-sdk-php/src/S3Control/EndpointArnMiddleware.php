@@ -249,11 +249,8 @@ class EndpointArnMiddleware
         } else {
             $region = $this->region;
         }
-        $fipsString = $this->config['use_fips_endpoint']->isUseFipsEndpoint()
-            ? "-fips"
-            : "";
         $suffix = $this->getPartitionSuffix($arn, $this->partitionProvider);
-        return "s3-outposts{$fipsString}.{$region}.{$suffix}";
+        return "s3-outposts.{$region}.{$suffix}";
     }
 
     private function generateOutpostIdHost()
@@ -316,7 +313,7 @@ class EndpointArnMiddleware
         // If client partition not found, try removing pseudo-region qualifiers
         if (!($clientPart->isRegionMatch($this->region, 's3'))) {
             $clientPart = $this->partitionProvider->getPartition(
-                \Aws\strip_fips_pseudo_regions($this->region),
+                $this->stripPseudoRegions($this->region),
                 's3'
             );
         }

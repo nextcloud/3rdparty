@@ -17,8 +17,6 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise batchUpdateScheduleAsync(array $args = [])
  * @method \Aws\Result cancelInputDeviceTransfer(array $args = [])
  * @method \GuzzleHttp\Promise\Promise cancelInputDeviceTransferAsync(array $args = [])
- * @method \Aws\Result claimDevice(array $args = [])
- * @method \GuzzleHttp\Promise\Promise claimDeviceAsync(array $args = [])
  * @method \Aws\Result createChannel(array $args = [])
  * @method \GuzzleHttp\Promise\Promise createChannelAsync(array $args = [])
  * @method \Aws\Result createInput(array $args = [])

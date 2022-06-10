@@ -59,8 +59,6 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise getInfrastructureConfigurationAsync(array $args = [])
  * @method \Aws\Result importComponent(array $args = [])
  * @method \GuzzleHttp\Promise\Promise importComponentAsync(array $args = [])
- * @method \Aws\Result importVmImage(array $args = [])
- * @method \GuzzleHttp\Promise\Promise importVmImageAsync(array $args = [])
  * @method \Aws\Result listComponentBuildVersions(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listComponentBuildVersionsAsync(array $args = [])
  * @method \Aws\Result listComponents(array $args = [])
