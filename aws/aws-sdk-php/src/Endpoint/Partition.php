@@ -130,21 +130,12 @@ final class Partition implements ArrayAccess, PartitionInterface
         $scheme = isset($args['scheme']) ? $args['scheme'] : 'https';
         $options = isset($args['options']) ? $args['options'] : [];
         $data = $this->getEndpointData($service, $region, $options);
-        $variant = $this->getVariant($options, $data);
-        if (isset($variant['hostname'])) {
-            $template = $variant['hostname'];
-        } else {
-            $template = isset($data['hostname']) ? $data['hostname'] : '';
-        }
-        $dnsSuffix = isset($variant['dnsSuffix'])
-            ? $variant['dnsSuffix']
-            : $this->data['dnsSuffix'];
+
         return [
             'endpoint' => "{$scheme}://" . $this->formatEndpoint(
-                    $template,
+                    isset($data['hostname']) ? $data['hostname'] : '',
                     $service,
-                    $region,
-                    $dnsSuffix
+                    $region
                 ),
             'signatureVersion' => $this->getSignatureVersion($data),
             'signingRegion' => isset($data['credentialScope']['region'])
@@ -260,12 +251,12 @@ final class Partition implements ArrayAccess, PartitionInterface
         return $this->data['services'][$service]['partitionEndpoint'];
     }
 
-    private function formatEndpoint($template, $service, $region, $dnsSuffix)
+    private function formatEndpoint($template, $service, $region)
     {
         return strtr($template, [
             '{service}' => $service,
             '{region}' => $region,
-            '{dnsSuffix}' => $dnsSuffix,
+            '{dnsSuffix}' => $this->data['dnsSuffix'],
         ]);
     }
 
@@ -277,41 +268,4 @@ final class Partition implements ArrayAccess, PartitionInterface
     {
         return strpos($region, "fips") !== false;
     }
-
-    /**
-     * @param array $options
-     * @param array $data
-     * @return array
-     */
-    private function getVariant(array $options, array $data)
-    {
-        $variantTags = [];
-        if (isset($options['use_fips_endpoint'])) {
-            if ($options['use_fips_endpoint']->isUseFipsEndpoint()) {
-                $variantTags[] = 'fips';
-            }
-        }
-        if (isset($options['use_dual_stack_endpoint'])) {
-            if ($options['use_dual_stack_endpoint']->isUseDualStackEndpoint()) {
-                $variantTags[] = 'dualstack';
-            }
-        }
-        if (!empty($variantTags)) {
-            if (isset($data['variants'])) {
-                foreach ($data['variants'] as $variant) {
-                    if ($variant['tags'] == $variantTags) {
-                        return $variant;
-                    }
-                }
-            }
-            if (isset($this->data['defaults']['variants'])) {
-                foreach ($this->data['defaults']['variants'] as $variant) {
-                    if ($variant['tags'] == $variantTags) {
-                        return $variant;
-                    }
-                }
-            }
-        }
-    }
-
 }
