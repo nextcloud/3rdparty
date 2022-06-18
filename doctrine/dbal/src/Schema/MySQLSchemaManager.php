@@ -2,13 +2,13 @@
 
 namespace Doctrine\DBAL\Schema;
 
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\MariaDb1027Platform;
-use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\MySQL;
 use Doctrine\DBAL\Types\Type;
 
 use function array_change_key_case;
 use function array_shift;
-use function array_values;
 use function assert;
 use function explode;
 use function is_string;
@@ -22,6 +22,8 @@ use const CASE_LOWER;
 
 /**
  * Schema manager for the MySQL RDBMS.
+ *
+ * @extends AbstractSchemaManager<AbstractMySQLPlatform>
  */
 class MySQLSchemaManager extends AbstractSchemaManager
 {
@@ -166,27 +168,27 @@ class MySQLSchemaManager extends AbstractSchemaManager
                 break;
 
             case 'tinytext':
-                $length = MySQLPlatform::LENGTH_LIMIT_TINYTEXT;
+                $length = AbstractMySQLPlatform::LENGTH_LIMIT_TINYTEXT;
                 break;
 
             case 'text':
-                $length = MySQLPlatform::LENGTH_LIMIT_TEXT;
+                $length = AbstractMySQLPlatform::LENGTH_LIMIT_TEXT;
                 break;
 
             case 'mediumtext':
-                $length = MySQLPlatform::LENGTH_LIMIT_MEDIUMTEXT;
+                $length = AbstractMySQLPlatform::LENGTH_LIMIT_MEDIUMTEXT;
                 break;
 
             case 'tinyblob':
-                $length = MySQLPlatform::LENGTH_LIMIT_TINYBLOB;
+                $length = AbstractMySQLPlatform::LENGTH_LIMIT_TINYBLOB;
                 break;
 
             case 'blob':
-                $length = MySQLPlatform::LENGTH_LIMIT_BLOB;
+                $length = AbstractMySQLPlatform::LENGTH_LIMIT_BLOB;
                 break;
 
             case 'mediumblob':
-                $length = MySQLPlatform::LENGTH_LIMIT_MEDIUMBLOB;
+                $length = AbstractMySQLPlatform::LENGTH_LIMIT_MEDIUMBLOB;
                 break;
 
             case 'tinyint':
@@ -312,9 +314,9 @@ class MySQLSchemaManager extends AbstractSchemaManager
         $result = [];
         foreach ($list as $constraint) {
             $result[] = new ForeignKeyConstraint(
-                array_values($constraint['local']),
+                $constraint['local'],
                 $constraint['foreignTable'],
-                array_values($constraint['foreign']),
+                $constraint['foreign'],
                 $constraint['name'],
                 [
                     'onDelete' => $constraint['onDelete'],
@@ -333,9 +335,7 @@ class MySQLSchemaManager extends AbstractSchemaManager
     {
         $table = parent::listTableDetails($name);
 
-        $platform = $this->_platform;
-        assert($platform instanceof MySQLPlatform);
-        $sql = $platform->getListTableMetadataSQL($name);
+        $sql = $this->_platform->getListTableMetadataSQL($name);
 
         $tableOptions = $this->_conn->fetchAssociative($sql);
 
@@ -349,6 +349,8 @@ class MySQLSchemaManager extends AbstractSchemaManager
             $table->addOption('collation', $tableOptions['TABLE_COLLATION']);
         }
 
+        $table->addOption('charset', $tableOptions['CHARACTER_SET_NAME']);
+
         if ($tableOptions['AUTO_INCREMENT'] !== null) {
             $table->addOption('autoincrement', $tableOptions['AUTO_INCREMENT']);
         }
@@ -357,6 +359,11 @@ class MySQLSchemaManager extends AbstractSchemaManager
         $table->addOption('create_options', $this->parseCreateOptions($tableOptions['CREATE_OPTIONS']));
 
         return $table;
+    }
+
+    public function createComparator(): Comparator
+    {
+        return new MySQL\Comparator($this->getDatabasePlatform());
     }
 
     /**

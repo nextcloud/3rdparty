@@ -2,7 +2,11 @@
 
 namespace Doctrine\DBAL\Schema;
 
+use BadMethodCallException;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types;
+use Doctrine\Deprecations\Deprecation;
 
 use function array_intersect_key;
 use function array_key_exists;
@@ -13,38 +17,76 @@ use function array_unique;
 use function assert;
 use function count;
 use function get_class;
+use function sprintf;
 use function strtolower;
 
 /**
  * Compares two Schemas and return an instance of SchemaDiff.
+ *
+ * @method SchemaDiff compareSchemas(Schema $fromSchema, Schema $toSchema)
  */
 class Comparator
 {
-    /**
-     * @return SchemaDiff
-     *
-     * @throws SchemaException
-     */
-    public static function compareSchemas(Schema $fromSchema, Schema $toSchema)
-    {
-        $c = new self();
+    /** @var AbstractPlatform|null */
+    private $platform;
 
-        return $c->compare($fromSchema, $toSchema);
+    /**
+     * @internal The comparator can be only instantiated by a schema manager.
+     */
+    public function __construct(?AbstractPlatform $platform = null)
+    {
+        if ($platform === null) {
+            Deprecation::triggerIfCalledFromOutside(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/4659',
+                'Not passing a $platform to %s is deprecated.'
+                    . ' Use AbstractSchemaManager::createComparator() to instantiate the comparator.',
+                __METHOD__
+            );
+        }
+
+        $this->platform = $platform;
+    }
+
+    /**
+     * @param list<mixed> $args
+     */
+    public function __call(string $method, array $args): SchemaDiff
+    {
+        if ($method !== 'compareSchemas') {
+            throw new BadMethodCallException(sprintf('Unknown method "%s"', $method));
+        }
+
+        return $this->doCompareSchemas(...$args);
+    }
+
+    /**
+     * @param list<mixed> $args
+     */
+    public static function __callStatic(string $method, array $args): SchemaDiff
+    {
+        if ($method !== 'compareSchemas') {
+            throw new BadMethodCallException(sprintf('Unknown method "%s"', $method));
+        }
+
+        $comparator = new self();
+
+        return $comparator->doCompareSchemas(...$args);
     }
 
     /**
      * Returns a SchemaDiff object containing the differences between the schemas $fromSchema and $toSchema.
      *
-     * The returned differences are returned in such a way that they contain the
-     * operations to change the schema stored in $fromSchema to the schema that is
-     * stored in $toSchema.
+     * This method should be called non-statically since it will be declared as non-static in the next major release.
      *
      * @return SchemaDiff
      *
      * @throws SchemaException
      */
-    public function compare(Schema $fromSchema, Schema $toSchema)
-    {
+    private function doCompareSchemas(
+        Schema $fromSchema,
+        Schema $toSchema
+    ) {
         $diff             = new SchemaDiff();
         $diff->fromSchema = $fromSchema;
 
@@ -162,12 +204,28 @@ class Comparator
     }
 
     /**
+     * @deprecated Use non-static call to {@see compareSchemas()} instead.
+     *
+     * @return SchemaDiff
+     *
+     * @throws SchemaException
+     */
+    public function compare(Schema $fromSchema, Schema $toSchema)
+    {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/4707',
+            'Method compare() is deprecated. Use a non-static call to compareSchemas() instead.'
+        );
+
+        return $this->compareSchemas($fromSchema, $toSchema);
+    }
+
+    /**
      * @param Schema   $schema
      * @param Sequence $sequence
-     *
-     * @return bool
      */
-    private function isAutoIncrementSequenceInSchema($schema, $sequence)
+    private function isAutoIncrementSequenceInSchema($schema, $sequence): bool
     {
         foreach ($schema->getTables() as $table) {
             if ($sequence->isAutoIncrementsFor($table)) {
@@ -197,7 +255,7 @@ class Comparator
      *
      * @return TableDiff|false
      *
-     * @throws SchemaException
+     * @throws Exception
      */
     public function diffTable(Table $fromTable, Table $toTable)
     {
@@ -227,17 +285,26 @@ class Comparator
                 continue;
             }
 
-            // See if column has changed properties in "to" table.
-            $changedProperties = $this->diffColumn($column, $toTable->getColumn($columnName));
+            $toColumn = $toTable->getColumn($columnName);
 
-            if (count($changedProperties) === 0) {
+            // See if column has changed properties in "to" table.
+            $changedProperties = $this->diffColumn($column, $toColumn);
+
+            if ($this->platform !== null) {
+                if ($this->columnsEqual($column, $toColumn)) {
+                    continue;
+                }
+            } elseif (count($changedProperties) === 0) {
                 continue;
             }
 
-            $columnDiff = new ColumnDiff($column->getName(), $toTable->getColumn($columnName), $changedProperties);
+            $tableDifferences->changedColumns[$column->getName()] = new ColumnDiff(
+                $column->getName(),
+                $toColumn,
+                $changedProperties,
+                $column
+            );
 
-            $columnDiff->fromColumn                               = $column;
-            $tableDifferences->changedColumns[$column->getName()] = $columnDiff;
             $changes++;
         }
 
@@ -315,15 +382,13 @@ class Comparator
     /**
      * Try to find columns that only changed their name, rename operations maybe cheaper than add/drop
      * however ambiguities between different possibilities should not lead to renaming at all.
-     *
-     * @return void
      */
-    private function detectColumnRenamings(TableDiff $tableDifferences)
+    private function detectColumnRenamings(TableDiff $tableDifferences): void
     {
         $renameCandidates = [];
         foreach ($tableDifferences->addedColumns as $addedColumnName => $addedColumn) {
             foreach ($tableDifferences->removedColumns as $removedColumn) {
-                if (count($this->diffColumn($addedColumn, $removedColumn)) !== 0) {
+                if (! $this->columnsEqual($addedColumn, $removedColumn)) {
                     continue;
                 }
 
@@ -337,7 +402,7 @@ class Comparator
             }
 
             [$removedColumn, $addedColumn] = $candidateColumns[0];
-            $removedColumnName             = strtolower($removedColumn->getName());
+            $removedColumnName             = $removedColumn->getName();
             $addedColumnName               = strtolower($addedColumn->getName());
 
             if (isset($tableDifferences->renamedColumns[$removedColumnName])) {
@@ -347,7 +412,7 @@ class Comparator
             $tableDifferences->renamedColumns[$removedColumnName] = $addedColumn;
             unset(
                 $tableDifferences->addedColumns[$addedColumnName],
-                $tableDifferences->removedColumns[$removedColumnName]
+                $tableDifferences->removedColumns[strtolower($removedColumnName)]
             );
         }
     }
@@ -355,10 +420,8 @@ class Comparator
     /**
      * Try to find indexes that only changed their name, rename operations maybe cheaper than add/drop
      * however ambiguities between different possibilities should not lead to renaming at all.
-     *
-     * @return void
      */
-    private function detectIndexRenamings(TableDiff $tableDifferences)
+    private function detectIndexRenamings(TableDiff $tableDifferences): void
     {
         $renameCandidates = [];
 
@@ -430,10 +493,24 @@ class Comparator
     }
 
     /**
+     * Compares the definitions of the given columns
+     *
+     * @throws Exception
+     */
+    public function columnsEqual(Column $column1, Column $column2): bool
+    {
+        if ($this->platform === null) {
+            return $this->diffColumn($column1, $column2) === [];
+        }
+
+        return $this->platform->columnsEqual($column1, $column2);
+    }
+
+    /**
      * Returns the difference between the columns
      *
-     * If there are differences this method returns $field2, otherwise the
-     * boolean false.
+     * If there are differences this method returns the changed properties as a
+     * string array, otherwise an empty array gets returned.
      *
      * @return string[]
      */
