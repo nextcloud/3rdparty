@@ -54,6 +54,7 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PackageVersions\\' => array($vendorDir . '/composer/package-versions-deprecated/src/PackageVersions'),
+    'Opis\\Closure\\' => array($vendorDir . '/opis/closure/src'),
     'OpenStack\\' => array($vendorDir . '/php-opencloud/openstack/src'),
     'Nextcloud\\LogNormalizer\\' => array($vendorDir . '/nextcloud/lognormalizer/src'),
     'MicrosoftAzure\\Storage\\Common\\' => array($vendorDir . '/microsoft/azure-storage-common/src/Common'),

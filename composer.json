@@ -34,6 +34,7 @@
 		"microsoft/azure-storage-blob": "^1.5",
 		"nextcloud/lognormalizer": "^1.0",
 		"nikic/php-parser": "^4.2",
+		"opis/closure": "^3.6",
 		"pear/archive_tar": "^1.4.9",
 		"pear/pear-core-minimal": "^v1.10",
 		"php-ds/php-ds": "^1.3",

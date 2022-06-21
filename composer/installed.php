@@ -3,7 +3,7 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '70e442d437625996457bb36431fc14f288d4640d',
+        'reference' => '02403021310540a848eb2385e979fcc0563ee730',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -301,7 +301,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '70e442d437625996457bb36431fc14f288d4640d',
+            'reference' => '02403021310540a848eb2385e979fcc0563ee730',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -330,6 +330,15 @@
             'replaced' => array(
                 0 => '1.11.99',
             ),
+        ),
+        'opis/closure' => array(
+            'pretty_version' => '3.6.3',
+            'version' => '3.6.3.0',
+            'reference' => '3d81e4309d2a927abbe66df935f4bb60082805ad',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../opis/closure',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(
             'pretty_version' => '1.4.14',
