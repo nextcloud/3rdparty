@@ -28,6 +28,10 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           reaction-type: "+1"
 
+      - name: Parse command
+        uses: skjnldsv/parse-command-comment@master
+        id: command
+
   process:
     runs-on: ubuntu-latest
     needs: init
