@@ -11,7 +11,6 @@ jobs:
     if: github.event.issue.pull_request != '' && startsWith(github.event.comment.body, '/composer-update')
 
     outputs:
-      git_path: ${{ steps.git-path.outputs.path }}
       head_ref: ${{ steps.comment-branch.outputs.head_ref }}
 
     steps:
@@ -28,9 +27,9 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           reaction-type: "+1"
 
-      - name: Parse command
-        uses: skjnldsv/parse-command-comment@master
-        id: command
+      - name: Init branch
+        uses: xt0rted/pull-request-comment-branch@v1
+        id: comment-branch
 
   process:
     runs-on: ubuntu-latest
@@ -72,7 +71,7 @@ jobs:
 
       - name: Commit and push amend
         run: |
-          git add ${{ needs.init.outputs.git_path }}
+          git add .
           git commit --amend --no-edit --signoff
           git push --force origin ${{ needs.init.outputs.head_ref }}
 
