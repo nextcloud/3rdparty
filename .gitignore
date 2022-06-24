@@ -14,6 +14,15 @@ bin
 **/CODE_OF_CONDUCT.md
 
 aws/aws-sdk-php/.changes
+aws/aws-crt-php/.clang-format
+aws/aws-crt-php/.clang-format-ignore
+aws/aws-crt-php/.gitignore
+aws/aws-crt-php/.gitmodules
+aws/aws-crt-php/CONTRIBUTING.md
+aws/aws-crt-php/Makefile.frag
+aws/aws-crt-php/README.md
+aws/aws-crt-php/builder.json
+aws/aws-crt-php/config.m4
 
 bantu/ini-get-wrapper/tests
 
