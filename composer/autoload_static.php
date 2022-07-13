@@ -3032,6 +3032,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Sabre\\DAV\\Auth\\Backend\\File' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Auth/Backend/File.php',
         'Sabre\\DAV\\Auth\\Backend\\IMAP' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Auth/Backend/IMAP.php',
         'Sabre\\DAV\\Auth\\Backend\\PDO' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Auth/Backend/PDO.php',
+        'Sabre\\DAV\\Auth\\Backend\\PDOBasicAuth' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Auth/Backend/PDOBasicAuth.php',
         'Sabre\\DAV\\Auth\\Plugin' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Auth/Plugin.php',
         'Sabre\\DAV\\Browser\\GuessContentType' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Browser/GuessContentType.php',
         'Sabre\\DAV\\Browser\\HtmlOutput' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Browser/HtmlOutput.php',
