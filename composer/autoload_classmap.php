@@ -2376,6 +2376,7 @@ return array(
     'Sabre\\DAV\\Auth\\Backend\\File' => $vendorDir . '/sabre/dav/lib/DAV/Auth/Backend/File.php',
     'Sabre\\DAV\\Auth\\Backend\\IMAP' => $vendorDir . '/sabre/dav/lib/DAV/Auth/Backend/IMAP.php',
     'Sabre\\DAV\\Auth\\Backend\\PDO' => $vendorDir . '/sabre/dav/lib/DAV/Auth/Backend/PDO.php',
+    'Sabre\\DAV\\Auth\\Backend\\PDOBasicAuth' => $vendorDir . '/sabre/dav/lib/DAV/Auth/Backend/PDOBasicAuth.php',
     'Sabre\\DAV\\Auth\\Plugin' => $vendorDir . '/sabre/dav/lib/DAV/Auth/Plugin.php',
     'Sabre\\DAV\\Browser\\GuessContentType' => $vendorDir . '/sabre/dav/lib/DAV/Browser/GuessContentType.php',
     'Sabre\\DAV\\Browser\\HtmlOutput' => $vendorDir . '/sabre/dav/lib/DAV/Browser/HtmlOutput.php',
