@@ -1304,6 +1304,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "7.3-dev"
+                },
+                "patches_applied": {
+                    "Fix failure to strip cookie on HTTP downgrade": ".patches/guzzle/74a8602c6faec9ef74b7a9391ac82c5e65b1cdab-cookie.diff",
+                    "Fix failure to strip Authorization header on HTTP downgrade": ".patches/guzzle/e3ff079b22820c2029d4c2a87796b6a0b8716ad8-header.patch"
                 }
             },
             "installation-source": "dist",

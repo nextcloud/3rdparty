@@ -26,6 +26,8 @@ jobs:
       run: rm -rf ./*/
     - name: Download dependencies
       run: composer install --no-dev
+    - name: Remove tests and other untracked files
+      run: git clean -X -d -f
     - name: Dump Autoload
       run: composer dump-autoload
     - name: Check vendor changes
