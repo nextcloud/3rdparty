@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62a9ea5f04f28df33dfdeea90ed8bcdb",
+    "content-hash": "2297310d6ca23ae439e3c5d2642b5331",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1088,6 +1088,110 @@
                 "source": "https://github.com/fgrosse/PHPASN1/tree/v2.3.0"
             },
             "time": "2021-04-24T19:01:55+00:00"
+        },
+        {
+            "name": "fusonic/linq",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fusonic/linq.git",
+                "reference": "63520ef1470ca771acbd26871efb945dd4a7a5d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fusonic/linq/zipball/63520ef1470ca771acbd26871efb945dd4a7a5d8",
+                "reference": "63520ef1470ca771acbd26871efb945dd4a7a5d8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Fusonic\\Linq": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fusonic",
+                    "homepage": "http://www.fusonic.net"
+                }
+            ],
+            "description": "LINQ 2 objects class for PHP",
+            "homepage": "http://fusonic.github.io/fusonic-linq/",
+            "keywords": [
+                "linq",
+                "linq2objects"
+            ],
+            "support": {
+                "issues": "https://github.com/fusonic/linq/issues",
+                "source": "https://github.com/fusonic/linq/tree/master"
+            },
+            "time": "2015-02-26T22:49:17+00:00"
+        },
+        {
+            "name": "fusonic/opengraph",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fusonic/opengraph.git",
+                "reference": "a63b588fbe56c175ae06e158f1513642653ee3c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fusonic/opengraph/zipball/a63b588fbe56c175ae06e158f1513642653ee3c1",
+                "reference": "a63b588fbe56c175ae06e158f1513642653ee3c1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "fusonic/linq": "^1.0",
+                "php": "^7.4|^8.0",
+                "psr/http-client": "^1.0",
+                "psr/http-factory": "^1.0",
+                "symfony/css-selector": "^3.0|^4.0|^5.0|^6.0",
+                "symfony/dom-crawler": "^3.0|^4.0|^5.0|^6.0"
+            },
+            "require-dev": {
+                "nyholm/psr7": "^1.2",
+                "phpunit/phpunit": "^9.0",
+                "symfony/http-client": "^6.0"
+            },
+            "suggest": {
+                "nyholm/psr7": "^1.2",
+                "symfony/http-client": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fusonic\\OpenGraph\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fusonic",
+                    "homepage": "https://www.fusonic.net"
+                }
+            ],
+            "description": "PHP library for consuming and publishing Open Graph resources.",
+            "homepage": "https://github.com/fusonic/fusonic-opengraph",
+            "keywords": [
+                "opengraph"
+            ],
+            "support": {
+                "issues": "https://github.com/fusonic/opengraph/issues",
+                "source": "https://github.com/fusonic/opengraph/tree/v2.2.0"
+            },
+            "time": "2022-01-20T05:47:36+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -4520,6 +4624,72 @@
             "time": "2021-08-25T19:27:26+00:00"
         },
         {
+            "name": "symfony/css-selector",
+            "version": "v5.4.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "c1681789f059ab756001052164726ae88512ae3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/c1681789f059ab756001052164726ae88512ae3d",
+                "reference": "c1681789f059ab756001052164726ae88512ae3d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Jean-François Simon",
+                    "email": "jeanfrancois.simon@sensiolabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Converts CSS selectors to XPath expressions",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/css-selector/tree/v5.4.11"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-06-27T16:58:25+00:00"
+        },
+        {
             "name": "symfony/deprecation-contracts",
             "version": "v2.5.2",
             "source": {
@@ -4585,6 +4755,81 @@
                 }
             ],
             "time": "2022-01-02T09:53:40+00:00"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "v5.4.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "0b900ca5576ecd59e08c76127e616667cfe427a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/0b900ca5576ecd59e08c76127e616667cfe427a7",
+                "reference": "0b900ca5576ecd59e08c76127e616667cfe427a7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "conflict": {
+                "masterminds/html5": "<2.6"
+            },
+            "require-dev": {
+                "masterminds/html5": "^2.6",
+                "symfony/css-selector": "^4.4|^5.0|^6.0"
+            },
+            "suggest": {
+                "symfony/css-selector": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DomCrawler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Eases DOM navigation for HTML and XML documents",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/dom-crawler/tree/v5.4.11"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-06-27T16:58:25+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -6316,7 +6561,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.3.0"
+        "php": "7.4.0"
     },
     "plugin-api-version": "2.3.0"
 }

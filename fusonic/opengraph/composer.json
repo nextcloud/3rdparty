@@ -1,0 +1,42 @@
+{
+    "name": "fusonic/opengraph",
+    "description": "PHP library for consuming and publishing Open Graph resources.",
+    "keywords": ["opengraph"],
+    "type": "library",
+    "homepage": "https://github.com/fusonic/fusonic-opengraph",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fusonic",
+            "homepage": "https://www.fusonic.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Fusonic\\OpenGraph\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fusonic\\OpenGraph\\Test\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-dom": "*",
+        "symfony/dom-crawler": "^3.0|^4.0|^5.0|^6.0",
+        "symfony/css-selector": "^3.0|^4.0|^5.0|^6.0",
+        "fusonic/linq": "^1.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "symfony/http-client": "^6.0",
+        "nyholm/psr7": "^1.2"
+    },
+    "suggest": {
+        "symfony/http-client": "^5.0",
+        "nyholm/psr7": "^1.2"
+    }
+}

@@ -58,6 +58,12 @@ doctrine/inflector/tests
 doctrine/lexer/composer.json
 doctrine/lexer/LICENSE
 
+fusonic/linq/examples/
+fusonic/linq/tests/
+
+fusonic/opengraph/examples/
+fusonic/opengraph/phpunit.xml
+
 giggsey/libphonenumber-for-php/METADATA-VERSION.txt
 
 giggsey/locale/CLDR-VERSION.txt

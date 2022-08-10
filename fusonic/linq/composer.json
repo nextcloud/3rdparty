@@ -1,0 +1,22 @@
+{
+    "name": "fusonic/linq",
+    "description": "LINQ 2 objects class for PHP",
+    "keywords": ["linq", "linq2objects"],
+    "type": "library",
+    "homepage": "http://fusonic.github.io/fusonic-linq/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fusonic",
+            "homepage": "http://www.fusonic.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Fusonic\\Linq": "src/"
+        }
+    }
+}
