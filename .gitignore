@@ -60,9 +60,17 @@ doctrine/lexer/LICENSE
 
 fusonic/linq/examples/
 fusonic/linq/tests/
+fusonic/linq/composer.json
+fusonic/linq/.gitignore
+fusonic/linq/README.md
 
 fusonic/opengraph/examples/
+fusonic/opengraph/.gitattributes
+fusonic/opengraph/.gitignore
+fusonic/opengraph/.scrutinizer.yml
+fusonic/opengraph/composer.json
 fusonic/opengraph/phpunit.xml
+fusonic/opengraph/README.md
 
 giggsey/libphonenumber-for-php/METADATA-VERSION.txt
 
