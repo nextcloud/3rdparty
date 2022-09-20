@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37d86728a17ad5fe98c1e8086a6c0c51",
+    "content-hash": "c2f8f0701128f174d058c26ec7bd61d0",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3558,16 +3558,16 @@
         },
         {
             "name": "punic/punic",
-            "version": "1.6.5",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/punic/punic.git",
-                "reference": "7bc85ce1137cf52db4d2a6298256a4c4a24da99a"
+                "reference": "6e14078c3848030a69401125b2665f8bc84ba386"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/punic/punic/zipball/7bc85ce1137cf52db4d2a6298256a4c4a24da99a",
-                "reference": "7bc85ce1137cf52db4d2a6298256a4c4a24da99a",
+                "url": "https://api.github.com/repos/punic/punic/zipball/6e14078c3848030a69401125b2665f8bc84ba386",
+                "reference": "6e14078c3848030a69401125b2665f8bc84ba386",
                 "shasum": ""
             },
             "require": {
@@ -3578,12 +3578,15 @@
                 "punic/common": "*"
             },
             "require-dev": {
-                "apigen/apigen": "4.0.*"
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.4 || ^8.5 || ^9.5"
             },
+            "bin": [
+                "bin/punic-data"
+            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Punic\\": "code/"
+                    "Punic\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3600,6 +3603,11 @@
                     "name": "Remo Laubacher",
                     "email": "remo.laubacher@gmail.com",
                     "role": "Collaborator, motivator and perfectionist supporter"
+                },
+                {
+                    "name": "Christian Schmidt",
+                    "email": "github@chsc.dk",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP-Unicode CLDR",
@@ -3619,7 +3627,21 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2017-02-03T16:13:09+00:00"
+            "support": {
+                "issues": "https://github.com/punic/punic/issues",
+                "source": "https://github.com/punic/punic/tree/3.7.0"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/mlocati",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/mlocati",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-11-16T11:09:43+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
