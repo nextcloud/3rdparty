@@ -1090,20 +1090,20 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.12.25",
+            "version": "8.12.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "7d397cbd2e01e78cf79ff347e40a403dbc4c22fa"
+                "reference": "0f6481df7bee33fe0ed87d2af06770527a2e1c86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/7d397cbd2e01e78cf79ff347e40a403dbc4c22fa",
-                "reference": "7d397cbd2e01e78cf79ff347e40a403dbc4c22fa",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/0f6481df7bee33fe0ed87d2af06770527a2e1c86",
+                "reference": "0f6481df7bee33fe0ed87d2af06770527a2e1c86",
                 "shasum": ""
             },
             "require": {
-                "giggsey/locale": "^1.7",
+                "giggsey/locale": "^1.7|^2.0",
                 "php": ">=5.3.2",
                 "symfony/polyfill-mbstring": "^1.17"
             },
@@ -1159,36 +1159,37 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2021-06-14T11:44:26+00:00"
+            "time": "2022-09-23T15:16:03+00:00"
         },
         {
             "name": "giggsey/locale",
-            "version": "1.9",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/Locale.git",
-                "reference": "b07f1eace8072ccc61445ad8fbd493ff9d783043"
+                "reference": "9c1dca769253f6a3e81f9a5c167f53b6a54ab635"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/Locale/zipball/b07f1eace8072ccc61445ad8fbd493ff9d783043",
-                "reference": "b07f1eace8072ccc61445ad8fbd493ff9d783043",
+                "url": "https://api.github.com/repos/giggsey/Locale/zipball/9c1dca769253f6a3e81f9a5c167f53b6a54ab635",
+                "reference": "9c1dca769253f6a3e81f9a5c167f53b6a54ab635",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": ">=7.2"
             },
             "require-dev": {
+                "ext-json": "*",
                 "pear/pear-core-minimal": "^1.9",
                 "pear/pear_exception": "^1.0",
                 "pear/versioncontrol_git": "^0.5",
-                "phing/phing": "~2.7",
-                "php-coveralls/php-coveralls": "^1.0|^2.0",
-                "phpunit/phpunit": "^4.8|^5.0",
-                "symfony/console": "^2.8|^3.0|^4.0",
-                "symfony/filesystem": "^2.8|^3.0|^4.0",
-                "symfony/finder": "^2.8|^3.0|^4.0",
-                "symfony/process": "^2.8|^3.0|^4.0"
+                "phing/phing": "^2.7",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^8.5|^9.5",
+                "symfony/console": "^5.0",
+                "symfony/filesystem": "^5.0",
+                "symfony/finder": "^5.0",
+                "symfony/process": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -1204,15 +1205,15 @@
                 {
                     "name": "Joshua Gigg",
                     "email": "giggsey@gmail.com",
-                    "homepage": "http://giggsey.com/"
+                    "homepage": "https://giggsey.com/"
                 }
             ],
             "description": "Locale functions required by libphonenumber-for-php",
             "support": {
                 "issues": "https://github.com/giggsey/Locale/issues",
-                "source": "https://github.com/giggsey/Locale/tree/master"
+                "source": "https://github.com/giggsey/Locale/tree/2.2"
             },
-            "time": "2020-07-07T11:16:24+00:00"
+            "time": "2022-04-06T07:33:59+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -6219,5 +6220,5 @@
     "platform-overrides": {
         "php": "7.3.0"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
