@@ -25,6 +25,25 @@ updates:
       versions: [ "5.x" ]
     - dependency-name: "symfony/translation"
       versions: [ "5.x" ]
+  labels:
+    - "dependencies"
+    - "main"
+
+- package-ecosystem: composer
+  directory: "/"
+  target-branch: stable25
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
+  labels:
+    - "dependencies"
+    - "stable25"
 
 - package-ecosystem: composer
   directory: "/"
@@ -38,6 +57,9 @@ updates:
   ignore:
     - dependency-name: "*"
       update-types: ["version-update:semver-major"]
+  labels:
+    - "dependencies"
+    - "stable24"
 
 - package-ecosystem: composer
   directory: "/"
@@ -51,6 +73,9 @@ updates:
   ignore:
     - dependency-name: "*"
       update-types: ["version-update:semver-major"]
+  labels:
+    - "dependencies"
+    - "stable23"
 
 - package-ecosystem: composer
   directory: "/"
@@ -64,16 +89,6 @@ updates:
   ignore:
     - dependency-name: "*"
       update-types: ["version-update:semver-major"]
-
-- package-ecosystem: composer
-  directory: "/"
-  target-branch: stable21
-  schedule:
-    interval: weekly
-    day: saturday
-    time: "03:00"
-    timezone: Europe/Paris
-  open-pull-requests-limit: 10
-  ignore:
-    - dependency-name: "*"
-      update-types: ["version-update:semver-major"]
+  labels:
+    - "dependencies"
+    - "stable22"
