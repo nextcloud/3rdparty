@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '4634bdbb964a10ee590cc3e96103e8e74d5aa81a',
+        'reference' => 'e6a429dcd19e45c9c81528bf96a604f391519a85',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -137,9 +137,9 @@
             'dev_requirement' => false,
         ),
         'egulias/email-validator' => array(
-            'pretty_version' => '3.2.1',
-            'version' => '3.2.1.0',
-            'reference' => 'f88dcf4b14af14a98ad96b14b2b317969eab6715',
+            'pretty_version' => '3.2.5',
+            'version' => '3.2.5.0',
+            'reference' => 'b531a2311709443320c786feb4519cfaf94af796',
             'type' => 'library',
             'install_path' => __DIR__ . '/../egulias/email-validator',
             'aliases' => array(),
@@ -328,7 +328,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '4634bdbb964a10ee590cc3e96103e8e74d5aa81a',
+            'reference' => 'e6a429dcd19e45c9c81528bf96a604f391519a85',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
