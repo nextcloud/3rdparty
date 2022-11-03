@@ -37,7 +37,7 @@ class MockHandler implements \Countable
         $this->onRejected = $onRejected;
 
         if ($resultOrQueue) {
-            call_user_func_array([$this, 'append'], $resultOrQueue);
+            call_user_func_array([$this, 'append'], array_values($resultOrQueue));
         }
     }
 
@@ -106,7 +106,7 @@ class MockHandler implements \Countable
                 $meta['statusCode'] = 200;
             }
             $result['@metadata'] = $meta;
-            $result = Promise\promise_for($result);
+            $result = Promise\Create::promiseFor($result);
         }
 
         $result->then($this->onFulfilled, $this->onRejected);
@@ -139,6 +139,7 @@ class MockHandler implements \Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->queue);
