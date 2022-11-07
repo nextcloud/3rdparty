@@ -33,6 +33,7 @@
 		"laravel/serializable-closure": "^1.2",
 		"mexitek/phpcolors": "^1.0",
 		"microsoft/azure-storage-blob": "^1.5",
+		"microsoft/azure-storage-common": "^1.5.2",
 		"mlocati/ip-lib": "^1.18",
 		"nextcloud/lognormalizer": "^1.0",
 		"nikic/php-parser": "^4.2",
