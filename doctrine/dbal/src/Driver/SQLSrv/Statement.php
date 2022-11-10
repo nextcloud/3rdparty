@@ -7,8 +7,10 @@ use Doctrine\DBAL\Driver\Result as ResultInterface;
 use Doctrine\DBAL\Driver\SQLSrv\Exception\Error;
 use Doctrine\DBAL\Driver\Statement as StatementInterface;
 use Doctrine\DBAL\ParameterType;
+use Doctrine\Deprecations\Deprecation;
 
 use function assert;
+use function func_num_args;
 use function is_int;
 use function sqlsrv_execute;
 use function SQLSRV_PHPTYPE_STREAM;
@@ -32,10 +34,8 @@ final class Statement implements StatementInterface
 
     /**
      * The SQL statement to execute.
-     *
-     * @var string
      */
-    private $sql;
+    private string $sql;
 
     /**
      * The SQLSRV statement resource.
@@ -47,16 +47,16 @@ final class Statement implements StatementInterface
     /**
      * References to the variables bound as statement parameters.
      *
-     * @var mixed
+     * @var array<int, mixed>
      */
-    private $variables = [];
+    private array $variables = [];
 
     /**
      * Bound parameter types.
      *
-     * @var int[]
+     * @var array<int, int>
      */
-    private $types = [];
+    private array $types = [];
 
     /**
      * Append to any INSERT query to retrieve the last insert id.
@@ -84,9 +84,18 @@ final class Statement implements StatementInterface
     /**
      * {@inheritdoc}
      */
-    public function bindValue($param, $value, $type = ParameterType::STRING)
+    public function bindValue($param, $value, $type = ParameterType::STRING): bool
     {
         assert(is_int($param));
+
+        if (func_num_args() < 3) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5558',
+                'Not passing $type to Statement::bindValue() is deprecated.'
+                    . ' Pass the type corresponding to the parameter being bound.',
+            );
+        }
 
         $this->variables[$param] = $value;
         $this->types[$param]     = $type;
@@ -96,10 +105,28 @@ final class Statement implements StatementInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Use {@see bindValue()} instead.
      */
-    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null)
+    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null): bool
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/5563',
+            '%s is deprecated. Use bindValue() instead.',
+            __METHOD__,
+        );
+
         assert(is_int($param));
+
+        if (func_num_args() < 3) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5558',
+                'Not passing $type to Statement::bindParam() is deprecated.'
+                    . ' Pass the type corresponding to the parameter being bound.',
+            );
+        }
 
         $this->variables[$param] =& $variable;
         $this->types[$param]     = $type;
@@ -116,18 +143,23 @@ final class Statement implements StatementInterface
     public function execute($params = null): ResultInterface
     {
         if ($params !== null) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5556',
+                'Passing $params to Statement::execute() is deprecated. Bind parameters using'
+                    . ' Statement::bindParam() or Statement::bindValue() instead.',
+            );
+
             foreach ($params as $key => $val) {
                 if (is_int($key)) {
-                    $this->bindValue($key + 1, $val);
+                    $this->bindValue($key + 1, $val, ParameterType::STRING);
                 } else {
-                    $this->bindValue($key, $val);
+                    $this->bindValue($key, $val, ParameterType::STRING);
                 }
             }
         }
 
-        if ($this->stmt === null) {
-            $this->stmt = $this->prepare();
-        }
+        $this->stmt ??= $this->prepare();
 
         if (! sqlsrv_execute($this->stmt)) {
             throw Error::new();

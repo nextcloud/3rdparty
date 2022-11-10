@@ -7,12 +7,14 @@ namespace Doctrine\DBAL\Driver\API\PostgreSQL;
 use Doctrine\DBAL\Driver\API\ExceptionConverter as ExceptionConverterInterface;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\ConnectionException;
+use Doctrine\DBAL\Exception\DatabaseDoesNotExist;
 use Doctrine\DBAL\Exception\DeadlockException;
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\DBAL\Exception\InvalidFieldNameException;
 use Doctrine\DBAL\Exception\NonUniqueFieldNameException;
 use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+use Doctrine\DBAL\Exception\SchemaDoesNotExist;
 use Doctrine\DBAL\Exception\SyntaxErrorException;
 use Doctrine\DBAL\Exception\TableExistsException;
 use Doctrine\DBAL\Exception\TableNotFoundException;
@@ -21,14 +23,10 @@ use Doctrine\DBAL\Query;
 
 use function strpos;
 
-/**
- * @internal
- */
+/** @internal */
 final class ExceptionConverter implements ExceptionConverterInterface
 {
-    /**
-     * @link http://www.postgresql.org/docs/9.4/static/errcodes-appendix.html
-     */
+    /** @link http://www.postgresql.org/docs/9.4/static/errcodes-appendix.html */
     public function convert(Exception $exception, ?Query $query): DriverException
     {
         switch ($exception->getSQLState()) {
@@ -54,6 +52,12 @@ final class ExceptionConverter implements ExceptionConverterInterface
             case '23505':
                 return new UniqueConstraintViolationException($exception, $query);
 
+            case '3D000':
+                return new DatabaseDoesNotExist($exception, $query);
+
+            case '3F000':
+                return new SchemaDoesNotExist($exception, $query);
+
             case '42601':
                 return new SyntaxErrorException($exception, $query);
 
@@ -73,7 +77,7 @@ final class ExceptionConverter implements ExceptionConverterInterface
                 return new ConnectionException($exception, $query);
         }
 
-        // Prior to fixing https://bugs.php.net/bug.php?id=64705 (PHP 7.3.22 and PHP 7.4.10),
+        // Prior to fixing https://bugs.php.net/bug.php?id=64705 (PHP 7.4.10),
         // in some cases (mainly connection errors) the PDO exception wouldn't provide a SQLSTATE via its code.
         // We have to match against the SQLSTATE in the error message in these cases.
         if ($exception->getCode() === 7 && strpos($exception->getMessage(), 'SQLSTATE[08006]') !== false) {

@@ -5,19 +5,19 @@ namespace Doctrine\DBAL\Tools\Console\Command;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Tools\Console\ConnectionProvider;
-use Doctrine\DBAL\Tools\Dumper;
-use LogicException;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
+use function array_keys;
 use function assert;
 use function is_bool;
-use function is_numeric;
 use function is_string;
+use function sprintf;
 use function stripos;
 
 /**
@@ -26,8 +26,7 @@ use function stripos;
  */
 class RunSqlCommand extends Command
 {
-    /** @var ConnectionProvider */
-    private $connectionProvider;
+    private ConnectionProvider $connectionProvider;
 
     public function __construct(ConnectionProvider $connectionProvider)
     {
@@ -44,16 +43,15 @@ class RunSqlCommand extends Command
         ->setDefinition([
             new InputOption('connection', null, InputOption::VALUE_REQUIRED, 'The named database connection'),
             new InputArgument('sql', InputArgument::REQUIRED, 'The SQL statement to execute.'),
-            new InputOption('depth', null, InputOption::VALUE_REQUIRED, 'Dumping depth of result set.', '7'),
+            new InputOption('depth', null, InputOption::VALUE_REQUIRED, 'Dumping depth of result set (deprecated).'),
             new InputOption('force-fetch', null, InputOption::VALUE_NONE, 'Forces fetching the result.'),
         ])
-        ->setHelp(<<<EOT
+        ->setHelp(<<<'EOT'
 The <info>%command.name%</info> command executes the given SQL query and
 outputs the results:
 
 <info>php %command.full_name% "SELECT * FROM users"</info>
-EOT
-        );
+EOT);
     }
 
     /**
@@ -66,6 +64,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $conn = $this->getConnection($input);
+        $io   = new SymfonyStyle($input, $output);
 
         $sql = $input->getArgument('sql');
 
@@ -75,22 +74,18 @@ EOT
 
         assert(is_string($sql));
 
-        $depth = $input->getOption('depth');
-
-        if (! is_numeric($depth)) {
-            throw new LogicException("Option 'depth' must contains an integer value");
+        if ($input->getOption('depth') !== null) {
+            $io->warning('Parameter "depth" is deprecated and has no effect anymore.');
         }
 
         $forceFetch = $input->getOption('force-fetch');
         assert(is_bool($forceFetch));
 
         if (stripos($sql, 'select') === 0 || $forceFetch) {
-            $resultSet = $conn->fetchAllAssociative($sql);
+            $this->runQuery($io, $conn, $sql);
         } else {
-            $resultSet = $conn->executeStatement($sql);
+            $this->runStatement($io, $conn, $sql);
         }
-
-        $output->write(Dumper::dump($resultSet, (int) $depth));
 
         return 0;
     }
@@ -105,5 +100,24 @@ EOT
         }
 
         return $this->connectionProvider->getDefaultConnection();
+    }
+
+    /** @throws Exception */
+    private function runQuery(SymfonyStyle $io, Connection $conn, string $sql): void
+    {
+        $resultSet = $conn->fetchAllAssociative($sql);
+        if ($resultSet === []) {
+            $io->success('The query yielded an empty result set.');
+
+            return;
+        }
+
+        $io->table(array_keys($resultSet[0]), $resultSet);
+    }
+
+    /** @throws Exception */
+    private function runStatement(SymfonyStyle $io, Connection $conn, string $sql): void
+    {
+        $io->success(sprintf('%d rows affected.', $conn->executeStatement($sql)));
     }
 }

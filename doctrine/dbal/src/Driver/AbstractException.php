@@ -8,7 +8,7 @@ use Exception as BaseException;
 use Throwable;
 
 /**
- * Base implementation of the {@link Exception} interface.
+ * Base implementation of the {@see Exception} interface.
  *
  * @internal
  *
@@ -18,10 +18,8 @@ abstract class AbstractException extends BaseException implements Exception
 {
     /**
      * The SQLSTATE of the driver.
-     *
-     * @var string|null
      */
-    private $sqlState;
+    private ?string $sqlState = null;
 
     /**
      * @param string         $message  The driver error message.

@@ -5,6 +5,8 @@ namespace Doctrine\DBAL\Types;
 use Doctrine\DBAL\Exception;
 use Throwable;
 
+use function func_get_arg;
+use function func_num_args;
 use function get_class;
 use function gettype;
 use function implode;
@@ -25,7 +27,7 @@ class ConversionException extends Exception
     /**
      * Thrown when a Database to Doctrine Type Conversion fails.
      *
-     * @param string $value
+     * @param mixed  $value
      * @param string $toType
      *
      * @return ConversionException
@@ -41,7 +43,7 @@ class ConversionException extends Exception
      * Thrown when a Database to Doctrine Type Conversion fails and we can make a statement
      * about the expected format.
      *
-     * @param string $value
+     * @param mixed  $value
      * @param string $toType
      * @param string $expectedFormat
      *
@@ -55,7 +57,7 @@ class ConversionException extends Exception
             'Could not convert database value "' . $value . '" to Doctrine Type ' .
             $toType . '. Expected format: ' . $expectedFormat,
             0,
-            $previous
+            $previous,
         );
     }
 
@@ -79,7 +81,7 @@ class ConversionException extends Exception
                 'Could not convert PHP value %s to type %s. Expected one of the following types: %s',
                 var_export($value, true),
                 $toType,
-                implode(', ', $possibleTypes)
+                implode(', ', $possibleTypes),
             ), 0, $previous);
         }
 
@@ -87,7 +89,7 @@ class ConversionException extends Exception
             'Could not convert PHP value of type %s to type %s. Expected one of the following types: %s',
             is_object($value) ? get_class($value) : gettype($value),
             $toType,
-            implode(', ', $possibleTypes)
+            implode(', ', $possibleTypes),
         ), 0, $previous);
     }
 
@@ -98,7 +100,7 @@ class ConversionException extends Exception
      *
      * @return ConversionException
      */
-    public static function conversionFailedSerialization($value, $format, $error)
+    public static function conversionFailedSerialization($value, $format, $error /*, ?Throwable $previous = null */)
     {
         $actualType = is_object($value) ? get_class($value) : gettype($value);
 
@@ -106,8 +108,8 @@ class ConversionException extends Exception
             "Could not convert PHP type '%s' to '%s', as an '%s' error was triggered by the serialization",
             $actualType,
             $format,
-            $error
-        ));
+            $error,
+        ), 0, func_num_args() >= 4 ? func_get_arg(3) : null);
     }
 
     public static function conversionFailedUnserialization(string $format, string $error): self
@@ -115,7 +117,7 @@ class ConversionException extends Exception
         return new self(sprintf(
             "Could not convert database value to '%s' as an error was triggered by the unserialization: '%s'",
             $format,
-            $error
+            $error,
         ));
     }
 }

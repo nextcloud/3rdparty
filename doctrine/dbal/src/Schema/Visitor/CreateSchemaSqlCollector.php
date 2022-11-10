@@ -6,28 +6,35 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Doctrine\DBAL\Schema\Sequence;
 use Doctrine\DBAL\Schema\Table;
+use Doctrine\Deprecations\Deprecation;
 
 use function array_merge;
 
+/** @deprecated Use {@link CreateSchemaObjectsSQLBuilder} instead. */
 class CreateSchemaSqlCollector extends AbstractVisitor
 {
     /** @var string[] */
-    private $createNamespaceQueries = [];
+    private array $createNamespaceQueries = [];
 
     /** @var string[] */
-    private $createTableQueries = [];
+    private array $createTableQueries = [];
 
     /** @var string[] */
-    private $createSequenceQueries = [];
+    private array $createSequenceQueries = [];
 
     /** @var string[] */
-    private $createFkConstraintQueries = [];
+    private array $createFkConstraintQueries = [];
 
-    /** @var AbstractPlatform */
-    private $platform;
+    private AbstractPlatform $platform;
 
     public function __construct(AbstractPlatform $platform)
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/5416',
+            'CreateSchemaSqlCollector is deprecated. Use CreateSchemaObjectsSQLBuilder instead.',
+        );
+
         $this->platform = $platform;
     }
 
@@ -71,9 +78,7 @@ class CreateSchemaSqlCollector extends AbstractVisitor
         $this->createSequenceQueries[] = $this->platform->getCreateSequenceSQL($sequence);
     }
 
-    /**
-     * @return void
-     */
+    /** @return void */
     public function resetQueries()
     {
         $this->createNamespaceQueries    = [];
@@ -91,9 +96,9 @@ class CreateSchemaSqlCollector extends AbstractVisitor
     {
         return array_merge(
             $this->createNamespaceQueries,
-            $this->createTableQueries,
             $this->createSequenceQueries,
-            $this->createFkConstraintQueries
+            $this->createTableQueries,
+            $this->createFkConstraintQueries,
         );
     }
 }

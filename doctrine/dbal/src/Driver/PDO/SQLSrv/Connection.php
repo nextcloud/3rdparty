@@ -2,46 +2,28 @@
 
 namespace Doctrine\DBAL\Driver\PDO\SQLSrv;
 
+use Doctrine\DBAL\Driver\Middleware\AbstractConnectionMiddleware;
 use Doctrine\DBAL\Driver\PDO\Connection as PDOConnection;
-use Doctrine\DBAL\Driver\Result;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
 use Doctrine\DBAL\Driver\Statement as StatementInterface;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\Deprecations\Deprecation;
 use PDO;
 
-final class Connection implements ServerInfoAwareConnection
+final class Connection extends AbstractConnectionMiddleware
 {
-    /** @var PDOConnection */
-    private $connection;
+    private PDOConnection $connection;
 
     public function __construct(PDOConnection $connection)
     {
+        parent::__construct($connection);
+
         $this->connection = $connection;
     }
 
     public function prepare(string $sql): StatementInterface
     {
         return new Statement(
-            $this->connection->prepare($sql)
+            $this->connection->prepare($sql),
         );
-    }
-
-    public function query(string $sql): Result
-    {
-        return $this->connection->query($sql);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function quote($value, $type = ParameterType::STRING)
-    {
-        return $this->connection->quote($value, $type);
-    }
-
-    public function exec(string $sql): int
-    {
-        return $this->connection->exec($sql);
     }
 
     /**
@@ -50,48 +32,39 @@ final class Connection implements ServerInfoAwareConnection
     public function lastInsertId($name = null)
     {
         if ($name === null) {
-            return $this->connection->lastInsertId($name);
+            return parent::lastInsertId($name);
         }
 
-        return $this->prepare('SELECT CONVERT(VARCHAR(MAX), current_value) FROM sys.sequences WHERE name = ?')
-            ->execute([$name])
+        Deprecation::triggerIfCalledFromOutside(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/issues/4687',
+            'The usage of Connection::lastInsertId() with a sequence name is deprecated.',
+        );
+
+        $statement = $this->prepare(
+            'SELECT CONVERT(VARCHAR(MAX), current_value) FROM sys.sequences WHERE name = ?',
+        );
+        $statement->bindValue(1, $name);
+
+        return $statement->execute()
             ->fetchOne();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function beginTransaction()
+    public function getNativeConnection(): PDO
     {
-        return $this->connection->beginTransaction();
+        return $this->connection->getNativeConnection();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function commit()
-    {
-        return $this->connection->commit();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function rollBack()
-    {
-        return $this->connection->rollBack();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getServerVersion()
-    {
-        return $this->connection->getServerVersion();
-    }
-
+    /** @deprecated Call {@see getNativeConnection()} instead. */
     public function getWrappedConnection(): PDO
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/5037',
+            '%s is deprecated, call getNativeConnection() instead.',
+            __METHOD__,
+        );
+
         return $this->connection->getWrappedConnection();
     }
 }

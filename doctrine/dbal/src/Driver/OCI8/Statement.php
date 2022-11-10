@@ -2,21 +2,18 @@
 
 namespace Doctrine\DBAL\Driver\OCI8;
 
-use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\OCI8\Exception\Error;
 use Doctrine\DBAL\Driver\OCI8\Exception\UnknownParameterIndex;
 use Doctrine\DBAL\Driver\Result as ResultInterface;
 use Doctrine\DBAL\Driver\Statement as StatementInterface;
 use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\SQL\Parser;
+use Doctrine\Deprecations\Deprecation;
 
-use function assert;
+use function func_num_args;
 use function is_int;
-use function is_resource;
 use function oci_bind_by_name;
 use function oci_execute;
 use function oci_new_descriptor;
-use function oci_parse;
 
 use const OCI_B_BIN;
 use const OCI_B_BLOB;
@@ -29,88 +26,96 @@ use const SQLT_CHR;
 final class Statement implements StatementInterface
 {
     /** @var resource */
-    protected $_dbh;
+    private $connection;
 
     /** @var resource */
-    protected $_sth;
+    private $statement;
 
-    /** @var ExecutionMode */
-    private $executionMode;
+    /** @var array<int,string> */
+    private array $parameterMap;
 
-    /** @var string[] */
-    protected $_paramMap = [];
-
-    /**
-     * Holds references to bound parameter values.
-     *
-     * This is a new requirement for PHP7's oci8 extension that prevents bound values from being garbage collected.
-     *
-     * @var mixed[]
-     */
-    private $boundValues = [];
+    private ExecutionMode $executionMode;
 
     /**
-     * Creates a new OCI8Statement that uses the given connection handle and SQL statement.
-     *
      * @internal The statement can be only instantiated by its driver connection.
      *
-     * @param resource $dbh   The connection handle.
-     * @param string   $query The SQL query.
-     *
-     * @throws Exception
+     * @param resource          $connection
+     * @param resource          $statement
+     * @param array<int,string> $parameterMap
      */
-    public function __construct($dbh, $query, ExecutionMode $executionMode)
+    public function __construct($connection, $statement, array $parameterMap, ExecutionMode $executionMode)
     {
-        $parser  = new Parser(false);
-        $visitor = new ConvertPositionalToNamedPlaceholders();
-
-        $parser->parse($query, $visitor);
-
-        $stmt = oci_parse($dbh, $visitor->getSQL());
-        assert(is_resource($stmt));
-
-        $this->_sth          = $stmt;
-        $this->_dbh          = $dbh;
-        $this->_paramMap     = $visitor->getParameterMap();
+        $this->connection    = $connection;
+        $this->statement     = $statement;
+        $this->parameterMap  = $parameterMap;
         $this->executionMode = $executionMode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function bindValue($param, $value, $type = ParameterType::STRING)
+    public function bindValue($param, $value, $type = ParameterType::STRING): bool
     {
-        return $this->bindParam($param, $value, $type, null);
+        if (func_num_args() < 3) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5558',
+                'Not passing $type to Statement::bindValue() is deprecated.'
+                    . ' Pass the type corresponding to the parameter being bound.',
+            );
+        }
+
+        return $this->bindParam($param, $value, $type);
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Use {@see bindValue()} instead.
      */
-    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null)
+    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null): bool
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/5563',
+            '%s is deprecated. Use bindValue() instead.',
+            __METHOD__,
+        );
+
+        if (func_num_args() < 3) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5558',
+                'Not passing $type to Statement::bindParam() is deprecated.'
+                    . ' Pass the type corresponding to the parameter being bound.',
+            );
+        }
+
         if (is_int($param)) {
-            if (! isset($this->_paramMap[$param])) {
+            if (! isset($this->parameterMap[$param])) {
                 throw UnknownParameterIndex::new($param);
             }
 
-            $param = $this->_paramMap[$param];
+            $param = $this->parameterMap[$param];
         }
 
         if ($type === ParameterType::LARGE_OBJECT) {
-            $lob = oci_new_descriptor($this->_dbh, OCI_D_LOB);
-            $lob->writeTemporary($variable, OCI_TEMP_BLOB);
+            if ($variable !== null) {
+                $lob = oci_new_descriptor($this->connection, OCI_D_LOB);
+                $lob->writeTemporary($variable, OCI_TEMP_BLOB);
 
-            $variable =& $lob;
+                $variable =& $lob;
+            } else {
+                $type = ParameterType::STRING;
+            }
         }
 
-        $this->boundValues[$param] =& $variable;
-
         return oci_bind_by_name(
-            $this->_sth,
+            $this->statement,
             $param,
             $variable,
             $length ?? -1,
-            $this->convertParameterType($type)
+            $this->convertParameterType($type),
         );
     }
 
@@ -137,11 +142,18 @@ final class Statement implements StatementInterface
     public function execute($params = null): ResultInterface
     {
         if ($params !== null) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5556',
+                'Passing $params to Statement::execute() is deprecated. Bind parameters using'
+                    . ' Statement::bindParam() or Statement::bindValue() instead.',
+            );
+
             foreach ($params as $key => $val) {
                 if (is_int($key)) {
-                    $this->bindValue($key + 1, $val);
+                    $this->bindValue($key + 1, $val, ParameterType::STRING);
                 } else {
-                    $this->bindValue($key, $val);
+                    $this->bindValue($key, $val, ParameterType::STRING);
                 }
             }
         }
@@ -152,11 +164,11 @@ final class Statement implements StatementInterface
             $mode = OCI_NO_AUTO_COMMIT;
         }
 
-        $ret = @oci_execute($this->_sth, $mode);
+        $ret = @oci_execute($this->statement, $mode);
         if (! $ret) {
-            throw Error::new($this->_sth);
+            throw Error::new($this->statement);
         }
 
-        return new Result($this->_sth);
+        return new Result($this->statement);
     }
 }

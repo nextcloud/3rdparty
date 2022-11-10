@@ -5,21 +5,20 @@ namespace Doctrine\DBAL\Driver\IBMDB2;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\IBMDB2\Exception\CannotCopyStreamToStream;
 use Doctrine\DBAL\Driver\IBMDB2\Exception\CannotCreateTemporaryFile;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\CannotWriteToTemporaryFile;
 use Doctrine\DBAL\Driver\IBMDB2\Exception\StatementError;
 use Doctrine\DBAL\Driver\Result as ResultInterface;
 use Doctrine\DBAL\Driver\Statement as StatementInterface;
 use Doctrine\DBAL\ParameterType;
+use Doctrine\Deprecations\Deprecation;
 
 use function assert;
 use function db2_bind_param;
 use function db2_execute;
 use function error_get_last;
 use function fclose;
-use function fwrite;
+use function func_num_args;
 use function is_int;
 use function is_resource;
-use function ksort;
 use function stream_copy_to_stream;
 use function stream_get_meta_data;
 use function tmpfile;
@@ -36,15 +35,15 @@ final class Statement implements StatementInterface
     private $stmt;
 
     /** @var mixed[] */
-    private $bindParam = [];
+    private array $parameters = [];
 
     /**
      * Map of LOB parameter positions to the tuples containing reference to the variable bound to the driver statement
      * and the temporary file handle bound to the underlying statement
      *
-     * @var mixed[][]
+     * @var array<int,string|resource|null>
      */
-    private $lobs = [];
+    private array $lobs = [];
 
     /**
      * @internal The statement can be only instantiated by its driver connection.
@@ -59,19 +58,46 @@ final class Statement implements StatementInterface
     /**
      * {@inheritdoc}
      */
-    public function bindValue($param, $value, $type = ParameterType::STRING)
+    public function bindValue($param, $value, $type = ParameterType::STRING): bool
     {
         assert(is_int($param));
+
+        if (func_num_args() < 3) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5558',
+                'Not passing $type to Statement::bindValue() is deprecated.'
+                    . ' Pass the type corresponding to the parameter being bound.',
+            );
+        }
 
         return $this->bindParam($param, $value, $type);
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Use {@see bindValue()} instead.
      */
-    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null)
+    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null): bool
     {
+        Deprecation::trigger(
+            'doctrine/dbal',
+            'https://github.com/doctrine/dbal/pull/5563',
+            '%s is deprecated. Use bindValue() instead.',
+            __METHOD__,
+        );
+
         assert(is_int($param));
+
+        if (func_num_args() < 3) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5558',
+                'Not passing $type to Statement::bindParam() is deprecated.'
+                    . ' Pass the type corresponding to the parameter being bound.',
+            );
+        }
 
         switch ($type) {
             case ParameterType::INTEGER:
@@ -79,17 +105,7 @@ final class Statement implements StatementInterface
                 break;
 
             case ParameterType::LARGE_OBJECT:
-                if (isset($this->lobs[$param])) {
-                    [, $handle] = $this->lobs[$param];
-                    fclose($handle);
-                }
-
-                $handle = $this->createTemporaryFile();
-                $path   = stream_get_meta_data($handle)['uri'];
-
-                $this->bind($param, $path, DB2_PARAM_FILE, DB2_BINARY);
-
-                $this->lobs[$param] = [&$variable, $handle];
+                $this->lobs[$param] = &$variable;
                 break;
 
             default:
@@ -108,9 +124,9 @@ final class Statement implements StatementInterface
      */
     private function bind($position, &$variable, int $parameterType, int $dataType): void
     {
-        $this->bindParam[$position] =& $variable;
+        $this->parameters[$position] =& $variable;
 
-        if (! db2_bind_param($this->stmt, $position, 'variable', $parameterType, $dataType)) {
+        if (! db2_bind_param($this->stmt, $position, '', $parameterType, $dataType)) {
             throw StatementError::new($this->stmt);
         }
     }
@@ -120,29 +136,20 @@ final class Statement implements StatementInterface
      */
     public function execute($params = null): ResultInterface
     {
-        if ($params === null) {
-            ksort($this->bindParam);
-
-            $params = [];
-
-            foreach ($this->bindParam as $value) {
-                $params[] = $value;
-            }
+        if ($params !== null) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/5556',
+                'Passing $params to Statement::execute() is deprecated. Bind parameters using'
+                    . ' Statement::bindParam() or Statement::bindValue() instead.',
+            );
         }
 
-        foreach ($this->lobs as [$source, $target]) {
-            if (is_resource($source)) {
-                $this->copyStreamToStream($source, $target);
+        $handles = $this->bindLobs();
 
-                continue;
-            }
+        $result = @db2_execute($this->stmt, $params ?? $this->parameters);
 
-            $this->writeStringToStream($source, $target);
-        }
-
-        $result = db2_execute($this->stmt, $params);
-
-        foreach ($this->lobs as [, $handle]) {
+        foreach ($handles as $handle) {
             fclose($handle);
         }
 
@@ -153,6 +160,31 @@ final class Statement implements StatementInterface
         }
 
         return new Result($this->stmt);
+    }
+
+    /**
+     * @return list<resource>
+     *
+     * @throws Exception
+     */
+    private function bindLobs(): array
+    {
+        $handles = [];
+
+        foreach ($this->lobs as $param => $value) {
+            if (is_resource($value)) {
+                $handle = $handles[] = $this->createTemporaryFile();
+                $path   = stream_get_meta_data($handle)['uri'];
+
+                $this->copyStreamToStream($value, $handle);
+
+                $this->bind($param, $path, DB2_PARAM_FILE, DB2_BINARY);
+            } else {
+                $this->bind($param, $value, DB2_PARAM_IN, DB2_CHAR);
+            }
+        }
+
+        return $handles;
     }
 
     /**
@@ -181,18 +213,6 @@ final class Statement implements StatementInterface
     {
         if (@stream_copy_to_stream($source, $target) === false) {
             throw CannotCopyStreamToStream::new(error_get_last());
-        }
-    }
-
-    /**
-     * @param resource $target
-     *
-     * @throws Exception
-     */
-    private function writeStringToStream(string $string, $target): void
-    {
-        if (@fwrite($target, $string) === false) {
-            throw CannotWriteToTemporaryFile::new(error_get_last());
         }
     }
 }

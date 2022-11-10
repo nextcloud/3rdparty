@@ -10,25 +10,21 @@ use Doctrine\DBAL\Driver\Mysqli\Exception\StatementError;
 use Doctrine\DBAL\Driver\Result as ResultInterface;
 use mysqli_sql_exception;
 use mysqli_stmt;
-use stdClass;
 
+use function array_column;
 use function array_combine;
 use function array_fill;
-use function array_map;
 use function count;
 
 final class Result implements ResultInterface
 {
-    /** @var mysqli_stmt */
-    private $statement;
+    private mysqli_stmt $statement;
 
     /**
      * Whether the statement result has columns. The property should be used only after the result metadata
      * has been fetched ({@see $metadataFetched}). Otherwise, the property value is undetermined.
-     *
-     * @var bool
      */
-    private $hasColumns = false;
+    private bool $hasColumns = false;
 
     /**
      * Mapping of statement result column indexes to their names. The property should be used only
@@ -36,10 +32,10 @@ final class Result implements ResultInterface
      *
      * @var array<int,string>
      */
-    private $columnNames = [];
+    private array $columnNames = [];
 
     /** @var mixed[] */
-    private $boundValues = [];
+    private array $boundValues = [];
 
     /**
      * @internal The result can be only instantiated by its driver connection or statement.
@@ -58,11 +54,7 @@ final class Result implements ResultInterface
 
         $this->hasColumns = true;
 
-        $fields = $meta->fetch_fields();
-
-        $this->columnNames = array_map(static function (stdClass $field): string {
-            return $field->name;
-        }, $fields);
+        $this->columnNames = array_column($meta->fetch_fields(), 'name');
 
         $meta->free();
 
@@ -84,10 +76,8 @@ final class Result implements ResultInterface
         // to the length of the ones fetched during the previous execution.
         $this->boundValues = array_fill(0, count($this->columnNames), null);
 
-        $refs = [];
-        foreach ($this->boundValues as &$value) {
-            $refs[] =& $value;
-        }
+        // The following is necessary as PHP cannot handle references to properties properly
+        $refs = &$this->boundValues;
 
         if (! $this->statement->bind_result(...$refs)) {
             throw StatementError::new($this->statement);
