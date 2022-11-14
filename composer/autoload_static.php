@@ -231,6 +231,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'I' => 
         array (
             'Icewind\\Streams\\' => 16,
+            'IPLib\\' => 6,
             'ID3Parser\\' => 10,
         ),
         'H' => 
@@ -513,6 +514,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Icewind\\Streams\\' => 
         array (
             0 => __DIR__ . '/..' . '/icewind/streams/src',
+        ),
+        'IPLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mlocati/ip-lib/src',
         ),
         'ID3Parser\\' => 
         array (
@@ -2073,6 +2078,22 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'ID3Parser\\getID3\\getid3_exception' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_exception.php',
         'ID3Parser\\getID3\\getid3_handler' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_handler.php',
         'ID3Parser\\getID3\\getid3_lib' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_lib.php',
+        'IPLib\\Address\\AddressInterface' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/AddressInterface.php',
+        'IPLib\\Address\\AssignedRange' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/AssignedRange.php',
+        'IPLib\\Address\\IPv4' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/IPv4.php',
+        'IPLib\\Address\\IPv6' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/IPv6.php',
+        'IPLib\\Address\\Type' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/Type.php',
+        'IPLib\\Factory' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Factory.php',
+        'IPLib\\ParseStringFlag' => __DIR__ . '/..' . '/mlocati/ip-lib/src/ParseStringFlag.php',
+        'IPLib\\Range\\AbstractRange' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/AbstractRange.php',
+        'IPLib\\Range\\Pattern' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/Pattern.php',
+        'IPLib\\Range\\RangeInterface' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/RangeInterface.php',
+        'IPLib\\Range\\Single' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/Single.php',
+        'IPLib\\Range\\Subnet' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/Subnet.php',
+        'IPLib\\Range\\Type' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/Type.php',
+        'IPLib\\Service\\BinaryMath' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/BinaryMath.php',
+        'IPLib\\Service\\RangesFromBoundaryCalculator' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/RangesFromBoundaryCalculator.php',
+        'IPLib\\Service\\UnsignedIntegerMath' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/UnsignedIntegerMath.php',
         'Icewind\\Streams\\CallbackWrapper' => __DIR__ . '/..' . '/icewind/streams/src/CallbackWrapper.php',
         'Icewind\\Streams\\CountWrapper' => __DIR__ . '/..' . '/icewind/streams/src/CountWrapper.php',
         'Icewind\\Streams\\Directory' => __DIR__ . '/..' . '/icewind/streams/src/Directory.php',
