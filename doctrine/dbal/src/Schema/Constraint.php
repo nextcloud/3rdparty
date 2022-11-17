@@ -6,6 +6,8 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 /**
  * Marker interface for constraints.
+ *
+ * @deprecated Use {@see ForeignKeyConstraint}, {@see Index} or {@see UniqueConstraint} instead.
  */
 interface Constraint
 {
