@@ -3,7 +3,7 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '17019bea3f47a54511a0d21bb6f79a8f51917ac1',
+        'reference' => '96efba0e1d6918a8c06915b634858a426d07a84f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -271,6 +271,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'mlocati/ip-lib' => array(
+            'pretty_version' => '1.18.0',
+            'version' => '1.18.0.0',
+            'reference' => 'c77bd0b1f3e3956c7e9661e75cb1f54ed67d95d2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mlocati/ip-lib',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'mtdowling/jmespath.php' => array(
             'pretty_version' => '2.6.1',
             'version' => '2.6.1.0',
@@ -283,7 +292,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '17019bea3f47a54511a0d21bb6f79a8f51917ac1',
+            'reference' => '96efba0e1d6918a8c06915b634858a426d07a84f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
