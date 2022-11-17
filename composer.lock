@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "420a81924c1c6e0144fb75e905d8ab2a",
+    "content-hash": "e8b44960bb5fe944cbac3aafb5fca8aa",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2862,16 +2862,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.32",
+            "version": "2.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "f5c4c19880d45d0be3e7d24ae8ac434844a898cd"
+                "reference": "f3a0e2b715c40cf1fd270d444901b63311725d63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f5c4c19880d45d0be3e7d24ae8ac434844a898cd",
-                "reference": "f5c4c19880d45d0be3e7d24ae8ac434844a898cd",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f3a0e2b715c40cf1fd270d444901b63311725d63",
+                "reference": "f3a0e2b715c40cf1fd270d444901b63311725d63",
                 "shasum": ""
             },
             "require": {
@@ -2886,7 +2886,8 @@
                 "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
                 "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
                 "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
-                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations.",
+                "ext-xml": "Install the XML extension to load XML formatted public keys."
             },
             "type": "library",
             "autoload": {
@@ -2951,7 +2952,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.32"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.39"
             },
             "funding": [
                 {
@@ -2967,7 +2968,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-12T12:12:59+00:00"
+            "time": "2022-10-24T10:49:03+00:00"
         },
         {
             "name": "pimple/pimple",
