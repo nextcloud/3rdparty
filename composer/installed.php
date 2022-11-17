@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '8f9c6c1160f8e484c5b46b233f84a372655d6285',
+        'reference' => '4b599a26731b0399c231c33a200cc12cb2e2031e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -271,6 +271,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'mlocati/ip-lib' => array(
+            'pretty_version' => '1.18.0',
+            'version' => '1.18.0.0',
+            'reference' => 'c77bd0b1f3e3956c7e9661e75cb1f54ed67d95d2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mlocati/ip-lib',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'mtdowling/jmespath.php' => array(
             'pretty_version' => '2.6.1',
             'version' => '2.6.1.0',
@@ -283,7 +292,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '8f9c6c1160f8e484c5b46b233f84a372655d6285',
+            'reference' => '4b599a26731b0399c231c33a200cc12cb2e2031e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
