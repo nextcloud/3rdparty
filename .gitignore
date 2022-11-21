@@ -7,7 +7,7 @@ bin
 # ignore demo files
 **/.travis.yml
 # ignore .github files
-**/.github
+**/*/.github
 # ignore changelogs
 **/CHANGELOG.md
 # ignore coc
