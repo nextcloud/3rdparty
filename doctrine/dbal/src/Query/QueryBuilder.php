@@ -327,9 +327,9 @@ class QueryBuilder
     /**
      * Executes this query using the bound parameters and their types.
      *
-     * @deprecated Use {@link executeQuery()} or {@link executeStatement()} instead.
+     * @deprecated Use {@see executeQuery()} or {@see executeStatement()} instead.
      *
-     * @return Result|int
+     * @return Result|int|string
      *
      * @throws Exception
      */
@@ -1315,11 +1315,9 @@ class QueryBuilder
     }
 
     /**
-     * @return string
-     *
      * @throws QueryException
      */
-    private function getSQLForSelect()
+    private function getSQLForSelect(): string
     {
         $query = 'SELECT ' . ($this->sqlParts['distinct'] ? 'DISTINCT ' : '') .
                   implode(', ', $this->sqlParts['select']);
@@ -1346,7 +1344,7 @@ class QueryBuilder
      *
      * @throws QueryException
      */
-    private function getFromClauses()
+    private function getFromClauses(): array
     {
         $fromClauses  = [];
         $knownAliases = [];
@@ -1385,20 +1383,15 @@ class QueryBuilder
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function isLimitQuery()
+    private function isLimitQuery(): bool
     {
         return $this->maxResults !== null || $this->firstResult !== 0;
     }
 
     /**
      * Converts this instance into an INSERT string in SQL.
-     *
-     * @return string
      */
-    private function getSQLForInsert()
+    private function getSQLForInsert(): string
     {
         return 'INSERT INTO ' . $this->sqlParts['from']['table'] .
         ' (' . implode(', ', array_keys($this->sqlParts['values'])) . ')' .
@@ -1407,10 +1400,8 @@ class QueryBuilder
 
     /**
      * Converts this instance into an UPDATE string in SQL.
-     *
-     * @return string
      */
-    private function getSQLForUpdate()
+    private function getSQLForUpdate(): string
     {
         $table = $this->sqlParts['from']['table']
             . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
@@ -1422,10 +1413,8 @@ class QueryBuilder
 
     /**
      * Converts this instance into a DELETE string in SQL.
-     *
-     * @return string
      */
-    private function getSQLForDelete()
+    private function getSQLForDelete(): string
     {
         $table = $this->sqlParts['from']['table']
             . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
@@ -1448,18 +1437,18 @@ class QueryBuilder
     /**
      * Creates a new named parameter and bind the value $value to it.
      *
-     * This method provides a shortcut for {@link Statement::bindValue()}
+     * This method provides a shortcut for {@see Statement::bindValue()}
      * when using prepared statements.
      *
      * The parameter $value specifies the value that you want to bind. If
-     * $placeholder is not provided bindValue() will automatically create a
-     * placeholder for you. An automatic placeholder will be of the name
-     * ':dcValue1', ':dcValue2' etc.
+     * $placeholder is not provided createNamedParameter() will automatically
+     * create a placeholder for you. An automatic placeholder will be of the
+     * name ':dcValue1', ':dcValue2' etc.
      *
      * Example:
      * <code>
      * $value = 2;
-     * $q->eq( 'id', $q->bindValue( $value ) );
+     * $q->eq( 'id', $q->createNamedParameter( $value ) );
      * $stmt = $q->executeQuery(); // executed with 'id = 2'
      * </code>
      *
@@ -1517,11 +1506,9 @@ class QueryBuilder
      * @param string             $fromAlias
      * @param array<string,true> $knownAliases
      *
-     * @return string
-     *
      * @throws QueryException
      */
-    private function getSQLForJoins($fromAlias, array &$knownAliases)
+    private function getSQLForJoins($fromAlias, array &$knownAliases): string
     {
         $sql = '';
 
