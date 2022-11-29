@@ -19,6 +19,8 @@ use GuzzleHttp\Promise\PromiseInterface;
  * @method \GuzzleHttp\Promise\Promise createBucketAsync(array $args = [])
  * @method \Aws\Result createJob(array $args = [])
  * @method \GuzzleHttp\Promise\Promise createJobAsync(array $args = [])
+ * @method \Aws\Result createMultiRegionAccessPoint(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise createMultiRegionAccessPointAsync(array $args = [])
  * @method \Aws\Result deleteAccessPoint(array $args = [])
  * @method \GuzzleHttp\Promise\Promise deleteAccessPointAsync(array $args = [])
  * @method \Aws\Result deleteAccessPointForObjectLambda(array $args = [])
@@ -37,6 +39,8 @@ use GuzzleHttp\Promise\PromiseInterface;
  * @method \GuzzleHttp\Promise\Promise deleteBucketTaggingAsync(array $args = [])
  * @method \Aws\Result deleteJobTagging(array $args = [])
  * @method \GuzzleHttp\Promise\Promise deleteJobTaggingAsync(array $args = [])
+ * @method \Aws\Result deleteMultiRegionAccessPoint(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise deleteMultiRegionAccessPointAsync(array $args = [])
  * @method \Aws\Result deletePublicAccessBlock(array $args = [])
  * @method \GuzzleHttp\Promise\Promise deletePublicAccessBlockAsync(array $args = [])
  * @method \Aws\Result deleteStorageLensConfiguration(array $args = [])
@@ -45,6 +49,8 @@ use GuzzleHttp\Promise\PromiseInterface;
  * @method \GuzzleHttp\Promise\Promise deleteStorageLensConfigurationTaggingAsync(array $args = [])
  * @method \Aws\Result describeJob(array $args = [])
  * @method \GuzzleHttp\Promise\Promise describeJobAsync(array $args = [])
+ * @method \Aws\Result describeMultiRegionAccessPointOperation(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise describeMultiRegionAccessPointOperationAsync(array $args = [])
  * @method \Aws\Result getAccessPoint(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getAccessPointAsync(array $args = [])
  * @method \Aws\Result getAccessPointConfigurationForObjectLambda(array $args = [])
@@ -67,8 +73,18 @@ use GuzzleHttp\Promise\PromiseInterface;
  * @method \GuzzleHttp\Promise\Promise getBucketPolicyAsync(array $args = [])
  * @method \Aws\Result getBucketTagging(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getBucketTaggingAsync(array $args = [])
+ * @method \Aws\Result getBucketVersioning(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getBucketVersioningAsync(array $args = [])
  * @method \Aws\Result getJobTagging(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getJobTaggingAsync(array $args = [])
+ * @method \Aws\Result getMultiRegionAccessPoint(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getMultiRegionAccessPointAsync(array $args = [])
+ * @method \Aws\Result getMultiRegionAccessPointPolicy(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getMultiRegionAccessPointPolicyAsync(array $args = [])
+ * @method \Aws\Result getMultiRegionAccessPointPolicyStatus(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getMultiRegionAccessPointPolicyStatusAsync(array $args = [])
+ * @method \Aws\Result getMultiRegionAccessPointRoutes(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getMultiRegionAccessPointRoutesAsync(array $args = [])
  * @method \Aws\Result getPublicAccessBlock(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getPublicAccessBlockAsync(array $args = [])
  * @method \Aws\Result getStorageLensConfiguration(array $args = [])
@@ -81,6 +97,8 @@ use GuzzleHttp\Promise\PromiseInterface;
  * @method \GuzzleHttp\Promise\Promise listAccessPointsForObjectLambdaAsync(array $args = [])
  * @method \Aws\Result listJobs(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listJobsAsync(array $args = [])
+ * @method \Aws\Result listMultiRegionAccessPoints(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise listMultiRegionAccessPointsAsync(array $args = [])
  * @method \Aws\Result listRegionalBuckets(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listRegionalBucketsAsync(array $args = [])
  * @method \Aws\Result listStorageLensConfigurations(array $args = [])
@@ -97,14 +115,20 @@ use GuzzleHttp\Promise\PromiseInterface;
  * @method \GuzzleHttp\Promise\Promise putBucketPolicyAsync(array $args = [])
  * @method \Aws\Result putBucketTagging(array $args = [])
  * @method \GuzzleHttp\Promise\Promise putBucketTaggingAsync(array $args = [])
+ * @method \Aws\Result putBucketVersioning(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise putBucketVersioningAsync(array $args = [])
  * @method \Aws\Result putJobTagging(array $args = [])
  * @method \GuzzleHttp\Promise\Promise putJobTaggingAsync(array $args = [])
+ * @method \Aws\Result putMultiRegionAccessPointPolicy(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise putMultiRegionAccessPointPolicyAsync(array $args = [])
  * @method \Aws\Result putPublicAccessBlock(array $args = [])
  * @method \GuzzleHttp\Promise\Promise putPublicAccessBlockAsync(array $args = [])
  * @method \Aws\Result putStorageLensConfiguration(array $args = [])
  * @method \GuzzleHttp\Promise\Promise putStorageLensConfigurationAsync(array $args = [])
  * @method \Aws\Result putStorageLensConfigurationTagging(array $args = [])
  * @method \GuzzleHttp\Promise\Promise putStorageLensConfigurationTaggingAsync(array $args = [])
+ * @method \Aws\Result submitMultiRegionAccessPointRoutes(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise submitMultiRegionAccessPointRoutesAsync(array $args = [])
  * @method \Aws\Result updateJobPriority(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateJobPriorityAsync(array $args = [])
  * @method \Aws\Result updateJobStatus(array $args = [])
@@ -178,29 +202,72 @@ class S3ControlClient extends AwsClient
     public function __construct(array $args)
     {
         parent::__construct($args);
+
+        if ($this->isUseEndpointV2()) {
+            $this->processEndpointV2Model();
+        }
         $stack = $this->getHandlerList();
-        $stack->appendBuild(
-            S3ControlEndpointMiddleware::wrap(
-                $this->getRegion(),
-                [
-                    'dual_stack' => $this->getConfig('use_dual_stack_endpoint'),
-                ]
-            ),
-            's3control.endpoint_middleware'
-        );
         $stack->appendBuild(
             EndpointArnMiddleware::wrap(
                 $this->getApi(),
                 $this->getRegion(),
                 [
                     'use_arn_region' => $this->getConfig('use_arn_region'),
-                    'dual_stack' => $this->getConfig('use_dual_stack_endpoint'),
+                    'dual_stack' =>
+                        $this->getConfig('use_dual_stack_endpoint')->isUseDualStackEndpoint(),
                     'endpoint' => isset($args['endpoint'])
                         ? $args['endpoint']
-                        : null
-                ]
+                        : null,
+                    'use_fips_endpoint' => $this->getConfig('use_fips_endpoint'),
+                ],
+                $this->isUseEndpointV2()
             ),
             's3control.endpoint_arn_middleware'
         );
+    }
+
+    /**
+     * Modifies API definition to remove `AccountId`
+     * host prefix.  This is now handled by the endpoint ruleset.
+     *
+     * @return void
+     *
+     * @internal
+     */
+    private function processEndpointV2Model()
+    {
+        $definition = $this->getApi()->getDefinition();
+        $this->removeHostPrefix($definition);
+        $this->removeRequiredMember($definition);
+        $this->getApi()->setDefinition($definition);
+    }
+
+    private function removeHostPrefix(&$definition)
+    {
+        foreach($definition['operations'] as &$operation) {
+            if (isset($operation['endpoint']['hostPrefix'])
+                && $operation['endpoint']['hostPrefix'] === '{AccountId}.'
+            ) {
+                $operation['endpoint']['hostPrefix'] = str_replace(
+                    '{AccountId}.',
+                    '',
+                    $operation['endpoint']['hostPrefix']
+                );
+            }
+        }
+    }
+
+    private function removeRequiredMember(&$definition)
+    {
+        foreach($definition['shapes'] as &$shape) {
+            if (isset($shape['required'])
+            ) {
+                $found = array_search('AccountId', $shape['required']);
+
+                if ($found !== false) {
+                    unset($shape['required'][$found]);
+                }
+            }
+        }
     }
 }

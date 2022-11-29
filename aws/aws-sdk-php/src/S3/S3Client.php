@@ -121,6 +121,8 @@ use Psr\Http\Message\RequestInterface;
  * @method \GuzzleHttp\Promise\Promise getObjectAsync(array $args = [])
  * @method \Aws\Result getObjectAcl(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getObjectAclAsync(array $args = [])
+ * @method \Aws\Result getObjectAttributes(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getObjectAttributesAsync(array $args = [])
  * @method \Aws\Result getObjectLegalHold(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getObjectLegalHoldAsync(array $args = [])
  * @method \Aws\Result getObjectLockConfiguration(array $args = [])
@@ -268,15 +270,6 @@ class S3Client extends AwsClient implements S3ClientInterface
                     . ' be accessed via an Accelerate endpoint.',
                 'default' => false,
             ],
-            'use_dual_stack_endpoint' => [
-                'type' => 'config',
-                'valid' => ['bool'],
-                'doc' => 'Set to true to send requests to an S3 Dual Stack'
-                    . ' endpoint by default, which enables IPv6 Protocol.'
-                    . ' Can be enabled or disabled on individual operations by setting'
-                    . ' \'@use_dual_stack_endpoint\' to true or false.',
-                'default' => false,
-            ],
             'use_path_style_endpoint' => [
                 'type' => 'config',
                 'valid' => ['bool'],
@@ -284,6 +277,15 @@ class S3Client extends AwsClient implements S3ClientInterface
                     . ' endpoint by default.'
                     . ' Can be enabled or disabled on individual operations by setting'
                     . ' \'@use_path_style_endpoint\' to true or false.',
+                'default' => false,
+            ],
+            'disable_multiregion_access_points' => [
+                'type' => 'config',
+                'valid' => ['bool'],
+                'doc' => 'Set to true to disable the usage of'
+                    . ' multi region access points. These are enabled by default.'
+                    . ' Can be enabled or disabled on individual operations by setting'
+                    . ' \'@disable_multiregion_access_points\' to true or false.',
                 'default' => false,
             ],
         ];
@@ -334,6 +336,11 @@ class S3Client extends AwsClient implements S3ClientInterface
      *   Can be enabled or disabled on individual operations by setting
      *   '@use_path_style_endpoint\' to true or false. Note:
      *   you cannot use it together with an accelerate endpoint.
+     * - disable_multiregion_access_points: (bool) Set to true to disable
+     *   sending multi region requests.  They are enabled by default.
+     *   Can be enabled or disabled on individual operations by setting
+     *   '@disable_multiregion_access_points\' to true or false. Note:
+     *   you cannot use it together with an accelerate or dualstack endpoint.
      *
      * @param array $args
      */
@@ -345,6 +352,7 @@ class S3Client extends AwsClient implements S3ClientInterface
         ) {
             $args['s3_us_east_1_regional_endpoint'] = ConfigurationProvider::defaultProvider($args);
         }
+        $this->addBuiltIns($args);
         parent::__construct($args);
         $stack = $this->getHandlerList();
         $stack->appendInit(SSECMiddleware::wrap($this->getEndpoint()->getScheme()), 's3.ssec');
@@ -354,18 +362,20 @@ class S3Client extends AwsClient implements S3ClientInterface
             's3.content_type'
         );
 
-        // Use the bucket style middleware when using a "bucket_endpoint" (for cnames)
         if ($this->getConfig('bucket_endpoint')) {
             $stack->appendBuild(BucketEndpointMiddleware::wrap(), 's3.bucket_endpoint');
-        } else {
+        } elseif (!$this->isUseEndpointV2()) {
             $stack->appendBuild(
                 S3EndpointMiddleware::wrap(
                     $this->getRegion(),
                     $this->getConfig('endpoint_provider'),
                     [
-                        'dual_stack' => $this->getConfig('use_dual_stack_endpoint'),
                         'accelerate' => $this->getConfig('use_accelerate_endpoint'),
                         'path_style' => $this->getConfig('use_path_style_endpoint'),
+                        'use_fips_endpoint' => $this->getConfig('use_fips_endpoint'),
+                        'dual_stack' =>
+                            $this->getConfig('use_dual_stack_endpoint')->isUseDualStackEndpoint(),
+
                     ]
                 ),
                 's3.endpoint_middleware'
@@ -378,13 +388,18 @@ class S3Client extends AwsClient implements S3ClientInterface
                 $this->getRegion(),
                 [
                     'use_arn_region' => $this->getConfig('use_arn_region'),
-                    'dual_stack' => $this->getConfig('use_dual_stack_endpoint'),
                     'accelerate' => $this->getConfig('use_accelerate_endpoint'),
                     'path_style' => $this->getConfig('use_path_style_endpoint'),
+                    'dual_stack' =>
+                        $this->getConfig('use_dual_stack_endpoint')->isUseDualStackEndpoint(),
+                    'use_fips_endpoint' => $this->getConfig('use_fips_endpoint'),
+                    'disable_multiregion_access_points' =>
+                        $this->getConfig('disable_multiregion_access_points'),
                     'endpoint' => isset($args['endpoint'])
                         ? $args['endpoint']
                         : null
-                ]
+                ],
+                $this->isUseEndpointV2()
             ),
             's3.bucket_endpoint_arn'
         );
@@ -400,6 +415,9 @@ class S3Client extends AwsClient implements S3ClientInterface
         $stack->appendInit($this->getLocationConstraintMiddleware(), 's3.location');
         $stack->appendInit($this->getEncodingTypeMiddleware(), 's3.auto_encode');
         $stack->appendInit($this->getHeadObjectMiddleware(), 's3.head_object');
+        if ($this->isUseEndpointV2()) {
+            $this->processEndpointV2Model();
+        }
     }
 
     /**
@@ -415,6 +433,9 @@ class S3Client extends AwsClient implements S3ClientInterface
      */
     public static function isBucketDnsCompatible($bucket)
     {
+        if (!is_string($bucket)) {
+            return false;
+        }
         $bucketLen = strlen($bucket);
 
         return ($bucketLen >= 3 && $bucketLen <= 63) &&
@@ -446,17 +467,19 @@ class S3Client extends AwsClient implements S3ClientInterface
     {
         $command = clone $command;
         $command->getHandlerList()->remove('signer');
+        $request = \Aws\serialize($command);
+        $signing_name = $this->getSigningName($request->getUri()->getHost());
 
         /** @var \Aws\Signature\SignatureInterface $signer */
         $signer = call_user_func(
             $this->getSignatureProvider(),
             $this->getConfig('signature_version'),
-            $this->getConfig('signing_name'),
+            $signing_name,
             $this->getConfig('signing_region')
         );
 
         return $signer->presign(
-            \Aws\serialize($command),
+            $request,
             $this->getCredentials()->wait(),
             $expires,
             $options
@@ -624,6 +647,82 @@ class S3Client extends AwsClient implements S3ClientInterface
         };
     }
 
+    /**
+     * Special handling for when the service name is s3-object-lambda.
+     * So, if the host contains s3-object-lambda, then the service name
+     * returned is s3-object-lambda, otherwise the default signing service is returned.
+     * @param string $host The host to validate if is a s3-object-lambda URL.
+     * @return string returns the signing service name to be used
+     */
+    private function getSigningName($host)
+    {
+        if (strpos( $host, 's3-object-lambda')) {
+            return 's3-object-lambda';
+        }
+
+        return $this->getConfig('signing_name');
+    }
+
+    /**
+     * Modifies API definition to remove `Bucket` from request URIs.
+     * This is now handled by the endpoint ruleset.
+     *
+     * @return void
+     *
+     * @internal
+     */
+    private function processEndpointV2Model()
+    {
+        $definition = $this->getApi()->getDefinition();
+
+        foreach($definition['operations'] as &$operation) {
+            if (isset($operation['http']['requestUri'])) {
+                $requestUri = $operation['http']['requestUri'];
+                if ($requestUri === "/{Bucket}") {
+                    $requestUri = str_replace('/{Bucket}', '/', $requestUri);
+                } else {
+                    $requestUri = str_replace('/{Bucket}', '', $requestUri);
+                }
+                $operation['http']['requestUri'] = $requestUri;
+            }
+        }
+        $this->getApi()->setDefinition($definition);
+    }
+
+    /**
+     * Adds service-specific client built-in values
+     *
+     * @return void
+     */
+    private function addBuiltIns($args)
+    {
+        if ($args['region'] !== 'us-east-1') {
+            return false;
+        }
+        $key = 'AWS::S3::UseGlobalEndpoint';
+        $result = $args['s3_us_east_1_regional_endpoint'] instanceof \Closure ?
+            $args['s3_us_east_1_regional_endpoint']()->wait() : $args['s3_us_east_1_regional_endpoint'];
+
+        if (is_string($result)) {
+            if ($result === 'regional') {
+                $value = false;
+            } else if ($result === 'legacy') {
+                $value = true;
+            } else {
+                return;
+            }
+        } else {
+            if ($result->isFallback()
+                || $result->getEndpointsType() === 'legacy'
+            ) {
+                $value = true;
+            } else {
+                $value = false;
+            }
+        }
+        $this->clientBuiltIns[$key] = $value;
+    }
+
     /** @internal */
     public static function _applyRetryConfig($value, $args, HandlerList $list)
     {
@@ -717,13 +816,16 @@ class S3Client extends AwsClient implements S3ClientInterface
     {
         ClientResolver::_apply_api_provider($value, $args);
         $args['parser'] = new GetBucketLocationParser(
-            new AmbiguousSuccessParser(
-                new RetryableMalformedResponseParser(
-                    $args['parser'],
+            new ValidateResponseChecksumParser(
+                new AmbiguousSuccessParser(
+                    new RetryableMalformedResponseParser(
+                        $args['parser'],
+                        $args['exception_class']
+                    ),
+                    $args['error_parser'],
                     $args['exception_class']
                 ),
-                $args['error_parser'],
-                $args['exception_class']
+                $args['api']
             )
         );
     }
