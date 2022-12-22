@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '9ef27e13d670f2afe61c08f9662731e727ff00ee',
+        'reference' => '33a6ef1c2223e8d105fa05b6b83663dcddab8109',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -328,7 +328,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9ef27e13d670f2afe61c08f9662731e727ff00ee',
+            'reference' => '33a6ef1c2223e8d105fa05b6b83663dcddab8109',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -478,6 +478,15 @@
             'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/cache',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/clock' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => 'e41a24703d4560fd0acb709162f73b8adfc3aa0d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/clock',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
