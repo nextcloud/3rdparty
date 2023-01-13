@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'e84c6c487dd19a023cd66af7dc5b6005222e5821',
+        'reference' => '4634bdbb964a10ee590cc3e96103e8e74d5aa81a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -328,7 +328,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'e84c6c487dd19a023cd66af7dc5b6005222e5821',
+            'reference' => '4634bdbb964a10ee590cc3e96103e8e74d5aa81a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -344,9 +344,9 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.10.5',
-            'version' => '4.10.5.0',
-            'reference' => '4432ba399e47c66624bc73c8c0f811e5c109576f',
+            'pretty_version' => 'v4.15.2',
+            'version' => '4.15.2.0',
+            'reference' => 'f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),

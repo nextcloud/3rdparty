@@ -664,6 +664,7 @@ abstract class ParserAbstract implements Parser
             'false'    => true,
             'mixed'    => true,
             'never'    => true,
+            'true'     => true,
         ];
 
         if (!$name->isUnqualified()) {
@@ -875,6 +876,15 @@ abstract class ParserAbstract implements Parser
         return $attributes;
     }
 
+    protected function checkClassModifier($a, $b, $modifierPos) {
+        try {
+            Class_::verifyClassModifier($a, $b);
+        } catch (Error $error) {
+            $error->setAttributes($this->getAttributesAt($modifierPos));
+            $this->emitError($error);
+        }
+    }
+
     protected function checkModifier($a, $b, $modifierPos) {
         // Jumping through some hoops here because verifyModifier() is also used elsewhere
         try {
@@ -977,6 +987,12 @@ abstract class ParserAbstract implements Parser
                     break;
             }
         }
+
+        if ($node->flags & Class_::MODIFIER_READONLY) {
+            $this->emitError(new Error(
+                sprintf('Method %s() cannot be readonly', $node->name),
+                $this->getAttributesAt($modifierPos)));
+        }
     }
 
     protected function checkClassConst(ClassConst $node, $modifierPos) {
@@ -990,9 +1006,9 @@ abstract class ParserAbstract implements Parser
                 "Cannot use 'abstract' as constant modifier",
                 $this->getAttributesAt($modifierPos)));
         }
-        if ($node->flags & Class_::MODIFIER_FINAL) {
+        if ($node->flags & Class_::MODIFIER_READONLY) {
             $this->emitError(new Error(
-                "Cannot use 'final' as constant modifier",
+                "Cannot use 'readonly' as constant modifier",
                 $this->getAttributesAt($modifierPos)));
         }
     }
