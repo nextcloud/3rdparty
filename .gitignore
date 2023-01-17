@@ -7,11 +7,27 @@ bin
 # ignore demo files
 **/.travis.yml
 # ignore .github files
-**/.github
+**/*/.github
 # ignore changelogs
 **/CHANGELOG.md
 # ignore coc
 **/CODE_OF_CONDUCT.md
+# ignore composer.json
+*/*/composer.json
+# ignore README.md and UPGRADE.md
+*/*/README.md
+*/*/UPGRADE.md
+# ignore codestyle tools config
+*/*/psalm.xml
+*/*/phpcs.xml
+*/*/.phpcs.xml
+*/*/.scrutinizer.yml
+*/*/phpunit.xml
+*/*/phpunit.xml.dist
+# ignore gitignores
+*/*/.gitignore
+# ignore docs and tests
+*/*/tests
 
 aws/aws-sdk-php/.changes
 
