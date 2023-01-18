@@ -14,18 +14,26 @@ bin
 **/CODE_OF_CONDUCT.md
 # ignore composer.json
 */*/composer.json
-# ignore README.md and UPGRADE.md
+# ignore README and UPGRADE
 */*/README.md
+*/*/README.rst
 */*/UPGRADE.md
+*/*/UPGRADE-*.md
+*/*/CONTRIBUTING.md
+*/*/SECURITY.md
 # ignore codestyle tools config
 */*/psalm.xml
+*/*/psalm.baseline.xml
 */*/phpcs.xml
+*/*/phpcs.xml.dist
 */*/.phpcs.xml
-*/*/.scrutinizer.yml
+*/*/phpstan.neon.dist
 */*/phpunit.xml
 */*/phpunit.xml.dist
-# ignore gitignores
+*/*/.scrutinizer.yml
+# ignore gitignores and gitattributes
 */*/.gitignore
+*/*/.gitattributes
 # ignore docs and tests
 */*/tests
 
@@ -34,20 +42,18 @@ aws/aws-sdk-php/.changes
 brick/math/random-tests.php
 brick/math/psalm*.xmls
 
-doctrine/cache/UPGRADE-1.11.md
 doctrine/dbal/.doctrine-project.json
-doctrine/dbal/.gitattributes
 doctrine/dbal/.gitmodules
 doctrine/dbal/build.*
 doctrine/dbal/docs
 doctrine/dbal/run-all.sh
+doctrine/dbal/static-analysis
+
 doctrine/event-manager/phpstan.neon.dist
-doctrine/lexer/LICENSE
 
 fusonic/linq/examples/
 
 fusonic/opengraph/examples/
-fusonic/opengraph/.gitattributes
 
 giggsey/libphonenumber-for-php/METADATA-VERSION.txt
 
@@ -58,36 +64,9 @@ guzzlehttp/guzzle/docs/
 guzzlehttp/guzzle/MAKEFILE
 guzzlehttp/guzzle/UPGRADING.md
 
-guzzlehttp/ringphp/docs/
-guzzlehttp/ringphp/Makefile
-guzzlehttp/ringphp/README.rst
-
-guzzlehttp/streams/CHANGELOG.rst
-guzzlehttp/streams/Makefile
-guzzlehttp/streams/README.rst
-
-icewind/streams/LICENCE
-
-icewind/searchdav/.github/
-
-ircmaxell/password-compat/test/
-ircmaxell/password-compat/version-test.php
-
-ircmaxell/random-lib/test/
-ircmaxell/random-lib/LICENSE
-ircmaxell/random-lib/composer.lock
-
 justinrainbow/json-schema/demo
 
-james-heinrich/getid3/demos
-james-heinrich/getid3/helperapps
-
-league/flysystem/SECURITY.md
-league/flysystem/deprecations.md
-
 mexitek/phpcolors/demo
-
-mikey179/vfsstream
 
 nikic/php-parser/bin/
 nikic/php-parser/doc/
@@ -111,6 +90,11 @@ pear/archive_tar/docs/
 pear/archive_tar/scripts/
 pear/archive_tar/sync-php4
 
+php-opencloud/openstack/doc
+php-opencloud/openstack/samples
+php-opencloud/openstack/COVERAGE.md
+php-opencloud/openstack/env_test.sh.dist
+
 phpseclib/phpseclib/.git*
 phpseclib/phpseclib/*.yml
 phpseclib/phpseclib/build/
@@ -118,26 +102,17 @@ phpseclib/phpseclib/travis/
 phpseclib/phpseclib/BACKERS.md
 phpseclib/phpseclib/composer.lock
 
-php-opencloud/openstack/doc
-php-opencloud/openstack/samples
-
 pimple/pimple/ext
 pimple/pimple/CHANGELOG
-pimple/pimple/LICENSE
-pimple/pimple/README.rst
 pimple/pimple/src/Pimple/Tests
 
 psr/log/Psr/Log/Test/
 
-rackspace/php-opencloud/doc
-rackspace/php-opencloud/docs
-rackspace/php-opencloud/samples
+psr/http-factory/.pullapprove.yml
 
 sabre/dav/examples
 
 sabre/http/examples
-
-sabre/uri/.gitattributes
 
 scssphp/scssphp/example
 
@@ -147,7 +122,6 @@ swiftmailer/swiftmailer/.gitattributes
 swiftmailer/swiftmailer/CHANGES
 swiftmailer/swiftmailer/README
 swiftmailer/swiftmailer/VERSION
-swiftmailer/swiftmailer/LICENSE
 
 symfony/*/Test
 symfony/debug/Tests
@@ -166,3 +140,5 @@ symfony/finder/Tests
 symfony/process/Symfony/Component/Process/Routing/Tests/
 symfony/process/Symfony/Component/Process/Tests
 symfony/process/Tests
+
+thecodingmachine/safe/rector-migrate-0.7.php
