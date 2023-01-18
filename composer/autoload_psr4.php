@@ -81,7 +81,6 @@ return array(
     'Fusonic\\OpenGraph\\' => array($vendorDir . '/fusonic/opengraph/src'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
-    'Ds\\' => array($vendorDir . '/php-ds/php-ds/src'),
     'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/lib/Doctrine/Deprecations'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/src'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),

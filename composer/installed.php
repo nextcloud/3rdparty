@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'e6a429dcd19e45c9c81528bf96a604f391519a85',
+        'reference' => '5e0dab110ac3bbf4d62ab0b808467b8d3350274e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -328,7 +328,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'e6a429dcd19e45c9c81528bf96a604f391519a85',
+            'reference' => '5e0dab110ac3bbf4d62ab0b808467b8d3350274e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -394,15 +394,6 @@
             'reference' => 'b14fbe2ddb0b9f94f5b24cf08783d599f776fff0',
             'type' => 'class',
             'install_path' => __DIR__ . '/../pear/pear_exception',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'php-ds/php-ds' => array(
-            'pretty_version' => 'v1.3.0',
-            'version' => '1.3.0.0',
-            'reference' => 'b98396862fb8a13cbdbbaf4d18be28ee5c01ed3c',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../php-ds/php-ds',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
