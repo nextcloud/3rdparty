@@ -8,7 +8,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "7.4.0"
+			"php": "8.0"
 		},
 		"sort-packages": true,
 		"allow-plugins": {
@@ -16,7 +16,7 @@
 		}
 	},
 	"require": {
-		"php": "^7.3|^8.0",
+		"php": "^8.0",
 		"aws/aws-sdk-php": "^3.240",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"christophwurst/id3parser": "^0.1.4",
