@@ -72,7 +72,7 @@ jobs:
       - name: Commit and push amend
         run: |
           git add .
-          git commit --amend --no-edit --signoff
+          git commit --signoff -m 'chore(autoloader): Dump autoloader'
           git push --force origin ${{ needs.init.outputs.head_ref }}
 
       - name: Add reaction on failure
