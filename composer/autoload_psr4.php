@@ -59,7 +59,6 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
-    'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'Opis\\Closure\\' => array($vendorDir . '/opis/closure/src'),
     'OpenStack\\' => array($vendorDir . '/php-opencloud/openstack/src'),
     'Nextcloud\\LogNormalizer\\' => array($vendorDir . '/nextcloud/lognormalizer/src'),

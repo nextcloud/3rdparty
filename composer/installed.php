@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '2fc9ec5ae9bcdf2b7cb9feb76ccb57c6b6cc4a3a',
+        'reference' => 'b31aba0505a3daf84b016f52873794b618694dff',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -328,7 +328,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '2fc9ec5ae9bcdf2b7cb9feb76ccb57c6b6cc4a3a',
+            'reference' => 'b31aba0505a3daf84b016f52873794b618694dff',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -340,15 +340,6 @@
             'reference' => '87445d69225c247aaff64643b1fc83c6d6df741f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nextcloud/lognormalizer',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'nikic/php-parser' => array(
-            'pretty_version' => 'v4.15.2',
-            'version' => '4.15.2.0',
-            'reference' => 'f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
