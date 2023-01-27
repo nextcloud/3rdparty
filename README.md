@@ -11,7 +11,7 @@ Some 3rd party libraries that are necessary to run Nextcloud.
 3. Run `composer update thevendor/thelib` (replace accordingly)
 4. Delete all installed dependencies with `rm -rf ./*/`
 5. Run `composer install --no-dev`
-5. Run `git clean -X -d -f`
+6. Run `git clean -X -d -f`
 7. Run `composer dump-autoload`
 8. Commit all changes onto a new branch
 9. You might need the following command for pushing if used as submodule: `git push git@github.com:nextcloud/3rdparty.git branchname`
