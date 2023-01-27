@@ -6,7 +6,7 @@ Some 3rd party libraries that are necessary to run Nextcloud.
 
 ## Updating libraries manually
 
-1. Make sure to use the latest version of composer.phar
+1. Make sure to use the latest version of composer.phar: `composer self-update`
 2. Edit composer.json and adjust the version of the library to the one to update to
 3. Run `composer update thevendor/thelib` (replace accordingly)
 4. Delete all installed dependencies with `rm -rf ./*/`
