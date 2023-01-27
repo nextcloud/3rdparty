@@ -1,12 +1,48 @@
 .DS_Store
 bin
+Dockerfile
 */**/phpstan.neon
+.php_cs
 .php_cs.dist
+# ignore editor config
+**/*.editorconfig
 # ignore demo files
-james-heinrich/getid3/demos
-james-heinrich/getid3/helperapps
+**/.travis.yml
+# ignore .github files
+**/*/.github
+# ignore changelogs
+**/CHANGELOG.md
+# ignore coc
+**/CODE_OF_CONDUCT.md
+# ignore composer.json
+*/*/composer.json
+# ignore README and UPGRADE
+*/*/README.md
+*/*/README.rst
+*/*/UPGRADE.md
+*/*/UPGRADE-*.md
+*/*/CONTRIBUTING.md
+*/*/SECURITY.md
+# ignore codestyle tools config
+*/*/psalm.xml
+*/*/psalm.baseline.xml
+*/*/phpcs.xml
+*/*/phpcs.xml.dist
+*/*/.phpcs.xml
+*/*/phpstan.neon.dist
+*/*/phpunit.xml
+*/*/phpunit.xml.dist
+*/*/.scrutinizer.yml
+# ignore gitignores and gitattributes
+*/*/.gitignore
+*/*/.gitattributes
+# ignore docs and tests
+*/*/tests
 
+# ignore demo files
 aws/aws-sdk-php/.changes
+
+deepdiver/zipstreamer/test
 
 doctrine/annotations/tests
 doctrine/annotations/.travis.yml
@@ -32,6 +68,7 @@ doctrine/dbal/.gitmodules
 doctrine/dbal/build.*
 doctrine/dbal/phpcs.xml.dist
 doctrine/dbal/phpunit.xml.dist
+doctrine/event-manager/.doctrine-project.json
 doctrine/inflector/tests
 doctrine/lexer/composer.json
 doctrine/lexer/LICENSE
@@ -54,11 +91,11 @@ phpseclib/phpseclib/phpunit.xml.dist
 phpseclib/phpseclib/build/
 phpseclib/phpseclib/tests/
 phpseclib/phpseclib/travis/
+phpseclib/phpseclib/BACKERS.md
 phpseclib/phpseclib/CHANGELOG.md
 phpseclib/phpseclib/README.md
 phpseclib/phpseclib/composer.json
 phpseclib/phpseclib/composer.lock
-phpseclib/phpseclib/phpunit.xml.dist
 
 php-http/guzzle6-adapter/CHANGELOG.md
 php-http/guzzle6-adapter/README.md
@@ -76,6 +113,7 @@ php-opencloud/openstack/doc
 php-opencloud/openstack/tests
 php-opencloud/openstack/samples
 
+symfony/*/Test
 symfony/debug/Tests
 
 symfony/console/Symfony/Component/Console/Tests
@@ -153,8 +191,6 @@ swiftmailer/swiftmailer/VERSION
 swiftmailer/swiftmailer/LICENSE
 swiftmailer/swiftmailer/composer.json
 
-**/.travis.yml
-
 guzzlehttp/guzzle/build/
 guzzlehttp/guzzle/docs/
 guzzlehttp/guzzle/tests/
@@ -228,6 +264,8 @@ deepdiver1975/tarstreamer/tests
 
 patchwork/jsqueeze/tests
 patchwork/jsqueeze/phpunit.xml.dist
+
+patchwork/utf8/appveyor.yml
 
 sabre/dav/examples
 sabre/dav/tests
