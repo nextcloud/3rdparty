@@ -35,7 +35,6 @@
 		"microsoft/azure-storage-blob": "^1.5.4",
 		"mlocati/ip-lib": "^1.18",
 		"nextcloud/lognormalizer": "^1.0",
-		"nikic/php-parser": "^4.2",
 		"opis/closure": "^3.6",
 		"pear/archive_tar": "^1.4.9",
 		"pear/pear-core-minimal": "^v1.10",
