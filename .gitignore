@@ -42,6 +42,8 @@ aws/aws-sdk-php/.changes
 brick/math/random-tests.php
 brick/math/psalm*.xmls
 
+deepdiver/zipstreamer/test
+
 doctrine/dbal/.doctrine-project.json
 doctrine/dbal/.gitmodules
 doctrine/dbal/build.*
