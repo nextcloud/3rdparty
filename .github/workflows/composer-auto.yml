@@ -48,10 +48,10 @@ jobs:
           git config --local user.email "nextcloud-command@users.noreply.github.com"
           git config --local user.name "nextcloud-command"
 
-      - name: Set up php7.4
+      - name: Set up php
         uses: shivammathur/setup-php@master
         with:
-          php-version: 7.4
+          php-version: 8.1
           coverage: none
 
       - name: Update composer
