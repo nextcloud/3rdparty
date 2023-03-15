@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:4[1-3]|50)\\d{4}',
+    'NationalNumberPattern' => '(?:4[1-356]|50)\\d{4}',
     'ExampleNumber' => '430123',
     'PossibleLength' => 
     array (
@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:4[02-4]|5[05])\\d{4}',
+    'NationalNumberPattern' => '(?:4[02-4]|5[056])\\d{4}',
     'ExampleNumber' => '551234',
     'PossibleLength' => 
     array (
@@ -177,6 +177,5 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

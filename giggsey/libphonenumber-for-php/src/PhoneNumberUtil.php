@@ -43,11 +43,6 @@ class PhoneNumberUtil
     const UNKNOWN_REGION = 'ZZ';
 
     const NANPA_COUNTRY_CODE = 1;
-    /*
-     * The prefix that needs to be inserted in front of a Colombian landline number when dialed from
-     * a mobile number in Colombia.
-     */
-    const COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = '3';
     // The PLUS_SIGN signifies the international prefix.
     const PLUS_SIGN = '+';
     const PLUS_CHARS = '+＋';
@@ -899,7 +894,7 @@ class PhoneNumberUtil
      */
     protected function isValidRegionCode($regionCode)
     {
-        return $regionCode !== null && in_array($regionCode, $this->supportedRegions);
+        return $regionCode !== null && !is_numeric($regionCode) && in_array(strtoupper($regionCode), $this->supportedRegions);
     }
 
     /**
@@ -2438,15 +2433,10 @@ class PhoneNumberUtil
         $regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
         $numberType = $this->getNumberType($numberNoExt);
         $isValidNumber = ($numberType !== PhoneNumberType::UNKNOWN);
-        if ($regionCallingFrom == $regionCode) {
-            $isFixedLineOrMobile = ($numberType == PhoneNumberType::FIXED_LINE) || ($numberType == PhoneNumberType::MOBILE) || ($numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE);
+        if (strtoupper($regionCallingFrom) === $regionCode) {
+            $isFixedLineOrMobile = ($numberType == PhoneNumberType::FIXED_LINE || $numberType == PhoneNumberType::MOBILE || $numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE);
             // Carrier codes may be needed in some countries. We handle this here.
-            if ($regionCode == 'CO' && $numberType == PhoneNumberType::FIXED_LINE) {
-                $formattedNumber = $this->formatNationalNumberWithCarrierCode(
-                    $numberNoExt,
-                    static::COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX
-                );
-            } elseif ($regionCode == 'BR' && $isFixedLineOrMobile) {
+            if ($regionCode === 'BR' && $isFixedLineOrMobile) {
                 // Historically, we set this to an empty string when parsing with raw input if none was
                 // found in the input string. However, this doesn't result in a number we can dial. For this
                 // reason, we treat the empty string the same as if it isn't set at all.
@@ -2823,15 +2813,17 @@ class PhoneNumberUtil
      */
     public function isNANPACountry($regionCode)
     {
-        return in_array($regionCode, $this->nanpaRegions);
+        return in_array(strtoupper((string)$regionCode), $this->nanpaRegions);
     }
 
     /**
-     * Formats a phone number using the original phone number format that the number is parsed from.
+     * Formats a phone number using the original phone number format (e.g. INTERNATIONAL or NATIONAL)
+     * that the number is parsed from, provided that the number has been parsed with
+     * parseAndKeepRawInput. Otherwise the number will be formatted in NATIONAL format.
+     *
      * The original format is embedded in the country_code_source field of the PhoneNumber object
-     * passed in. If such information is missing, the number will be formatted into the NATIONAL
-     * format by default. When we don't have a formatting pattern for the number, the method returns
-     * the raw input when it is available.
+     * passed in, which is only set when parsing keeps the raw input. When we don't have a formatting
+     * pattern for the number, the method falls back to returning the raw input.
      *
      * Note this method guarantees no digit will be inserted, removed or modified as a result of
      * formatting.

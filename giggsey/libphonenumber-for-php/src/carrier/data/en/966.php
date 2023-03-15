@@ -12,6 +12,8 @@
 
 return array (
   96650 => 'STC',
+  966510 => 'Salam',
+  966511 => 'Salam',
   9665153 => 'STC',
   9665154 => 'STC',
   96653 => 'STC',
@@ -22,6 +24,7 @@ return array (
   966571 => 'Virgin',
   966572 => 'Virgin',
   966573 => 'Virgin',
+  966575 => 'Red Bull Mobile',
   966576 => 'Lebara',
   966577 => 'Lebara',
   966578 => 'Lebara',
