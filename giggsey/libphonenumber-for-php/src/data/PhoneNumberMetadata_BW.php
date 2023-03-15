@@ -39,7 +39,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:321|7(?:[1-7]\\d|8[01]))\\d{5}',
+    'NationalNumberPattern' => '(?:321|7(?:[1-7]\\d|8[0-4]))\\d{5}',
     'ExampleNumber' => '71123456',
     'PossibleLength' => 
     array (
@@ -95,7 +95,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '79(?:1(?:[01]\\d|20)|2[0-25-7]\\d)\\d{3}',
+    'NationalNumberPattern' => '79(?:1(?:[01]\\d|2[0-7])|2[0-7]\\d)\\d{3}',
     'ExampleNumber' => '79101234',
     'PossibleLength' => 
     array (
@@ -216,6 +216,5 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );
