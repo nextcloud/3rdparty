@@ -550,7 +550,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
         'ID3Parser\\' => 
         array (
-            0 => __DIR__ . '/..' . '/christophwurst/id3parser/src',
+            0 => __DIR__ . '/..' . '/nextcloud/id3parser/src',
         ),
         'Http\\Promise\\' => 
         array (
@@ -2280,13 +2280,13 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Http\\Promise\\FulfilledPromise' => __DIR__ . '/..' . '/php-http/promise/src/FulfilledPromise.php',
         'Http\\Promise\\Promise' => __DIR__ . '/..' . '/php-http/promise/src/Promise.php',
         'Http\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/php-http/promise/src/RejectedPromise.php',
-        'ID3Parser\\ID3Parser' => __DIR__ . '/..' . '/christophwurst/id3parser/src/ID3Parser.php',
-        'ID3Parser\\getID3\\Tags\\getid3_id3v1' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/Tags/getid3_id3v1.php',
-        'ID3Parser\\getID3\\Tags\\getid3_id3v2' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/Tags/getid3_id3v2.php',
-        'ID3Parser\\getID3\\getid3' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3.php',
-        'ID3Parser\\getID3\\getid3_exception' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_exception.php',
-        'ID3Parser\\getID3\\getid3_handler' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_handler.php',
-        'ID3Parser\\getID3\\getid3_lib' => __DIR__ . '/..' . '/christophwurst/id3parser/src/getID3/getid3_lib.php',
+        'ID3Parser\\ID3Parser' => __DIR__ . '/..' . '/nextcloud/id3parser/src/ID3Parser.php',
+        'ID3Parser\\getID3\\Tags\\getid3_id3v1' => __DIR__ . '/..' . '/nextcloud/id3parser/src/getID3/Tags/getid3_id3v1.php',
+        'ID3Parser\\getID3\\Tags\\getid3_id3v2' => __DIR__ . '/..' . '/nextcloud/id3parser/src/getID3/Tags/getid3_id3v2.php',
+        'ID3Parser\\getID3\\getid3' => __DIR__ . '/..' . '/nextcloud/id3parser/src/getID3/getid3.php',
+        'ID3Parser\\getID3\\getid3_exception' => __DIR__ . '/..' . '/nextcloud/id3parser/src/getID3/getid3_exception.php',
+        'ID3Parser\\getID3\\getid3_handler' => __DIR__ . '/..' . '/nextcloud/id3parser/src/getID3/getid3_handler.php',
+        'ID3Parser\\getID3\\getid3_lib' => __DIR__ . '/..' . '/nextcloud/id3parser/src/getID3/getid3_lib.php',
         'IPLib\\Address\\AddressInterface' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/AddressInterface.php',
         'IPLib\\Address\\AssignedRange' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/AssignedRange.php',
         'IPLib\\Address\\IPv4' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Address/IPv4.php',

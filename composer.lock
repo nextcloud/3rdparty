@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c11636a163e61609621cf26a4ec2b012",
+    "content-hash": "aced2dee7280ae6bf51dc56e20a852f3",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -302,46 +302,6 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
-        },
-        {
-            "name": "christophwurst/id3parser",
-            "version": "v0.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ChristophWurst/ID3Parser.git",
-                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/ID3Parser/zipball/050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
-                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ID3Parser\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "description": "An ID3 parser",
-            "homepage": "https://github.com/ChristophWurst/ID3Parser/",
-            "keywords": [
-                "codecs",
-                "php",
-                "tags"
-            ],
-            "support": {
-                "issues": "https://github.com/ChristophWurst/ID3Parser/issues",
-                "source": "https://github.com/ChristophWurst/ID3Parser/tree/v0.1.4"
-            },
-            "time": "2021-11-29T15:02:22+00:00"
         },
         {
             "name": "cweagans/composer-patches",
@@ -2352,6 +2312,45 @@
                 "source": "https://github.com/jmespath/jmespath.php/tree/2.6.1"
             },
             "time": "2021-06-14T00:11:39+00:00"
+        },
+        {
+            "name": "nextcloud/id3parser",
+            "version": "v0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nextcloud-deps/ID3Parser.git",
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nextcloud-deps/ID3Parser/zipball/050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
+                "reference": "050c9d81ea89b0cf53e23a27efc4e1840f9ab260",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ID3Parser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "An ID3 parser",
+            "homepage": "https://github.com/ChristophWurst/ID3Parser/",
+            "keywords": [
+                "codecs",
+                "php",
+                "tags"
+            ],
+            "support": {
+                "source": "https://github.com/nextcloud-deps/ID3Parser/tree/v0.1.4"
+            },
+            "time": "2021-11-29T15:02:22+00:00"
         },
         {
             "name": "nextcloud/lognormalizer",
