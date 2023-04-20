@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '6757c6d1d6191ed9a0092c8c19ee34c28914b55f',
+        'reference' => 'ac8a27348ea5c6bab50a251a5f541418b30d9c44',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -191,9 +191,9 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '1.9.0',
-            'version' => '1.9.0.0',
-            'reference' => 'e98e3e6d4f86621a9b75f623996e6bbdeb4b9318',
+            'pretty_version' => '1.9.1',
+            'version' => '1.9.1.0',
+            'reference' => 'e4490cabc77465aaee90b20cfc9a770f8c04be6b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
@@ -301,7 +301,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '6757c6d1d6191ed9a0092c8c19ee34c28914b55f',
+            'reference' => 'ac8a27348ea5c6bab50a251a5f541418b30d9c44',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
