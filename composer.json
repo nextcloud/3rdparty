@@ -62,6 +62,9 @@
 		"symfony/translation": "^4.4.41",
 		"web-auth/webauthn-lib": "^3.1"
 	},
+	"scripts": {
+		"lint": "find . -name \\*.php -print0 | xargs -0 -n1 php -l"
+	},
 	"extra": {
 		"patches-file": "composer.patches.json"
 	}
