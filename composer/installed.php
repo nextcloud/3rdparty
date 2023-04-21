@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'aa0686a79bb4a1c27dc36f255ebd04f35e64cf5c',
+        'reference' => 'b662cd14738aae34ac2006de1c81cb6220b78b72',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-sdk-php' => array(
@@ -319,7 +319,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'aa0686a79bb4a1c27dc36f255ebd04f35e64cf5c',
+            'reference' => 'b662cd14738aae34ac2006de1c81cb6220b78b72',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
