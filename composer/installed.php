@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '8663b86ca8c73f524d27b1b9d5d48a4c629b4a35',
+        'reference' => 'd1e92ff90b9accbbdcf6387f1b5f33b92f3cb385',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -337,7 +337,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '8663b86ca8c73f524d27b1b9d5d48a4c629b4a35',
+            'reference' => 'd1e92ff90b9accbbdcf6387f1b5f33b92f3cb385',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
