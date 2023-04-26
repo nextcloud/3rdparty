@@ -53,7 +53,7 @@
 		"symfony/console": "5.4.19",
 		"symfony/event-dispatcher": "4.4.30",
 		"symfony/event-dispatcher-contracts": "1.1.9",
-		"symfony/http-foundation": "^5.4.10",
+		"symfony/http-foundation": "^6.0.20",
 		"symfony/mailer": "^5.4.13",
 		"symfony/polyfill-intl-grapheme": "^1.20",
 		"symfony/polyfill-intl-normalizer": "^1.20",
