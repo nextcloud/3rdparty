@@ -53,7 +53,7 @@ final class Versions
   'giggsey/locale' => '1.9@b07f1eace8072ccc61445ad8fbd493ff9d783043',
   'guzzlehttp/guzzle' => '7.5.0@b50a2a1251152e43f6a37f0fa053e730a67d25ba',
   'guzzlehttp/promises' => '1.5.1@fe752aedc9fd8fcca3fe7ad05d419d32998a06da',
-  'guzzlehttp/psr7' => '1.9.0@e98e3e6d4f86621a9b75f623996e6bbdeb4b9318',
+  'guzzlehttp/psr7' => '1.9.1@e4490cabc77465aaee90b20cfc9a770f8c04be6b',
   'guzzlehttp/uri-template' => 'v0.2.0@db46525d6d8fee71033b73cc07160f3e5271a8ce',
   'icewind/searchdav' => 'v2.0.0@c69806d900c2c9a5954bfabc80178d6eb0d63df4',
   'icewind/streams' => 'v0.7.5@0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2',
@@ -123,7 +123,7 @@ final class Versions
   'web-auth/cose-lib' => 'v3.3.9@ed172d2dc1a6b87b5c644c07c118cd30c1b3819b',
   'web-auth/metadata-service' => 'v3.3.9@8488d3a832a38cc81c670fce05de1e515c6e64b1',
   'web-auth/webauthn-lib' => 'v3.3.9@04b98ee3d39cb79dad68a7c15c297c085bf66bfe',
-  'nextcloud/3rdparty' => 'dev-master@cddea622a8f3cc999556217017d83be79a45f50a',
+  'nextcloud/3rdparty' => 'dev-master@1b8faf170f4fb3e240dec6b00d905638938bad5d',
 );
 
     private function __construct()
