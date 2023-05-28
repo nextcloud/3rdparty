@@ -19,7 +19,6 @@
 		"php": "^8.0",
 		"aws/aws-sdk-php": "^3.240",
 		"bantu/ini-get-wrapper": "v1.0.1",
-		"christophwurst/id3parser": "^0.1.4",
 		"cweagans/composer-patches": "^1.7",
 		"deepdiver/zipstreamer": "2.0.0",
 		"deepdiver1975/tarstreamer": "v2.0.0",
@@ -59,6 +58,7 @@
 		"symfony/process": "4.4.30",
 		"symfony/routing": "4.4.30",
 		"symfony/translation": "^4.4.41",
+		"wapmorgan/mp3info": "^0.1.0",
 		"web-auth/webauthn-lib": "^3.1"
 	},
 	"scripts": {
