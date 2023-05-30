@@ -49,7 +49,6 @@
 		"sabre/dav": "^4.4.0",
 		"scssphp/scssphp": "^1.11",
 		"stecman/symfony-console-completion": "^0.11.0",
-		"swiftmailer/swiftmailer": "^6.3.0",
 		"symfony/console": "5.4.19",
 		"symfony/event-dispatcher": "4.4.30",
 		"symfony/event-dispatcher-contracts": "1.1.9",

@@ -118,13 +118,6 @@ sabre/http/examples
 
 scssphp/scssphp/example
 
-swiftmailer/swiftmailer/doc/
-swiftmailer/swiftmailer/notes/
-swiftmailer/swiftmailer/.gitattributes
-swiftmailer/swiftmailer/CHANGES
-swiftmailer/swiftmailer/README
-swiftmailer/swiftmailer/VERSION
-
 symfony/*/Test
 symfony/debug/Tests
 
