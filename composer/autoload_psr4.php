@@ -8,7 +8,7 @@ $baseDir = $vendorDir;
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
-    'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php/src'),
+    'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php-lite/src'),
     'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
     'ZipStreamer\\' => array($vendorDir . '/deepdiver/zipstreamer/src'),
@@ -78,7 +78,6 @@ return array(
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
-    'Giggsey\\Locale\\' => array($vendorDir . '/giggsey/locale/src'),
     'Fusonic\\OpenGraph\\' => array($vendorDir . '/fusonic/opengraph/src'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),

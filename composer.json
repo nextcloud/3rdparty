@@ -26,7 +26,7 @@
 		"doctrine/dbal": "3.3.8",
 		"egulias/email-validator": "^3.2.5",
 		"fusonic/opengraph": "^2.2",
-		"giggsey/libphonenumber-for-php": "^8.12.37",
+		"giggsey/libphonenumber-for-php-lite": "^8.13.12",
 		"guzzlehttp/guzzle": "^7.5.0",
 		"icewind/searchdav": "^3.0",
 		"icewind/streams": "^0.7.7",
