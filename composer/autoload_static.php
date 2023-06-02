@@ -651,24 +651,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
                 0 => __DIR__ . '/..' . '/fusonic/linq/src',
             ),
         ),
-        'C' => 
-        array (
-            'Console' => 
-            array (
-                0 => __DIR__ . '/..' . '/pear/console_getopt',
-            ),
-        ),
-        'A' => 
-        array (
-            'Archive_Tar' => 
-            array (
-                0 => __DIR__ . '/..' . '/pear/archive_tar',
-            ),
-        ),
-    );
-
-    public static $fallbackDirsPsr0 = array (
-        0 => __DIR__ . '/..' . '/pear/pear-core-minimal/src',
     );
 
     public static $classMap = array (
@@ -695,7 +677,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'AWS\\CRT\\NativeResource' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/NativeResource.php',
         'AWS\\CRT\\OptionValue' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
         'AWS\\CRT\\Options' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
-        'Archive_Tar' => __DIR__ . '/..' . '/pear/archive_tar/Archive/Tar.php',
         'Assert\\Assert' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/Assert.php',
         'Assert\\Assertion' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/Assertion.php',
         'Assert\\AssertionChain' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/AssertionChain.php',
@@ -1667,7 +1648,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'CBOR\\UnsignedIntegerObject' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/UnsignedIntegerObject.php',
         'CBOR\\Utils' => __DIR__ . '/..' . '/spomky-labs/cbor-php/src/Utils.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Console_Getopt' => __DIR__ . '/..' . '/pear/console_getopt/Console/Getopt.php',
         'Cose\\Algorithm\\Algorithm' => __DIR__ . '/..' . '/web-auth/cose-lib/src/Algorithm/Algorithm.php',
         'Cose\\Algorithm\\Mac\\HS256' => __DIR__ . '/..' . '/web-auth/cose-lib/src/Algorithm/Mac/HS256.php',
         'Cose\\Algorithm\\Mac\\HS256Truncated64' => __DIR__ . '/..' . '/web-auth/cose-lib/src/Algorithm/Mac/HS256Truncated64.php',
@@ -2532,7 +2512,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'MicrosoftAzure\\Storage\\Common\\SharedAccessSignatureHelper' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/SharedAccessSignatureHelper.php',
         'Nextcloud\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/nextcloud/lognormalizer/src/Normalizer.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-        'OS_Guess' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/OS/Guess.php',
         'OpenStack\\BlockStorage\\v2\\Api' => __DIR__ . '/..' . '/php-opencloud/openstack/src/BlockStorage/v2/Api.php',
         'OpenStack\\BlockStorage\\v2\\Models\\QuotaSet' => __DIR__ . '/..' . '/php-opencloud/openstack/src/BlockStorage/v2/Models/QuotaSet.php',
         'OpenStack\\BlockStorage\\v2\\Models\\Snapshot' => __DIR__ . '/..' . '/php-opencloud/openstack/src/BlockStorage/v2/Models/Snapshot.php',
@@ -2679,9 +2658,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Opis\\Closure\\SecurityProvider' => __DIR__ . '/..' . '/opis/closure/src/SecurityProvider.php',
         'Opis\\Closure\\SelfReference' => __DIR__ . '/..' . '/opis/closure/src/SelfReference.php',
         'Opis\\Closure\\SerializableClosure' => __DIR__ . '/..' . '/opis/closure/src/SerializableClosure.php',
-        'PEAR' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
-        'PEAR_ErrorStack' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
-        'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Pimple\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Container.php',
         'Pimple\\Exception\\ExpectedInvokableException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/ExpectedInvokableException.php',
@@ -3962,7 +3938,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
         'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
-        'System' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/System.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webauthn\\AttestationStatement\\AndroidKeyAttestationStatementSupport' => __DIR__ . '/..' . '/web-auth/webauthn-lib/src/AttestationStatement/AndroidKeyAttestationStatementSupport.php',
@@ -4114,7 +4089,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             $loader->prefixLengthsPsr4 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$classMap;
 
         }, null, ClassLoader::class);

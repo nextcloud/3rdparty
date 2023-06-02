@@ -3,11 +3,11 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'b28af7ccf0bebff554672543fbbfe0e5d99968bd',
+        'reference' => '216b791c9081f06a4ed6581a436020647dd41bbd',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -319,7 +319,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'b28af7ccf0bebff554672543fbbfe0e5d99968bd',
+            'reference' => '216b791c9081f06a4ed6581a436020647dd41bbd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -340,42 +340,6 @@
             'reference' => '3d81e4309d2a927abbe66df935f4bb60082805ad',
             'type' => 'library',
             'install_path' => __DIR__ . '/../opis/closure',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'pear/archive_tar' => array(
-            'pretty_version' => '1.4.14',
-            'version' => '1.4.14.0',
-            'reference' => '4d761c5334c790e45ef3245f0864b8955c562caa',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../pear/archive_tar',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'pear/console_getopt' => array(
-            'pretty_version' => 'v1.4.3',
-            'version' => '1.4.3.0',
-            'reference' => 'a41f8d3e668987609178c7c4a9fe48fecac53fa0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../pear/console_getopt',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'pear/pear-core-minimal' => array(
-            'pretty_version' => 'v1.10.10',
-            'version' => '1.10.10.0',
-            'reference' => '625a3c429d9b2c1546438679074cac1b089116a7',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../pear/pear-core-minimal',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'pear/pear_exception' => array(
-            'pretty_version' => 'v1.0.2',
-            'version' => '1.0.2.0',
-            'reference' => 'b14fbe2ddb0b9f94f5b24cf08783d599f776fff0',
-            'type' => 'class',
-            'install_path' => __DIR__ . '/../pear/pear_exception',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -599,12 +563,6 @@
             'dev_requirement' => false,
             'replaced' => array(
                 0 => '4.1.1',
-            ),
-        ),
-        'rsky/pear-core-min' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => 'v1.10.10',
             ),
         ),
         'sabre/dav' => array(
