@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = $vendorDir;
 
 return array(
+    'wapmorgan\\Mp3Info\\' => array($vendorDir . '/wapmorgan/mp3info/src'),
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
     'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php-lite/src'),
@@ -70,7 +71,6 @@ return array(
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'Icewind\\Streams\\' => array($vendorDir . '/icewind/streams/src'),
     'IPLib\\' => array($vendorDir . '/mlocati/ip-lib/src'),
-    'ID3Parser\\' => array($vendorDir . '/christophwurst/id3parser/src'),
     'Http\\Promise\\' => array($vendorDir . '/php-http/promise/src'),
     'Http\\Client\\' => array($vendorDir . '/php-http/httplug/src'),
     'Http\\Adapter\\Guzzle7\\' => array($vendorDir . '/php-http/guzzle7-adapter/src'),
