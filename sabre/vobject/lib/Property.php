@@ -30,7 +30,7 @@ abstract class Property extends Node
      *
      * This is only used in vcards
      *
-     * @var string
+     * @var string|null
      */
     public $group;
 
@@ -318,7 +318,7 @@ abstract class Property extends Node
      *
      * @param Xml\Writer $writer XML writer
      */
-    public function xmlSerialize(Xml\Writer $writer)
+    public function xmlSerialize(Xml\Writer $writer): void
     {
         $parameters = [];
 

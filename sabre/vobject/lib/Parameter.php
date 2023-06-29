@@ -52,11 +52,12 @@ class Parameter extends Node
      */
     public function __construct(Document $root, $name, $value = null)
     {
-        $this->name = strtoupper($name);
         $this->root = $root;
         if (is_null($name)) {
             $this->noName = true;
             $this->name = static::guessParameterNameByValue($value);
+        } else {
+            $this->name = strtoupper($name);
         }
 
         // If guessParameterNameByValue() returns an empty string
@@ -333,7 +334,7 @@ class Parameter extends Node
      *
      * @param Xml\Writer $writer XML writer
      */
-    public function xmlSerialize(Xml\Writer $writer)
+    public function xmlSerialize(Xml\Writer $writer): void
     {
         foreach (explode(',', $this->value) as $value) {
             $writer->writeElement('text', $value);
