@@ -29,11 +29,9 @@ class PhpExecutableFinder
     /**
      * Finds The PHP executable.
      *
-     * @param bool $includeArgs Whether or not include command arguments
-     *
-     * @return string|false The PHP executable path or false if it cannot be found
+     * @return string|false
      */
-    public function find($includeArgs = true)
+    public function find(bool $includeArgs = true)
     {
         if ($php = getenv('PHP_BINARY')) {
             if (!is_executable($php)) {
@@ -47,6 +45,10 @@ class PhpExecutableFinder
                 }
             }
 
+            if (@is_dir($php)) {
+                return false;
+            }
+
             return $php;
         }
 
@@ -54,12 +56,12 @@ class PhpExecutableFinder
         $args = $includeArgs && $args ? ' '.implode(' ', $args) : '';
 
         // PHP_BINARY return the current sapi executable
-        if (\PHP_BINARY && \in_array(\PHP_SAPI, ['cgi-fcgi', 'cli', 'cli-server', 'phpdbg'], true)) {
+        if (\PHP_BINARY && \in_array(\PHP_SAPI, ['cli', 'cli-server', 'phpdbg'], true)) {
             return \PHP_BINARY.$args;
         }
 
         if ($php = getenv('PHP_PATH')) {
-            if (!@is_executable($php)) {
+            if (!@is_executable($php) || @is_dir($php)) {
                 return false;
             }
 
@@ -67,12 +69,12 @@ class PhpExecutableFinder
         }
 
         if ($php = getenv('PHP_PEAR_PHP_BIN')) {
-            if (@is_executable($php)) {
+            if (@is_executable($php) && !@is_dir($php)) {
                 return $php;
             }
         }
 
-        if (@is_executable($php = \PHP_BINDIR.('\\' === \DIRECTORY_SEPARATOR ? '\\php.exe' : '/php'))) {
+        if (@is_executable($php = \PHP_BINDIR.('\\' === \DIRECTORY_SEPARATOR ? '\\php.exe' : '/php')) && !@is_dir($php)) {
             return $php;
         }
 
@@ -87,7 +89,7 @@ class PhpExecutableFinder
     /**
      * Finds the PHP executable arguments.
      *
-     * @return array The PHP executable arguments
+     * @return array
      */
     public function findArguments()
     {
