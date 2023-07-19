@@ -44,7 +44,7 @@
 		"psr/clock": "^1.0",
 		"psr/container": "^2.0.2",
 		"psr/event-dispatcher": "^1.0",
-		"punic/punic": "^1.6",
+		"punic/punic": "^3.8",
 		"sabre/dav": "^4.4.0",
 		"scssphp/scssphp": "^1.11",
 		"stecman/symfony-console-completion": "^0.11.0",
