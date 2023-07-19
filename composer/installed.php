@@ -3,7 +3,7 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '350e2a466ff849c59386e817c849f9e441fc10ab',
+        'reference' => '176fea9ed19bf24d4620cb0b2ca1274201ad045c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -310,7 +310,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '350e2a466ff849c59386e817c849f9e441fc10ab',
+            'reference' => '176fea9ed19bf24d4620cb0b2ca1274201ad045c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -749,9 +749,9 @@
             ),
         ),
         'symfony/http-foundation' => array(
-            'pretty_version' => 'v5.4.10',
-            'version' => '5.4.10.0',
-            'reference' => 'e7793b7906f72a8cc51054fbca9dcff7a8af1c1e',
+            'pretty_version' => 'v5.4.25',
+            'version' => '5.4.25.0',
+            'reference' => 'f66be2706075c5f6325d2fe2b743a57fb5d23f6b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-foundation',
             'aliases' => array(),
@@ -857,9 +857,9 @@
             'dev_requirement' => false,
         ),
         'symfony/routing' => array(
-            'pretty_version' => 'v4.4.30',
-            'version' => '4.4.30.0',
-            'reference' => '9ddf033927ad9f30ba2bfd167a7b342cafa13e8e',
+            'pretty_version' => 'v5.4.25',
+            'version' => '5.4.25.0',
+            'reference' => '56bfc1394f7011303eb2e22724f9b422d3f14649',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/routing',
             'aliases' => array(),
@@ -884,9 +884,9 @@
             'dev_requirement' => false,
         ),
         'symfony/translation' => array(
-            'pretty_version' => 'v4.4.41',
-            'version' => '4.4.41.0',
-            'reference' => 'dcb67eae126e74507e0b4f0b9ac6ef35b37c3331',
+            'pretty_version' => 'v5.4.24',
+            'version' => '5.4.24.0',
+            'reference' => 'de237e59c5833422342be67402d487fbf50334ff',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/translation',
             'aliases' => array(),
@@ -904,7 +904,7 @@
         'symfony/translation-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
+                0 => '2.3',
             ),
         ),
         'thecodingmachine/safe' => array(
