@@ -52,7 +52,7 @@
 		"symfony/event-dispatcher": "4.4.30",
 		"symfony/event-dispatcher-contracts": "1.1.9",
 		"symfony/http-foundation": "^5.4.24",
-		"symfony/mailer": "^5.4.13",
+		"symfony/mailer": "^5.4.22",
 		"symfony/polyfill-intl-grapheme": "^1.20",
 		"symfony/polyfill-intl-normalizer": "^1.20",
 		"symfony/process": "^5.4.24",
