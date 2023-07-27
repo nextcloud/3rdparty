@@ -437,29 +437,35 @@
         },
         {
             "name": "deepdiver1975/tarstreamer",
-            "version": "2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "v2.1.0",
+            "version_normalized": "2.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owncloud/TarStreamer.git",
-                "reference": "ad48505d1ab54a8e94e6b1cc5297bbed72e956de"
+                "reference": "163052d7a076fd3dd54d4f50e1ff2705b72604db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/ad48505d1ab54a8e94e6b1cc5297bbed72e956de",
-                "reference": "ad48505d1ab54a8e94e6b1cc5297bbed72e956de",
+                "url": "https://api.github.com/repos/owncloud/TarStreamer/zipball/163052d7a076fd3dd54d4f50e1ff2705b72604db",
+                "reference": "163052d7a076fd3dd54d4f50e1ff2705b72604db",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
             },
             "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.5",
                 "pear/archive_tar": "~1.4",
-                "pear/pear-core-minimal": "v1.10.10",
-                "phpunit/phpunit": "^7.5"
+                "pear/pear-core-minimal": "v1.10.13",
+                "phpunit/phpunit": "^7.5|^8.5|^9.6"
             },
-            "time": "2020-01-08T09:55:35+00:00",
+            "time": "2023-06-16T08:01:55+00:00",
             "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "bin-links": false
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
@@ -478,6 +484,10 @@
                 "stream",
                 "tar"
             ],
+            "support": {
+                "issues": "https://github.com/owncloud/TarStreamer/issues",
+                "source": "https://github.com/owncloud/TarStreamer/tree/v2.1.0"
+            },
             "install-path": "../deepdiver1975/tarstreamer"
         },
         {
