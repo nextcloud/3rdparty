@@ -5226,17 +5226,17 @@
         },
         {
             "name": "symfony/mailer",
-            "version": "v5.4.19",
-            "version_normalized": "5.4.19.0",
+            "version": "v5.4.22",
+            "version_normalized": "5.4.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "66081dc01cfc04fdea08bbd253f44627ec5591dd"
+                "reference": "6330cd465dfd8b7a07515757a1c37069075f7b0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/66081dc01cfc04fdea08bbd253f44627ec5591dd",
-                "reference": "66081dc01cfc04fdea08bbd253f44627ec5591dd",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/6330cd465dfd8b7a07515757a1c37069075f7b0b",
+                "reference": "6330cd465dfd8b7a07515757a1c37069075f7b0b",
                 "shasum": ""
             },
             "require": {
@@ -5254,10 +5254,10 @@
                 "symfony/http-kernel": "<4.4"
             },
             "require-dev": {
-                "symfony/http-client-contracts": "^1.1|^2|^3",
+                "symfony/http-client": "^4.4|^5.0|^6.0",
                 "symfony/messenger": "^4.4|^5.0|^6.0"
             },
-            "time": "2023-01-09T05:43:46+00:00",
+            "time": "2023-03-10T10:15:32+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -5285,7 +5285,7 @@
             "description": "Helps sending emails",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/mailer/tree/v5.4.19"
+                "source": "https://github.com/symfony/mailer/tree/v5.4.22"
             },
             "funding": [
                 {
