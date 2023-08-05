@@ -44,6 +44,12 @@ brick/math/psalm*.xmls
 
 deepdiver/zipstreamer/test
 
+deepdiver1975/tarstreamer/.drone.star
+deepdiver1975/tarstreamer/.phan
+deepdiver1975/tarstreamer/.php-cs-fixer.dist.php
+deepdiver1975/tarstreamer/Makefile
+deepdiver1975/tarstreamer/vendor-bin
+
 doctrine/dbal/.doctrine-project.json
 doctrine/dbal/.gitmodules
 doctrine/dbal/build.*

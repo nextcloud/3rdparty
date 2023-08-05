@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'nextcloud/3rdparty',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '6c36449d6cea0a8b5eec3a3c7d1b40a137b689b7',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -83,9 +83,9 @@
             'dev_requirement' => false,
         ),
         'deepdiver1975/tarstreamer' => array(
-            'pretty_version' => '2.0.0',
-            'version' => '2.0.0.0',
-            'reference' => 'ad48505d1ab54a8e94e6b1cc5297bbed72e956de',
+            'pretty_version' => 'v2.1.0',
+            'version' => '2.1.0.0',
+            'reference' => '163052d7a076fd3dd54d4f50e1ff2705b72604db',
             'type' => 'library',
             'install_path' => __DIR__ . '/../deepdiver1975/tarstreamer',
             'aliases' => array(),
@@ -326,9 +326,9 @@
             'dev_requirement' => false,
         ),
         'nextcloud/3rdparty' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '6c36449d6cea0a8b5eec3a3c7d1b40a137b689b7',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
