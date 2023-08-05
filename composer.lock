@@ -1775,16 +1775,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.2.2",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "47afb7fae28ed29057fdca37e16a84f90cc62fae"
+                "reference": "e5a3057a5591e1cfe8183034b0203921abe2c902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/47afb7fae28ed29057fdca37e16a84f90cc62fae",
-                "reference": "47afb7fae28ed29057fdca37e16a84f90cc62fae",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/e5a3057a5591e1cfe8183034b0203921abe2c902",
+                "reference": "e5a3057a5591e1cfe8183034b0203921abe2c902",
                 "shasum": ""
             },
             "require": {
@@ -1831,7 +1831,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2022-09-08T13:45:54+00:00"
+            "time": "2023-07-14T13:56:28+00:00"
         },
         {
             "name": "league/uri",
