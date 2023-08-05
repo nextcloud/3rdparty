@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f262e7f99a4f195644c8542f2c4ed3e2",
+    "content-hash": "67f60d41cab99135db5e441877a93248",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -5999,16 +5999,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v4.4.30",
+            "version": "v4.4.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "9ddf033927ad9f30ba2bfd167a7b342cafa13e8e"
+                "reference": "f7751fd8b60a07f3f349947a309b5bdfce22d6ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/9ddf033927ad9f30ba2bfd167a7b342cafa13e8e",
-                "reference": "9ddf033927ad9f30ba2bfd167a7b342cafa13e8e",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/f7751fd8b60a07f3f349947a309b5bdfce22d6ae",
+                "reference": "f7751fd8b60a07f3f349947a309b5bdfce22d6ae",
                 "shasum": ""
             },
             "require": {
@@ -6068,7 +6068,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v4.4.30"
+                "source": "https://github.com/symfony/routing/tree/v4.4.44"
             },
             "funding": [
                 {
@@ -6084,7 +6084,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-04T21:41:01+00:00"
+            "time": "2022-07-20T09:59:04+00:00"
         },
         {
             "name": "symfony/service-contracts",
