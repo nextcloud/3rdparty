@@ -8,23 +8,6 @@ updates:
     time: "03:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
-  ignore:
-    - dependency-name: "symfony/console"
-      versions: ["5.x"]
-    - dependency-name: "symfony/event-dispatcher"
-      versions: [ "5.x" ]
-    - dependency-name: "symfony/event-dispatcher-contracts"
-      versions: [ "5.x" ]
-    - dependency-name: "symfony/polyfill-intl-grapheme"
-      versions: [ "5.x" ]
-    - dependency-name: "symfony/polyfill-intl-normalizer"
-      versions: ["5.x"]
-    - dependency-name: "symfony/process"
-      versions: [ "5.x" ]
-    - dependency-name: "symfony/routing"
-      versions: [ "5.x" ]
-    - dependency-name: "symfony/translation"
-      versions: [ "5.x" ]
   labels:
     - "dependencies"
     - "main"
