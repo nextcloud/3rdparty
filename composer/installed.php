@@ -65,9 +65,9 @@
             'dev_requirement' => false,
         ),
         'cweagans/composer-patches' => array(
-            'pretty_version' => '1.7.1',
-            'version' => '1.7.1.0',
-            'reference' => '9888dcc74993c030b75f3dd548bb5e20cdbd740c',
+            'pretty_version' => '1.7.3',
+            'version' => '1.7.3.0',
+            'reference' => 'e190d4466fe2b103a55467dfa83fc2fecfcaf2db',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../cweagans/composer-patches',
             'aliases' => array(),
