@@ -5,11 +5,10 @@ namespace ownCloud\TarStreamer;
 use ownCloud\TarStreamer\TarHeader;
 
 class TarStreamer {
-
-	const REGTYPE = 0;
-	const DIRTYPE = 5;
-	const XHDTYPE = 'x';
-	const LONGNAMETYPE = 'L';
+	public const REGTYPE = 0;
+	public const DIRTYPE = 5;
+	public const XHDTYPE = 'x';
+	public const LONGNAMETYPE = 'L';
 
 	/**
 	 * Process in 1 MB chunks
@@ -24,13 +23,13 @@ class TarStreamer {
 	 *
 	 * @param array $options
 	 */
-	public function __construct($options = []){
-		if (isset($options['outstream'])){
+	public function __construct($options = []) {
+		if (isset($options['outstream'])) {
 			$this->outStream = $options['outstream'];
 		} else {
 			$this->outStream = fopen('php://output', 'w');
 			// turn off output buffering
-			while (ob_get_level() > 0){
+			while (ob_get_level() > 0) {
 				ob_end_flush();
 			}
 		}
@@ -49,13 +48,13 @@ class TarStreamer {
 	 * @param string $contentType Content mime type to be set (optional, default 'application/x-tar')
 	 * @throws \Exception
 	 */
-	public function sendHeaders($archiveName = 'archive.tar', $contentType = 'application/x-tar'){
+	public function sendHeaders($archiveName = 'archive.tar', $contentType = 'application/x-tar') {
 		$encodedArchiveName = rawurlencode($archiveName);
-		if (headers_sent($headerFile, $headerLine)){
+		if (headers_sent($headerFile, $headerLine)) {
 			throw new \Exception("Unable to send file $encodedArchiveName. HTML Headers have already been sent from $headerFile in line $headerLine");
 		}
 		$buffer = ob_get_contents();
-		if (!empty($buffer)){
+		if (!empty($buffer)) {
 			throw new \Exception("Unable to send file $encodedArchiveName. Output buffer already contains text (typically warnings or errors).");
 		}
 
@@ -71,14 +70,14 @@ class TarStreamer {
 		];
 
 		// Use UTF-8 filenames when not using Internet Explorer
-		if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
+		if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
 			header('Content-Disposition: attachment; filename="' . rawurlencode($archiveName) . '"');
-		}  else  {
+		} else {
 			header('Content-Disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($archiveName)
 					. '; filename="' . rawurlencode($archiveName) . '"');
 		}
 
-		foreach ($headers as $key => $value){
+		foreach ($headers as $key => $value) {
 			header("$key: $value");
 		}
 	}
@@ -94,15 +93,15 @@ class TarStreamer {
 	 *                      * int timestamp: timestamp for the file (default: current time)
 	 * @return bool $success
 	 */
-	public function addFileFromStream($stream, $filePath, $size, $options = []){
-		if (!is_resource($stream) || get_resource_type($stream) != 'stream'){
+	public function addFileFromStream($stream, $filePath, $size, $options = []) {
+		if (!\is_resource($stream) || get_resource_type($stream) != 'stream') {
 			return false;
 		}
 
 		$this->initFileStreamTransfer($filePath, self::REGTYPE, $size, $options);
 
 		// send file blocks
-		while ($data = fread($stream, $this->blockSize)){
+		while ($data = fread($stream, $this->blockSize)) {
 			// send data
 			$this->streamFilePart($data);
 		}
@@ -117,12 +116,12 @@ class TarStreamer {
 	 * Explicitly adds a directory to the tar (necessary for empty directories)
 	 *
 	 * @param  string $name Name (path) of the directory
-	 * @param  array  $opt  Additional options to set 
+	 * @param  array  $opt  Additional options to set
 	 *                   Valid options are:
 	 *                      * int timestamp: timestamp for the file (default: current time)
 	 * @return void
 	 */
-	public function addEmptyDir($name, $opt = []){
+	public function addEmptyDir($name, $opt = []) {
 		$opt['type'] = self::DIRTYPE;
 
 		// send header
@@ -137,7 +136,7 @@ class TarStreamer {
 	 * A closed archive can no longer have new files added to it. After
 	 * closing, the file is completely written to the output stream.
 	 * @return bool $success */
-	public function finalize(){
+	public function finalize() {
 		// tar requires the end of the file have two 512 byte null blocks
 		$this->send(pack('a1024', ''));
 
@@ -150,19 +149,18 @@ class TarStreamer {
 	 * Initialize a file stream
 	 *
 	 * @param string $name file path or just name
-	 * @param int $type type of the item
+	 * @param int|string $type type of the item
 	 * @param int $size size in bytes of the file
 	 * @param array $opt array  (optional)
 	 *                   Valid options are:
 	 *                      * int timestamp: timestamp for the file (default: current time)
 	 */
-	protected function initFileStreamTransfer($name, $type, $size, $opt = []){
-		$dirName = (dirname($name) == '.') ? '' : dirname($name);
+	protected function initFileStreamTransfer($name, $type, $size, $opt = []) {
+		$dirName = (\dirname($name) == '.') ? '' : \dirname($name);
 		$fileName = ($type == self::DIRTYPE) ? basename($name) . '/' : basename($name);
 
-
 		// handle long file names
-		if (strlen($fileName) > 99 || strlen($dirName) > 154){
+		if (\strlen($fileName) > 99 || \strlen($dirName) > 154) {
 			$this->writeLongName($fileName, $dirName);
 		}
 
@@ -176,29 +174,29 @@ class TarStreamer {
 				->setTypeflag($type)
 				->setPrefix($dirName)
 				->getHeader()
-			;
+		;
 		// print header
 		$this->send($header);
 	}
 	
-	protected function writeLongName($fileName, $dirName){
+	protected function writeLongName($fileName, $dirName) {
 		$internalPath = trim($dirName . '/' . $fileName, '/');
 		if ($this->longNameHeaderType === self::XHDTYPE) {
 			// Long names via PAX
 			$pax = $this->paxGenerate([ 'path' => $internalPath]);
-			$paxSize = strlen($pax);
+			$paxSize = \strlen($pax);
 			$this->initFileStreamTransfer('', self::XHDTYPE, $paxSize);
 			$this->streamFilePart($pax);
 			$this->completeFileStream($paxSize);
 		} else {
 			// long names via 'L' header
-			$pathSize = strlen($internalPath);
+			$pathSize = \strlen($internalPath);
 			$tarHeader = new TarHeader();
 			$header = $tarHeader->setName('././@LongLink')
 					->setSize($pathSize)
 					->setTypeflag(self::LONGNAMETYPE)
 					->getHeader()
-				;
+			;
 			$this->send($header);
 			$this->streamFilePart($internalPath);
 			$this->completeFileStream($pathSize);
@@ -210,7 +208,7 @@ class TarStreamer {
 	 *
 	 * @param string $data raw data to send
 	 */
-	protected function streamFilePart($data){
+	protected function streamFilePart($data) {
 		// send data
 		$this->send($data);
 
@@ -222,9 +220,9 @@ class TarStreamer {
 	 * Complete the current file stream
 	 * @param $size
 	 */
-	protected function completeFileStream($size){
+	protected function completeFileStream($size) {
 		// ensure we pad the last block so that it is 512 bytes
-		if (($mod = ($size % 512)) > 0){
+		if (($mod = ($size % 512)) > 0) {
 			$this->send(pack('a' . (512 - $mod), ''));
 		}
 
@@ -237,8 +235,8 @@ class TarStreamer {
 	 *
 	 * @param string $data data to send
 	 */
-	protected function send($data){
-		if ($this->needHeaders){
+	protected function send($data) {
+		if ($this->needHeaders) {
 			$this->sendHeaders();
 		}
 		$this->needHeaders = false;
@@ -250,15 +248,15 @@ class TarStreamer {
 	 * Generate a PAX string
 	 *
 	 * @param array $fields key value mapping
-	 * @return string PAX formated string
+	 * @return string PAX formatted string
 	 * @link http://www.freebsd.org/cgi/man.cgi?query=tar&sektion=5&manpath=FreeBSD+8-current tar / PAX spec
 	 */
-	protected function paxGenerate($fields){
+	protected function paxGenerate($fields) {
 		$lines = '';
-		foreach ($fields as $name => $value){
+		foreach ($fields as $name => $value) {
 			// build the line and the size
 			$line = ' ' . $name . '=' . $value . "\n";
-			$size = strlen(strlen($line)) + strlen($line);
+			$size = \strlen((string) \strlen($line)) + \strlen($line);
 
 			// add the line
 			$lines .= $size . $line;
