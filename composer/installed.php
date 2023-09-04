@@ -635,9 +635,9 @@
             'dev_requirement' => false,
         ),
         'sabre/http' => array(
-            'pretty_version' => '5.1.5',
-            'version' => '5.1.5.0',
-            'reference' => '164725c2d2e248384e5b6115510c545e9c47cff9',
+            'pretty_version' => '5.1.10',
+            'version' => '5.1.10.0',
+            'reference' => 'f9f3d1fba8916fa2f4ec25636c4fedc26cb94e02',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabre/http',
             'aliases' => array(),
