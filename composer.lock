@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a9f474b01a5f2a497e76d603f6b6827",
+    "content-hash": "1d15ddde624555f55fb048226b49cf2d",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2886,16 +2886,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.40",
+            "version": "2.0.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "5ef6f8376ddad21f3ce1da429950f7e00ec2292c"
+                "reference": "28d8f438a0064c9de80857e3270d071495544640"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/5ef6f8376ddad21f3ce1da429950f7e00ec2292c",
-                "reference": "5ef6f8376ddad21f3ce1da429950f7e00ec2292c",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/28d8f438a0064c9de80857e3270d071495544640",
+                "reference": "28d8f438a0064c9de80857e3270d071495544640",
                 "shasum": ""
             },
             "require": {
@@ -2976,7 +2976,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.40"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.45"
             },
             "funding": [
                 {
@@ -2992,7 +2992,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-17T17:22:59+00:00"
+            "time": "2023-09-15T20:55:47+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -6728,5 +6728,5 @@
     "platform-overrides": {
         "php": "8.0.2"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
