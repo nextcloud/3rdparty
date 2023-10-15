@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f262e7f99a4f195644c8542f2c4ed3e2",
+    "content-hash": "bc739ea34119168089aab9d56b0a5069",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1815,16 +1815,16 @@
         },
         {
             "name": "icewind/streams",
-            "version": "v0.7.5",
+            "version": "v0.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/Streams.git",
-                "reference": "0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2"
+                "reference": "64200fd7cfcc7f550c3c695c48d8fd8bba97fecb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2",
-                "reference": "0c6aae16ebdadb257f0bd089c1e1e4cf5e20ddc2",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/64200fd7cfcc7f550c3c695c48d8fd8bba97fecb",
+                "reference": "64200fd7cfcc7f550c3c695c48d8fd8bba97fecb",
                 "shasum": ""
             },
             "require": {
@@ -1854,9 +1854,9 @@
             "description": "A set of generic stream wrappers",
             "support": {
                 "issues": "https://github.com/icewind1991/Streams/issues",
-                "source": "https://github.com/icewind1991/Streams/tree/v0.7.5"
+                "source": "https://github.com/icewind1991/Streams/tree/v0.7.7"
             },
-            "time": "2021-06-14T14:02:48+00:00"
+            "time": "2023-03-16T14:52:25+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
