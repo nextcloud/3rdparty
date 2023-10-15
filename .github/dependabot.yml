@@ -11,6 +11,21 @@ updates:
   labels:
     - "dependencies"
     - "main"
+  ignore:
+    - dependency-name: "symfony/console"
+      versions: [ "6.x" ]
+    - dependency-name: "symfony/event-dispatcher"
+      versions: [ "6.x" ]
+    - dependency-name: "symfony/http-foundation"
+      versions: [ "6.x" ]
+    - dependency-name: "symfony/mailer"
+      versions: [ "6.x" ]
+    - dependency-name: "symfony/process"
+      versions: [ "6.x" ]
+    - dependency-name: "symfony/routing"
+      versions: [ "6.x" ]
+    - dependency-name: "symfony/translation"
+      versions: [ "6.x" ]
 
 - package-ecosystem: composer
   directory: "/"
@@ -23,7 +38,7 @@ updates:
   open-pull-requests-limit: 10
   ignore:
     - dependency-name: "*"
-      update-types: ["version-update:semver-major"]
+      update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
     - "stable27"
@@ -40,7 +55,7 @@ updates:
   open-pull-requests-limit: 10
   ignore:
     - dependency-name: "*"
-      update-types: ["version-update:semver-major"]
+      update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
     - "stable26"
@@ -56,7 +71,7 @@ updates:
   open-pull-requests-limit: 10
   ignore:
     - dependency-name: "*"
-      update-types: ["version-update:semver-major"]
+      update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
     - "stable25"
