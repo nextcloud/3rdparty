@@ -253,6 +253,8 @@ react/promise/README.md
 sabre/dav/examples
 sabre/dav/tests
 sabre/event/tests
+sabre/http/CHANGELOG.md
+sabre/http/README.md
 sabre/http/examples
 sabre/http/tests
 sabre/uri/.gitattributes
