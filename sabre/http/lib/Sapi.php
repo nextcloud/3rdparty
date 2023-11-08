@@ -26,7 +26,7 @@ use InvalidArgumentException;
  * * php://output
  *
  * You can choose to either call all these methods statically, but you can also
- * instantiate this as an object to allow for polymorhpism.
+ * instantiate this as an object to allow for polymorphism.
  *
  * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
  * @author Evert Pot (http://evertpot.com/)
@@ -113,6 +113,12 @@ class Sapi
                     // It returns the negative number of bytes copied
                     // So break the loop in such cases.
                     if ($copied <= 0) {
+                        break;
+                    }
+                    // Abort on client disconnect.
+                    // With ignore_user_abort(true), the script is not aborted on client disconnect.
+                    // To avoid reading the entire stream and dismissing the data afterward, check between the chunks if the client is still there.
+                    if (1 === ignore_user_abort() && 1 === connection_aborted()) {
                         break;
                     }
                     $left -= $copied;
@@ -207,7 +213,7 @@ class Sapi
                         // Normalizing it to be prettier
                         $header = strtolower(substr($key, 5));
 
-                        // Transforming dashes into spaces, and uppercasing
+                        // Transforming dashes into spaces, and upper-casing
                         // every first letter.
                         $header = ucwords(str_replace('_', ' ', $header));
 
