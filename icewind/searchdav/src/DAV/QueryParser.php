@@ -76,6 +76,7 @@ class QueryParser extends Service {
 			'{DAV:}contains'      => Operator::class,
 			'{DAV:}not'           => Operator::class,
 			'{DAV:}is-collection' => Operator::class,
+			'{DAV:}is-defined'    => Operator::class,
 			'{DAV:}limit'         => Limit::class,
 		];
 	}
