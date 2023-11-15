@@ -2414,6 +2414,7 @@ return array(
     'Sabre\\DAV\\IMoveTarget' => $vendorDir . '/sabre/dav/lib/DAV/IMoveTarget.php',
     'Sabre\\DAV\\IMultiGet' => $vendorDir . '/sabre/dav/lib/DAV/IMultiGet.php',
     'Sabre\\DAV\\INode' => $vendorDir . '/sabre/dav/lib/DAV/INode.php',
+    'Sabre\\DAV\\INodeByPath' => $vendorDir . '/sabre/dav/lib/DAV/INodeByPath.php',
     'Sabre\\DAV\\IProperties' => $vendorDir . '/sabre/dav/lib/DAV/IProperties.php',
     'Sabre\\DAV\\IQuota' => $vendorDir . '/sabre/dav/lib/DAV/IQuota.php',
     'Sabre\\DAV\\Locks\\Backend\\AbstractBackend' => $vendorDir . '/sabre/dav/lib/DAV/Locks/Backend/AbstractBackend.php',
