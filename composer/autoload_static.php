@@ -191,10 +191,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'Sabre\\Uri\\' => 10,
             'Sabre\\HTTP\\' => 11,
             'Sabre\\Event\\' => 12,
-            'Sabre\\DAV\\' => 10,
-            'Sabre\\DAVACL\\' => 13,
-            'Sabre\\CardDAV\\' => 14,
-            'Sabre\\CalDAV\\' => 13,
+            'Sabre\\' => 6,
         ),
         'R' => 
         array (
@@ -450,21 +447,9 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             0 => __DIR__ . '/..' . '/sabre/event/lib',
         ),
-        'Sabre\\DAV\\' => 
+        'Sabre\\' => 
         array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/DAV',
-        ),
-        'Sabre\\DAVACL\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/DAVACL',
-        ),
-        'Sabre\\CardDAV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/CardDAV',
-        ),
-        'Sabre\\CalDAV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/CalDAV',
+            0 => __DIR__ . '/..' . '/sabre/dav/lib',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -3078,6 +3063,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Sabre\\DAV\\IMoveTarget' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/IMoveTarget.php',
         'Sabre\\DAV\\IMultiGet' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/IMultiGet.php',
         'Sabre\\DAV\\INode' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/INode.php',
+        'Sabre\\DAV\\INodeByPath' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/INodeByPath.php',
         'Sabre\\DAV\\IProperties' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/IProperties.php',
         'Sabre\\DAV\\IQuota' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/IQuota.php',
         'Sabre\\DAV\\Locks\\Backend\\AbstractBackend' => __DIR__ . '/..' . '/sabre/dav/lib/DAV/Locks/Backend/AbstractBackend.php',
