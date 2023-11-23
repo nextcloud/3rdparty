@@ -29,11 +29,11 @@ updates:
 
 - package-ecosystem: composer
   directory: "/"
-  target-branch: stable27
+  target-branch: stable28
   schedule:
     interval: weekly
     day: saturday
-    time: "03:10"
+    time: "03:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
   ignore:
@@ -41,12 +41,11 @@ updates:
       update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
-    - "stable27"
-
+    - "stable28"
 
 - package-ecosystem: composer
   directory: "/"
-  target-branch: stable26
+  target-branch: stable27
   schedule:
     interval: weekly
     day: saturday
@@ -58,11 +57,11 @@ updates:
       update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
-    - "stable26"
+    - "stable27"
 
 - package-ecosystem: composer
   directory: "/"
-  target-branch: stable25
+  target-branch: stable26
   schedule:
     interval: weekly
     day: saturday
@@ -74,4 +73,4 @@ updates:
       update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
-    - "stable25"
+    - "stable26"
