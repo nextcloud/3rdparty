@@ -91,9 +91,9 @@ class ZipStreamer {
     $options = array_merge($defaultOptions, $options);
 
     if ($options['outstream']) {
-      $this->outstream = $options['outstream'];
+      $this->outStream = $options['outstream'];
     } else {
-      $this->outstream = fopen('php://output', 'w');
+      $this->outStream = fopen('php://output', 'w');
     }
     $this->zip64 = $options['zip64'];
     $this->compress = $options['compress'];
@@ -156,7 +156,7 @@ class ZipStreamer {
         header('Connection: Keep-Alive');
         header('Content-Type: ' . $contentType);
         // Use UTF-8 filenames when not using Internet Explorer
-        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
+        if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
           header('Content-Disposition: attachment; filename="' . rawurlencode($archiveName) . '"' );
         }  else  {
           header( 'Content-Disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($archiveName)
@@ -175,7 +175,7 @@ class ZipStreamer {
   /**
    * Add a file to the archive at the specified location and file name.
    *
-   * @param string $stream      Stream to read data from
+   * @param resource $stream    Stream to read data from
    * @param string $filePath    Filepath and name to be used in the archive.
    * @param array $options      Optional, additional options
    *                            Valid options are:
@@ -322,11 +322,11 @@ class ZipStreamer {
   }
 
   private function write($data) {
-    return fwrite($this->outstream, $data);
+    return fwrite($this->outStream, $data);
   }
 
   private function flush() {
-    return fflush($this->outstream);
+    return fflush($this->outStream);
   }
 
   private function beginFile($filePath, $isDir, $fileComment, $timestamp, $gpFlags, $gzMethod,
