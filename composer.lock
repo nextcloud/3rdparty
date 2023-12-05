@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a5a90741c696278519e98713c9e1dcf",
+    "content-hash": "c3013c5c52fded238303c4254923bb03",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -353,23 +353,26 @@
         },
         {
             "name": "deepdiver/zipstreamer",
-            "version": "2.0.0",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DeepDiver1975/PHPZipStreamer.git",
-                "reference": "b8c59647ff34fb97e8937aefb2a65de2bc4b4755"
+                "reference": "f5659266771aeb3e356f75d7f39a092a291953b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DeepDiver1975/PHPZipStreamer/zipball/b8c59647ff34fb97e8937aefb2a65de2bc4b4755",
-                "reference": "b8c59647ff34fb97e8937aefb2a65de2bc4b4755",
+                "url": "https://api.github.com/repos/DeepDiver1975/PHPZipStreamer/zipball/f5659266771aeb3e356f75d7f39a092a291953b3",
+                "reference": "f5659266771aeb3e356f75d7f39a092a291953b3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^7 || ^8"
+            },
+            "suggest": {
+                "ext-http": ">=0.10"
             },
             "type": "library",
             "autoload": {
@@ -379,7 +382,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0+"
+                "GPL-3.0-or-later"
             ],
             "authors": [
                 {
@@ -416,9 +419,9 @@
             ],
             "support": {
                 "issues": "https://github.com/DeepDiver1975/PHPZipStreamer/issues",
-                "source": "https://github.com/DeepDiver1975/PHPZipStreamer/tree/master"
+                "source": "https://github.com/DeepDiver1975/PHPZipStreamer/tree/v2.0.2"
             },
-            "time": "2020-07-21T07:45:14+00:00"
+            "time": "2023-11-14T16:21:07+00:00"
         },
         {
             "name": "deepdiver1975/tarstreamer",

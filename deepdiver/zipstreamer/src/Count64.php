@@ -113,7 +113,7 @@ function unpack32le($data) {
  */
 function pack64le($data) {
   if (is_object($data)) {
-    if ("Count64_32" == get_class($data)) {
+    if (Count64_32::class == get_class($data)) {
       $value = $data->_getValue();
       $hiBytess = $value[0];
       $loBytess = $value[1];
