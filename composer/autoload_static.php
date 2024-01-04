@@ -141,6 +141,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'libphonenumber\\' => 15,
         ),
+        'k' => 
+        array (
+            'kornrunner\\Blurhash\\' => 20,
+        ),
         'c' => 
         array (
             'cweagans\\Composer\\' => 18,
@@ -300,6 +304,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'libphonenumber\\' => 
         array (
             0 => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src',
+        ),
+        'kornrunner\\Blurhash\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kornrunner/blurhash/src',
         ),
         'cweagans\\Composer\\' => 
         array (
@@ -4089,6 +4097,11 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'cweagans\\Composer\\PatchEvent' => __DIR__ . '/..' . '/cweagans/composer-patches/src/PatchEvent.php',
         'cweagans\\Composer\\PatchEvents' => __DIR__ . '/..' . '/cweagans/composer-patches/src/PatchEvents.php',
         'cweagans\\Composer\\Patches' => __DIR__ . '/..' . '/cweagans/composer-patches/src/Patches.php',
+        'kornrunner\\Blurhash\\AC' => __DIR__ . '/..' . '/kornrunner/blurhash/src/AC.php',
+        'kornrunner\\Blurhash\\Base83' => __DIR__ . '/..' . '/kornrunner/blurhash/src/Base83.php',
+        'kornrunner\\Blurhash\\Blurhash' => __DIR__ . '/..' . '/kornrunner/blurhash/src/Blurhash.php',
+        'kornrunner\\Blurhash\\Color' => __DIR__ . '/..' . '/kornrunner/blurhash/src/Color.php',
+        'kornrunner\\Blurhash\\DC' => __DIR__ . '/..' . '/kornrunner/blurhash/src/DC.php',
         'libphonenumber\\CountryCodeSource' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/CountryCodeSource.php',
         'libphonenumber\\CountryCodeToRegionCodeMap' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/CountryCodeToRegionCodeMap.php',
         'libphonenumber\\CountryCodeToRegionCodeMapForTesting' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/CountryCodeToRegionCodeMapForTesting.php',

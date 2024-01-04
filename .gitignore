@@ -145,3 +145,7 @@ symfony/process/Tests
 thecodingmachine/safe/rector-migrate-0.7.php
 
 wapmorgan/mp3info/_config.yml
+
+kornrunner/blurhash/test
+kornrunner/blurhash/.coveralls.yml
+kornrunner/blurhash/infection.json.dist
