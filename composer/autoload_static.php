@@ -4104,7 +4104,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'kornrunner\\Blurhash\\DC' => __DIR__ . '/..' . '/kornrunner/blurhash/src/DC.php',
         'libphonenumber\\CountryCodeSource' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/CountryCodeSource.php',
         'libphonenumber\\CountryCodeToRegionCodeMap' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/CountryCodeToRegionCodeMap.php',
-        'libphonenumber\\CountryCodeToRegionCodeMapForTesting' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/CountryCodeToRegionCodeMapForTesting.php',
         'libphonenumber\\DefaultMetadataLoader' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/DefaultMetadataLoader.php',
         'libphonenumber\\MatchType' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/MatchType.php',
         'libphonenumber\\Matcher' => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php-lite/src/Matcher.php',
