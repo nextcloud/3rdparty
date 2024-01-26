@@ -3,7 +3,7 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '9c0a9d112bd123e2c18e4846cc08d5ca48c477f4',
+        'reference' => '6039e8a6de193441ede5535626999f344e2776ed',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -319,7 +319,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9c0a9d112bd123e2c18e4846cc08d5ca48c477f4',
+            'reference' => '6039e8a6de193441ede5535626999f344e2776ed',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
@@ -353,9 +353,9 @@
             'dev_requirement' => false,
         ),
         'pear/pear-core-minimal' => array(
-            'pretty_version' => 'v1.10.10',
-            'version' => '1.10.10.0',
-            'reference' => '625a3c429d9b2c1546438679074cac1b089116a7',
+            'pretty_version' => 'v1.10.14',
+            'version' => '1.10.14.0',
+            'reference' => 'a86fc145edb5caedbf96527214ce3cadc9de4a32',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/pear-core-minimal',
             'aliases' => array(),
@@ -595,7 +595,7 @@
         'rsky/pear-core-min' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.10.10',
+                0 => 'v1.10.14',
             ),
         ),
         'sabre/dav' => array(
