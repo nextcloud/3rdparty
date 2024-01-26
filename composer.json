@@ -54,7 +54,7 @@
 		"symfony/mailer": "^5.4.22",
 		"symfony/polyfill-intl-grapheme": "^1.28",
 		"symfony/polyfill-intl-normalizer": "^1.28",
-		"symfony/process": "^5.4.24",
+		"symfony/process": "^5.4.34",
 		"symfony/routing": "^5.4.24",
 		"symfony/translation": "^5.4.24",
 		"wapmorgan/mp3info": "^0.1.0",
