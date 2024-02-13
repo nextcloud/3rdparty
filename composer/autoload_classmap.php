@@ -1754,6 +1754,7 @@ return array(
     'Laravel\\SerializableClosure\\Support\\ClosureStream' => $vendorDir . '/laravel/serializable-closure/src/Support/ClosureStream.php',
     'Laravel\\SerializableClosure\\Support\\ReflectionClosure' => $vendorDir . '/laravel/serializable-closure/src/Support/ReflectionClosure.php',
     'Laravel\\SerializableClosure\\Support\\SelfReference' => $vendorDir . '/laravel/serializable-closure/src/Support/SelfReference.php',
+    'Laravel\\SerializableClosure\\UnsignedSerializableClosure' => $vendorDir . '/laravel/serializable-closure/src/UnsignedSerializableClosure.php',
     'League\\Uri\\Contracts\\AuthorityInterface' => $vendorDir . '/league/uri-interfaces/src/Contracts/AuthorityInterface.php',
     'League\\Uri\\Contracts\\DataPathInterface' => $vendorDir . '/league/uri-interfaces/src/Contracts/DataPathInterface.php',
     'League\\Uri\\Contracts\\DomainHostInterface' => $vendorDir . '/league/uri-interfaces/src/Contracts/DomainHostInterface.php',
