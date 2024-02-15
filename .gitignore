@@ -119,6 +119,8 @@ psr/log/Psr/Log/Test/
 
 psr/http-factory/.pullapprove.yml
 
+psr/http-message/docs/
+
 sabre/dav/examples
 
 sabre/http/examples
