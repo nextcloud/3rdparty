@@ -3962,6 +3962,11 @@
                 "bin/naturalselection"
             ],
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "Fix getNodeForPath cache": ".patches/fix-cache-for-node.diff"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {

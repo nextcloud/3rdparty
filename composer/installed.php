@@ -3,7 +3,7 @@
         'name' => 'nextcloud/3rdparty',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '577e6962c14ee303d486c87b11a687fe64c7b421',
+        'reference' => 'c1dfb58d1a08450a3451688a55ce2bd2a5bf79f1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -319,7 +319,7 @@
         'nextcloud/3rdparty' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '577e6962c14ee303d486c87b11a687fe64c7b421',
+            'reference' => 'c1dfb58d1a08450a3451688a55ce2bd2a5bf79f1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
