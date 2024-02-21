@@ -101,7 +101,7 @@ class TarStreamer {
 		$this->initFileStreamTransfer($filePath, self::REGTYPE, $size, $options);
 
 		// send file blocks
-		while ($data = fread($stream, $this->blockSize)) {
+		while (!feof($stream) && ($data = fread($stream, $this->blockSize)) !== false) {
 			// send data
 			$this->streamFilePart($data);
 		}
