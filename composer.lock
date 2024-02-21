@@ -1549,30 +1549,32 @@
         },
         {
             "name": "guzzlehttp/uri-template",
-            "version": "v0.2.0",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "db46525d6d8fee71033b73cc07160f3e5271a8ce"
+                "reference": "ecea8feef63bd4fef1f037ecb288386999ecc11c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/db46525d6d8fee71033b73cc07160f3e5271a8ce",
-                "reference": "db46525d6d8fee71033b73cc07160f3e5271a8ce",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/ecea8feef63bd4fef1f037ecb288386999ecc11c",
+                "reference": "ecea8feef63bd4fef1f037ecb288386999ecc11c",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0",
-                "symfony/polyfill-php80": "^1.17"
+                "php": "^7.2.5 || ^8.0",
+                "symfony/polyfill-php80": "^1.24"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.5.15 || ^8.5 || ^9.3",
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "phpunit/phpunit": "^8.5.36 || ^9.6.15",
                 "uri-template/tests": "1.0.0"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false
                 }
             },
             "autoload": {
@@ -1586,21 +1588,34 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
                     "name": "George Mponos",
                     "email": "gmponos@gmail.com",
-                    "homepage": "https://github.com/gmponos",
-                    "role": "Developer"
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
                 }
             ],
             "description": "A polyfill class for uri_template of PHP",
-            "homepage": "https://github.com/guzzlehttp/uri-template",
             "keywords": [
                 "guzzlehttp",
                 "uri-template"
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-                "source": "https://github.com/guzzle/uri-template/tree/master"
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.3"
             },
             "funding": [
                 {
@@ -1608,11 +1623,15 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/gmponos",
+                    "url": "https://github.com/Nyholm",
                     "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/uri-template",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2020-07-21T13:45:09+00:00"
+            "time": "2023-12-03T19:50:20+00:00"
         },
         {
             "name": "icewind/searchdav",
@@ -2806,29 +2825,33 @@
         },
         {
             "name": "php-opencloud/openstack",
-            "version": "v3.2.1",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-opencloud/openstack.git",
-                "reference": "42e2d09b9368becb6fde6dac17854132fcf77a5c"
+                "reference": "38a686070d3b3a25b26e21f3c445dde1ae66fd8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/42e2d09b9368becb6fde6dac17854132fcf77a5c",
-                "reference": "42e2d09b9368becb6fde6dac17854132fcf77a5c",
+                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/38a686070d3b3a25b26e21f3c445dde1ae66fd8d",
+                "reference": "38a686070d3b3a25b26e21f3c445dde1ae66fd8d",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
-                "guzzlehttp/uri-template": "0.2",
+                "guzzlehttp/psr7": ">=1.7",
+                "guzzlehttp/uri-template": "^0.2 || ^1.0",
                 "justinrainbow/json-schema": "^5.2",
-                "php": "^7.2.5|^8.0"
+                "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.18",
+                "ergebnis/composer-normalize": "^2.0",
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^3",
                 "php-coveralls/php-coveralls": "^2.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpunit/phpunit": "^8.0",
+                "phpspec/prophecy": "^1.17",
+                "phpunit/phpunit": ">=8.5.23 <9.0",
                 "psr/log": "^1.0"
             },
             "type": "library",
@@ -2856,6 +2879,11 @@
                     "name": "Ha Phan",
                     "email": "thanhha.work@gmail.com",
                     "homepage": "https://github.com/haphan"
+                },
+                {
+                    "name": "Konstantin Babushkin",
+                    "email": "koka@idwrx.com",
+                    "homepage": "https://github.com/k0ka"
                 }
             ],
             "description": "PHP SDK for OpenStack APIs. Supports BlockStorage, Compute, Identity, Images, Networking and Metric Gnocchi",
@@ -2868,9 +2896,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-opencloud/openstack/issues",
-                "source": "https://github.com/php-opencloud/openstack/tree/v3.2.1"
+                "source": "https://github.com/php-opencloud/openstack/tree/v3.9.0"
             },
-            "time": "2021-07-21T13:43:25+00:00"
+            "time": "2024-02-10T10:49:56+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -5728,16 +5756,16 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5"
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
                 "shasum": ""
             },
             "require": {
@@ -5745,9 +5773,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.28-dev"
-                },
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
@@ -5791,7 +5816,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.28.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -5807,7 +5832,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "symfony/process",
