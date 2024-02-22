@@ -1,4 +1,8 @@
 {
     "patches": {
+	"sabre/dav": {
+            "Fix getNodeForPath cache": ".patches/fix-cache-for-node.diff"
+        }
+
     }
 }
