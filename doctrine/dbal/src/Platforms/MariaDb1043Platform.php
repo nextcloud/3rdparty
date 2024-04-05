@@ -3,6 +3,7 @@
 namespace Doctrine\DBAL\Platforms;
 
 use Doctrine\DBAL\Types\JsonType;
+use Doctrine\Deprecations\Deprecation;
 
 use function sprintf;
 
@@ -40,7 +41,8 @@ class MariaDb1043Platform extends MariaDb1027Platform
      */
     public function getListTableColumnsSQL($table, $database = null): string
     {
-        [$columnTypeSQL, $joinCheckConstraintSQL] = $this->getColumnTypeSQLSnippets();
+        // @todo 4.0 - call getColumnTypeSQLSnippet() instead
+        [$columnTypeSQL, $joinCheckConstraintSQL] = $this->getColumnTypeSQLSnippets('c', $database);
 
         return sprintf(
             <<<SQL
@@ -72,34 +74,46 @@ class MariaDb1043Platform extends MariaDb1027Platform
      * is valid json. This function generates the SQL snippets which reverse this aliasing i.e. report a column
      * as JSON where it was originally specified as such instead of LONGTEXT.
      *
-     * The CHECK constraints are stored in information_schema.CHECK_CONSTRAINTS so JOIN that table.
-     *
-     * @return array{string, string}
+     * The CHECK constraints are stored in information_schema.CHECK_CONSTRAINTS so query that table.
      */
-    public function getColumnTypeSQLSnippets(string $tableAlias = 'c'): array
+    public function getColumnTypeSQLSnippet(string $tableAlias = 'c', ?string $databaseName = null): string
     {
         if ($this->getJsonTypeDeclarationSQL([]) !== 'JSON') {
-            return parent::getColumnTypeSQLSnippets($tableAlias);
+            return parent::getColumnTypeSQLSnippet($tableAlias, $databaseName);
         }
 
-        $columnTypeSQL = <<<SQL
+        if ($databaseName === null) {
+            Deprecation::trigger(
+                'doctrine/dbal',
+                'https://github.com/doctrine/dbal/pull/6215',
+                'Not passing a database name to methods "getColumnTypeSQLSnippet()", '
+                    . '"getColumnTypeSQLSnippets()", and "getListTableColumnsSQL()" of "%s" is deprecated.',
+                self::class,
+            );
+        }
+
+        $subQueryAlias = 'i_' . $tableAlias;
+
+        $databaseName = $this->getDatabaseNameSQL($databaseName);
+
+        // The check for `CONSTRAINT_SCHEMA = $databaseName` is mandatory here to prevent performance issues
+        return <<<SQL
             IF(
-                x.CHECK_CLAUSE IS NOT NULL AND $tableAlias.COLUMN_TYPE = 'longtext',
+                $tableAlias.COLUMN_TYPE = 'longtext'
+                AND EXISTS(
+                    SELECT * from information_schema.CHECK_CONSTRAINTS $subQueryAlias
+                    WHERE $subQueryAlias.CONSTRAINT_SCHEMA = $databaseName
+                    AND $subQueryAlias.TABLE_NAME = $tableAlias.TABLE_NAME
+                    AND $subQueryAlias.CHECK_CLAUSE = CONCAT(
+                        'json_valid(`',
+                            $tableAlias.COLUMN_NAME,
+                        '`)'
+                    )
+                ),
                 'json',
                 $tableAlias.COLUMN_TYPE
             )
         SQL;
-
-        $joinCheckConstraintSQL = <<<SQL
-        LEFT JOIN information_schema.CHECK_CONSTRAINTS x
-            ON (
-                $tableAlias.TABLE_SCHEMA = x.CONSTRAINT_SCHEMA
-                AND $tableAlias.TABLE_NAME = x.TABLE_NAME
-                AND x.CHECK_CLAUSE = CONCAT('json_valid(`', $tableAlias.COLUMN_NAME , '`)')
-            )
-        SQL;
-
-        return [$columnTypeSQL, $joinCheckConstraintSQL];
     }
 
     /** {@inheritDoc} */

@@ -191,12 +191,6 @@ class MySQLSchemaManager extends AbstractSchemaManager
             $tableColumn['comment'] = $this->removeDoctrineTypeFromComment($tableColumn['comment'], $type);
         }
 
-        // Check underlying database type where doctrine type is inferred from DC2Type comment
-        // and set a flag if it is not as expected.
-        if ($origType !== $type && $this->expectedDbType($type, $tableColumn) !== $dbType) {
-            $tableColumn['declarationMismatch'] = true;
-        }
-
         switch ($dbType) {
             case 'char':
             case 'binary':
@@ -294,6 +288,12 @@ class MySQLSchemaManager extends AbstractSchemaManager
 
         if (isset($tableColumn['declarationMismatch'])) {
             $column->setPlatformOption('declarationMismatch', $tableColumn['declarationMismatch']);
+        }
+
+        // Check underlying database type where doctrine type is inferred from DC2Type comment
+        // and set a flag if it is not as expected.
+        if ($type === 'json' && $origType !== $type && $this->expectedDbType($type, $options) !== $dbType) {
+            $column->setPlatformOption('declarationMismatch', true);
         }
 
         return $column;
@@ -437,7 +437,8 @@ SQL;
 
     protected function selectTableColumns(string $databaseName, ?string $tableName = null): Result
     {
-        [$columnTypeSQL, $joinCheckConstraintSQL] = $this->_platform->getColumnTypeSQLSnippets();
+        // @todo 4.0 - call getColumnTypeSQLSnippet() instead
+        [$columnTypeSQL, $joinCheckConstraintSQL] = $this->_platform->getColumnTypeSQLSnippets('c', $databaseName);
 
         $sql = 'SELECT';
 
