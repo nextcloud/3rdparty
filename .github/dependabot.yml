@@ -1,5 +1,10 @@
 version: 2
 updates:
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "monthly"
+
 - package-ecosystem: composer
   directory: "/"
   schedule:
@@ -26,6 +31,22 @@ updates:
       versions: [ "6.x" ]
     - dependency-name: "symfony/translation"
       versions: [ "6.x" ]
+
+- package-ecosystem: composer
+  directory: "/"
+  target-branch: stable29
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  labels:
+    - "dependencies"
+    - "stable29"
 
 - package-ecosystem: composer
   directory: "/"
@@ -58,19 +79,3 @@ updates:
   labels:
     - "dependencies"
     - "stable27"
-
-- package-ecosystem: composer
-  directory: "/"
-  target-branch: stable26
-  schedule:
-    interval: weekly
-    day: saturday
-    time: "03:30"
-    timezone: Europe/Paris
-  open-pull-requests-limit: 10
-  ignore:
-    - dependency-name: "*"
-      update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  labels:
-    - "dependencies"
-    - "stable26"
