@@ -2961,16 +2961,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.40",
+            "version": "2.0.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "5ef6f8376ddad21f3ce1da429950f7e00ec2292c"
+                "reference": "b7d7d90ee7df7f33a664b4aea32d50a305d35adb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/5ef6f8376ddad21f3ce1da429950f7e00ec2292c",
-                "reference": "5ef6f8376ddad21f3ce1da429950f7e00ec2292c",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b7d7d90ee7df7f33a664b4aea32d50a305d35adb",
+                "reference": "b7d7d90ee7df7f33a664b4aea32d50a305d35adb",
                 "shasum": ""
             },
             "require": {
@@ -3051,7 +3051,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.40"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.47"
             },
             "funding": [
                 {
@@ -3067,7 +3067,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-17T17:22:59+00:00"
+            "time": "2024-02-26T04:55:38+00:00"
         },
         {
             "name": "pimple/pimple",
