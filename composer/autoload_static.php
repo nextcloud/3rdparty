@@ -8,8 +8,8 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
@@ -225,6 +225,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'MicrosoftAzure\\Storage\\Common\\' => 30,
             'MicrosoftAzure\\Storage\\Blob\\' => 28,
+            'Masterminds\\' => 12,
         ),
         'L' => 
         array (
@@ -516,6 +517,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             0 => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob',
         ),
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
         'League\\Uri\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/uri/src',
@@ -633,13 +638,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
-        ),
-        'F' => 
-        array (
-            'Fusonic\\Linq' => 
-            array (
-                0 => __DIR__ . '/..' . '/fusonic/linq/src',
             ),
         ),
         'C' => 
@@ -2193,18 +2191,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'FG\\X509\\SAN\\DNSName' => __DIR__ . '/..' . '/fgrosse/phpasn1/lib/X509/SAN/DNSName.php',
         'FG\\X509\\SAN\\IPAddress' => __DIR__ . '/..' . '/fgrosse/phpasn1/lib/X509/SAN/IPAddress.php',
         'FG\\X509\\SAN\\SubjectAlternativeNames' => __DIR__ . '/..' . '/fgrosse/phpasn1/lib/X509/SAN/SubjectAlternativeNames.php',
-        'Fusonic\\Linq\\GroupedLinq' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/GroupedLinq.php',
-        'Fusonic\\Linq\\Helper\\LinqHelper' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Helper/LinqHelper.php',
-        'Fusonic\\Linq\\Iterator\\DistinctIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/DistinctIterator.php',
-        'Fusonic\\Linq\\Iterator\\ExceptIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/ExceptIterator.php',
-        'Fusonic\\Linq\\Iterator\\GroupIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/GroupIterator.php',
-        'Fusonic\\Linq\\Iterator\\IntersectIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/IntersectIterator.php',
-        'Fusonic\\Linq\\Iterator\\OfTypeIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/OfTypeIterator.php',
-        'Fusonic\\Linq\\Iterator\\OrderIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/OrderIterator.php',
-        'Fusonic\\Linq\\Iterator\\SelectIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/SelectIterator.php',
-        'Fusonic\\Linq\\Iterator\\SelectManyIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/SelectManyIterator.php',
-        'Fusonic\\Linq\\Iterator\\WhereIterator' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Iterator/WhereIterator.php',
-        'Fusonic\\Linq\\Linq' => __DIR__ . '/..' . '/fusonic/linq/src/Fusonic/Linq/Linq.php',
         'Fusonic\\OpenGraph\\Consumer' => __DIR__ . '/..' . '/fusonic/opengraph/src/Consumer.php',
         'Fusonic\\OpenGraph\\Elements\\Audio' => __DIR__ . '/..' . '/fusonic/opengraph/src/Elements/Audio.php',
         'Fusonic\\OpenGraph\\Elements\\ElementBase' => __DIR__ . '/..' . '/fusonic/opengraph/src/Elements/ElementBase.php',
@@ -2450,6 +2436,26 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'League\\Uri\\UriTemplate\\Template' => __DIR__ . '/..' . '/league/uri/src/UriTemplate/Template.php',
         'League\\Uri\\UriTemplate\\VarSpecifier' => __DIR__ . '/..' . '/league/uri/src/UriTemplate/VarSpecifier.php',
         'League\\Uri\\UriTemplate\\VariableBag' => __DIR__ . '/..' . '/league/uri/src/UriTemplate/VariableBag.php',
+        'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
+        'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
+        'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',
+        'Masterminds\\HTML5\\Exception' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Exception.php',
+        'Masterminds\\HTML5\\InstructionProcessor' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/InstructionProcessor.php',
+        'Masterminds\\HTML5\\Parser\\CharacterReference' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/CharacterReference.php',
+        'Masterminds\\HTML5\\Parser\\DOMTreeBuilder' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php',
+        'Masterminds\\HTML5\\Parser\\EventHandler' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/EventHandler.php',
+        'Masterminds\\HTML5\\Parser\\FileInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/FileInputStream.php',
+        'Masterminds\\HTML5\\Parser\\InputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/InputStream.php',
+        'Masterminds\\HTML5\\Parser\\ParseError' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/ParseError.php',
+        'Masterminds\\HTML5\\Parser\\Scanner' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Scanner.php',
+        'Masterminds\\HTML5\\Parser\\StringInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/StringInputStream.php',
+        'Masterminds\\HTML5\\Parser\\Tokenizer' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Tokenizer.php',
+        'Masterminds\\HTML5\\Parser\\TreeBuildingRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php',
+        'Masterminds\\HTML5\\Parser\\UTF8Utils' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/UTF8Utils.php',
+        'Masterminds\\HTML5\\Serializer\\HTML5Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php',
+        'Masterminds\\HTML5\\Serializer\\OutputRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
+        'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
+        'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
         'Mexitek\\PHPColors\\Color' => __DIR__ . '/..' . '/mexitek/phpcolors/src/Mexitek/PHPColors/Color.php',
         'MicrosoftAzure\\Storage\\Blob\\BlobRestProxy' => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob/BlobRestProxy.php',
         'MicrosoftAzure\\Storage\\Blob\\BlobSharedAccessSignatureHelper' => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob/BlobSharedAccessSignatureHelper.php',
