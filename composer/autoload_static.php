@@ -225,6 +225,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'MicrosoftAzure\\Storage\\Common\\' => 30,
             'MicrosoftAzure\\Storage\\Blob\\' => 28,
+            'Masterminds\\' => 12,
         ),
         'L' => 
         array (
@@ -515,6 +516,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'MicrosoftAzure\\Storage\\Blob\\' => 
         array (
             0 => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob',
+        ),
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
         'League\\Uri\\' => 
         array (
@@ -2431,6 +2436,26 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'League\\Uri\\UriTemplate\\Template' => __DIR__ . '/..' . '/league/uri/src/UriTemplate/Template.php',
         'League\\Uri\\UriTemplate\\VarSpecifier' => __DIR__ . '/..' . '/league/uri/src/UriTemplate/VarSpecifier.php',
         'League\\Uri\\UriTemplate\\VariableBag' => __DIR__ . '/..' . '/league/uri/src/UriTemplate/VariableBag.php',
+        'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
+        'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
+        'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',
+        'Masterminds\\HTML5\\Exception' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Exception.php',
+        'Masterminds\\HTML5\\InstructionProcessor' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/InstructionProcessor.php',
+        'Masterminds\\HTML5\\Parser\\CharacterReference' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/CharacterReference.php',
+        'Masterminds\\HTML5\\Parser\\DOMTreeBuilder' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php',
+        'Masterminds\\HTML5\\Parser\\EventHandler' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/EventHandler.php',
+        'Masterminds\\HTML5\\Parser\\FileInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/FileInputStream.php',
+        'Masterminds\\HTML5\\Parser\\InputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/InputStream.php',
+        'Masterminds\\HTML5\\Parser\\ParseError' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/ParseError.php',
+        'Masterminds\\HTML5\\Parser\\Scanner' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Scanner.php',
+        'Masterminds\\HTML5\\Parser\\StringInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/StringInputStream.php',
+        'Masterminds\\HTML5\\Parser\\Tokenizer' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Tokenizer.php',
+        'Masterminds\\HTML5\\Parser\\TreeBuildingRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php',
+        'Masterminds\\HTML5\\Parser\\UTF8Utils' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/UTF8Utils.php',
+        'Masterminds\\HTML5\\Serializer\\HTML5Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php',
+        'Masterminds\\HTML5\\Serializer\\OutputRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
+        'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
+        'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
         'Mexitek\\PHPColors\\Color' => __DIR__ . '/..' . '/mexitek/phpcolors/src/Mexitek/PHPColors/Color.php',
         'MicrosoftAzure\\Storage\\Blob\\BlobRestProxy' => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob/BlobRestProxy.php',
         'MicrosoftAzure\\Storage\\Blob\\BlobSharedAccessSignatureHelper' => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob/BlobSharedAccessSignatureHelper.php',

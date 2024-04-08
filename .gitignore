@@ -16,12 +16,14 @@ bin
 */*/composer.json
 */*/composer.lock
 # ignore README and UPGRADE
-*/*/README.md
-*/*/README.rst
-*/*/UPGRADE.md
-*/*/UPGRADE-*.md
-*/*/CONTRIBUTING.md
-*/*/SECURITY.md
+*/**/README.md
+*/**/README.rst
+*/**/UPGRADE.md
+*/**/UPGRADING.md
+*/**/UPGRADE-*.md
+*/**/CONTRIBUTING.md
+*/**/SECURITY.md
+*/**/RELEASE.md
 # ignore codestyle tools config
 */*/psalm.xml
 */*/psalm.baseline.xml
@@ -71,9 +73,10 @@ giggsey/locale/CLDR-VERSION.txt
 guzzlehttp/guzzle/build/
 guzzlehttp/guzzle/docs/
 guzzlehttp/guzzle/MAKEFILE
-guzzlehttp/guzzle/UPGRADING.md
 
 justinrainbow/json-schema/demo
+
+masterminds/html5/CREDITS
 
 mexitek/phpcolors/demo
 
@@ -83,10 +86,6 @@ nikic/php-parser/test/
 nikic/php-parser/test_old/
 nikic/php-parser/grammar/analyze.php
 nikic/php-parser/grammar/rebuildParser.php
-nikic/php-parser/UPGRADE-1.0.md
-nikic/php-parser/UPGRADE-2.0.md
-nikic/php-parser/UPGRADE-3.0.md
-nikic/php-parser/UPGRADE-4.0.md
 nikic/php-parser/grammar/parser.template
 nikic/php-parser/grammar/php5.y
 nikic/php-parser/grammar/php7.y
