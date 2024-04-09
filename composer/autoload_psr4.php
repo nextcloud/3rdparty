@@ -7,7 +7,7 @@ $baseDir = $vendorDir;
 
 return array(
     'wapmorgan\\Mp3Info\\' => array($vendorDir . '/wapmorgan/mp3info/src'),
-    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
     'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php-lite/src'),
     'kornrunner\\Blurhash\\' => array($vendorDir . '/kornrunner/blurhash/src'),
@@ -58,6 +58,7 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'OpenStack\\' => array($vendorDir . '/php-opencloud/openstack/src'),
     'Nextcloud\\LogNormalizer\\' => array($vendorDir . '/nextcloud/lognormalizer/src'),
     'MicrosoftAzure\\Storage\\Common\\' => array($vendorDir . '/microsoft/azure-storage-common/src/Common'),
