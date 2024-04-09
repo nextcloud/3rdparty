@@ -39,7 +39,7 @@
 		"pear/pear-core-minimal": "^1.10",
 		"php-http/guzzle7-adapter": "^1.0.0",
 		"php-opencloud/openstack": "^3.1",
-		"phpseclib/phpseclib": "^2.0.45",
+		"phpseclib/phpseclib": "^3.0.37",
 		"pimple/pimple": "^3.5.0",
 		"psr/clock": "^1.0",
 		"psr/container": "^2.0.2",
