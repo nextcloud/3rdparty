@@ -2,103 +2,122 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn;
 
+use InvalidArgumentException;
 use JsonSerializable;
 use Webauthn\AuthenticationExtensions\AuthenticationExtension;
+use Webauthn\AuthenticationExtensions\AuthenticationExtensions;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientInputs;
 
 abstract class PublicKeyCredentialOptions implements JsonSerializable
 {
-    /**
-     * @var string
-     */
-    protected $challenge;
+    public AuthenticationExtensions $extensions;
 
     /**
-     * @var int|null
+     * @param positive-int|null $timeout
+     * @param null|AuthenticationExtensions|array<string|int, mixed|AuthenticationExtensions> $extensions
+     * @protected
      */
-    protected $timeout;
-
-    /**
-     * @var AuthenticationExtensionsClientInputs
-     */
-    protected $extensions;
-
-    public function __construct(string $challenge, ?int $timeout = null, ?AuthenticationExtensionsClientInputs $extensions = null)
-    {
-        if (null !== $timeout) {
-            @trigger_error('The argument "timeout" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setTimeout".', E_USER_DEPRECATED);
+    public function __construct(
+        public readonly string $challenge,
+        public null|int $timeout = null,
+        null|array|AuthenticationExtensions $extensions = null,
+    ) {
+        ($this->timeout === null || $this->timeout > 0) || throw new InvalidArgumentException('Invalid timeout');
+        if ($extensions === null) {
+            $this->extensions = AuthenticationExtensionsClientInputs::create();
+        } elseif ($extensions instanceof AuthenticationExtensions) {
+            $this->extensions = $extensions;
+        } else {
+            $this->extensions = AuthenticationExtensions::create($extensions);
         }
-        if (null !== $extensions) {
-            @trigger_error('The argument "extensions" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "addExtension" or "addExtensions".', E_USER_DEPRECATED);
-        }
-        $this->challenge = $challenge;
-        $this->setTimeout($timeout);
-        $this->extensions = $extensions ?? new AuthenticationExtensionsClientInputs();
     }
 
-    public function setTimeout(?int $timeout): self
+    /**
+     * @deprecated since 4.7.0. Please use the {self::create} instead.
+     * @infection-ignore-all
+     */
+    public function setTimeout(?int $timeout): static
     {
         $this->timeout = $timeout;
 
         return $this;
     }
 
-    public function addExtension(AuthenticationExtension $extension): self
+    /**
+     * @deprecated since 4.7.0. Please use the {self::create} instead.
+     * @infection-ignore-all
+     */
+    public function addExtension(AuthenticationExtension $extension): static
     {
-        $this->extensions->add($extension);
+        $this->extensions[$extension->name] = $extension;
 
         return $this;
     }
 
     /**
      * @param AuthenticationExtension[] $extensions
+     * @deprecated since 4.7.0. No replacement. Please use the {self::create} instead.
+     * @infection-ignore-all
      */
-    public function addExtensions(array $extensions): self
+    public function addExtensions(array $extensions): static
     {
         foreach ($extensions as $extension) {
-            $this->addExtension($extension);
+            $this->extensions[$extension->name] = $extension;
         }
 
         return $this;
     }
 
-    public function setExtensions(AuthenticationExtensionsClientInputs $extensions): self
+    /**
+     * @deprecated since 4.7.0. Please use the {self::create} instead.
+     * @infection-ignore-all
+     */
+    public function setExtensions(AuthenticationExtensions $extensions): static
     {
         $this->extensions = $extensions;
 
         return $this;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getChallenge(): string
     {
         return $this->challenge;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getTimeout(): ?int
     {
         return $this->timeout;
     }
 
-    public function getExtensions(): AuthenticationExtensionsClientInputs
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
+    public function getExtensions(): AuthenticationExtensions
     {
         return $this->extensions;
     }
 
-    abstract public static function createFromString(string $data): self;
+    /**
+     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
+     * @infection-ignore-all
+     */
+    abstract public static function createFromString(string $data): static;
 
     /**
      * @param mixed[] $json
+     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
+     * @infection-ignore-all
      */
-    abstract public static function createFromArray(array $json): self;
+    abstract public static function createFromArray(array $json): static;
 }

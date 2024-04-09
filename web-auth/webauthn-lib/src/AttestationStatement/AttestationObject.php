@@ -2,76 +2,79 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn\AttestationStatement;
 
 use Webauthn\AuthenticatorData;
-use Webauthn\MetadataService\MetadataStatement;
+use Webauthn\MetadataService\Statement\MetadataStatement;
 
 class AttestationObject
 {
-    /**
-     * @var string
-     */
-    private $rawAttestationObject;
-    /**
-     * @var AttestationStatement
-     */
-    private $attStmt;
-    /**
-     * @var AuthenticatorData
-     */
-    private $authData;
+    public ?MetadataStatement $metadataStatement = null;
 
-    /**
-     * @var MetadataStatement|null
-     */
-    private $metadataStatement;
-
-    public function __construct(string $rawAttestationObject, AttestationStatement $attStmt, AuthenticatorData $authData, ?MetadataStatement $metadataStatement = null)
-    {
-        if (null !== $metadataStatement) {
-            @trigger_error('The argument "metadataStatement" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setMetadataStatement".', E_USER_DEPRECATED);
-        }
-        $this->rawAttestationObject = $rawAttestationObject;
-        $this->attStmt = $attStmt;
-        $this->authData = $authData;
-        $this->metadataStatement = $metadataStatement;
+    public function __construct(
+        public readonly string $rawAttestationObject,
+        public AttestationStatement $attStmt,
+        public readonly AuthenticatorData $authData
+    ) {
     }
 
+    public static function create(
+        string $rawAttestationObject,
+        AttestationStatement $attStmt,
+        AuthenticatorData $authData
+    ): self {
+        return new self($rawAttestationObject, $attStmt, $authData);
+    }
+
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getRawAttestationObject(): string
     {
         return $this->rawAttestationObject;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getAttStmt(): AttestationStatement
     {
         return $this->attStmt;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function setAttStmt(AttestationStatement $attStmt): void
     {
         $this->attStmt = $attStmt;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getAuthData(): AuthenticatorData
     {
         return $this->authData;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getMetadataStatement(): ?MetadataStatement
     {
         return $this->metadataStatement;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function setMetadataStatement(MetadataStatement $metadataStatement): self
     {
         $this->metadataStatement = $metadataStatement;

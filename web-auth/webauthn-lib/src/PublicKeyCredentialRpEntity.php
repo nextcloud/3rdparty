@@ -2,32 +2,30 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn;
 
-use Assert\Assertion;
+use Webauthn\Exception\InvalidDataException;
+use function array_key_exists;
 
 class PublicKeyCredentialRpEntity extends PublicKeyCredentialEntity
 {
-    /**
-     * @var string|null
-     */
-    protected $id;
-
-    public function __construct(string $name, ?string $id = null, ?string $icon = null)
-    {
+    public function __construct(
+        string $name,
+        public readonly ?string $id = null,
+        ?string $icon = null
+    ) {
         parent::__construct($name, $icon);
-        $this->id = $id;
     }
 
+    public static function create(string $name, ?string $id = null, ?string $icon = null): self
+    {
+        return new self($name, $id, $icon);
+    }
+
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getId(): ?string
     {
         return $this->id;
@@ -35,16 +33,17 @@ class PublicKeyCredentialRpEntity extends PublicKeyCredentialEntity
 
     /**
      * @param mixed[] $json
+     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
+     * @infection-ignore-all
      */
     public static function createFromArray(array $json): self
     {
-        Assertion::keyExists($json, 'name', 'Invalid input. "name" is missing.');
-
-        return new self(
-            $json['name'],
-            $json['id'] ?? null,
-            $json['icon'] ?? null
+        array_key_exists('name', $json) || throw InvalidDataException::create(
+            $json,
+            'Invalid input. "name" is missing.'
         );
+
+        return self::create($json['name'], $json['id'] ?? null, $json['icon'] ?? null);
     }
 
     /**
@@ -53,7 +52,7 @@ class PublicKeyCredentialRpEntity extends PublicKeyCredentialEntity
     public function jsonSerialize(): array
     {
         $json = parent::jsonSerialize();
-        if (null !== $this->id) {
+        if ($this->id !== null) {
             $json['id'] = $this->id;
         }
 

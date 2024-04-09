@@ -2,28 +2,17 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn;
 
-use Assert\Assertion;
-use Base64Url\Base64Url;
-use InvalidArgumentException;
 use JsonSerializable;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
-use function Safe\base64_decode;
-use function Safe\sprintf;
+use ParagonIE\ConstantTime\Base64UrlSafe;
+use Symfony\Component\Uid\Uuid;
 use Throwable;
+use Webauthn\Exception\InvalidDataException;
 use Webauthn\TrustPath\TrustPath;
 use Webauthn\TrustPath\TrustPathLoader;
+use function array_key_exists;
+use function in_array;
 
 /**
  * @see https://www.w3.org/TR/webauthn/#iface-pkcredential
@@ -31,72 +20,67 @@ use Webauthn\TrustPath\TrustPathLoader;
 class PublicKeyCredentialSource implements JsonSerializable
 {
     /**
-     * @var string
+     * @private
+     * @param string[] $transports
+     * @param array<string, mixed>|null $otherUI
      */
-    protected $publicKeyCredentialId;
-
-    /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var string[]
-     */
-    protected $transports;
-
-    /**
-     * @var string
-     */
-    protected $attestationType;
-
-    /**
-     * @var TrustPath
-     */
-    protected $trustPath;
-
-    /**
-     * @var UuidInterface
-     */
-    protected $aaguid;
-
-    /**
-     * @var string
-     */
-    protected $credentialPublicKey;
-
-    /**
-     * @var string
-     */
-    protected $userHandle;
-
-    /**
-     * @var int
-     */
-    protected $counter;
-
-    /**
-     * @var array|null
-     */
-    protected $otherUI;
+    public function __construct(
+        public string $publicKeyCredentialId,
+        public string $type,
+        public array $transports,
+        public string $attestationType,
+        public TrustPath $trustPath,
+        public Uuid $aaguid,
+        public string $credentialPublicKey,
+        public string $userHandle,
+        public int $counter,
+        public ?array $otherUI = null,
+        public ?bool $backupEligible = null,
+        public ?bool $backupStatus = null,
+        public ?bool $uvInitialized = null,
+    ) {
+    }
 
     /**
      * @param string[] $transports
+     * @param array<string, mixed>|null $otherUI
      */
-    public function __construct(string $publicKeyCredentialId, string $type, array $transports, string $attestationType, TrustPath $trustPath, UuidInterface $aaguid, string $credentialPublicKey, string $userHandle, int $counter, ?array $otherUI = null)
-    {
-        $this->publicKeyCredentialId = $publicKeyCredentialId;
-        $this->type = $type;
-        $this->transports = $transports;
-        $this->aaguid = $aaguid;
-        $this->credentialPublicKey = $credentialPublicKey;
-        $this->userHandle = $userHandle;
-        $this->counter = $counter;
-        $this->attestationType = $attestationType;
-        $this->trustPath = $trustPath;
-        $this->otherUI = $otherUI;
+    public static function create(
+        string $publicKeyCredentialId,
+        string $type,
+        array $transports,
+        string $attestationType,
+        TrustPath $trustPath,
+        Uuid $aaguid,
+        string $credentialPublicKey,
+        string $userHandle,
+        int $counter,
+        ?array $otherUI = null,
+        ?bool $backupEligible = null,
+        ?bool $backupStatus = null,
+        ?bool $uvInitialized = null,
+    ): self {
+        return new self(
+            $publicKeyCredentialId,
+            $type,
+            $transports,
+            $attestationType,
+            $trustPath,
+            $aaguid,
+            $credentialPublicKey,
+            $userHandle,
+            $counter,
+            $otherUI,
+            $backupEligible,
+            $backupStatus,
+            $uvInitialized
+        );
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getPublicKeyCredentialId(): string
     {
         return $this->publicKeyCredentialId;
@@ -104,18 +88,22 @@ class PublicKeyCredentialSource implements JsonSerializable
 
     public function getPublicKeyCredentialDescriptor(): PublicKeyCredentialDescriptor
     {
-        return new PublicKeyCredentialDescriptor(
-            $this->type,
-            $this->publicKeyCredentialId,
-            $this->transports
-        );
+        return PublicKeyCredentialDescriptor::create($this->type, $this->publicKeyCredentialId, $this->transports);
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getAttestationType(): string
     {
         return $this->attestationType;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getTrustPath(): TrustPath
     {
         return $this->trustPath;
@@ -123,13 +111,13 @@ class PublicKeyCredentialSource implements JsonSerializable
 
     public function getAttestedCredentialData(): AttestedCredentialData
     {
-        return new AttestedCredentialData(
-            $this->aaguid,
-            $this->publicKeyCredentialId,
-            $this->credentialPublicKey
-        );
+        return AttestedCredentialData::create($this->aaguid, $this->publicKeyCredentialId, $this->credentialPublicKey);
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getType(): string
     {
         return $this->type;
@@ -137,42 +125,74 @@ class PublicKeyCredentialSource implements JsonSerializable
 
     /**
      * @return string[]
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
      */
     public function getTransports(): array
     {
         return $this->transports;
     }
 
-    public function getAaguid(): UuidInterface
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
+    public function getAaguid(): Uuid
     {
         return $this->aaguid;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getCredentialPublicKey(): string
     {
         return $this->credentialPublicKey;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getUserHandle(): string
     {
         return $this->userHandle;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getCounter(): int
     {
         return $this->counter;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function setCounter(int $counter): void
     {
         $this->counter = $counter;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getOtherUI(): ?array
     {
         return $this->otherUI;
     }
 
+    /**
+     * @param array<string, mixed>|null $otherUI
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function setOtherUI(?array $otherUI): self
     {
         $this->otherUI = $otherUI;
@@ -182,40 +202,44 @@ class PublicKeyCredentialSource implements JsonSerializable
 
     /**
      * @param mixed[] $data
+     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
+     * @infection-ignore-all
      */
     public static function createFromArray(array $data): self
     {
         $keys = array_keys(get_class_vars(self::class));
         foreach ($keys as $key) {
-            if ('otherUI' === $key) {
+            if (in_array($key, ['otherUI', 'backupEligible', 'backupStatus', 'uvInitialized'], true)) {
                 continue;
             }
-            Assertion::keyExists($data, $key, sprintf('The parameter "%s" is missing', $key));
+            array_key_exists($key, $data) || throw InvalidDataException::create($data, sprintf(
+                'The parameter "%s" is missing',
+                $key
+            ));
         }
-        switch (true) {
-            case 36 === mb_strlen($data['aaguid'], '8bit'):
-                $uuid = Uuid::fromString($data['aaguid']);
-                break;
-            default: // Kept for compatibility with old format
-                $decoded = base64_decode($data['aaguid'], true);
-                $uuid = Uuid::fromBytes($decoded);
-        }
+        mb_strlen((string) $data['aaguid'], '8bit') === 36 || throw InvalidDataException::create(
+            $data,
+            'Invalid AAGUID'
+        );
+        $uuid = Uuid::fromString($data['aaguid']);
 
         try {
-            return new self(
-                Base64Url::decode($data['publicKeyCredentialId']),
+            return self::create(
+                Base64UrlSafe::decodeNoPadding($data['publicKeyCredentialId']),
                 $data['type'],
                 $data['transports'],
                 $data['attestationType'],
                 TrustPathLoader::loadTrustPath($data['trustPath']),
                 $uuid,
-                Base64Url::decode($data['credentialPublicKey']),
-                Base64Url::decode($data['userHandle']),
+                Base64UrlSafe::decodeNoPadding($data['credentialPublicKey']),
+                Base64UrlSafe::decodeNoPadding($data['userHandle']),
                 $data['counter'],
-                $data['otherUI'] ?? null
+                $data['otherUI'] ?? null,
+                $data['backupEligible'] ?? null,
+                $data['backupStatus'] ?? null,
             );
         } catch (Throwable $throwable) {
-            throw new InvalidArgumentException('Unable to load the data', $throwable->getCode(), $throwable);
+            throw InvalidDataException::create($data, 'Unable to load the data', $throwable);
         }
     }
 
@@ -225,16 +249,19 @@ class PublicKeyCredentialSource implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'publicKeyCredentialId' => Base64Url::encode($this->publicKeyCredentialId),
+            'publicKeyCredentialId' => Base64UrlSafe::encodeUnpadded($this->publicKeyCredentialId),
             'type' => $this->type,
             'transports' => $this->transports,
             'attestationType' => $this->attestationType,
-            'trustPath' => $this->trustPath->jsonSerialize(),
-            'aaguid' => $this->aaguid->toString(),
-            'credentialPublicKey' => Base64Url::encode($this->credentialPublicKey),
-            'userHandle' => Base64Url::encode($this->userHandle),
+            'trustPath' => $this->trustPath,
+            'aaguid' => $this->aaguid->__toString(),
+            'credentialPublicKey' => Base64UrlSafe::encodeUnpadded($this->credentialPublicKey),
+            'userHandle' => Base64UrlSafe::encodeUnpadded($this->userHandle),
             'counter' => $this->counter,
             'otherUI' => $this->otherUI,
+            'backupEligible' => $this->backupEligible,
+            'backupStatus' => $this->backupStatus,
+            'uvInitialized' => $this->uvInitialized,
         ];
     }
 }

@@ -2,62 +2,68 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn;
 
-use Assert\Assertion;
-use Base64Url\Base64Url;
-use function count;
 use JsonSerializable;
-use function Safe\json_decode;
+use ParagonIE\ConstantTime\Base64UrlSafe;
+use Webauthn\Exception\InvalidDataException;
+use function array_key_exists;
+use function count;
+use const JSON_THROW_ON_ERROR;
 
 class PublicKeyCredentialDescriptor implements JsonSerializable
 {
-    public const CREDENTIAL_TYPE_PUBLIC_KEY = 'public-key';
+    final public const CREDENTIAL_TYPE_PUBLIC_KEY = 'public-key';
 
-    public const AUTHENTICATOR_TRANSPORT_USB = 'usb';
-    public const AUTHENTICATOR_TRANSPORT_NFC = 'nfc';
-    public const AUTHENTICATOR_TRANSPORT_BLE = 'ble';
-    public const AUTHENTICATOR_TRANSPORT_INTERNAL = 'internal';
+    final public const AUTHENTICATOR_TRANSPORT_USB = 'usb';
 
-    /**
-     * @var string
-     */
-    protected $type;
+    final public const AUTHENTICATOR_TRANSPORT_NFC = 'nfc';
 
-    /**
-     * @var string
-     */
-    protected $id;
+    final public const AUTHENTICATOR_TRANSPORT_BLE = 'ble';
 
-    /**
-     * @var string[]
-     */
-    protected $transports;
+    final public const AUTHENTICATOR_TRANSPORT_CABLE = 'cable';
+
+    final public const AUTHENTICATOR_TRANSPORT_INTERNAL = 'internal';
+
+    final public const AUTHENTICATOR_TRANSPORTS = [
+        self::AUTHENTICATOR_TRANSPORT_USB,
+        self::AUTHENTICATOR_TRANSPORT_NFC,
+        self::AUTHENTICATOR_TRANSPORT_BLE,
+        self::AUTHENTICATOR_TRANSPORT_CABLE,
+        self::AUTHENTICATOR_TRANSPORT_INTERNAL,
+    ];
 
     /**
      * @param string[] $transports
      */
-    public function __construct(string $type, string $id, array $transports = [])
-    {
-        $this->type = $type;
-        $this->id = $id;
-        $this->transports = $transports;
+    public function __construct(
+        public readonly string $type,
+        public readonly string $id,
+        public readonly array $transports = []
+    ) {
     }
 
+    /**
+     * @param string[] $transports
+     */
+    public static function create(string $type, string $id, array $transports = []): self
+    {
+        return new self($type, $id, $transports);
+    }
+
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getId(): string
     {
         return $this->id;
@@ -65,6 +71,8 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
 
     /**
      * @return string[]
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
      */
     public function getTransports(): array
     {
@@ -73,8 +81,7 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
 
     public static function createFromString(string $data): self
     {
-        $data = json_decode($data, true);
-        Assertion::isArray($data, 'Invalid data');
+        $data = json_decode($data, true, flags: JSON_THROW_ON_ERROR);
 
         return self::createFromArray($data);
     }
@@ -84,14 +91,15 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
      */
     public static function createFromArray(array $json): self
     {
-        Assertion::keyExists($json, 'type', 'Invalid input. "type" is missing.');
-        Assertion::keyExists($json, 'id', 'Invalid input. "id" is missing.');
-
-        return new self(
-            $json['type'],
-            Base64Url::decode($json['id']),
-            $json['transports'] ?? []
+        array_key_exists('type', $json) || throw InvalidDataException::create(
+            $json,
+            'Invalid input. "type" is missing.'
         );
+        array_key_exists('id', $json) || throw InvalidDataException::create($json, 'Invalid input. "id" is missing.');
+
+        $id = Base64UrlSafe::decodeNoPadding($json['id']);
+
+        return self::create($json['type'], $id, $json['transports'] ?? []);
     }
 
     /**
@@ -101,9 +109,9 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
     {
         $json = [
             'type' => $this->type,
-            'id' => Base64Url::encode($this->id),
+            'id' => Base64UrlSafe::encodeUnpadded($this->id),
         ];
-        if (0 !== count($this->transports)) {
+        if (count($this->transports) !== 0) {
             $json['transports'] = $this->transports;
         }
 

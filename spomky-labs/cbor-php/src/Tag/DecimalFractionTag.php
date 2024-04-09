@@ -2,96 +2,81 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2018-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace CBOR\Tag;
 
 use CBOR\CBORObject;
 use CBOR\ListObject;
-use CBOR\SignedIntegerObject;
-use CBOR\TagObject as Base;
+use CBOR\NegativeIntegerObject;
+use CBOR\Normalizable;
+use CBOR\Tag;
 use CBOR\UnsignedIntegerObject;
-use function count;
-use function extension_loaded;
 use InvalidArgumentException;
 use RuntimeException;
+use function count;
+use function extension_loaded;
 
-final class DecimalFractionTag extends Base
+final class DecimalFractionTag extends Tag implements Normalizable
 {
-    public function __construct(CBORObject $object)
+    public function __construct(int $additionalInformation, ?string $data, CBORObject $object)
     {
-        if (!extension_loaded('bcmath')) {
+        if (! extension_loaded('bcmath')) {
             throw new RuntimeException('The extension "bcmath" is required to use this tag');
         }
-        if (!$object instanceof ListObject || 2 !== count($object)) {
-            throw new InvalidArgumentException('This tag only accepts a ListObject object that contains an exponent and a mantissa.');
+        if (! $object instanceof ListObject || count($object) !== 2) {
+            throw new InvalidArgumentException(
+                'This tag only accepts a ListObject object that contains an exponent and a mantissa.'
+            );
         }
         $e = $object->get(0);
-        if (!$e instanceof UnsignedIntegerObject && !$e instanceof SignedIntegerObject) {
+        if (! $e instanceof UnsignedIntegerObject && ! $e instanceof NegativeIntegerObject) {
             throw new InvalidArgumentException('The exponent must be a Signed Integer or an Unsigned Integer object.');
         }
         $m = $object->get(1);
-        if (!$m instanceof UnsignedIntegerObject && !$m instanceof SignedIntegerObject && !$m instanceof NegativeBigIntegerTag && !$m instanceof PositiveBigIntegerTag) {
-            throw new InvalidArgumentException('The mantissa must be a Positive or Negative Signed Integer or an Unsigned Integer object.');
+        if (! $m instanceof UnsignedIntegerObject && ! $m instanceof NegativeIntegerObject && ! $m instanceof NegativeBigIntegerTag && ! $m instanceof UnsignedBigIntegerTag) {
+            throw new InvalidArgumentException(
+                'The mantissa must be a Positive or Negative Signed Integer or an Unsigned Integer object.'
+            );
         }
 
-        parent::__construct(4, null, $object);
+        parent::__construct($additionalInformation, $data, $object);
+    }
+
+    public static function create(CBORObject $object): self
+    {
+        [$ai, $data] = self::determineComponents(self::TAG_DECIMAL_FRACTION);
+
+        return new self($ai, $data, $object);
     }
 
     public static function getTagId(): int
     {
-        return 4;
+        return self::TAG_DECIMAL_FRACTION;
     }
 
-    public static function createFromLoadedData(int $additionalInformation, ?string $data, CBORObject $object): Base
+    public static function createFromLoadedData(int $additionalInformation, ?string $data, CBORObject $object): Tag
     {
-        return new self($object);
+        return new self($additionalInformation, $data, $object);
     }
 
-    public static function createFromExponentAndMantissa(CBORObject $e, CBORObject $m): Base
+    public static function createFromExponentAndMantissa(CBORObject $e, CBORObject $m): Tag
     {
-        $object = new ListObject();
-        $object->add($e);
-        $object->add($m);
+        $object = ListObject::create()
+            ->add($e)
+            ->add($m)
+        ;
 
-        return new self($object);
+        return self::create($object);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false)
+    public function normalize()
     {
-        if ($ignoreTags) {
-            return $this->object->getNormalizedData($ignoreTags);
-        }
+        /** @var ListObject $object */
+        $object = $this->object;
+        /** @var UnsignedIntegerObject|NegativeIntegerObject $e */
+        $e = $object->get(0);
+        /** @var UnsignedIntegerObject|NegativeIntegerObject|NegativeBigIntegerTag|UnsignedBigIntegerTag $m */
+        $m = $object->get(1);
 
-        if (!$this->object instanceof ListObject || 2 !== count($this->object)) {
-            return $this->object->getNormalizedData($ignoreTags);
-        }
-        $e = $this->object->get(0);
-        $m = $this->object->get(1);
-
-        if (!$e instanceof UnsignedIntegerObject && !$e instanceof SignedIntegerObject) {
-            return $this->object->getNormalizedData($ignoreTags);
-        }
-        if (!$m instanceof UnsignedIntegerObject && !$m instanceof SignedIntegerObject && !$m instanceof NegativeBigIntegerTag && !$m instanceof PositiveBigIntegerTag) {
-            return $this->object->getNormalizedData($ignoreTags);
-        }
-
-        return rtrim(
-            bcmul(
-                $m->getNormalizedData($ignoreTags),
-                bcpow(
-                    '10',
-                    $e->getNormalizedData($ignoreTags),
-                    100),
-                100),
-            '0'
-        );
+        return rtrim(bcmul($m->normalize(), bcpow('10', $e->normalize(), 100), 100), '0');
     }
 }
