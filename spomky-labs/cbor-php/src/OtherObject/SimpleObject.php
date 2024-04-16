@@ -2,55 +2,71 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2018-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace CBOR\OtherObject;
 
+use CBOR\Normalizable;
 use CBOR\OtherObject as Base;
 use CBOR\Utils;
-use function chr;
 use InvalidArgumentException;
+use function chr;
+use function ord;
 
-final class SimpleObject extends Base
+final class SimpleObject extends Base implements Normalizable
 {
     public static function supportedAdditionalInformation(): array
     {
-        return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24];
+        return array_merge(range(0, 19), [24]);
+    }
+
+    public static function create(int $value): self|FalseObject|TrueObject|NullObject|UndefinedObject
+    {
+        switch (true) {
+            case $value >= 0 && $value <= 19:
+                return new self($value, null);
+            case $value === 20:
+                return FalseObject::create();
+            case $value === 21:
+                return TrueObject::create();
+            case $value === 22:
+                return NullObject::create();
+            case $value === 23:
+                return UndefinedObject::create();
+            case $value <= 31:
+                throw new InvalidArgumentException('Invalid simple value. Shall be between 32 and 255.');
+            case $value <= 255:
+                return new self(24, chr($value));
+            default:
+                throw new InvalidArgumentException('The value is not a valid simple value.');
+        }
     }
 
     public static function createFromLoadedData(int $additionalInformation, ?string $data): Base
     {
+        if ($additionalInformation === 24) {
+            if ($data === null) {
+                throw new InvalidArgumentException('Invalid simple value. Content data is missing.');
+            }
+            if (mb_strlen($data, '8bit') !== 1) {
+                throw new InvalidArgumentException('Invalid simple value. Content data is too long.');
+            }
+            if (ord($data) < 32) {
+                throw new InvalidArgumentException('Invalid simple value. Content data must be between 32 and 255.');
+            }
+        } elseif ($additionalInformation < 20) {
+            if ($data !== null) {
+                throw new InvalidArgumentException('Invalid simple value. Content data should not be present.');
+            }
+        }
+
         return new self($additionalInformation, $data);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false)
+    public function normalize(): int
     {
-        if (null === $this->data) {
+        if ($this->data === null) {
             return $this->getAdditionalInformation();
         }
 
         return Utils::binToInt($this->data);
-    }
-
-    /**
-     * @return SimpleObject
-     */
-    public static function create(int $value): self
-    {
-        switch (true) {
-            case $value < 24:
-                return new self($value, null);
-            case $value < 256:
-                return new self(24, chr($value));
-            default:
-                throw new InvalidArgumentException('The value is not a valid simple value');
-        }
     }
 }

@@ -2,42 +2,31 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn;
 
 use JsonSerializable;
 
 abstract class PublicKeyCredentialEntity implements JsonSerializable
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string|null
-     */
-    protected $icon;
-
-    public function __construct(string $name, ?string $icon)
-    {
-        $this->name = $name;
-        $this->icon = $icon;
+    public function __construct(
+        public readonly string $name,
+        public readonly ?string $icon
+    ) {
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getIcon(): ?string
     {
         return $this->icon;
@@ -51,7 +40,7 @@ abstract class PublicKeyCredentialEntity implements JsonSerializable
         $json = [
             'name' => $this->name,
         ];
-        if (null !== $this->icon) {
+        if ($this->icon !== null) {
             $json['icon'] = $this->icon;
         }
 

@@ -2,71 +2,79 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn;
 
-use Assert\Assertion;
-use Base64Url\Base64Url;
-use function count;
-use function Safe\json_decode;
+use ParagonIE\ConstantTime\Base64UrlSafe;
+use Webauthn\AuthenticationExtensions\AuthenticationExtensions;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientInputs;
+use Webauthn\Exception\InvalidDataException;
+use Webauthn\Util\Base64;
+use function array_key_exists;
+use function count;
+use function in_array;
+use const JSON_THROW_ON_ERROR;
 
-class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
+final class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
 {
+    public const USER_VERIFICATION_REQUIREMENT_DEFAULT = null;
+
     public const USER_VERIFICATION_REQUIREMENT_REQUIRED = 'required';
+
     public const USER_VERIFICATION_REQUIREMENT_PREFERRED = 'preferred';
+
     public const USER_VERIFICATION_REQUIREMENT_DISCOURAGED = 'discouraged';
 
-    /**
-     * @var string|null
-     */
-    private $rpId;
+    public const USER_VERIFICATION_REQUIREMENTS = [
+        self::USER_VERIFICATION_REQUIREMENT_DEFAULT,
+        self::USER_VERIFICATION_REQUIREMENT_REQUIRED,
+        self::USER_VERIFICATION_REQUIREMENT_PREFERRED,
+        self::USER_VERIFICATION_REQUIREMENT_DISCOURAGED,
+    ];
 
     /**
-     * @var PublicKeyCredentialDescriptor[]
+     * @private
+     * @param PublicKeyCredentialDescriptor[] $allowCredentials
+     * @param null|AuthenticationExtensions|array<string|int, mixed|AuthenticationExtensions> $extensions
      */
-    private $allowCredentials = [];
-
-    /**
-     * @var string|null
-     */
-    private $userVerification;
+    public function __construct(
+        string $challenge,
+        public null|string $rpId = null,
+        public array $allowCredentials = [],
+        public null|string $userVerification = null,
+        null|int $timeout = null,
+        null|array|AuthenticationExtensions $extensions = null,
+    ) {
+        in_array($userVerification, self::USER_VERIFICATION_REQUIREMENTS, true) || throw InvalidDataException::create(
+            $userVerification,
+            'Invalid user verification requirement'
+        );
+        parent::__construct(
+            $challenge,
+            $timeout,
+            $extensions
+        );
+    }
 
     /**
      * @param PublicKeyCredentialDescriptor[] $allowCredentials
+     * @param positive-int $timeout
+     * @param null|AuthenticationExtensions|array<string|int, mixed|AuthenticationExtensions> $extensions
      */
-    public function __construct(string $challenge, ?int $timeout = null, ?string $rpId = null, array $allowCredentials = [], ?string $userVerification = null, ?AuthenticationExtensionsClientInputs $extensions = null)
-    {
-        if (0 !== count($allowCredentials)) {
-            @trigger_error('The argument "allowCredentials" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "addAllowedCredentials" or "addAllowedCredential".', E_USER_DEPRECATED);
-        }
-        if (null !== $rpId) {
-            @trigger_error('The argument "rpId" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setRpId".', E_USER_DEPRECATED);
-        }
-        if (null !== $userVerification) {
-            @trigger_error('The argument "userVerification" is deprecated since version 3.3 and will be removed in 4.0. Please use the method "setUserVerification".', E_USER_DEPRECATED);
-        }
-        parent::__construct($challenge, $timeout, $extensions);
-        $this
-            ->setRpId($rpId)
-            ->allowCredentials($allowCredentials)
-            ->setUserVerification($userVerification)
-        ;
+    public static function create(
+        string $challenge,
+        null|string $rpId = null,
+        array $allowCredentials = [],
+        null|string $userVerification = null,
+        null|int $timeout = null,
+        null|array|AuthenticationExtensions $extensions = null,
+    ): self {
+        return new self($challenge, $rpId, $allowCredentials, $userVerification, $timeout, $extensions);
     }
 
-    public static function create(string $challenge): self
-    {
-        return new self($challenge);
-    }
-
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function setRpId(?string $rpId): self
     {
         $this->rpId = $rpId;
@@ -74,6 +82,10 @@ class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
         return $this;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function allowCredential(PublicKeyCredentialDescriptor $allowCredential): self
     {
         $this->allowCredentials[] = $allowCredential;
@@ -82,34 +94,43 @@ class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
     }
 
     /**
-     * @param PublicKeyCredentialDescriptor[] $allowCredentials
+     * @deprecated since 4.7.0. No replacement. Please use the property directly.
+     * @infection-ignore-all
      */
-    public function allowCredentials(array $allowCredentials): self
+    public function allowCredentials(PublicKeyCredentialDescriptor ...$allowCredentials): self
     {
         foreach ($allowCredentials as $allowCredential) {
-            $this->allowCredential($allowCredential);
+            $this->allowCredentials[] = $allowCredential;
         }
 
         return $this;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function setUserVerification(?string $userVerification): self
     {
-        if (null === $userVerification) {
+        if ($userVerification === null) {
             $this->rpId = null;
 
             return $this;
         }
-        Assertion::inArray($userVerification, [
+        in_array($userVerification, [
             self::USER_VERIFICATION_REQUIREMENT_REQUIRED,
             self::USER_VERIFICATION_REQUIREMENT_PREFERRED,
             self::USER_VERIFICATION_REQUIREMENT_DISCOURAGED,
-        ], 'Invalid user verification requirement');
+        ], true) || throw InvalidDataException::create($userVerification, 'Invalid user verification requirement');
         $this->userVerification = $userVerification;
 
         return $this;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getRpId(): ?string
     {
         return $this->rpId;
@@ -117,31 +138,45 @@ class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
 
     /**
      * @return PublicKeyCredentialDescriptor[]
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
      */
     public function getAllowCredentials(): array
     {
         return $this->allowCredentials;
     }
 
+    /**
+     * @deprecated since 4.7.0. Please use the property directly.
+     * @infection-ignore-all
+     */
     public function getUserVerification(): ?string
     {
         return $this->userVerification;
     }
 
-    public static function createFromString(string $data): PublicKeyCredentialOptions
+    /**
+     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
+     * @infection-ignore-all
+     */
+    public static function createFromString(string $data): static
     {
-        $data = json_decode($data, true);
-        Assertion::isArray($data, 'Invalid data');
+        $data = json_decode($data, true, flags: JSON_THROW_ON_ERROR);
 
         return self::createFromArray($data);
     }
 
     /**
      * @param mixed[] $json
+     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
+     * @infection-ignore-all
      */
-    public static function createFromArray(array $json): PublicKeyCredentialOptions
+    public static function createFromArray(array $json): static
     {
-        Assertion::keyExists($json, 'challenge', 'Invalid input. "challenge" is missing.');
+        array_key_exists('challenge', $json) || throw InvalidDataException::create(
+            $json,
+            'Invalid input. "challenge" is missing.'
+        );
 
         $allowCredentials = [];
         $allowCredentialList = $json['allowCredentials'] ?? [];
@@ -149,13 +184,19 @@ class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
             $allowCredentials[] = PublicKeyCredentialDescriptor::createFromArray($allowCredential);
         }
 
-        return self::create(Base64Url::decode($json['challenge']))
-            ->setRpId($json['rpId'] ?? null)
-            ->allowCredentials($allowCredentials)
-            ->setUserVerification($json['userVerification'] ?? null)
-            ->setTimeout($json['timeout'] ?? null)
-            ->setExtensions(isset($json['extensions']) ? AuthenticationExtensionsClientInputs::createFromArray($json['extensions']) : new AuthenticationExtensionsClientInputs())
-        ;
+        $challenge = Base64::decode($json['challenge']);
+        $extensions = isset($json['extensions']) ? AuthenticationExtensionsClientInputs::createFromArray(
+            $json['extensions']
+        ) : AuthenticationExtensionsClientInputs::create();
+
+        return self::create(
+            $challenge,
+            $json['rpId'] ?? null,
+            $allowCredentials,
+            $json['userVerification'] ?? null,
+            $json['timeout'] ?? null,
+            $extensions
+        );
     }
 
     /**
@@ -164,28 +205,26 @@ class PublicKeyCredentialRequestOptions extends PublicKeyCredentialOptions
     public function jsonSerialize(): array
     {
         $json = [
-            'challenge' => Base64Url::encode($this->challenge),
+            'challenge' => Base64UrlSafe::encodeUnpadded($this->challenge),
         ];
 
-        if (null !== $this->rpId) {
+        if ($this->rpId !== null) {
             $json['rpId'] = $this->rpId;
         }
 
-        if (null !== $this->userVerification) {
+        if ($this->userVerification !== null) {
             $json['userVerification'] = $this->userVerification;
         }
 
-        if (0 !== count($this->allowCredentials)) {
-            $json['allowCredentials'] = array_map(static function (PublicKeyCredentialDescriptor $object): array {
-                return $object->jsonSerialize();
-            }, $this->allowCredentials);
+        if (count($this->allowCredentials) !== 0) {
+            $json['allowCredentials'] = $this->allowCredentials;
         }
 
-        if (0 !== $this->extensions->count()) {
-            $json['extensions'] = $this->extensions->jsonSerialize();
+        if ($this->extensions->count() !== 0) {
+            $json['extensions'] = $this->extensions;
         }
 
-        if (null !== $this->timeout) {
+        if ($this->timeout !== null) {
             $json['timeout'] = $this->timeout;
         }
 

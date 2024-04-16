@@ -2,27 +2,21 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2018-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace CBOR\OtherObject;
 
 use Brick\Math\BigInteger;
+use CBOR\Normalizable;
 use CBOR\OtherObject as Base;
 use CBOR\Utils;
 use InvalidArgumentException;
+use const INF;
+use const NAN;
 
-final class DoublePrecisionFloatObject extends Base
+final class DoublePrecisionFloatObject extends Base implements Normalizable
 {
     public static function supportedAdditionalInformation(): array
     {
-        return [27];
+        return [self::OBJECT_DOUBLE_PRECISION_FLOAT];
     }
 
     public static function createFromLoadedData(int $additionalInformation, ?string $data): Base
@@ -30,30 +24,27 @@ final class DoublePrecisionFloatObject extends Base
         return new self($additionalInformation, $data);
     }
 
-    /**
-     * @return DoublePrecisionFloatObject
-     */
     public static function create(string $value): self
     {
-        if (8 !== mb_strlen($value, '8bit')) {
+        if (mb_strlen($value, '8bit') !== 8) {
             throw new InvalidArgumentException('The value is not a valid double precision floating point');
         }
 
-        return new self(27, $value);
+        return new self(self::OBJECT_DOUBLE_PRECISION_FLOAT, $value);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false)
+    public function normalize(): float|int
     {
-        $exp = $this->getExponent();
-        $mant = $this->getMantissa();
+        $exponent = $this->getExponent();
+        $mantissa = $this->getMantissa();
         $sign = $this->getSign();
 
-        if (0 === $exp) {
-            $val = $mant * 2 ** (-(1022 + 52));
-        } elseif (0b11111111111 !== $exp) {
-            $val = ($mant + (1 << 52)) * 2 ** ($exp - (1023 + 52));
+        if ($exponent === 0) {
+            $val = $mantissa * 2 ** (-(1022 + 52));
+        } elseif ($exponent !== 0b11111111111) {
+            $val = ($mantissa + (1 << 52)) * 2 ** ($exponent - (1023 + 52));
         } else {
-            $val = 0 === $mant ? INF : NAN;
+            $val = $mantissa === 0 ? INF : NAN;
         }
 
         return $sign * $val;

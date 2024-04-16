@@ -2,22 +2,14 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace Webauthn\CertificateChainChecker;
 
-interface CertificateChainChecker
+use Webauthn\MetadataService\CertificateChain\CertificateChainValidator;
+
+/**
+ * @deprecated since v4.1. Please use Webauthn\MetadataService\CertificateChainChecker\CertificateChainValidator instead
+ * @infection-ignore-all
+ */
+interface CertificateChainChecker extends CertificateChainValidator
 {
-    /**
-     * @param string[] $authenticatorCertificates
-     * @param string[] $trustedCertificates
-     */
-    public function check(array $authenticatorCertificates, array $trustedCertificates): void;
 }

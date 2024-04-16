@@ -2,34 +2,22 @@
 
 declare(strict_types=1);
 
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2018-2020 Spomky-Labs
- *
- * This software may be modified and distributed under the terms
- * of the MIT license.  See the LICENSE file for details.
- */
-
 namespace CBOR;
 
-final class TextStringObject extends AbstractCBORObject
+/**
+ * @see \CBOR\Test\TextStringObjectTest
+ */
+final class TextStringObject extends AbstractCBORObject implements Normalizable
 {
-    private const MAJOR_TYPE = 0b011;
+    private const MAJOR_TYPE = self::MAJOR_TYPE_TEXT_STRING;
 
-    /**
-     * @var int|null
-     */
-    private $length;
+    private ?string $length = null;
 
-    /**
-     * @var string
-     */
-    private $data;
+    private string $data;
 
     public function __construct(string $data)
     {
-        list($additionalInformation, $length) = LengthCalculator::getLengthOfString($data);
+        [$additionalInformation, $length] = LengthCalculator::getLengthOfString($data);
 
         parent::__construct(self::MAJOR_TYPE, $additionalInformation);
         $this->data = $data;
@@ -39,12 +27,16 @@ final class TextStringObject extends AbstractCBORObject
     public function __toString(): string
     {
         $result = parent::__toString();
-        if (null !== $this->length) {
+        if ($this->length !== null) {
             $result .= $this->length;
         }
-        $result .= $this->data;
 
-        return $result;
+        return $result . $this->data;
+    }
+
+    public static function create(string $data): self
+    {
+        return new self($data);
     }
 
     public function getValue(): string
@@ -57,7 +49,7 @@ final class TextStringObject extends AbstractCBORObject
         return mb_strlen($this->data, 'utf8');
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): string
+    public function normalize(): string
     {
         return $this->data;
     }

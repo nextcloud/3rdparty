@@ -6,6 +6,8 @@ bin
 **/*.editorconfig
 # ignore demo files
 **/.travis.yml
+# ignore renovate configs
+**/renovate.json
 # ignore .github files
 **/*/.github
 # ignore changelogs
