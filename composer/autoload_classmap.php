@@ -1984,6 +1984,7 @@ return array(
     'OpenStack\\ObjectStore\\v1\\Service' => $vendorDir . '/php-opencloud/openstack/src/ObjectStore/v1/Service.php',
     'OpenStack\\OpenStack' => $vendorDir . '/php-opencloud/openstack/src/OpenStack.php',
     'PEAR' => $vendorDir . '/pear/pear-core-minimal/src/PEAR.php',
+    'PEAR_Error' => $vendorDir . '/pear/pear-core-minimal/src/PEAR.php',
     'PEAR_ErrorStack' => $vendorDir . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
     'PEAR_Exception' => $vendorDir . '/pear/pear_exception/PEAR/Exception.php',
     'ParagonIE\\ConstantTime\\Base32' => $vendorDir . '/paragonie/constant_time_encoding/src/Base32.php',

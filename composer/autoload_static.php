@@ -550,10 +550,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         ),
     );
 
-    public static $fallbackDirsPsr0 = array (
-        0 => __DIR__ . '/..' . '/pear/pear-core-minimal/src',
-    );
-
     public static $classMap = array (
         'AWS\\CRT\\Auth\\AwsCredentials' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Auth/AwsCredentials.php',
         'AWS\\CRT\\Auth\\CredentialsProvider' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Auth/CredentialsProvider.php',
@@ -2533,6 +2529,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'OpenStack\\ObjectStore\\v1\\Service' => __DIR__ . '/..' . '/php-opencloud/openstack/src/ObjectStore/v1/Service.php',
         'OpenStack\\OpenStack' => __DIR__ . '/..' . '/php-opencloud/openstack/src/OpenStack.php',
         'PEAR' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
+        'PEAR_Error' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
         'PEAR_ErrorStack' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'ParagonIE\\ConstantTime\\Base32' => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src/Base32.php',
@@ -4191,7 +4188,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             $loader->prefixLengthsPsr4 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652::$classMap;
 
         }, null, ClassLoader::class);
