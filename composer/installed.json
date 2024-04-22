@@ -3591,17 +3591,17 @@
         },
         {
             "name": "sabre/dav",
-            "version": "4.5.0",
-            "version_normalized": "4.5.0.0",
+            "version": "4.6.0",
+            "version_normalized": "4.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/dav.git",
-                "reference": "7e40343e473f17eab3d1d6ca4ae3e1cdfc6e0fd8"
+                "reference": "554145304b4a026477d130928d16e626939b0b2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/dav/zipball/7e40343e473f17eab3d1d6ca4ae3e1cdfc6e0fd8",
-                "reference": "7e40343e473f17eab3d1d6ca4ae3e1cdfc6e0fd8",
+                "url": "https://api.github.com/repos/sabre-io/dav/zipball/554145304b4a026477d130928d16e626939b0b2a",
+                "reference": "554145304b4a026477d130928d16e626939b0b2a",
                 "shasum": ""
             },
             "require": {
@@ -3625,7 +3625,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.19",
-                "monolog/monolog": "^1.27",
+                "monolog/monolog": "^1.27 || ^2.0",
                 "phpstan/phpstan": "^0.12 || ^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6"
@@ -3635,7 +3635,7 @@
                 "ext-imap": "*",
                 "ext-pdo": "*"
             },
-            "time": "2023-11-14T10:48:05+00:00",
+            "time": "2023-12-11T13:01:23+00:00",
             "bin": [
                 "bin/sabredav",
                 "bin/naturalselection"
@@ -3987,17 +3987,17 @@
         },
         {
             "name": "sabre/xml",
-            "version": "2.2.6",
-            "version_normalized": "2.2.6.0",
+            "version": "2.2.7",
+            "version_normalized": "2.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/xml.git",
-                "reference": "9cde7cdab1e50893cc83b037b40cd47bfde42a2b"
+                "reference": "f1d53d55976bbd4cf3e640dda6ebc31120c71a4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/xml/zipball/9cde7cdab1e50893cc83b037b40cd47bfde42a2b",
-                "reference": "9cde7cdab1e50893cc83b037b40cd47bfde42a2b",
+                "url": "https://api.github.com/repos/sabre-io/xml/zipball/f1d53d55976bbd4cf3e640dda6ebc31120c71a4e",
+                "reference": "f1d53d55976bbd4cf3e640dda6ebc31120c71a4e",
                 "shasum": ""
             },
             "require": {
@@ -4013,7 +4013,7 @@
                 "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
             },
-            "time": "2023-06-28T12:56:05+00:00",
+            "time": "2024-04-18T10:15:43+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
