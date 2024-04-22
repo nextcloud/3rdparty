@@ -2,9 +2,14 @@
 
 namespace OpenStack\Networking\v2\Extensions\Layer3;
 
+/**
+ * @deprecated Use Networking\v2\Params instead
+ *
+ * @internal
+ */
 class Params extends \OpenStack\Networking\v2\Params
 {
-    public function tenantIdJson()
+    public function tenantIdJson(): array
     {
         return [
             'type'        => self::STRING_TYPE,
@@ -13,7 +18,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function floatingNetworkIdJson()
+    public function floatingNetworkIdJson(): array
     {
         return [
             'type'        => self::STRING_TYPE,
@@ -23,7 +28,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function fixedIpAddressJson()
+    public function fixedIpAddressJson(): array
     {
         return [
             'type'        => self::STRING_TYPE,
@@ -32,7 +37,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function floatingIpAddressJson()
+    public function floatingIpAddressJson(): array
     {
         return [
             'type'        => self::STRING_TYPE,
@@ -41,7 +46,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function portIdJson()
+    public function portIdJson(): array
     {
         return [
             'type'        => self::STRING_TYPE,

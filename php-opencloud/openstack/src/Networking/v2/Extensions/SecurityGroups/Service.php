@@ -8,6 +8,10 @@ use OpenStack\Networking\v2\Extensions\SecurityGroups\Models\SecurityGroupRule;
 
 /**
  * @property Api $api
+ *
+ * @deprecated Use Networking\v2\Service instead
+ *
+ * @internal
  */
 class Service extends AbstractService
 {
@@ -21,6 +25,9 @@ class Service extends AbstractService
         return $this->model(SecurityGroupRule::class, $info);
     }
 
+    /**
+     * @return \Generator<mixed, SecurityGroup>
+     */
     public function listSecurityGroups(array $options = []): \Generator
     {
         return $this->securityGroup()->enumerate($this->api->getSecurityGroups(), $options);
@@ -36,6 +43,9 @@ class Service extends AbstractService
         return $this->securityGroup(['id' => $id]);
     }
 
+    /**
+     * @return \Generator<mixed, SecurityGroupRule>
+     */
     public function listSecurityGroupRules(): \Generator
     {
         return $this->securityGroupRule()->enumerate($this->api->getSecurityRules());

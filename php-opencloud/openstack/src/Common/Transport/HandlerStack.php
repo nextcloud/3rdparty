@@ -1,20 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Transport;
 
-use GuzzleHttp\HandlerStack as GuzzleStack;
-use GuzzleHttp\Utils;
-
-class HandlerStack extends GuzzleStack
+/**
+ * @deprecated use \OpenStack\Common\Transport\HandlerStackFactory instead
+ */
+class HandlerStack
 {
-    public static function create(?callable $handler = null): GuzzleStack
+    /**
+     * @deprecated use \OpenStack\Common\Transport\HandlerStackFactory::createWithOptions instead
+     */
+    public static function create(callable $handler = null): \GuzzleHttp\HandlerStack
     {
-        $stack = new self($handler ?: Utils::chooseHandler());
-        $stack->push(Middleware::httpErrors(), 'http_errors');
-        $stack->push(Middleware::prepareBody(), 'prepare_body');
-
-        return $stack;
+        return HandlerStackFactory::create($handler);
     }
 }

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace OpenStack;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Middleware as GuzzleMiddleware;
 use OpenStack\Common\Service\Builder;
-use OpenStack\Common\Transport\HandlerStack;
+use OpenStack\Common\Transport\HandlerStackFactory;
 use OpenStack\Common\Transport\Utils;
 use OpenStack\Identity\v3\Service;
 
@@ -33,10 +32,12 @@ class OpenStack
      *         ['messageFormatter'] = (MessageFormatter)  Must set if debugLog is true   [OPTIONAL]
      *         ['requestOptions']   = (array)             Guzzle Http request options    [OPTIONAL]
      *         ['cachedToken']      = (array)             Cached token credential        [OPTIONAL]
-     * @param Builder $builder
      */
     public function __construct(array $options = [], Builder $builder = null)
     {
+        $defaults = ['errorVerbosity' => 2];
+        $options  = array_merge($defaults, $options);
+
         if (!isset($options['identityService'])) {
             $options['identityService'] = $this->getDefaultIdentityService($options);
         }
@@ -50,15 +51,7 @@ class OpenStack
             throw new \InvalidArgumentException("'authUrl' is a required option");
         }
 
-        $stack = HandlerStack::create();
-
-        if (!empty($options['debugLog'])
-            && !empty($options['logger'])
-            && !empty($options['messageFormatter'])
-        ) {
-            $logMiddleware = GuzzleMiddleware::log($options['logger'], $options['messageFormatter']);
-            $stack->push($logMiddleware, 'logger');
-        }
+        $stack = HandlerStackFactory::createWithOptions(array_merge($options, ['token' => null]));
 
         $clientOptions = [
             'base_uri' => Utils::normalizeUrl($options['authUrl']),
@@ -100,6 +93,8 @@ class OpenStack
      * Creates a new Networking v2 Layer 3 service.
      *
      * @param array $options options that will be used in configuring the service
+     *
+     * @deprecated Use networkingV2 instead
      */
     public function networkingV2ExtLayer3(array $options = []): Networking\v2\Extensions\Layer3\Service
     {
@@ -112,6 +107,8 @@ class OpenStack
      * Creates a new Networking v2 Layer 3 service.
      *
      * @param array $options options that will be used in configuring the service
+     *
+     * @deprecated Use networkingV2 instead
      */
     public function networkingV2ExtSecGroups(array $options = []): Networking\v2\Extensions\SecurityGroups\Service
     {
@@ -160,12 +157,26 @@ class OpenStack
      * Creates a new Block Storage v2 service.
      *
      * @param array $options options that will be used in configuring the service
+     *
+     * @deprecated Use blockStorageV3 instead
      */
     public function blockStorageV2(array $options = []): BlockStorage\v2\Service
     {
         $defaults = ['catalogName' => 'cinderv2', 'catalogType' => 'volumev2'];
 
         return $this->builder->createService('BlockStorage\\v2', array_merge($defaults, $options));
+    }
+
+    /**
+     * Creates a new Block Storage v3 service.
+     *
+     * @param array $options options that will be used in configuring the service
+     */
+    public function blockStorageV3(array $options = []): BlockStorage\v3\Service
+    {
+        $defaults = ['catalogName' => 'cinderv3', 'catalogType' => 'volumev3'];
+
+        return $this->builder->createService('BlockStorage\\v3', array_merge($defaults, $options));
     }
 
     /**
