@@ -31,7 +31,7 @@ return  [
   ],
   'mobile' =>
    [
-    'NationalNumberPattern' => '(?:1(?:0[0-6]|1[0-5]|2[014]|30)|7\\d\\d)\\d{6}',
+    'NationalNumberPattern' => '(?:1(?:0[0-8]|1[0-5]|2[014]|30)|7\\d\\d)\\d{6}',
     'ExampleNumber' => '712123456',
     'PossibleLength' =>
      [
@@ -40,7 +40,7 @@ return  [
   ],
   'tollFree' =>
    [
-    'NationalNumberPattern' => '800[2-8]\\d{5,6}',
+    'NationalNumberPattern' => '800[02-8]\\d{5,6}',
     'ExampleNumber' => '800223456',
     'PossibleLength' =>
      [
