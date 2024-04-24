@@ -113,9 +113,6 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
         'OS-EXT-SRV-ATTR:hypervisor_hostname' => 'hypervisorHostname',
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getAliases(): array
     {
         return parent::getAliases() + [
@@ -127,8 +124,6 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param array $userOptions {@see \OpenStack\Compute\v2\Api::postServer}
      */
     public function create(array $userOptions): Creatable
@@ -142,26 +137,17 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
         return $this->populateFromResponse($response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function update()
     {
         $response = $this->execute($this->api->putServer(), $this->getAttrs(['id', 'name', 'ipv4', 'ipv6']));
         $this->populateFromResponse($response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function delete()
     {
         $this->execute($this->api->deleteServer(), $this->getAttrs(['id']));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function retrieve()
     {
         $response = $this->execute($this->api->getServer(), $this->getAttrs(['id']));
@@ -199,7 +185,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      */
     public function reboot(string $type = Enum::REBOOT_SOFT)
     {
-        if (!in_array($type, ['SOFT', 'HARD'])) {
+        if (!in_array($type, [Enum::REBOOT_SOFT, Enum::REBOOT_HARD])) {
             throw new \RuntimeException('Reboot type must either be SOFT or HARD');
         }
 
@@ -228,6 +214,28 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
         $this->execute($this->api->stopServer(), [
             'id'      => $this->id,
             'os-stop' => null,
+        ]);
+    }
+
+    /**
+     * Resumes server.
+     */
+    public function resume(): void
+    {
+        $this->execute($this->api->resumeServer(), [
+            'id'     => $this->id,
+            'resume' => null,
+        ]);
+    }
+
+    /**
+     * Suspends server.
+     */
+    public function suspend(): void
+    {
+        $this->execute($this->api->suspendServer(), [
+            'id'      => $this->id,
+            'suspend' => null,
         ]);
     }
 
@@ -394,6 +402,8 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
 
     /**
      * Returns Generator for InterfaceAttachment.
+     *
+     * @return \Generator<mixed, \OpenStack\Networking\v2\Models\InterfaceAttachment>
      */
     public function listInterfaceAttachments(array $options = []): \Generator
     {
@@ -470,8 +480,6 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      * existing keys will remain unaffected.
      *
      * @param array $metadata {@see \OpenStack\Compute\v2\Api::postServerMetadata}
-     *
-     * @return array
      */
     public function mergeMetadata(array $metadata)
     {
@@ -483,8 +491,6 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      * Retrieve the value for a specific metadata key.
      *
      * @param string $key {@see \OpenStack\Compute\v2\Api::getServerMetadataKey}
-     *
-     * @return mixed
      */
     public function getMetadataItem(string $key)
     {
@@ -541,6 +547,8 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
 
     /**
      * Returns Generator for SecurityGroups.
+     *
+     * @return \Generator<mixed, \OpenStack\Networking\v2\Extensions\SecurityGroups\Models\SecurityGroup>
      */
     public function listSecurityGroups(): \Generator
     {
@@ -549,6 +557,8 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
 
     /**
      * Returns Generator for VolumeAttachment.
+     *
+     * @return \Generator<mixed, \OpenStack\BlockStorage\v2\Models\VolumeAttachment>
      */
     public function listVolumeAttachments(): \Generator
     {
@@ -557,8 +567,6 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
 
     /**
      * Attach a volume and returns volume that was attached.
-     *
-     * @param $volumeId
      */
     public function attachVolume(string $volumeId): VolumeAttachment
     {
@@ -569,8 +577,6 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
 
     /**
      * Detach a volume.
-     *
-     * @param $attachmentId
      */
     public function detachVolume(string $attachmentId)
     {

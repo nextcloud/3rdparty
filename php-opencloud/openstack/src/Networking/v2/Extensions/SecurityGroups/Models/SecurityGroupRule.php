@@ -90,17 +90,11 @@ class SecurityGroupRule extends OperatorResource implements Creatable, Listable,
         return $this->populateFromResponse($response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function delete()
     {
         $this->executeWithState($this->api->deleteSecurityRule());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function retrieve()
     {
         $response = $this->executeWithState($this->api->getSecurityRule());

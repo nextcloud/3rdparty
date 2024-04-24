@@ -15,25 +15,22 @@ use Psr\Log\LogLevel;
 
 final class Middleware
 {
-    public static function httpErrors(): callable
+    public static function httpErrors(int $verbosity = 0): callable
     {
-        return function (callable $handler) {
-            return function ($request, array $options) use ($handler) {
+        return function (callable $handler) use ($verbosity) {
+            return function ($request, array $options) use ($handler, $verbosity) {
                 return $handler($request, $options)->then(
-                    function (ResponseInterface $response) use ($request) {
+                    function (ResponseInterface $response) use ($request, $verbosity) {
                         if ($response->getStatusCode() < 400) {
                             return $response;
                         }
-                        throw (new Builder())->httpError($request, $response);
+                        throw (new Builder())->httpError($request, $response, $verbosity);
                     }
                 );
             };
         };
     }
 
-    /**
-     * @param Token $token
-     */
     public static function authHandler(callable $tokenGenerator, Token $token = null): callable
     {
         return function (callable $handler) use ($tokenGenerator, $token) {
