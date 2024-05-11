@@ -20,7 +20,7 @@
 		"aws/aws-sdk-php": "^3.240",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"cweagans/composer-patches": "^1.7",
-		"deepdiver/zipstreamer": "2.0.0",
+		"deepdiver/zipstreamer": "2.0.2",
 		"deepdiver1975/tarstreamer": "^2.1.0",
 		"doctrine/dbal": "^3.7.0",
 		"egulias/email-validator": "^3.2.5",
