@@ -965,20 +965,20 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
-            "version": "8.13.35",
+            "version": "8.13.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php-lite.git",
-                "reference": "2908ab704834762f2074a25e41d524bdec76829b"
+                "reference": "3e9d76a9e39fc4b6767a54910aed795d49edcd23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/2908ab704834762f2074a25e41d524bdec76829b",
-                "reference": "2908ab704834762f2074a25e41d524bdec76829b",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/3e9d76a9e39fc4b6767a54910aed795d49edcd23",
+                "reference": "3e9d76a9e39fc4b6767a54910aed795d49edcd23",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0",
+                "php": "^8.1",
                 "symfony/polyfill-mbstring": "^1.17"
             },
             "conflict": {
@@ -987,16 +987,17 @@
             "require-dev": {
                 "ext-dom": "*",
                 "friendsofphp/php-cs-fixer": "^3.12",
-                "infection/infection": "^0.26.16",
+                "infection/infection": "^0.28",
                 "pear/pear-core-minimal": "^1.10.11",
                 "pear/pear_exception": "^1.0.2",
-                "pear/versioncontrol_git": "^0.5",
+                "pear/versioncontrol_git": "^0.7",
                 "phing/phing": "^2.17.4",
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.2",
-                "phpunit/phpunit": "^9.5.26",
-                "symfony/console": "^6.0"
+                "phpunit/phpunit": "^10.5",
+                "symfony/console": "^6.0",
+                "symfony/var-exporter": "^6.0"
             },
             "suggest": {
                 "giggsey/libphonenumber-for-php": "Use libphonenumber-for-php for geocoding, carriers, timezones and matching"
@@ -1043,7 +1044,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php-lite/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php-lite"
             },
-            "time": "2024-04-19T12:41:17+00:00"
+            "time": "2024-05-16T09:01:25+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
