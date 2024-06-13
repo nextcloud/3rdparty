@@ -48,7 +48,7 @@ class ZipStreamer {
   private $extFileAttrFile;
   private $extFileAttrDir;
 
-  /** @var stream output stream zip file is written to */
+  /** @var resource $outStream output stream zip file is written to */
   private $outStream;
   /** @var boolean zip64 enabled */
   private $zip64 = True;
@@ -91,9 +91,9 @@ class ZipStreamer {
     $options = array_merge($defaultOptions, $options);
 
     if ($options['outstream']) {
-      $this->outstream = $options['outstream'];
+      $this->outStream = $options['outstream'];
     } else {
-      $this->outstream = fopen('php://output', 'w');
+      $this->outStream = fopen('php://output', 'w');
     }
     $this->zip64 = $options['zip64'];
     $this->compress = $options['compress'];
@@ -156,7 +156,7 @@ class ZipStreamer {
         header('Connection: Keep-Alive');
         header('Content-Type: ' . $contentType);
         // Use UTF-8 filenames when not using Internet Explorer
-        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
+        if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') > 0) {
           header('Content-Disposition: attachment; filename="' . rawurlencode($archiveName) . '"' );
         }  else  {
           header( 'Content-Disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($archiveName)
@@ -175,7 +175,7 @@ class ZipStreamer {
   /**
    * Add a file to the archive at the specified location and file name.
    *
-   * @param string $stream      Stream to read data from
+   * @param resource $stream    Stream to read data from
    * @param string $filePath    Filepath and name to be used in the archive.
    * @param array $options      Optional, additional options
    *                            Valid options are:
@@ -322,11 +322,11 @@ class ZipStreamer {
   }
 
   private function write($data) {
-    return fwrite($this->outstream, $data);
+    return fwrite($this->outStream, $data);
   }
 
   private function flush() {
-    return fflush($this->outstream);
+    return fflush($this->outStream);
   }
 
   private function beginFile($filePath, $isDir, $fileComment, $timestamp, $gpFlags, $gzMethod,
@@ -356,7 +356,7 @@ class ZipStreamer {
       $compStream = DeflateStream::create($level);
     }
 
-    while (!feof($stream) && $data = fread($stream, self::STREAM_CHUNK_SIZE)) {
+    while (!feof($stream) && ($data = fread($stream, self::STREAM_CHUNK_SIZE)) !== false) {
       $dataLength->add(strlen($data));
       hash_update($hashCtx, $data);
       if (COMPR::DEFLATE === $compress) {
@@ -438,7 +438,7 @@ class ZipStreamer {
 
   private function buildZip64EndOfCentralDirectoryRecord($cdRecLength) {
     $versionToExtract = $this->getVersionToExtract(False);
-    $cdRecCount = sizeof($this->cdRec);
+    $cdRecCount = count($this->cdRec);
 
     return ''
         . pack32le(self::ZIP64_END_OF_CENTRAL_DIRECTORY) // zip64 end of central dir signature         4 bytes  (0x06064b50)
@@ -517,12 +517,12 @@ class ZipStreamer {
   private function buildEndOfCentralDirectoryRecord($cdRecLength) {
     if ($this->zip64) {
       $diskNumber = -1;
-      $cdRecCount = min(sizeof($this->cdRec), 0xffff);
+      $cdRecCount = min(count($this->cdRec), 0xffff);
       $cdRecLength = -1;
       $offset = -1;
     } else {
       $diskNumber = 0;
-      $cdRecCount = sizeof($this->cdRec);
+      $cdRecCount = count($this->cdRec);
       $offset = $this->offset->getLoBytes();
     }
     //throw new \Exception(sprintf("zip64 %d diskno %d", $this->zip64, $diskNumber));
@@ -646,7 +646,7 @@ class DeflatePeclStream extends DeflateStream {
       $class = self::PECL2_DEFLATE_STREAM_CLASS;
     }
     if (!class_exists($class)) {
-      new \Exception('unable to instantiate PECL deflate stream (requires pecl_http >= 0.10)');
+      throw new \Exception('unable to instantiate PECL deflate stream (requires pecl_http >= 0.10)');
     }
 
     $deflateFlags = constant($class . '::TYPE_RAW');
@@ -723,8 +723,8 @@ class GPFLAGS {
 
   // compression settings for deflate/deflate64
   const DEFL_NORM = 0x0000; // normal compression (COMP1 and COMP2 not set)
-  const DEFL_MAX = COMP1; // maximum compression
-  const DEFL_FAST = COMP2; // fast compression
+  const DEFL_MAX = self::COMP1; // maximum compression
+  const DEFL_FAST = self::COMP2; // fast compression
   const DEFL_SFAST = 0x0006; // superfast compression (COMP1 and COMP2 set)
 }
 

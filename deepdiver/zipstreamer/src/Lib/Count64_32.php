@@ -42,7 +42,7 @@ class Count64_32 extends Count64Base {
     if (is_int($value)) {
       $this->loBytes = $value;
       $this->hiBytes = 0;
-    } else if (is_array($value) && 2 == sizeof($value)) {
+    } else if (is_array($value) && 2 == count($value)) {
       $this->loBytes = $value[0];
       if ($this->limit32Bit && 0 !== $value[1]) {
         throw new \OverflowException(self::EXCEPTION_32BIT_OVERFLOW);
