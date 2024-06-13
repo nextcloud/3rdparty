@@ -22,8 +22,9 @@
  */
 namespace ZipStreamer\Lib;
 
-use const \ZipStreamer\INT64_LOW_MAP;
-use const \ZipStreamer\INT_MAX_32;
+use function ZipStreamer\urShift;
+use const ZipStreamer\INT64_LOW_MAP;
+use const ZipStreamer\INT_MAX_32;
 
 class Count64_64 extends Count64Base {
   private $value;
@@ -46,7 +47,7 @@ class Count64_64 extends Count64Base {
         throw new \OverFlowException(self::EXCEPTION_32BIT_OVERFLOW);
       }
       $this->value = $value;
-    } else if (is_array($value) && 2 == sizeof($value)) {
+    } else if (is_array($value) && 2 == count($value)) {
       if ($this->limit32Bit && 0 !== $value[1]) {
         throw new \OverFlowException(self::EXCEPTION_32BIT_OVERFLOW);
       }

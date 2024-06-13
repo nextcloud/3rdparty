@@ -22,8 +22,9 @@
  */
 namespace ZipStreamer;
 
-use \ZipStreamer\Lib\Count64_32;
-use \ZipStreamer\Lib\Count64_64;
+use ZipStreamer\Lib\Count64_32;
+use ZipStreamer\Lib\Count64_64;
+use ZipStreamer\Lib\Count64Base;
 
 const INT64_HIGH_MAP = 0xffffffff00000000;
 const INT64_LOW_MAP =  0x00000000ffffffff;
@@ -41,16 +42,6 @@ function urShift($bits, $shift) {
     return $bits;
   }
   return ($bits >> $shift) & ~(1 << (8 * PHP_INT_SIZE - 1) >> ($shift - 1));
-}
-
-/**
- * Convert binary data string to readable hex string
- *
- * @param string $data binary string
- * @return string readable hex string
- */
-function byte2hex($data) {
-  return unpack("h*", $data);
 }
 
 /**
@@ -149,8 +140,8 @@ abstract class Count64 {
   public static function construct($value = 0, $limit32Bit = False) {
     if (4 == PHP_INT_SIZE) {
       return new Count64_32($value, $limit32Bit);
-    } else {
-      return new Count64_64($value, $limit32Bit);
     }
+
+      return new Count64_64($value, $limit32Bit);
   }
 }
