@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\EventDispatcher;
 
+use OCA\Talk\Events\MessageParseEvent;
 use Psr\EventDispatcher\StoppableEventInterface;
 use Symfony\Component\EventDispatcher\Debug\WrappedListener;
 
@@ -222,13 +223,28 @@ class EventDispatcher implements EventDispatcherInterface
     protected function callListeners(iterable $listeners, string $eventName, object $event)
     {
         $stoppable = $event instanceof StoppableEventInterface;
+        $logThis = $event instanceof MessageParseEvent;
+		if ($logThis) {
+			$t1 = microtime(true);
+			$ts = [microtime(true)];
+		}
 
         foreach ($listeners as $listener) {
             if ($stoppable && $event->isPropagationStopped()) {
                 break;
             }
             $listener($event, $eventName, $this);
+			$ts[] = microtime(true);
         }
+		$t2 = microtime(true);
+
+		if ($logThis) {
+			if (($t2 - $t1) > 1) {
+				\OC::$server->getLogger()->debug('End MessageParseEvent: [ts: ' . implode(',', $ts) . ']', [
+					'app' => 'spreed-message-loading-time',
+				]);
+			}
+		}
     }
 
     /**
