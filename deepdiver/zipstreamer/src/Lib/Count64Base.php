@@ -25,7 +25,7 @@ namespace ZipStreamer\Lib;
 abstract class Count64Base {
   protected $limit32Bit = False;
 
-  function __construct($value = 0, $limit32Bit = False) {
+  public function __construct($value = 0, $limit32Bit = False) {
     $this->limit32Bit = $limit32Bit;
     $this->set($value);
   }
