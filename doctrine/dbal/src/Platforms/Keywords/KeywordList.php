@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Platforms\Keywords;
 
 use function array_flip;
@@ -8,8 +10,6 @@ use function strtoupper;
 
 /**
  * Abstract interface for a SQL reserved keyword dictionary.
- *
- * @psalm-consistent-constructor
  */
 abstract class KeywordList
 {
@@ -18,12 +18,8 @@ abstract class KeywordList
 
     /**
      * Checks if the given word is a keyword of this dialect/vendor platform.
-     *
-     * @param string $word
-     *
-     * @return bool
      */
-    public function isKeyword($word)
+    public function isKeyword(string $word): bool
     {
         if ($this->keywords === null) {
             $this->initializeKeywords();
@@ -32,8 +28,7 @@ abstract class KeywordList
         return isset($this->keywords[strtoupper($word)]);
     }
 
-    /** @return void */
-    protected function initializeKeywords()
+    protected function initializeKeywords(): void
     {
         $this->keywords = array_flip(array_map('strtoupper', $this->getKeywords()));
     }
@@ -43,14 +38,5 @@ abstract class KeywordList
      *
      * @return string[]
      */
-    abstract protected function getKeywords();
-
-    /**
-     * Returns the name of this keyword list.
-     *
-     * @deprecated
-     *
-     * @return string
-     */
-    abstract public function getName();
+    abstract protected function getKeywords(): array;
 }

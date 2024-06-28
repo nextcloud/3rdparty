@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Driver\SQLite3;
 
 use Doctrine\DBAL\Driver\FetchUtils;
@@ -12,17 +14,14 @@ use const SQLITE3_NUM;
 final class Result implements ResultInterface
 {
     private ?SQLite3Result $result;
-    private int $changes;
 
     /** @internal The result can be only instantiated by its driver connection or statement. */
-    public function __construct(SQLite3Result $result, int $changes)
+    public function __construct(SQLite3Result $result, private readonly int $changes)
     {
-        $this->result  = $result;
-        $this->changes = $changes;
+        $this->result = $result;
     }
 
-    /** @inheritDoc */
-    public function fetchNumeric()
+    public function fetchNumeric(): array|false
     {
         if ($this->result === null) {
             return false;
@@ -31,8 +30,7 @@ final class Result implements ResultInterface
         return $this->result->fetchArray(SQLITE3_NUM);
     }
 
-    /** @inheritDoc */
-    public function fetchAssociative()
+    public function fetchAssociative(): array|false
     {
         if ($this->result === null) {
             return false;
@@ -41,8 +39,7 @@ final class Result implements ResultInterface
         return $this->result->fetchArray(SQLITE3_ASSOC);
     }
 
-    /** @inheritDoc */
-    public function fetchOne()
+    public function fetchOne(): mixed
     {
         return FetchUtils::fetchOne($this);
     }

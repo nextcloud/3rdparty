@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Exception;
 
 use Doctrine\DBAL\Exception;
@@ -9,11 +11,6 @@ use Doctrine\DBAL\Exception;
  *
  * @psalm-immutable
  */
-class InvalidArgumentException extends Exception
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
 {
-    /** @return self */
-    public static function fromEmptyCriteria()
-    {
-        return new self('Empty criteria was used, expected non-empty criteria');
-    }
 }

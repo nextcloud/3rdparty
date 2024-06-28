@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Platforms\SQLServer;
 
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
@@ -14,32 +16,17 @@ use Doctrine\DBAL\Schema\TableDiff;
  */
 class Comparator extends BaseComparator
 {
-    private string $databaseCollation;
-
     /** @internal The comparator can be only instantiated by a schema manager. */
-    public function __construct(SQLServerPlatform $platform, string $databaseCollation)
+    public function __construct(SQLServerPlatform $platform, private readonly string $databaseCollation)
     {
         parent::__construct($platform);
-
-        $this->databaseCollation = $databaseCollation;
     }
 
-    public function compareTables(Table $fromTable, Table $toTable): TableDiff
+    public function compareTables(Table $oldTable, Table $newTable): TableDiff
     {
         return parent::compareTables(
-            $this->normalizeColumns($fromTable),
-            $this->normalizeColumns($toTable),
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function diffTable(Table $fromTable, Table $toTable)
-    {
-        return parent::diffTable(
-            $this->normalizeColumns($fromTable),
-            $this->normalizeColumns($toTable),
+            $this->normalizeColumns($oldTable),
+            $this->normalizeColumns($newTable),
         );
     }
 

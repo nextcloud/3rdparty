@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\SQL;
 
 use Doctrine\DBAL\SQL\Parser\Exception;
@@ -44,7 +46,7 @@ final class Parser
     private const SPECIAL              = '[' . self::SPECIAL_CHARS . ']';
     private const OTHER                = '[^' . self::SPECIAL_CHARS . ']+';
 
-    private string $sqlPattern;
+    private readonly string $sqlPattern;
 
     public function __construct(bool $mySQLStringEscaping)
     {
