@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Cache;
 
 use Doctrine\DBAL\Driver\FetchUtils;
@@ -12,27 +14,16 @@ use function reset;
 /** @internal The class is internal to the caching layer implementation. */
 final class ArrayResult implements Result
 {
-    /** @var list<array<string, mixed>> */
-    private array $data;
-
-    private int $columnCount = 0;
-    private int $num         = 0;
+    private readonly int $columnCount;
+    private int $num = 0;
 
     /** @param list<array<string, mixed>> $data */
-    public function __construct(array $data)
+    public function __construct(private array $data)
     {
-        $this->data = $data;
-        if (count($data) === 0) {
-            return;
-        }
-
-        $this->columnCount = count($data[0]);
+        $this->columnCount = $data === [] ? 0 : count($data[0]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchNumeric()
+    public function fetchNumeric(): array|false
     {
         $row = $this->fetch();
 
@@ -43,18 +34,12 @@ final class ArrayResult implements Result
         return array_values($row);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchAssociative()
+    public function fetchAssociative(): array|false
     {
         return $this->fetch();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchOne()
+    public function fetchOne(): mixed
     {
         $row = $this->fetch();
 
@@ -105,7 +90,7 @@ final class ArrayResult implements Result
     }
 
     /** @return array<string, mixed>|false */
-    private function fetch()
+    private function fetch(): array|false
     {
         if (! isset($this->data[$this->num])) {
             return false;

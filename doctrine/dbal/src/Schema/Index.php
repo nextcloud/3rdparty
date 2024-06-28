@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Schema;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use InvalidArgumentException;
 
 use function array_filter;
 use function array_keys;
@@ -13,60 +14,47 @@ use function array_shift;
 use function count;
 use function strtolower;
 
-class Index extends AbstractAsset implements Constraint
+class Index extends AbstractAsset
 {
     /**
      * Asset identifier instances of the column names the index is associated with.
-     * array($columnName => Identifier)
      *
-     * @var Identifier[]
+     * @var array<string, Identifier>
      */
-    protected $_columns = [];
+    protected array $_columns = [];
 
-    /** @var bool */
-    protected $_isUnique = false;
+    protected bool $_isUnique = false;
 
-    /** @var bool */
-    protected $_isPrimary = false;
+    protected bool $_isPrimary = false;
 
     /**
      * Platform specific flags for indexes.
-     * array($flagName => true)
      *
-     * @var true[]
+     * @var array<string, true>
      */
-    protected $_flags = [];
+    protected array $_flags = [];
 
     /**
-     * Platform specific options
-     *
-     * @todo $_flags should eventually be refactored into options
-     * @var mixed[]
-     */
-    private array $options = [];
-
-    /**
-     * @param string   $name
-     * @param string[] $columns
-     * @param bool     $isUnique
-     * @param bool     $isPrimary
-     * @param string[] $flags
-     * @param mixed[]  $options
+     * @param array<int, string>   $columns
+     * @param array<int, string>   $flags
+     * @param array<string, mixed> $options
      */
     public function __construct(
-        $name,
+        ?string $name,
         array $columns,
-        $isUnique = false,
-        $isPrimary = false,
+        bool $isUnique = false,
+        bool $isPrimary = false,
         array $flags = [],
-        array $options = []
+        private readonly array $options = [],
     ) {
         $isUnique = $isUnique || $isPrimary;
 
-        $this->_setName($name);
+        if ($name !== null) {
+            $this->_setName($name);
+        }
+
         $this->_isUnique  = $isUnique;
         $this->_isPrimary = $isPrimary;
-        $this->options    = $options;
 
         foreach ($columns as $column) {
             $this->_addColumn($column);
@@ -77,24 +65,33 @@ class Index extends AbstractAsset implements Constraint
         }
     }
 
-    /** @throws InvalidArgumentException */
     protected function _addColumn(string $column): void
     {
         $this->_columns[$column] = new Identifier($column);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the names of the referencing table columns the constraint is associated with.
+     *
+     * @return list<string>
      */
-    public function getColumns()
+    public function getColumns(): array
     {
         return array_keys($this->_columns);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the quoted representation of the column names the constraint is associated with.
+     *
+     * But only if they were defined with one or a column name
+     * is a keyword reserved by the platform.
+     * Otherwise, the plain unquoted value as inserted is returned.
+     *
+     * @param AbstractPlatform $platform The platform to use for quotation.
+     *
+     * @return list<string>
      */
-    public function getQuotedColumns(AbstractPlatform $platform)
+    public function getQuotedColumns(AbstractPlatform $platform): array
     {
         $subParts = $platform->supportsColumnLengthIndexes() && $this->hasOption('lengths')
             ? $this->getOption('lengths') : [];
@@ -116,41 +113,31 @@ class Index extends AbstractAsset implements Constraint
         return $columns;
     }
 
-    /** @return string[] */
-    public function getUnquotedColumns()
+    /** @return array<int, string> */
+    public function getUnquotedColumns(): array
     {
-        return array_map([$this, 'trimQuotes'], $this->getColumns());
+        return array_map($this->trimQuotes(...), $this->getColumns());
     }
 
     /**
      * Is the index neither unique nor primary key?
-     *
-     * @return bool
      */
-    public function isSimpleIndex()
+    public function isSimpleIndex(): bool
     {
         return ! $this->_isPrimary && ! $this->_isUnique;
     }
 
-    /** @return bool */
-    public function isUnique()
+    public function isUnique(): bool
     {
         return $this->_isUnique;
     }
 
-    /** @return bool */
-    public function isPrimary()
+    public function isPrimary(): bool
     {
         return $this->_isPrimary;
     }
 
-    /**
-     * @param string $name
-     * @param int    $pos
-     *
-     * @return bool
-     */
-    public function hasColumnAtPosition($name, $pos = 0)
+    public function hasColumnAtPosition(string $name, int $pos = 0): bool
     {
         $name         = $this->trimQuotes(strtolower($name));
         $indexColumns = array_map('strtolower', $this->getUnquotedColumns());
@@ -161,11 +148,9 @@ class Index extends AbstractAsset implements Constraint
     /**
      * Checks if this index exactly spans the given column names in the correct order.
      *
-     * @param string[] $columnNames
-     *
-     * @return bool
+     * @param array<int, string> $columnNames
      */
-    public function spansColumns(array $columnNames)
+    public function spansColumns(array $columnNames): bool
     {
         $columns         = $this->getColumns();
         $numberOfColumns = count($columns);
@@ -183,18 +168,6 @@ class Index extends AbstractAsset implements Constraint
         }
 
         return $sameColumns;
-    }
-
-    /**
-     * Keeping misspelled function name for backwards compatibility
-     *
-     * @deprecated Use {@see isFulfilledBy()} instead.
-     *
-     * @return bool
-     */
-    public function isFullfilledBy(Index $other)
-    {
-        return $this->isFulfilledBy($other);
     }
 
     /**
@@ -240,10 +213,8 @@ class Index extends AbstractAsset implements Constraint
 
     /**
      * Detects if the other index is a non-unique, non primary index that can be overwritten by this one.
-     *
-     * @return bool
      */
-    public function overrules(Index $other)
+    public function overrules(Index $other): bool
     {
         if ($other->isPrimary()) {
             return false;
@@ -261,9 +232,9 @@ class Index extends AbstractAsset implements Constraint
     /**
      * Returns platform specific flags for indexes.
      *
-     * @return string[]
+     * @return array<int, string>
      */
-    public function getFlags()
+    public function getFlags(): array
     {
         return array_keys($this->_flags);
     }
@@ -271,13 +242,9 @@ class Index extends AbstractAsset implements Constraint
     /**
      * Adds Flag for an index that translates to platform specific handling.
      *
-     * @param string $flag
-     *
-     * @return Index
-     *
      * @example $index->addFlag('CLUSTERED')
      */
-    public function addFlag($flag)
+    public function addFlag(string $flag): self
     {
         $this->_flags[strtolower($flag)] = true;
 
@@ -286,50 +253,32 @@ class Index extends AbstractAsset implements Constraint
 
     /**
      * Does this index have a specific flag?
-     *
-     * @param string $flag
-     *
-     * @return bool
      */
-    public function hasFlag($flag)
+    public function hasFlag(string $flag): bool
     {
         return isset($this->_flags[strtolower($flag)]);
     }
 
     /**
      * Removes a flag.
-     *
-     * @param string $flag
-     *
-     * @return void
      */
-    public function removeFlag($flag)
+    public function removeFlag(string $flag): void
     {
         unset($this->_flags[strtolower($flag)]);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function hasOption($name)
+    public function hasOption(string $name): bool
     {
         return isset($this->options[strtolower($name)]);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function getOption($name)
+    public function getOption(string $name): mixed
     {
         return $this->options[strtolower($name)];
     }
 
-    /** @return mixed[] */
-    public function getOptions()
+    /** @return array<string, mixed> */
+    public function getOptions(): array
     {
         return $this->options;
     }

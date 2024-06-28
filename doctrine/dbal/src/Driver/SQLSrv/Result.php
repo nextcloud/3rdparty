@@ -17,39 +17,26 @@ use const SQLSRV_FETCH_NUMERIC;
 
 final class Result implements ResultInterface
 {
-    /** @var resource */
-    private $statement;
-
     /**
      * @internal The result can be only instantiated by its driver connection or statement.
      *
-     * @param resource $stmt
+     * @param resource $statement
      */
-    public function __construct($stmt)
+    public function __construct(private readonly mixed $statement)
     {
-        $this->statement = $stmt;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchNumeric()
+    public function fetchNumeric(): array|false
     {
         return $this->fetch(SQLSRV_FETCH_NUMERIC);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchAssociative()
+    public function fetchAssociative(): array|false
     {
         return $this->fetch(SQLSRV_FETCH_ASSOC);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchOne()
+    public function fetchOne(): mixed
     {
         return FetchUtils::fetchOne($this);
     }
@@ -110,8 +97,7 @@ final class Result implements ResultInterface
         }
     }
 
-    /** @return mixed|false */
-    private function fetch(int $fetchType)
+    private function fetch(int $fetchType): mixed
     {
         return sqlsrv_fetch_array($this->statement, $fetchType) ?? false;
     }
