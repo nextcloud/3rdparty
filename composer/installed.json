@@ -6747,6 +6747,11 @@
                 "bin/mp3scan"
             ],
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "generate exception if codec/layer versions or channel headers are unrecognized": ".patches/mp3info-check-array-key.diff"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
