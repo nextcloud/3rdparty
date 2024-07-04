@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'nextcloud/3rdparty',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'a912b6da034f385b17707ce8c41275b91a593683',
+        'pretty_version' => 'dev-stable29',
+        'version' => 'dev-stable29',
+        'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
@@ -317,9 +317,9 @@
             'dev_requirement' => false,
         ),
         'nextcloud/3rdparty' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'a912b6da034f385b17707ce8c41275b91a593683',
+            'pretty_version' => 'dev-stable29',
+            'version' => 'dev-stable29',
+            'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../',
             'aliases' => array(),
