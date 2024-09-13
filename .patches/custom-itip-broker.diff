@@ -1,0 +1,52 @@
+diff --git a/lib/CalDAV/Schedule/Plugin.php b/lib/CalDAV/Schedule/Plugin.php
+index 5e56596101..5bca56d47e 100644
+--- a/lib/CalDAV/Schedule/Plugin.php
++++ b/lib/CalDAV/Schedule/Plugin.php
+@@ -25,6 +25,7 @@
+ use Sabre\VObject;
+ use Sabre\VObject\Component\VCalendar;
+ use Sabre\VObject\ITip;
++use Sabre\VObject\ITip\Broker;
+ use Sabre\VObject\ITip\Message;
+ use Sabre\VObject\Reader;
+ 
+@@ -389,7 +390,7 @@ public function beforeUnbind($path)
+             $node->getOwner()
+         );
+ 
+-        $broker = new ITip\Broker();
++        $broker = $this->createITipBroker();
+         $messages = $broker->parseEvent(null, $addresses, $node->get());
+ 
+         foreach ($messages as $message) {
+@@ -500,7 +501,7 @@ public function scheduleLocalDelivery(ITip\Message $iTipMessage)
+             $isNewNode = true;
+         }
+ 
+-        $broker = new ITip\Broker();
++        $broker = $this->createITipBroker();
+         $newObject = $broker->processMessage($iTipMessage, $currentObject);
+ 
+         $inbox->createFile($newFileName, $iTipMessage->message->serialize());
+@@ -611,7 +612,7 @@ public function getSupportedPrivilegeSet(INode $node, array &$supportedPrivilege
+      */
+     protected function processICalendarChange($oldObject, VCalendar $newObject, array $addresses, array $ignore = [], &$modified = false)
+     {
+-        $broker = new ITip\Broker();
++        $broker = $this->createITipBroker();
+         $messages = $broker->parseEvent($newObject, $addresses, $oldObject);
+ 
+         if ($messages) {
+@@ -994,4 +995,12 @@ public function getPluginInfo()
+             'link' => 'http://sabre.io/dav/scheduling/',
+         ];
+     }
++
++    /**
++     * Returns an instance of the iTip\Broker.
++     */
++    protected function createITipBroker(): Broker
++    {
++        return new Broker();
++    }
+ }
