@@ -29,6 +29,7 @@ bin
 # ignore codestyle tools config
 */*/psalm.xml
 */*/psalm.baseline.xml
+*/*/psalm-baseline.xml
 */*/phpcs.xml
 */*/phpcs.xml.dist
 */*/.phpcs.xml
