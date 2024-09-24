@@ -79,6 +79,9 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
         return $this->transports;
     }
 
+    /**
+     * @deprecated since 4.9.0 and will be removed in 5.0.0. Please use the serializer instead.
+     */
     public static function createFromString(string $data): self
     {
         $data = json_decode($data, true, flags: JSON_THROW_ON_ERROR);
@@ -88,6 +91,7 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
 
     /**
      * @param mixed[] $json
+     * @deprecated since 4.9.0 and will be removed in 5.0.0. Please use the serializer instead.
      */
     public static function createFromArray(array $json): self
     {
@@ -107,6 +111,12 @@ class PublicKeyCredentialDescriptor implements JsonSerializable
      */
     public function jsonSerialize(): array
     {
+        trigger_deprecation(
+            'web-auth/webauthn-bundle',
+            '4.9.0',
+            'The "%s" method is deprecated and will be removed in 5.0. Please use the serializer instead.',
+            __METHOD__
+        );
         $json = [
             'type' => $this->type,
             'id' => Base64UrlSafe::encodeUnpadded($this->id),
