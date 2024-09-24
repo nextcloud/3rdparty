@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2020 Spomky-Labs
+ * Copyright (c) 2014-2021 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -92,7 +92,7 @@ final class ECSignature
 
     private static function octetLength(string $data): int
     {
-        return (int) (mb_strlen($data, '8bit') / self::BYTE_SIZE);
+        return intdiv(mb_strlen($data, '8bit'), self::BYTE_SIZE);
     }
 
     private static function preparePositiveInteger(string $data): string

@@ -13,22 +13,23 @@ declare(strict_types=1);
 
 namespace League\Uri;
 
+use finfo;
 use League\Uri\Contracts\UriInterface;
 use League\Uri\Exceptions\FileinfoSupportMissing;
+use League\Uri\Exceptions\IdnaConversionFailed;
 use League\Uri\Exceptions\IdnSupportMissing;
 use League\Uri\Exceptions\SyntaxError;
+use League\Uri\Idna\Idna;
 use Psr\Http\Message\UriInterface as Psr7UriInterface;
+use TypeError;
 use function array_filter;
 use function array_map;
 use function base64_decode;
 use function base64_encode;
 use function count;
-use function defined;
 use function explode;
 use function file_get_contents;
 use function filter_var;
-use function function_exists;
-use function idn_to_ascii;
 use function implode;
 use function in_array;
 use function inet_pton;
@@ -52,24 +53,6 @@ use const FILTER_FLAG_IPV6;
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
 use const FILTER_VALIDATE_IP;
-use const IDNA_CHECK_BIDI;
-use const IDNA_CHECK_CONTEXTJ;
-use const IDNA_ERROR_BIDI;
-use const IDNA_ERROR_CONTEXTJ;
-use const IDNA_ERROR_DISALLOWED;
-use const IDNA_ERROR_DOMAIN_NAME_TOO_LONG;
-use const IDNA_ERROR_EMPTY_LABEL;
-use const IDNA_ERROR_HYPHEN_3_4;
-use const IDNA_ERROR_INVALID_ACE_LABEL;
-use const IDNA_ERROR_LABEL_HAS_DOT;
-use const IDNA_ERROR_LABEL_TOO_LONG;
-use const IDNA_ERROR_LEADING_COMBINING_MARK;
-use const IDNA_ERROR_LEADING_HYPHEN;
-use const IDNA_ERROR_PUNYCODE;
-use const IDNA_ERROR_TRAILING_HYPHEN;
-use const IDNA_NONTRANSITIONAL_TO_ASCII;
-use const IDNA_NONTRANSITIONAL_TO_UNICODE;
-use const INTL_IDNA_VARIANT_UTS46;
 
 final class Uri implements UriInterface
 {
@@ -139,6 +122,11 @@ final class Uri implements UriInterface
     $/ix';
 
     /**
+     * RFC3986 IPvFuture host and port component.
+     */
+    private const REGEXP_HOST_PORT = ',^(?<host>(\[.*]|[^:])*)(:(?<port>[^/?#]*))?$,x';
+
+    /**
      * Significant 10 bits of IP to detect Zone ID regular expression pattern.
      */
     private const HOST_ADDRESS_BLOCK = "\xfe\x80";
@@ -171,11 +159,10 @@ final class Uri implements UriInterface
      */
     private const REGEXP_WINDOW_PATH = ',^(?<root>[a-zA-Z][:|\|]),';
 
-
     /**
      * Supported schemes and corresponding default port.
      *
-     * @var array
+     * @var array<string, int|null>
      */
     private const SCHEME_DEFAULT_PORT = [
         'data' => null,
@@ -191,7 +178,7 @@ final class Uri implements UriInterface
     /**
      * URI validation methods per scheme.
      *
-     * @var array
+     * @var array<string>
      */
     private const SCHEME_VALIDATION_METHOD = [
         'data' => 'isUriWithSchemeAndPathOnly',
@@ -211,80 +198,16 @@ final class Uri implements UriInterface
      */
     private const ASCII = "\x20\x65\x69\x61\x73\x6E\x74\x72\x6F\x6C\x75\x64\x5D\x5B\x63\x6D\x70\x27\x0A\x67\x7C\x68\x76\x2E\x66\x62\x2C\x3A\x3D\x2D\x71\x31\x30\x43\x32\x2A\x79\x78\x29\x28\x4C\x39\x41\x53\x2F\x50\x22\x45\x6A\x4D\x49\x6B\x33\x3E\x35\x54\x3C\x44\x34\x7D\x42\x7B\x38\x46\x77\x52\x36\x37\x55\x47\x4E\x3B\x4A\x7A\x56\x23\x48\x4F\x57\x5F\x26\x21\x4B\x3F\x58\x51\x25\x59\x5C\x09\x5A\x2B\x7E\x5E\x24\x40\x60\x7F\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0B\x0C\x0D\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F";
 
-    /**
-     * URI scheme component.
-     *
-     * @var string|null
-     */
-    private $scheme;
+    private ?string $scheme;
+    private ?string $user_info;
+    private ?string $host;
+    private ?int $port;
+    private ?string $authority;
+    private string $path = '';
+    private ?string $query;
+    private ?string $fragment;
+    private ?string $uri;
 
-    /**
-     * URI user info part.
-     *
-     * @var string|null
-     */
-    private $user_info;
-
-    /**
-     * URI host component.
-     *
-     * @var string|null
-     */
-    private $host;
-
-    /**
-     * URI port component.
-     *
-     * @var int|null
-     */
-    private $port;
-
-    /**
-     * URI authority string representation.
-     *
-     * @var string|null
-     */
-    private $authority;
-
-    /**
-     * URI path component.
-     *
-     * @var string
-     */
-    private $path = '';
-
-    /**
-     * URI query component.
-     *
-     * @var string|null
-     */
-    private $query;
-
-    /**
-     * URI fragment component.
-     *
-     * @var string|null
-     */
-    private $fragment;
-
-    /**
-     * URI string representation.
-     *
-     * @var string|null
-     */
-    private $uri;
-
-    /**
-     * Create a new instance.
-     *
-     * @param ?string $scheme
-     * @param ?string $user
-     * @param ?string $pass
-     * @param ?string $host
-     * @param ?int    $port
-     * @param ?string $query
-     * @param ?string $fragment
-     */
     private function __construct(
         ?string $scheme,
         ?string $user,
@@ -309,8 +232,7 @@ final class Uri implements UriInterface
     /**
      * Format the Scheme and Host component.
      *
-     * @param ?string $scheme
-     *
+     * @param  ?string     $scheme
      * @throws SyntaxError if the scheme is invalid
      */
     private function formatScheme(?string $scheme): ?string
@@ -329,7 +251,6 @@ final class Uri implements UriInterface
 
     /**
      * Set the UserInfo component.
-     *
      * @param ?string $user
      * @param ?string $password
      */
@@ -360,7 +281,6 @@ final class Uri implements UriInterface
 
     /**
      * Validate and Format the Host component.
-     *
      * @param ?string $host
      */
     private function formatHost(?string $host): ?string
@@ -386,43 +306,8 @@ final class Uri implements UriInterface
      */
     private function formatRegisteredName(string $host): string
     {
-        // @codeCoverageIgnoreStart
-        // added because it is not possible in travis to disabled the ext/intl extension
-        // see travis issue https://github.com/travis-ci/travis-ci/issues/4701
-        static $idn_support = null;
-        $idn_support = $idn_support ?? function_exists('idn_to_ascii') && defined('INTL_IDNA_VARIANT_UTS46');
-        // @codeCoverageIgnoreEnd
-
         $formatted_host = rawurldecode($host);
         if (1 === preg_match(self::REGEXP_HOST_REGNAME, $formatted_host)) {
-            $formatted_host = strtolower($formatted_host);
-            if (false === strpos($formatted_host, 'xn--')) {
-                return $formatted_host;
-            }
-
-            // @codeCoverageIgnoreStart
-            if (!$idn_support) {
-                throw new IdnSupportMissing(sprintf('the host `%s` could not be processed for IDN. Verify that ext/intl is installed for IDN support and that ICU is at least version 4.6.', $host));
-            }
-            // @codeCoverageIgnoreEnd
-
-            $unicode = idn_to_utf8(
-                $host,
-                IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_UNICODE,
-                INTL_IDNA_VARIANT_UTS46,
-                $arr
-            );
-
-            if (0 !== $arr['errors']) {
-                throw new SyntaxError(sprintf('The host `%s` is invalid : %s', $host, $this->getIDNAErrors($arr['errors'])));
-            }
-
-            // @codeCoverageIgnoreStart
-            if (false === $unicode) {
-                throw new IdnSupportMissing(sprintf('The Intl extension is misconfigured for %s, please correct this issue before proceeding.', PHP_OS));
-            }
-            // @codeCoverageIgnoreEnd
-
             return $formatted_host;
         }
 
@@ -430,70 +315,12 @@ final class Uri implements UriInterface
             throw new SyntaxError(sprintf('The host `%s` is invalid : a registered name can not contain URI delimiters or spaces', $host));
         }
 
-        // @codeCoverageIgnoreStart
-        if (!$idn_support) {
-            throw new IdnSupportMissing(sprintf('the host `%s` could not be processed for IDN. Verify that ext/intl is installed for IDN support and that ICU is at least version 4.6.', $host));
-        }
-        // @codeCoverageIgnoreEnd
-
-        $formatted_host = idn_to_ascii(
-            $formatted_host,
-            IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_ASCII,
-            INTL_IDNA_VARIANT_UTS46,
-            $arr
-        );
-
-        if ([] === $arr) {
-            throw new SyntaxError(sprintf('Host `%s` is invalid', $host));
+        $info = Idna::toAscii($host, Idna::IDNA2008_ASCII);
+        if (0 !== $info->errors()) {
+            throw IdnaConversionFailed::dueToIDNAError($host, $info);
         }
 
-        if (0 !== $arr['errors']) {
-            throw new SyntaxError(sprintf('The host `%s` is invalid : %s', $host, $this->getIDNAErrors($arr['errors'])));
-        }
-
-        // @codeCoverageIgnoreStart
-        if (false === $formatted_host) {
-            throw new IdnSupportMissing(sprintf('The Intl extension is misconfigured for %s, please correct this issue before proceeding.', PHP_OS));
-        }
-        // @codeCoverageIgnoreEnd
-
-        return $arr['result'];
-    }
-
-    /**
-     * Retrieves and format IDNA conversion error message.
-     *
-     * @link http://icu-project.org/apiref/icu4j/com/ibm/icu/text/IDNA.Error.html
-     */
-    private function getIDNAErrors(int $error_byte): string
-    {
-        /**
-         * IDNA errors.
-         */
-        static $idnErrors = [
-            IDNA_ERROR_EMPTY_LABEL => 'a non-final domain name label (or the whole domain name) is empty',
-            IDNA_ERROR_LABEL_TOO_LONG => 'a domain name label is longer than 63 bytes',
-            IDNA_ERROR_DOMAIN_NAME_TOO_LONG => 'a domain name is longer than 255 bytes in its storage form',
-            IDNA_ERROR_LEADING_HYPHEN => 'a label starts with a hyphen-minus ("-")',
-            IDNA_ERROR_TRAILING_HYPHEN => 'a label ends with a hyphen-minus ("-")',
-            IDNA_ERROR_HYPHEN_3_4 => 'a label contains hyphen-minus ("-") in the third and fourth positions',
-            IDNA_ERROR_LEADING_COMBINING_MARK => 'a label starts with a combining mark',
-            IDNA_ERROR_DISALLOWED => 'a label or domain name contains disallowed characters',
-            IDNA_ERROR_PUNYCODE => 'a label starts with "xn--" but does not contain valid Punycode',
-            IDNA_ERROR_LABEL_HAS_DOT => 'a label contains a dot=full stop',
-            IDNA_ERROR_INVALID_ACE_LABEL => 'An ACE label does not contain a valid label string',
-            IDNA_ERROR_BIDI => 'a label does not meet the IDNA BiDi requirements (for right-to-left characters)',
-            IDNA_ERROR_CONTEXTJ => 'a label does not meet the IDNA CONTEXTJ requirements',
-        ];
-
-        $res = [];
-        foreach ($idnErrors as $error => $reason) {
-            if ($error === ($error_byte & $error)) {
-                $res[] = $reason;
-            }
-        }
-
-        return [] === $res ? 'Unknown IDNA conversion error.' : implode(', ', $res).'.';
+        return $info->result();
     }
 
     /**
@@ -538,7 +365,7 @@ final class Uri implements UriInterface
     /**
      * Format the Port component.
      *
-     * @param null|mixed $port
+     * @param object|null|int|string $port
      *
      * @throws SyntaxError
      */
@@ -549,7 +376,7 @@ final class Uri implements UriInterface
         }
 
         if (!is_int($port) && !(is_string($port) && 1 === preg_match('/^\d*$/', $port))) {
-            throw new SyntaxError(sprintf('The port `%s` is invalid', $port));
+            throw new SyntaxError('The port is expected to be an integer or a string representing an integer; '.gettype($port).' given.');
         }
 
         $port = (int) $port;
@@ -653,12 +480,8 @@ final class Uri implements UriInterface
     }
 
     /**
-     * Create a new instance from a hash of parse_url parts.
-     *
-     * Create an new instance from a hash representation of the URI similar
-     * to PHP parse_url function result
-     *
-     * @param array<string, mixed> $components
+     * Create a new instance from a hash representation of the URI similar
+     * to PHP parse_url function result.
      */
     public static function createFromComponents(array $components = []): self
     {
@@ -690,7 +513,7 @@ final class Uri implements UriInterface
     public static function createFromDataPath(string $path, $context = null): self
     {
         static $finfo_support = null;
-        $finfo_support = $finfo_support ?? class_exists(\finfo::class);
+        $finfo_support = $finfo_support ?? class_exists(finfo::class);
 
         // @codeCoverageIgnoreStart
         if (!$finfo_support) {
@@ -710,7 +533,7 @@ final class Uri implements UriInterface
             throw new SyntaxError(sprintf('The file `%s` does not exist or is not readable', $path));
         }
 
-        $mimetype = (string) (new \finfo(FILEINFO_MIME))->file(...$mime_args);
+        $mimetype = (string) (new finfo(FILEINFO_MIME))->file(...$mime_args);
 
         return Uri::createFromComponents([
             'scheme' => 'data',
@@ -787,7 +610,7 @@ final class Uri implements UriInterface
         }
 
         if (!$uri instanceof Psr7UriInterface) {
-            throw new \TypeError(sprintf('The object must implement the `%s` or the `%s`', Psr7UriInterface::class, UriInterface::class));
+            throw new TypeError(sprintf('The object must implement the `%s` or the `%s`', Psr7UriInterface::class, UriInterface::class));
         }
 
         $scheme = $uri->getScheme();
@@ -894,7 +717,7 @@ final class Uri implements UriInterface
      *
      * @throws SyntaxError If the host can not be detected
      *
-     * @return array{0:?string, 1:?string}
+     * @return array{0:string|null, 1:int|null}
      */
     private static function fetchHostname(array $server): array
     {
@@ -903,12 +726,14 @@ final class Uri implements UriInterface
             $server['SERVER_PORT'] = (int) $server['SERVER_PORT'];
         }
 
-        if (isset($server['HTTP_HOST'])) {
-            preg_match(',^(?<host>(\[.*]|[^:])*)(:(?<port>[^/?#]*))?$,x', $server['HTTP_HOST'], $matches);
+        if (isset($server['HTTP_HOST']) && 1 === preg_match(self::REGEXP_HOST_PORT, $server['HTTP_HOST'], $matches)) {
+            if (isset($matches['port'])) {
+                $matches['port'] = (int) $matches['port'];
+            }
 
             return [
                 $matches['host'],
-                isset($matches['port']) ? (int) $matches['port'] : $server['SERVER_PORT'],
+                $matches['port'] ?? $server['SERVER_PORT'],
             ];
         }
 
@@ -1226,10 +1051,7 @@ final class Uri implements UriInterface
         return $scheme.$authority.$path.$query.$fragment;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function __toString(): string
+    public function toString(): string
     {
         $this->uri = $this->uri ?? $this->getUriString(
             $this->scheme,
@@ -1245,9 +1067,17 @@ final class Uri implements UriInterface
     /**
      * {@inheritDoc}
      */
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function jsonSerialize(): string
     {
-        return $this->__toString();
+        return $this->toString();
     }
 
     /**
@@ -1313,6 +1143,10 @@ final class Uri implements UriInterface
      */
     public function getPath(): string
     {
+        if (0 === strpos($this->path, '//')) {
+            return '/'.ltrim($this->path, '/');
+        }
+
         return $this->path;
     }
 
@@ -1369,7 +1203,7 @@ final class Uri implements UriInterface
         }
 
         if (!is_scalar($str)) {
-            throw new \TypeError(sprintf('The component must be a string, a scalar or a stringable object %s given.', gettype($str)));
+            throw new SyntaxError(sprintf('The component must be a string, a scalar or a stringable object; `%s` given.', gettype($str)));
         }
 
         $str = (string) $str;
@@ -1445,12 +1279,14 @@ final class Uri implements UriInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @param string|object $path
      */
     public function withPath($path): UriInterface
     {
         $path = $this->filterString($path);
         if (null === $path) {
-            throw new \TypeError('A path must be a string NULL given.');
+            throw new TypeError('A path must be a string NULL given.');
         }
 
         $path = $this->formatPath($path);

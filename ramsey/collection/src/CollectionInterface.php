@@ -21,7 +21,7 @@ namespace Ramsey\Collection;
  * and others unordered.
  *
  * @template T
- * @template-extends ArrayInterface<T>
+ * @extends ArrayInterface<T>
  */
 interface CollectionInterface extends ArrayInterface
 {
@@ -151,6 +151,7 @@ interface CollectionInterface extends ArrayInterface
      *
      * @return CollectionInterface<T>
      */
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
     public function where(string $propertyOrMethod, $value): self;
 
     /**
