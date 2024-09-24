@@ -18,15 +18,16 @@ use Ramsey\Collection\Exception\InvalidArgumentException;
 use Ramsey\Collection\Tool\TypeTrait;
 use Ramsey\Collection\Tool\ValueToStringTrait;
 
+use function var_export;
+
 /**
  * This class provides a basic implementation of `TypedMapInterface`, to
  * minimize the effort required to implement this interface.
  *
- * @phpstan-ignore-next-line
- * @template K as array-key
+ * @template K of array-key
  * @template T
- * @template-extends AbstractMap<T>
- * @template-implements TypedMapInterface<T>
+ * @extends AbstractMap<T>
+ * @implements TypedMapInterface<T>
  */
 abstract class AbstractTypedMap extends AbstractMap implements TypedMapInterface
 {
@@ -38,29 +39,27 @@ abstract class AbstractTypedMap extends AbstractMap implements TypedMapInterface
      * @param T $value
      *
      * @inheritDoc
-     *
-     * @psalm-suppress MoreSpecificImplementedParamType
      */
     public function offsetSet($offset, $value): void
     {
         if ($offset === null) {
             throw new InvalidArgumentException(
                 'Map elements are key/value pairs; a key must be provided for '
-                . 'value ' . var_export($value, true)
+                . 'value ' . var_export($value, true),
             );
         }
 
         if ($this->checkType($this->getKeyType(), $offset) === false) {
             throw new InvalidArgumentException(
                 'Key must be of type ' . $this->getKeyType() . '; key is '
-                . $this->toolValueToString($offset)
+                . $this->toolValueToString($offset),
             );
         }
 
         if ($this->checkType($this->getValueType(), $value) === false) {
             throw new InvalidArgumentException(
                 'Value must be of type ' . $this->getValueType() . '; value is '
-                . $this->toolValueToString($value)
+                . $this->toolValueToString($value),
             );
         }
 

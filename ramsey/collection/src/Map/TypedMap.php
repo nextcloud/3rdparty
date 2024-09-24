@@ -20,7 +20,7 @@ use Ramsey\Collection\Tool\TypeTrait;
  * A `TypedMap` represents a map of elements where key and value are typed.
  *
  * Each element is identified by a key with defined type and a value of defined
- * type. The keys of the map must be unique. The values on the map can be=
+ * type. The keys of the map must be unique. The values on the map can be
  * repeated but each with its own different key.
  *
  * The most common case is to use a string type key, but it's not limited to
@@ -80,10 +80,9 @@ use Ramsey\Collection\Tool\TypeTrait;
  * }
  * ```
  *
- * @phpstan-ignore-next-line
- * @template K as array-key
+ * @template K of array-key
  * @template T
- * @template-extends AbstractTypedMap<K, T>
+ * @extends AbstractTypedMap<K, T>
  */
 class TypedMap extends AbstractTypedMap
 {
@@ -94,20 +93,16 @@ class TypedMap extends AbstractTypedMap
      *
      * A map key's type is immutable once it is set. For this reason, this
      * property is set private.
-     *
-     * @var string data type of the map key.
      */
-    private $keyType;
+    private string $keyType;
 
     /**
      * The data type of values stored in this collection.
      *
      * A map value's type is immutable once it is set. For this reason, this
      * property is set private.
-     *
-     * @var string data type of the map value.
      */
-    private $valueType;
+    private string $valueType;
 
     /**
      * Constructs a map object of the specified key and value types,
@@ -121,6 +116,7 @@ class TypedMap extends AbstractTypedMap
     {
         $this->keyType = $keyType;
         $this->valueType = $valueType;
+
         parent::__construct($data);
     }
 

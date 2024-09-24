@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace League\Uri;
 
+use JsonSerializable;
 use League\Uri\Contracts\UriInterface;
 use League\Uri\Exceptions\SyntaxError;
 use Psr\Http\Message\UriInterface as Psr7UriInterface;
@@ -21,16 +22,10 @@ use function is_scalar;
 use function method_exists;
 use function sprintf;
 
-final class Http implements Psr7UriInterface, \JsonSerializable
+final class Http implements Psr7UriInterface, JsonSerializable
 {
-    /**
-     * @var UriInterface
-     */
-    private $uri;
+    private UriInterface $uri;
 
-    /**
-     * New instance.
-     */
     private function __construct(UriInterface $uri)
     {
         $this->validate($uri);
@@ -188,13 +183,14 @@ final class Http implements Psr7UriInterface, \JsonSerializable
      */
     public function withScheme($scheme): self
     {
+        /** @var string $scheme */
         $scheme = $this->filterInput($scheme);
         if ('' === $scheme) {
             $scheme = null;
         }
 
         $uri = $this->uri->withScheme($scheme);
-        if ($uri->getScheme() === $this->uri->getScheme()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 
@@ -224,13 +220,14 @@ final class Http implements Psr7UriInterface, \JsonSerializable
      */
     public function withUserInfo($user, $password = null): self
     {
+        /** @var string $user */
         $user = $this->filterInput($user);
         if ('' === $user) {
             $user = null;
         }
 
         $uri = $this->uri->withUserInfo($user, $password);
-        if ($uri->getUserInfo() === $this->uri->getUserInfo()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 
@@ -242,13 +239,14 @@ final class Http implements Psr7UriInterface, \JsonSerializable
      */
     public function withHost($host): self
     {
+        /** @var string $host */
         $host = $this->filterInput($host);
         if ('' === $host) {
             $host = null;
         }
 
         $uri = $this->uri->withHost($host);
-        if ($uri->getHost() === $this->uri->getHost()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 
@@ -261,7 +259,7 @@ final class Http implements Psr7UriInterface, \JsonSerializable
     public function withPort($port): self
     {
         $uri = $this->uri->withPort($port);
-        if ($uri->getPort() === $this->uri->getPort()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 
@@ -274,7 +272,7 @@ final class Http implements Psr7UriInterface, \JsonSerializable
     public function withPath($path): self
     {
         $uri = $this->uri->withPath($path);
-        if ($uri->getPath() === $this->uri->getPath()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 
@@ -286,13 +284,14 @@ final class Http implements Psr7UriInterface, \JsonSerializable
      */
     public function withQuery($query): self
     {
+        /** @var string $query */
         $query = $this->filterInput($query);
         if ('' === $query) {
             $query = null;
         }
 
         $uri = $this->uri->withQuery($query);
-        if ($uri->getQuery() === $this->uri->getQuery()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 
@@ -304,13 +303,14 @@ final class Http implements Psr7UriInterface, \JsonSerializable
      */
     public function withFragment($fragment): self
     {
+        /** @var string $fragment */
         $fragment = $this->filterInput($fragment);
         if ('' === $fragment) {
             $fragment = null;
         }
 
         $uri = $this->uri->withFragment($fragment);
-        if ($uri->getFragment() === $this->uri->getFragment()) {
+        if ((string) $uri === (string) $this->uri) {
             return $this;
         }
 

@@ -47,25 +47,23 @@ abstract class Utils
         return BigInteger::fromBase(bin2hex($value), 16)->toBase(10);
     }
 
-    public static function intToHex(int $value): string
-    {
-        return BigInteger::of($value)->toBase(16);
-    }
-
     public static function decode(string $data): string
     {
         $decoded = base64_decode(strtr($data, '-_', '+/'), true);
-        if (false === $decoded) {
+        if ($decoded === false) {
             throw new InvalidArgumentException('Invalid data provided');
         }
 
         return $decoded;
     }
 
+    /**
+     * @param mixed|null $data
+     */
     public static function assertString($data, ?string $message = null): void
     {
-        if (!is_string($data)) {
-            throw new InvalidArgumentException($message);
+        if (! is_string($data)) {
+            throw new InvalidArgumentException($message ?? '');
         }
     }
 }
