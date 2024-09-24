@@ -14,6 +14,7 @@ use SpomkyLabs\Pki\ASN1\Type\Tagged\ExplicitlyTaggedType;
 use function array_key_exists;
 use function in_array;
 use function is_int;
+use function strlen;
 
 /**
  * @final
@@ -93,10 +94,10 @@ class Ec2Key extends Key
         if (! isset($data[self::DATA_CURVE], $data[self::DATA_X], $data[self::DATA_Y])) {
             throw new InvalidArgumentException('Invalid EC2 key. The curve or the "x/y" coordinates are missing');
         }
-        if (mb_strlen((string) $data[self::DATA_X], '8bit') !== self::CURVE_KEY_LENGTH[$data[self::DATA_CURVE]]) {
+        if (strlen((string) $data[self::DATA_X]) !== self::CURVE_KEY_LENGTH[$data[self::DATA_CURVE]]) {
             throw new InvalidArgumentException('Invalid length for x coordinate');
         }
-        if (mb_strlen((string) $data[self::DATA_Y], '8bit') !== self::CURVE_KEY_LENGTH[$data[self::DATA_CURVE]]) {
+        if (strlen((string) $data[self::DATA_Y]) !== self::CURVE_KEY_LENGTH[$data[self::DATA_CURVE]]) {
             throw new InvalidArgumentException('Invalid length for y coordinate');
         }
         if (is_int($data[self::DATA_CURVE])) {
@@ -188,8 +189,8 @@ class Ec2Key extends Key
 
     private function pem(string $type, string $der): string
     {
-        return sprintf("-----BEGIN %s-----\n", mb_strtoupper($type)) .
+        return sprintf("-----BEGIN %s-----\n", strtoupper($type)) .
             chunk_split(base64_encode($der), 64, "\n") .
-            sprintf("-----END %s-----\n", mb_strtoupper($type));
+            sprintf("-----END %s-----\n", strtoupper($type));
     }
 }

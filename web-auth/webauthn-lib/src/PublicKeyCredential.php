@@ -14,16 +14,16 @@ use const JSON_THROW_ON_ERROR;
 class PublicKeyCredential extends Credential implements Stringable
 {
     public function __construct(
-        string $id,
+        null|string $id,
         string $type,
-        public readonly string $rawId,
+        string $rawId,
         public readonly AuthenticatorResponse $response
     ) {
-        parent::__construct($id, $type);
+        parent::__construct($id, $type, $rawId);
     }
 
     /**
-     * @deprecated since 4.8.0. Please use the PublicKeyCredentialDescriptor ({self::getPublicKeyCredentialDescriptor}) instead.
+     * @deprecated since 4.8.0.
      * @infection-ignore-all
      */
     public function __toString(): string
@@ -31,7 +31,7 @@ class PublicKeyCredential extends Credential implements Stringable
         return json_encode($this->getPublicKeyCredentialDescriptor(), JSON_THROW_ON_ERROR);
     }
 
-    public static function create(string $id, string $type, string $rawId, AuthenticatorResponse $response): self
+    public static function create(null|string $id, string $type, string $rawId, AuthenticatorResponse $response): self
     {
         return new self($id, $type, $rawId, $response);
     }
