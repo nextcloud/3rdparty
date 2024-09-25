@@ -42,6 +42,11 @@ final class WebauthnSerializerFactory
         }
 
         $denormalizers = [
+            new ExtensionDescriptorDenormalizer(),
+            new VerificationMethodANDCombinationsDenormalizer(),
+            new AuthenticationExtensionNormalizer(),
+            new PublicKeyCredentialDescriptorNormalizer(),
+            new AttestedCredentialDataNormalizer(),
             new AttestationObjectDenormalizer(),
             new AttestationStatementDenormalizer($this->attestationStatementSupportManager),
             new AuthenticationExtensionsDenormalizer(),

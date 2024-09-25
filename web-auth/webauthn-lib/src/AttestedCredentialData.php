@@ -66,6 +66,7 @@ class AttestedCredentialData implements JsonSerializable
 
     /**
      * @param mixed[] $json
+     * @deprecated since 4.9.0 and will be removed in 5.0.0. Please use the serializer instead.
      */
     public static function createFromArray(array $json): self
     {
@@ -108,6 +109,12 @@ class AttestedCredentialData implements JsonSerializable
      */
     public function jsonSerialize(): array
     {
+        trigger_deprecation(
+            'web-auth/webauthn-bundle',
+            '4.9.0',
+            'The "%s" method is deprecated and will be removed in 5.0. Please use the serializer instead.',
+            __METHOD__
+        );
         $result = [
             'aaguid' => $this->aaguid->__toString(),
             'credentialId' => base64_encode($this->credentialId),
