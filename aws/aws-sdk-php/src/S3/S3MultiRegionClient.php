@@ -22,6 +22,8 @@ use GuzzleHttp\Promise;
  * @method \GuzzleHttp\Promise\Promise createBucketAsync(array $args = [])
  * @method \Aws\Result createMultipartUpload(array $args = [])
  * @method \GuzzleHttp\Promise\Promise createMultipartUploadAsync(array $args = [])
+ * @method \Aws\Result createSession(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise createSessionAsync(array $args = [])
  * @method \Aws\Result deleteBucket(array $args = [])
  * @method \GuzzleHttp\Promise\Promise deleteBucketAsync(array $args = [])
  * @method \Aws\Result deleteBucketAnalyticsConfiguration(array $args = [])
@@ -132,6 +134,8 @@ use GuzzleHttp\Promise;
  * @method \GuzzleHttp\Promise\Promise listBucketMetricsConfigurationsAsync(array $args = [])
  * @method \Aws\Result listBuckets(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listBucketsAsync(array $args = [])
+ * @method \Aws\Result listDirectoryBuckets(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise listDirectoryBucketsAsync(array $args = [])
  * @method \Aws\Result listMultipartUploads(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listMultipartUploadsAsync(array $args = [])
  * @method \Aws\Result listObjectVersions(array $args = [])
@@ -317,7 +321,8 @@ class S3MultiRegionClient extends BaseClient implements S3ClientInterface
         );
         return $client->createPresignedRequest(
             $client->getCommand($command->getName(), $command->toArray()),
-            $expires
+            $expires,
+            $options
         );
     }
 
