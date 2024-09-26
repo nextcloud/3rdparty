@@ -1,6 +1,7 @@
 <?php
 namespace Aws\Sts;
 
+use Aws\Arn\ArnParser;
 use Aws\AwsClient;
 use Aws\CacheInterface;
 use Aws\Credentials\Credentials;
@@ -57,6 +58,7 @@ class StsClient extends AwsClient
         ) {
             $args['sts_regional_endpoints'] = ConfigurationProvider::defaultProvider($args);
         }
+        $this->addBuiltIns($args);
         parent::__construct($args);
     }
 
@@ -74,15 +76,56 @@ class StsClient extends AwsClient
             throw new \InvalidArgumentException('Result contains no credentials');
         }
 
-        $c = $result['Credentials'];
+        $accountId = null;
+        if ($result->hasKey('AssumedRoleUser')) {
+            $parsedArn = ArnParser::parse($result->get('AssumedRoleUser')['Arn']);
+            $accountId = $parsedArn->getAccountId();
+        } elseif ($result->hasKey('FederatedUser')) {
+            $parsedArn = ArnParser::parse($result->get('FederatedUser')['Arn']);
+            $accountId = $parsedArn->getAccountId();
+        }
+
+        $credentials = $result['Credentials'];
+        $expiration = isset($credentials['Expiration']) && $credentials['Expiration'] instanceof \DateTimeInterface
+            ? (int) $credentials['Expiration']->format('U')
+            : null;
 
         return new Credentials(
-            $c['AccessKeyId'],
-            $c['SecretAccessKey'],
-            isset($c['SessionToken']) ? $c['SessionToken'] : null,
-            isset($c['Expiration']) && $c['Expiration'] instanceof \DateTimeInterface
-                ? (int) $c['Expiration']->format('U')
-                : null
+            $credentials['AccessKeyId'],
+            $credentials['SecretAccessKey'],
+            isset($credentials['SessionToken']) ? $credentials['SessionToken'] : null,
+            $expiration,
+            $accountId
         );
+    }
+
+    /**
+     * Adds service-specific client built-in value
+     *
+     * @return void
+     */
+    private function addBuiltIns($args)
+    {
+        $key = 'AWS::STS::UseGlobalEndpoint';
+        $result = $args['sts_regional_endpoints'] instanceof \Closure ?
+            $args['sts_regional_endpoints']()->wait() : $args['sts_regional_endpoints'];
+
+        if (is_string($result)) {
+            if ($result === 'regional') {
+                $value = false;
+            } else if ($result === 'legacy') {
+                $value = true;
+            } else {
+                return;
+            }
+        } else {
+            if ($result->getEndpointsType() === 'regional') {
+                $value = false;
+            } else {
+                $value = true;
+            }
+        }
+
+        $this->clientBuiltIns[$key] = $value;
     }
 }
