@@ -78,6 +78,10 @@ guzzlehttp/guzzle/MAKEFILE
 
 justinrainbow/json-schema/demo
 
+kornrunner/blurhash/test
+kornrunner/blurhash/.coveralls.yml
+kornrunner/blurhash/infection.json.dist
+
 masterminds/html5/CREDITS
 
 mexitek/phpcolors/demo
@@ -134,22 +138,24 @@ symfony/debug/Tests
 symfony/console/Symfony/Component/Console/Tests
 symfony/console/Tests
 
-symfony/routing/Tests/
-
 symfony/event-dispatcher/Symfony/Component/EventDispatcher/Tests/
 symfony/event-dispatcher/Symfony/EventDispatcher/Debug/Routing/Tests/
 symfony/event-dispatcher/Tests
 
 symfony/finder/Tests
 
+symfony/http-foundation/Test/
+
+symfony/mailer/Test/
+
+symfony/mime/Test/
+
 symfony/process/Symfony/Component/Process/Routing/Tests/
 symfony/process/Symfony/Component/Process/Tests
 symfony/process/Tests
 
+symfony/routing/Tests/
+
 thecodingmachine/safe/rector-migrate-0.7.php
 
 wapmorgan/mp3info/_config.yml
-
-kornrunner/blurhash/test
-kornrunner/blurhash/.coveralls.yml
-kornrunner/blurhash/infection.json.dist
