@@ -23,7 +23,7 @@ class AuthSchemeResolver implements AuthSchemeResolverInterface
         'aws.auth#sigv4' => 'v4',
         'aws.auth#sigv4a' => 'v4a',
         'smithy.api#httpBearerAuth' => 'bearer',
-        'smithy.auth#noAuth' => 'anonymous'
+        'smithy.api#noAuth' => 'anonymous'
     ];
 
     /**
@@ -37,7 +37,7 @@ class AuthSchemeResolver implements AuthSchemeResolverInterface
 
     public function __construct(
         callable $credentialProvider,
-        callable $tokenProvider = null,
+        ?callable $tokenProvider = null,
         array $authSchemeMap = []
     ){
         $this->credentialProvider = $credentialProvider;

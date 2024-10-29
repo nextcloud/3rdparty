@@ -43,6 +43,7 @@ bin
 # ignore docs and tests
 */*/tests
 
+aws/aws-crt-php/format-check.py
 aws/aws-sdk-php/.changes
 
 brick/math/random-tests.php
