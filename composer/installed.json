@@ -3683,9 +3683,6 @@
                 "bin/naturalselection"
             ],
             "type": "library",
-            "extra": {
-                "patches_applied": []
-            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
