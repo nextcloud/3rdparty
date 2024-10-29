@@ -19,7 +19,7 @@ use XMLReader;
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
-class Reader extends XMLReader
+class Reader extends \XMLReader
 {
     use ContextStackTrait;
 
@@ -103,7 +103,7 @@ class Reader extends XMLReader
      * If the $elementMap argument is specified, the existing elementMap will
      * be overridden while parsing the tree, and restored after this process.
      */
-    public function parseGetElements(array $elementMap = null): array
+    public function parseGetElements(?array $elementMap = null): array
     {
         $result = $this->parseInnerTree($elementMap);
         if (!is_array($result)) {
@@ -126,7 +126,7 @@ class Reader extends XMLReader
      *
      * @return array|string|null
      */
-    public function parseInnerTree(array $elementMap = null)
+    public function parseInnerTree(?array $elementMap = null)
     {
         $text = null;
         $elements = [];
@@ -205,7 +205,7 @@ class Reader extends XMLReader
         $previousDepth = $this->depth;
 
         while ($this->read() && $this->depth != $previousDepth) {
-            if (in_array($this->nodeType, [XMLReader::TEXT, XMLReader::CDATA, XMLReader::WHITESPACE])) {
+            if (in_array($this->nodeType, [\XMLReader::TEXT, \XMLReader::CDATA, \XMLReader::WHITESPACE])) {
                 $result .= $this->value;
             }
         }

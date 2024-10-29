@@ -1,9 +1,5 @@
 {
 	"patches": {
-		"sabre/dav": {
-			"Allow for custom iTip broker": ".patches/custom-itip-broker.diff",
-			"Fix getNodeForPath cache": ".patches/fix-cache-for-node.diff"
-		},
 		"wapmorgan/mp3info": {
 			"generate exception if codec/layer versions or channel headers are unrecognized": ".patches/mp3info-check-array-key.diff"
 		}
