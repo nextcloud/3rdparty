@@ -211,7 +211,7 @@ class Server implements LoggerAwareInterface, EmitterInterface
      *
      * @throws Exception
      */
-    public function __construct($treeOrNode = null, HTTP\Sapi $sapi = null)
+    public function __construct($treeOrNode = null, ?HTTP\Sapi $sapi = null)
     {
         if ($treeOrNode instanceof Tree) {
             $this->tree = $treeOrNode;
@@ -882,7 +882,7 @@ class Server implements LoggerAwareInterface, EmitterInterface
      *
      * @return \Traversable
      */
-    private function generatePathNodes(PropFind $propFind, array $yieldFirst = null)
+    private function generatePathNodes(PropFind $propFind, ?array $yieldFirst = null)
     {
         if (null !== $yieldFirst) {
             yield $yieldFirst;
@@ -1635,6 +1635,8 @@ class Server implements LoggerAwareInterface, EmitterInterface
      */
     public function generateMultiStatus($fileProperties, $strip404s = false)
     {
+        $this->emit('beforeMultiStatus', [&$fileProperties]);
+
         $w = $this->xml->getWriter();
         if (self::$streamMultiStatus) {
             return function () use ($fileProperties, $strip404s, $w) {

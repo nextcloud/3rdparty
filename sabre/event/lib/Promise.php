@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sabre\Event;
 
 use Exception;
-use Throwable;
 
 /**
  * An implementation of the Promise pattern.
@@ -30,17 +29,17 @@ class Promise
     /**
      * The asynchronous operation is pending.
      */
-    const PENDING = 0;
+    public const PENDING = 0;
 
     /**
      * The asynchronous operation has completed, and has a result.
      */
-    const FULFILLED = 1;
+    public const FULFILLED = 1;
 
     /**
      * The asynchronous operation has completed with an error.
      */
-    const REJECTED = 2;
+    public const REJECTED = 2;
 
     /**
      * The current state of this promise.
@@ -58,7 +57,7 @@ class Promise
      * Each are callbacks that map to $this->fulfill and $this->reject.
      * Using the executor is optional.
      */
-    public function __construct(callable $executor = null)
+    public function __construct(?callable $executor = null)
     {
         if ($executor) {
             $executor(
@@ -87,7 +86,7 @@ class Promise
      * If either of the callbacks throw an exception, the returned promise will
      * be rejected and the exception will be passed back.
      */
-    public function then(callable $onFulfilled = null, callable $onRejected = null): Promise
+    public function then(?callable $onFulfilled = null, ?callable $onRejected = null): Promise
     {
         // This new subPromise will be returned from this function, and will
         // be fulfilled with the result of the onFulfilled or onRejected event
@@ -128,8 +127,6 @@ class Promise
 
     /**
      * Marks this promise as fulfilled and sets its return value.
-     *
-     * @param mixed $value
      */
     public function fulfill($value = null)
     {
@@ -146,7 +143,7 @@ class Promise
     /**
      * Marks this promise as rejected, and set its rejection reason.
      */
-    public function reject(Throwable $reason)
+    public function reject(\Throwable $reason)
     {
         if (self::PENDING !== $this->state) {
             throw new PromiseAlreadyResolvedException('This promise is already resolved, and you\'re not allowed to resolve a promise more than once');
@@ -169,7 +166,6 @@ class Promise
      * one. In PHP it might be useful to call this on the last promise in a
      * chain.
      *
-     * @return mixed
      * @psalm-return TReturn
      */
     public function wait()
@@ -208,10 +204,8 @@ class Promise
      *
      * If the promise was fulfilled, this will be the result value. If the
      * promise was rejected, this property hold the rejection reason.
-     *
-     * @var mixed
      */
-    protected $value = null;
+    protected $value;
 
     /**
      * This method is used to call either an onFulfilled or onRejected callback.
@@ -219,10 +213,8 @@ class Promise
      * This method makes sure that the result of these callbacks are handled
      * correctly, and any chained promises are also correctly fulfilled or
      * rejected.
-     *
-     * @param callable $callBack
      */
-    private function invokeCallback(Promise $subPromise, callable $callBack = null)
+    private function invokeCallback(Promise $subPromise, ?callable $callBack = null)
     {
         // We use 'nextTick' to ensure that the event handlers are always
         // triggered outside of the calling stack in which they were originally
@@ -244,7 +236,7 @@ class Promise
                         // immediately fulfill the chained promise.
                         $subPromise->fulfill($result);
                     }
-                } catch (Throwable $e) {
+                } catch (\Throwable $e) {
                     // If the event handler threw an exception, we need to make sure that
                     // the chained promise is rejected as well.
                     $subPromise->reject($e);

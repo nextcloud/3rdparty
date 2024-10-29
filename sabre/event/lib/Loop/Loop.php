@@ -24,7 +24,7 @@ class Loop
      */
     public function setTimeout(callable $cb, float $timeout)
     {
-        $triggerTime = microtime(true) + ($timeout);
+        $triggerTime = microtime(true) + $timeout;
 
         if (!$this->timers) {
             // Special case when the timers array was empty.
@@ -265,7 +265,7 @@ class Loop
      * If $timeout is 0, it will return immediately. If $timeout is null, it
      * will wait indefinitely.
      *
-     * @param float|null timeout
+     * @param float|null $timeout
      */
     protected function runStreams($timeout)
     {
