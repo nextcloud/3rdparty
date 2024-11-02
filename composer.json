@@ -57,7 +57,7 @@
 		"symfony/polyfill-intl-grapheme": "^1.31.0",
 		"symfony/polyfill-intl-normalizer": "^1.31.0",
 		"symfony/process": "^6.4.12",
-		"symfony/routing": "^6.4.12",
+		"symfony/routing": "^6.4.13",
 		"symfony/translation": "^6.4.12",
 		"wapmorgan/mp3info": "^0.1.0",
 		"web-auth/webauthn-lib": "^4.9.1"
