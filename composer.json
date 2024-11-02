@@ -51,7 +51,7 @@
 		"scssphp/scssphp": "^1.12",
 		"stecman/symfony-console-completion": "^0.13.0",
 		"symfony/console": "^6.4.12",
-		"symfony/event-dispatcher": "^6.4.8",
+		"symfony/event-dispatcher": "^6.4.13",
 		"symfony/http-foundation": "^6.4.12",
 		"symfony/mailer": "^6.4.12",
 		"symfony/polyfill-intl-grapheme": "^1.31.0",
