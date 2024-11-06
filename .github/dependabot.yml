@@ -15,6 +15,7 @@ updates:
     day: saturday
     time: "03:00"
     timezone: Europe/Paris
+  open-pull-requests-limit: 20
   commit-message:
     prefix: "build"
     include: "scope"
@@ -31,6 +32,7 @@ updates:
     day: saturday
     time: "03:00"
     timezone: Europe/Paris
+  open-pull-requests-limit: 20
   commit-message:
     prefix: "build"
     include: "scope"
