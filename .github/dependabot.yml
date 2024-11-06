@@ -15,6 +15,7 @@ updates:
     day: saturday
     time: "03:00"
     timezone: Europe/Paris
+  open-pull-requests-limit: 20
   commit-message:
     prefix: "build"
     include: "scope"
@@ -22,6 +23,11 @@ updates:
   labels:
     - "dependencies"
     - "main"
+  groups:
+    symfony:
+      applies-to: version-updates
+      patterns:
+        - "symfony/*"
 
 - package-ecosystem: composer
   directory: "/"
@@ -31,6 +37,7 @@ updates:
     day: saturday
     time: "03:00"
     timezone: Europe/Paris
+  open-pull-requests-limit: 20
   commit-message:
     prefix: "build"
     include: "scope"
@@ -41,3 +48,8 @@ updates:
   labels:
     - "dependencies"
     - "stable30"
+  groups:
+    symfony:
+      applies-to: version-updates
+      patterns:
+        - "symfony/*"
