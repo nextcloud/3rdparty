@@ -23,6 +23,11 @@ updates:
   labels:
     - "dependencies"
     - "main"
+  groups:
+    symfony:
+      applies-to: version-updates
+      patterns:
+        - "symfony/*"
 
 - package-ecosystem: composer
   directory: "/"
@@ -43,3 +48,8 @@ updates:
   labels:
     - "dependencies"
     - "stable30"
+  groups:
+    symfony:
+      applies-to: version-updates
+      patterns:
+        - "symfony/*"
