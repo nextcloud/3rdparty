@@ -3948,6 +3948,7 @@
             "type": "library",
             "extra": {
                 "patches_applied": {
+                    "Allow for custom iTip broker": ".patches/custom-itip-broker.diff",
                     "Fix getNodeForPath cache": ".patches/fix-cache-for-node.diff"
                 }
             },
