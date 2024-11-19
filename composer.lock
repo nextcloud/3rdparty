@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31fce8add59fc8f0d4af48f981bbccdb",
+    "content-hash": "1200b1cca474f0f5b130458915a26f2c",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4197,21 +4197,21 @@
         },
         {
             "name": "stecman/symfony-console-completion",
-            "version": "v0.13.0",
+            "version": "v0.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stecman/symfony-console-completion.git",
-                "reference": "769e6b49123847648ae80f10d3ccb0f128cbb953"
+                "reference": "93b88586e50c05b7375a547031f535bf1ea970f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stecman/symfony-console-completion/zipball/769e6b49123847648ae80f10d3ccb0f128cbb953",
-                "reference": "769e6b49123847648ae80f10d3ccb0f128cbb953",
+                "url": "https://api.github.com/repos/stecman/symfony-console-completion/zipball/93b88586e50c05b7375a547031f535bf1ea970f5",
+                "reference": "93b88586e50c05b7375a547031f535bf1ea970f5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
-                "symfony/console": "~6.3 || ^7.0"
+                "php": ">=8.1",
+                "symfony/console": "~6.4 || ^7.1"
             },
             "require-dev": {
                 "dms/phpunit-arraysubset-asserts": "^0.4.0",
@@ -4241,22 +4241,22 @@
             "description": "Automatic BASH completion for Symfony Console Component based applications.",
             "support": {
                 "issues": "https://github.com/stecman/symfony-console-completion/issues",
-                "source": "https://github.com/stecman/symfony-console-completion/tree/v0.13.0"
+                "source": "https://github.com/stecman/symfony-console-completion/tree/v0.14.0"
             },
-            "time": "2024-07-05T11:49:57+00:00"
+            "time": "2024-11-09T03:07:26+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v6.4.12",
+            "version": "v6.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "72d080eb9edf80e36c19be61f72c98ed8273b765"
+                "reference": "897c2441ed4eec8a8a2c37b943427d24dba3f26b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/72d080eb9edf80e36c19be61f72c98ed8273b765",
-                "reference": "72d080eb9edf80e36c19be61f72c98ed8273b765",
+                "url": "https://api.github.com/repos/symfony/console/zipball/897c2441ed4eec8a8a2c37b943427d24dba3f26b",
+                "reference": "897c2441ed4eec8a8a2c37b943427d24dba3f26b",
                 "shasum": ""
             },
             "require": {
@@ -4321,7 +4321,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.4.12"
+                "source": "https://github.com/symfony/console/tree/v6.4.14"
             },
             "funding": [
                 {
@@ -4337,7 +4337,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-20T08:15:52+00:00"
+            "time": "2024-11-05T15:34:40+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -6355,13 +6355,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.1.0"
     },
