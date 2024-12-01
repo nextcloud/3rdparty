@@ -50,7 +50,7 @@ jobs:
           reactions: '+1'
 
       - name: Init branch
-        uses: xt0rted/pull-request-comment-branch@v2
+        uses: xt0rted/pull-request-comment-branch@v3
         id: comment-branch
 
       - name: Add reaction on failure
