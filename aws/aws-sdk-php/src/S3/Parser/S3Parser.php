@@ -10,9 +10,11 @@ use Aws\Api\StructureShape;
 use Aws\CommandInterface;
 use Aws\Exception\AwsException;
 use Aws\ResultInterface;
+use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Custom S3 parser on top of the S3 protocol parser
@@ -178,7 +180,17 @@ final class S3Parser extends AbstractParser
         $foundErrorElement = preg_match($pattern, $reducedBodyContent);
         // A rewind is needed because the stream is partially or entirely consumed
         // in the previous read operation.
-        $responseBody->rewind();
+		try {
+			$responseBody->rewind();
+		} catch (\RuntimeException $e) {
+			if ($responseBody instanceof Stream) {
+				$url = $responseBody->getMetadata('uri');
+			} else {
+				$url = "unknown resource url";
+			}
+			\OC::$server->get(LoggerInterface::class)->error("S3 response not seekable ($url)", ['exception' => $e, 'response_uri' => $url]);
+			throw $e;
+		}
 
         return $foundErrorElement;
     }
