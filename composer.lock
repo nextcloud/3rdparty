@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31fce8add59fc8f0d4af48f981bbccdb",
+    "content-hash": "c53e8d0e6b3b3b7002ec2f3744dff8eb",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2697,16 +2697,16 @@
         },
         {
             "name": "php-opencloud/openstack",
-            "version": "v3.10.0",
+            "version": "v3.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-opencloud/openstack.git",
-                "reference": "2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa"
+                "reference": "998e5c0ed262bc7bc192fbcf0c48fee2928597f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa",
-                "reference": "2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa",
+                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/998e5c0ed262bc7bc192fbcf0c48fee2928597f6",
+                "reference": "998e5c0ed262bc7bc192fbcf0c48fee2928597f6",
                 "shasum": ""
             },
             "require": {
@@ -2768,9 +2768,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-opencloud/openstack/issues",
-                "source": "https://github.com/php-opencloud/openstack/tree/v3.10.0"
+                "source": "https://github.com/php-opencloud/openstack/tree/v3.11.0"
             },
-            "time": "2024-04-02T12:17:34+00:00"
+            "time": "2024-11-20T18:59:59+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -4406,16 +4406,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1"
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
                 "shasum": ""
             },
             "require": {
@@ -4453,7 +4453,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
             },
             "funding": [
                 {
@@ -4469,7 +4469,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-09-25T14:20:29+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -5357,8 +5357,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -6355,13 +6355,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.1.0"
     },
