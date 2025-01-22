@@ -62,6 +62,7 @@ doctrine/dbal/build.*
 doctrine/dbal/docs
 doctrine/dbal/run-all.sh
 doctrine/dbal/static-analysis
+doctrine/dbal/phpstan-baseline.neon
 
 doctrine/event-manager/phpstan.neon.dist
 
