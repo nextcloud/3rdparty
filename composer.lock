@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b747f1f3b55f9ac94a5032a768f91df",
+    "content-hash": "b23f7f8e16fe237ab4b7f49bd6b974f0",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -62,16 +62,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.324.13",
+            "version": "3.337.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "781cb9594f7d1754c888452f980748115fd159d3"
+                "reference": "06dfc8f76423b49aaa181debd25bbdc724c346d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/781cb9594f7d1754c888452f980748115fd159d3",
-                "reference": "781cb9594f7d1754c888452f980748115fd159d3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/06dfc8f76423b49aaa181debd25bbdc724c346d6",
+                "reference": "06dfc8f76423b49aaa181debd25bbdc724c346d6",
                 "shasum": ""
             },
             "require": {
@@ -100,8 +100,8 @@
                 "nette/neon": "^2.3",
                 "paragonie/random_compat": ">= 2",
                 "phpunit/phpunit": "^5.6.3 || ^8.5 || ^9.5",
-                "psr/cache": "^1.0",
-                "psr/simple-cache": "^1.0",
+                "psr/cache": "^1.0 || ^2.0 || ^3.0",
+                "psr/simple-cache": "^1.0 || ^2.0 || ^3.0",
                 "sebastian/comparator": "^1.2.3 || ^4.0",
                 "yoast/phpunit-polyfills": "^1.0"
             },
@@ -154,9 +154,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.324.13"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.337.3"
             },
-            "time": "2024-10-29T18:11:10+00:00"
+            "time": "2025-01-21T19:10:05+00:00"
         },
         {
             "name": "bantu/ini-get-wrapper",
