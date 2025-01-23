@@ -31,6 +31,31 @@ updates:
 
 - package-ecosystem: composer
   directory: "/"
+  target-branch: stable31
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 20
+  commit-message:
+    prefix: "build"
+    include: "scope"
+  versioning-strategy: "increase"
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  labels:
+    - "dependencies"
+    - "stable30"
+  groups:
+    symfony:
+      applies-to: version-updates
+      patterns:
+        - "symfony/*"
+
+- package-ecosystem: composer
+  directory: "/"
   target-branch: stable30
   schedule:
     interval: weekly
