@@ -1,6 +1,6 @@
 {
 	"name": "nextcloud/3rdparty",
-	"version": "dev-master",
+	"version": "dev-stable31",
 	"description": "All 3rdparty components",
 	"license": "MIT",
 	"config": {
