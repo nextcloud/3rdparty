@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "862270b4ea52b072b168184b59475323",
+    "content-hash": "16669c3f08218f74579055372f00bd23",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2697,16 +2697,16 @@
         },
         {
             "name": "php-opencloud/openstack",
-            "version": "v3.10.0",
+            "version": "v3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-opencloud/openstack.git",
-                "reference": "2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa"
+                "reference": "9886899de3a81e95dd6cb352253870fa02abd0f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa",
-                "reference": "2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa",
+                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/9886899de3a81e95dd6cb352253870fa02abd0f9",
+                "reference": "9886899de3a81e95dd6cb352253870fa02abd0f9",
                 "shasum": ""
             },
             "require": {
@@ -2768,9 +2768,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-opencloud/openstack/issues",
-                "source": "https://github.com/php-opencloud/openstack/tree/v3.10.0"
+                "source": "https://github.com/php-opencloud/openstack/tree/v3.12.0"
             },
-            "time": "2024-04-02T12:17:34+00:00"
+            "time": "2025-01-07T07:11:23+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -6365,5 +6365,5 @@
     "platform-overrides": {
         "php": "8.1.0"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
