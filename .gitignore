@@ -61,10 +61,12 @@ doctrine/dbal/.doctrine-project.json
 doctrine/dbal/.gitmodules
 doctrine/dbal/build.*
 doctrine/dbal/docs
+doctrine/dbal/phpstan-baseline.neon
 doctrine/dbal/run-all.sh
 doctrine/dbal/static-analysis
 
 doctrine/event-manager/phpstan.neon.dist
+doctrine/event-manager/psalm-baseline.xml
 
 fusonic/linq/examples/
 
