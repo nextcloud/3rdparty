@@ -1413,6 +1413,7 @@ return array(
     'Doctrine\\DBAL\\Exception\\SyntaxErrorException' => $vendorDir . '/doctrine/dbal/src/Exception/SyntaxErrorException.php',
     'Doctrine\\DBAL\\Exception\\TableExistsException' => $vendorDir . '/doctrine/dbal/src/Exception/TableExistsException.php',
     'Doctrine\\DBAL\\Exception\\TableNotFoundException' => $vendorDir . '/doctrine/dbal/src/Exception/TableNotFoundException.php',
+    'Doctrine\\DBAL\\Exception\\TransactionRolledBack' => $vendorDir . '/doctrine/dbal/src/Exception/TransactionRolledBack.php',
     'Doctrine\\DBAL\\Exception\\UniqueConstraintViolationException' => $vendorDir . '/doctrine/dbal/src/Exception/UniqueConstraintViolationException.php',
     'Doctrine\\DBAL\\ExpandArrayParameters' => $vendorDir . '/doctrine/dbal/src/ExpandArrayParameters.php',
     'Doctrine\\DBAL\\FetchMode' => $vendorDir . '/doctrine/dbal/src/FetchMode.php',
