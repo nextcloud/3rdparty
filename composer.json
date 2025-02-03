@@ -49,7 +49,7 @@
 		"punic/punic": "^3.8",
 		"sabre/dav": "^4.7.0",
 		"scssphp/scssphp": "^1.12",
-		"stecman/symfony-console-completion": "^0.13.0",
+		"stecman/symfony-console-completion": "^0.14.0",
 		"symfony/console": "^6.4.12",
 		"symfony/event-dispatcher": "^6.4.8",
 		"symfony/http-foundation": "^6.4.14",
