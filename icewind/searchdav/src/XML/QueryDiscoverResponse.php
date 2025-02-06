@@ -38,7 +38,7 @@ class QueryDiscoverResponse extends Response {
 	 * @param BasicSearchSchema|null $schema
 	 * @param null|int|string $httpStatus
 	 */
-	public function __construct($href, BasicSearchSchema $schema = null, $httpStatus = null) {
+	public function __construct($href, ?BasicSearchSchema $schema = null, $httpStatus = null) {
 		if ($httpStatus !== null) {
 			$httpStatus = (string)$httpStatus;
 		}

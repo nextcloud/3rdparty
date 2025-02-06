@@ -182,9 +182,9 @@
             'dev_requirement' => false,
         ),
         'icewind/searchdav' => array(
-            'pretty_version' => 'v3.1.0',
-            'version' => '3.1.0.0',
-            'reference' => '8339181df313361da4daee6cb1c7f144f67f8492',
+            'pretty_version' => 'v3.2.0',
+            'version' => '3.2.0.0',
+            'reference' => '3865288b6962de33086d4e02ec3584610c32b773',
             'type' => 'library',
             'install_path' => __DIR__ . '/../icewind/searchdav',
             'aliases' => array(),
