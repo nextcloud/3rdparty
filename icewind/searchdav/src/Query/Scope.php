@@ -51,7 +51,7 @@ class Scope {
 	 * @param int|string $depth
 	 * @param string|null $path
 	 */
-	public function __construct(string $href = '', $depth = 1, string $path = null) {
+	public function __construct(string $href = '', $depth = 1, ?string $path = null) {
 		$this->href = $href;
 		$this->depth = $depth;
 		$this->path = $path;

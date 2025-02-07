@@ -1527,17 +1527,17 @@
         },
         {
             "name": "icewind/searchdav",
-            "version": "v3.1.0",
-            "version_normalized": "3.1.0.0",
+            "version": "v3.2.0",
+            "version_normalized": "3.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/icewind1991/SearchDAV.git",
-                "reference": "8339181df313361da4daee6cb1c7f144f67f8492"
+                "reference": "3865288b6962de33086d4e02ec3584610c32b773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/8339181df313361da4daee6cb1c7f144f67f8492",
-                "reference": "8339181df313361da4daee6cb1c7f144f67f8492",
+                "url": "https://api.github.com/repos/icewind1991/SearchDAV/zipball/3865288b6962de33086d4e02ec3584610c32b773",
+                "reference": "3865288b6962de33086d4e02ec3584610c32b773",
                 "shasum": ""
             },
             "require": {
@@ -1551,7 +1551,7 @@
                 "phpunit/phpunit": "^8",
                 "psalm/phar": "^4.3"
             },
-            "time": "2023-11-14T22:32:04+00:00",
+            "time": "2024-11-08T15:54:16+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1572,7 +1572,7 @@
             "description": "sabre/dav plugin to implement rfc5323 SEARCH",
             "support": {
                 "issues": "https://github.com/icewind1991/SearchDAV/issues",
-                "source": "https://github.com/icewind1991/SearchDAV/tree/v3.1.0"
+                "source": "https://github.com/icewind1991/SearchDAV/tree/v3.2.0"
             },
             "install-path": "../icewind/searchdav"
         },
