@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3590e1faea96199b2a06d73cd3ea33fc",
+    "content-hash": "28ef2407b900d39ff45e6ad1568c1002",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1390,16 +1390,16 @@
         },
         {
             "name": "guzzlehttp/uri-template",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "ecea8feef63bd4fef1f037ecb288386999ecc11c"
+                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/ecea8feef63bd4fef1f037ecb288386999ecc11c",
-                "reference": "ecea8feef63bd4fef1f037ecb288386999ecc11c",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/30e286560c137526eccd4ce21b2de477ab0676d2",
+                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2",
                 "shasum": ""
             },
             "require": {
@@ -1456,7 +1456,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-                "source": "https://github.com/guzzle/uri-template/tree/v1.0.3"
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.4"
             },
             "funding": [
                 {
@@ -1472,7 +1472,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T19:50:20+00:00"
+            "time": "2025-02-03T10:55:03+00:00"
         },
         {
             "name": "icewind/searchdav",
@@ -2697,16 +2697,16 @@
         },
         {
             "name": "php-opencloud/openstack",
-            "version": "v3.10.0",
+            "version": "v3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-opencloud/openstack.git",
-                "reference": "2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa"
+                "reference": "9886899de3a81e95dd6cb352253870fa02abd0f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa",
-                "reference": "2ed9c10badd8eb2645870a7d1f6e9dabe809d6aa",
+                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/9886899de3a81e95dd6cb352253870fa02abd0f9",
+                "reference": "9886899de3a81e95dd6cb352253870fa02abd0f9",
                 "shasum": ""
             },
             "require": {
@@ -2768,9 +2768,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-opencloud/openstack/issues",
-                "source": "https://github.com/php-opencloud/openstack/tree/v3.10.0"
+                "source": "https://github.com/php-opencloud/openstack/tree/v3.12.0"
             },
-            "time": "2024-04-02T12:17:34+00:00"
+            "time": "2025-01-07T07:11:23+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
