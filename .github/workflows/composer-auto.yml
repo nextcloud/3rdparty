@@ -1,7 +1,11 @@
 name: Compile Command
+
 on:
   issue_comment:
     types: [created]
+
+permissions:
+  contents: read
 
 jobs:
   init:
@@ -14,22 +18,53 @@ jobs:
       head_ref: ${{ steps.comment-branch.outputs.head_ref }}
 
     steps:
+      - name: Get repository from pull request comment
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        id: get-repository
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const pull = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            const repositoryName = pull.data.head?.repo?.full_name
+            console.log(repositoryName)
+            return repositoryName
+
+      - name: Disabled on forks
+        if: ${{ fromJSON(steps.get-repository.outputs.result) != github.repository }}
+        run: |
+          echo 'Can not execute /composer-update on forks'
+          exit 1
+
       - name: Check actor permission
-        uses: skjnldsv/check-actor-permission@v2
+        uses: skjnldsv/check-actor-permission@69e92a3c4711150929bca9fcf34448c5bf5526e7 # v3.0
         with:
           require: write
 
       - name: Add reaction on start
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
         with:
           token: ${{ secrets.COMMAND_BOT_PAT }}
           repository: ${{ github.event.repository.full_name }}
           comment-id: ${{ github.event.comment.id }}
-          reaction-type: "+1"
+          reactions: '+1'
 
       - name: Init branch
-        uses: xt0rted/pull-request-comment-branch@v1
+        uses: xt0rted/pull-request-comment-branch@e8b8daa837e8ea7331c0003c9c316a64c6d8b0b1 # v3.0.0
         id: comment-branch
+
+      - name: Add reaction on failure
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
+        if: failure()
+        with:
+          token: ${{ secrets.COMMAND_BOT_PAT }}
+          repository: ${{ github.event.repository.full_name }}
+          comment-id: ${{ github.event.comment.id }}
+          reactions: '-1'
 
   process:
     runs-on: ubuntu-latest
@@ -37,19 +72,20 @@ jobs:
 
     steps:
       - name: Checkout ${{ needs.init.outputs.head_ref }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          persist-credentials: false
           token: ${{ secrets.COMMAND_BOT_PAT }}
           fetch-depth: 0
           ref: ${{ needs.init.outputs.head_ref }}
 
       - name: Setup git
         run: |
-          git config --local user.email "nextcloud-command@users.noreply.github.com"
-          git config --local user.name "nextcloud-command"
+          git config --local user.email 'nextcloud-command@users.noreply.github.com'
+          git config --local user.name 'nextcloud-command'
 
       - name: Set up php
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401 # v2.32.0
         with:
           php-version: 8.1
           coverage: none
@@ -73,13 +109,13 @@ jobs:
         run: |
           git add .
           git commit --signoff -m 'chore(autoloader): Dump autoloader'
-          git push --force origin ${{ needs.init.outputs.head_ref }}
+          git push --force origin '${{ needs.init.outputs.head_ref }}'
 
       - name: Add reaction on failure
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
         if: failure()
         with:
           token: ${{ secrets.COMMAND_BOT_PAT }}
-          repository: ${{ github.event.repository.full_name }}
-          comment-id: ${{ github.event.comment.id }}
-          reaction-type: "-1"
+          repository: '${{ github.event.repository.full_name }}'
+          comment-id: '${{ github.event.comment.id }}'
+          reactions: '-1'
