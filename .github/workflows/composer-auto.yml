@@ -1,7 +1,11 @@
 name: Compile Command
+
 on:
   issue_comment:
     types: [created]
+
+permissions:
+  contents: read
 
 jobs:
   init:
@@ -37,12 +41,12 @@ jobs:
           exit 1
 
       - name: Check actor permission
-        uses: skjnldsv/check-actor-permission@v3
+        uses: skjnldsv/check-actor-permission@69e92a3c4711150929bca9fcf34448c5bf5526e7 # v3.0
         with:
           require: write
 
       - name: Add reaction on start
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
         with:
           token: ${{ secrets.COMMAND_BOT_PAT }}
           repository: ${{ github.event.repository.full_name }}
@@ -50,7 +54,7 @@ jobs:
           reactions: '+1'
 
       - name: Init branch
-        uses: xt0rted/pull-request-comment-branch@v2
+        uses: xt0rted/pull-request-comment-branch@e8b8daa837e8ea7331c0003c9c316a64c6d8b0b1 # v3.0.0
         id: comment-branch
 
       - name: Add reaction on failure
@@ -68,8 +72,9 @@ jobs:
 
     steps:
       - name: Checkout ${{ needs.init.outputs.head_ref }}
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          persist-credentials: false
           token: ${{ secrets.COMMAND_BOT_PAT }}
           fetch-depth: 0
           ref: ${{ needs.init.outputs.head_ref }}
@@ -80,7 +85,7 @@ jobs:
           git config --local user.name 'nextcloud-command'
 
       - name: Set up php
-        uses: shivammathur/setup-php@2e947f1f6932d141d076ca441d0e1e881775e95b #v2.31.0
+        uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401 # v2.32.0
         with:
           php-version: 8.1
           coverage: none
@@ -107,7 +112,7 @@ jobs:
           git push --force origin '${{ needs.init.outputs.head_ref }}'
 
       - name: Add reaction on failure
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
         if: failure()
         with:
           token: ${{ secrets.COMMAND_BOT_PAT }}
