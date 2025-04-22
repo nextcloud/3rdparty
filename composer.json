@@ -27,7 +27,7 @@
 		"egulias/email-validator": "^4.0.2",
 		"fusonic/opengraph": "^2.3.0",
 		"giggsey/libphonenumber-for-php-lite": "^8.13.48",
-		"guzzlehttp/guzzle": "^7.9.2",
+		"guzzlehttp/guzzle": "^7.9.3",
 		"icewind/searchdav": "^3.2.0",
 		"icewind/streams": "^0.7.7",
 		"kornrunner/blurhash": "^1.2",
