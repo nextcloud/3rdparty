@@ -132,8 +132,6 @@ sabre/dav/examples
 
 sabre/http/examples
 
-scssphp/scssphp/example
-
 symfony/*/Test
 symfony/debug/Tests
 
