@@ -374,7 +374,7 @@ class Connection
             return false;
         }
 
-		var_dump('DB reconnecting?')
+		var_dump('DB reconnecting?');
 
         try {
             $this->_conn = $this->_driver->connect($this->params);
