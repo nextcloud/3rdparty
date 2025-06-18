@@ -335,9 +335,9 @@
             'dev_requirement' => false,
         ),
         'pear/pear-core-minimal' => array(
-            'pretty_version' => 'v1.10.15',
-            'version' => '1.10.15.0',
-            'reference' => 'ce0adade8b97561656ace07cdaac4751c271ea8c',
+            'pretty_version' => 'v1.10.16',
+            'version' => '1.10.16.0',
+            'reference' => 'c0f51b45f50683bf5bbf558036854ebc9b54d033',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/pear-core-minimal',
             'aliases' => array(),
@@ -559,7 +559,7 @@
         'rsky/pear-core-min' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.10.15',
+                0 => 'v1.10.16',
             ),
         ),
         'sabre/dav' => array(
