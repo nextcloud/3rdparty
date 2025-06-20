@@ -191,9 +191,9 @@
             'dev_requirement' => false,
         ),
         'icewind/streams' => array(
-            'pretty_version' => 'v0.7.7',
-            'version' => '0.7.7.0',
-            'reference' => '64200fd7cfcc7f550c3c695c48d8fd8bba97fecb',
+            'pretty_version' => 'v0.7.8',
+            'version' => '0.7.8.0',
+            'reference' => 'cb2bd3ed41b516efb97e06e8da35a12ef58ba48b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../icewind/streams',
             'aliases' => array(),
