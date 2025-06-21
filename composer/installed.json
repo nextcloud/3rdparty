@@ -3951,6 +3951,9 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "4.0.x-dev"
+                },
+                "patches_applied": {
+                    "Allow RRULE and RDATE directices together in one calendar entry": ".patches/sabre-vobject-support-rdate-together-with-rrule.patch"
                 }
             },
             "installation-source": "dist",
