@@ -23,7 +23,7 @@
 		"cweagans/composer-patches": "^1.7",
 		"deepdiver/zipstreamer": "^2.0.3",
 		"deepdiver1975/tarstreamer": "^2.1.0",
-		"doctrine/dbal": "^3.9.4",
+		"doctrine/dbal": "^3.9.5",
 		"egulias/email-validator": "^4.0.2",
 		"fusonic/opengraph": "^2.3.0",
 		"giggsey/libphonenumber-for-php-lite": "^8.13.12",
