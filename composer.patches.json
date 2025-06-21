@@ -2,6 +2,9 @@
 	"patches": {
 		"wapmorgan/mp3info": {
 			"generate exception if codec/layer versions or channel headers are unrecognized": ".patches/mp3info-check-array-key.diff"
+		},
+    "sabre/vobject": {
+			"Allow RRULE and RDATE directices together in one calendar entry": ".patches/sabre-vobject-support-rdate-together-with-rrule.patch"
 		}
 	}
 }

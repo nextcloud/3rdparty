@@ -1,0 +1,296 @@
+commit 88ac2e2794eb7a0530e1ee8118ed80a36072b7a3
+Author: Claus-Justus Heine <himself@claus-justus-heine.de>
+Date:   Sat Jun 21 12:08:42 2025 +0200
+
+    Backport of sabre-io/vobject#716 -- support RDATE together with RRULE.
+
+diff --git a/lib/Recur/EventIterator.php b/lib/Recur/EventIterator.php
+index 55d6e47..ad11cec 100644
+--- a/lib/Recur/EventIterator.php
++++ b/lib/Recur/EventIterator.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Sabre\VObject\Recur;
+ 
++use AppendIterator;
+ use DateTimeImmutable;
+ use DateTimeInterface;
+ use DateTimeZone;
+@@ -167,18 +168,25 @@ class EventIterator implements \Iterator
+             $this->eventDuration = 0;
+         }
+ 
++        $this->recurIterators = [];
++        if (isset($this->masterEvent->RRULE)) {
++            foreach ($this->masterEvent->RRULE as $rRule) {
++                $this->recurIterators[] = new RRuleIterator(
++                    $this->masterEvent->RRULE->getParts(),
++                    $this->startDate
++                );
++            }
++        }
+         if (isset($this->masterEvent->RDATE)) {
+-            $this->recurIterator = new RDateIterator(
+-                $this->masterEvent->RDATE->getParts(),
+-                $this->startDate
+-            );
+-        } elseif (isset($this->masterEvent->RRULE)) {
+-            $this->recurIterator = new RRuleIterator(
+-                $this->masterEvent->RRULE->getParts(),
+-                $this->startDate
+-            );
+-        } else {
+-            $this->recurIterator = new RRuleIterator(
++            foreach ($this->masterEvent->RDATE as $rDate) {
++                $this->recurIterators[] = new RDateIterator(
++                    $rDate->getParts(),
++                    $this->startDate,
++                );
++            }
++        }
++        if (empty($this->recurIterators)) {
++            $this->recurIterators[] = new RRuleIterator(
+                 [
+                     'FREQ' => 'DAILY',
+                     'COUNT' => 1,
+@@ -317,7 +325,9 @@ class EventIterator implements \Iterator
+     #[\ReturnTypeWillChange]
+     public function rewind()
+     {
+-        $this->recurIterator->rewind();
++        foreach ($this->recurIterators as $iterator) {
++            $iterator->rewind();
++        }
+         // re-creating overridden event index.
+         $index = [];
+         foreach ($this->overriddenEvents as $key => $event) {
+@@ -332,6 +342,15 @@ class EventIterator implements \Iterator
+         $this->nextDate = null;
+         $this->currentDate = clone $this->startDate;
+ 
++        $this->currentCandidates = [];
++        foreach ($this->recurIterators as $index => $iterator) {
++            if (!$iterator->valid()) {
++                continue;
++            }
++            $this->currentCandidates[$index] = $iterator->current()->getTimeStamp();
++        }
++        asort($this->currentCandidates);
++
+         $this->next();
+     }
+ 
+@@ -354,13 +373,30 @@ class EventIterator implements \Iterator
+             // We need to do this until we find a date that's not in the
+             // exception list.
+             do {
+-                if (!$this->recurIterator->valid()) {
++                if (empty($this->currentCandidates)) {
+                     $nextDate = null;
+                     break;
+                 }
+-                $nextDate = $this->recurIterator->current();
+-                $this->recurIterator->next();
+-            } while (isset($this->exceptions[$nextDate->getTimeStamp()]));
++                $nextIndex = array_key_first($this->currentCandidates);
++                $nextDate = $this->recurIterators[$nextIndex]->current();
++                $nextStamp = $this->currentCandidates[$nextIndex];
++
++                // advance all iterators which match the current timestamp
++                foreach ($this->currentCandidates as $index => $stamp) {
++                    if ($stamp > $nextStamp) {
++                        break;
++                    }
++                    $iterator = $this->recurIterators[$index];
++                    $iterator->next();
++                    if ($iterator->valid()) {
++                        $this->currentCandidates[$index] = $iterator->current()->getTimeStamp();
++                        asort($this->currentCandidates);
++                    } else {
++                        unset($this->currentCandidates[$index]);
++                        // resort not neccessary
++                    }
++                }
++            } while (isset($this->exceptions[$nextStamp]));
+         }
+ 
+         // $nextDate now contains what rrule thinks is the next one, but an
+@@ -408,15 +444,27 @@ class EventIterator implements \Iterator
+      */
+     public function isInfinite()
+     {
+-        return $this->recurIterator->isInfinite();
++        foreach ($this->recurIterators as $iterator) {
++            if ($iterator->isInfinite()) {
++                return true;
++            }
++        }
++        return false;
+     }
+ 
+     /**
+-     * RRULE parser.
++     * Array of RRULE parsers.
++     *
++     * @var array<int, RRuleIterator>
++     */
++    protected $recurIterators;
++
++    /**
++     * Array of current candidate timestamps.
+      *
+-     * @var RRuleIterator
++     * @var array<int, int>
+      */
+-    protected $recurIterator;
++    protected $currentCandidates;
+ 
+     /**
+      * The duration, in seconds, of the master event.
+diff --git a/lib/Recur/RDateIterator.php b/lib/Recur/RDateIterator.php
+index 5d56657..3f2e368 100644
+--- a/lib/Recur/RDateIterator.php
++++ b/lib/Recur/RDateIterator.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Sabre\VObject\Recur;
+ 
++use DateTimeImmutable;
+ use DateTimeInterface;
+ use Iterator;
+ use Sabre\VObject\DateTimeParser;
+@@ -30,7 +31,8 @@ class RDateIterator implements Iterator
+     {
+         $this->startDate = $start;
+         $this->parseRDate($rrule);
+-        $this->currentDate = clone $this->startDate;
++        array_unshift($this->dates, DateTimeImmutable::createFromInterface($this->startDate));
++        $this->rewind();
+     }
+ 
+     /* Implementation of the Iterator interface {{{ */
+@@ -39,10 +41,16 @@ class RDateIterator implements Iterator
+     public function current()
+     {
+         if (!$this->valid()) {
+-            return;
++            return null;
+         }
+-
+-        return clone $this->currentDate;
++        if (is_string($this->dates[$this->counter])) {
++            $this->dates[$this->counter] =
++                DateTimeParser::parse(
++                    $this->dates[$this->counter],
++                    $this->startDate->getTimezone()
++                );
++        }
++        return $this->dates[$this->counter];
+     }
+ 
+     /**
+@@ -65,7 +73,7 @@ class RDateIterator implements Iterator
+     #[\ReturnTypeWillChange]
+     public function valid()
+     {
+-        return $this->counter <= count($this->dates);
++        return $this->counter < count($this->dates);
+     }
+ 
+     /**
+@@ -76,7 +84,6 @@ class RDateIterator implements Iterator
+     #[\ReturnTypeWillChange]
+     public function rewind()
+     {
+-        $this->currentDate = clone $this->startDate;
+         $this->counter = 0;
+     }
+ 
+@@ -92,12 +99,6 @@ class RDateIterator implements Iterator
+         if (!$this->valid()) {
+             return;
+         }
+-
+-        $this->currentDate =
+-            DateTimeParser::parse(
+-                $this->dates[$this->counter - 1],
+-                $this->startDate->getTimezone()
+-            );
+     }
+ 
+     /* End of Iterator implementation }}} */
+@@ -118,7 +119,7 @@ class RDateIterator implements Iterator
+      */
+     public function fastForward(DateTimeInterface $dt)
+     {
+-        while ($this->valid() && $this->currentDate < $dt) {
++        while ($this->valid() && $this->current() < $dt) {
+             $this->next();
+         }
+     }
+@@ -132,14 +133,6 @@ class RDateIterator implements Iterator
+      */
+     protected $startDate;
+ 
+-    /**
+-     * The date of the current iteration. You can get this by calling
+-     * ->current().
+-     *
+-     * @var DateTimeInterface
+-     */
+-    protected $currentDate;
+-
+     /**
+      * The current item in the list.
+      *
+commit 09253e82509b8972aae98ce0c417bbafa4f6f616
+Author: Claus-Justus Heine <himself@claus-justus-heine.de>
+Date:   Sat Jun 21 12:11:40 2025 +0200
+
+    Backport of sabre-io/vobject#716 -- RDateIterator shoudld not assume that DTSTART is the earliest date.
+    
+    It should also not assume that the list of dates is sorted at all.
+
+diff --git a/lib/Recur/RDateIterator.php b/lib/Recur/RDateIterator.php
+index 3f2e368..ba70db4 100644
+--- a/lib/Recur/RDateIterator.php
++++ b/lib/Recur/RDateIterator.php
+@@ -32,6 +32,8 @@ class RDateIterator implements Iterator
+         $this->startDate = $start;
+         $this->parseRDate($rrule);
+         array_unshift($this->dates, DateTimeImmutable::createFromInterface($this->startDate));
++        sort($this->dates);
++        $this->dates = array_values($this->dates);
+         $this->rewind();
+     }
+ 
+@@ -43,13 +45,6 @@ class RDateIterator implements Iterator
+         if (!$this->valid()) {
+             return null;
+         }
+-        if (is_string($this->dates[$this->counter])) {
+-            $this->dates[$this->counter] =
+-                DateTimeParser::parse(
+-                    $this->dates[$this->counter],
+-                    $this->startDate->getTimezone()
+-                );
+-        }
+         return $this->dates[$this->counter];
+     }
+ 
+@@ -155,8 +150,13 @@ class RDateIterator implements Iterator
+         if (is_string($rdate)) {
+             $rdate = explode(',', $rdate);
+         }
+-
+-        $this->dates = $rdate;
++        $this->dates = array_map(
++            fn(string $dateString) => DateTimeParser::parse(
++                $dateString,
++                $this->startDate->getTimezone()
++            ),
++            $rdate
++        );
+     }
+ 
+     /**
