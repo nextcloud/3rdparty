@@ -272,9 +272,9 @@
             'dev_requirement' => false,
         ),
         'mlocati/ip-lib' => array(
-            'pretty_version' => '1.18.1',
-            'version' => '1.18.1.0',
-            'reference' => '08bb43b4949069c543ebdf099a6b2c322d0172ab',
+            'pretty_version' => '1.20.0',
+            'version' => '1.20.0.0',
+            'reference' => 'fd45fc3bf08ed6c7e665e2e70562082ac954afd4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mlocati/ip-lib',
             'aliases' => array(),
