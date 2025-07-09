@@ -38,7 +38,7 @@
 		"nextcloud/lognormalizer": "^1.0",
 		"pear/archive_tar": "^1.4.9",
 		"pear/pear-core-minimal": "^1.10",
-		"php-http/guzzle7-adapter": "^1.0.0",
+		"php-http/guzzle7-adapter": "^1.1.0",
 		"php-opencloud/openstack": "^3.12",
 		"phpseclib/phpseclib": "^2.0.45",
 		"pimple/pimple": "^3.5.0",
