@@ -129,6 +129,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'MicrosoftAzure\\Storage\\Common\\' => 30,
             'MicrosoftAzure\\Storage\\Blob\\' => 28,
             'Masterminds\\' => 12,
+            'MabeEnum\\' => 9,
         ),
         'L' => 
         array (
@@ -410,6 +411,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'MabeEnum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marc-mabe/php-enum/src',
         ),
         'Lcobucci\\Clock\\' => 
         array (
@@ -2367,8 +2372,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'JmesPath\\TreeCompiler' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/TreeCompiler.php',
         'JmesPath\\TreeInterpreter' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/TreeInterpreter.php',
         'JmesPath\\Utils' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/Utils.php',
+        'JsonSchema\\ConstraintError' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/ConstraintError.php',
         'JsonSchema\\Constraints\\BaseConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/BaseConstraint.php',
         'JsonSchema\\Constraints\\CollectionConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/CollectionConstraint.php',
+        'JsonSchema\\Constraints\\ConstConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/ConstConstraint.php',
         'JsonSchema\\Constraints\\Constraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/Constraint.php',
         'JsonSchema\\Constraints\\ConstraintInterface' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/ConstraintInterface.php',
         'JsonSchema\\Constraints\\EnumConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/EnumConstraint.php',
@@ -2384,6 +2391,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'JsonSchema\\Constraints\\TypeConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/TypeConstraint.php',
         'JsonSchema\\Constraints\\UndefinedConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/UndefinedConstraint.php',
         'JsonSchema\\Entity\\JsonPointer' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Entity/JsonPointer.php',
+        'JsonSchema\\Enum' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Enum.php',
         'JsonSchema\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Exception/ExceptionInterface.php',
         'JsonSchema\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Exception/InvalidArgumentException.php',
         'JsonSchema\\Exception\\InvalidConfigException' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Exception/InvalidConfigException.php',
@@ -2400,6 +2408,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'JsonSchema\\Rfc3339' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Rfc3339.php',
         'JsonSchema\\SchemaStorage' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/SchemaStorage.php',
         'JsonSchema\\SchemaStorageInterface' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/SchemaStorageInterface.php',
+        'JsonSchema\\Tool\\DeepComparer' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Tool/DeepComparer.php',
+        'JsonSchema\\Tool\\DeepCopy' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Tool/DeepCopy.php',
+        'JsonSchema\\Tool\\Validator\\RelativeReferenceValidator' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Tool/Validator/RelativeReferenceValidator.php',
+        'JsonSchema\\Tool\\Validator\\UriValidator' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Tool/Validator/UriValidator.php',
         'JsonSchema\\UriResolverInterface' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/UriResolverInterface.php',
         'JsonSchema\\UriRetrieverInterface' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/UriRetrieverInterface.php',
         'JsonSchema\\Uri\\Retrievers\\AbstractRetriever' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Uri/Retrievers/AbstractRetriever.php',
@@ -2427,6 +2439,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Lcobucci\\Clock\\Clock' => __DIR__ . '/..' . '/lcobucci/clock/src/Clock.php',
         'Lcobucci\\Clock\\FrozenClock' => __DIR__ . '/..' . '/lcobucci/clock/src/FrozenClock.php',
         'Lcobucci\\Clock\\SystemClock' => __DIR__ . '/..' . '/lcobucci/clock/src/SystemClock.php',
+        'MabeEnum\\Enum' => __DIR__ . '/..' . '/marc-mabe/php-enum/src/Enum.php',
+        'MabeEnum\\EnumMap' => __DIR__ . '/..' . '/marc-mabe/php-enum/src/EnumMap.php',
+        'MabeEnum\\EnumSerializableTrait' => __DIR__ . '/..' . '/marc-mabe/php-enum/src/EnumSerializableTrait.php',
+        'MabeEnum\\EnumSet' => __DIR__ . '/..' . '/marc-mabe/php-enum/src/EnumSet.php',
         'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
         'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
         'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',
