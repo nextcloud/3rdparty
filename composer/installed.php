@@ -749,8 +749,8 @@
             'dev_requirement' => false,
         ),
         'symfony/polyfill-intl-grapheme' => array(
-            'pretty_version' => 'v1.31.0',
-            'version' => '1.31.0.0',
+            'pretty_version' => 'v1.32.0',
+            'version' => '1.32.0.0',
             'reference' => 'b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-intl-grapheme',
