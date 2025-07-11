@@ -881,9 +881,9 @@
             'dev_requirement' => false,
         ),
         'wapmorgan/mp3info' => array(
-            'pretty_version' => '0.1.0',
-            'version' => '0.1.0.0',
-            'reference' => 'f4e3b0d606732f667729c116e1baa4f845a65f9d',
+            'pretty_version' => '0.1.1',
+            'version' => '0.1.1.0',
+            'reference' => 'e532c2e1997874f9c672c7810ce90ef15004ef94',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wapmorgan/mp3info',
             'aliases' => array(),
