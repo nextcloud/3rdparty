@@ -1,7 +1,3 @@
 {
-	"patches": {
-		"wapmorgan/mp3info": {
-			"generate exception if codec/layer versions or channel headers are unrecognized": ".patches/mp3info-check-array-key.diff"
-		}
-	}
+	"patches": {}
 }
