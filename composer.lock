@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb06f8384bc134dc1ffdb6a0f4ebbc2e",
+    "content-hash": "86bb1b60f929e3fa40bb828c73b81440",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -925,34 +925,39 @@
         },
         {
             "name": "fusonic/opengraph",
-            "version": "v2.3.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fusonic/opengraph.git",
-                "reference": "09dca70b04b4221c9dc664e1689e876a3faa50c2"
+                "reference": "2daa6dce84f23b1bb6d66bf03b3e9371c39cd378"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fusonic/opengraph/zipball/09dca70b04b4221c9dc664e1689e876a3faa50c2",
-                "reference": "09dca70b04b4221c9dc664e1689e876a3faa50c2",
+                "url": "https://api.github.com/repos/fusonic/opengraph/zipball/2daa6dce84f23b1bb6d66bf03b3e9371c39cd378",
+                "reference": "2daa6dce84f23b1bb6d66bf03b3e9371c39cd378",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
-                "php": "^7.4|^8.0",
+                "php": "^8.1",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
-                "symfony/css-selector": "^3.0|^4.0|^5.0|^6.0",
-                "symfony/dom-crawler": "^3.0|^4.0|^5.0|^6.0"
+                "symfony/css-selector": "^5.4 || ^6.4 || ^7.1",
+                "symfony/dom-crawler": "^5.4 || ^6.4 || ^7.1"
             },
             "require-dev": {
-                "nyholm/psr7": "^1.2",
-                "phpunit/phpunit": "^9.0",
-                "symfony/http-client": "^6.0"
+                "friendsofphp/php-cs-fixer": "^3.65",
+                "nyholm/psr7": "^1.8",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.5 || ^11.4",
+                "symfony/http-client": "^5.4 || ^6.4 || ^7.1"
             },
             "suggest": {
-                "nyholm/psr7": "^1.2",
-                "symfony/http-client": "^5.0"
+                "nyholm/psr7": "^1.8",
+                "symfony/http-client": "^5.4 || ^6.4 || ^7.1"
             },
             "type": "library",
             "autoload": {
@@ -971,15 +976,15 @@
                 }
             ],
             "description": "PHP library for consuming and publishing Open Graph resources.",
-            "homepage": "https://github.com/fusonic/fusonic-opengraph",
+            "homepage": "https://github.com/fusonic/opengraph",
             "keywords": [
                 "opengraph"
             ],
             "support": {
                 "issues": "https://github.com/fusonic/opengraph/issues",
-                "source": "https://github.com/fusonic/opengraph/tree/v2.3.0"
+                "source": "https://github.com/fusonic/opengraph/tree/v3.0.0"
             },
-            "time": "2023-12-05T14:26:51+00:00"
+            "time": "2025-01-13T07:23:24+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
@@ -4327,16 +4332,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v6.4.3",
+            "version": "v6.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "ee0f7ed5cf298cc019431bb3b3977ebc52b86229"
+                "reference": "cb23e97813c5837a041b73a6d63a9ddff0778f5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ee0f7ed5cf298cc019431bb3b3977ebc52b86229",
-                "reference": "ee0f7ed5cf298cc019431bb3b3977ebc52b86229",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/cb23e97813c5837a041b73a6d63a9ddff0778f5e",
+                "reference": "cb23e97813c5837a041b73a6d63a9ddff0778f5e",
                 "shasum": ""
             },
             "require": {
@@ -4372,7 +4377,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v6.4.3"
+                "source": "https://github.com/symfony/css-selector/tree/v6.4.13"
             },
             "funding": [
                 {
@@ -4388,7 +4393,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-23T14:51:35+00:00"
+            "time": "2024-09-25T14:18:03+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4459,16 +4464,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v6.4.4",
+            "version": "v6.4.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "f0e7ec3fa17000e2d0cb4557b4b47c88a6a63531"
+                "reference": "22210aacb35dbadd772325d759d17bce2374a84d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/f0e7ec3fa17000e2d0cb4557b4b47c88a6a63531",
-                "reference": "f0e7ec3fa17000e2d0cb4557b4b47c88a6a63531",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/22210aacb35dbadd772325d759d17bce2374a84d",
+                "reference": "22210aacb35dbadd772325d759d17bce2374a84d",
                 "shasum": ""
             },
             "require": {
@@ -4506,7 +4511,7 @@
             "description": "Eases DOM navigation for HTML and XML documents",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dom-crawler/tree/v6.4.4"
+                "source": "https://github.com/symfony/dom-crawler/tree/v6.4.23"
             },
             "funding": [
                 {
@@ -4522,7 +4527,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-07T09:17:57+00:00"
+            "time": "2025-06-13T12:10:00+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -4924,7 +4929,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.31.0",
+            "version": "v1.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -4983,7 +4988,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.32.0"
             },
             "funding": [
                 {
