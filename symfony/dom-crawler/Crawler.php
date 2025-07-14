@@ -431,7 +431,7 @@ class Crawler implements \Countable, \IteratorAggregate
 
         $domNode = $this->getNode(0);
 
-        while (\XML_ELEMENT_NODE === $domNode->nodeType) {
+        while (null !== $domNode && \XML_ELEMENT_NODE === $domNode->nodeType) {
             $node = $this->createSubCrawler($domNode);
             if ($node->matches($selector)) {
                 return $node;
@@ -770,12 +770,12 @@ class Crawler implements \Countable, \IteratorAggregate
     }
 
     /**
-     * Selects a button by name or alt value for images.
+     * Selects a button by its text content, id, value, name or alt attribute.
      */
     public function selectButton(string $value): static
     {
         return $this->filterRelativeXPath(
-            sprintf('descendant-or-self::input[((contains(%1$s, "submit") or contains(%1$s, "button")) and contains(concat(\' \', normalize-space(string(@value)), \' \'), %2$s)) or (contains(%1$s, "image") and contains(concat(\' \', normalize-space(string(@alt)), \' \'), %2$s)) or @id=%3$s or @name=%3$s] | descendant-or-self::button[contains(concat(\' \', normalize-space(string(.)), \' \'), %2$s) or @id=%3$s or @name=%3$s]', 'translate(@type, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")', static::xpathLiteral(' '.$value.' '), static::xpathLiteral($value))
+            sprintf('descendant-or-self::input[((contains(%1$s, "submit") or contains(%1$s, "button")) and contains(concat(\' \', normalize-space(string(@value)), \' \'), %2$s)) or (contains(%1$s, "image") and contains(concat(\' \', normalize-space(string(@alt)), \' \'), %2$s)) or @id=%3$s or @name=%3$s] | descendant-or-self::button[contains(concat(\' \', normalize-space(string(.)), \' \'), %2$s) or contains(concat(\' \', normalize-space(string(@value)), \' \'), %2$s) or @id=%3$s or @name=%3$s]', 'translate(@type, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")', static::xpathLiteral(' '.$value.' '), static::xpathLiteral($value))
         );
     }
 
@@ -1090,12 +1090,30 @@ class Crawler implements \Countable, \IteratorAggregate
 
     private function parseHtml5(string $htmlContent, string $charset = 'UTF-8'): \DOMDocument
     {
-        return $this->html5Parser->parse($this->convertToHtmlEntities($htmlContent, $charset));
+        if (!$this->supportsEncoding($charset)) {
+            $htmlContent = $this->convertToHtmlEntities($htmlContent, $charset);
+            $charset = 'UTF-8';
+        }
+
+        return $this->html5Parser->parse($htmlContent, ['encoding' => $charset]);
+    }
+
+    private function supportsEncoding(string $encoding): bool
+    {
+        try {
+            return '' === @mb_convert_encoding('', $encoding, 'UTF-8');
+        } catch (\Throwable $e) {
+            return false;
+        }
     }
 
     private function parseXhtml(string $htmlContent, string $charset = 'UTF-8'): \DOMDocument
     {
-        $htmlContent = $this->convertToHtmlEntities($htmlContent, $charset);
+        if ('UTF-8' === $charset && preg_match('//u', $htmlContent)) {
+            $htmlContent = '<?xml encoding="UTF-8">'.$htmlContent;
+        } else {
+            $htmlContent = $this->convertToHtmlEntities($htmlContent, $charset);
+        }
 
         $internalErrors = libxml_use_internal_errors(true);
 
