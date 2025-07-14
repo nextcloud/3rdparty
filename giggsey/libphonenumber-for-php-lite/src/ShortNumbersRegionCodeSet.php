@@ -1,4 +1,5 @@
 <?php
+
 /**
  * libphonenumber-for-php-lite data file
  * This file has been @generated from libphonenumber data
@@ -6,12 +7,19 @@
  * @internal
  */
 
+declare(strict_types=1);
+
 namespace libphonenumber;
 
+/**
+ * @internal
+ */
 class ShortNumbersRegionCodeSet
 {
-    // A set of all region codes for which data is available.
-
+    /**
+     * A set of all region codes for which data is available.
+     * @var string[]
+     */
     public const SHORT_NUMBERS_REGION_CODE_SET = [
         'AC',
         'AD',
@@ -255,5 +263,4 @@ class ShortNumbersRegionCodeSet
         'ZM',
         'ZW',
     ];
-
 }
