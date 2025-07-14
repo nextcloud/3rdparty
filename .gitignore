@@ -12,6 +12,7 @@ bin
 **/*/.github
 # ignore changelogs
 **/CHANGELOG.md
+**/CHANGELOG*.md
 # ignore coc
 **/CODE_OF_CONDUCT.md
 # ignore composer.json
@@ -31,6 +32,7 @@ bin
 */*/psalm.baseline.xml
 */*/phpcs.xml
 */*/phpcs.xml.dist
+*/*/.php-cs-fixer.php
 */*/.php-cs-fixer.dist.php
 */*/.phpcs.xml
 */*/phpstan.neon.dist
