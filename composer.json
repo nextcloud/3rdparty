@@ -62,9 +62,13 @@
 		"web-auth/webauthn-lib": "^4.9.1"
 	},
 	"scripts": {
-		"lint": "find . -name \\*.php -print0 | xargs -0 -n1 php -l"
+		"lint": "find . -name \\*.php -print0 | xargs -0 -n1 php -l",
+		"pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
 	},
 	"extra": {
-		"patches-file": "composer.patches.json"
+		"patches-file": "composer.patches.json",
+		"aws/aws-sdk-php": [
+			"S3"
+		]
 	}
 }
