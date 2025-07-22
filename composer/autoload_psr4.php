@@ -67,6 +67,7 @@ return array(
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'Icewind\\Streams\\' => array($vendorDir . '/icewind/streams/src'),
+    'Icewind\\SMB\\' => array($vendorDir . '/icewind/smb/src'),
     'IPLib\\' => array($vendorDir . '/mlocati/ip-lib/src'),
     'Http\\Promise\\' => array($vendorDir . '/php-http/promise/src'),
     'Http\\Client\\' => array($vendorDir . '/php-http/httplug/src'),

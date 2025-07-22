@@ -190,6 +190,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'icewind/smb' => array(
+            'pretty_version' => 'v3.7.0',
+            'version' => '3.7.0.0',
+            'reference' => 'e6904cbe75f678335092f4861c60c656b1a99e84',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../icewind/smb',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'icewind/streams' => array(
             'pretty_version' => 'v0.7.8',
             'version' => '0.7.8.0',
