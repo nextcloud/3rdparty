@@ -15,8 +15,11 @@ bin
 **/CHANGELOG*.md
 # ignore coc
 **/CODE_OF_CONDUCT.md
+# ignore codecov
+*/*/codecov.yml
 # ignore composer.json
 */*/composer.json
+*/*/composer.json.license
 */*/composer.lock
 # ignore README and UPGRADE
 */**/README.md
@@ -29,6 +32,7 @@ bin
 */**/RELEASE.md
 # ignore codestyle tools config
 */*/psalm.xml
+*/*/psalm.xml.license
 */*/psalm.baseline.xml
 */*/phpcs.xml
 */*/phpcs.xml.dist
@@ -161,3 +165,11 @@ symfony/routing/Tests/
 thecodingmachine/safe/rector-migrate-0.7.php
 
 wapmorgan/mp3info/_config.yml
+
+icewind/smb/example-sso-kerberos.php
+icewind/smb/example.php
+icewind/smb/install_libsmbclient.sh
+icewind/smb/tests
+icewind/smb/Makefile
+
+
