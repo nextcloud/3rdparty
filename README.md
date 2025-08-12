@@ -16,6 +16,22 @@ Some 3rd party libraries that are necessary to run Nextcloud.
 8. Commit all changes onto a new branch
 9. You might need the following command for pushing if used as submodule: `git push git@github.com:nextcloud/3rdparty.git branchname`
 
+### Updating polyfills
+
+We make use of Symfony polyfills to allow us writing code already using methods from newer PHP version.
+This allows cleaner code and once our minimum PHP version is bumped we have no duplicated code for those methods anymore.
+
+To keep the list of polyfills up to date, we need to add new polyfills once a new PHP version was released,
+for example with the release of PHP 8.4 we need to add its polyfills by running `composer require symfony/polyfill-php84`.
+
+But we need to also remove unused polyfills to reduce any (minimal) overhead.
+Thus once we increase our minimal PHP version we should remove the added polyfills from the list of dependencies.
+Moreover also some dependencies require polyfills, to also reduce the list of added polyfills,
+we add the unneeded onces to the `replace` section of the `composer.json`.
+
+So all PHP polyfills for already supported versions should be added to that section.
+But also polyfills for PHP modules that we require to be installed should be added, one example here is the `mbstring` module.
+
 ## Testing your PR with server
 
 1. On https://github.com/nextcloud/server make a new branch `3rdparty/my-dependency`
