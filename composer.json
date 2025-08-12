@@ -62,6 +62,12 @@
 		"wapmorgan/mp3info": "^0.1.1",
 		"web-auth/webauthn-lib": "^4.9.1"
 	},
+	 "replace": {
+        "symfony/polyfill-php80": "*",
+		"symfony/polyfill-php81": "*",
+		"symfony/polyfill-ctype": "*",
+		"symfony/polyfill-mbstring": "*"
+    },
 	"scripts": {
 		"lint": "find . -name \\*.php -print0 | xargs -0 -n1 php -l",
 		"pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
