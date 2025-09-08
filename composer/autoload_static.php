@@ -171,7 +171,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Lexer\\' => 22,
-            'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
         ),
         'C' => 
@@ -486,10 +485,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
-        ),
-        'Doctrine\\Common\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
         'Doctrine\\Common\\' => 
         array (
@@ -978,19 +973,6 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'DateObjectError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateObjectError.php',
         'DateRangeError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateRangeError.php',
         'Deprecated' => __DIR__ . '/..' . '/symfony/polyfill-php84/Resources/stubs/Deprecated.php',
-        'Doctrine\\Common\\Cache\\Cache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Cache.php',
-        'Doctrine\\Common\\Cache\\CacheProvider' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/CacheProvider.php',
-        'Doctrine\\Common\\Cache\\ClearableCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/ClearableCache.php',
-        'Doctrine\\Common\\Cache\\FlushableCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/FlushableCache.php',
-        'Doctrine\\Common\\Cache\\MultiDeleteCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiDeleteCache.php',
-        'Doctrine\\Common\\Cache\\MultiGetCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiGetCache.php',
-        'Doctrine\\Common\\Cache\\MultiOperationCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiOperationCache.php',
-        'Doctrine\\Common\\Cache\\MultiPutCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiPutCache.php',
-        'Doctrine\\Common\\Cache\\Psr6\\CacheAdapter' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/CacheAdapter.php',
-        'Doctrine\\Common\\Cache\\Psr6\\CacheItem' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/CacheItem.php',
-        'Doctrine\\Common\\Cache\\Psr6\\DoctrineProvider' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/DoctrineProvider.php',
-        'Doctrine\\Common\\Cache\\Psr6\\InvalidArgument' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/InvalidArgument.php',
-        'Doctrine\\Common\\Cache\\Psr6\\TypedCacheItem' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/TypedCacheItem.php',
         'Doctrine\\Common\\EventArgs' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventArgs.php',
         'Doctrine\\Common\\EventManager' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventManager.php',
         'Doctrine\\Common\\EventSubscriber' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventSubscriber.php',
@@ -1082,6 +1064,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Doctrine\\DBAL\\Driver\\PDO\\Exception' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/Exception.php',
         'Doctrine\\DBAL\\Driver\\PDO\\MySQL\\Driver' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php',
         'Doctrine\\DBAL\\Driver\\PDO\\OCI\\Driver' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/OCI/Driver.php',
+        'Doctrine\\DBAL\\Driver\\PDO\\PDOConnect' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/PDOConnect.php',
         'Doctrine\\DBAL\\Driver\\PDO\\PDOException' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/PDOException.php',
         'Doctrine\\DBAL\\Driver\\PDO\\ParameterTypeMap' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/ParameterTypeMap.php',
         'Doctrine\\DBAL\\Driver\\PDO\\PgSQL\\Driver' => __DIR__ . '/..' . '/doctrine/dbal/src/Driver/PDO/PgSQL/Driver.php',
@@ -1158,6 +1141,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Doctrine\\DBAL\\Exception\\SyntaxErrorException' => __DIR__ . '/..' . '/doctrine/dbal/src/Exception/SyntaxErrorException.php',
         'Doctrine\\DBAL\\Exception\\TableExistsException' => __DIR__ . '/..' . '/doctrine/dbal/src/Exception/TableExistsException.php',
         'Doctrine\\DBAL\\Exception\\TableNotFoundException' => __DIR__ . '/..' . '/doctrine/dbal/src/Exception/TableNotFoundException.php',
+        'Doctrine\\DBAL\\Exception\\TransactionRolledBack' => __DIR__ . '/..' . '/doctrine/dbal/src/Exception/TransactionRolledBack.php',
         'Doctrine\\DBAL\\Exception\\UniqueConstraintViolationException' => __DIR__ . '/..' . '/doctrine/dbal/src/Exception/UniqueConstraintViolationException.php',
         'Doctrine\\DBAL\\ExpandArrayParameters' => __DIR__ . '/..' . '/doctrine/dbal/src/ExpandArrayParameters.php',
         'Doctrine\\DBAL\\FetchMode' => __DIR__ . '/..' . '/doctrine/dbal/src/FetchMode.php',
@@ -1181,6 +1165,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Doctrine\\DBAL\\Platforms\\Keywords\\KeywordList' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/KeywordList.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\MariaDBKeywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/MariaDBKeywords.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\MariaDb102Keywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/MariaDb102Keywords.php',
+        'Doctrine\\DBAL\\Platforms\\Keywords\\MariaDb117Keywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/MariaDb117Keywords.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\MySQL57Keywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/MySQL57Keywords.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\MySQL80Keywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/MySQL80Keywords.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\MySQL84Keywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/MySQL84Keywords.php',
@@ -1199,6 +1184,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Doctrine\\DBAL\\Platforms\\MariaDb1043Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDb1043Platform.php',
         'Doctrine\\DBAL\\Platforms\\MariaDb1052Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDb1052Platform.php',
         'Doctrine\\DBAL\\Platforms\\MariaDb1060Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDb1060Platform.php',
+        'Doctrine\\DBAL\\Platforms\\MariaDb110700Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDb110700Platform.php',
         'Doctrine\\DBAL\\Platforms\\MySQL57Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MySQL57Platform.php',
         'Doctrine\\DBAL\\Platforms\\MySQL80Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MySQL80Platform.php',
         'Doctrine\\DBAL\\Platforms\\MySQL84Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MySQL84Platform.php',
