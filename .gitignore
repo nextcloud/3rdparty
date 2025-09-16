@@ -1,6 +1,7 @@
 .DS_Store
 bin
 */**/phpstan.neon
+*/**/phpstan-baseline.neon
 .php_cs.dist
 # ignore editor config
 **/*.editorconfig
@@ -29,6 +30,7 @@ bin
 # ignore codestyle tools config
 */*/psalm.xml
 */*/psalm.baseline.xml
+*/*/psalm-baseline.xml
 */*/phpcs.xml
 */*/phpcs.xml.dist
 */*/.php-cs-fixer.dist.php
