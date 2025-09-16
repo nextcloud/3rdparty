@@ -1,6 +1,7 @@
 .DS_Store
 bin
 */**/phpstan.neon
+*/**/phpstan-baseline.neon
 .php_cs.dist
 # ignore editor config
 **/*.editorconfig
