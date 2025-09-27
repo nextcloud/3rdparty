@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f34be717061030fb2e787b1b220c71e8",
+    "content-hash": "04d208c2a1250acb04cda4e1b067670b",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2062,16 +2062,16 @@
         },
         {
             "name": "mlocati/ip-lib",
-            "version": "1.20.0",
+            "version": "1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mlocati/ip-lib.git",
-                "reference": "fd45fc3bf08ed6c7e665e2e70562082ac954afd4"
+                "reference": "b5d38cdcbfc1516604d821a1f3f4a1638f327267"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/fd45fc3bf08ed6c7e665e2e70562082ac954afd4",
-                "reference": "fd45fc3bf08ed6c7e665e2e70562082ac954afd4",
+                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/b5d38cdcbfc1516604d821a1f3f4a1638f327267",
+                "reference": "b5d38cdcbfc1516604d821a1f3f4a1638f327267",
                 "shasum": ""
             },
             "require": {
@@ -2117,7 +2117,7 @@
             ],
             "support": {
                 "issues": "https://github.com/mlocati/ip-lib/issues",
-                "source": "https://github.com/mlocati/ip-lib/tree/1.20.0"
+                "source": "https://github.com/mlocati/ip-lib/tree/1.21.0"
             },
             "funding": [
                 {
@@ -2129,7 +2129,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-02-04T17:30:58+00:00"
+            "time": "2025-09-24T13:58:50+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
