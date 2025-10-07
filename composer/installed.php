@@ -791,13 +791,10 @@
             ),
         ),
         'symfony/polyfill-php82' => array(
-            'pretty_version' => 'v1.32.0',
-            'version' => '1.32.0.0',
-            'reference' => '5d2ed36f7734637dacc025f179698031951b1692',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/polyfill-php82',
-            'aliases' => array(),
             'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
         ),
         'symfony/polyfill-php83' => array(
             'pretty_version' => 'v1.32.0',
