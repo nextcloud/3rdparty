@@ -9,7 +9,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.1.0"
+			"php": "8.2.0"
 		},
 		"sort-packages": true,
 		"allow-plugins": {
@@ -17,7 +17,7 @@
 		}
 	},
 	"require": {
-		"php": "^8.1",
+		"php": "^8.2",
 		"ext-ctype": "*",
 		"ext-mbstring": "*",
 		"aws/aws-sdk-php": "^3.349",
@@ -69,6 +69,7 @@
 	 "replace": {
         "symfony/polyfill-php80": "*",
 		"symfony/polyfill-php81": "*",
+		"symfony/polyfill-php82": "*",
 		"symfony/polyfill-ctype": "*",
 		"symfony/polyfill-mbstring": "*"
     },
