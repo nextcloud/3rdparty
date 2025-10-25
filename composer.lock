@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dde938650207a3fe9c46262185eeeea6",
+    "content-hash": "5c1ac99a96d7824f9871e9f1756028eb",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2199,24 +2199,26 @@
         },
         {
             "name": "nextcloud/lognormalizer",
-            "version": "v1.0.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud/lognormalizer.git",
-                "reference": "87445d69225c247aaff64643b1fc83c6d6df741f"
+                "reference": "82ba06218001a15b3bc3b50dfca32e9ce8efb93e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/87445d69225c247aaff64643b1fc83c6d6df741f",
-                "reference": "87445d69225c247aaff64643b1fc83c6d6df741f",
+                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/82ba06218001a15b3bc3b50dfca32e9ce8efb93e",
+                "reference": "82ba06218001a15b3bc3b50dfca32e9ce8efb93e",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.2.0"
+                "php": ">=7.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "8.*"
+                "nextcloud/coding-standard": "^1.4",
+                "phpunit/phpunit": "^10.5",
+                "vimeo/psalm": "^6.13"
             },
             "type": "library",
             "autoload": {
@@ -2253,9 +2255,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nextcloud/lognormalizer/issues",
-                "source": "https://github.com/nextcloud/lognormalizer/tree/v1.0.0"
+                "source": "https://github.com/nextcloud/lognormalizer/tree/v2.0.0"
             },
-            "time": "2020-12-02T09:34:47+00:00"
+            "time": "2025-10-24T13:47:11+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
