@@ -37,7 +37,7 @@
 		"laravel/serializable-closure": "^2.0.4",
 		"mexitek/phpcolors": "^1.0",
 		"microsoft/azure-storage-blob": "^1.5.4",
-		"mlocati/ip-lib": "^1.20",
+		"mlocati/ip-lib": "^1.22",
 		"nextcloud/lognormalizer": "^2.0.0",
 		"pear/archive_tar": "^1.4.9",
 		"pear/pear-core-minimal": "^1.10",
