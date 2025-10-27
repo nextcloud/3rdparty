@@ -308,9 +308,9 @@
             'dev_requirement' => false,
         ),
         'nextcloud/lognormalizer' => array(
-            'pretty_version' => 'v1.0.0',
-            'version' => '1.0.0.0',
-            'reference' => '87445d69225c247aaff64643b1fc83c6d6df741f',
+            'pretty_version' => 'v2.0.0',
+            'version' => '2.0.0.0',
+            'reference' => '82ba06218001a15b3bc3b50dfca32e9ce8efb93e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nextcloud/lognormalizer',
             'aliases' => array(),
