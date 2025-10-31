@@ -1531,6 +1531,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'IPLib\\Range\\Subnet' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/Subnet.php',
         'IPLib\\Range\\Type' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Range/Type.php',
         'IPLib\\Service\\BinaryMath' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/BinaryMath.php',
+        'IPLib\\Service\\NumberInChunks' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/NumberInChunks.php',
         'IPLib\\Service\\RangesFromBoundaryCalculator' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/RangesFromBoundaryCalculator.php',
         'IPLib\\Service\\UnsignedIntegerMath' => __DIR__ . '/..' . '/mlocati/ip-lib/src/Service/UnsignedIntegerMath.php',
         'Icewind\\SMB\\ACL' => __DIR__ . '/..' . '/icewind/smb/src/ACL.php',
