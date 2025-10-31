@@ -2146,17 +2146,17 @@
         },
         {
             "name": "mlocati/ip-lib",
-            "version": "1.20.0",
-            "version_normalized": "1.20.0.0",
+            "version": "1.22.0",
+            "version_normalized": "1.22.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mlocati/ip-lib.git",
-                "reference": "fd45fc3bf08ed6c7e665e2e70562082ac954afd4"
+                "reference": "4e40ffd3bf9989db19403d89c4d8be44b87b8a91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/fd45fc3bf08ed6c7e665e2e70562082ac954afd4",
-                "reference": "fd45fc3bf08ed6c7e665e2e70562082ac954afd4",
+                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/4e40ffd3bf9989db19403d89c4d8be44b87b8a91",
+                "reference": "4e40ffd3bf9989db19403d89c4d8be44b87b8a91",
                 "shasum": ""
             },
             "require": {
@@ -2166,7 +2166,7 @@
                 "ext-pdo_sqlite": "*",
                 "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.5 || ^9.5"
             },
-            "time": "2025-02-04T17:30:58+00:00",
+            "time": "2025-10-15T12:35:09+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2204,7 +2204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/mlocati/ip-lib/issues",
-                "source": "https://github.com/mlocati/ip-lib/tree/1.20.0"
+                "source": "https://github.com/mlocati/ip-lib/tree/1.22.0"
             },
             "funding": [
                 {
