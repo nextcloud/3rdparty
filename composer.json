@@ -34,7 +34,7 @@
 		"icewind/smb": "^3.7",
 		"icewind/streams": "^0.7.8",
 		"kornrunner/blurhash": "^1.2",
-		"laravel/serializable-closure": "^2.0.4",
+		"laravel/serializable-closure": "^2.0.6",
 		"mexitek/phpcolors": "^1.0",
 		"microsoft/azure-storage-blob": "^1.5.4",
 		"mlocati/ip-lib": "^1.20",
