@@ -22,7 +22,7 @@
 		"ext-mbstring": "*",
 		"aws/aws-sdk-php": "^3.349",
 		"bantu/ini-get-wrapper": "v1.0.1",
-		"cweagans/composer-patches": "^1.7",
+		"cweagans/composer-patches": "^2.0",
 		"deepdiver/zipstreamer": "^2.0.3",
 		"deepdiver1975/tarstreamer": "^2.1.0",
 		"doctrine/dbal": "^3.10.2",
