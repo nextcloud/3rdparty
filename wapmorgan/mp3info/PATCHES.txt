@@ -5,3 +5,7 @@ Break frame parsing on invalid frame
 Source: .patches/mp3info-break-frame-parsing.patch
 
 
+fix incorrect lookup for mpeg header
+Source: .patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch
+
+

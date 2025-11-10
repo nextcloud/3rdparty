@@ -1,7 +1,8 @@
 {
 	"patches": {
 		"wapmorgan/mp3info": {
-			"Break frame parsing on invalid frame": ".patches/mp3info-break-frame-parsing.patch"
+			"Break frame parsing on invalid frame": ".patches/mp3info-break-frame-parsing.patch",
+			"fix incorrect lookup for mpeg header": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch"
 		}
 	}
 }
