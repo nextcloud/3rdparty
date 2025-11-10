@@ -5,3 +5,11 @@ generate exception if codec/layer versions or channel headers are unrecognized
 Source: .patches/mp3info-check-array-key.diff
 
 
+Break frame parsing on invalid frame
+Source: .patches/mp3info-break-frame-parsing.patch
+
+
+fix incorrect lookup for mpeg header
+Source: .patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch
+
+

@@ -6319,7 +6319,9 @@
             "type": "library",
             "extra": {
                 "patches_applied": {
-                    "generate exception if codec/layer versions or channel headers are unrecognized": ".patches/mp3info-check-array-key.diff"
+                    "generate exception if codec/layer versions or channel headers are unrecognized": ".patches/mp3info-check-array-key.diff",
+                    "Break frame parsing on invalid frame": ".patches/mp3info-break-frame-parsing.patch",
+                    "fix incorrect lookup for mpeg header": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch"
                 }
             },
             "installation-source": "dist",
