@@ -585,6 +585,11 @@ class Mp3Info {
             $raw = fread($fp, 10);
             $frame_id = substr($raw, 0, 4);
 
+            if (strlen($raw) < 10) {
+                fseek($fp, $lastByte);
+                break;
+            }
+
             if ($frame_id == str_repeat(chr(0), 4)) {
                 fseek($fp, $lastByte);
                 break;
