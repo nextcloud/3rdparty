@@ -6,6 +6,9 @@
 
 namespace Icewind\SMB;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class Options implements IOptions {
 	/** @var int */
 	private $timeout = 20;

@@ -8,12 +8,12 @@ namespace Icewind\SMB;
 
 use Icewind\SMB\Exception\Exception;
 
-class AnonymousAuth implements IAuth {
+final class AnonymousAuth implements IAuth {
 	public function getUsername(): ?string {
 		return null;
 	}
 
-	public function getWorkgroup(): ?string {
+	public function getWorkgroup(): string {
 		return 'dummy';
 	}
 

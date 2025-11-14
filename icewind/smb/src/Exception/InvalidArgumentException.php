@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class InvalidArgumentException extends InvalidRequestException {
+final class InvalidArgumentException extends InvalidRequestException {
 }

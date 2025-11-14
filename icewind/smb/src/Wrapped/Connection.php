@@ -14,7 +14,7 @@ use Icewind\SMB\Exception\ConnectionRefusedException;
 use Icewind\SMB\Exception\InvalidHostException;
 use Icewind\SMB\Exception\NoLoginServerException;
 
-class Connection extends RawConnection {
+final class Connection extends RawConnection {
 	const DELIMITER = 'smb:';
 	const DELIMITER_LENGTH = 4;
 
@@ -88,16 +88,16 @@ class Connection extends RawConnection {
 	}
 
 	/**
-	 * @param string|bool $promptLine (optional) prompt line that might contain some info about the error
+	 * @param string|false $promptLine (optional) prompt line that might contain some info about the error
 	 * @throws ConnectException
 	 * @return no-return
 	 */
 	private function unknownError($promptLine = '') {
-		if ($promptLine) { //maybe we have some error we missed on the previous line
+		if ($promptLine !== false) { //maybe we have some error we missed on the previous line
 			throw new ConnectException('Unknown error (' . $promptLine . ')');
 		} else {
 			$error = $this->readError(); // maybe something on stderr
-			if ($error) {
+			if ($error !== false) {
 				throw new ConnectException('Unknown error (stderr: ' . $error . ')');
 			} else {
 				throw new ConnectException('Unknown error');

@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class HostDownException extends ConnectException {
+final class HostDownException extends ConnectException {
 }

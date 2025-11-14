@@ -20,7 +20,7 @@ use Icewind\SMB\Exception\NoLoginServerException;
 use Icewind\SMB\Exception\NotEmptyException;
 use Icewind\SMB\Exception\NotFoundException;
 
-class Parser {
+final class Parser {
 	const MSG_NOT_FOUND = 'Error opening local file ';
 
 	/**
@@ -78,14 +78,17 @@ class Parser {
 	 * @throws NotFoundException
 	 */
 	public function checkForError(array $output, string $path): void {
-		if (strpos($output[0], 'does not exist')) {
-			throw new NotFoundException($path);
-		}
-		$error = $this->getErrorCode($output[0]);
+		$error = '';
+		if (isset($output[0])) {
+			if (strpos($output[0], 'does not exist') > 0) {
+				throw new NotFoundException($path);
+			}
+			$error = $this->getErrorCode($output[0]);
 
-		if (substr($output[0], 0, strlen(self::MSG_NOT_FOUND)) === self::MSG_NOT_FOUND) {
-			$localPath = substr($output[0], strlen(self::MSG_NOT_FOUND));
-			throw new InvalidResourceException('Failed opening local file "' . $localPath . '" for writing');
+			if (substr($output[0], 0, strlen(self::MSG_NOT_FOUND)) === self::MSG_NOT_FOUND) {
+				$localPath = substr($output[0], strlen(self::MSG_NOT_FOUND));
+				throw new InvalidResourceException('Failed opening local file "' . $localPath . '" for writing');
+			}
 		}
 
 		throw Exception::fromMap(self::EXCEPTION_MAP, $error, $path);
@@ -143,7 +146,7 @@ class Parser {
 			// A line = explode statement may not fill all array elements
 			// properly. May happen when accessing non Windows Fileservers
 			$words = explode(':', $line, 2);
-			$name = isset($words[0]) ? $words[0] : '';
+			$name = $words[0];
 			$value = isset($words[1]) ? $words[1] : '';
 			$value = trim($value);
 
@@ -156,8 +159,8 @@ class Parser {
 			throw new Exception("Malformed state response from server");
 		}
 		return [
-			'mtime' => strtotime($data['write_time']),
-			'mode'  => hexdec(substr($data['attributes'], $attributeStart + 1, -1)),
+			'mtime' => (int)strtotime($data['write_time']),
+			'mode'  => (int)hexdec(substr($data['attributes'], $attributeStart + 1, -1)),
 			'size'  => isset($data['stream']) ? (int)(explode(' ', $data['stream'])[1]) : 0
 		];
 	}
@@ -179,7 +182,7 @@ class Parser {
 				list(, $name, $mode, $size, $time) = $matches;
 				if ($name !== '.' and $name !== '..') {
 					$mode = $this->parseMode(strtoupper($mode));
-					$time = strtotime($time . ' ' . $this->timeZone);
+					$time = (int)strtotime($time . ' ' . $this->timeZone);
 					$path = $basePath . '/' . $name;
 					$content[] = new FileInfo($path, $name, (int)$size, $time, $mode, function () use ($aclCallback, $path): array {
 						return $aclCallback($path);
@@ -197,12 +200,12 @@ class Parser {
 	public function parseListShares(array $output): array {
 		$shareNames = [];
 		foreach ($output as $line) {
-			if (strpos($line, '|')) {
+			if (strpos($line, '|') > 0) {
 				list($type, $name, $description) = explode('|', $line);
 				if (strtolower($type) === 'disk') {
 					$shareNames[$name] = $description;
 				}
-			} elseif (strpos($line, 'Disk')) {
+			} elseif (strpos($line, 'Disk') > 0) {
 				// new output format
 				list($name, $description) = explode('Disk', $line);
 				$shareNames[trim($name)] = trim($description);
@@ -221,12 +224,24 @@ class Parser {
 			if (strpos($acl, ':') === false) {
 				continue;
 			}
-			[$type, $acl] = explode(':', $acl, 2);
+			$parts = explode(':', $acl, 2);
+			if (count($parts) !== 2) {
+				continue;
+			}
+			[$type, $acl] = $parts;
 			if ($type !== 'ACL') {
 				continue;
 			}
-			[$user, $permissions] = explode(':', $acl, 2);
-			[$type, $flags, $mask] = explode('/', $permissions);
+			$parts = explode(':', $acl, 2);
+			if (count($parts) !== 2) {
+				continue;
+			}
+			[$user, $permissions] = $parts;
+			$parts = explode('/', $permissions);
+			if (count($parts) < 3) {
+				continue;
+			}
+			[$type, $flags, $mask] = $parts;
 
 			$type = $type === 'ALLOWED' ? ACL::TYPE_ALLOW : ACL::TYPE_DENY;
 
@@ -240,7 +255,7 @@ class Parser {
 			}
 
 			if (substr($mask, 0, 2) === '0x') {
-				$maskInt = hexdec($mask);
+				$maskInt = (int)hexdec($mask);
 			} else {
 				$maskInt = 0;
 				foreach (explode('|', $mask) as $maskString) {

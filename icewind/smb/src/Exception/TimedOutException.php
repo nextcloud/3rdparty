@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class TimedOutException extends ConnectException {
+final class TimedOutException extends ConnectException {
 }

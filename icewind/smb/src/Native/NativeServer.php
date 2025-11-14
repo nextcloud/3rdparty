@@ -15,7 +15,7 @@ use Icewind\SMB\IShare;
 use Icewind\SMB\ISystem;
 use Icewind\SMB\ITimeZoneProvider;
 
-class NativeServer extends AbstractServer {
+final class NativeServer extends AbstractServer {
 	/**
 	 * @var NativeState
 	 */

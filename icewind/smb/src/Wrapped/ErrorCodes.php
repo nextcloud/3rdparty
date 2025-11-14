@@ -6,7 +6,7 @@
 
 namespace Icewind\SMB\Wrapped;
 
-class ErrorCodes {
+final class ErrorCodes {
 	/**
 	 * connection errors
 	 */

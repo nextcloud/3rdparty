@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class InvalidPathException extends InvalidRequestException {
+final class InvalidPathException extends InvalidRequestException {
 }

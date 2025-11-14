@@ -77,7 +77,7 @@ class RawConnection {
 			'COLUMNS'               => 8192, // prevent smbclient from line-wrapping it's output
 			'TZ'                    => 'UTC',
 		]);
-		$this->process = proc_open($this->command, $descriptorSpec, $this->pipes, '/', $env);
+		$this->process = proc_open($this->command, $descriptorSpec, $this->pipes, '/', $env) ?: null;
 		if (!$this->isValid()) {
 			throw new ConnectionException();
 		}
@@ -211,7 +211,9 @@ class RawConnection {
 			? "username=$user"
 			: "username=$user\npassword=$password\n";
 
-		$this->authStream = fopen('php://temp', 'w+');
+		/** @var resource $stream */
+		$stream = fopen('php://temp', 'w+');
+		$this->authStream = $stream;
 		fwrite($this->authStream, $auth);
 		rewind($this->authStream);
 	}

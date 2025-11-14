@@ -6,7 +6,7 @@
 
 namespace Icewind\SMB;
 
-class Change {
+final class Change {
 	/** @var int */
 	private $code;
 	/** @var string */

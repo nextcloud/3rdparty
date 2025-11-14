@@ -31,7 +31,7 @@
 		"giggsey/libphonenumber-for-php-lite": "^9.0.9",
 		"guzzlehttp/guzzle": "^7.9.3",
 		"icewind/searchdav": "^3.2.0",
-		"icewind/smb": "^3.7",
+		"icewind/smb": "^3.8.1",
 		"icewind/streams": "^0.7.8",
 		"kornrunner/blurhash": "^1.2",
 		"laravel/serializable-closure": "^2.0.4",

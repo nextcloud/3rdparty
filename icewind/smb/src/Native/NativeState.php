@@ -28,7 +28,7 @@ use Icewind\SMB\IOptions;
 /**
  * Low level wrapper for libsmbclient-php with error handling
  */
-class NativeState {
+final class NativeState {
 	/** @var resource|null */
 	protected $state = null;
 
@@ -108,6 +108,7 @@ class NativeState {
 		smbclient_option_set($this->state, SMBCLIENT_OPT_AUTO_ANONYMOUS_LOGIN, false);
 		/** @psalm-suppress UnusedFunctionCall */
 		smbclient_option_set($this->state, SMBCLIENT_OPT_TIMEOUT, $options->getTimeout() * 1000);
+		smbclient_option_set($this->state, SMBCLIENT_OPT_ENCRYPT_LEVEL, SMBCLIENT_ENCRYPTLEVEL_REQUEST); // Request encrypted connection
 
 		if (function_exists('smbclient_client_protocols')) {
 			smbclient_client_protocols($this->state, $options->getMinProtocol(), $options->getMaxProtocol());
@@ -181,6 +182,10 @@ class NativeState {
 		if (!$this->state) {
 			throw new ConnectionException("Not connected");
 		}
+		/**
+		 * false positive from wrong reflection info
+		 * @phpstan-ignore arguments.count
+		 */
 		$result = @smbclient_rename($this->state, $old, $this->state, $new);
 
 		$this->testResult($result, $new);
@@ -322,7 +327,7 @@ class NativeState {
 		if (!$this->state) {
 			throw new ConnectionException("Not connected");
 		}
-		if ($length) {
+		if ($length !== null) {
 			$result = @smbclient_write($this->state, $file, $data, $length);
 		} else {
 			$result = @smbclient_write($this->state, $file, $data);
@@ -343,7 +348,7 @@ class NativeState {
 	 *
 	 * @return false|int new file offset as measured from the start of the file on success.
 	 */
-	public function lseek($file, int $offset, int $whence = SEEK_SET, string $path = null) {
+	public function lseek($file, int $offset, int $whence = SEEK_SET, ?string $path = null) {
 		if (!$this->state) {
 			throw new ConnectionException("Not connected");
 		}

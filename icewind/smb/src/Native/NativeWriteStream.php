@@ -11,7 +11,7 @@ use Icewind\SMB\StringBuffer;
 /**
  * Stream optimized for write only usage
  */
-class NativeWriteStream extends NativeStream {
+final class NativeWriteStream extends NativeStream {
 	const CHUNK_SIZE = 1048576; // 1MB chunks
 
 	/** @var StringBuffer */
@@ -58,7 +58,7 @@ class NativeWriteStream extends NativeStream {
 		parent::stream_write($this->writeBuffer->flush());
 	}
 
-	public function stream_write($data) {
+	public function stream_write($data): int {
 		$written = $this->writeBuffer->push($data);
 		$this->pos += $written;
 
@@ -79,7 +79,7 @@ class NativeWriteStream extends NativeStream {
 		return parent::stream_close() && $flushResult;
 	}
 
-	public function stream_tell() {
+	public function stream_tell(): int {
 		return $this->pos;
 	}
 

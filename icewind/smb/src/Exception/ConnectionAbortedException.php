@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class ConnectionAbortedException extends ConnectException {
+final class ConnectionAbortedException extends ConnectException {
 }

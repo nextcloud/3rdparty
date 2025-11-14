@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Icewind\SMB;
 
-class StringBuffer {
+final class StringBuffer {
 	/** @var string */
 	private $buffer = "";
 	/** @var int */

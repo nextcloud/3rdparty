@@ -1,7 +1,9 @@
 .DS_Store
 bin
 */**/phpstan.neon
+*/**/phpstan.neon.license
 */**/phpstan-baseline.neon
+*/**/phpstan-baseline.neon.license
 .php_cs.dist
 # ignore editor config
 **/*.editorconfig
@@ -9,7 +11,9 @@ bin
 **/.travis.yml
 # ignore renovate configs
 **/renovate.json
+**/renovate.json.license
 # ignore .github files
+**/*/.forgejo
 **/*/.github
 # ignore changelogs
 **/CHANGELOG.md
@@ -18,10 +22,12 @@ bin
 **/CODE_OF_CONDUCT.md
 # ignore codecov
 */*/codecov.yml
+*/*/codecov.yml.license
 # ignore composer.json
 */*/composer.json
 */*/composer.json.license
 */*/composer.lock
+*/*/composer.lock.license
 # ignore README and UPGRADE
 */**/README.md
 */**/README.rst
@@ -35,7 +41,9 @@ bin
 */*/psalm.xml
 */*/psalm.xml.license
 */*/psalm.baseline.xml
+*/*/psalm.baseline.xml.license
 */*/psalm-baseline.xml
+*/*/psalm-baseline.xml.license
 */*/phpcs.xml
 */*/phpcs.xml.dist
 */*/.php-cs-fixer.php
@@ -85,6 +93,19 @@ giggsey/locale/CLDR-VERSION.txt
 guzzlehttp/guzzle/build/
 guzzlehttp/guzzle/docs/
 guzzlehttp/guzzle/MAKEFILE
+
+icewind/smb/.envrc
+icewind/smb/.envrc.license
+icewind/smb/example-sso-kerberos.php
+icewind/smb/install_libsmbclient.sh
+icewind/smb/example.php
+icewind/smb/flake.lock
+icewind/smb/flake.lock.license
+icewind/smb/flake.nix
+icewind/smb/flake.nix.license
+icewind/smb/Makefile
+icewind/smb/stubs
+icewind/smb/tests
 
 justinrainbow/json-schema/demo
 
@@ -167,11 +188,3 @@ symfony/routing/Tests/
 thecodingmachine/safe/rector-migrate-0.7.php
 
 wapmorgan/mp3info/_config.yml
-
-icewind/smb/example-sso-kerberos.php
-icewind/smb/example.php
-icewind/smb/install_libsmbclient.sh
-icewind/smb/tests
-icewind/smb/Makefile
-
-

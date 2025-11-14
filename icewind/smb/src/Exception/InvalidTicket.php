@@ -8,6 +8,5 @@ declare(strict_types=1);
 
 namespace Icewind\SMB\Exception;
 
-class InvalidTicket extends Exception {
-
+final class InvalidTicket extends Exception {
 }

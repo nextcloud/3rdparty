@@ -12,6 +12,9 @@ class InvalidRequestException extends Exception {
 	 */
 	protected $path;
 
+	/**
+	 * @psalm-suppress ParamNameMismatch
+	 */
 	public function __construct(string $path = "", int $code = 0, ?\Throwable $previous = null) {
 		$class = get_class($this);
 		$parts = explode('\\', $class);

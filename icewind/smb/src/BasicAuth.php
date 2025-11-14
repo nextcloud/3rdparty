@@ -6,7 +6,7 @@
 
 namespace Icewind\SMB;
 
-class BasicAuth implements IAuth {
+final class BasicAuth implements IAuth {
 	/** @var string */
 	private $username;
 	/** @var string|null */
@@ -20,7 +20,7 @@ class BasicAuth implements IAuth {
 		$this->password = $password;
 	}
 
-	public function getUsername(): ?string {
+	public function getUsername(): string {
 		return $this->username;
 	}
 
@@ -28,12 +28,12 @@ class BasicAuth implements IAuth {
 		return $this->workgroup;
 	}
 
-	public function getPassword(): ?string {
+	public function getPassword(): string {
 		return $this->password;
 	}
 
 	public function getExtraCommandLineArguments(): string {
-		return ($this->workgroup) ? '-W ' . escapeshellarg($this->workgroup) : '';
+		return ($this->workgroup !== null) ? '-W ' . escapeshellarg($this->workgroup) : '';
 	}
 
 	public function setExtraSmbClientOptions($smbClientState): void {

@@ -16,7 +16,7 @@ use Icewind\SMB\Exception\InvalidHostException;
 use Icewind\SMB\IShare;
 use Icewind\SMB\ISystem;
 
-class Server extends AbstractServer {
+final class Server extends AbstractServer {
 	/**
 	 * Check if the smbclient php extension is available
 	 *
@@ -28,7 +28,7 @@ class Server extends AbstractServer {
 	}
 
 	private function getAuthFileArgument(): string {
-		if ($this->getAuth()->getUsername()) {
+		if ($this->getAuth()->getUsername() !== null) {
 			return '--authentication-file=' . $this->system->getFD(3);
 		} else {
 			return '';
@@ -54,8 +54,8 @@ class Server extends AbstractServer {
 			$smbClient,
 			$this->getAuthFileArgument(),
 			$this->getAuth()->getExtraCommandLineArguments(),
-			$maxProtocol ? "--option='client max protocol=" . $maxProtocol . "'" : "",
-			$minProtocol ? "--option='client min protocol=" . $minProtocol . "'" : "",
+			($maxProtocol !== null) ? "--option='client max protocol=" . $maxProtocol . "'" : "",
+			($minProtocol !== null) ? "--option='client min protocol=" . $minProtocol . "'" : "",
 			escapeshellarg('//' . $this->getHost())
 		);
 		$connection = new RawConnection($command);

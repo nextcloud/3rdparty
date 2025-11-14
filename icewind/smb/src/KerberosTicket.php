@@ -11,7 +11,7 @@ namespace Icewind\SMB;
 use Icewind\SMB\Exception\InvalidTicket;
 use KRB5CCache;
 
-class KerberosTicket {
+final class KerberosTicket {
 	/** @var KRB5CCache */
 	private $krb5;
 	/** @var string */
@@ -26,7 +26,7 @@ class KerberosTicket {
 		return $this->cacheName;
 	}
 
-	public function getName(): string{
+	public function getName(): string {
 		return $this->krb5->getName();
 	}
 
@@ -47,7 +47,7 @@ class KerberosTicket {
 	 */
 	public static function fromEnv(): ?KerberosTicket {
 		$ticketName = getenv("KRB5CCNAME");
-		if (!$ticketName) {
+		if ($ticketName === false) {
 			return null;
 		}
 		$krb5 = new KRB5CCache();
@@ -55,8 +55,16 @@ class KerberosTicket {
 		return new KerberosTicket($krb5, $ticketName);
 	}
 
-	public static function load(string $ticket): KerberosTicket {
+	private static function tmpNam(): string {
 		$tmpFilename = tempnam(sys_get_temp_dir(), "krb5cc_php_");
+		if ($tmpFilename === false) {
+			throw new \Exception("Failed to create temporary file for ticket");
+		}
+		return $tmpFilename;
+	}
+
+	public static function load(string $ticket): KerberosTicket {
+		$tmpFilename = self::tmpNam();
 		file_put_contents($tmpFilename, $ticket);
 		register_shutdown_function(function () use ($tmpFilename) {
 			if (file_exists($tmpFilename)) {
@@ -74,11 +82,14 @@ class KerberosTicket {
 		if (substr($this->cacheName, 0, 5) === 'FILE:') {
 			$ticket = file_get_contents(substr($this->cacheName, 5));
 		} else {
-			$tmpFilename = tempnam(sys_get_temp_dir(), "krb5cc_php_");
+			$tmpFilename = self::tmpNam();
 			$tmpCacheFile = "FILE:" . $tmpFilename;
 			$this->krb5->save($tmpCacheFile);
 			$ticket = file_get_contents($tmpFilename);
 			unlink($tmpFilename);
+		}
+		if ($ticket === false) {
+			throw new \Exception("Failed to read saved ticket");
 		}
 		return $ticket;
 	}

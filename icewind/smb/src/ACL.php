@@ -6,7 +6,7 @@
 
 namespace Icewind\SMB;
 
-class ACL {
+final class ACL {
 	const TYPE_ALLOW = 0;
 	const TYPE_DENY = 1;
 

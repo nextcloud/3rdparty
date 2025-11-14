@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class NoRouteToHostException extends ConnectException {
+final class NoRouteToHostException extends ConnectException {
 }

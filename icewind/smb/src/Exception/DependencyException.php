@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class DependencyException extends Exception {
+final class DependencyException extends Exception {
 }
