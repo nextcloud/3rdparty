@@ -22,7 +22,7 @@ use Icewind\SMB\IServer;
 use Icewind\SMB\Wrapped\Server;
 use Icewind\SMB\Wrapped\Share;
 
-class NativeShare extends AbstractShare {
+final class NativeShare extends AbstractShare {
 	/**
 	 * @var IServer $server
 	 */
@@ -204,6 +204,9 @@ class NativeShare extends AbstractShare {
 	 */
 	public function put(string $source, string $target): bool {
 		$sourceHandle = fopen($source, 'rb');
+		if (!$sourceHandle) {
+			return false;
+		}
 		$targetUrl = $this->buildUrl($target);
 
 		$targetHandle = $this->getState()->create($targetUrl);

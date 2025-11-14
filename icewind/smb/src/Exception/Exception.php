@@ -23,7 +23,7 @@ class Exception extends \Exception {
 	 */
 	public static function unknown(?string $path, $error): Exception {
 		$message = 'Unknown error (' . (string)$error . ')';
-		if ($path) {
+		if ($path !== null) {
 			$message .= ' for ' . $path;
 		}
 
@@ -40,7 +40,7 @@ class Exception extends \Exception {
 		if (isset($exceptionMap[$error])) {
 			$exceptionClass = $exceptionMap[$error];
 			if (is_numeric($error)) {
-				return new $exceptionClass($path, $error);
+				return new $exceptionClass($path, (int)$error);
 			} else {
 				return new $exceptionClass($path);
 			}

@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class OutOfSpaceException extends InvalidRequestException {
+final class OutOfSpaceException extends InvalidRequestException {
 }

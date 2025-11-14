@@ -8,6 +8,9 @@ namespace Icewind\SMB;
 
 use Icewind\SMB\Exception\Exception;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class System implements ISystem {
 	/** @var (string|null)[] */
 	private $paths = [];

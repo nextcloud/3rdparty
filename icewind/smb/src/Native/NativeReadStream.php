@@ -11,7 +11,7 @@ use Icewind\SMB\StringBuffer;
 /**
  * Stream optimized for read only usage
  */
-class NativeReadStream extends NativeStream {
+final class NativeReadStream extends NativeStream {
 	const CHUNK_SIZE = 1048576; // 1MB chunks
 
 	/** @var StringBuffer */
@@ -78,7 +78,7 @@ class NativeReadStream extends NativeStream {
 		return $this->readBuffer->remaining() <= 0 && parent::stream_eof();
 	}
 
-	public function stream_tell() {
+	public function stream_tell(): int {
 		return $this->pos;
 	}
 

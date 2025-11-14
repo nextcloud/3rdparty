@@ -27,7 +27,7 @@ use Icewind\Streams\CallbackWrapper;
 use Icewind\SMB\Native\NativeShare;
 use Icewind\SMB\Native\NativeServer;
 
-class Share extends AbstractShare {
+final class Share extends AbstractShare {
 	/**
 	 * @var IServer $server
 	 */
@@ -76,7 +76,7 @@ class Share extends AbstractShare {
 	}
 
 	private function getAuthFileArgument(): string {
-		if ($this->server->getAuth()->getUsername()) {
+		if ($this->server->getAuth()->getUsername() !== null) {
 			return '--authentication-file=' . $this->system->getFD(3);
 		} else {
 			return '';
@@ -94,13 +94,13 @@ class Share extends AbstractShare {
 		$command = sprintf(
 			'%s %s%s -t %s %s %s %s %s %s',
 			self::EXEC_CMD,
-			$stdBuf ? $stdBuf . ' -o0 ' : '',
+			($stdBuf !== null) ? $stdBuf . ' -o0 ' : '',
 			$smbClient,
 			$this->server->getOptions()->getTimeout(),
 			$this->getAuthFileArgument(),
 			$this->server->getAuth()->getExtraCommandLineArguments(),
-			$maxProtocol ? "--option='client max protocol=" . $maxProtocol . "'" : "",
-			$minProtocol ? "--option='client min protocol=" . $minProtocol . "'" : "",
+			($maxProtocol !== null) ? "--option='client max protocol=" . $maxProtocol . "'" : "",
+			($minProtocol !== null) ? "--option='client min protocol=" . $minProtocol . "'" : "",
 			escapeshellarg('//' . $this->server->getHost() . '/' . $this->name)
 		);
 		$connection = new Connection($command, $this->parser);
@@ -349,7 +349,7 @@ class Share extends AbstractShare {
 		$connection->write('get ' . $source . ' ' . $this->system->getFD(5));
 		$connection->write('exit');
 		$fh = $connection->getFileOutputStream();
-		$fh = CallbackWrapper::wrap($fh, function() use ($connection) {
+		$fh = CallbackWrapper::wrap($fh, function () use ($connection) {
 			$connection->write('');
 		});
 		if (!is_resource($fh)) {
@@ -379,7 +379,7 @@ class Share extends AbstractShare {
 
 		// use a close callback to ensure the upload is finished before continuing
 		// this also serves as a way to keep the connection in scope
-		$stream = CallbackWrapper::wrap($fh, function() use ($connection) {
+		$stream = CallbackWrapper::wrap($fh, function () use ($connection) {
 			$connection->write('');
 		}, null, function () use ($connection) {
 			$connection->close(false); // dont terminate, give the upload some time
@@ -439,7 +439,7 @@ class Share extends AbstractShare {
 	 * @throws DependencyException
 	 */
 	public function notify(string $path): INotifyHandler {
-		if (!$this->system->getStdBufPath()) { //stdbuf is required to disable smbclient's output buffering
+		if ($this->system->getStdBufPath() == null) { //stdbuf is required to disable smbclient's output buffering
 			throw new DependencyException('stdbuf is required for usage of the notify command');
 		}
 		$connection = $this->getConnection(); // use a fresh connection since the notify command blocks the process
@@ -519,7 +519,7 @@ class Share extends AbstractShare {
 	 */
 	protected function getAcls(string $path): array {
 		$commandPath = $this->system->getSmbcAclsPath();
-		if (!$commandPath) {
+		if ($commandPath === null) {
 			return [];
 		}
 

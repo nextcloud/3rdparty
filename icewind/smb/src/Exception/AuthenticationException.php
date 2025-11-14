@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class AuthenticationException extends ConnectException {
+final class AuthenticationException extends ConnectException {
 }

@@ -11,7 +11,7 @@ use Icewind\SMB\Exception\Exception;
 use Icewind\SMB\Exception\RevisionMismatchException;
 use Icewind\SMB\INotifyHandler;
 
-class NotifyHandler implements INotifyHandler {
+final class NotifyHandler implements INotifyHandler {
 	/** @var Connection */
 	private $connection;
 

@@ -5,6 +5,9 @@
  */
 namespace Icewind\SMB;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class TimeZoneProvider implements ITimeZoneProvider {
 	/**
 	 * @var string[]
@@ -28,7 +31,7 @@ class TimeZoneProvider implements ITimeZoneProvider {
 			$timeZone = null;
 			$net = $this->system->getNetPath();
 			// for local domain names we can assume same timezone
-			if ($net && $host && strpos($host, '.') !== false) {
+			if ($net !== null && $host && strpos($host, '.') !== false) {
 				$command = sprintf(
 					'%s time zone -S %s',
 					$net,
@@ -37,11 +40,12 @@ class TimeZoneProvider implements ITimeZoneProvider {
 				$timeZone = exec($command);
 			}
 
-			if (!$timeZone) {
+			if (!is_string($timeZone)) {
 				$date = $this->system->getDatePath();
-				if ($date) {
+				if ($date !== null) {
 					$timeZone = exec($date . " +%z");
-				} else {
+				}
+				if (!is_string($timeZone)) {
 					$timeZone = date_default_timezone_get();
 				}
 			}

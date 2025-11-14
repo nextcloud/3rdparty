@@ -10,7 +10,7 @@ use Icewind\SMB\Exception\DependencyException;
 use Icewind\SMB\Native\NativeServer;
 use Icewind\SMB\Wrapped\Server;
 
-class ServerFactory {
+final class ServerFactory {
 	const BACKENDS = [
 		NativeServer::class,
 		Server::class

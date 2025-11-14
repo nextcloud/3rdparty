@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class NotEmptyException extends InvalidRequestException {
+final class NotEmptyException extends InvalidRequestException {
 }

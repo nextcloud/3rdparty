@@ -11,7 +11,7 @@ use Icewind\SMB\Exception\Exception;
 use Icewind\SMB\Exception\NotFoundException;
 use Icewind\SMB\IFileInfo;
 
-class NativeFileInfo implements IFileInfo {
+final class NativeFileInfo implements IFileInfo {
 	/** @var string */
 	protected $path;
 	/** @var string */
@@ -129,9 +129,17 @@ class NativeFileInfo implements IFileInfo {
 		$attribute = $this->share->getAttribute($this->path, 'system.nt_sec_desc.acl.*+');
 
 		foreach (explode(',', $attribute) as $acl) {
-			list($user, $permissions) = explode(':', $acl, 2);
+			$parts = explode(':', $acl, 2);
+			if (count($parts) !== 2) {
+				continue;
+			}
+			list($user, $permissions) = $parts;
 			$user = trim($user, '\\');
-			list($type, $flags, $mask) = explode('/', $permissions);
+			$parts = explode('/', $permissions);
+			if (count($parts) < 3) {
+				continue;
+			}
+			list($type, $flags, $mask) = $parts;
 			$mask = hexdec($mask);
 
 			$acls[$user] = new ACL((int)$type, (int)$flags, (int)$mask);

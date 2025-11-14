@@ -9,7 +9,7 @@ namespace Icewind\SMB\Wrapped;
 use Icewind\SMB\ACL;
 use Icewind\SMB\IFileInfo;
 
-class FileInfo implements IFileInfo {
+final class FileInfo implements IFileInfo {
 	/** @var string */
 	protected $path;
 	/** @var string */

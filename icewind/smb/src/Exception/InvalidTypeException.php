@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class InvalidTypeException extends InvalidRequestException {
+final class InvalidTypeException extends InvalidRequestException {
 }

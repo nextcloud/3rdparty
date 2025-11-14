@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class ConnectionResetException extends ConnectException {
+final class ConnectionResetException extends ConnectException {
 }

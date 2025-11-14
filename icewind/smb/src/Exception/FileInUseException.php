@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class FileInUseException extends InvalidRequestException {
+final class FileInUseException extends InvalidRequestException {
 }

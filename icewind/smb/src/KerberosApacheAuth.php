@@ -15,7 +15,7 @@ use Icewind\SMB\Exception\InvalidTicket;
  *
  * @deprecated Use `KerberosAuth` with `$auth->setTicket(KerberosTicket::fromEnv())` instead
  */
-class KerberosApacheAuth extends KerberosAuth implements IAuth {
+final class KerberosApacheAuth extends KerberosAuth implements IAuth {
 	public function getTicket(): KerberosTicket {
 		if ($this->ticket === null) {
 			$ticket = KerberosTicket::fromEnv();

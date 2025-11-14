@@ -65,6 +65,9 @@ abstract class NativeStream implements File {
 		if (stream_wrapper_unregister('nativesmb') === false) {
 			throw new Exception("Failed to unregister stream wrapper");
 		}
+		if ($fh === false) {
+			throw new \Exception("Failed to start stream wrapper");
+		}
 		return $fh;
 	}
 

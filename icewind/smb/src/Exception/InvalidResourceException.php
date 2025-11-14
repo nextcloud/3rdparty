@@ -6,5 +6,5 @@
 
 namespace Icewind\SMB\Exception;
 
-class InvalidResourceException extends Exception {
+final class InvalidResourceException extends Exception {
 }
