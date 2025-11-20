@@ -713,9 +713,9 @@
             ),
         ),
         'symfony/http-foundation' => array(
-            'pretty_version' => 'v6.4.18',
-            'version' => '6.4.18.0',
-            'reference' => 'd0492d6217e5ab48f51fca76f64cf8e78919d0db',
+            'pretty_version' => 'v6.4.29',
+            'version' => '6.4.29.0',
+            'reference' => 'b03d11e015552a315714c127d8d1e0f9e970ec88',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-foundation',
             'aliases' => array(),
