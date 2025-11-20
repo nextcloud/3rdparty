@@ -740,9 +740,9 @@
             ),
         ),
         'symfony/http-foundation' => array(
-            'pretty_version' => 'v5.4.25',
-            'version' => '5.4.25.0',
-            'reference' => 'f66be2706075c5f6325d2fe2b743a57fb5d23f6b',
+            'pretty_version' => 'v5.4.50',
+            'version' => '5.4.50.0',
+            'reference' => '1a0706e8b8041046052ea2695eb8aeee04f97609',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-foundation',
             'aliases' => array(),
