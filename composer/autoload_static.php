@@ -27,6 +27,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
+        '606a39d89246991a373564698c2d8383' => __DIR__ . '/..' . '/symfony/polyfill-php85/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
     );
 
@@ -70,6 +71,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'S' =>
         array (
             'Symfony\\Polyfill\\Uuid\\' => 22,
+            'Symfony\\Polyfill\\Php85\\' => 23,
             'Symfony\\Polyfill\\Php84\\' => 23,
             'Symfony\\Polyfill\\Php83\\' => 23,
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
@@ -226,6 +228,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Polyfill\\Uuid\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-uuid',
+        ),
+        'Symfony\\Polyfill\\Php85\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php85',
         ),
         'Symfony\\Polyfill\\Php84\\' =>
         array (
@@ -1839,6 +1845,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'MicrosoftAzure\\Storage\\Common\\Models\\TransactionalMD5Trait' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/Models/TransactionalMD5Trait.php',
         'MicrosoftAzure\\Storage\\Common\\SharedAccessSignatureHelper' => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common/SharedAccessSignatureHelper.php',
         'Nextcloud\\LogNormalizer\\Normalizer' => __DIR__ . '/..' . '/nextcloud/lognormalizer/src/Normalizer.php',
+        'NoDiscard' => __DIR__ . '/..' . '/symfony/polyfill-php85/Resources/stubs/NoDiscard.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'OS_Guess' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/OS/Guess.php',
         'OpenStack\\BlockStorage\\v2\\Api' => __DIR__ . '/..' . '/php-opencloud/openstack/src/BlockStorage/v2/Api.php',
@@ -3400,6 +3407,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Symfony\\Polyfill\\Intl\\Normalizer\\Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Normalizer.php',
         'Symfony\\Polyfill\\Php83\\Php83' => __DIR__ . '/..' . '/symfony/polyfill-php83/Php83.php',
         'Symfony\\Polyfill\\Php84\\Php84' => __DIR__ . '/..' . '/symfony/polyfill-php84/Php84.php',
+        'Symfony\\Polyfill\\Php85\\Php85' => __DIR__ . '/..' . '/symfony/polyfill-php85/Php85.php',
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
         'System' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/System.php',
         'Webauthn\\AttestationStatement\\AndroidKeyAttestationStatementSupport' => __DIR__ . '/..' . '/web-auth/webauthn-lib/src/AttestationStatement/AndroidKeyAttestationStatementSupport.php',
