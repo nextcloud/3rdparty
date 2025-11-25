@@ -6259,6 +6259,12 @@
                 "bin/mp3scan"
             ],
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "Break frame parsing on invalid frame": ".patches/mp3info-break-frame-parsing.patch",
+                    "fix incorrect lookup for mpeg header": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {

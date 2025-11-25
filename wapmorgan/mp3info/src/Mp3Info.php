@@ -363,7 +363,6 @@ class Mp3Info {
                     break;
                 }
             }
-            fseek($fp, 1, SEEK_CUR);
         } while (ftell($fp) <= $header_seek_pos);
 
         if (!isset($header_bytes) || $header_bytes[0] !== 0xFF || (($header_bytes[1] >> 5) & 0b111) != 0b111) {
@@ -584,6 +583,11 @@ class Mp3Info {
         while (ftell($fp) < $lastByte) {
             $raw = fread($fp, 10);
             $frame_id = substr($raw, 0, 4);
+
+            if (strlen($raw) < 10) {
+                fseek($fp, $lastByte);
+                break;
+            }
 
             if ($frame_id == str_repeat(chr(0), 4)) {
                 fseek($fp, $lastByte);
