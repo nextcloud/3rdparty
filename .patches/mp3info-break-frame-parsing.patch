@@ -1,0 +1,26 @@
+From 186b99ac4a57d091e9414c0944524a9e098835f3 Mon Sep 17 00:00:00 2001
+From: grnd-alt <github@belakkaf.net>
+Date: Mon, 13 Oct 2025 12:18:37 +0200
+Subject: [PATCH] fix: break frame parsing on short frame
+
+Signed-off-by: grnd-alt <github@belakkaf.net>
+---
+ src/Mp3Info.php | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/Mp3Info.php b/src/Mp3Info.php
+index ccf97f4..24781d7 100644
+--- a/src/Mp3Info.php
++++ b/src/Mp3Info.php
+@@ -584,6 +584,11 @@ protected function parseId3v23Body($fp, $lastByte) {
+             $raw = fread($fp, 10);
+             $frame_id = substr($raw, 0, 4);
+ 
++            if (strlen($raw) < 10) {
++                fseek($fp, $lastByte);
++                break;
++            }
++
+             if ($frame_id == str_repeat(chr(0), 4)) {
+                 fseek($fp, $lastByte);
+                 break;
