@@ -1,0 +1,43 @@
+From 099a37744a3aaf368bdd339f9c01e34553e8828e Mon Sep 17 00:00:00 2001
+From: SebastianKrupinski <krupinskis05@gmail.com>
+Date: Wed, 19 Nov 2025 19:19:32 -0500
+Subject: [PATCH] fix: use RDATE in time range check and use all instances
+
+Signed-off-by: SebastianKrupinski <krupinskis05@gmail.com>
+---
+ lib/Component/VEvent.php               |  2 +-
+ lib/Recur/EventIterator.php            |  6 ++++-
+ tests/VObject/Component/VEventTest.php | 35 ++++++++++++++++++++++++++
+ 3 files changed, 41 insertions(+), 2 deletions(-)
+
+diff --git a/lib/Component/VEvent.php b/lib/Component/VEvent.php
+index e29e56322..6ca196d66 100644
+--- a/lib/Component/VEvent.php
++++ b/lib/Component/VEvent.php
+@@ -41,7 +41,7 @@ class VEvent extends VObject\Component
+      */
+     public function isInTimeRange(\DateTimeInterface $start, \DateTimeInterface $end): bool
+     {
+-        if ($this->RRULE) {
++        if ($this->RRULE || $this->RDATE) {
+             try {
+                 $it = new EventIterator($this, null, $start->getTimezone());
+             } catch (NoInstancesException $e) {
+diff --git a/lib/Recur/EventIterator.php b/lib/Recur/EventIterator.php
+index 2c93bcf4e..79a070ee4 100644
+--- a/lib/Recur/EventIterator.php
++++ b/lib/Recur/EventIterator.php
+@@ -164,8 +164,12 @@ public function __construct($input, ?string $uid = null, ?\DateTimeZone $timeZon
+         }
+ 
+         if (isset($this->masterEvent->RDATE)) {
++            $rdateValues = [];
++            foreach ($this->masterEvent->RDATE as $rdate) {
++                $rdateValues = array_merge($rdateValues, $rdate->getParts());
++            }
+             $this->recurIterator = new RDateIterator(
+-                $this->masterEvent->RDATE->getParts(),
++                $rdateValues,
+                 $this->startDate
+             );
+         } elseif (isset($this->masterEvent->RRULE)) {
