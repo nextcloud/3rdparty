@@ -3701,6 +3701,11 @@
                 "bin/naturalselection"
             ],
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "Check for instanceof INode instead of Node": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {

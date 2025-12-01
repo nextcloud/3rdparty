@@ -3,6 +3,9 @@
 		"wapmorgan/mp3info": {
 			"Break frame parsing on invalid frame": ".patches/mp3info-break-frame-parsing.patch",
 			"fix incorrect lookup for mpeg header": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch"
+		},
+		"sabre/dav": {
+			"Check for instanceof INode instead of Node": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch"
 		}
 	}
 }
