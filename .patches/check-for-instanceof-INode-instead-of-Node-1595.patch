@@ -1,0 +1,26 @@
+From 5d7501ddcf23f98da84af06e23a2413f4fc9b03f Mon Sep 17 00:00:00 2001
+From: Carl Schwan <carl@carlschwan.eu>
+Date: Fri, 12 Sep 2025 00:03:26 +0200
+Subject: [PATCH 1/2] feat: Check for instanceof INode instead of Node (#1595)
+
+Signed-off-by: Carl Schwan <carl.schwan@nextcloud.com>
+---
+ lib/DAV/Tree.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/DAV/Tree.php b/lib/DAV/Tree.php
+index 1483e1bc..f8a996b5 100644
+--- a/lib/DAV/Tree.php
++++ b/lib/DAV/Tree.php
+@@ -84,7 +84,7 @@ class Tree implements INodeByPath
+ 
+             if ($node instanceof INodeByPath) {
+                 $targetNode = $node->getNodeForPath(implode('/', $parts));
+-                if ($targetNode instanceof Node) {
++                if ($targetNode instanceof INode) {
+                     $node = $targetNode;
+                     break;
+                 }
+-- 
+2.52.0
+
