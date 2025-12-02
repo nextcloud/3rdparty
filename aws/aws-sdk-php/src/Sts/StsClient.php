@@ -17,8 +17,6 @@ use Aws\Sts\RegionalEndpoints\ConfigurationProvider;
  * @method \GuzzleHttp\Promise\Promise assumeRoleWithSAMLAsync(array $args = [])
  * @method \Aws\Result assumeRoleWithWebIdentity(array $args = [])
  * @method \GuzzleHttp\Promise\Promise assumeRoleWithWebIdentityAsync(array $args = [])
- * @method \Aws\Result assumeRoot(array $args = [])
- * @method \GuzzleHttp\Promise\Promise assumeRootAsync(array $args = [])
  * @method \Aws\Result decodeAuthorizationMessage(array $args = [])
  * @method \GuzzleHttp\Promise\Promise decodeAuthorizationMessageAsync(array $args = [])
  * @method \Aws\Result getAccessKeyInfo(array $args = [])
@@ -72,7 +70,7 @@ class StsClient extends AwsClient
      * @return Credentials
      * @throws \InvalidArgumentException if the result contains no credentials
      */
-    public function createCredentials(Result $result, $source=null)
+    public function createCredentials(Result $result)
     {
         if (!$result->hasKey('Credentials')) {
             throw new \InvalidArgumentException('Result contains no credentials');
@@ -97,8 +95,7 @@ class StsClient extends AwsClient
             $credentials['SecretAccessKey'],
             isset($credentials['SessionToken']) ? $credentials['SessionToken'] : null,
             $expiration,
-            $accountId,
-            $source
+            $accountId
         );
     }
 

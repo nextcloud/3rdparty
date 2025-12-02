@@ -7,7 +7,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.349.3',
-            'version' => '3.349.3.0',
-            'reference' => 'b2d4718786398f47626add9c29840fc416175ef2',
+            'pretty_version' => '3.324.0',
+            'version' => '3.324.0.0',
+            'reference' => 'b258712f0d986e00e1143d55246b6f9e344c7184',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),

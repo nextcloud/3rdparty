@@ -2,7 +2,6 @@
 namespace Aws\Auth;
 
 use Aws\Api\Service;
-use Aws\Auth\Exception\UnresolvedAuthSchemeException;
 use Aws\CommandInterface;
 use Closure;
 use GuzzleHttp\Promise\Promise;
@@ -85,16 +84,10 @@ class AuthSelectionMiddleware
                 $resolver = $this->authResolver;
             }
 
-            try {
-                $selectedAuthScheme = $resolver->selectAuthScheme(
-                    $resolvableAuth,
-                    ['unsigned_payload' => $unsignedPayload]
-                );
-            } catch (UnresolvedAuthSchemeException $e) {
-                // There was an error resolving auth
-                // The signature version will fall back to the modeled `signatureVersion`
-                // or auth schemes resolved during endpoint resolution
-            }
+            $selectedAuthScheme = $resolver->selectAuthScheme(
+                $resolvableAuth,
+                ['unsigned_payload' => $unsignedPayload]
+            );
 
             if (!empty($selectedAuthScheme)) {
                 $command['@context']['signature_version'] = $selectedAuthScheme;
