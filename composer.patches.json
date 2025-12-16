@@ -6,6 +6,9 @@
 		},
 		"sabre/dav": {
 			"Check for instanceof INode instead of Node": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch"
+		},
+		"sabre/vobject": {
+			"fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch"
 		}
 	}
 }
