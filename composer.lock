@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c9b64cbb1cf528b4a913f0ae3ec1b54",
+    "content-hash": "24dd4a400d1a5e49f42b40082fb459b2",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2188,26 +2188,27 @@
         },
         {
             "name": "nextcloud/lognormalizer",
-            "version": "v2.0.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud/lognormalizer.git",
-                "reference": "82ba06218001a15b3bc3b50dfca32e9ce8efb93e"
+                "reference": "9fbc308d900d0399298b0fa76123aa856e07ea1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/82ba06218001a15b3bc3b50dfca32e9ce8efb93e",
-                "reference": "82ba06218001a15b3bc3b50dfca32e9ce8efb93e",
+                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/9fbc308d900d0399298b0fa76123aa856e07ea1c",
+                "reference": "9fbc308d900d0399298b0fa76123aa856e07ea1c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.3.0"
+                "php": ">=8.1"
             },
             "require-dev": {
                 "nextcloud/coding-standard": "^1.4",
                 "phpunit/phpunit": "^10.5",
-                "vimeo/psalm": "^6.13"
+                "symfony/polyfill-php85": "^1.33",
+                "vimeo/psalm": "^6.14"
             },
             "type": "library",
             "autoload": {
@@ -2217,7 +2218,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "AGPL-3.0"
+                "AGPL-3.0-or-later"
             ],
             "authors": [
                 {
@@ -2244,9 +2245,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nextcloud/lognormalizer/issues",
-                "source": "https://github.com/nextcloud/lognormalizer/tree/v2.0.0"
+                "source": "https://github.com/nextcloud/lognormalizer/tree/v3.0.0"
             },
-            "time": "2025-10-24T13:47:11+00:00"
+            "time": "2025-12-17T14:56:48+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -6225,5 +6226,5 @@
     "platform-overrides": {
         "php": "8.2.0"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
