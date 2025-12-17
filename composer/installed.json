@@ -2278,29 +2278,30 @@
         },
         {
             "name": "nextcloud/lognormalizer",
-            "version": "v2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "v3.0.0",
+            "version_normalized": "3.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud/lognormalizer.git",
-                "reference": "82ba06218001a15b3bc3b50dfca32e9ce8efb93e"
+                "reference": "9fbc308d900d0399298b0fa76123aa856e07ea1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/82ba06218001a15b3bc3b50dfca32e9ce8efb93e",
-                "reference": "82ba06218001a15b3bc3b50dfca32e9ce8efb93e",
+                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/9fbc308d900d0399298b0fa76123aa856e07ea1c",
+                "reference": "9fbc308d900d0399298b0fa76123aa856e07ea1c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.3.0"
+                "php": ">=8.1"
             },
             "require-dev": {
                 "nextcloud/coding-standard": "^1.4",
                 "phpunit/phpunit": "^10.5",
-                "vimeo/psalm": "^6.13"
+                "symfony/polyfill-php85": "^1.33",
+                "vimeo/psalm": "^6.14"
             },
-            "time": "2025-10-24T13:47:11+00:00",
+            "time": "2025-12-17T14:56:48+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2310,7 +2311,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "AGPL-3.0"
+                "AGPL-3.0-or-later"
             ],
             "authors": [
                 {
@@ -2337,7 +2338,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nextcloud/lognormalizer/issues",
-                "source": "https://github.com/nextcloud/lognormalizer/tree/v2.0.0"
+                "source": "https://github.com/nextcloud/lognormalizer/tree/v3.0.0"
             },
             "install-path": "../nextcloud/lognormalizer"
         },
@@ -3976,6 +3977,9 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "4.0.x-dev"
+                },
+                "patches_applied": {
+                    "fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch"
                 }
             },
             "installation-source": "dist",
