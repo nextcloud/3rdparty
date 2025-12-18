@@ -154,24 +154,13 @@ class SmtpTransport extends AbstractTransport
 
     protected function parseMessageId(string $mtaResult): string
     {
-        $regexps = [
-            '/250 Ok (?P<id>[0-9a-f-]+)\r?$/mis',
-            '/250 Ok:? queued as (?P<id>[A-Z0-9]+)\r?$/mis',
-        ];
-        $matches = [];
-        foreach ($regexps as $regexp) {
-            if (preg_match($regexp, $mtaResult, $matches)) {
-                return $matches['id'];
-            }
-        }
-
-        return '';
+        return preg_match('/^250 (?:\S+ )?Ok:?+ (?:queued as |id=)?+(?P<id>[A-Z0-9._-]++)/im', $mtaResult, $matches) ? $matches['id'] : '';
     }
 
     public function __toString(): string
     {
         if ($this->stream instanceof SocketStream) {
-            $name = sprintf('smtp%s://%s', ($tls = $this->stream->isTLS()) ? 's' : '', $this->stream->getHost());
+            $name = \sprintf('smtp%s://%s', ($tls = $this->stream->isTLS()) ? 's' : '', $this->stream->getHost());
             $port = $this->stream->getPort();
             if (!(25 === $port || ($tls && 465 === $port))) {
                 $name .= ':'.$port;
@@ -227,7 +216,7 @@ class SmtpTransport extends AbstractTransport
             } catch (\Exception $e) {
                 $this->stream->terminate();
                 $this->started = false;
-                $this->getLogger()->debug(sprintf('Email transport "%s" stopped', __CLASS__));
+                $this->getLogger()->debug(\sprintf('Email transport "%s" stopped', __CLASS__));
                 throw $e;
             }
             $mtaResult = $this->executeCommand("\r\n.\r\n", [250]);
@@ -251,17 +240,17 @@ class SmtpTransport extends AbstractTransport
      */
     protected function doHeloCommand(): void
     {
-        $this->executeCommand(sprintf("HELO %s\r\n", $this->domain), [250]);
+        $this->executeCommand(\sprintf("HELO %s\r\n", $this->domain), [250]);
     }
 
     private function doMailFromCommand(string $address): void
     {
-        $this->executeCommand(sprintf("MAIL FROM:<%s>\r\n", $address), [250]);
+        $this->executeCommand(\sprintf("MAIL FROM:<%s>\r\n", $address), [250]);
     }
 
     private function doRcptToCommand(string $address): void
     {
-        $this->executeCommand(sprintf("RCPT TO:<%s>\r\n", $address), [250, 251, 252]);
+        $this->executeCommand(\sprintf("RCPT TO:<%s>\r\n", $address), [250, 251, 252]);
     }
 
     public function start(): void
@@ -270,7 +259,7 @@ class SmtpTransport extends AbstractTransport
             return;
         }
 
-        $this->getLogger()->debug(sprintf('Email transport "%s" starting', __CLASS__));
+        $this->getLogger()->debug(\sprintf('Email transport "%s" starting', __CLASS__));
 
         $this->stream->initialize();
         $this->assertResponseCode($this->getFullResponse(), [220]);
@@ -278,7 +267,7 @@ class SmtpTransport extends AbstractTransport
         $this->started = true;
         $this->lastMessageTime = 0;
 
-        $this->getLogger()->debug(sprintf('Email transport "%s" started', __CLASS__));
+        $this->getLogger()->debug(\sprintf('Email transport "%s" started', __CLASS__));
     }
 
     /**
@@ -294,7 +283,7 @@ class SmtpTransport extends AbstractTransport
             return;
         }
 
-        $this->getLogger()->debug(sprintf('Email transport "%s" stopping', __CLASS__));
+        $this->getLogger()->debug(\sprintf('Email transport "%s" stopping', __CLASS__));
 
         try {
             $this->executeCommand("QUIT\r\n", [221]);
@@ -302,7 +291,7 @@ class SmtpTransport extends AbstractTransport
         } finally {
             $this->stream->terminate();
             $this->started = false;
-            $this->getLogger()->debug(sprintf('Email transport "%s" stopped', __CLASS__));
+            $this->getLogger()->debug(\sprintf('Email transport "%s" stopped', __CLASS__));
         }
     }
 
@@ -332,10 +321,10 @@ class SmtpTransport extends AbstractTransport
         $valid = \in_array($code, $codes);
 
         if (!$valid || !$response) {
-            $codeStr = $code ? sprintf('code "%s"', $code) : 'empty code';
-            $responseStr = $response ? sprintf(', with message "%s"', trim($response)) : '';
+            $codeStr = $code ? \sprintf('code "%s"', $code) : 'empty code';
+            $responseStr = $response ? \sprintf(', with message "%s"', trim($response)) : '';
 
-            throw new UnexpectedResponseException(sprintf('Expected response code "%s" but got ', implode('/', $codes)).$codeStr.$responseStr.'.', $code ?: 0);
+            throw new UnexpectedResponseException(\sprintf('Expected response code "%s" but got ', implode('/', $codes)).$codeStr.$responseStr.'.', $code ?: 0);
         }
     }
 
@@ -364,7 +353,7 @@ class SmtpTransport extends AbstractTransport
 
         $this->stop();
         if (0 < $sleep = $this->restartThresholdSleep) {
-            $this->getLogger()->debug(sprintf('Email transport "%s" sleeps for %d seconds after stopping', __CLASS__, $sleep));
+            $this->getLogger()->debug(\sprintf('Email transport "%s" sleeps for %d seconds after stopping', __CLASS__, $sleep));
 
             sleep($sleep);
         }
@@ -372,15 +361,12 @@ class SmtpTransport extends AbstractTransport
         $this->restartCounter = 0;
     }
 
-    public function __sleep(): array
+    public function __serialize(): array
     {
         throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
     }
 
-    /**
-     * @return void
-     */
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
         throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
     }
