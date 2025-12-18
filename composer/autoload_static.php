@@ -2078,6 +2078,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Punic\\Script' => __DIR__ . '/..' . '/punic/punic/src/Script.php',
         'Punic\\Territory' => __DIR__ . '/..' . '/punic/punic/src/Territory.php',
         'Punic\\Unit' => __DIR__ . '/..' . '/punic/punic/src/Unit.php',
+        'ReflectionConstant' => __DIR__ . '/..' . '/symfony/polyfill-php84/Resources/stubs/ReflectionConstant.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
         'Sabre\\CalDAV\\Backend\\AbstractBackend' => __DIR__ . '/..' . '/sabre/dav/lib/CalDAV/Backend/AbstractBackend.php',
         'Sabre\\CalDAV\\Backend\\BackendInterface' => __DIR__ . '/..' . '/sabre/dav/lib/CalDAV/Backend/BackendInterface.php',

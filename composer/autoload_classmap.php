@@ -1551,6 +1551,7 @@ return array(
     'Punic\\Script' => $vendorDir . '/punic/punic/src/Script.php',
     'Punic\\Territory' => $vendorDir . '/punic/punic/src/Territory.php',
     'Punic\\Unit' => $vendorDir . '/punic/punic/src/Unit.php',
+    'ReflectionConstant' => $vendorDir . '/symfony/polyfill-php84/Resources/stubs/ReflectionConstant.php',
     'SQLite3Exception' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
     'Sabre\\CalDAV\\Backend\\AbstractBackend' => $vendorDir . '/sabre/dav/lib/CalDAV/Backend/AbstractBackend.php',
     'Sabre\\CalDAV\\Backend\\BackendInterface' => $vendorDir . '/sabre/dav/lib/CalDAV/Backend/BackendInterface.php',
