@@ -20,7 +20,7 @@
 		"php": "^8.2",
 		"ext-ctype": "*",
 		"ext-mbstring": "*",
-		"aws/aws-sdk-php": "^3.349",
+		"aws/aws-sdk-php": "^3.368",
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"cweagans/composer-patches": "^1.7",
 		"deepdiver/zipstreamer": "^2.0.3",
