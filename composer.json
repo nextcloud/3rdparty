@@ -65,7 +65,7 @@
 		"symfony/routing": "^6.4.12",
 		"symfony/translation": "^6.4.4",
 		"wapmorgan/mp3info": "^0.1.1",
-		"web-auth/webauthn-lib": "^4.9.1"
+		"web-auth/webauthn-lib": "^5.2.2"
 	},
 	 "replace": {
         "symfony/polyfill-php80": "*",
