@@ -60,7 +60,7 @@
 		"symfony/routing": "^6.4.30",
 		"symfony/translation": "^6.4.30",
 		"wapmorgan/mp3info": "^0.1.0",
-		"web-auth/webauthn-lib": "^4.9.1"
+		"web-auth/webauthn-lib": "^4.9.2"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -print0 | xargs -0 -n1 php -l"

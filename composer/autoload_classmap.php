@@ -1136,6 +1136,8 @@ return array(
     'CBOR\\CBORObject' => $vendorDir . '/spomky-labs/cbor-php/src/CBORObject.php',
     'CBOR\\Decoder' => $vendorDir . '/spomky-labs/cbor-php/src/Decoder.php',
     'CBOR\\DecoderInterface' => $vendorDir . '/spomky-labs/cbor-php/src/DecoderInterface.php',
+    'CBOR\\Encoder' => $vendorDir . '/spomky-labs/cbor-php/src/Encoder.php',
+    'CBOR\\EncoderInterface' => $vendorDir . '/spomky-labs/cbor-php/src/EncoderInterface.php',
     'CBOR\\IndefiniteLengthByteStringObject' => $vendorDir . '/spomky-labs/cbor-php/src/IndefiniteLengthByteStringObject.php',
     'CBOR\\IndefiniteLengthListObject' => $vendorDir . '/spomky-labs/cbor-php/src/IndefiniteLengthListObject.php',
     'CBOR\\IndefiniteLengthMapObject' => $vendorDir . '/spomky-labs/cbor-php/src/IndefiniteLengthMapObject.php',

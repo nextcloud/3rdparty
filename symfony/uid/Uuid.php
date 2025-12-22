@@ -14,7 +14,7 @@ namespace Symfony\Component\Uid;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  *
- * @see https://tools.ietf.org/html/rfc4122#appendix-C for details about namespaces
+ * @see https://datatracker.ietf.org/doc/html/rfc9562/#section-6.6 for details about namespaces
  */
 class Uuid extends AbstractUid
 {
@@ -32,13 +32,13 @@ class Uuid extends AbstractUid
         $type = preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $uuid) ? (int) $uuid[14] : false;
 
         if (false === $type || (static::TYPE ?: $type) !== $type) {
-            throw new \InvalidArgumentException(sprintf('Invalid UUID%s: "%s".', static::TYPE ? 'v'.static::TYPE : '', $uuid));
+            throw new \InvalidArgumentException(\sprintf('Invalid UUID%s: "%s".', static::TYPE ? 'v'.static::TYPE : '', $uuid));
         }
 
         $this->uid = strtolower($uuid);
 
         if ($checkVariant && !\in_array($this->uid[19], ['8', '9', 'a', 'b'], true)) {
-            throw new \InvalidArgumentException(sprintf('Invalid UUID%s: "%s".', static::TYPE ? 'v'.static::TYPE : '', $uuid));
+            throw new \InvalidArgumentException(\sprintf('Invalid UUID%s: "%s".', static::TYPE ? 'v'.static::TYPE : '', $uuid));
         }
     }
 
@@ -153,9 +153,9 @@ class Uuid extends AbstractUid
     }
 
     /**
-     * Returns the identifier as a RFC4122 case insensitive string.
+     * Returns the identifier as a RFC 9562/4122 case insensitive string.
      *
-     * @see https://tools.ietf.org/html/rfc4122#section-3
+     * @see https://datatracker.ietf.org/doc/html/rfc9562/#section-4
      *
      * @example 09748193-048a-4bfb-b825-8528cf74fdc1 (len=36)
      */
