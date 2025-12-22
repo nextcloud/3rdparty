@@ -27,15 +27,20 @@ final class IndefiniteLengthByteStringObject extends AbstractCBORObject implemen
     {
         $result = parent::__toString();
         foreach ($this->chunks as $chunk) {
-            $result .= $chunk->__toString();
+            $result .= (string) $chunk;
         }
 
         return $result . "\xFF";
     }
 
-    public static function create(): self
+    public static function create(string ...$chunks): self
     {
-        return new self();
+        $object = new self();
+        foreach ($chunks as $chunk) {
+            $object->append($chunk);
+        }
+
+        return $object;
     }
 
     public function add(ByteStringObject $chunk): self

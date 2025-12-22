@@ -8,6 +8,7 @@ use Brick\Math\Exception\DivisionByZeroException;
 use Brick\Math\Exception\MathException;
 use Brick\Math\Exception\NegativeNumberException;
 use Brick\Math\Internal\Calculator;
+use Override;
 
 /**
  * Immutable, arbitrary-precision signed decimal numbers.
@@ -47,6 +48,7 @@ final class BigDecimal extends BigNumber
     /**
      * @psalm-pure
      */
+    #[Override]
     protected static function from(BigNumber $number): static
     {
         return $number->toBigDecimal();
@@ -58,19 +60,23 @@ final class BigDecimal extends BigNumber
      * Example: `(12345, 3)` will result in the BigDecimal `12.345`.
      *
      * @param BigNumber|int|float|string $value The unscaled value. Must be convertible to a BigInteger.
-     * @param int                        $scale The scale of the number, positive or zero.
-     *
-     * @throws \InvalidArgumentException If the scale is negative.
+     * @param int                        $scale The scale of the number. If negative, the scale will be set to zero
+     *                                          and the unscaled value will be adjusted accordingly.
      *
      * @psalm-pure
      */
     public static function ofUnscaledValue(BigNumber|int|float|string $value, int $scale = 0) : BigDecimal
     {
+        $value = (string) BigInteger::of($value);
+
         if ($scale < 0) {
-            throw new \InvalidArgumentException('The scale cannot be negative.');
+            if ($value !== '0') {
+                $value .= \str_repeat('0', -$scale);
+            }
+            $scale = 0;
         }
 
-        return new BigDecimal((string) BigInteger::of($value), $scale);
+        return new BigDecimal($value, $scale);
     }
 
     /**
@@ -535,6 +541,7 @@ final class BigDecimal extends BigNumber
         return new BigDecimal(Calculator::get()->neg($this->value), $this->scale);
     }
 
+    #[Override]
     public function compareTo(BigNumber|int|float|string $that) : int
     {
         $that = BigNumber::of($that);
@@ -552,6 +559,7 @@ final class BigDecimal extends BigNumber
         return - $that->compareTo($this);
     }
 
+    #[Override]
     public function getSign() : int
     {
         return ($this->value === '0') ? 0 : (($this->value[0] === '-') ? -1 : 1);
@@ -565,6 +573,33 @@ final class BigDecimal extends BigNumber
     public function getScale() : int
     {
         return $this->scale;
+    }
+
+    /**
+     * Returns the number of significant digits in the number.
+     *
+     * This is the number of digits to both sides of the decimal point, stripped of leading zeros.
+     * The sign has no impact on the result.
+     *
+     * Examples:
+     *   0 => 0
+     *   0.0 => 0
+     *   123 => 3
+     *   123.456 => 6
+     *   0.00123 => 3
+     *   0.0012300 => 5
+     */
+    public function getPrecision(): int
+    {
+        $value = $this->value;
+
+        if ($value === '0') {
+            return 0;
+        }
+
+        $length = \strlen($value);
+
+        return ($value[0] === '-') ? $length - 1 : $length;
     }
 
     /**
@@ -609,6 +644,7 @@ final class BigDecimal extends BigNumber
         return $this->getFractionalPart() !== \str_repeat('0', $this->scale);
     }
 
+    #[Override]
     public function toBigInteger() : BigInteger
     {
         $zeroScaleDecimal = $this->scale === 0 ? $this : $this->dividedBy(1, 0);
@@ -616,11 +652,13 @@ final class BigDecimal extends BigNumber
         return self::newBigInteger($zeroScaleDecimal->value);
     }
 
+    #[Override]
     public function toBigDecimal() : BigDecimal
     {
         return $this;
     }
 
+    #[Override]
     public function toBigRational() : BigRational
     {
         $numerator = self::newBigInteger($this->value);
@@ -629,6 +667,7 @@ final class BigDecimal extends BigNumber
         return self::newBigRational($numerator, $denominator, false);
     }
 
+    #[Override]
     public function toScale(int $scale, RoundingMode $roundingMode = RoundingMode::UNNECESSARY) : BigDecimal
     {
         if ($scale === $this->scale) {
@@ -638,24 +677,32 @@ final class BigDecimal extends BigNumber
         return $this->dividedBy(BigDecimal::one(), $scale, $roundingMode);
     }
 
+    #[Override]
     public function toInt() : int
     {
         return $this->toBigInteger()->toInt();
     }
 
+    #[Override]
     public function toFloat() : float
     {
         return (float) (string) $this;
     }
 
+    /**
+     * @return numeric-string
+     */
+    #[Override]
     public function __toString() : string
     {
         if ($this->scale === 0) {
+            /** @var numeric-string */
             return $this->value;
         }
 
         $value = $this->getUnscaledValueWithLeadingZeros();
 
+        /** @var numeric-string */
         return \substr($value, 0, -$this->scale) . '.' . \substr($value, -$this->scale);
     }
 
