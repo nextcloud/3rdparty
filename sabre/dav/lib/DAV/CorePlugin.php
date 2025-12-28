@@ -80,7 +80,7 @@ class CorePlugin extends ServerPlugin
         }
 
         if ('HEAD' === $request->getHeader('X-Sabre-Original-Method')) {
-            $body = '';
+            $body = fopen('php://temp', 'r+');
         } else {
             $body = $node->get();
         }
