@@ -1570,33 +1570,33 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "6.4.2",
-            "version_normalized": "6.4.2.0",
+            "version": "6.6.4",
+            "version_normalized": "6.6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "ce1fd2d47799bb60668643bc6220f6278a4c1d02"
+                "reference": "2eeb75d21cf73211335888e7f5e6fd7440723ec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/ce1fd2d47799bb60668643bc6220f6278a4c1d02",
-                "reference": "ce1fd2d47799bb60668643bc6220f6278a4c1d02",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/2eeb75d21cf73211335888e7f5e6fd7440723ec7",
+                "reference": "2eeb75d21cf73211335888e7f5e6fd7440723ec7",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "marc-mabe/php-enum": "^4.0",
+                "marc-mabe/php-enum": "^4.4",
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "3.3.0",
-                "json-schema/json-schema-test-suite": "1.2.0",
+                "json-schema/json-schema-test-suite": "^23.2",
                 "marc-mabe/php-enum-phpstan": "^2.0",
                 "phpspec/prophecy": "^1.19",
                 "phpstan/phpstan": "^1.12",
                 "phpunit/phpunit": "^8.5"
             },
-            "time": "2025-06-03T18:27:04+00:00",
+            "time": "2025-12-19T15:01:32+00:00",
             "bin": [
                 "bin/validate-json"
             ],
@@ -1642,7 +1642,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.4.2"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.4"
             },
             "install-path": "../justinrainbow/json-schema"
         },
@@ -3978,7 +3978,8 @@
                     "dev-master": "4.0.x-dev"
                 },
                 "patches_applied": {
-                    "fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch"
+                    "fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch",
+                    "fix send participation reply on fresh event": ".patches/sabre-vobject-iTipBroker-replies.patch"
                 }
             },
             "installation-source": "dist",

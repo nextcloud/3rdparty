@@ -200,9 +200,9 @@
             'dev_requirement' => false,
         ),
         'justinrainbow/json-schema' => array(
-            'pretty_version' => '6.4.2',
-            'version' => '6.4.2.0',
-            'reference' => 'ce1fd2d47799bb60668643bc6220f6278a4c1d02',
+            'pretty_version' => '6.6.4',
+            'version' => '6.6.4.0',
+            'reference' => '2eeb75d21cf73211335888e7f5e6fd7440723ec7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../justinrainbow/json-schema',
             'aliases' => array(),

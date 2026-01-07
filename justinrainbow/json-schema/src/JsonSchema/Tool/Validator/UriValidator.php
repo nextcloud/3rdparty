@@ -12,18 +12,22 @@ class UriValidator
         $hierarchicalPattern = '/^
             ([a-z][a-z0-9+\-.]*):\/\/                # Scheme (http, https, ftp, etc.)
             (?:([^:@\/?#]+)(?::([^@\/?#]*))?@)?      # Optional userinfo (user:pass@)
-            ([a-z0-9.-]+|\[[a-f0-9:.]+\])            # Hostname or IPv6 in brackets
+            ([a-z0-9._~-]+|\[[a-f0-9:.]+\])          # Hostname or IPv6 in brackets
             (?::(\d{1,5}))?                          # Optional port
             (\/[a-zA-Z0-9._~!$&\'()*+,;=:@\/%-]*)*   # Path (valid characters only)
             (\?([^#]*))?                             # Optional query
             (\#(.*))?                                # Optional fragment
         $/ix';
 
-        // RFC 3986: Non-Hierarchical URIs (mailto, data, urn)
+        // RFC 3986: Non-Hierarchical URIs (mailto, data, urn, news)
         $nonHierarchicalPattern = '/^
-            (mailto|data|urn):                        # Only allow known non-hierarchical schemes
-            (.+)                                      # Must contain at least one character after scheme
+                (mailto|data|urn|news|tel|file):     # Only allow known non-hierarchical schemes
+                (.+)                                 # Must contain at least one character after scheme
         $/ix';
+
+        // Validation for newsgroup name (alphanumeric + dots, no empty segments)
+        $newsGroupPattern = '/^[a-z0-9]+(\.[a-z0-9]+)*$/i';
+        $telPattern = '/^\+?[0-9.\-() ]+$/'; // Allows +, digits, separators
 
         // RFC 5322-compliant email validation for `mailto:` URIs
         $emailPattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
@@ -40,7 +44,7 @@ class UriValidator
                 return false;
             }
 
-            // Validate path (reject illegal characters: < > { } | \ ^ `)
+            // Validate the path (reject illegal characters: < > { } | \ ^ `)
             if (!empty($matches[6]) && preg_match('/[<>{}|\\\^`]/', $matches[6])) {
                 return false;
             }
@@ -55,6 +59,14 @@ class UriValidator
             // Special case: `mailto:` must contain a **valid email address**
             if ($scheme === 'mailto') {
                 return preg_match($emailPattern, $matches[2]) === 1;
+            }
+
+            if ($scheme === 'news') {
+                return preg_match($newsGroupPattern, $matches[2]) === 1;
+            }
+
+            if ($scheme === 'tel') {
+                return preg_match($telPattern, $matches[2]) === 1;
             }
 
             return true; // Valid non-hierarchical URI
