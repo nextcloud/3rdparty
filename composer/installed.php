@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.324.13',
-            'version' => '3.324.13.0',
-            'reference' => '781cb9594f7d1754c888452f980748115fd159d3',
+            'pretty_version' => '3.369.9',
+            'version' => '3.369.9.0',
+            'reference' => 'cb7c0a255a34d44f13f9276d720827d56a3b381b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
@@ -702,6 +702,15 @@
             'provided' => array(
                 0 => '2.0|3.0',
             ),
+        ),
+        'symfony/filesystem' => array(
+            'pretty_version' => 'v6.4.30',
+            'version' => '6.4.30.0',
+            'reference' => '441c6b69f7222aadae7cbf5df588496d5ee37789',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/filesystem',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/http-foundation' => array(
             'pretty_version' => 'v6.4.30',

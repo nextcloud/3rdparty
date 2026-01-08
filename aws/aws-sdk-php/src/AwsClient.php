@@ -12,6 +12,7 @@ use Aws\EndpointV2\EndpointV2Middleware;
 use Aws\Exception\AwsException;
 use Aws\Signature\SignatureProvider;
 use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * Default AWS client implementation
@@ -271,15 +272,17 @@ class AwsClient implements AwsClientInterface
         if ($this->isUseEndpointV2()) {
             $this->addEndpointV2Middleware();
         }
-        $this->addAuthSelectionMiddleware();
+        $this->addAuthSelectionMiddleware($config['config']);
 
         if (!is_null($this->api->getMetadata('awsQueryCompatible'))) {
             $this->addQueryCompatibleInputMiddleware($this->api);
+            $this->addQueryModeHeader();
         }
 
         if (isset($args['with_resolved'])) {
             $args['with_resolved']($config);
         }
+        $this->addUserAgentMiddleware($config);
     }
 
     public function getHandlerList()
@@ -297,6 +300,12 @@ class AwsClient implements AwsClientInterface
     public function getCredentials()
     {
         $fn = $this->credentialProvider;
+        return $fn();
+    }
+
+    public function getToken()
+    {
+        $fn = $this->tokenProvider;
         return $fn();
     }
 
@@ -447,7 +456,7 @@ class AwsClient implements AwsClientInterface
         }
 
         $resolver = static function (
-            CommandInterface $c
+            CommandInterface $command
         ) use (
                 $api,
                 $provider,
@@ -458,17 +467,17 @@ class AwsClient implements AwsClientInterface
                 $signingRegionSet
         ) {
             if (!$configuredSignatureVersion) {
-                if (!empty($c['@context']['signing_region'])) {
-                    $region = $c['@context']['signing_region'];
+                if (!empty($command['@context']['signing_region'])) {
+                    $region = $command['@context']['signing_region'];
                 }
-                if (!empty($c['@context']['signing_service'])) {
-                    $name = $c['@context']['signing_service'];
+                if (!empty($command['@context']['signing_service'])) {
+                    $name = $command['@context']['signing_service'];
                 }
-                if (!empty($c['@context']['signature_version'])) {
-                    $signatureVersion = $c['@context']['signature_version'];
+                if (!empty($command['@context']['signature_version'])) {
+                    $signatureVersion = $command['@context']['signature_version'];
                 }
 
-                $authType = $api->getOperation($c->getName())['authtype'];
+                $authType = $api->getOperation($command->getName())['authtype'];
                 switch ($authType){
                     case 'none':
                         $signatureVersion = 'anonymous';
@@ -483,14 +492,20 @@ class AwsClient implements AwsClientInterface
             }
 
             if ($signatureVersion === 'v4a') {
-                $commandSigningRegionSet = !empty($c['@context']['signing_region_set'])
-                    ? implode(', ', $c['@context']['signing_region_set'])
+                $commandSigningRegionSet = !empty($command['@context']['signing_region_set'])
+                    ? implode(', ', $command['@context']['signing_region_set'])
                     : null;
 
                 $region = $signingRegionSet
                     ?? $commandSigningRegionSet
                     ?? $region;
             }
+
+            // Capture signature metric
+            $command->getMetricsBuilder()->identifyMetricByValueAndAppend(
+                'signature',
+                $signatureVersion
+            );
 
             return SignatureProvider::resolve($provider, $signatureVersion, $name, $region);
         };
@@ -524,6 +539,20 @@ class AwsClient implements AwsClientInterface
             );
     }
 
+    private function addQueryModeHeader(): void
+    {
+        $list = $this->getHandlerList();
+        $list->appendBuild(
+            Middleware::mapRequest(function (RequestInterface $r) {
+                return $r->withHeader(
+                    'x-amzn-query-mode',
+                    "true"
+                );
+            }),
+            'x-amzn-query-mode-header'
+        );
+    }
+
     private function addInvocationId()
     {
         // Add invocation id to each request
@@ -539,8 +568,14 @@ class AwsClient implements AwsClientInterface
             $aliases = \Aws\load_compiled_json($file);
             $serviceId = $this->api->getServiceId();
             $version = $this->getApi()->getApiVersion();
-            if (!empty($aliases['operations'][$serviceId][$version])) {
-                $this->aliases = array_flip($aliases['operations'][$serviceId][$version]);
+            $serviceAliases = null;
+
+            if (!is_null($serviceId) && isset($aliases['operations'][$serviceId])) {
+                $serviceAliases = $aliases['operations'][$serviceId];
+            }
+
+            if ($serviceAliases && isset($serviceAliases[$version])) {
+                $this->aliases = array_flip($serviceAliases[$version]);
             }
         }
     }
@@ -566,14 +601,15 @@ class AwsClient implements AwsClientInterface
         );
     }
 
-    private function addAuthSelectionMiddleware()
+    private function addAuthSelectionMiddleware(array $args)
     {
         $list = $this->getHandlerList();
 
         $list->prependBuild(
             AuthSelectionMiddleware::wrap(
                 $this->authSchemeResolver,
-                $this->getApi()
+                $this->getApi(),
+                $args['auth_scheme_preference'] ?? null
             ),
             'auth-selection'
         );
@@ -592,6 +628,24 @@ class AwsClient implements AwsClientInterface
                 $this->credentialProvider
             ),
             'endpoint-resolution'
+        );
+    }
+
+    /**
+     * Appends the user agent middleware.
+     * This middleware MUST be appended after the
+     * signature middleware `addSignatureMiddleware`,
+     * so that metrics around signatures are properly
+     * captured.
+     *
+     * @param $args
+     * @return void
+     */
+    private function addUserAgentMiddleware($args)
+    {
+        $this->getHandlerList()->appendSign(
+            UserAgentMiddleware::wrap($args),
+            'user-agent'
         );
     }
 
