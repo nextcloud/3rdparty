@@ -34,6 +34,7 @@ use Aws\Retry\ConfigurationProvider as RetryConfigProvider;
 use Aws\Signature\SignatureProvider;
 use Aws\Token\Token;
 use Aws\Token\TokenInterface;
+use Aws\Token\BedrockTokenProvider;
 use Aws\Token\TokenProvider;
 use GuzzleHttp\Promise\PromiseInterface;
 use InvalidArgumentException as IAE;
@@ -46,6 +47,22 @@ class ClientResolver
 {
     /** @var array */
     private $argDefinitions;
+
+    /**
+     * When using this option as default please make sure that, your config
+     * has at least one data type defined in `valid` otherwise it will be
+     * defaulted to `string`. Also, the default value will be the falsy value
+     * based on the resolved data type. For example, the default for `string`
+     * will be `''` and for bool will be `false`.
+     *
+     * @var string
+     */
+    const DEFAULT_FROM_ENV_INI = [
+        __CLASS__,
+        '_resolve_from_env_ini'
+    ];
+    private const ANONYMOUS_SIGNATURE = 'anonymous';
+    private const DPOP_SIGNATURE = 'dpop';
 
     /** @var array Map of types to a corresponding function */
     private static $typeMap = [
@@ -91,7 +108,7 @@ class ClientResolver
             'valid'     => ['bool'],
             'doc'       => 'Set to true to disable endpoint urls configured using `AWS_ENDPOINT_URL` and `endpoint_url` shared config option.',
             'fn'        => [__CLASS__, '_apply_ignore_configured_endpoint_urls'],
-            'default'   => [__CLASS__, '_default_ignore_configured_endpoint_urls'],
+            'default'   => self::DEFAULT_FROM_ENV_INI,
         ],
         'endpoint' => [
             'type'  => 'value',
@@ -105,7 +122,7 @@ class ClientResolver
             'valid'    => ['string'],
             'doc'      => 'Region to connect to. See http://docs.aws.amazon.com/general/latest/gr/rande.html for a list of available regions.',
             'fn'       => [__CLASS__, '_apply_region'],
-            'default'  => [__CLASS__, '_default_region']
+            'default'  => self::DEFAULT_FROM_ENV_INI
         ],
         'version' => [
             'type'     => 'value',
@@ -192,6 +209,13 @@ class ClientResolver
             'fn'      => [__CLASS__, '_apply_credentials'],
             'default' => [__CLASS__, '_default_credential_provider'],
         ],
+        'auth_scheme_preference' => [
+            'type'    => 'value',
+            'valid'   => ['string', 'array'],
+            'doc'     => 'Comma-separated list of authentication scheme preferences in priority order. Configure via environment variable `AWS_AUTH_SCHEME_PREFERENCE`, INI config file `auth_scheme_preference`, or client constructor parameter `auth_scheme_preference` (string or array).\nExample: `AWS_AUTH_SCHEME_PREFERENCE=aws.auth#sigv4a,aws.auth#sigv4,smithy.api#httpBearerAuth`',
+            'default' => self::DEFAULT_FROM_ENV_INI,
+            'fn' => [__CLASS__, '_apply_auth_scheme_preference'],
+        ],
         'token' => [
             'type'    => 'value',
             'valid'   => [TokenInterface::class, CacheInterface::class, 'array', 'bool', 'callable'],
@@ -244,7 +268,7 @@ class ClientResolver
             'valid'     => ['bool', 'callable'],
             'doc'       => 'Set to true to disable request compression for supported operations',
             'fn'        => [__CLASS__, '_apply_disable_request_compression'],
-            'default'   => [__CLASS__, '_default_disable_request_compression'],
+            'default'   => self::DEFAULT_FROM_ENV_INI,
         ],
         'request_min_compression_size_bytes' => [
             'type'      => 'value',
@@ -324,10 +348,10 @@ class ClientResolver
         ],
         'sigv4a_signing_region_set' => [
             'type' => 'value',
-            'valid' => ['array', 'string'],
+            'valid' => ['string', 'array'],
             'doc' => 'A comma-delimited list of supported regions sent in sigv4a requests.',
             'fn' => [__CLASS__, '_apply_sigv4a_signing_region_set'],
-            'default' => [__CLASS__, '_default_sigv4a_signing_region_set']
+            'default' => self::DEFAULT_FROM_ENV_INI
         ]
     ];
 
@@ -397,7 +421,15 @@ class ClientResolver
                             || $a['default'] instanceof \Closure
                         )
                     ) {
-                        $args[$key] = $a['default']($args);
+                        if ($a['default'] === self::DEFAULT_FROM_ENV_INI) {
+                            $args[$key] = $a['default'](
+                                $key,
+                                $a['valid'][0] ?? 'string',
+                                $args
+                            );
+                        } else {
+                            $args[$key] = $a['default']($args);
+                        }
                     } else {
                         $args[$key] = $a['default'];
                     }
@@ -590,15 +622,6 @@ class ClientResolver
         $args['config']['disable_request_compression'] = $value;
     }
 
-    public static function _default_disable_request_compression(array &$args) {
-        return ConfigurationResolver::resolve(
-            'disable_request_compression',
-            false,
-            'bool',
-            $args
-        );
-    }
-
     public static function _apply_min_compression_size($value, array &$args) {
         if (is_callable($value)) {
             $value = $value();
@@ -647,7 +670,10 @@ class ClientResolver
             $args['credentials'] = CredentialProvider::fromCredentials(
                 new Credentials('', '')
             );
-            $args['config']['signature_version'] = 'anonymous';
+            if ($args['config']['signature_version'] !== self::DPOP_SIGNATURE) {
+                $args['config']['signature_version'] = self::ANONYMOUS_SIGNATURE;
+            }
+
             $args['config']['configured_signature_version'] = true;
         } elseif ($value instanceof CacheInterface) {
             $args['credentials'] = CredentialProvider::defaultProvider($args);
@@ -691,8 +717,17 @@ class ClientResolver
         }
     }
 
-    public static function _default_token_provider(array $args)
+    public static function _default_token_provider(array &$args)
     {
+        if (($args['config']['signing_name'] ?? '') === 'bedrock') {
+            // Checks for env value, if present, sets auth_scheme_preference
+            // to bearer auth and returns a provider
+            $provider = BedrockTokenProvider::createIfAvailable($args);
+            if (!is_null($provider)) {
+                return $provider;
+            }
+        }
+
         return TokenProvider::defaultProvider($args);
     }
 
@@ -978,68 +1013,14 @@ class ClientResolver
         );
     }
 
-    public static function _apply_user_agent($inputUserAgent, array &$args, HandlerList $list)
+    public static function _apply_user_agent(
+        $inputUserAgent,
+        array &$args,
+        HandlerList $list
+    ): void
     {
-        // Add SDK version
-        $userAgent = ['aws-sdk-php/' . Sdk::VERSION];
-
-        // User Agent Metadata
-        $userAgent[] = 'ua/2.0';
-
-        // If on HHVM add the HHVM version
-        if (defined('HHVM_VERSION')) {
-            $userAgent []= 'HHVM/' . HHVM_VERSION;
-        }
-
-        // Add OS version
-        $disabledFunctions = explode(',', ini_get('disable_functions'));
-        if (function_exists('php_uname')
-            && !in_array('php_uname', $disabledFunctions, true)
-        ) {
-            $osName = "OS/" . php_uname('s') . '#' . php_uname('r');
-            if (!empty($osName)) {
-                $userAgent []= $osName;
-            }
-        }
-
-        // Add the language version
-        $userAgent []= 'lang/php#' . phpversion();
-
-        // Add exec environment if present
-        if ($executionEnvironment = getenv('AWS_EXECUTION_ENV')) {
-            $userAgent []= $executionEnvironment;
-        }
-
         // Add endpoint discovery if set
-        if (isset($args['endpoint_discovery'])) {
-            if (($args['endpoint_discovery'] instanceof \Aws\EndpointDiscovery\Configuration
-                && $args['endpoint_discovery']->isEnabled())
-            ) {
-                $userAgent []= 'cfg/endpoint-discovery';
-            } elseif (is_array($args['endpoint_discovery'])
-                && isset($args['endpoint_discovery']['enabled'])
-                && $args['endpoint_discovery']['enabled']
-            ) {
-                $userAgent []= 'cfg/endpoint-discovery';
-            }
-        }
-
-        // Add retry mode if set
-        if (isset($args['retries'])) {
-            if ($args['retries'] instanceof \Aws\Retry\Configuration) {
-                $userAgent []= 'cfg/retry-mode#' . $args["retries"]->getMode();
-            } elseif (is_array($args['retries'])
-                && isset($args["retries"]["mode"])
-            ) {
-                $userAgent []= 'cfg/retry-mode#' . $args["retries"]["mode"];
-            }
-        }
-
-        // AppID Metadata
-        if (!empty($args['app_id'])) {
-            $userAgent[] = 'app/' . $args['app_id'];
-        }
-
+        $userAgent = [];
         // Add the input to the end
         if ($inputUserAgent){
             if (!is_array($inputUserAgent)) {
@@ -1051,29 +1032,17 @@ class ClientResolver
 
         $args['ua_append'] = $userAgent;
 
-        $list->appendBuild(static function (callable $handler) use ($userAgent) {
-            return function (
-                CommandInterface $command,
-                RequestInterface $request
-            ) use ($handler, $userAgent) {
-                return $handler(
-                    $command,
-                    $request->withHeader(
-                        'X-Amz-User-Agent',
-                        implode(' ', array_merge(
-                            $userAgent,
-                            $request->getHeader('X-Amz-User-Agent')
-                        ))
-                    )->withHeader(
-                        'User-Agent',
-                        implode(' ', array_merge(
-                            $userAgent,
-                            $request->getHeader('User-Agent')
-                        ))
-                    )
+        $list->appendBuild(
+            Middleware::mapRequest(function (RequestInterface $request) use ($userAgent) {
+                return $request->withHeader(
+                    'X-Amz-User-Agent',
+                    implode(' ', array_merge(
+                        $userAgent,
+                        $request->getHeader('X-Amz-User-Agent')
+                    ))
                 );
-            };
-        });
+            })
+        );
     }
 
     public static function _apply_endpoint($value, array &$args, HandlerList $list)
@@ -1083,6 +1052,7 @@ class ClientResolver
             return;
         }
 
+        $args['endpoint_override'] = true;
         $args['endpoint'] = $value;
     }
 
@@ -1174,6 +1144,32 @@ class ClientResolver
         return new AuthSchemeResolver($args['credentials'], $args['token']);
     }
 
+    public static function _apply_auth_scheme_preference(
+        string|array|null &$value,
+        array &$args
+    ): void
+    {
+        // Not provided user's preference auth scheme list
+        if (empty($value)) {
+            $value = null;
+            $args['config']['auth_scheme_preference'] = $value;
+            return;
+        }
+
+        // Normalize it as an array
+        if (is_string($value)) {
+            $value = explode(',', $value);
+        }
+
+        // Let`s trim each value to remove break lines, spaces and/or tabs
+        foreach ($value as &$val) {
+            $val = trim($val);
+        }
+
+        // Assign user's preferred auth scheme list
+        $args['auth_scheme_preference'] = $value;
+    }
+
     public static function _default_signature_version(array &$args)
     {
         if (isset($args['config']['signature_version'])) {
@@ -1259,16 +1255,6 @@ class ClientResolver
         }
     }
 
-    public static function _default_ignore_configured_endpoint_urls(array &$args)
-    {
-        return ConfigurationResolver::resolve(
-            'ignore_configured_endpoint_urls',
-            false,
-            'bool',
-            $args
-        );
-    }
-
     public static function _default_endpoint(array &$args)
     {
         if ($args['config']['ignore_configured_endpoint_urls']
@@ -1318,26 +1304,12 @@ class ClientResolver
         }
     }
 
-    public static function _default_sigv4a_signing_region_set(array &$args)
-    {
-        return ConfigurationResolver::resolve(
-            'sigv4a_signing_region_set',
-            '',
-            'string'
-        );
-    }
-
     public static function _apply_region($value, array &$args)
     {
         if (empty($value)) {
             self::_missing_region($args);
         }
         $args['region'] = $value;
-    }
-
-    public static function _default_region(&$args)
-    {
-        return ConfigurationResolver::resolve('region', '', 'string');
     }
 
     public static function _missing_region(array $args)
@@ -1354,6 +1326,35 @@ A "region" configuration value is required for the "{$service}" service
 found at http://docs.aws.amazon.com/general/latest/gr/rande.html.
 EOT;
         throw new IAE($msg);
+    }
+
+    /**
+     * Resolves a value from env or config.
+     *
+     * @param $key
+     * @param $expectedType
+     * @param $args
+     *
+     * @return mixed|string
+     */
+    private static function _resolve_from_env_ini(
+        string $key,
+        string $expectedType,
+        array $args
+    ) {
+        static $typeDefaultMap = [
+            'int' => 0,
+            'bool' => false,
+            'boolean' => false,
+            'string' => '',
+        ];
+
+        return ConfigurationResolver::resolve(
+            $key,
+            $typeDefaultMap[$expectedType] ?? '',
+            $expectedType,
+            $args
+        );
     }
 
     /**
