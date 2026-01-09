@@ -5,3 +5,7 @@ fix use RDATE in time range check and use all instances
 Source: .patches/sabre-vobject-rdate.patch
 
 
+fix send participation reply on fresh event
+Source: .patches/sabre-vobject-iTipBroker-replies.patch
+
+

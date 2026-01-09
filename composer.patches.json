@@ -8,7 +8,8 @@
 			"Check for instanceof INode instead of Node": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch"
 		},
 		"sabre/vobject": {
-			"fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch"
+			"fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch",
+			"fix send participation reply on fresh event": ".patches/sabre-vobject-iTipBroker-replies.patch"
 		}
 	}
 }
