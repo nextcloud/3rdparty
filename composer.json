@@ -45,7 +45,7 @@
 		"php-http/guzzle7-adapter": "^1.1.0",
 		"php-opencloud/openstack": "^3.14",
 		"phpseclib/phpseclib": "^2.0.45",
-		"pimple/pimple": "^3.6.0",
+		"pimple/pimple": "^3.6.1",
 		"psr/clock": "^1.0",
 		"psr/container": "^2.0.2",
 		"psr/event-dispatcher": "^1.0",
