@@ -80,18 +80,18 @@ class CorePlugin extends ServerPlugin
         }
 
         if ('HEAD' === $request->getHeader('X-Sabre-Original-Method')) {
-            $body = '';
+            $body = fopen('php://temp', 'r+');
         } else {
             $body = $node->get();
-
-            // Converting string into stream, if needed.
-            if (is_string($body)) {
-                $stream = fopen('php://temp', 'r+');
-                fwrite($stream, $body);
-                rewind($stream);
-                $body = $stream;
-            }
         }
+        // Converting string into stream, if needed.
+        if (is_string($body)) {
+            $stream = fopen('php://temp', 'r+');
+            fwrite($stream, $body);
+            rewind($stream);
+            $body = $stream;
+        }
+    
 
         /*
          * TODO: getetag, getlastmodified, getsize should also be used using
