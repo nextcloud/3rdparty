@@ -33,7 +33,7 @@
 		"icewind/searchdav": "^3.2.0",
 		"icewind/smb": "^3.8.1",
 		"icewind/streams": "^0.7.8",
-		"justinrainbow/json-schema": "^6.6",
+		"justinrainbow/json-schema": "^6.7",
 		"kornrunner/blurhash": "^1.2",
 		"laravel/serializable-closure": "^2.0.4",
 		"mexitek/phpcolors": "^1.0",
