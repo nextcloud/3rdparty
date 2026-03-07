@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccb16eeca5b242e409af2accf0269116",
+    "content-hash": "438ec3ffd2263d9465fc3b16151ed7ac",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -894,16 +894,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
-            "version": "9.0.9",
+            "version": "9.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php-lite.git",
-                "reference": "d7ae8dd1186b54ce1451aec437346dd772321492"
+                "reference": "3288e55938d2fc13883883ec34a860d5c7fb9eae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/d7ae8dd1186b54ce1451aec437346dd772321492",
-                "reference": "d7ae8dd1186b54ce1451aec437346dd772321492",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/3288e55938d2fc13883883ec34a860d5c7fb9eae",
+                "reference": "3288e55938d2fc13883883ec34a860d5c7fb9eae",
                 "shasum": ""
             },
             "require": {
@@ -916,7 +916,7 @@
             "require-dev": {
                 "ext-dom": "*",
                 "friendsofphp/php-cs-fixer": "^3.71",
-                "infection/infection": "^0.28.0",
+                "infection/infection": "^0.29|^0.31.0",
                 "nette/php-generator": "^4.1",
                 "php-coveralls/php-coveralls": "^2.7",
                 "phpstan/extension-installer": "^1.4.3",
@@ -968,7 +968,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php-lite/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php-lite"
             },
-            "time": "2025-07-08T08:38:23+00:00"
+            "time": "2026-02-26T09:06:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
