@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68ecb1c0ed5b62493bd61913050bcd91",
+    "content-hash": "37cee298b99b619b91a6bc65aa622f05",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2187,16 +2187,16 @@
         },
         {
             "name": "nextcloud/lognormalizer",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextcloud/lognormalizer.git",
-                "reference": "9fbc308d900d0399298b0fa76123aa856e07ea1c"
+                "reference": "128aba2a22d6df0ec1a8c8eb071caadc1b0d992f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/9fbc308d900d0399298b0fa76123aa856e07ea1c",
-                "reference": "9fbc308d900d0399298b0fa76123aa856e07ea1c",
+                "url": "https://api.github.com/repos/nextcloud/lognormalizer/zipball/128aba2a22d6df0ec1a8c8eb071caadc1b0d992f",
+                "reference": "128aba2a22d6df0ec1a8c8eb071caadc1b0d992f",
                 "shasum": ""
             },
             "require": {
@@ -2207,7 +2207,7 @@
                 "nextcloud/coding-standard": "^1.4",
                 "phpunit/phpunit": "^10.5",
                 "symfony/polyfill-php85": "^1.33",
-                "vimeo/psalm": "^6.14"
+                "vimeo/psalm": "^6.15"
             },
             "type": "library",
             "autoload": {
@@ -2244,9 +2244,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nextcloud/lognormalizer/issues",
-                "source": "https://github.com/nextcloud/lognormalizer/tree/v3.0.0"
+                "source": "https://github.com/nextcloud/lognormalizer/tree/v3.0.1"
             },
-            "time": "2025-12-17T14:56:48+00:00"
+            "time": "2026-03-12T13:59:12+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

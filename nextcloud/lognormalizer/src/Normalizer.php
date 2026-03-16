@@ -104,6 +104,9 @@ class Normalizer {
 			$data = @json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PARTIAL_OUTPUT_ON_ERROR);
 			// Removing null byte and double slashes from object properties
 			$data = str_replace(['\\u0000', '\\\\'], ['', '\\'], $data);
+		} else {
+			// Removing null byte from strings
+			$data = str_replace("\x00", '', $data);
 		}
 
 		return $data;
