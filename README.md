@@ -35,19 +35,21 @@ But also polyfills for PHP modules that we require to be installed should be add
 ## Testing your PR with server
 
 1. On https://github.com/nextcloud/server make a new branch `3rdparty/my-dependency`
-2. Navigate into the 3rdparty directory
-3. Checkout the commit sha of the **last commit** of your PR in the 3rdparty repository
-4. Leave the directory
-5. Add the change to the stash
+2. Navigate into the `3rdparty` directory
+3. Checkout the **last commit SHA** from your `3rdparty` PR
+4. Return to the parent repository
+5. Stage the submodule update
 6. Commit (with sign-off and message)
 7. Push the branch and send a PR
+   - Optional: use a tool like [ion-bazan/composer-diff](https://packagist.org/packages/ion-bazan/composer-diff) to generate a list of 
+   upgraded dependencies for the PR description
 8. ⏳ Wait for CI and reviews
-9. Navigate into the 3rdparty directory
-10. Checkout the commit sha of the **merge commit** of your PR in the 3rdparty repository
-11. Leave the directory
-12. Add the change to the stash
+9. Navigate into the `3rdparty` directory
+10. Checkout the commit sha of the **merge commit** of your PR in the `3rdparty` repository
+11. Return to the parent repository
+12. Stage the submodule update with `git add 3rdparty`
 13. Amend to the previous dependency bump
-14. Push with lease force
+14. Force-push with lease
 15. ⏳ Wait for CI
 16. Merge 🎉
 
@@ -56,9 +58,11 @@ cd 3rdparty
 git checkout 16cd747ebb8ab4d746193416aa2448c8114d5084
 cd ..
 git add 3rdparty
-git commit
+git commit -s
 git push origin 3rdparty/my-dependency
 
+# Optionally generate a list of upgraded dependencies for the PR description
+# e.g. composer diff --base origin/master --target my-dependency-branch
 # Wait for CI and reviews
 
 cd 3rdparty
