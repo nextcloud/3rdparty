@@ -26,8 +26,12 @@ use ZipStreamer\Lib\Count64_32;
 use ZipStreamer\Lib\Count64_64;
 use ZipStreamer\Lib\Count64Base;
 
-const INT64_HIGH_MAP = 0xffffffff00000000;
-const INT64_LOW_MAP =  0x00000000ffffffff;
+// Use bit shift operations instead of hex literals to avoid float representation in PHP 8.5+
+/** @var int */
+const INT64_HIGH_MAP = (0xffffffff << 32);
+/** @var int */
+const INT64_LOW_MAP = 0xffffffff;
+/** @var int */
 const INT_MAX_32 = 0xffffffff;
 
 /**

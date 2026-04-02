@@ -56,9 +56,9 @@
             'dev_requirement' => false,
         ),
         'deepdiver/zipstreamer' => array(
-            'pretty_version' => 'v2.0.3',
-            'version' => '2.0.3.0',
-            'reference' => 'b9d1f53453a5736285facb723252ea2169dc472e',
+            'pretty_version' => 'v3.0.1',
+            'version' => '3.0.1.0',
+            'reference' => 'e860b893fce08a370886cba5ec0252c61b0b5e73',
             'type' => 'library',
             'install_path' => __DIR__ . '/../deepdiver/zipstreamer',
             'aliases' => array(),
