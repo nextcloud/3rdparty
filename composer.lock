@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abdf59d51fb51913c621d375a5661a86",
+    "content-hash": "1db43074ad79a4e38558153e20b50bb8",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2901,16 +2901,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.47",
+            "version": "2.0.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "b7d7d90ee7df7f33a664b4aea32d50a305d35adb"
+                "reference": "2552c4001631d1cc844332faea6a08a49c964b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b7d7d90ee7df7f33a664b4aea32d50a305d35adb",
-                "reference": "b7d7d90ee7df7f33a664b4aea32d50a305d35adb",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/2552c4001631d1cc844332faea6a08a49c964b28",
+                "reference": "2552c4001631d1cc844332faea6a08a49c964b28",
                 "shasum": ""
             },
             "require": {
@@ -2918,7 +2918,7 @@
             },
             "require-dev": {
                 "phing/phing": "~2.7",
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^9.4",
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^8.5|^9.4",
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "suggest": {
@@ -2991,7 +2991,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.47"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.52"
             },
             "funding": [
                 {
@@ -3007,7 +3007,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-26T04:55:38+00:00"
+            "time": "2026-03-19T02:54:44+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -5850,16 +5850,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.4.47",
+            "version": "v5.4.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "5d1662fb32ebc94f17ddb8d635454a776066733d"
+                "reference": "467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/5d1662fb32ebc94f17ddb8d635454a776066733d",
-                "reference": "5d1662fb32ebc94f17ddb8d635454a776066733d",
+                "url": "https://api.github.com/repos/symfony/process/zipball/467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f",
+                "reference": "467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f",
                 "shasum": ""
             },
             "require": {
@@ -5892,7 +5892,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v5.4.47"
+                "source": "https://github.com/symfony/process/tree/v5.4.51"
             },
             "funding": [
                 {
@@ -5904,11 +5904,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-06T11:36:42+00:00"
+            "time": "2026-01-26T15:53:37+00:00"
         },
         {
             "name": "symfony/routing",
@@ -6755,5 +6759,5 @@
     "platform-overrides": {
         "php": "8.0.2"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

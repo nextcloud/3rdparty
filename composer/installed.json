@@ -115,6 +115,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "3.0-dev"
+                },
+                "patches_applied": {
+                    "fix: validates custom provided policies": ".patches/aws-sdk-php-GHSA-27qh-8cxx-2cr5.diff",
+                    "fix: validates custom policy and resourceURL": ".patches/aws-sdk-php-GHSA-27qh-8cxx-2cr5-part2.diff"
                 }
             },
             "installation-source": "dist",
@@ -3024,17 +3028,17 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.47",
-            "version_normalized": "2.0.47.0",
+            "version": "2.0.52",
+            "version_normalized": "2.0.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "b7d7d90ee7df7f33a664b4aea32d50a305d35adb"
+                "reference": "2552c4001631d1cc844332faea6a08a49c964b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b7d7d90ee7df7f33a664b4aea32d50a305d35adb",
-                "reference": "b7d7d90ee7df7f33a664b4aea32d50a305d35adb",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/2552c4001631d1cc844332faea6a08a49c964b28",
+                "reference": "2552c4001631d1cc844332faea6a08a49c964b28",
                 "shasum": ""
             },
             "require": {
@@ -3042,7 +3046,7 @@
             },
             "require-dev": {
                 "phing/phing": "~2.7",
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^9.4",
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^8.5|^9.4",
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "suggest": {
@@ -3052,7 +3056,7 @@
                 "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations.",
                 "ext-xml": "Install the XML extension to load XML formatted public keys."
             },
-            "time": "2024-02-26T04:55:38+00:00",
+            "time": "2026-03-19T02:54:44+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3117,7 +3121,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.47"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.52"
             },
             "funding": [
                 {
@@ -6102,24 +6106,24 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.4.47",
-            "version_normalized": "5.4.47.0",
+            "version": "v5.4.51",
+            "version_normalized": "5.4.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "5d1662fb32ebc94f17ddb8d635454a776066733d"
+                "reference": "467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/5d1662fb32ebc94f17ddb8d635454a776066733d",
-                "reference": "5d1662fb32ebc94f17ddb8d635454a776066733d",
+                "url": "https://api.github.com/repos/symfony/process/zipball/467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f",
+                "reference": "467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/polyfill-php80": "^1.16"
             },
-            "time": "2024-11-06T11:36:42+00:00",
+            "time": "2026-01-26T15:53:37+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -6147,7 +6151,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v5.4.47"
+                "source": "https://github.com/symfony/process/tree/v5.4.51"
             },
             "funding": [
                 {
@@ -6156,6 +6160,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
