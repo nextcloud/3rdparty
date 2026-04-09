@@ -1,5 +1,9 @@
 {
 	"patches": {
+		"aws/aws-sdk-php": {
+			"fix: validates custom provided policies": ".patches/aws-sdk-php-GHSA-27qh-8cxx-2cr5.diff",
+			"fix: validates custom policy and resourceURL": ".patches/aws-sdk-php-GHSA-27qh-8cxx-2cr5-part2.diff"
+		},
 		"sabre/dav": {
 			"Allow for custom iTip broker": ".patches/custom-itip-broker.diff",
 			"Fix getNodeForPath cache": ".patches/fix-cache-for-node.diff"

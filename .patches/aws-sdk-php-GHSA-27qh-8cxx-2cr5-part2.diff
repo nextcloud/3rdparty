@@ -1,0 +1,25 @@
+diff --git a/src/CloudFront/Signer.php b/src/CloudFront/Signer.php
+index dee68e024d..6bb0653fcd 100644
+--- a/src/CloudFront/Signer.php
++++ b/src/CloudFront/Signer.php
+@@ -84,6 +84,7 @@ public function getSignature($resource = null, $expires = null, $policy = null)
+             self::validatePolicy($policy);
+             $signatureHash['Policy'] = $this->encode($policy);
+         } elseif ($resource && $expires) {
++            self::validateResourceUrl($resource);
+             $expires = (int) $expires; // Handle epoch passed as string
+             $policy = $this->createCannedPolicy($resource, $expires);
+             $signatureHash['Expires'] = $expires;
+diff --git a/src/CloudFront/UrlSigner.php b/src/CloudFront/UrlSigner.php
+index 3929c2f46b..be3b0ad8a4 100644
+--- a/src/CloudFront/UrlSigner.php
++++ b/src/CloudFront/UrlSigner.php
+@@ -101,7 +101,7 @@ private function createResource($scheme, $url)
+                 $parts = parse_url($url);
+                 $pathParts = pathinfo($parts['path']);
+                 $resource = ltrim(
+-                    $pathParts['dirname'] . '/' . $pathParts['basename'],
++                    str_replace('\\', '/', $pathParts['dirname']) . '/' . $pathParts['basename'],
+                     '/'
+                 );
+ 
