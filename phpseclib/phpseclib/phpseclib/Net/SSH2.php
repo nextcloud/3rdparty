@@ -1441,7 +1441,8 @@ class SSH2
             $this->_append_log('->', $this->identifier . "\r\n");
         }
 
-        $this->server_identifier = trim($data, "\r\n");
+        $data = explode("\r\n", trim($data, "\r\n"));
+        $this->server_identifier = $data[count($data) - 1];
 
         if (strlen($extra)) {
             $this->errors[] = $data;
@@ -1925,16 +1926,21 @@ class SSH2
                 $this->_updateLogHistory('UNKNOWN (32)', 'NET_SSH2_MSG_KEXDH_GEX_INIT');
         }
 
-        $response = $this->_get_binary_packet();
-        if ($response === false) {
-            $this->bitmap = 0;
-            user_error('Connection closed by server');
-            return false;
+        while (true) {
+            $response = $this->_get_binary_packet();
+            if ($response === false) {
+                $this->bitmap = 0;
+                user_error('Connection closed by server');
+                return false;
+            }
+            if (!strlen($response)) {
+                return false;
+            }
+            extract(unpack('Ctype', $this->_string_shift($response, 1)));
+            if ($type != NET_SSH2_MSG_IGNORE) {
+                break;
+            }
         }
-        if (!strlen($response)) {
-            return false;
-        }
-        extract(unpack('Ctype', $this->_string_shift($response, 1)));
 
         if ($type != constant($serverKexReplyMessage)) {
             user_error("Expected $serverKexReplyMessage");
@@ -3977,8 +3983,9 @@ class SSH2
                     }
                     extract(unpack('Nlength', $this->_string_shift($payload, 4)));
                     $this->errors[] = 'SSH_MSG_GLOBAL_REQUEST: ' . $this->_string_shift($payload, $length);
+                    $want_reply = ord($this->_string_shift($payload)) != 0;
 
-                    if (!$this->_send_binary_packet(pack('C', NET_SSH2_MSG_REQUEST_FAILURE))) {
+                    if ($want_reply && !$this->_send_binary_packet(pack('C', NET_SSH2_MSG_REQUEST_FAILURE))) {
                         return $this->_disconnect(NET_SSH2_DISCONNECT_BY_APPLICATION);
                     }
 
@@ -4263,7 +4270,7 @@ class SSH2
                                     $this->errors[count($this->errors)].= "\r\n" . $this->_string_shift($response, $length);
                                 }
 
-                                $this->_send_binary_packet(pack('CN', NET_SSH2_MSG_CHANNEL_EOF, $this->server_channels[$client_channel]));
+                                $this->_send_binary_packet(pack('CN', NET_SSH2_MSG_CHANNEL_EOF, $this->server_channels[$channel]));
                                 $this->_send_binary_packet(pack('CN', NET_SSH2_MSG_CHANNEL_CLOSE, $this->server_channels[$channel]));
 
                                 $this->channel_status[$channel] = NET_SSH2_MSG_CHANNEL_EOF;
@@ -4281,8 +4288,13 @@ class SSH2
 
                                 continue 3;
                             default:
-                                // "Some systems may not implement signals, in which case they SHOULD ignore this message."
-                                //  -- http://tools.ietf.org/html/rfc4254#section-6.9
+                                $want_reply = ord($this->_string_shift($response)) != 0;
+                                if ($want_reply) {
+                                    // "If the request is not recognized or is not supported for the channel,
+                                    //  SSH_MSG_CHANNEL_FAILURE is returned."
+                                    // -- https://datatracker.ietf.org/doc/html/rfc4254#page-10
+                                    $this->_send_binary_packet(pack('CN', NET_SSH2_MSG_CHANNEL_FAILURE, $this->server_channels[$channel]));
+                                }
                                 continue 3;
                         }
                 }

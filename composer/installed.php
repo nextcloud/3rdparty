@@ -392,9 +392,9 @@
             'dev_requirement' => false,
         ),
         'phpseclib/phpseclib' => array(
-            'pretty_version' => '2.0.48',
-            'version' => '2.0.48.0',
-            'reference' => 'eaa7be704b8b93a6913b69eb7f645a59d7731b61',
+            'pretty_version' => '2.0.52',
+            'version' => '2.0.52.0',
+            'reference' => '2552c4001631d1cc844332faea6a08a49c964b28',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpseclib/phpseclib',
             'aliases' => array(),
