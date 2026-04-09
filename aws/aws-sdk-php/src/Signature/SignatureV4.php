@@ -155,6 +155,9 @@ class SignatureV4 implements SignatureInterface
                 $presignHeaders[] = $lName;
             }
         }
+
+        sort($presignHeaders);
+
         return $presignHeaders;
     }
 
@@ -346,12 +349,14 @@ class SignatureV4 implements SignatureInterface
         }
 
         $qs = '';
-        ksort($query);
+        uksort($query, static function (string $a, string $b): int {
+            return strcmp(rawurlencode($a), rawurlencode($b));
+        });
         foreach ($query as $k => $v) {
             if (!is_array($v)) {
                 $qs .= rawurlencode($k) . '=' . rawurlencode($v !== null ? $v : '') . '&';
             } else {
-                sort($v);
+                sort($v, SORT_STRING);
                 foreach ($v as $value) {
                     $qs .= rawurlencode($k) . '=' . rawurlencode($value !== null ? $value : '') . '&';
                 }
@@ -469,16 +474,17 @@ class SignatureV4 implements SignatureInterface
 
     private function removeIllegalV4aHeaders(&$request)
     {
-        $illegalV4aHeaders = [
+        static $illegalV4aHeaders = [
             self::AMZ_CONTENT_SHA256_HEADER,
-            "aws-sdk-invocation-id",
-            "aws-sdk-retry",
+            'aws-sdk-invocation-id',
+            'aws-sdk-retry',
             'x-amz-region-set',
+            'transfer-encoding'
         ];
         $storedHeaders = [];
 
         foreach ($illegalV4aHeaders as $header) {
-            if ($request->hasHeader($header)){
+            if ($request->hasHeader($header)) {
                 $storedHeaders[$header] = $request->getHeader($header);
                 $request = $request->withoutHeader($header);
             }
@@ -508,7 +514,7 @@ class SignatureV4 implements SignatureInterface
         CredentialsInterface $credentials,
         RequestInterface $request,
         $signingService,
-        SigningConfigAWS $signingConfig = null
+        ?SigningConfigAWS $signingConfig = null
     ){
         $this->verifyCRTLoaded();
         $signingConfig = $signingConfig ?? new SigningConfigAWS([
@@ -518,7 +524,7 @@ class SignatureV4 implements SignatureInterface
             'signed_body_value' => $this->getPayload($request),
             'should_normalize_uri_path' => true,
             'use_double_uri_encode' => true,
-            'region' => "*",
+            'region' => $this->region,
             'service' => $signingService,
             'date' => time(),
         ]);

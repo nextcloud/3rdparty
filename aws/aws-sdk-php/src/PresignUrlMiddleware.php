@@ -56,7 +56,7 @@ class PresignUrlMiddleware
         };
     }
 
-    public function __invoke(CommandInterface $cmd, RequestInterface $request = null)
+    public function __invoke(CommandInterface $cmd, ?RequestInterface $request = null)
     {
         if (in_array($cmd->getName(), $this->commandPool)
             && (!isset($cmd['__skip' . $cmd->getName()]))
@@ -114,7 +114,7 @@ class PresignUrlMiddleware
         if (!empty($this->extraQueryParams[$cmdName])) {
             foreach ($this->extraQueryParams[$cmdName] as $param) {
                 if (!strpos($currentQueryParams, $param)) {
-                    $paramsToAdd =  "&{$param}={$cmd[$param]}";
+                    $paramsToAdd =  "&{$param}=" . urlencode($cmd[$param]);
                 }
             }
         }
