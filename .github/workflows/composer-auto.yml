@@ -1,4 +1,4 @@
-name: Compile Command
+name: Composer-update comment
 
 on:
   issue_comment:
@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   init:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-low
 
     # On pull requests and if the comment starts with `/composer-update`
     if: github.event.issue.pull_request != '' && startsWith(github.event.comment.body, '/composer-update')
