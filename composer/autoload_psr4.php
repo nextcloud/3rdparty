@@ -56,6 +56,7 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'OpenStack\\' => array($vendorDir . '/php-opencloud/openstack/src'),
     'Nextcloud\\LogNormalizer\\' => array($vendorDir . '/nextcloud/lognormalizer/src'),
