@@ -11,6 +11,8 @@ return array(
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
     'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php-lite/src'),
     'kornrunner\\Blurhash\\' => array($vendorDir . '/kornrunner/blurhash/src'),
+    'gapple\\Tests\\StructuredFields\\' => array($vendorDir . '/gapple/structured-fields/tests'),
+    'gapple\\StructuredFields\\' => array($vendorDir . '/gapple/structured-fields/src'),
     'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
     'ZipStreamer\\' => array($vendorDir . '/deepdiver/zipstreamer/src'),

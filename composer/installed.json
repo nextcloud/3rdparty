@@ -993,6 +993,80 @@
             "install-path": "../fusonic/opengraph"
         },
         {
+            "name": "gapple/structured-fields",
+            "version": "v2.3.2",
+            "version_normalized": "2.3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gapple/structured-fields.git",
+                "reference": "f753bf49ffccc44a1287706c4fab973ddf6e2f5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gapple/structured-fields/zipball/f753bf49ffccc44a1287706c4fab973ddf6e2f5f",
+                "reference": "f753bf49ffccc44a1287706c4fab973ddf6e2f5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "httpwg/structured-field-tests": "*@dev",
+                "paragonie/constant_time_encoding": "^3.0.0",
+                "phpmd/phpmd": "^2.15",
+                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "phpunit/phpunit": "^10.5",
+                "slevomat/coding-standard": "^8.15",
+                "squizlabs/php_codesniffer": "^3.11"
+            },
+            "time": "2025-04-14T03:43:17+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "gapple\\StructuredFields\\": "src/",
+                    "gapple\\Tests\\StructuredFields\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Geoff Appleby"
+                }
+            ],
+            "description": "Library for Structured Field Values for HTTP",
+            "keywords": [
+                "http",
+                "rfc8941",
+                "rfc9651"
+            ],
+            "support": {
+                "issues": "https://github.com/gapple/structured-fields/issues",
+                "source": "https://github.com/gapple/structured-fields"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/gapple",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/gapple",
+                    "type": "ko_fi"
+                }
+            ],
+            "install-path": "../gapple/structured-fields"
+        },
+        {
             "name": "giggsey/libphonenumber-for-php-lite",
             "version": "9.0.9",
             "version_normalized": "9.0.9.0",

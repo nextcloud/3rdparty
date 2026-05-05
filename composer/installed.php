@@ -136,6 +136,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'gapple/structured-fields' => array(
+            'pretty_version' => 'v2.3.2',
+            'version' => '2.3.2.0',
+            'reference' => 'f753bf49ffccc44a1287706c4fab973ddf6e2f5f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../gapple/structured-fields',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'giggsey/libphonenumber-for-php-lite' => array(
             'pretty_version' => '9.0.9',
             'version' => '9.0.9.0',

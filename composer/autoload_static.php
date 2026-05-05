@@ -52,6 +52,11 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         array (
             'kornrunner\\Blurhash\\' => 20,
         ),
+        'g' =>
+        array (
+            'gapple\\Tests\\StructuredFields\\' => 30,
+            'gapple\\StructuredFields\\' => 24,
+        ),
         'c' =>
         array (
             'cweagans\\Composer\\' => 18,
@@ -210,6 +215,14 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'kornrunner\\Blurhash\\' =>
         array (
             0 => __DIR__ . '/..' . '/kornrunner/blurhash/src',
+        ),
+        'gapple\\Tests\\StructuredFields\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/gapple/structured-fields/tests',
+        ),
+        'gapple\\StructuredFields\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/gapple/structured-fields/src',
         ),
         'cweagans\\Composer\\' =>
         array (
@@ -3765,6 +3778,22 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'cweagans\\Composer\\PatchEvent' => __DIR__ . '/..' . '/cweagans/composer-patches/src/PatchEvent.php',
         'cweagans\\Composer\\PatchEvents' => __DIR__ . '/..' . '/cweagans/composer-patches/src/PatchEvents.php',
         'cweagans\\Composer\\Patches' => __DIR__ . '/..' . '/cweagans/composer-patches/src/Patches.php',
+        'gapple\\StructuredFields\\Bytes' => __DIR__ . '/..' . '/gapple/structured-fields/src/Bytes.php',
+        'gapple\\StructuredFields\\Date' => __DIR__ . '/..' . '/gapple/structured-fields/src/Date.php',
+        'gapple\\StructuredFields\\Dictionary' => __DIR__ . '/..' . '/gapple/structured-fields/src/Dictionary.php',
+        'gapple\\StructuredFields\\DisplayString' => __DIR__ . '/..' . '/gapple/structured-fields/src/DisplayString.php',
+        'gapple\\StructuredFields\\InnerList' => __DIR__ . '/..' . '/gapple/structured-fields/src/InnerList.php',
+        'gapple\\StructuredFields\\Item' => __DIR__ . '/..' . '/gapple/structured-fields/src/Item.php',
+        'gapple\\StructuredFields\\OuterList' => __DIR__ . '/..' . '/gapple/structured-fields/src/OuterList.php',
+        'gapple\\StructuredFields\\Parameters' => __DIR__ . '/..' . '/gapple/structured-fields/src/Parameters.php',
+        'gapple\\StructuredFields\\ParseException' => __DIR__ . '/..' . '/gapple/structured-fields/src/ParseException.php',
+        'gapple\\StructuredFields\\Parser' => __DIR__ . '/..' . '/gapple/structured-fields/src/Parser.php',
+        'gapple\\StructuredFields\\ParsingInput' => __DIR__ . '/..' . '/gapple/structured-fields/src/ParsingInput.php',
+        'gapple\\StructuredFields\\SerializeException' => __DIR__ . '/..' . '/gapple/structured-fields/src/SerializeException.php',
+        'gapple\\StructuredFields\\Serializer' => __DIR__ . '/..' . '/gapple/structured-fields/src/Serializer.php',
+        'gapple\\StructuredFields\\Token' => __DIR__ . '/..' . '/gapple/structured-fields/src/Token.php',
+        'gapple\\StructuredFields\\TupleInterface' => __DIR__ . '/..' . '/gapple/structured-fields/src/TupleInterface.php',
+        'gapple\\StructuredFields\\TupleTrait' => __DIR__ . '/..' . '/gapple/structured-fields/src/TupleTrait.php',
         'kornrunner\\Blurhash\\AC' => __DIR__ . '/..' . '/kornrunner/blurhash/src/AC.php',
         'kornrunner\\Blurhash\\Base83' => __DIR__ . '/..' . '/kornrunner/blurhash/src/Base83.php',
         'kornrunner\\Blurhash\\Blurhash' => __DIR__ . '/..' . '/kornrunner/blurhash/src/Blurhash.php',
