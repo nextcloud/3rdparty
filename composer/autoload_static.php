@@ -162,6 +162,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'F' =>
         array (
             'Fusonic\\OpenGraph\\' => 18,
+            'Firebase\\JWT\\' => 13,
         ),
         'E' =>
         array (
@@ -474,6 +475,10 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Fusonic\\OpenGraph\\' =>
         array (
             0 => __DIR__ . '/..' . '/fusonic/opengraph/src',
+        ),
+        'Firebase\\JWT\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Egulias\\EmailValidator\\' =>
         array (
@@ -1495,6 +1500,14 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
+        'Firebase\\JWT\\CachedKeySet' => __DIR__ . '/..' . '/firebase/php-jwt/src/CachedKeySet.php',
+        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
+        'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
+        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
+        'Firebase\\JWT\\JWTExceptionWithPayloadInterface' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWTExceptionWithPayloadInterface.php',
+        'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
+        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'Fusonic\\OpenGraph\\Consumer' => __DIR__ . '/..' . '/fusonic/opengraph/src/Consumer.php',
         'Fusonic\\OpenGraph\\Elements\\Audio' => __DIR__ . '/..' . '/fusonic/opengraph/src/Elements/Audio.php',
         'Fusonic\\OpenGraph\\Elements\\ElementBase' => __DIR__ . '/..' . '/fusonic/opengraph/src/Elements/ElementBase.php',
