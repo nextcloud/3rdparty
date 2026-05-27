@@ -31,6 +31,7 @@ bin
 # ignore README and UPGRADE
 */**/README.md
 */**/README.rst
+*/**/readme.md
 */**/UPGRADE.md
 */**/UPGRADING.md
 */**/UPGRADE-*.md
