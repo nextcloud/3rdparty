@@ -30,7 +30,7 @@
 		"firebase/php-jwt": "^7.0",
 		"fusonic/opengraph": "^3.0.0",
 		"gapple/structured-fields": "^2.3",
-		"giggsey/libphonenumber-for-php-lite": "^9.0.9",
+		"giggsey/libphonenumber-for-php-lite": "^9.0.30",
 		"guzzlehttp/guzzle": "^7.10.0",
 		"icewind/searchdav": "^3.2.0",
 		"icewind/smb": "^3.8.1",
