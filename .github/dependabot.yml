@@ -53,7 +53,7 @@ updates:
       update-types: ["version-update:semver-major", "version-update:semver-minor"]
   labels:
     - "dependencies"
-    - "stable33"
+    - "stable34"
   groups:
     symfony:
       applies-to: version-updates
