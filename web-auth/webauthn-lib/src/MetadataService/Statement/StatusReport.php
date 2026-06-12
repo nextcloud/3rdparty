@@ -10,6 +10,7 @@ use Webauthn\MetadataService\ValueFilter;
 use function array_key_exists;
 use function in_array;
 use function is_string;
+use function sprintf;
 
 class StatusReport implements JsonSerializable
 {
@@ -62,6 +63,7 @@ class StatusReport implements JsonSerializable
             AuthenticatorStatus::USER_KEY_PHYSICAL_COMPROMISE,
             AuthenticatorStatus::USER_KEY_REMOTE_COMPROMISE,
             AuthenticatorStatus::USER_VERIFICATION_BYPASS,
+            AuthenticatorStatus::REVOKED,
         ], true);
     }
 
