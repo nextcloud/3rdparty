@@ -22,6 +22,7 @@ use Webauthn\Exception\AuthenticatorResponseVerificationException;
 use Webauthn\MetadataService\CanLogData;
 use Webauthn\TokenBinding\TokenBindingHandler;
 use function is_string;
+use function sprintf;
 
 class AuthenticatorAssertionResponseValidator implements CanLogData, CanDispatchEvents
 {
@@ -79,7 +80,7 @@ class AuthenticatorAssertionResponseValidator implements CanLogData, CanDispatch
             trigger_deprecation(
                 'web-auth/webauthn-lib',
                 '4.8.0',
-                'The parameter "$ceremonyStepManager" will mandatory in 5.0.0. Please set a CeremonyStepManager object instead and set null for $algorithmManager and $extensionOutputCheckerHandler.'
+                'The parameter "$ceremonyStepManager" will become mandatory in 5.0.0. Please set a CeremonyStepManager object instead and set null for $algorithmManager and $extensionOutputCheckerHandler.'
             );
         }
         $this->logger = new NullLogger();
