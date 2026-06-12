@@ -9,7 +9,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.2.0"
+			"php": "8.3.0"
 		},
 		"sort-packages": true,
 		"allow-plugins": {
@@ -71,20 +71,15 @@
 		"wapmorgan/mp3info": "^0.1.1",
 		"web-auth/webauthn-lib": "^4.9.1"
 	},
-	 "replace": {
-        "symfony/polyfill-php80": "*",
+	"replace": {
+		"symfony/polyfill-php80": "*",
 		"symfony/polyfill-php81": "*",
 		"symfony/polyfill-php82": "*",
 		"symfony/polyfill-ctype": "*",
 		"symfony/polyfill-mbstring": "*"
-    },
+	},
 	"scripts": {
-		"lint": [
-			"@lint-8.2-or-earlier",
-			"@lint-8.3-or-later"
-		],
-		"lint-8.2-or-earlier": "[ $(php -r \"echo PHP_VERSION_ID;\") -ge 80300 ] || find . -type f -name '*.php' -not -name '.*.php' -print0 | xargs -0 -n1 -P$(nproc) php -l",
-		"lint-8.3-or-later": "[ $(php -r \"echo PHP_VERSION_ID;\") -lt 80300 ] || find . -type f -name '*.php' -not -name '.*.php' -print0 | xargs -0 -n200 -P$(nproc) php -l",
+		"lint": "find . -type f -name '*.php' -not -name '.*.php' -print0 | xargs -0 -n200 -P$(nproc) php -l",
 		"pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
 	},
 	"extra": {
