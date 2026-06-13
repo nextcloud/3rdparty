@@ -59,7 +59,7 @@
 		"symfony/mailer": "^6.4",
 		"symfony/polyfill-intl-normalizer": "^1.33.0",
 		"symfony/polyfill-php82": "^1.32.0",
-		"symfony/polyfill-php83": "^1.33.0",
+		"symfony/polyfill-php83": "^1.38.2",
 		"symfony/polyfill-php84": "^1.33.0",
 		"symfony/polyfill-php85": "^1.33",
 		"symfony/process": "^6.4.41",
