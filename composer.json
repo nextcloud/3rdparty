@@ -17,7 +17,7 @@
 		}
 	},
 	"require": {
-		"php": "^8.2",
+		"php": "^8.3",
 		"ext-ctype": "*",
 		"ext-mbstring": "*",
 		"aws/aws-sdk-php": "^3.376",
@@ -64,17 +64,18 @@
 		"symfony/polyfill-php82": "^1.32.0",
 		"symfony/polyfill-php83": "^1.33.0",
 		"symfony/polyfill-php84": "^1.33.0",
-		"symfony/polyfill-php85": "^1.33",
+		"symfony/polyfill-php85": "^1.33.0",
 		"symfony/process": "^6.4.33",
 		"symfony/routing": "^6.4.12",
 		"symfony/translation": "^6.4.4",
 		"wapmorgan/mp3info": "^0.1.1",
-		"web-auth/webauthn-lib": "^4.9.1"
+		"web-auth/webauthn-lib": "^5.3"
 	},
 	"replace": {
 		"symfony/polyfill-php80": "*",
 		"symfony/polyfill-php81": "*",
 		"symfony/polyfill-php82": "*",
+		"symfony/polyfill-php83": "*",
 		"symfony/polyfill-ctype": "*",
 		"symfony/polyfill-mbstring": "*"
 	},
