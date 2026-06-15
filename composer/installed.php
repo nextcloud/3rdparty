@@ -245,9 +245,9 @@
             'dev_requirement' => false,
         ),
         'lcobucci/clock' => array(
-            'pretty_version' => '3.0.0',
-            'version' => '3.0.0.0',
-            'reference' => '039ef98c6b57b101d10bd11d8fdfda12cbd996dc',
+            'pretty_version' => '3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => 'a3139d9e97d47826f27e6a17bb63f13621f86058',
             'type' => 'library',
             'install_path' => __DIR__ . '/../lcobucci/clock',
             'aliases' => array(),
@@ -824,13 +824,10 @@
             ),
         ),
         'symfony/polyfill-php83' => array(
-            'pretty_version' => 'v1.33.0',
-            'version' => '1.33.0.0',
-            'reference' => '17f6f9a6b1735c0f163024d959f700cfbc5155e5',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/polyfill-php83',
-            'aliases' => array(),
             'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
         ),
         'symfony/polyfill-php84' => array(
             'pretty_version' => 'v1.33.0',
@@ -947,9 +944,9 @@
             'dev_requirement' => false,
         ),
         'web-auth/webauthn-lib' => array(
-            'pretty_version' => '4.9.1',
-            'version' => '4.9.1.0',
-            'reference' => 'fd7a0943c663b325e92ad562c2bcc943e77beeac',
+            'pretty_version' => '4.9.3',
+            'version' => '4.9.3.0',
+            'reference' => '129fbaccd22163429a39bf85e320fb9eddad035c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../web-auth/webauthn-lib',
             'aliases' => array(),
