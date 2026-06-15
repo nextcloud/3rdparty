@@ -17,7 +17,7 @@
 		}
 	},
 	"require": {
-		"php": "^8.2",
+		"php": "^8.3",
 		"ext-ctype": "*",
 		"ext-mbstring": "*",
 		"aws/aws-sdk-php": "^3.376",
