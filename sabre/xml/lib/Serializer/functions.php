@@ -160,9 +160,6 @@ function standardSerializer(Writer $writer, $value)
     } elseif (is_object($value) && isset($writer->classMap[get_class($value)])) {
         // It's an object which class appears in the classmap.
         $writer->classMap[get_class($value)]($writer, $value);
-    } elseif (is_callable($value)) {
-        // A callback
-        $value($writer);
     } elseif (is_array($value) && array_key_exists('name', $value)) {
         // if the array had a 'name' element, we assume that this array
         // describes a 'name' and optionally 'attributes' and 'value'.
