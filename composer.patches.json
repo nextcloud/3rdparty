@@ -10,6 +10,9 @@
 		"sabre/vobject": {
 			"fix use RDATE in time range check and use all instances": ".patches/sabre-vobject-rdate.patch",
 			"fix send participation reply on fresh event": ".patches/sabre-vobject-iTipBroker-replies.patch"
+		},
+		"sabre/xml": {
+			"Remove callable serialization": ".patches/sabre-xml-remove-callable-serialization.patch"
 		}
 	}
 }
