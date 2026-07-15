@@ -46,6 +46,7 @@
 		"php-opencloud/openstack": "^3.14",
 		"phpseclib/phpseclib": "^2.0.55",
 		"pimple/pimple": "^3.6.0",
+		"predis/predis": "^3.4.2",
 		"psr/clock": "^1.0",
 		"psr/container": "^2.0.2",
 		"psr/event-dispatcher": "^1.0",
