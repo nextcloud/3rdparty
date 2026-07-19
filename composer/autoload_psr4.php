@@ -7,7 +7,7 @@ $baseDir = $vendorDir;
 
 return array(
     'wapmorgan\\Mp3Info\\' => array($vendorDir . '/wapmorgan/mp3info/src'),
-    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ownCloud\\TarStreamer\\' => array($vendorDir . '/deepdiver1975/tarstreamer/src'),
     'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php-lite/src'),
     'kornrunner\\Blurhash\\' => array($vendorDir . '/kornrunner/blurhash/src'),
