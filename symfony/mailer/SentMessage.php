@@ -21,16 +21,19 @@ class SentMessage
 {
     private RawMessage $original;
     private RawMessage $raw;
-    private Envelope $envelope;
     private string $messageId;
     private string $debug = '';
 
-    public function __construct(RawMessage $message, Envelope $envelope)
-    {
+    /**
+     * @internal
+     */
+    public function __construct(
+        RawMessage $message,
+        private Envelope $envelope,
+    ) {
         $message->ensureValidity();
 
         $this->original = $message;
-        $this->envelope = $envelope;
 
         if ($message instanceof Message) {
             $message = clone $message;

@@ -14,6 +14,7 @@ namespace Symfony\Component\Mailer\Transport\Smtp;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\Envelope;
+use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mailer\Exception\LogicException;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -107,6 +108,10 @@ class SmtpTransport extends AbstractTransport
      */
     public function setLocalDomain(string $domain): static
     {
+        if (preg_match('/[\x00-\x1F\x7F]/', $domain)) {
+            throw new InvalidArgumentException('The local domain name must not contain control characters.');
+        }
+
         if ('' !== $domain && '[' !== $domain[0]) {
             if (filter_var($domain, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV4)) {
                 $domain = '['.$domain.']';
@@ -200,7 +205,7 @@ class SmtpTransport extends AbstractTransport
             }
 
             $envelope = $message->getEnvelope();
-            $this->doMailFromCommand($envelope->getSender()->getEncodedAddress());
+            $this->doMailFromCommand($envelope->getSender()->getEncodedAddress(), $envelope->anyAddressHasUnicodeLocalpart());
             foreach ($envelope->getRecipients() as $recipient) {
                 $this->doRcptToCommand($recipient->getEncodedAddress());
             }
@@ -233,19 +238,22 @@ class SmtpTransport extends AbstractTransport
         }
     }
 
-    /**
-     * @internal since version 6.1, to be made private in 7.0
-     *
-     * @final since version 6.1, to be made private in 7.0
-     */
-    protected function doHeloCommand(): void
+    protected function serverSupportsSmtpUtf8(): bool
+    {
+        return false;
+    }
+
+    private function doHeloCommand(): void
     {
         $this->executeCommand(\sprintf("HELO %s\r\n", $this->domain), [250]);
     }
 
-    private function doMailFromCommand(string $address): void
+    private function doMailFromCommand(string $address, bool $smtputf8): void
     {
-        $this->executeCommand(\sprintf("MAIL FROM:<%s>\r\n", $address), [250]);
+        if ($smtputf8 && !$this->serverSupportsSmtpUtf8()) {
+            throw new InvalidArgumentException('Invalid addresses: non-ASCII characters not supported in local-part of email.');
+        }
+        $this->executeCommand(\sprintf("MAIL FROM:<%s>%s\r\n", $address, $smtputf8 ? ' SMTPUTF8' : ''), [250]);
     }
 
     private function doRcptToCommand(string $address): void
