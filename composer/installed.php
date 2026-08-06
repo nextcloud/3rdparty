@@ -7,7 +7,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'aws/aws-crt-php' => array(
@@ -74,9 +74,9 @@
             'dev_requirement' => false,
         ),
         'doctrine/dbal' => array(
-            'pretty_version' => '3.10.4',
-            'version' => '3.10.4.0',
-            'reference' => '63a46cb5aa6f60991186cc98c1d1b50c09311868',
+            'pretty_version' => '4.4.4',
+            'version' => '4.4.4.0',
+            'reference' => 'fb9e0ffe15e1590e24dc61c0c0a23f9a33ee42ce',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/dbal',
             'aliases' => array(),
@@ -88,15 +88,6 @@
             'reference' => 'd4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/deprecations',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'doctrine/event-manager' => array(
-            'pretty_version' => '2.0.1',
-            'version' => '2.0.1.0',
-            'reference' => 'b680156fa328f1dfd874fd48c7026c41570b9c6e',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../doctrine/event-manager',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

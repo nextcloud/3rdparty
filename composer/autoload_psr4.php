@@ -84,7 +84,6 @@ return array(
     'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/src'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/src'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
-    'Doctrine\\Common\\' => array($vendorDir . '/doctrine/event-manager/src'),
     'Cose\\' => array($vendorDir . '/web-auth/cose-lib/src'),
     'CBOR\\' => array($vendorDir . '/spomky-labs/cbor-php/src'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
