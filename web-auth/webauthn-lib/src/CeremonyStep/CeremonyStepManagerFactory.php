@@ -35,6 +35,13 @@ final class CeremonyStepManagerFactory
      */
     private null|array $securedRelyingPartyId = null;
 
+    /**
+     * @var string[]
+     */
+    private null|array $allowedOrigins = null;
+
+    private bool $allowSubdomains = false;
+
     private AttestationStatementSupportManager $attestationStatementSupportManager;
 
     private ExtensionOutputCheckerHandler $extensionOutputCheckerHandler;
@@ -55,11 +62,21 @@ final class CeremonyStepManagerFactory
     }
 
     /**
+     * @deprecated since 5.2.0 and will be removed in 6.0.0. Use setAllowedOrigins instead.
      * @param string[] $securedRelyingPartyId
      */
     public function setSecuredRelyingPartyId(array $securedRelyingPartyId): void
     {
         $this->securedRelyingPartyId = $securedRelyingPartyId;
+    }
+
+    /**
+     * @param string[] $allowedOrigins
+     */
+    public function setAllowedOrigins(array $allowedOrigins, bool $allowSubdomains = false): void
+    {
+        $this->allowedOrigins = $allowedOrigins;
+        $this->allowSubdomains = $allowSubdomains;
     }
 
     public function setExtensionOutputCheckerHandler(ExtensionOutputCheckerHandler $extensionOutputCheckerHandler): void
@@ -98,10 +115,52 @@ final class CeremonyStepManagerFactory
         $this->topOriginValidator = $topOriginValidator;
     }
 
+    public function requestCeremony(): CeremonyStepManager
+    {
+        /* @see https://www.w3.org/TR/webauthn-3/#sctn-verifying-assertion */
+        return new CeremonyStepManager([
+            new CheckAllowedCredentialList(),
+            new CheckUserHandle(),
+            new CheckClientDataCollectorType(),
+            new CheckChallenge(),
+            $this->allowedOrigins === null ? new CheckOrigin(
+                $this->securedRelyingPartyId ?? []
+            ) : new CheckAllowedOrigins(
+                $this->allowedOrigins,
+                $this->allowSubdomains,
+                $this->securedRelyingPartyId ?? []
+            ),
+            new CheckTopOrigin($this->topOriginValidator),
+            new CheckRelyingPartyIdIdHash(),
+            new CheckUserWasPresent(),
+            new CheckUserVerification(),
+            new CheckBackupBitsAreConsistent(),
+            new CheckExtensions($this->extensionOutputCheckerHandler),
+            new CheckSignature($this->algorithmManager),
+            new CheckCounter($this->counterChecker),
+        ]);
+    }
+
+    public function creationCeremony(): CeremonyStepManager
+    {
+        return $this->buildCreationCeremony(true);
+    }
+
     /**
-     * @param null|string[] $securedRelyingPartyId
+     * Create a ceremony manager for Conditional Create (auto-register)
+     *
+     * Use this when creating credentials with mediation: 'conditional',
+     * where user presence may be false after password authentication.
+     *
+     * @see https://github.com/w3c/webauthn/wiki/Explainer:-Conditional-Create
+     * @see https://github.com/web-auth/webauthn-framework/issues/719
      */
-    public function creationCeremony(null|array $securedRelyingPartyId = null): CeremonyStepManager
+    public function conditionalCreateCeremony(): CeremonyStepManager
+    {
+        return $this->buildCreationCeremony(false);
+    }
+
+    private function buildCreationCeremony(bool $requireUserPresence): CeremonyStepManager
     {
         $metadataStatementChecker = new CheckMetadataStatement();
         if ($this->certificateChainValidator !== null) {
@@ -119,10 +178,16 @@ final class CeremonyStepManagerFactory
         return new CeremonyStepManager([
             new CheckClientDataCollectorType(),
             new CheckChallenge(),
-            new CheckOrigin($this->securedRelyingPartyId ?? $securedRelyingPartyId ?? []),
+            $this->allowedOrigins === null ? new CheckOrigin(
+                $this->securedRelyingPartyId ?? []
+            ) : new CheckAllowedOrigins(
+                $this->allowedOrigins,
+                $this->allowSubdomains,
+                $this->securedRelyingPartyId ?? []
+            ),
             new CheckTopOrigin($this->topOriginValidator),
             new CheckRelyingPartyIdIdHash(),
-            new CheckUserWasPresent(),
+            new CheckUserWasPresent($requireUserPresence),
             new CheckUserVerification(),
             new CheckBackupBitsAreConsistent(),
             new CheckAlgorithm(),
@@ -131,29 +196,6 @@ final class CeremonyStepManagerFactory
             new CheckHasAttestedCredentialData(),
             $metadataStatementChecker,
             new CheckCredentialId(),
-        ]);
-    }
-
-    /**
-     * @param null|string[] $securedRelyingPartyId
-     */
-    public function requestCeremony(null|array $securedRelyingPartyId = null): CeremonyStepManager
-    {
-        /* @see https://www.w3.org/TR/webauthn-3/#sctn-verifying-assertion */
-        return new CeremonyStepManager([
-            new CheckAllowedCredentialList(),
-            new CheckUserHandle(),
-            new CheckClientDataCollectorType(),
-            new CheckChallenge(),
-            new CheckOrigin($this->securedRelyingPartyId ?? $securedRelyingPartyId ?? []),
-            new CheckTopOrigin(null),
-            new CheckRelyingPartyIdIdHash(),
-            new CheckUserWasPresent(),
-            new CheckUserVerification(),
-            new CheckBackupBitsAreConsistent(),
-            new CheckExtensions($this->extensionOutputCheckerHandler),
-            new CheckSignature($this->algorithmManager),
-            new CheckCounter($this->counterChecker),
         ]);
     }
 }

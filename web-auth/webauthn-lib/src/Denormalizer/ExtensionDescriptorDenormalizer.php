@@ -4,31 +4,21 @@ declare(strict_types=1);
 
 namespace Webauthn\Denormalizer;
 
-use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use function array_key_exists;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Webauthn\MetadataService\Statement\ExtensionDescriptor;
-use function array_key_exists;
 
-/**
- * @final
- */
-class ExtensionDescriptorDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
+final class ExtensionDescriptorDenormalizer implements DenormalizerInterface
 {
-    use DenormalizerAwareTrait;
-
-    private const ALREADY_CALLED = 'EXTENSION_DESCRIPTOR_PREPROCESS_ALREADY_CALLED';
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
+        /** @var array{id: string, tag?: ?int, data?: ?string, failIfUnknown?: bool, fail_if_unknown?: bool} $data */
         if (array_key_exists('fail_if_unknown', $data)) {
             $data['failIfUnknown'] = $data['fail_if_unknown'];
             unset($data['fail_if_unknown']);
         }
 
-        $context[self::ALREADY_CALLED] = true;
-
-        return $this->denormalizer->denormalize($data, $type, $format, $context);
+        return ExtensionDescriptor::create(...$data);
     }
 
     public function supportsDenormalization(
@@ -37,10 +27,6 @@ class ExtensionDescriptorDenormalizer implements DenormalizerInterface, Denormal
         ?string $format = null,
         array $context = []
     ): bool {
-        if ($context[self::ALREADY_CALLED] ?? false) {
-            return false;
-        }
-
         return $type === ExtensionDescriptor::class;
     }
 
@@ -50,7 +36,7 @@ class ExtensionDescriptorDenormalizer implements DenormalizerInterface, Denormal
     public function getSupportedTypes(?string $format): array
     {
         return [
-            ExtensionDescriptor::class => false,
+            ExtensionDescriptor::class => true,
         ];
     }
 }

@@ -4,34 +4,48 @@ declare(strict_types=1);
 
 namespace Webauthn\CeremonyStep;
 
+use function in_array;
+use function is_array;
+use function is_string;
+use function strlen;
+use function trigger_deprecation;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensions;
 use Webauthn\AuthenticatorAssertionResponse;
 use Webauthn\AuthenticatorAttestationResponse;
+use Webauthn\CredentialRecord;
 use Webauthn\Exception\AuthenticatorResponseVerificationException;
 use Webauthn\PublicKeyCredentialCreationOptions;
 use Webauthn\PublicKeyCredentialRequestOptions;
 use Webauthn\PublicKeyCredentialSource;
-use function in_array;
-use function is_array;
-use function is_string;
 
-final class CheckOrigin implements CeremonyStep
+/**
+ * @deprecated since 5.2.0 and will be removed in 6.0.0. Will be replaced by CheckAllowedOrigins
+ */
+final readonly class CheckOrigin implements CeremonyStep
 {
     /**
      * @param string[] $securedRelyingPartyId
      */
     public function __construct(
-        private readonly array $securedRelyingPartyId
+        private array $securedRelyingPartyId
     ) {
     }
 
     public function process(
-        PublicKeyCredentialSource $publicKeyCredentialSource,
+        CredentialRecord $credentialRecord,
         AuthenticatorAssertionResponse|AuthenticatorAttestationResponse $authenticatorResponse,
         PublicKeyCredentialRequestOptions|PublicKeyCredentialCreationOptions $publicKeyCredentialOptions,
         ?string $userHandle,
         string $host
     ): void {
+        if ($credentialRecord instanceof PublicKeyCredentialSource) {
+            trigger_deprecation(
+                'web-auth/webauthn-lib',
+                '5.3',
+                'Passing a PublicKeyCredentialSource to "%s::process()" is deprecated, pass a CredentialRecord instead.',
+                self::class
+            );
+        }
         $authData = $authenticatorResponse instanceof AuthenticatorAssertionResponse ? $authenticatorResponse->authenticatorData : $authenticatorResponse->attestationObject->authData;
         $C = $authenticatorResponse->clientDataJSON;
         $rpId = $publicKeyCredentialOptions->rpId ?? $publicKeyCredentialOptions->rp->id ?? $host;
@@ -48,9 +62,9 @@ final class CheckOrigin implements CeremonyStep
         }
         $clientDataRpId = $parsedRelyingPartyId['host'] ?? '';
         $clientDataRpId !== '' || throw AuthenticatorResponseVerificationException::create('Invalid origin rpId.');
-        $rpIdLength = mb_strlen($facetId);
+        $rpIdLength = strlen($facetId);
 
-        mb_substr(
+        substr(
             '.' . $clientDataRpId,
             -($rpIdLength + 1)
         ) === '.' . $facetId || throw AuthenticatorResponseVerificationException::create('rpId mismatch.');
@@ -58,15 +72,15 @@ final class CheckOrigin implements CeremonyStep
 
     private function getFacetId(
         string $rpId,
-        AuthenticationExtensions $authenticationExtensionsClientInputs,
+        AuthenticationExtensions $AuthenticationExtensions,
         null|AuthenticationExtensions $authenticationExtensionsClientOutputs
     ): string {
-        if ($authenticationExtensionsClientOutputs === null || ! $authenticationExtensionsClientInputs->has(
+        if ($authenticationExtensionsClientOutputs === null || ! $AuthenticationExtensions->has(
             'appid'
         ) || ! $authenticationExtensionsClientOutputs->has('appid')) {
             return $rpId;
         }
-        $appId = $authenticationExtensionsClientInputs->get('appid')
+        $appId = $AuthenticationExtensions->get('appid')
             ->value;
         $wasUsed = $authenticationExtensionsClientOutputs->get('appid')
             ->value;

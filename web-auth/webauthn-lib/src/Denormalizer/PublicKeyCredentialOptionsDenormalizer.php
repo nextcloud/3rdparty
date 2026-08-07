@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Webauthn\Denormalizer;
 
+use function array_key_exists;
+use function assert;
+use function count;
+use function in_array;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use Symfony\Component\Serializer\Exception\BadMethodCallException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
@@ -20,84 +24,112 @@ use Webauthn\PublicKeyCredentialParameters;
 use Webauthn\PublicKeyCredentialRequestOptions;
 use Webauthn\PublicKeyCredentialRpEntity;
 use Webauthn\PublicKeyCredentialUserEntity;
-use function array_key_exists;
-use function assert;
-use function in_array;
 
 final class PublicKeyCredentialOptionsDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface, NormalizerInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
 
+    /**
+     * @throws BadMethodCallException
+     */
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
+        /** @var array{challenge?: string, rp?: array<string, mixed>, user?: array<string, mixed>, pubKeyCredParams?: list<array<string, mixed>>, authenticatorSelection?: array<string, mixed>, attestation?: string, excludeCredentials?: list<array{id: string, type?: string, transports?: list<string>}>, allowCredentials?: list<array{id: string, type?: string, transports?: list<string>}>, timeout?: int<1, max>, extensions?: array<string, mixed>, hints?: list<string>, rpId?: string, userVerification?: string} $data */
         if (array_key_exists('challenge', $data)) {
             $data['challenge'] = Base64UrlSafe::decodeNoPadding($data['challenge']);
         }
 
         foreach (['allowCredentials', 'excludeCredentials'] as $key) {
             if (array_key_exists($key, $data)) {
-                foreach ($data[$key] ?? [] as $item => $allowCredential) {
+                /** @var list<array{id: string, type?: string, transports?: list<string>}> $credentials */
+                $credentials = $data[$key] ?? [];
+                foreach ($credentials as $item => $allowCredential) {
                     $data[$key][$item]['id'] = Base64UrlSafe::decodeNoPadding($allowCredential['id']);
                 }
             }
         }
         if ($type === PublicKeyCredentialCreationOptions::class) {
+            /** @var PublicKeyCredentialRpEntity $rp */
+            $rp = ! isset($data['rp']) ? PublicKeyCredentialRpEntity::create() : $this->denormalizer->denormalize(
+                $data['rp'],
+                PublicKeyCredentialRpEntity::class,
+                $format,
+                $context
+            );
+            /** @var PublicKeyCredentialUserEntity $user */
+            $user = $this->denormalizer->denormalize(
+                $data['user'] ?? [],
+                PublicKeyCredentialUserEntity::class,
+                $format,
+                $context
+            );
+            /** @var list<PublicKeyCredentialParameters> $pubKeyCredParams */
+            $pubKeyCredParams = ! isset($data['pubKeyCredParams']) ? [] : $this->denormalizer->denormalize(
+                $data['pubKeyCredParams'],
+                PublicKeyCredentialParameters::class . '[]',
+                $format,
+                $context
+            );
+            /** @var ?AuthenticatorSelectionCriteria $authenticatorSelection */
+            $authenticatorSelection = ! isset($data['authenticatorSelection']) ? null : $this->denormalizer->denormalize(
+                $data['authenticatorSelection'],
+                AuthenticatorSelectionCriteria::class,
+                $format,
+                $context
+            );
+            /** @var list<PublicKeyCredentialDescriptor> $excludeCredentials */
+            $excludeCredentials = ! isset($data['excludeCredentials']) ? [] : $this->denormalizer->denormalize(
+                $data['excludeCredentials'],
+                PublicKeyCredentialDescriptor::class . '[]',
+                $format,
+                $context
+            );
+            /** @var ?AuthenticationExtensions $extensions */
+            $extensions = ! isset($data['extensions']) ? null : $this->denormalizer->denormalize(
+                $data['extensions'],
+                AuthenticationExtensions::class,
+                $format,
+                $context
+            );
+
             return PublicKeyCredentialCreationOptions::create(
-                $this->denormalizer->denormalize($data['rp'], PublicKeyCredentialRpEntity::class, $format, $context),
-                $this->denormalizer->denormalize(
-                    $data['user'],
-                    PublicKeyCredentialUserEntity::class,
-                    $format,
-                    $context
-                ),
-                $data['challenge'],
-                ! isset($data['pubKeyCredParams']) ? [] : $this->denormalizer->denormalize(
-                    $data['pubKeyCredParams'],
-                    PublicKeyCredentialParameters::class . '[]',
-                    $format,
-                    $context
-                ),
-                ! isset($data['authenticatorSelection']) ? null : $this->denormalizer->denormalize(
-                    $data['authenticatorSelection'],
-                    AuthenticatorSelectionCriteria::class,
-                    $format,
-                    $context
-                ),
+                $rp,
+                $user,
+                $data['challenge'] ?? '',
+                $pubKeyCredParams,
+                $authenticatorSelection,
                 $data['attestation'] ?? null,
-                ! isset($data['excludeCredentials']) ? [] : $this->denormalizer->denormalize(
-                    $data['excludeCredentials'],
-                    PublicKeyCredentialDescriptor::class . '[]',
-                    $format,
-                    $context
-                ),
+                $excludeCredentials,
                 $data['timeout'] ?? null,
-                ! isset($data['extensions']) ? null : $this->denormalizer->denormalize(
-                    $data['extensions'],
-                    AuthenticationExtensions::class,
-                    $format,
-                    $context
-                ),
+                $extensions,
+                $data['hints'] ?? [],
             );
         }
         if ($type === PublicKeyCredentialRequestOptions::class) {
+            /** @var list<PublicKeyCredentialDescriptor> $allowCredentials */
+            $allowCredentials = ! isset($data['allowCredentials']) ? [] : $this->denormalizer->denormalize(
+                $data['allowCredentials'],
+                PublicKeyCredentialDescriptor::class . '[]',
+                $format,
+                $context
+            );
+            /** @var ?AuthenticationExtensions $extensions */
+            $extensions = ! isset($data['extensions']) ? null : $this->denormalizer->denormalize(
+                $data['extensions'],
+                AuthenticationExtensions::class,
+                $format,
+                $context
+            );
+
             return PublicKeyCredentialRequestOptions::create(
-                $data['challenge'],
+                $data['challenge'] ?? '',
                 $data['rpId'] ?? null,
-                ! isset($data['allowCredentials']) ? [] : $this->denormalizer->denormalize(
-                    $data['allowCredentials'],
-                    PublicKeyCredentialDescriptor::class . '[]',
-                    $format,
-                    $context
-                ),
+                $allowCredentials,
                 $data['userVerification'] ?? null,
                 $data['timeout'] ?? null,
-                ! isset($data['extensions']) ? null : $this->denormalizer->denormalize(
-                    $data['extensions'],
-                    AuthenticationExtensions::class,
-                    $format,
-                    $context
-                ),
+                $extensions,
+                $data['hints'] ?? [],
             );
         }
         throw new BadMethodCallException('Unsupported type');
@@ -135,49 +167,50 @@ final class PublicKeyCredentialOptionsDenormalizer implements DenormalizerInterf
     /**
      * @return array<string, mixed>
      */
-    public function normalize(mixed $data, ?string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         assert(
-            $data instanceof PublicKeyCredentialCreationOptions || $data instanceof PublicKeyCredentialRequestOptions
+            $object instanceof PublicKeyCredentialCreationOptions || $object instanceof PublicKeyCredentialRequestOptions
         );
         $json = [
-            'challenge' => Base64UrlSafe::encodeUnpadded($data->challenge),
-            'timeout' => $data->timeout,
-            'extensions' => $data->extensions->count() === 0 ? null : $this->normalizer->normalize(
-                $data->extensions,
+            'challenge' => Base64UrlSafe::encodeUnpadded($object->challenge),
+            'timeout' => $object->timeout,
+            'extensions' => $object->extensions->count() === 0 ? null : $this->normalizer->normalize(
+                $object->extensions,
                 $format,
                 $context
             ),
+            'hints' => count($object->hints) === 0 ? null : $object->hints,
         ];
 
-        if ($data instanceof PublicKeyCredentialCreationOptions) {
+        if ($object instanceof PublicKeyCredentialCreationOptions) {
             $json = [
                 ...$json,
-                'rp' => $this->normalizer->normalize($data->rp, $format, $context),
-                'user' => $this->normalizer->normalize($data->user, $format, $context),
+                'rp' => $this->normalizer->normalize($object->rp, $format, $context),
+                'user' => $this->normalizer->normalize($object->user, $format, $context),
                 'pubKeyCredParams' => $this->normalizer->normalize(
-                    $data->pubKeyCredParams,
+                    $object->pubKeyCredParams,
                     PublicKeyCredentialParameters::class . '[]',
                     $context
                 ),
-                'authenticatorSelection' => $data->authenticatorSelection === null ? null : $this->normalizer->normalize(
-                    $data->authenticatorSelection,
+                'authenticatorSelection' => $object->authenticatorSelection === null ? null : $this->normalizer->normalize(
+                    $object->authenticatorSelection,
                     $format,
                     $context
                 ),
-                'attestation' => $data->attestation,
-                'excludeCredentials' => $this->normalizer->normalize($data->excludeCredentials, $format, $context),
+                'attestation' => $object->attestation,
+                'excludeCredentials' => $this->normalizer->normalize($object->excludeCredentials, $format, $context),
             ];
         }
-        if ($data instanceof PublicKeyCredentialRequestOptions) {
+        if ($object instanceof PublicKeyCredentialRequestOptions) {
             $json = [
                 ...$json,
-                'rpId' => $data->rpId,
-                'allowCredentials' => $this->normalizer->normalize($data->allowCredentials, $format, $context),
-                'userVerification' => $data->userVerification,
+                'rpId' => $object->rpId,
+                'allowCredentials' => $this->normalizer->normalize($object->allowCredentials, $format, $context),
+                'userVerification' => $object->userVerification,
             ];
         }
 
-        return array_filter($json, static fn ($value) => $value !== null && $value !== []);
+        return array_filter($json, static fn ($value): bool => $value !== null);
     }
 }
