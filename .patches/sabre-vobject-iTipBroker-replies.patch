@@ -1,7 +1,7 @@
-From 49d53f187089ec9a67917e564a87c6dea89ea839 Mon Sep 17 00:00:00 2001
+From 4647f615ac01ee82298f6f79e4efda30fb2fc326 Mon Sep 17 00:00:00 2001
 From: SebastianKrupinski <krupinskis05@gmail.com>
 Date: Tue, 30 Dec 2025 13:48:29 -0500
-Subject: [PATCH] fix: send participation reply on fresh event
+Subject: [PATCH 1/3] fix: send participation reply on fresh event
 
 Signed-off-by: SebastianKrupinski <krupinskis05@gmail.com>
 ---
@@ -10,10 +10,10 @@ Signed-off-by: SebastianKrupinski <krupinskis05@gmail.com>
  2 files changed, 71 insertions(+), 6 deletions(-)
 
 diff --git a/lib/ITip/Broker.php b/lib/ITip/Broker.php
-index 76ee0c71..e621c6e2 100644
+index 6f0b1ed2f..fc3db753c 100644
 --- a/lib/ITip/Broker.php
 +++ b/lib/ITip/Broker.php
-@@ -246,16 +246,29 @@ public function parseEvent($calendar, $userHref, $oldCalendar = null): array
+@@ -240,16 +240,29 @@ public function parseEvent($calendar, $userHref, $oldCalendar = null)
              $baseCalendar = $oldCalendar;
          }
  
