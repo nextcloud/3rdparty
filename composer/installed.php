@@ -137,9 +137,9 @@
             'dev_requirement' => false,
         ),
         'gapple/structured-fields' => array(
-            'pretty_version' => 'v2.3.2',
-            'version' => '2.3.2.0',
-            'reference' => 'f753bf49ffccc44a1287706c4fab973ddf6e2f5f',
+            'pretty_version' => 'v2.3.3',
+            'version' => '2.3.3.0',
+            'reference' => '4c6936249482d100cc56732aed8c163a76c10dd3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../gapple/structured-fields',
             'aliases' => array(),

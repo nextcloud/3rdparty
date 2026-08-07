@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace gapple\StructuredFields;
 
+/**
+ * @method mixed getValue()
+ */
 class Item implements TupleInterface
 {
     use TupleTrait;

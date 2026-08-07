@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace gapple\StructuredFields;
 
+/**
+ * @method array<TupleInterface|list{mixed,object}> getValue()
+ */
 class InnerList implements TupleInterface
 {
     use TupleTrait;
