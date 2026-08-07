@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Webauthn\Denormalizer;
 
+use function assert;
+use function is_array;
+use function is_string;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webauthn\AuthenticationExtensions\AuthenticationExtension;
 use Webauthn\AuthenticationExtensions\AuthenticationExtensions;
-use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientInputs;
-use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientOutputs;
-use function assert;
-use function in_array;
-use function is_array;
-use function is_string;
 
 final class AuthenticationExtensionsDenormalizer implements DenormalizerInterface, NormalizerInterface
 {
@@ -30,6 +27,7 @@ final class AuthenticationExtensionsDenormalizer implements DenormalizerInterfac
             $data[$key] = AuthenticationExtension::create($key, $value);
         }
 
+        /** @var array<string, AuthenticationExtension> $data */
         return AuthenticationExtensions::create($data);
     }
 
@@ -39,15 +37,7 @@ final class AuthenticationExtensionsDenormalizer implements DenormalizerInterfac
         ?string $format = null,
         array $context = []
     ): bool {
-        return in_array(
-            $type,
-            [
-                AuthenticationExtensions::class,
-                AuthenticationExtensionsClientOutputs::class,
-                AuthenticationExtensionsClientInputs::class,
-            ],
-            true
-        );
+        return $type === AuthenticationExtensions::class;
     }
 
     /**
@@ -57,8 +47,6 @@ final class AuthenticationExtensionsDenormalizer implements DenormalizerInterfac
     {
         return [
             AuthenticationExtensions::class => true,
-            AuthenticationExtensionsClientInputs::class => true,
-            AuthenticationExtensionsClientOutputs::class => true,
         ];
     }
 

@@ -4,46 +4,35 @@ declare(strict_types=1);
 
 namespace Webauthn;
 
-use JsonSerializable;
-
-abstract class PublicKeyCredentialEntity implements JsonSerializable
+abstract class PublicKeyCredentialEntity
 {
-    public function __construct(
-        public readonly string $name,
-        public readonly ?string $icon
-    ) {
-    }
+    /**
+     * @deprecated since 5.3.0 and will be removed in 6.0.0. Please set "" and use PublicKeyCredentialUserEntity.name instead.
+     */
+    public string $name;
 
     /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
+     * @deprecated since 5.1.0 and will be removed in 6.0.0. This value is always null.
      */
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    public ?string $icon = null;
 
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function getIcon(): ?string
+    public function __construct(string $name, ?string $icon = null)
     {
-        return $this->icon;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function jsonSerialize(): array
-    {
-        $json = [
-            'name' => $this->name,
-        ];
-        if ($this->icon !== null) {
-            $json['icon'] = $this->icon;
+        if ($name !== '') {
+            trigger_deprecation(
+                'web-auth/webauthn-lib',
+                '5.3.0',
+                'The parameter "$name" is deprecated since 5.3.0 and will be removed in 6.0.0. Please set "" and use PublicKeyCredentialUserEntity.name instead.'
+            );
         }
+        $this->name = $name;
 
-        return $json;
+        if ($icon !== null) {
+            trigger_deprecation(
+                'web-auth/webauthn-lib',
+                '5.1.0',
+                'The parameter "$icon" is deprecated since 5.1.0 and will be removed in 6.0.0. This value has no effect. Please set "null" instead.'
+            );
+        }
     }
 }

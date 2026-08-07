@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Webauthn\MetadataService\Service;
 
+use function array_key_exists;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
 use Webauthn\Denormalizer\WebauthnSerializerFactory;
@@ -13,7 +15,6 @@ use Webauthn\Event\MetadataStatementFound;
 use Webauthn\Event\NullEventDispatcher;
 use Webauthn\Exception\MissingMetadataStatementException;
 use Webauthn\MetadataService\Statement\MetadataStatement;
-use function array_key_exists;
 
 final class JsonMetadataService implements MetadataService, CanDispatchEvents
 {
@@ -24,15 +25,13 @@ final class JsonMetadataService implements MetadataService, CanDispatchEvents
 
     private EventDispatcherInterface $dispatcher;
 
-    private readonly ?SerializerInterface $serializer;
+    private readonly SerializerInterface $serializer;
 
     /**
      * @param string[] $statements
      */
-    public function __construct(
-        array $statements,
-        ?SerializerInterface $serializer = null,
-    ) {
+    public function __construct(array $statements, ?SerializerInterface $serializer = null)
+    {
         $this->dispatcher = new NullEventDispatcher();
         $this->serializer = $serializer ?? (new WebauthnSerializerFactory(
             AttestationStatementSupportManager::create()
@@ -68,11 +67,7 @@ final class JsonMetadataService implements MetadataService, CanDispatchEvents
 
     private function addStatement(string $statement): void
     {
-        if ($this->serializer === null) {
-            $mds = MetadataStatement::createFromString($statement);
-        } else {
-            $mds = $this->serializer->deserialize($statement, MetadataStatement::class, 'json');
-        }
+        $mds = $this->serializer->deserialize($statement, MetadataStatement::class, JsonEncoder::FORMAT);
         if ($mds->aaguid === null) {
             return;
         }
