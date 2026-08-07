@@ -3867,17 +3867,17 @@
         },
         {
             "name": "sabre/dav",
-            "version": "4.7.0",
-            "version_normalized": "4.7.0.0",
+            "version": "4.7.1",
+            "version_normalized": "4.7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/dav.git",
-                "reference": "074373bcd689a30bcf5aaa6bbb20a3395964ce7a"
+                "reference": "f36f002dce082e1d425c4a0dc8c71a6b176c3b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/dav/zipball/074373bcd689a30bcf5aaa6bbb20a3395964ce7a",
-                "reference": "074373bcd689a30bcf5aaa6bbb20a3395964ce7a",
+                "url": "https://api.github.com/repos/sabre-io/dav/zipball/f36f002dce082e1d425c4a0dc8c71a6b176c3b07",
+                "reference": "f36f002dce082e1d425c4a0dc8c71a6b176c3b07",
                 "shasum": ""
             },
             "require": {
@@ -3911,17 +3911,12 @@
                 "ext-imap": "*",
                 "ext-pdo": "*"
             },
-            "time": "2024-10-29T11:46:02+00:00",
+            "time": "2026-07-07T08:39:09+00:00",
             "bin": [
                 "bin/sabredav",
                 "bin/naturalselection"
             ],
             "type": "library",
-            "extra": {
-                "patches_applied": {
-                    "Check for instanceof INode instead of Node": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch"
-                }
-            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
