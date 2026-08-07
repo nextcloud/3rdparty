@@ -2689,17 +2689,17 @@
         },
         {
             "name": "pear/pear-core-minimal",
-            "version": "v1.10.16",
-            "version_normalized": "1.10.16.0",
+            "version": "v1.10.18",
+            "version_normalized": "1.10.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/pear-core-minimal.git",
-                "reference": "c0f51b45f50683bf5bbf558036854ebc9b54d033"
+                "reference": "c7b55789d01de0ce090d289b73f1bbd6a2f113b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/c0f51b45f50683bf5bbf558036854ebc9b54d033",
-                "reference": "c0f51b45f50683bf5bbf558036854ebc9b54d033",
+                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/c7b55789d01de0ce090d289b73f1bbd6a2f113b1",
+                "reference": "c7b55789d01de0ce090d289b73f1bbd6a2f113b1",
                 "shasum": ""
             },
             "require": {
@@ -2710,7 +2710,7 @@
             "replace": {
                 "rsky/pear-core-min": "self.version"
             },
-            "time": "2024-11-24T22:27:58+00:00",
+            "time": "2025-12-14T20:37:07+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
