@@ -219,7 +219,13 @@ class Parser
     private static function parseBoolean(ParsingInput $input): bool
     {
         $input->consumeChar('?');
-        return match ($input->consumeChar()) {
+        $value = '';
+        try {
+            $value = $input->consumeChar();
+        } catch (\RuntimeException) {
+            // Consume may throw if value character is missing at end of string. Fall through to default error.
+        }
+        return match ($value) {
             '0' => false,
             '1' => true,
             default => throw new ParseException('Invalid boolean at position ' . $input->position()),

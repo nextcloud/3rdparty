@@ -39,27 +39,27 @@ class Serializer
     }
 
     /**
-     * @param iterable<TupleInterface|array{mixed, object}> $value
+     * @param iterable<TupleInterface|list{TupleInterface|list{mixed, object}, object}> $value
      */
     public static function serializeList(iterable $value): string
     {
         if ($value instanceof \Traversable) {
-            // @todo Checking for Traversable is not required for PHP ^8.2.0.
             $value = iterator_to_array($value);
         }
 
         $returnValue = array_map(function ($item) {
-            if ($item instanceof TupleInterface) {
-                $itemValue = $item->getValue();
-                $itemParameters = $item->getParameters();
-            } elseif (is_array($item) && count($item) === 2) {
+            if (is_array($item) && count($item) === 2) {
                 $itemValue = $item[0];
                 $itemParameters = $item[1];
+            } elseif ($item instanceof TupleInterface) {
+                $itemValue = $item->getValue();
+                $itemParameters = $item->getParameters();
             } else {
                 throw new SerializeException("Invalid item in list");
             }
 
             if (is_array($itemValue)) {
+                /** @var array<TupleInterface|list{mixed, object}> $itemValue */
                 return self::serializeInnerList($itemValue, $itemParameters);
             } else {
                 return self::serializeItem($itemValue, $itemParameters);
@@ -73,8 +73,6 @@ class Serializer
      * Serialize an object as a dictionary.
      *
      * Either a Traversable object can be provided, or the public properties of the object will be extracted.
-     *
-     * @param Dictionary|object $value
      */
     public static function serializeDictionary(object $value): string
     {
@@ -84,6 +82,10 @@ class Serializer
             $value = get_object_vars($value);
         }
 
+        /**
+         * @var string $key
+         * @var TupleInterface|list{TupleInterface|list{mixed,object}, object} $item
+         */
         foreach ($value as $key => $item) {
             if (!empty($returnValue)) {
                 $returnValue .= ', ';
@@ -102,6 +104,7 @@ class Serializer
             if ($itemValue === true) {
                 $returnValue .= self::serializeParameters($itemParameters);
             } elseif (is_array($itemValue)) {
+                /** @var array<TupleInterface|list{mixed, object}> $itemValue */
                 $returnValue .= '=' . self::serializeInnerList($itemValue, $itemParameters);
             } else {
                 $returnValue .= '=' . self::serializeItem($itemValue, $itemParameters);
@@ -189,7 +192,7 @@ class Serializer
 
         // Casting to a string loses a digit on long numbers, but is preserved
         // by json_encode (e.g. 111111111111.111).
-        /** @var string $result */
+        /** @var non-empty-string $result */
         $result = json_encode(round($value, 3, PHP_ROUND_HALF_EVEN));
 
         if (!str_contains($result, '.')) {
@@ -250,6 +253,7 @@ class Serializer
             $value = get_object_vars($value);
         }
 
+        /** @var string $key */
         foreach ($value as $key => $item) {
             $returnValue .= ';' . self::serializeKey($key);
 
