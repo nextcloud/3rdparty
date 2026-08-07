@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -35,14 +37,9 @@ use SearchDAV\Query\Query;
 use SearchDAV\XML\BasicSearch;
 
 class SearchHandler {
-	/** @var ISearchBackend */
-	private $searchBackend;
-
-	/** @var PathHelper */
-	private $pathHelper;
-
-	/** @var Server */
-	private $server;
+	private ISearchBackend $searchBackend;
+	private PathHelper $pathHelper;
+	private Server $server;
 
 	/**
 	 * @param ISearchBackend $searchBackend
@@ -55,6 +52,9 @@ class SearchHandler {
 		$this->server = $server;
 	}
 
+	/**
+	 * @param array<string, mixed>|object|string $xml
+	 */
 	public function handleSearchRequest($xml, ResponseInterface $response): bool {
 		if (!isset($xml['{DAV:}basicsearch'])) {
 			$response->setStatus(400);
@@ -168,7 +168,7 @@ class SearchHandler {
 	 * @param SearchResult[] $results
 	 * @param string[] $propertyNames
 	 * @param int $depth
-	 * @return \Iterator<array>
+	 * @return \Iterator<array<string, mixed>>
 	 */
 	private function getPropertiesIteratorResults(array $results, array $propertyNames = [], int $depth = 0): \Iterator {
 		$propFindType = $propertyNames ? PropFind::NORMAL : PropFind::ALLPROPS;

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
@@ -24,8 +26,8 @@ namespace SearchDAV\Query;
 use SearchDAV\Backend\SearchPropertyDefinition;
 
 class Order {
-	const ASC = 'ascending';
-	const DESC = 'descending';
+	public const ASC = 'ascending';
+	public const DESC = 'descending';
 
 	/**
 	 * @var SearchPropertyDefinition

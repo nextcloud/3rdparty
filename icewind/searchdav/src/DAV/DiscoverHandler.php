@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -34,14 +36,9 @@ use SearchDAV\XML\QueryDiscoverResponse;
 use SearchDAV\XML\Scope;
 
 class DiscoverHandler {
-	/** @var ISearchBackend */
-	private $searchBackend;
-
-	/** @var PathHelper */
-	private $pathHelper;
-
-	/** @var QueryParser */
-	private $queryParser;
+	private ISearchBackend $searchBackend;
+	private PathHelper $pathHelper;
+	private QueryParser $queryParser;
 
 	/**
 	 * @param ISearchBackend $searchBackend
@@ -54,6 +51,9 @@ class DiscoverHandler {
 		$this->queryParser = $queryParser;
 	}
 
+	/**
+	 * @param array<string, mixed>|object|string $xml
+	 */
 	public function handelDiscoverRequest($xml, RequestInterface $request, ResponseInterface $response): bool {
 		if (!isset($xml['{DAV:}basicsearch'])) {
 			$response->setStatus(400);

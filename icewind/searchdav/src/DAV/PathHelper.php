@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -25,13 +27,10 @@ use Sabre\DAV\Exception\Forbidden;
 use Sabre\DAV\Server;
 
 class PathHelper {
-	/** @var Server */
-	private $server;
+	private Server $server;
 
 	/**
 	 * PathHelper constructor.
-	 *
-	 * @param Server $server
 	 */
 	public function __construct(Server $server) {
 		$this->server = $server;
@@ -42,7 +41,7 @@ class PathHelper {
 			return $uri;
 		}
 		try {
-			return ($uri === '' && $this->server->getBaseUri() === '/') ? '' : $this->server->calculateUri($uri);
+			return $this->server->calculateUri($uri);
 		} catch (Forbidden $e) {
 			return null;
 		}

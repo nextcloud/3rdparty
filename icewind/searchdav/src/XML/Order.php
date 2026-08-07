@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -23,6 +25,7 @@ namespace SearchDAV\XML;
 
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
+
 use function Sabre\Xml\Deserializer\keyValue;
 
 class Order implements XmlDeserializable {
