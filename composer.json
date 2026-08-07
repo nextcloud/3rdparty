@@ -32,7 +32,7 @@
 		"gapple/structured-fields": "^2.3",
 		"giggsey/libphonenumber-for-php-lite": "^9.0.9",
 		"guzzlehttp/guzzle": "^7.15.2",
-		"icewind/searchdav": "^3.2.0",
+		"icewind/searchdav": "^3.3.0",
 		"icewind/smb": "^3.8.1",
 		"icewind/streams": "^0.7.8",
 		"justinrainbow/json-schema": "^6.6",
