@@ -146,9 +146,9 @@
             'dev_requirement' => false,
         ),
         'giggsey/libphonenumber-for-php-lite' => array(
-            'pretty_version' => '9.0.9',
-            'version' => '9.0.9.0',
-            'reference' => 'd7ae8dd1186b54ce1451aec437346dd772321492',
+            'pretty_version' => '9.0.36',
+            'version' => '9.0.36.0',
+            'reference' => 'f21237b7df458b326cd5b1bac44d64cc7b1dcb2f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../giggsey/libphonenumber-for-php-lite',
             'aliases' => array(),
