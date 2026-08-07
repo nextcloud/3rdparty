@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -30,10 +32,15 @@ use SearchDAV\XML\Literal;
 use SearchDAV\XML\Operator;
 use SearchDAV\XML\Order;
 use SearchDAV\XML\Scope;
+
 use function Sabre\Xml\Deserializer\keyValue;
 use function Sabre\Xml\Deserializer\repeatingElements;
 
 class QueryParser extends Service {
+	/**
+	 * @psalm-suppress NonInvariantDocblockPropertyType
+	 * @var array<string, string>
+	 */
 	public $namespaceMap = [
 		'DAV:'                             => 'd',
 		'http://sabredav.org/ns'           => 's',

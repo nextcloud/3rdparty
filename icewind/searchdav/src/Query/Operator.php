@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2018 Robin Appelman <robin@icewind.nl>
  *
@@ -22,18 +24,18 @@
 namespace SearchDAV\Query;
 
 class Operator {
-	const OPERATION_AND = '{DAV:}and';
-	const OPERATION_OR = '{DAV:}or';
-	const OPERATION_NOT = '{DAV:}not';
-	const OPERATION_EQUAL = '{DAV:}eq';
-	const OPERATION_LESS_THAN = '{DAV:}lt';
-	const OPERATION_LESS_OR_EQUAL_THAN = '{DAV:}lte';
-	const OPERATION_GREATER_THAN = '{DAV:}gt';
-	const OPERATION_GREATER_OR_EQUAL_THAN = '{DAV:}gte';
-	const OPERATION_IS_COLLECTION = '{DAV:}is-collection';
-	const OPERATION_IS_DEFINED = '{DAV:}is-defined';
-	const OPERATION_IS_LIKE = '{DAV:}like';
-	const OPERATION_CONTAINS = '{DAV:}contains';
+	public const OPERATION_AND = '{DAV:}and';
+	public const OPERATION_OR = '{DAV:}or';
+	public const OPERATION_NOT = '{DAV:}not';
+	public const OPERATION_EQUAL = '{DAV:}eq';
+	public const OPERATION_LESS_THAN = '{DAV:}lt';
+	public const OPERATION_LESS_OR_EQUAL_THAN = '{DAV:}lte';
+	public const OPERATION_GREATER_THAN = '{DAV:}gt';
+	public const OPERATION_GREATER_OR_EQUAL_THAN = '{DAV:}gte';
+	public const OPERATION_IS_COLLECTION = '{DAV:}is-collection';
+	public const OPERATION_IS_DEFINED = '{DAV:}is-defined';
+	public const OPERATION_IS_LIKE = '{DAV:}like';
+	public const OPERATION_CONTAINS = '{DAV:}contains';
 
 	/**
 	 * @var string

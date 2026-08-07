@@ -499,7 +499,6 @@ class Broker
         }
 
         $messages = [];
-
         foreach ($attendees as $attendee) {
             // An organizer can also be an attendee. We should not generate any
             // messages for those.
@@ -599,6 +598,9 @@ class Broker
                                 ));
                             } else {
                                 $currentEvent->EXDATE = $exceptions;
+                                if ($currentEvent->DTSTART['TZID']) {
+                                    $currentEvent->EXDATE['TZID'] = clone $currentEvent->DTSTART['TZID'];
+                                }
                             }
                         }
 
@@ -607,14 +609,14 @@ class Broker
                         unset($currentEvent->ORGANIZER['SCHEDULE-FORCE-SEND']);
                         unset($currentEvent->ORGANIZER['SCHEDULE-STATUS']);
 
-                        foreach ($currentEvent->ATTENDEE as $attendee) {
-                            unset($attendee['SCHEDULE-FORCE-SEND']);
-                            unset($attendee['SCHEDULE-STATUS']);
+                        foreach ($currentEvent->ATTENDEE as $currentEventAttendee) {
+                            unset($currentEventAttendee['SCHEDULE-FORCE-SEND']);
+                            unset($currentEventAttendee['SCHEDULE-STATUS']);
 
                             // We're adding PARTSTAT=NEEDS-ACTION to ensure that
                             // iOS shows an "Inbox Item"
-                            if (!isset($attendee['PARTSTAT'])) {
-                                $attendee['PARTSTAT'] = 'NEEDS-ACTION';
+                            if (!isset($currentEventAttendee['PARTSTAT'])) {
+                                $currentEventAttendee['PARTSTAT'] = 'NEEDS-ACTION';
                             }
                         }
                     }
@@ -683,7 +685,7 @@ class Broker
         // We only need to do that though, if the master event is not declined.
         if (isset($instances['master']) && 'DECLINED' !== $instances['master']['newstatus']) {
             foreach ($eventInfo['exdate'] as $exDate) {
-                if (!in_array($exDate, $oldEventInfo['exdate'])) {
+                if (!in_array($exDate, $oldEventInfo['exdate'] ?? [])) {
                     if (isset($instances[$exDate])) {
                         $instances[$exDate]['newstatus'] = 'DECLINED';
                     } else {
@@ -913,6 +915,9 @@ class Broker
                     $timezone = $vevent->{'RECURRENCE-ID'}->getDateTime()->getTimeZone();
                 }
             }
+
+            $instances[$recurId] = $vevent;
+
             if (isset($vevent->ATTENDEE)) {
                 foreach ($vevent->ATTENDEE as $attendee) {
                     if ($this->scheduleAgentServerRules &&
@@ -951,7 +956,6 @@ class Broker
                         ];
                     }
                 }
-                $instances[$recurId] = $vevent;
             }
 
             foreach ($this->significantChangeProperties as $prop) {

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -22,14 +24,14 @@
 namespace SearchDAV\Backend;
 
 class SearchPropertyDefinition {
-	const XS = '{http://www.w3.org/2001/XMLSchema}';
-	const DATATYPE_STRING = self::XS . 'string';
-	const DATATYPE_INTEGER = self::XS . 'integer';
-	const DATATYPE_NONNEGATIVE_INTEGER = self::XS . 'nonNegativeInteger';
-	const DATATYPE_NON_NEGATIVE_INTEGER = self::XS . 'nonNegativeInteger';
-	const DATATYPE_DECIMAL = self::XS . 'decimal';
-	const DATATYPE_DATETIME = self::XS . 'dateTime';
-	const DATATYPE_BOOLEAN = self::XS . 'boolean';
+	public const XS = '{http://www.w3.org/2001/XMLSchema}';
+	public const DATATYPE_STRING = self::XS . 'string';
+	public const DATATYPE_INTEGER = self::XS . 'integer';
+	public const DATATYPE_NONNEGATIVE_INTEGER = self::XS . 'nonNegativeInteger';
+	public const DATATYPE_NON_NEGATIVE_INTEGER = self::XS . 'nonNegativeInteger';
+	public const DATATYPE_DECIMAL = self::XS . 'decimal';
+	public const DATATYPE_DATETIME = self::XS . 'dateTime';
+	public const DATATYPE_BOOLEAN = self::XS . 'boolean';
 
 
 	/** @var boolean */

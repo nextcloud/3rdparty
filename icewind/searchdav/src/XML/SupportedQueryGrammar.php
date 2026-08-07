@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -25,7 +27,7 @@ use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 class SupportedQueryGrammar implements XmlSerializable {
-	const GRAMMAR_BASIC_SEARCH = '{DAV:}basicsearch';
+	public const GRAMMAR_BASIC_SEARCH = '{DAV:}basicsearch';
 
 	public function xmlSerialize(Writer $writer): void {
 		$writer->startElement('{DAV:}supported-query-grammar');

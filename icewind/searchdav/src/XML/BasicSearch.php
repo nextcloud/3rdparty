@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2017 Robin Appelman <robin@icewind.nl>
  *
@@ -24,6 +26,7 @@ namespace SearchDAV\XML;
 use Sabre\Xml\ParseException;
 use Sabre\Xml\Reader;
 use Sabre\Xml\XmlDeserializable;
+
 use function Sabre\Xml\Deserializer\keyValue;
 
 /**
@@ -31,13 +34,13 @@ use function Sabre\Xml\Deserializer\keyValue;
  */
 class BasicSearch implements XmlDeserializable {
 	/**
-	 * @var string[]
+	 * @var list<string>
 	 *
 	 * The list of properties to be selected, specified in clark notation
 	 */
 	public $select;
 	/**
-	 * @var Scope[]
+	 * @var list<Scope>
 	 *
 	 * The collections to perform the search in
 	 */
@@ -49,7 +52,7 @@ class BasicSearch implements XmlDeserializable {
 	 */
 	public $where;
 	/**
-	 * @var Order[]
+	 * @var list<Order>
 	 *
 	 * The list of order operations that should be used to order the results.
 	 *
@@ -66,6 +69,11 @@ class BasicSearch implements XmlDeserializable {
 	 */
 	public $limit;
 
+	/**
+	 * @param list<string> $select
+	 * @param list<Scope> $from
+	 * @param list<Order> $orderBy
+	 */
 	public function __construct(array $select, array $from, ?Operator $where, array $orderBy, Limit $limit) {
 		$this->select = $select;
 		$this->from = $from;
