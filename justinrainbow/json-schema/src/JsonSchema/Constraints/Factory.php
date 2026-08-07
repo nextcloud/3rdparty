@@ -75,6 +75,8 @@ class Factory
         'schema' => 'JsonSchema\Constraints\SchemaConstraint',
         'validator' => 'JsonSchema\Validator',
         'draft06' => Drafts\Draft06\Draft06Constraint::class,
+        'draft07' => Drafts\Draft07\Draft07Constraint::class,
+        'draft2019-09' => Drafts\Draft2019\Draft2019Constraint::class,
     ];
 
     /**

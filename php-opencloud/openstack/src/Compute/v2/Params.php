@@ -366,6 +366,16 @@ EOL
         ];
     }
 
+    public function schedulerHints(): array
+    {
+        return [
+            'type'        => self::OBJECT_TYPE,
+            'location'    => self::JSON,
+            'sentAs'      => 'os:scheduler_hints',
+            'description' => 'Scheduler hints to pass alongside the server create request, for example ["group" => "{serverGroupId}"].',
+        ];
+    }
+
     public function filterHost(): array
     {
         return [
@@ -496,6 +506,55 @@ EOL
             'type'        => self::STRING_TYPE,
             'location'    => self::JSON,
             'description' => 'The type of the keypair. Allowed values are ssh or x509. Require micro version 2.2.',
+        ];
+    }
+
+    public function allProjects(): array
+    {
+        return [
+            'type'        => self::BOOL_TYPE,
+            'location'    => self::QUERY,
+            'sentAs'      => 'all_projects',
+            'description' => '(Admin only) Set this to true to list server groups from all projects.',
+        ];
+    }
+
+    public function offset(): array
+    {
+        return [
+            'type'        => self::INT_TYPE,
+            'location'    => self::QUERY,
+            'description' => 'The offset of the first server group to return.',
+        ];
+    }
+
+    public function serverGroupPolicies(): array
+    {
+        return [
+            'type'        => self::ARRAY_TYPE,
+            'location'    => self::JSON,
+            'description' => 'The list of policies for the server group. In the base Compute API, a single policy must be provided in this array.',
+            'items'       => [
+                'type' => self::STRING_TYPE,
+            ],
+        ];
+    }
+
+    public function serverGroupPolicy(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'location'    => self::JSON,
+            'description' => 'The server group policy name. This is available with Compute microversion 2.64 or later.',
+        ];
+    }
+
+    public function serverGroupRules(): array
+    {
+        return [
+            'type'        => self::OBJECT_TYPE,
+            'location'    => self::JSON,
+            'description' => 'The server group rules object. This is available with Compute microversion 2.64 or later.',
         ];
     }
 

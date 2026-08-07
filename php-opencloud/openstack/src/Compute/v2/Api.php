@@ -18,6 +18,11 @@ class Api extends AbstractApi
         $this->params = new Params();
     }
 
+    private function serverParam(array $param): array
+    {
+        return array_merge($param, ['path' => 'server']);
+    }
+
     public function getLimits(): array
     {
         return [
@@ -189,21 +194,21 @@ class Api extends AbstractApi
     public function postServer(): array
     {
         return [
-            'path'    => 'servers',
-            'method'  => 'POST',
-            'jsonKey' => 'server',
-            'params'  => [
-                'imageId'            => $this->notRequired($this->params->imageId()),
-                'flavorId'           => $this->params->flavorId(),
-                'personality'        => $this->params->personality(),
-                'metadata'           => $this->notRequired($this->params->metadata()),
-                'name'               => $this->isRequired($this->params->name('server')),
-                'securityGroups'     => $this->params->securityGroups(),
-                'userData'           => $this->params->userData(),
-                'availabilityZone'   => $this->params->availabilityZone(),
-                'networks'           => $this->params->networks(),
-                'blockDeviceMapping' => $this->params->blockDeviceMapping(),
-                'keyName'            => $this->params->keyName(),
+            'path'   => 'servers',
+            'method' => 'POST',
+            'params' => [
+                'imageId'            => $this->serverParam($this->notRequired($this->params->imageId())),
+                'flavorId'           => $this->serverParam($this->params->flavorId()),
+                'personality'        => $this->serverParam($this->params->personality()),
+                'metadata'           => $this->serverParam($this->notRequired($this->params->metadata())),
+                'name'               => $this->serverParam($this->isRequired($this->params->name('server'))),
+                'securityGroups'     => $this->serverParam($this->params->securityGroups()),
+                'userData'           => $this->serverParam($this->params->userData()),
+                'availabilityZone'   => $this->serverParam($this->params->availabilityZone()),
+                'networks'           => $this->serverParam($this->params->networks()),
+                'blockDeviceMapping' => $this->serverParam($this->params->blockDeviceMapping()),
+                'keyName'            => $this->serverParam($this->params->keyName()),
+                'schedulerHints'     => $this->params->schedulerHints(),
             ],
         ];
     }
@@ -704,6 +709,68 @@ class Api extends AbstractApi
             'path'   => 'os-keypairs/{name}',
             'params' => [
                 'name' => $this->isRequired($this->params->keypairName()),
+            ],
+        ];
+    }
+
+    public function getServerGroups(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => 'os-server-groups',
+            'params' => [
+                'allProjects' => $this->params->allProjects(),
+                'limit'       => $this->params->limit(),
+                'offset'      => $this->params->offset(),
+            ],
+        ];
+    }
+
+    public function getServerGroup(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => 'os-server-groups/{id}',
+            'params' => [
+                'id' => $this->params->urlId('server group'),
+            ],
+        ];
+    }
+
+    public function postServerGroup(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'os-server-groups',
+            'jsonKey' => 'server_group',
+            'params'  => [
+                'name'     => $this->isRequired($this->params->name('server group')),
+                'policies' => $this->isRequired($this->params->serverGroupPolicies()),
+            ],
+        ];
+    }
+
+    public function postServerGroupWithPolicy(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'os-server-groups',
+            'jsonKey' => 'server_group',
+            'params'  => [
+                'name'   => $this->isRequired($this->params->name('server group')),
+                'policy' => $this->isRequired($this->params->serverGroupPolicy()),
+                'rules'  => $this->notRequired($this->params->serverGroupRules()),
+            ],
+        ];
+    }
+
+    public function deleteServerGroup(): array
+    {
+        return [
+            'method' => 'DELETE',
+            'path'   => 'os-server-groups/{id}',
+            'params' => [
+                'id' => $this->params->urlId('server group'),
             ],
         ];
     }
