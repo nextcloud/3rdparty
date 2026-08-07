@@ -71,7 +71,7 @@
 		"symfony/string": "^7.4.15",
 		"symfony/translation": "^6.4.4",
 		"wapmorgan/mp3info": "^0.1.1",
-		"web-auth/webauthn-lib": "^4.9.1"
+		"web-auth/webauthn-lib": "^5.3.5"
 	},
 	"replace": {
 		"paragonie/random_compat": "*",
