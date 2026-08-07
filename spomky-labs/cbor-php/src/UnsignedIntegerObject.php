@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CBOR;
 
+use function assert;
 use Brick\Math\BigInteger;
 use InvalidArgumentException;
 use const STR_PAD_LEFT;
@@ -41,6 +42,7 @@ final class UnsignedIntegerObject extends AbstractCBORObject implements Normaliz
 
     public static function createFromHex(string $value): self
     {
+        assert($value !== '', 'Value must not be empty');
         $integer = BigInteger::fromBase($value, 16);
 
         return self::createBigInteger($integer);
@@ -58,17 +60,24 @@ final class UnsignedIntegerObject extends AbstractCBORObject implements Normaliz
         return self::MAJOR_TYPE;
     }
 
+    /**
+     * @return numeric-string
+     */
     public function getValue(): string
     {
         if ($this->data === null) {
             return (string) $this->additionalInformation;
         }
 
-        $integer = BigInteger::fromBase(bin2hex($this->data), 16);
+        $hex = bin2hex($this->data);
+        assert($hex !== '', 'Value must not be empty');
 
-        return $integer->toBase(10);
+        return BigInteger::fromBase($hex, 16)->toBase(10);
     }
 
+    /**
+     * @return numeric-string
+     */
     public function normalize(): string
     {
         return $this->getValue();

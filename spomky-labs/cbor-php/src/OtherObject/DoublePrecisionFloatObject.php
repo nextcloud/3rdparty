@@ -8,15 +8,31 @@ use Brick\Math\BigInteger;
 use CBOR\Normalizable;
 use CBOR\OtherObject as Base;
 use CBOR\Utils;
-use InvalidArgumentException;
 use const INF;
+use InvalidArgumentException;
 use const NAN;
+use function strlen;
 
 final class DoublePrecisionFloatObject extends Base implements Normalizable
 {
     public static function supportedAdditionalInformation(): array
     {
         return [self::OBJECT_DOUBLE_PRECISION_FLOAT];
+    }
+
+    public static function createFromFloat(float $number): self
+    {
+        $value = match (true) {
+            is_nan($number) => self::hex2binSafe('7FF8000000000000'),
+            is_infinite($number) && $number > 0 => self::hex2binSafe('7FF0000000000000'),
+            is_infinite($number) && $number < 0 => self::hex2binSafe('FFF0000000000000'),
+            default => (static fn (): string => unpack('S', "\x01\x00")[1] === 1 ? strrev(pack('d', $number)) : pack(
+                'd',
+                $number
+            ))(),
+        };
+
+        return new self(self::OBJECT_DOUBLE_PRECISION_FLOAT, $value);
     }
 
     public static function createFromLoadedData(int $additionalInformation, ?string $data): Base
@@ -26,7 +42,7 @@ final class DoublePrecisionFloatObject extends Base implements Normalizable
 
     public static function create(string $value): self
     {
-        if (mb_strlen($value, '8bit') !== 8) {
+        if (strlen($value) !== 8) {
             throw new InvalidArgumentException('The value is not a valid double precision floating point');
         }
 
@@ -73,5 +89,14 @@ final class DoublePrecisionFloatObject extends Base implements Normalizable
         $sign = Utils::binToBigInteger($data)->shiftedRight(63);
 
         return $sign->isEqualTo(BigInteger::one()) ? -1 : 1;
+    }
+
+    private static function hex2binSafe(string $hex): string
+    {
+        $result = hex2bin($hex);
+        if ($result === false) {
+            throw new InvalidArgumentException('Invalid hex string');
+        }
+        return $result;
     }
 }

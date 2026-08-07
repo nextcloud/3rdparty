@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace CBOR;
 
+use function array_key_exists;
 use ArrayAccess;
 use ArrayIterator;
 use InvalidArgumentException;
 use Iterator;
 use IteratorAggregate;
-use function array_key_exists;
 
 /**
  * @phpstan-implements ArrayAccess<int, CBORObject>
@@ -42,9 +42,14 @@ class IndefiniteLengthListObject extends AbstractCBORObject implements IteratorA
         return $result . "\xFF";
     }
 
-    public static function create(): self
+    public static function create(CBORObject ...$items): self
     {
-        return new self();
+        $object = new self();
+        foreach ($items as $item) {
+            $object->add($item);
+        }
+
+        return $object;
     }
 
     /**

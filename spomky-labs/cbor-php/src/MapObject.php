@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace CBOR;
 
+use function array_key_exists;
 use ArrayAccess;
 use ArrayIterator;
+use function count;
 use Countable;
 use InvalidArgumentException;
 use Iterator;
 use IteratorAggregate;
-use function array_key_exists;
-use function count;
 
 /**
  * @phpstan-implements ArrayAccess<int, CBORObject>
@@ -26,7 +26,7 @@ final class MapObject extends AbstractCBORObject implements Countable, IteratorA
      */
     private array $data;
 
-    private ?string $length = null;
+    private ?string $length;
 
     /**
      * @param MapItem[] $data
@@ -34,12 +34,6 @@ final class MapObject extends AbstractCBORObject implements Countable, IteratorA
     public function __construct(array $data = [])
     {
         [$additionalInformation, $length] = LengthCalculator::getLengthOfArray($data);
-        array_map(static function ($item): void {
-            if (! $item instanceof MapItem) {
-                throw new InvalidArgumentException('The list must contain only MapItem objects.');
-            }
-        }, $data);
-
         parent::__construct(self::MAJOR_TYPE, $additionalInformation);
         $this->data = $data;
         $this->length = $length;
@@ -48,16 +42,10 @@ final class MapObject extends AbstractCBORObject implements Countable, IteratorA
     public function __toString(): string
     {
         $result = parent::__toString();
-        if ($this->length !== null) {
-            $result .= $this->length;
-        }
+        $result .= $this->length ?? '';
         foreach ($this->data as $object) {
-            $result .= $object->getKey()
-                ->__toString()
-            ;
-            $result .= $object->getValue()
-                ->__toString()
-            ;
+            $result .= (string) $object->getKey();
+            $result .= (string) $object->getValue();
         }
 
         return $result;

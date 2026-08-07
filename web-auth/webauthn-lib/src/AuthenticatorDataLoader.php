@@ -11,15 +11,15 @@ use CBOR\MapObject;
 use CBOR\NegativeIntegerObject;
 use CBOR\TextStringObject;
 use CBOR\UnsignedIntegerObject;
-use Symfony\Component\Uid\Uuid;
-use Webauthn\AuthenticationExtensions\AuthenticationExtensionsClientOutputsLoader;
-use Webauthn\Exception\InvalidDataException;
 use function chr;
 use function ord;
+use Symfony\Component\Uid\Uuid;
+use Webauthn\AuthenticationExtensions\AuthenticationExtensionLoader;
+use Webauthn\Exception\InvalidDataException;
 
-final class AuthenticatorDataLoader
+final readonly class AuthenticatorDataLoader
 {
-    private readonly Decoder $decoder;
+    private Decoder $decoder;
 
     private function __construct()
     {
@@ -37,14 +37,16 @@ final class AuthenticatorDataLoader
         $authDataStream = new StringStream($authData);
         $rp_id_hash = $authDataStream->read(32);
         $flags = $authDataStream->read(1);
-        $signCount = $authDataStream->read(4);
-        $signCount = unpack('N', $signCount);
+        $signCountRaw = $authDataStream->read(4);
+        /** @var array{1: int} $signCount */
+        $signCount = unpack('N', $signCountRaw);
 
         $attestedCredentialData = null;
         if (0 !== (ord($flags) & AuthenticatorData::FLAG_AT)) {
             $aaguid = Uuid::fromBinary($authDataStream->read(16));
-            $credentialLength = $authDataStream->read(2);
-            $credentialLength = unpack('n', $credentialLength);
+            $credentialLengthRaw = $authDataStream->read(2);
+            /** @var array{1: int} $credentialLength */
+            $credentialLength = unpack('n', $credentialLengthRaw);
             $credentialId = $authDataStream->read($credentialLength[1]);
             $credentialPublicKey = $this->decoder->decode($authDataStream);
             $credentialPublicKey instanceof MapObject || throw InvalidDataException::create(
@@ -61,7 +63,7 @@ final class AuthenticatorDataLoader
         $extension = null;
         if (0 !== (ord($flags) & AuthenticatorData::FLAG_ED)) {
             $extension = $this->decoder->decode($authDataStream);
-            $extension = AuthenticationExtensionsClientOutputsLoader::load($extension);
+            $extension = AuthenticationExtensionLoader::load($extension);
         }
         $authDataStream->isEOF() || throw InvalidDataException::create(
             $authData,
@@ -81,15 +83,17 @@ final class AuthenticatorDataLoader
 
     private function fixIncorrectEdDSAKey(string $data): string
     {
+        /** @var string $needle */
         $needle = hex2bin('a301634f4b500327206745643235353139');
+        /** @var string $correct */
         $correct = hex2bin('a401634f4b500327206745643235353139');
-        $position = mb_strpos($data, $needle, 0, '8bit');
+        $position = strpos($data, $needle);
         if ($position === false) {
             return $data;
         }
 
-        $begin = mb_substr($data, 0, $position, '8bit');
-        $end = mb_substr($data, $position, null, '8bit');
+        $begin = substr($data, 0, $position);
+        $end = substr($data, $position);
         $end = str_replace($needle, $correct, $end);
         $cbor = new StringStream($end);
         $badKey = $this->decoder->decode($cbor);
@@ -100,8 +104,10 @@ final class AuthenticatorDataLoader
         );
         $badX = $badKey->get(-2);
         $badX instanceof ListObject || throw InvalidDataException::create($end, 'Invalid authentication data.');
+        /** @var list<string> $normalizedBadX */
+        $normalizedBadX = $badX->normalize();
         $keyBytes = array_reduce(
-            $badX->normalize(),
+            $normalizedBadX,
             static fn (string $carry, string $item): string => $carry . chr((int) $item),
             ''
         );

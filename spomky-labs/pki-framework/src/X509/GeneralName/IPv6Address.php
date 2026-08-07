@@ -7,6 +7,7 @@ namespace SpomkyLabs\Pki\X509\GeneralName;
 use UnexpectedValueException;
 use function array_slice;
 use function count;
+use function sprintf;
 
 final class IPv6Address extends IPAddress
 {
@@ -50,9 +51,9 @@ final class IPv6Address extends IPAddress
 
     protected function octets(): string
     {
-        $words = array_map('hexdec', explode(':', $this->ip));
+        $words = array_map(hexdec(...), explode(':', $this->ip));
         if (isset($this->mask)) {
-            $words = array_merge($words, array_map('hexdec', explode(':', $this->mask)));
+            $words = array_merge($words, array_map(hexdec(...), explode(':', $this->mask)));
         }
         return pack('n*', ...$words);
     }

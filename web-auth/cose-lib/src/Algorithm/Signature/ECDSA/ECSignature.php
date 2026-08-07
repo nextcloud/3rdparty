@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Cose\Algorithm\Signature\ECDSA;
 
-use InvalidArgumentException;
 use function bin2hex;
 use function dechex;
 use function hex2bin;
 use function hexdec;
-use function mb_strlen;
-use function mb_substr;
+use InvalidArgumentException;
 use function str_pad;
 use const STR_PAD_LEFT;
+use function strlen;
+use function substr;
 
 /**
  * @internal
@@ -41,8 +41,8 @@ final class ECSignature
             throw new InvalidArgumentException('Invalid signature length.');
         }
 
-        $pointR = self::preparePositiveInteger(mb_substr($signature, 0, $length, '8bit'));
-        $pointS = self::preparePositiveInteger(mb_substr($signature, $length, null, '8bit'));
+        $pointR = self::preparePositiveInteger(substr($signature, 0, $length));
+        $pointS = self::preparePositiveInteger(substr($signature, $length));
 
         $lengthR = self::octetLength($pointR);
         $lengthS = self::octetLength($pointS);
@@ -67,7 +67,6 @@ final class ECSignature
             throw new InvalidArgumentException('Invalid data. Should start with a sequence.');
         }
 
-        // @phpstan-ignore-next-line
         if (self::readAsn1Content($message, $position, self::BYTE_SIZE) === self::ASN1_LENGTH_2BYTES) {
             $position += self::BYTE_SIZE;
         }
@@ -80,20 +79,20 @@ final class ECSignature
 
     private static function octetLength(string $data): int
     {
-        return intdiv(mb_strlen($data, '8bit'), self::BYTE_SIZE);
+        return intdiv(strlen($data), self::BYTE_SIZE);
     }
 
     private static function preparePositiveInteger(string $data): string
     {
-        if (mb_substr($data, 0, self::BYTE_SIZE, '8bit') > self::ASN1_BIG_INTEGER_LIMIT) {
+        if (substr($data, 0, self::BYTE_SIZE) > self::ASN1_BIG_INTEGER_LIMIT) {
             return self::ASN1_NEGATIVE_INTEGER . $data;
         }
 
         while (
-            mb_strpos($data, self::ASN1_NEGATIVE_INTEGER, 0, '8bit') === 0
-            && mb_substr($data, 2, self::BYTE_SIZE, '8bit') <= self::ASN1_BIG_INTEGER_LIMIT
+            str_starts_with($data, self::ASN1_NEGATIVE_INTEGER)
+            && substr($data, 2, self::BYTE_SIZE) <= self::ASN1_BIG_INTEGER_LIMIT
         ) {
-            $data = mb_substr($data, 2, null, '8bit');
+            $data = substr($data, 2);
         }
 
         return $data;
@@ -101,7 +100,7 @@ final class ECSignature
 
     private static function readAsn1Content(string $message, int &$position, int $length): string
     {
-        $content = mb_substr($message, $position, $length, '8bit');
+        $content = substr($message, $position, $length);
         $position += $length;
 
         return $content;
@@ -121,10 +120,10 @@ final class ECSignature
     private static function retrievePositiveInteger(string $data): string
     {
         while (
-            mb_strpos($data, self::ASN1_NEGATIVE_INTEGER, 0, '8bit') === 0
-            && mb_substr($data, 2, self::BYTE_SIZE, '8bit') > self::ASN1_BIG_INTEGER_LIMIT
+            str_starts_with($data, self::ASN1_NEGATIVE_INTEGER)
+            && substr($data, 2, self::BYTE_SIZE) > self::ASN1_BIG_INTEGER_LIMIT
         ) {
-            $data = mb_substr($data, 2, null, '8bit');
+            $data = substr($data, 2);
         }
 
         return $data;

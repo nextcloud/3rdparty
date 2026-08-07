@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Webauthn\Denormalizer;
 
+use function assert;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webauthn\MetadataService\Statement\VerificationMethodANDCombinations;
 use Webauthn\MetadataService\Statement\VerificationMethodDescriptor;
-use function assert;
 
 final class VerificationMethodANDCombinationsDenormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
@@ -26,15 +26,20 @@ final class VerificationMethodANDCombinationsDenormalizer implements NormalizerI
     }
 
     /**
-     * @return array<VerificationMethodDescriptor>
+     * @return array<array<string, mixed>>
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array
     {
-        assert($object instanceof VerificationMethodANDCombinations);
+        assert($data instanceof VerificationMethodANDCombinations);
 
+        /** @var array<array<string, mixed>> */
         return array_map(
-            fn ($verificationMethod) => $this->normalizer->normalize($verificationMethod, $format, $context),
-            $object->verificationMethods
+            fn (VerificationMethodDescriptor $verificationMethod) => $this->normalizer->normalize(
+                $verificationMethod,
+                $format,
+                $context
+            ),
+            $data->verificationMethods
         );
     }
 
