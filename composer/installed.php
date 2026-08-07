@@ -350,9 +350,9 @@
             ),
         ),
         'pear/archive_tar' => array(
-            'pretty_version' => '1.5.0',
-            'version' => '1.5.0.0',
-            'reference' => 'b439c859564f5cbb0f64ad6002d0afe84a889602',
+            'pretty_version' => '1.6.0',
+            'version' => '1.6.0.0',
+            'reference' => 'dc3285537f1832da8ddbbe45f5a007248b6cc00e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/archive_tar',
             'aliases' => array(),
