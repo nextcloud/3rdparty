@@ -50,7 +50,7 @@
 		"psr/event-dispatcher": "^1.0",
 		"psr/log": "^3.0.2",
 		"punic/punic": "^3.8",
-		"sabre/dav": "^4.7.0",
+		"sabre/dav": "^4.7.1",
 		"stecman/symfony-console-completion": "^0.14.0",
 		"symfony/console": "^6.4.41",
 		"symfony/event-dispatcher": "^6.4.37",
