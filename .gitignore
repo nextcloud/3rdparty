@@ -66,6 +66,9 @@ aws/aws-sdk-php/.changes
 brick/math/random-tests.php
 brick/math/psalm*.xmls
 
+cweagans/composer-configurable-plugin/docs
+cweagans/composer-configurable-plugin/*.yml
+
 deepdiver/zipstreamer/test
 
 deepdiver1975/tarstreamer/.drone.star

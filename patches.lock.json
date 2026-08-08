@@ -1,0 +1,73 @@
+{
+    "_hash": "b827683badf38ee383e2b0f62c03aedfa5f367a811b2ad426de87332e0910b2f",
+    "patches": {
+        "wapmorgan/mp3info": [
+            {
+                "package": "wapmorgan/mp3info",
+                "description": "Break frame parsing on invalid frame",
+                "url": ".patches/mp3info-break-frame-parsing.patch",
+                "sha256": "d1093bc21282827bd49b98618cc8e44b1456d317d2713e27cc5f58a6af45a4bf",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "wapmorgan/mp3info",
+                "description": "fix incorrect lookup for mpeg header",
+                "url": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch",
+                "sha256": "084e7b15afc1dd149a3a7bf3cc39a13918d2d6ec8aeb6e4ff7f4f2e47ce15eed",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "sabre/dav": [
+            {
+                "package": "sabre/dav",
+                "description": "Check for instanceof INode instead of Node",
+                "url": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch",
+                "sha256": "852573c258fccf8a89636870a752ab02a799d160e291ea04f358664ba956296d",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "sabre/vobject": [
+            {
+                "package": "sabre/vobject",
+                "description": "fix use RDATE in time range check and use all instances",
+                "url": ".patches/sabre-vobject-rdate.patch",
+                "sha256": "816d7b859858535c610ee7a6b0401d907da3f8b08dfc909149ad7cc72b5dc250",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "sabre/vobject",
+                "description": "fix send participation reply on fresh event",
+                "url": ".patches/sabre-vobject-iTipBroker-replies.patch",
+                "sha256": "fb764740364f485079058d9a653094c3f9f36e04d01f0f3f5b52bd7b66a9cb2b",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "sabre/xml": [
+            {
+                "package": "sabre/xml",
+                "description": "Remove callable serialization",
+                "url": ".patches/sabre-xml-remove-callable-serialization.patch",
+                "sha256": "96ff87a1eac6c0c8094f121b73cf1672aa21d991aa3cefb2a5435f2476f1026e",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ]
+    }
+}
