@@ -605,9 +605,9 @@
             ),
         ),
         'sabre/dav' => array(
-            'pretty_version' => '4.7.0',
-            'version' => '4.7.0.0',
-            'reference' => '074373bcd689a30bcf5aaa6bbb20a3395964ce7a',
+            'pretty_version' => '4.7.1',
+            'version' => '4.7.1.0',
+            'reference' => 'f36f002dce082e1d425c4a0dc8c71a6b176c3b07',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabre/dav',
             'aliases' => array(),
