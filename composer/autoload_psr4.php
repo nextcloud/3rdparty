@@ -13,7 +13,7 @@ return array(
     'kornrunner\\Blurhash\\' => array($vendorDir . '/kornrunner/blurhash/src'),
     'gapple\\Tests\\StructuredFields\\' => array($vendorDir . '/gapple/structured-fields/tests'),
     'gapple\\StructuredFields\\' => array($vendorDir . '/gapple/structured-fields/src'),
-    'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
+    'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src', $vendorDir . '/cweagans/composer-configurable-plugin/src'),
     'bantu\\IniGetWrapper\\' => array($vendorDir . '/bantu/ini-get-wrapper/src'),
     'ZipStreamer\\' => array($vendorDir . '/deepdiver/zipstreamer/src'),
     'Webauthn\\' => array($vendorDir . '/web-auth/webauthn-lib/src'),
