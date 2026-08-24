@@ -1030,6 +1030,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/validator' => array(
+            'pretty_version' => 'v7.4.17',
+            'version' => '7.4.17.0',
+            'reference' => 'b1cbb758c005fbe0d7b2b8d1561869d318628a10',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/validator',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'wapmorgan/mp3info' => array(
             'pretty_version' => '0.1.1',
             'version' => '0.1.1.0',
