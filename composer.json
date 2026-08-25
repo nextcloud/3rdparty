@@ -62,7 +62,7 @@
 		"symfony/http-foundation": "^7.4.15",
 		"symfony/mailer": "^7.4.15",
 		"symfony/polyfill-intl-grapheme": "^1.41.0",
-		"symfony/polyfill-intl-normalizer": "^1.38.0",
+		"symfony/polyfill-intl-normalizer": "^1.42.0",
 		"symfony/polyfill-php84": "^1.38.1",
 		"symfony/polyfill-php85": "^1.41.0",
 		"symfony/polyfill-php86": "^1.41.0",
