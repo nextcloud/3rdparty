@@ -55,7 +55,7 @@
 		"psr/http-client": "^1.0.3",
 		"psr/log": "^3.0.2",
 		"punic/punic": "^3.8",
-		"sabre/dav": "^4.7.0",
+		"sabre/dav": "^4.7.1",
 		"stecman/symfony-console-completion": "^0.15.0",
 		"symfony/console": "^7.4.15",
 		"symfony/event-dispatcher": "^7.4.15",
