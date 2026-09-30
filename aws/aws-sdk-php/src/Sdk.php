@@ -16,6 +16,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionAccessAnalyzer(array $args = [])
  * @method \Aws\Account\AccountClient createAccount(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionAccount(array $args = [])
+ * @method \Aws\AccountAccess\AccountAccessClient createAccountAccess(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionAccountAccess(array $args = [])
  * @method \Aws\Acm\AcmClient createAcm(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionAcm(array $args = [])
  * @method \Aws\AgentRegistry\AgentRegistryClient createAgentRegistry(array $args = [])
@@ -166,6 +168,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionCloudWatchEvents(array $args = [])
  * @method \Aws\CloudWatchLogs\CloudWatchLogsClient createCloudWatchLogs(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionCloudWatchLogs(array $args = [])
+ * @method \Aws\CloudWatchOmni\CloudWatchOmniClient createCloudWatchOmni(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionCloudWatchOmni(array $args = [])
  * @method \Aws\CloudWatchRUM\CloudWatchRUMClient createCloudWatchRUM(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionCloudWatchRUM(array $args = [])
  * @method \Aws\CodeArtifact\CodeArtifactClient createCodeArtifact(array $args = [])
@@ -316,6 +320,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionEntityResolution(array $args = [])
  * @method \Aws\EventBridge\EventBridgeClient createEventBridge(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEventBridge(array $args = [])
+ * @method \Aws\EventBridgeV2\EventBridgeV2Client createEventBridgeV2(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionEventBridgeV2(array $args = [])
  * @method \Aws\Evs\EvsClient createEvs(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEvs(array $args = [])
  * @method \Aws\FIS\FISClient createFIS(array $args = [])
@@ -366,6 +372,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionHealth(array $args = [])
  * @method \Aws\HealthLake\HealthLakeClient createHealthLake(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionHealthLake(array $args = [])
+ * @method \Aws\IAMToolbox\IAMToolboxClient createIAMToolbox(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionIAMToolbox(array $args = [])
  * @method \Aws\IVS\IVSClient createIVS(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionIVS(array $args = [])
  * @method \Aws\IVSRealTime\IVSRealTimeClient createIVSRealTime(array $args = [])
@@ -554,6 +562,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionNetworkManager(array $args = [])
  * @method \Aws\NetworkMonitor\NetworkMonitorClient createNetworkMonitor(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionNetworkMonitor(array $args = [])
+ * @method \Aws\NetworkSecurityManager\NetworkSecurityManagerClient createNetworkSecurityManager(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionNetworkSecurityManager(array $args = [])
  * @method \Aws\Notifications\NotificationsClient createNotifications(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionNotifications(array $args = [])
  * @method \Aws\NotificationsContacts\NotificationsContactsClient createNotificationsContacts(array $args = [])
@@ -863,7 +873,7 @@ namespace Aws;
  */
 class Sdk
 {
-    const VERSION = '3.391.2';
+    const VERSION = '3.398.3';
 
     /** @var array Arguments for creating clients */
     private $args;
@@ -882,7 +892,10 @@ class Sdk
         $this->args = $args;
 
         if (!isset($args['handler']) && !isset($args['http_handler'])) {
-            $this->args['http_handler'] = default_http_handler();
+            $this->args['http_handler'] = default_http_handler(
+                $args['transport_sharing'] ?? null
+            );
+            unset($this->args['transport_sharing']);
         }
     }
 

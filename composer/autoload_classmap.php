@@ -225,6 +225,7 @@ return array(
     'Aws\\HandlerList' => $vendorDir . '/aws/aws-sdk-php/src/HandlerList.php',
     'Aws\\Handler\\Guzzle\\GuzzleHandler' => $vendorDir . '/aws/aws-sdk-php/src/Handler/Guzzle/GuzzleHandler.php',
     'Aws\\Handler\\HttpHandlerError' => $vendorDir . '/aws/aws-sdk-php/src/Handler/HttpHandlerError.php',
+    'Aws\\Handler\\HttpTransportSharing' => $vendorDir . '/aws/aws-sdk-php/src/Handler/HttpTransportSharing.php',
     'Aws\\HasDataTrait' => $vendorDir . '/aws/aws-sdk-php/src/HasDataTrait.php',
     'Aws\\HasMonitoringEventsTrait' => $vendorDir . '/aws/aws-sdk-php/src/HasMonitoringEventsTrait.php',
     'Aws\\HashInterface' => $vendorDir . '/aws/aws-sdk-php/src/HashInterface.php',
