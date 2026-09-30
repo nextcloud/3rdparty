@@ -27,10 +27,14 @@ use Aws\Endpoint\UseFipsEndpoint\ConfigurationProvider as UseFipsConfigProvider;
 use Aws\EndpointDiscovery\ConfigurationInterface;
 use Aws\EndpointDiscovery\ConfigurationProvider;
 use Aws\EndpointV2\EndpointDefinitionProvider;
+use Aws\EndpointV2\EndpointProviderV2;
 use Aws\Exception\AwsException;
 use Aws\Exception\InvalidRegionException;
+use Aws\Handler\HttpTransportSharing;
 use Aws\Retry\ConfigurationInterface as RetryConfigInterface;
 use Aws\Retry\ConfigurationProvider as RetryConfigProvider;
+use Aws\Retry\V3\OptIn as NewRetriesOptIn;
+use Aws\Retry\V3\RetryMiddleware as RetryV3Middleware;
 use Aws\Signature\SignatureProvider;
 use Aws\Token\Token;
 use Aws\Token\TokenInterface;
@@ -290,6 +294,12 @@ class ClientResolver
             'default' => [],
             'doc'     => 'Set to an array of SDK request options to apply to each request (e.g., proxy, verify, etc.).',
         ],
+        'transport_sharing' => [
+            'type'    => 'value',
+            'valid'   => ['string'],
+            'doc'     => 'Set to a transport sharing mode ("none", "handler_prefer", "handler_require", "persistent_prefer", or "persistent_require") to enable connection sharing on the default HTTP handler. The "*_prefer" modes degrade gracefully when the installed version of Guzzle or the runtime cannot honor them, and the "*_require" modes throw. This option only applies when the SDK creates the default HTTP handler, and the "*_require" modes throw when combined with a custom "handler" or "http_handler" option.',
+            'fn'      => [__CLASS__, '_apply_transport_sharing'],
+        ],
         'http_handler' => [
             'type'    => 'value',
             'valid'   => ['callable'],
@@ -547,28 +557,42 @@ class ClientResolver
     public static function _apply_retries($value, array &$args, HandlerList $list)
     {
         // A value of 0 for the config option disables retries
-        if ($value) {
-            $config = RetryConfigProvider::unwrap($value);
-
-            if ($config->getMode() === 'legacy') {
-                // # of retries is 1 less than # of attempts
-                $decider = RetryMiddleware::createDefaultDecider(
-                    $config->getMaxAttempts() - 1
-                );
-                $list->appendSign(
-                    Middleware::retry($decider, null, $args['stats']['retries']),
-                    'retry'
-                );
-            } else {
-                $list->appendSign(
-                    RetryMiddlewareV2::wrap(
-                        $config,
-                        ['collect_stats' => $args['stats']['retries']]
-                    ),
-                    'retry'
-                );
-            }
+        if (!$value) {
+            return;
         }
+
+        $config = RetryConfigProvider::unwrap($value);
+
+        if ($config->getMode() === 'legacy') {
+            // # of retries is 1 less than # of attempts
+            $decider = RetryMiddleware::createDefaultDecider(
+                $config->getMaxAttempts() - 1
+            );
+            $list->appendSign(
+                Middleware::retry($decider, null, $args['stats']['retries']),
+                'retry'
+            );
+            return;
+        }
+
+        if (NewRetriesOptIn::isEnabled()) {
+            $list->appendSign(
+                RetryV3Middleware::wrap($config, [
+                    'collect_stats' => $args['stats']['retries'],
+                    'service'       => $args['service'],
+                ]),
+                'retry'
+            );
+            return;
+        }
+
+        $list->appendSign(
+            RetryMiddlewareV2::wrap(
+                $config,
+                ['collect_stats' => $args['stats']['retries']]
+            ),
+            'retry'
+        );
     }
 
     public static function _apply_defaults($value, array &$args, HandlerList $list)
@@ -791,7 +815,7 @@ class ClientResolver
     public static function _apply_endpoint_provider($value, array &$args)
     {
         if (!isset($args['endpoint'])) {
-            if ($value instanceof \Aws\EndpointV2\EndpointProviderV2) {
+            if ($value instanceof EndpointProviderV2) {
                 $options = self::getEndpointProviderOptions($args);
                 $value = PartitionEndpointProvider::defaultProvider($options)
                     ->getPartition($args['region'], $args['service']);
@@ -971,7 +995,7 @@ class ClientResolver
     public static function _default_handler(array &$args)
     {
         return new WrappedHttpHandler(
-            default_http_handler(),
+            default_http_handler($args['transport_sharing'] ?? null),
             $args['parser'],
             $args['error_parser'],
             $args['exception_class'],
@@ -988,6 +1012,21 @@ class ClientResolver
             $args['exception_class'],
             $args['stats']['http']
         );
+    }
+
+    public static function _apply_transport_sharing($value, array &$args)
+    {
+        HttpTransportSharing::validate($value);
+
+        if ((isset($args['http_handler']) || isset($args['handler']))
+            && HttpTransportSharing::isRequired($value)
+        ) {
+            throw new IAE('The "transport_sharing" option can only'
+                . ' require transport sharing when the SDK creates the'
+                . ' default HTTP handler. Remove the "handler" or'
+                . ' "http_handler" option, or configure transport sharing'
+                . ' on the custom handler instead.');
+        }
     }
 
     public static function _apply_app_id($value, array &$args)
@@ -1112,14 +1151,13 @@ class ClientResolver
         if (self::isValidService($serviceName)
             && self::isValidApiVersion($serviceName, $apiVersion)
         ) {
-            $ruleset = EndpointDefinitionProvider::getEndpointRuleset(
+            $partitions = EndpointDefinitionProvider::getPartitions();
+            $parsed = EndpointDefinitionProvider::getParsedRuleset(
                 $service->getServiceName(),
-                $service->getApiVersion()
+                $service->getApiVersion(),
+                $partitions
             );
-            return new \Aws\EndpointV2\EndpointProviderV2(
-                $ruleset,
-                EndpointDefinitionProvider::getPartitions()
-            );
+            return new EndpointProviderV2($parsed, $partitions);
         }
         $options = self::getEndpointProviderOptions($args);
         return PartitionEndpointProvider::defaultProvider($options)
