@@ -781,6 +781,7 @@ class ComposerStaticInit2f23f73bc0cc116b4b1eee1521aa8652
         'Aws\\HandlerList' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/HandlerList.php',
         'Aws\\Handler\\Guzzle\\GuzzleHandler' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Handler/Guzzle/GuzzleHandler.php',
         'Aws\\Handler\\HttpHandlerError' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Handler/HttpHandlerError.php',
+        'Aws\\Handler\\HttpTransportSharing' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Handler/HttpTransportSharing.php',
         'Aws\\HasDataTrait' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/HasDataTrait.php',
         'Aws\\HasMonitoringEventsTrait' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/HasMonitoringEventsTrait.php',
         'Aws\\HashInterface' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/HashInterface.php',
