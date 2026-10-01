@@ -204,6 +204,13 @@ class AwsClient implements AwsClientInterface
      *   signature version to use with a service (e.g., v4). Note that
      *   per/operation signature version MAY override this requested signature
      *   version.
+     * - transport_sharing: (string) Set to a transport sharing mode ("none",
+     *   "handler_prefer", "handler_require", "persistent_prefer", or
+     *   "persistent_require") to enable connection sharing on the default
+     *   HTTP handler. The "*_prefer" modes degrade gracefully when the
+     *   installed version of Guzzle or the runtime cannot honor them, and
+     *   the "*_require" modes throw. This option only applies when the SDK
+     *   creates the default HTTP handler.
      * - use_aws_shared_config_files: (bool, default=bool(true)) Set to false to
      *   disable checking for shared config file in '~/.aws/config' and
      *   '~/.aws/credentials'.  This will override the AWS_CONFIG_FILE
@@ -544,7 +551,7 @@ class AwsClient implements AwsClientInterface
     {
         $list = $this->getHandlerList();
         $list->appendBuild(
-            Middleware::mapRequest(function (RequestInterface $r) {
+            Middleware::mapRequest(static function (RequestInterface $r) {
                 return $r->withHeader(
                     'x-amzn-query-mode',
                     "true"
@@ -657,11 +664,12 @@ class AwsClient implements AwsClientInterface
      */
     private function addEventStreamHttpFlagMiddleware(): void
     {
+        $api = $this->getApi();
         $this->getHandlerList()
             -> appendInit(
-                function (callable $handler) {
-                    return function (CommandInterface $command, $request = null) use ($handler) {
-                        $operation = $this->getApi()->getOperation($command->getName());
+                static function (callable $handler) use ($api) {
+                    return static function (CommandInterface $command, $request = null) use ($handler, $api) {
+                        $operation = $api->getOperation($command->getName());
                         $output = $operation->getOutput();
                         foreach ($output->getMembers() as $memberProps) {
                             if (!empty($memberProps['eventstream'])) {
