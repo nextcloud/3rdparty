@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c43e553dd99d8a9e572802ad95dceffd",
+    "content-hash": "380415d55bec5544916b14973a8edeff",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -3173,16 +3173,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v3.5.1",
+            "version": "v3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "5c996db191ee2d9bafe651f454b1fca16754271b"
+                "reference": "4d91f3b08a60c3bacc2afbd8dc41724559b7626a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/5c996db191ee2d9bafe651f454b1fca16754271b",
-                "reference": "5c996db191ee2d9bafe651f454b1fca16754271b",
+                "url": "https://api.github.com/repos/predis/predis/zipball/4d91f3b08a60c3bacc2afbd8dc41724559b7626a",
+                "reference": "4d91f3b08a60c3bacc2afbd8dc41724559b7626a",
                 "shasum": ""
             },
             "require": {
@@ -3224,7 +3224,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v3.5.1"
+                "source": "https://github.com/predis/predis/tree/v3.7.0"
             },
             "funding": [
                 {
@@ -3232,7 +3232,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-11T16:56:53+00:00"
+            "time": "2026-10-08T16:46:04+00:00"
         },
         {
             "name": "psr/cache",
