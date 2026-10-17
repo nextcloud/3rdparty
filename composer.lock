@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c43e553dd99d8a9e572802ad95dceffd",
+    "content-hash": "afb6bf03e7cd4e3d38da5946bfd56a8d",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1105,16 +1105,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
-            "version": "9.0.36",
+            "version": "9.0.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php-lite.git",
-                "reference": "f21237b7df458b326cd5b1bac44d64cc7b1dcb2f"
+                "reference": "6ffb41a259c950d6f4df5596e32917f631052910"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/f21237b7df458b326cd5b1bac44d64cc7b1dcb2f",
-                "reference": "f21237b7df458b326cd5b1bac44d64cc7b1dcb2f",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/6ffb41a259c950d6f4df5596e32917f631052910",
+                "reference": "6ffb41a259c950d6f4df5596e32917f631052910",
                 "shasum": ""
             },
             "require": {
@@ -1179,7 +1179,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php-lite/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php-lite"
             },
-            "time": "2026-08-03T07:53:53+00:00"
+            "time": "2026-10-08T08:51:54+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
