@@ -28,6 +28,16 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     private ?string $newSessionId = null;
     private string $igbinaryEmptyData;
 
+    public function __serialize(): array
+    {
+        throw new \BadMethodCallException('Cannot serialize '.static::class);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        throw new \BadMethodCallException('Cannot unserialize '.static::class);
+    }
+
     public function open(string $savePath, string $sessionName): bool
     {
         $this->sessionName = $sessionName;
@@ -36,6 +46,14 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
         }
 
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function create_sid()
+    {
+        return session_create_id() ?: throw new \RuntimeException('Unable to create a session ID.');
     }
 
     abstract protected function doRead(#[\SensitiveParameter] string $sessionId): string;
