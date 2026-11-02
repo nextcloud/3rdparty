@@ -87,6 +87,6 @@ jobs:
             Automated sync of the workflows from `${{ github.event.repository.default_branch }}`
             ${{ env.SUMMARY }}
           labels: |
-            dependencies
+            github_actions
             ${{ matrix.branches }}
             3. to review
