@@ -39,7 +39,6 @@
 		"kornrunner/blurhash": "^1.2",
 		"laravel/serializable-closure": "^2.0.15",
 		"mexitek/phpcolors": "^1.0",
-		"microsoft/azure-storage-blob": "^1.5.4",
 		"mlocati/ip-lib": "^1.22",
 		"nextcloud/lognormalizer": "^3.0.1",
 		"pear/archive_tar": "^1.6.0",
