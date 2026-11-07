@@ -57,7 +57,7 @@
 		"punic/punic": "^3.8",
 		"sabre/dav": "^4.7.0",
 		"stecman/symfony-console-completion": "^0.15.0",
-		"symfony/console": "^7.4.21",
+		"symfony/console": "^7.4.22",
 		"symfony/event-dispatcher": "^7.4.17",
 		"symfony/http-foundation": "^7.4.21",
 		"symfony/mailer": "^7.4.22",
