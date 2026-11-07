@@ -61,7 +61,7 @@
 		"symfony/event-dispatcher": "^7.4.15",
 		"symfony/http-foundation": "^7.4.15",
 		"symfony/mailer": "^7.4.15",
-		"symfony/polyfill-intl-grapheme": "^1.43.0",
+		"symfony/polyfill-intl-grapheme": "^1.43.3",
 		"symfony/polyfill-intl-normalizer": "^1.43.0",
 		"symfony/polyfill-php84": "^1.43.0",
 		"symfony/polyfill-php85": "^1.43.0",
