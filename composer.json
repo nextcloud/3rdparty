@@ -24,7 +24,7 @@
 		"bantu/ini-get-wrapper": "v1.0.1",
 		"cweagans/composer-patches": "^1.7",
 		"deepdiver/zipstreamer": "^2.0.3",
-		"deepdiver1975/tarstreamer": "^2.1.0",
+		"deepdiver1975/tarstreamer": "^2.1.1",
 		"doctrine/dbal": "^3.10.4",
 		"egulias/email-validator": "^4.0.4",
 		"fusonic/opengraph": "^3.0.0",
