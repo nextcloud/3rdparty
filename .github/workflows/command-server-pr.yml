@@ -80,6 +80,7 @@ jobs:
       BASE_REF: ${{ needs.init.outputs.base_ref }}
       PR_NUMBER: ${{ github.event.issue.number }}
       PR_TITLE: ${{ github.event.issue.title }}
+      REVIEWER: ${{ github.event.comment.user.login }}
       GH_TOKEN: ${{ secrets.COMMAND_BOT_PAT }} # zizmor: ignore[secrets-outside-env]
 
     steps:
@@ -145,6 +146,8 @@ jobs:
         run: |
           url=$(gh pr create --repo nextcloud/server --base "$BASE_REF" --head "$HEAD_REF" \
             --title "$PR_TITLE" \
+            --label dependencies --label '3. to review' \
+            --reviewer "$REVIEWER" \
             --body-file "$RUNNER_TEMP/pr-body.md")
           gh pr comment "$PR_NUMBER" --repo '${{ github.repository }}' --body "- Server PR: $url"
 
