@@ -103,7 +103,7 @@ jobs:
           composer global config --no-interaction allow-plugins.ion-bazan/composer-diff true
           composer global require --no-interaction ion-bazan/composer-diff
           {
-            echo "3rdparty: ${{ github.server_url }}/${{ github.repository }}/pull/$PR_NUMBER"
+            echo "- [ ] 3rdparty: ${{ github.server_url }}/${{ github.repository }}/pull/$PR_NUMBER"
             echo
             composer diff --with-links --base "origin/$BASE_REF:composer.lock" --target composer.lock
           } > "$RUNNER_TEMP/pr-body.md"
@@ -115,7 +115,8 @@ jobs:
           repository: nextcloud/server
           path: server
           persist-credentials: true
-          token: ${{ secrets.COMMAND_BOT_PAT }} # zizmor: ignore[secrets-outside-env]
+          # Pushing a new branch to server needs the `workflow` scope, as GitHub can not always verify in time that no workflow is changed
+          token: ${{ secrets.COMMAND_BOT_WORKFLOWS }} # zizmor: ignore[secrets-outside-env]
           ref: ${{ needs.init.outputs.base_ref }}
 
       - name: Fail if branch already exists on server
@@ -137,7 +138,7 @@ jobs:
         run: |
           git checkout -b "$HEAD_REF"
           git update-index --cacheinfo "160000,$HEAD_SHA,3rdparty"
-          git commit --signoff -m "chore(deps): $PR_TITLE"
+          git commit --signoff -m "$(sed -E 's/^\[stable[0-9.]*\] *//' <<< "$PR_TITLE")"
           git push origin "$HEAD_REF"
 
       - name: Create server pull request
@@ -145,7 +146,7 @@ jobs:
           url=$(gh pr create --repo nextcloud/server --base "$BASE_REF" --head "$HEAD_REF" \
             --title "$PR_TITLE" \
             --body-file "$RUNNER_TEMP/pr-body.md")
-          gh pr comment "$PR_NUMBER" --repo '${{ github.repository }}' --body "Server PR: $url"
+          gh pr comment "$PR_NUMBER" --repo '${{ github.repository }}' --body "- Server PR: $url"
 
       - name: Add reaction on failure
         uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
