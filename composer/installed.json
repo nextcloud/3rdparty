@@ -1147,17 +1147,17 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
-            "version": "9.0.36",
-            "version_normalized": "9.0.36.0",
+            "version": "9.0.43",
+            "version_normalized": "9.0.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php-lite.git",
-                "reference": "f21237b7df458b326cd5b1bac44d64cc7b1dcb2f"
+                "reference": "e3c20f1eea133cb67b1f31ad86b0f4049c6fa4d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/f21237b7df458b326cd5b1bac44d64cc7b1dcb2f",
-                "reference": "f21237b7df458b326cd5b1bac44d64cc7b1dcb2f",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/e3c20f1eea133cb67b1f31ad86b0f4049c6fa4d8",
+                "reference": "e3c20f1eea133cb67b1f31ad86b0f4049c6fa4d8",
                 "shasum": ""
             },
             "require": {
@@ -1186,7 +1186,7 @@
             "suggest": {
                 "giggsey/libphonenumber-for-php": "Use libphonenumber-for-php for geocoding, carriers, timezones and matching"
             },
-            "time": "2026-08-03T07:53:53+00:00",
+            "time": "2026-11-06T09:59:40+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
