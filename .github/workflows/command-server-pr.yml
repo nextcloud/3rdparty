@@ -103,7 +103,7 @@ jobs:
           composer global config --no-interaction allow-plugins.ion-bazan/composer-diff true
           composer global require --no-interaction ion-bazan/composer-diff
           {
-            echo "3rdparty: ${{ github.server_url }}/${{ github.repository }}/pull/$PR_NUMBER"
+            echo "- [ ] 3rdparty: ${{ github.server_url }}/${{ github.repository }}/pull/$PR_NUMBER"
             echo
             composer diff --with-links --base "origin/$BASE_REF:composer.lock" --target composer.lock
           } > "$RUNNER_TEMP/pr-body.md"
@@ -145,7 +145,7 @@ jobs:
           url=$(gh pr create --repo nextcloud/server --base "$BASE_REF" --head "$HEAD_REF" \
             --title "$PR_TITLE" \
             --body-file "$RUNNER_TEMP/pr-body.md")
-          gh pr comment "$PR_NUMBER" --repo '${{ github.repository }}' --body "Server PR: $url"
+          gh pr comment "$PR_NUMBER" --repo '${{ github.repository }}' --body "- Server PR: $url"
 
       - name: Add reaction on failure
         uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
