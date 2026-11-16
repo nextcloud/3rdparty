@@ -19,7 +19,7 @@ updates:
     timezone: Europe/Paris
   open-pull-requests-limit: 20
   commit-message:
-    prefix: "build"
+    prefix: "[skip ci] build"
     include: "scope"
   versioning-strategy: "increase"
   labels:
@@ -45,7 +45,7 @@ updates:
     timezone: Europe/Paris
   open-pull-requests-limit: 20
   commit-message:
-    prefix: "build"
+    prefix: "[skip ci] build"
     include: "scope"
   versioning-strategy: "increase"
   ignore:
@@ -74,7 +74,7 @@ updates:
     timezone: Europe/Paris
   open-pull-requests-limit: 20
   commit-message:
-    prefix: "build"
+    prefix: "[skip ci] build"
     include: "scope"
   versioning-strategy: "increase"
   ignore:
@@ -103,7 +103,7 @@ updates:
     timezone: Europe/Paris
   open-pull-requests-limit: 20
   commit-message:
-    prefix: "build"
+    prefix: "[skip ci] build"
     include: "scope"
   versioning-strategy: "increase"
   ignore:
