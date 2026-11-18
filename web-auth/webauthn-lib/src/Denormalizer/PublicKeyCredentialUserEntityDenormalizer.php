@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Webauthn\Denormalizer;
 
+use function array_key_exists;
+use function assert;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webauthn\Exception\InvalidDataException;
 use Webauthn\PublicKeyCredentialUserEntity;
 use Webauthn\Util\Base64;
-use function array_key_exists;
-use function assert;
 
 final class PublicKeyCredentialUserEntityDenormalizer implements DenormalizerInterface, NormalizerInterface
 {
+    /**
+     * @throws InvalidDataException
+     */
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
+        /** @var array{id?: string, name: string, displayName: string} $data */
         if (! array_key_exists('id', $data)) {
             return $data;
         }
         $data['id'] = Base64::decode($data['id']);
 
-        return PublicKeyCredentialUserEntity::create(
-            $data['name'],
-            $data['id'],
-            $data['displayName'],
-            $data['icon'] ?? null
-        );
+        return PublicKeyCredentialUserEntity::create($data['name'], $data['id'], $data['displayName']);
     }
 
     public function supportsDenormalization(
@@ -51,17 +51,14 @@ final class PublicKeyCredentialUserEntityDenormalizer implements DenormalizerInt
     /**
      * @return array<string, mixed>
      */
-    public function normalize(mixed $data, ?string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
-        assert($data instanceof PublicKeyCredentialUserEntity);
-        $normalized = [
-            'id' => Base64UrlSafe::encodeUnpadded($data->id),
-            'name' => $data->name,
-            'displayName' => $data->displayName,
-            'icon' => $data->icon,
+        assert($object instanceof PublicKeyCredentialUserEntity);
+        return [
+            'id' => Base64UrlSafe::encodeUnpadded($object->id),
+            'name' => $object->name,
+            'displayName' => $object->displayName,
         ];
-
-        return array_filter($normalized, fn ($value) => $value !== null);
     }
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool

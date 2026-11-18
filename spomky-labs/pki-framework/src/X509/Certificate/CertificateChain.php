@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace SpomkyLabs\Pki\X509\Certificate;
 
 use ArrayIterator;
+use function count;
 use Countable;
 use IteratorAggregate;
 use LogicException;
 use SpomkyLabs\Pki\CryptoEncoding\PEM;
 use SpomkyLabs\Pki\CryptoEncoding\PEMBundle;
 use SpomkyLabs\Pki\X509\CertificationPath\CertificationPath;
-use function count;
 
 /**
  * Ordered list of certificates from the end-entity to the trust anchor.
@@ -43,7 +43,7 @@ final class CertificateChain implements Countable, IteratorAggregate
      */
     public static function fromPEMs(PEM ...$pems): self
     {
-        $certs = array_map(static fn (PEM $pem) => Certificate::fromPEM($pem), $pems);
+        $certs = array_map(Certificate::fromPEM(...), $pems);
         return self::create(...$certs);
     }
 

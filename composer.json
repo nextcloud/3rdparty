@@ -71,7 +71,7 @@
 		"symfony/string": "^7.4.15",
 		"symfony/translation": "^6.4.4",
 		"wapmorgan/mp3info": "^0.1.1",
-		"web-auth/webauthn-lib": "^4.9.1"
+		"web-auth/webauthn-lib": "^5.3.12"
 	},
 	"replace": {
 		"paragonie/random_compat": "*",
@@ -83,7 +83,7 @@
 		"symfony/polyfill-mbstring": "*"
 	},
 	"scripts": {
-		"lint": "find . -type f -name '*.php' -not -name '.*.php' -print0 | xargs -0 -n200 -P$(nproc) php -l",
+		"lint": "find . -type f -name '*.php' -not -name '.*.php' -not -path './symfony/polyfill-uuid/bootstrap85.php' -print0 | xargs -0 -n200 -P$(nproc) php -l",
 		"pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
 	},
 	"extra": {
