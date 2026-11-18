@@ -12,9 +12,8 @@ use SpomkyLabs\Pki\CryptoTypes\AlgorithmIdentifier\SpecificAlgorithmIdentifier;
 use UnexpectedValueException;
 
 /*
-RFC 2898 defines parameters as follows:
-
-{OCTET STRING (SIZE(8)) IDENTIFIED BY des-EDE3-CBC}
+ * RFC 2898 defines parameters as follows:
+ * {OCTET STRING (SIZE(8)) IDENTIFIED BY des-EDE3-CBC}
  */
 
 /**
@@ -77,7 +76,7 @@ final class DESEDE3CBCAlgorithmIdentifier extends BlockCipherAlgorithmIdentifier
     /**
      * @return OctetString
      */
-    protected function paramsASN1(): ?Element
+    protected function paramsASN1(): Element
     {
         if (! isset($this->initializationVector)) {
             throw new LogicException('IV not set.');

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace SpomkyLabs\Pki\X509\Certificate\Extension\NameConstraints;
 
+use function count;
 use SpomkyLabs\Pki\ASN1\Element;
 use SpomkyLabs\Pki\ASN1\Type\Constructed\Sequence;
 use SpomkyLabs\Pki\ASN1\Type\Primitive\Integer;
 use SpomkyLabs\Pki\ASN1\Type\Tagged\ImplicitlyTaggedType;
 use SpomkyLabs\Pki\X509\GeneralName\GeneralName;
-use function count;
 
 /**
  * Implements *GeneralSubtree* ASN.1 type used by 'Name Constraints' certificate extension.
@@ -57,7 +57,8 @@ final class GeneralSubtree
         // or rfc822Name [1]. As minimum and maximum are also implicitly tagged,
         // we have to iterate the remaining elements instead of just checking
         // for tagged types.
-        for ($i = 1; $i < count($seq); ++$i) {
+        $count = count($seq);
+        for ($i = 1; $i < $count; ++$i) {
             $el = $seq->at($i)
                 ->expectTagged();
             switch ($el->tag()) {
@@ -87,7 +88,7 @@ final class GeneralSubtree
     public function toASN1(): Sequence
     {
         $elements = [$this->base->toASN1()];
-        if (isset($this->min) && $this->min !== 0) {
+        if ($this->min !== 0) {
             $elements[] = ImplicitlyTaggedType::create(0, Integer::create($this->min));
         }
         if (isset($this->max)) {

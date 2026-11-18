@@ -4,63 +4,58 @@ declare(strict_types=1);
 
 namespace Webauthn\Event;
 
-use Psr\Http\Message\ServerRequestInterface;
+use LogicException;
+use function sprintf;
 use Webauthn\AuthenticatorAttestationResponse;
+use Webauthn\CredentialRecord;
 use Webauthn\PublicKeyCredentialCreationOptions;
 use Webauthn\PublicKeyCredentialSource;
-use function sprintf;
 
 class AuthenticatorAttestationResponseValidationSucceededEvent
 {
     public function __construct(
         public readonly AuthenticatorAttestationResponse $authenticatorAttestationResponse,
         public readonly PublicKeyCredentialCreationOptions $publicKeyCredentialCreationOptions,
-        public readonly ServerRequestInterface|string $host,
-        public readonly PublicKeyCredentialSource $publicKeyCredentialSource
+        public readonly string $host,
+        public readonly CredentialRecord $credentialRecord
     ) {
-        if ($host instanceof ServerRequestInterface) {
-            trigger_deprecation(
-                'web-auth/webauthn-lib',
-                '4.5.0',
-                sprintf(
-                    'Passing a %s to the class "%s" is deprecated since 4.5.0 and will be removed in 5.0.0. Please inject the host as a string instead.',
-                    ServerRequestInterface::class,
-                    self::class
-                )
-            );
+    }
+
+    /**
+     * @deprecated since 5.3, use credentialRecord instead. Will be removed in 6.0.
+     */
+    public function __get(string $name): mixed
+    {
+        if ($name === 'publicKeyCredentialSource') {
+            return $this->getPublicKeyCredentialSource();
         }
+
+        throw new LogicException(sprintf('Undefined property: %s::$%s', self::class, $name));
     }
 
     /**
-     * @deprecated since 4.8.0. Will be removed in 5.0.0. Please use the property instead.
-     */
-    public function getAuthenticatorAttestationResponse(): AuthenticatorAttestationResponse
-    {
-        return $this->authenticatorAttestationResponse;
-    }
-
-    /**
-     * @deprecated since 4.8.0. Will be removed in 5.0.0. Please use the property instead.
-     */
-    public function getPublicKeyCredentialCreationOptions(): PublicKeyCredentialCreationOptions
-    {
-        return $this->publicKeyCredentialCreationOptions;
-    }
-
-    /**
-     * @deprecated since 4.5.0 and will be removed in 5.0.0. Please use the `host` property instead
-     * @infection-ignore-all
-     */
-    public function getRequest(): ServerRequestInterface|string
-    {
-        return $this->host;
-    }
-
-    /**
-     * @deprecated since 4.8.0. Will be removed in 5.0.0. Please use the property instead.
+     * @deprecated since 5.3, use credentialRecord instead. Will be removed in 6.0.
      */
     public function getPublicKeyCredentialSource(): PublicKeyCredentialSource
     {
-        return $this->publicKeyCredentialSource;
+        if ($this->credentialRecord instanceof PublicKeyCredentialSource) {
+            return $this->credentialRecord;
+        }
+
+        return new PublicKeyCredentialSource(
+            $this->credentialRecord->publicKeyCredentialId,
+            $this->credentialRecord->type,
+            $this->credentialRecord->transports,
+            $this->credentialRecord->attestationType,
+            $this->credentialRecord->trustPath,
+            $this->credentialRecord->aaguid,
+            $this->credentialRecord->credentialPublicKey,
+            $this->credentialRecord->userHandle,
+            $this->credentialRecord->counter,
+            $this->credentialRecord->otherUI,
+            $this->credentialRecord->backupEligible,
+            $this->credentialRecord->backupStatus,
+            $this->credentialRecord->uvInitialized,
+        );
     }
 }

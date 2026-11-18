@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Webauthn;
 
-use ParagonIE\ConstantTime\Base64UrlSafe;
-use Webauthn\Exception\InvalidDataException;
-use Webauthn\TokenBinding\TokenBinding;
 use function array_key_exists;
+use function in_array;
 use function is_array;
 use function is_string;
-use function sprintf;
 use const JSON_THROW_ON_ERROR;
+use ParagonIE\ConstantTime\Base64UrlSafe;
+use function sprintf;
+use Webauthn\Exception\InvalidDataException;
 
 class CollectedClientData
 {
@@ -29,13 +29,6 @@ class CollectedClientData
     public readonly null|string $topOrigin;
 
     public readonly bool $crossOrigin;
-
-    /**
-     * @var mixed[]|null
-     * @deprecated Since 4.3.0 and will be removed in 5.0.0
-     * @infection-ignore-all
-     */
-    public readonly ?array $tokenBinding;
 
     /**
      * @param mixed[] $data
@@ -70,15 +63,17 @@ class CollectedClientData
         );
         $this->origin = $origin;
 
-        $this->topOrigin = $data['topOrigin'] ?? null;
-        $this->crossOrigin = $data['crossOrigin'] ?? false;
+        /** @var string|null $topOrigin */
+        $topOrigin = $data['topOrigin'] ?? null;
+        $this->topOrigin = $topOrigin;
+        /** @var bool $crossOrigin */
+        $crossOrigin = $data['crossOrigin'] ?? false;
+        $this->crossOrigin = $crossOrigin;
 
         $tokenBinding = $data['tokenBinding'] ?? null;
-        $tokenBinding === null || is_array($tokenBinding) || throw InvalidDataException::create(
-            $data,
-            'Invalid parameter "tokenBinding". Shall be an object or .'
-        );
-        $this->tokenBinding = $tokenBinding;
+        if ($tokenBinding !== null) {
+            self::checkTokenBinding($data, $tokenBinding);
+        }
 
         $this->data = $data;
     }
@@ -91,6 +86,9 @@ class CollectedClientData
         return new self($rawData, $data);
     }
 
+    /**
+     * @deprecated Since 5.3.0 and will be removed in 6.0.0. No replacement as not used anymore.
+     */
     public static function createFormJson(string $data): self
     {
         $rawData = Base64UrlSafe::decodeNoPadding($data);
@@ -98,60 +96,6 @@ class CollectedClientData
         is_array($json) || throw InvalidDataException::create($data, 'Invalid JSON data.');
 
         return self::create($rawData, $json);
-    }
-
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function getChallenge(): string
-    {
-        return $this->challenge;
-    }
-
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function getOrigin(): string
-    {
-        return $this->origin;
-    }
-
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function getCrossOrigin(): bool
-    {
-        return $this->crossOrigin;
-    }
-
-    /**
-     * @deprecated Since 4.3.0 and will be removed in 5.0.0
-     * @infection-ignore-all
-     */
-    public function getTokenBinding(): ?TokenBinding
-    {
-        return $this->tokenBinding === null ? null : TokenBinding::createFormArray($this->tokenBinding);
-    }
-
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function getRawData(): string
-    {
-        return $this->rawData;
     }
 
     /**
@@ -174,5 +118,34 @@ class CollectedClientData
         }
 
         return $this->data[$key];
+    }
+
+    /**
+     * The tokenBinding member is [RESERVED] since Webauthn Level 3, which still defines the TokenBinding dictionary it
+     * holds (section 5.8.1): a required status and, when the status is "present", the Token Binding ID. A client that
+     * sends the member sends that dictionary, and the FIDO Conformance Tools expect any other value to be refused. The
+     * accepted statuses are "present" and "supported", the TokenBindingStatus values, and "not-supported", which the
+     * tools name as well. The value itself is not used.
+     *
+     * @param mixed[] $data
+     */
+    private static function checkTokenBinding(array $data, mixed $tokenBinding): void
+    {
+        is_array($tokenBinding) || throw InvalidDataException::create(
+            $data,
+            'Invalid parameter "tokenBinding". Shall be an object.'
+        );
+        $status = $tokenBinding['status'] ?? null;
+        in_array($status, ['present', 'supported', 'not-supported'], true) || throw InvalidDataException::create(
+            $data,
+            'Invalid parameter "tokenBinding.status". Shall be "present", "supported" or "not-supported".'
+        );
+        if ($status === 'present') {
+            $id = $tokenBinding['id'] ?? null;
+            (is_string($id) && $id !== '') || throw InvalidDataException::create(
+                $data,
+                'Invalid parameter "tokenBinding.id". Shall be a non-empty string when the status is "present".'
+            );
+        }
     }
 }

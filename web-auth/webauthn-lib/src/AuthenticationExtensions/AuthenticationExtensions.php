@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace Webauthn\AuthenticationExtensions;
 
+use function array_key_exists;
 use ArrayAccess;
 use ArrayIterator;
+use function count;
+use const COUNT_NORMAL;
 use Countable;
+use function is_string;
 use Iterator;
 use IteratorAggregate;
-use JsonSerializable;
-use Webauthn\Exception\AuthenticationExtensionException;
-use function array_key_exists;
-use function count;
-use function is_string;
 use function sprintf;
-use const COUNT_NORMAL;
+use Webauthn\Exception\AuthenticationExtensionException;
 
 /**
- * @implements IteratorAggregate<AuthenticationExtension>
- * @final
+ * @implements IteratorAggregate<string, AuthenticationExtension>
+ * @implements ArrayAccess<string, AuthenticationExtension>
  */
-class AuthenticationExtensions implements JsonSerializable, Countable, IteratorAggregate, ArrayAccess
+final class AuthenticationExtensions implements Countable, IteratorAggregate, ArrayAccess
 {
     /**
      * @var array<string, AuthenticationExtension>
-     * @readonly
      */
     public array $extensions;
 
@@ -58,38 +56,6 @@ class AuthenticationExtensions implements JsonSerializable, Countable, IteratorA
         return new static($extensions);
     }
 
-    /**
-     * @deprecated since 4.7.0. Please use the property directly.
-     * @infection-ignore-all
-     */
-    public function add(AuthenticationExtension ...$extensions): static
-    {
-        foreach ($extensions as $extension) {
-            $this->extensions[$extension->name] = $extension;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param array<string, mixed> $json
-     * @deprecated since 4.8.0. Please use {Webauthn\Denormalizer\WebauthnSerializerFactory} for converting the object.
-     * @infection-ignore-all
-     */
-    public static function createFromArray(array $json): static
-    {
-        return static::create(
-            array_map(
-                static fn (string $key, mixed $value): AuthenticationExtension => AuthenticationExtension::create(
-                    $key,
-                    $value
-                ),
-                array_keys($json),
-                $json
-            )
-        );
-    }
-
     public function has(string $key): bool
     {
         return array_key_exists($key, $this->extensions);
@@ -106,20 +72,6 @@ class AuthenticationExtensions implements JsonSerializable, Countable, IteratorA
     }
 
     /**
-     * @return array<string, AuthenticationExtension>
-     */
-    public function jsonSerialize(): array
-    {
-        trigger_deprecation(
-            'web-auth/webauthn-bundle',
-            '4.9.0',
-            'The "%s" method is deprecated and will be removed in 5.0. Please use the serializer instead.',
-            __METHOD__
-        );
-        return $this->extensions;
-    }
-
-    /**
      * @return Iterator<string, AuthenticationExtension>
      */
     public function getIterator(): Iterator
@@ -127,6 +79,9 @@ class AuthenticationExtensions implements JsonSerializable, Countable, IteratorA
         return new ArrayIterator($this->extensions);
     }
 
+    /**
+     * @param 0|1 $mode
+     */
     public function count(int $mode = COUNT_NORMAL): int
     {
         return count($this->extensions, $mode);
@@ -137,7 +92,7 @@ class AuthenticationExtensions implements JsonSerializable, Countable, IteratorA
         return array_key_exists($offset, $this->extensions);
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function offsetGet(mixed $offset): AuthenticationExtension
     {
         return $this->extensions[$offset];
     }

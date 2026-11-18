@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SpomkyLabs\Pki\X501\DN;
 
+use function mb_strlen;
 use SpomkyLabs\Pki\ASN1\Element;
 use SpomkyLabs\Pki\ASN1\Exception\DecodeException;
-use SpomkyLabs\Pki\ASN1\Feature\ElementBase;
+use function sprintf;
 use UnexpectedValueException;
-use function mb_strlen;
 
 /**
  * Distinguished Name parsing conforming to RFC 2253 and RFC 1779.
@@ -23,7 +23,7 @@ final class DNParser
      *
      * @var string
      */
-    final public const SPECIAL_CHARS = ',=+<>#;';
+    public const SPECIAL_CHARS = ',=+<>#;';
 
     /**
      * DN string length.
@@ -42,7 +42,7 @@ final class DNParser
     /**
      * Parse distinguished name string to name-components.
      *
-     * @return array<array<string>>
+     * @return list<list<array{string, string|Element}>>
      */
     public static function parseString(string $dn): array
     {
@@ -78,7 +78,7 @@ final class DNParser
     /**
      * Parse DN to name-components.
      *
-     * @return array<array<string>>
+     * @return list<list<array{string, string|Element}>>
      */
     private function parse(): array
     {
@@ -99,7 +99,7 @@ final class DNParser
      *
      * name-component *("," name-component)
      *
-     * @return array<array<string>> Array of name-components
+     * @return list<list<array{string, string|Element}>> Array of name-components
      */
     private function _parseName(int &$offset): array
     {
@@ -126,7 +126,7 @@ final class DNParser
      *
      * attributeTypeAndValue *("+" attributeTypeAndValue)
      *
-     * @return array<array<string, string|ElementBase>> Array of [type, value] tuples
+     * @return list<array{string, string|Element}> Array of [type, value] tuples
      */
     private function _parseNameComponent(int &$offset): array
     {
@@ -150,8 +150,8 @@ final class DNParser
      *
      * attributeType "=" attributeValue
      *
-     * @return array<string, string|ElementBase> A tuple of [type, value]. Value may be either a string or
-     * an Element, if it's encoded as hexstring.
+     * @return array{string, string|Element} A tuple of [type, value]. Value may be either a string or an Element, if it's
+     * encoded as hexstring.
      */
     private function _parseAttrTypeAndValue(int &$offset): array
     {

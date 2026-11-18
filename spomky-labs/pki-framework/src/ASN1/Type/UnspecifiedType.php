@@ -36,6 +36,7 @@ use SpomkyLabs\Pki\ASN1\Type\Primitive\VideotexString;
 use SpomkyLabs\Pki\ASN1\Type\Primitive\VisibleString;
 use SpomkyLabs\Pki\ASN1\Type\Tagged\ApplicationType;
 use SpomkyLabs\Pki\ASN1\Type\Tagged\PrivateType;
+use function sprintf;
 use UnexpectedValueException;
 
 /**
@@ -471,7 +472,7 @@ final class UnspecifiedType implements ElementBase
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * Consider using any of the `as*` accessor methods instead.
      */
@@ -481,7 +482,7 @@ final class UnspecifiedType implements ElementBase
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * Consider using `asTagged()` method instead and chaining
      * with `TaggedType::asExplicit()` or `TaggedType::asImplicit()`.
