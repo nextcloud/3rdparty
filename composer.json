@@ -83,7 +83,7 @@
 		"symfony/polyfill-mbstring": "*"
 	},
 	"scripts": {
-		"lint": "find . -type f -name '*.php' -not -name '.*.php' -print0 | xargs -0 -n200 -P$(nproc) php -l",
+		"lint": "find . -type f -name '*.php' -not -name '.*.php' -not -path './symfony/polyfill-uuid/bootstrap85.php' -print0 | xargs -0 -n200 -P$(nproc) php -l",
 		"pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
 	},
 	"extra": {
