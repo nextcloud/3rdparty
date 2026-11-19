@@ -85,8 +85,9 @@ class ServiceException extends \LogicException
         //as the error message.
         $serializer = new XmlSerializer();
         $errorMessage = '';
+        $internalErrors = libxml_use_internal_errors(true);
+        libxml_clear_errors();
         try {
-            $internalErrors = libxml_use_internal_errors(true);
             $parsedArray = $serializer->unserialize($response->getBody());
             $messages = array();
             foreach (libxml_get_errors() as $error) {
@@ -97,7 +98,6 @@ class ServiceException extends \LogicException
                     sprintf(Resources::ERROR_CANNOT_PARSE_XML, implode('; ', $messages))
                 );
             }
-            libxml_use_internal_errors($internalErrors);
             if (array_key_exists(Resources::XTAG_MESSAGE, $parsedArray)) {
                 $errorMessage = $parsedArray[Resources::XTAG_MESSAGE];
             } else {
@@ -105,6 +105,9 @@ class ServiceException extends \LogicException
             }
         } catch (\Exception $e) {
             $errorMessage = $response->getBody();
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($internalErrors);
         }
         return $errorMessage;
     }
