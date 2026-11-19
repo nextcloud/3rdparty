@@ -1,5 +1,5 @@
 {
-    "_hash": "b827683badf38ee383e2b0f62c03aedfa5f367a811b2ad426de87332e0910b2f",
+    "_hash": "61e632f1c985c0e64a47b48f31d3a169bb528211fcdb3c9cf4740bacfafb5ee5",
     "patches": {
         "wapmorgan/mp3info": [
             {
@@ -17,6 +17,18 @@
                 "description": "fix incorrect lookup for mpeg header",
                 "url": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch",
                 "sha256": "084e7b15afc1dd149a3a7bf3cc39a13918d2d6ec8aeb6e4ff7f4f2e47ce15eed",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "microsoft/azure-storage-common": [
+            {
+                "package": "microsoft/azure-storage-common",
+                "description": "Restore the libxml error state after parsing an error response",
+                "url": ".patches/azure-storage-common-restore-libxml-error-state.patch",
+                "sha256": "6bfb92314b66687cb8fe135a9dfecc9c1ebfc8771a76b3311ec6652716cac019",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
