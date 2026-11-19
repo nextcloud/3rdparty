@@ -4,6 +4,9 @@
 			"Break frame parsing on invalid frame": ".patches/mp3info-break-frame-parsing.patch",
 			"fix incorrect lookup for mpeg header": ".patches/mp3info-fix-incorrect-lookup-for-mpeg-header.patch"
 		},
+		"microsoft/azure-storage-common": {
+			"Restore the libxml error state after parsing an error response": ".patches/azure-storage-common-restore-libxml-error-state.patch"
+		},
 		"sabre/dav": {
 			"Check for instanceof INode instead of Node": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch"
 		},
