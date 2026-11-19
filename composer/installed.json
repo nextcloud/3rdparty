@@ -2106,6 +2106,11 @@
             },
             "time": "2021-10-09T03:03:47+00:00",
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "Restore the libxml error state after parsing an error response": ".patches/azure-storage-common-restore-libxml-error-state.patch"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
