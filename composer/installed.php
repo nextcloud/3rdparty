@@ -173,9 +173,9 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/promises' => array(
-            'pretty_version' => '2.5.1',
-            'version' => '2.5.1.0',
-            'reference' => '9ad1e4fc607446a055b95870c7f668e93b5cff29',
+            'pretty_version' => '2.6.2',
+            'version' => '2.6.2.0',
+            'reference' => '72e93ed2b1f3d8c09d1460c950bd5726face7ccd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/promises',
             'aliases' => array(),
