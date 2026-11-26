@@ -1,5 +1,5 @@
 {
-    "_hash": "61e632f1c985c0e64a47b48f31d3a169bb528211fcdb3c9cf4740bacfafb5ee5",
+    "_hash": "b4e32d44e218dadfa54660ce7dacf1ae38c89af7c26cb22a690764ebc08e3b4f",
     "patches": {
         "wapmorgan/mp3info": [
             {
@@ -29,40 +29,6 @@
                 "description": "Restore the libxml error state after parsing an error response",
                 "url": ".patches/azure-storage-common-restore-libxml-error-state.patch",
                 "sha256": "6bfb92314b66687cb8fe135a9dfecc9c1ebfc8771a76b3311ec6652716cac019",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            }
-        ],
-        "sabre/dav": [
-            {
-                "package": "sabre/dav",
-                "description": "Check for instanceof INode instead of Node",
-                "url": ".patches/check-for-instanceof-INode-instead-of-Node-1595.patch",
-                "sha256": "852573c258fccf8a89636870a752ab02a799d160e291ea04f358664ba956296d",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            }
-        ],
-        "sabre/vobject": [
-            {
-                "package": "sabre/vobject",
-                "description": "fix use RDATE in time range check and use all instances",
-                "url": ".patches/sabre-vobject-rdate.patch",
-                "sha256": "816d7b859858535c610ee7a6b0401d907da3f8b08dfc909149ad7cc72b5dc250",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            },
-            {
-                "package": "sabre/vobject",
-                "description": "fix send participation reply on fresh event",
-                "url": ".patches/sabre-vobject-iTipBroker-replies.patch",
-                "sha256": "fb764740364f485079058d9a653094c3f9f36e04d01f0f3f5b52bd7b66a9cb2b",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
