@@ -1,0 +1,11 @@
+--- lib/DAV/Tree.php
++++ lib/DAV/Tree.php
+@@ -84,7 +84,7 @@ class Tree implements INodeByPath
+ 
+             if ($node instanceof INodeByPath) {
+                 $targetNode = $node->getNodeForPath(implode('/', $parts));
+-                if ($targetNode instanceof Node) {
++                if ($targetNode instanceof INode) {
+                     $node = $targetNode;
+                     break;
+                 }
