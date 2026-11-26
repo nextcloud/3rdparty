@@ -15,7 +15,7 @@ use Sabre\Xml\XmlDeserializable;
  * This class parses the {urn:ietf:params:xml:ns:caldav}calendar-query
  * REPORT, as defined in:
  *
- * https://tools.ietf.org/html/rfc4791#section-7.9
+ * https://tools.ietf.org/html/rfc4791#section-7.8
  *
  * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
  * @author Evert Pot (http://www.rooftopsolutions.nl/)
@@ -86,11 +86,11 @@ class CalendarQueryReport implements XmlDeserializable
     public static function xmlDeserialize(Reader $reader)
     {
         $elems = $reader->parseInnerTree([
-            '{urn:ietf:params:xml:ns:caldav}comp-filter' => 'Sabre\\CalDAV\\Xml\\Filter\\CompFilter',
-            '{urn:ietf:params:xml:ns:caldav}prop-filter' => 'Sabre\\CalDAV\\Xml\\Filter\\PropFilter',
-            '{urn:ietf:params:xml:ns:caldav}param-filter' => 'Sabre\\CalDAV\\Xml\\Filter\\ParamFilter',
-            '{urn:ietf:params:xml:ns:caldav}calendar-data' => 'Sabre\\CalDAV\\Xml\\Filter\\CalendarData',
-            '{DAV:}prop' => 'Sabre\\Xml\\Element\\KeyValue',
+            '{urn:ietf:params:xml:ns:caldav}comp-filter' => \Sabre\CalDAV\Xml\Filter\CompFilter::class,
+            '{urn:ietf:params:xml:ns:caldav}prop-filter' => \Sabre\CalDAV\Xml\Filter\PropFilter::class,
+            '{urn:ietf:params:xml:ns:caldav}param-filter' => \Sabre\CalDAV\Xml\Filter\ParamFilter::class,
+            '{urn:ietf:params:xml:ns:caldav}calendar-data' => \Sabre\CalDAV\Xml\Filter\CalendarData::class,
+            '{DAV:}prop' => \Sabre\Xml\Element\KeyValue::class,
         ]);
 
         $newProps = [
