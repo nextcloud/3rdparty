@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63dcf5bece8a5d82a5417071a566b444",
+    "content-hash": "cbca74367b13b0ed39653c8c342100e5",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -762,26 +762,26 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa"
+                "reference": "9bef884e12278a7b89b64adbfb9379c021d3c102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa",
-                "reference": "d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/9bef884e12278a7b89b64adbfb9379c021d3c102",
+                "reference": "9bef884e12278a7b89b64adbfb9379c021d3c102",
                 "shasum": ""
             },
             "require": {
-                "doctrine/lexer": "^2.0 || ^3.0",
+                "doctrine/lexer": "^3.0.3",
                 "php": ">=8.1",
-                "symfony/polyfill-intl-idn": "^1.26"
+                "symfony/polyfill-intl-idn": "^1.43"
             },
             "require-dev": {
-                "phpunit/phpunit": "^10.2",
-                "vimeo/psalm": "^5.12"
+                "phpunit/phpunit": "^10.5.67",
+                "vimeo/psalm": "^5.26.1"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -817,7 +817,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/4.0.4"
+                "source": "https://github.com/egulias/EmailValidator/tree/4.0.5"
             },
             "funding": [
                 {
@@ -825,7 +825,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-06T22:45:56+00:00"
+            "time": "2026-11-22T16:52:20+00:00"
         },
         {
             "name": "fusonic/opengraph",
@@ -4183,16 +4183,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v6.4.50",
+            "version": "v6.4.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "955771637c0a01d5e91730aa8f63edae5190e2c7"
+                "reference": "3176cb05763b4690fd0b9f4073fa452c4c9163bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/955771637c0a01d5e91730aa8f63edae5190e2c7",
-                "reference": "955771637c0a01d5e91730aa8f63edae5190e2c7",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3176cb05763b4690fd0b9f4073fa452c4c9163bb",
+                "reference": "3176cb05763b4690fd0b9f4073fa452c4c9163bb",
                 "shasum": ""
             },
             "require": {
@@ -4257,7 +4257,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.4.50"
+                "source": "https://github.com/symfony/console/tree/v6.4.51"
             },
             "funding": [
                 {
@@ -4277,7 +4277,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-03T21:19:33+00:00"
+            "time": "2026-11-06T16:06:30+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -4577,16 +4577,16 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v3.7.1",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "c7de7a00ffb67842132da02ea92988a39ccd9f4e"
+                "reference": "658e29751424da3ef4758c60f769e59d1b2981eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/c7de7a00ffb67842132da02ea92988a39ccd9f4e",
-                "reference": "c7de7a00ffb67842132da02ea92988a39ccd9f4e",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/658e29751424da3ef4758c60f769e59d1b2981eb",
+                "reference": "658e29751424da3ef4758c60f769e59d1b2981eb",
                 "shasum": ""
             },
             "require": {
@@ -4600,7 +4600,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.7-dev"
+                    "dev-main": "3.8-dev"
                 }
             },
             "autoload": {
@@ -4633,7 +4633,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.7.1"
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.8.1"
             },
             "funding": [
                 {
@@ -4653,7 +4653,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-05T06:23:12+00:00"
+            "time": "2026-09-16T14:15:10+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -4808,16 +4808,16 @@
         },
         {
             "name": "symfony/mailer",
-            "version": "v6.4.49",
+            "version": "v6.4.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "d0743b170644b632290072ff335268071cb31779"
+                "reference": "79bb3d693255fb18d8bdbcdc36d1dce18da5cde1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/d0743b170644b632290072ff335268071cb31779",
-                "reference": "d0743b170644b632290072ff335268071cb31779",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/79bb3d693255fb18d8bdbcdc36d1dce18da5cde1",
+                "reference": "79bb3d693255fb18d8bdbcdc36d1dce18da5cde1",
                 "shasum": ""
             },
             "require": {
@@ -4868,7 +4868,7 @@
             "description": "Helps sending emails",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/mailer/tree/v6.4.49"
+                "source": "https://github.com/symfony/mailer/tree/v6.4.51"
             },
             "funding": [
                 {
@@ -4888,20 +4888,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-22T16:31:15+00:00"
+            "time": "2026-11-07T21:20:37+00:00"
         },
         {
             "name": "symfony/mime",
-            "version": "v7.4.22",
+            "version": "v7.4.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "94a4c017435bc515f5ac80421a2c555fb9ca3676"
+                "reference": "de952f839520f9945b337eeab67e49c68b24ea6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/94a4c017435bc515f5ac80421a2c555fb9ca3676",
-                "reference": "94a4c017435bc515f5ac80421a2c555fb9ca3676",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/de952f839520f9945b337eeab67e49c68b24ea6b",
+                "reference": "de952f839520f9945b337eeab67e49c68b24ea6b",
                 "shasum": ""
             },
             "require": {
@@ -4957,7 +4957,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v7.4.22"
+                "source": "https://github.com/symfony/mime/tree/v7.4.24"
             },
             "funding": [
                 {
@@ -4977,7 +4977,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-28T17:57:58+00:00"
+            "time": "2026-11-24T16:26:23+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
@@ -5793,16 +5793,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.4.22",
+            "version": "v7.4.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "8dff7da3a56638f1d189c5368183294102de4ced"
+                "reference": "93c0ef02c1548d3b9498e8c4cc92f77106ca5d46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/8dff7da3a56638f1d189c5368183294102de4ced",
-                "reference": "8dff7da3a56638f1d189c5368183294102de4ced",
+                "url": "https://api.github.com/repos/symfony/string/zipball/93c0ef02c1548d3b9498e8c4cc92f77106ca5d46",
+                "reference": "93c0ef02c1548d3b9498e8c4cc92f77106ca5d46",
                 "shasum": ""
             },
             "require": {
@@ -5860,7 +5860,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.4.22"
+                "source": "https://github.com/symfony/string/tree/v7.4.25"
             },
             "funding": [
                 {
@@ -5880,7 +5880,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-23T16:51:52+00:00"
+            "time": "2026-11-25T18:09:18+00:00"
         },
         {
             "name": "symfony/translation",
