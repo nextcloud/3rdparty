@@ -1033,16 +1033,16 @@
         },
         {
             "name": "gapple/structured-fields",
-            "version": "v2.3.3",
+            "version": "v2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gapple/structured-fields.git",
-                "reference": "4c6936249482d100cc56732aed8c163a76c10dd3"
+                "reference": "d93e2605be70a319639a5515dbb666268fd50e99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gapple/structured-fields/zipball/4c6936249482d100cc56732aed8c163a76c10dd3",
-                "reference": "4c6936249482d100cc56732aed8c163a76c10dd3",
+                "url": "https://api.github.com/repos/gapple/structured-fields/zipball/d93e2605be70a319639a5515dbb666268fd50e99",
+                "reference": "d93e2605be70a319639a5515dbb666268fd50e99",
                 "shasum": ""
             },
             "require": {
@@ -1052,7 +1052,7 @@
                 "httpwg/structured-field-tests": "*@dev",
                 "paragonie/constant_time_encoding": "^3.0.0",
                 "phpcompatibility/php-compatibility": "^10@dev",
-                "phpmd/phpmd": "^2.15",
+                "phpmd/phpmd": "^3.0.0",
                 "phpstan/phpstan": "^2.1",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.5",
@@ -1101,7 +1101,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-06-12T23:47:46+00:00"
+            "time": "2026-10-27T21:19:59+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
